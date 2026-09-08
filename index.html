@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="YunaRunes — ferramentas, códigos e recursos para Summoners War.">
+<title>YunaRunes — Summoners War Tools</title>
+<style>
+:root{--bg:#11151b;--panel:#1b222b;--panel2:#222b35;--text:#edf2f7;--muted:#9ba8b5;--accent:#36a9e1;--border:#303b47}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}a{color:inherit;text-decoration:none}.top{height:58px;background:#171d24;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;gap:28px;position:sticky;top:0;z-index:5}.logo{font-size:23px;font-weight:800;letter-spacing:.4px}.logo span{color:var(--accent)}.nav{display:flex;gap:20px;font-size:14px;color:#c8d1da}.nav a:hover{color:white}.wrap{max-width:1180px;margin:auto;padding:28px 18px}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;margin-bottom:20px}.card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:20px}.hero h1{margin:0 0 8px;font-size:30px}.hero p{color:var(--muted);line-height:1.55;margin:0 0 18px}.search{display:flex;gap:10px}.search input{flex:1;background:#10151b;border:1px solid var(--border);border-radius:5px;color:white;padding:12px}.btn{background:var(--accent);border:0;border-radius:5px;padding:11px 16px;font-weight:700;cursor:pointer}.code{border-left:4px solid var(--accent)}.code h2{margin-top:0;font-size:19px}.code-value{font-size:22px;font-weight:800;letter-spacing:1px;margin:15px 0}.code small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.tile h3{margin:0 0 8px}.tile p{color:var(--muted);font-size:14px;line-height:1.45}.tile .icon{font-size:28px;margin-bottom:12px}.section-title{margin:30px 0 14px;font-size:20px}.footer{border-top:1px solid var(--border);margin-top:35px;padding:25px 0;color:var(--muted);font-size:13px;text-align:center}@media(max-width:800px){.hero,.grid{grid-template-columns:1fr}.nav{display:none}.top{justify-content:center}.wrap{padding:18px 12px}.hero h1{font-size:25px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="logo" href=".">Yuna<span>Runes</span></a><nav class="nav"><a href="#codes">Game Codes</a><a href="#tools">Tools</a><a href="#guides">Guides</a><a href="#about">About</a></nav></header>
+<main class="wrap">
+<section class="hero">
+<div class="card"><h1>YunaRunes</h1><p>Ferramentas e recursos para a comunidade de Summoners War. Consulta códigos ativos, explora ferramentas e encontra guias num só lugar.</p><div class="search"><input id="search" placeholder="Pesquisar monstro, ferramenta ou guia..."><button class="btn" onclick="searchSite()">Pesquisar</button></div></div>
+<div class="card code" id="codes"><h2>🎁 Summoners War — Código ativo</h2><div class="code-value" id="code">SEPSW2026I8B</div><small>Verifica sempre a validade antes de resgatar.</small><div style="margin-top:15px"><button class="btn" onclick="copyCode()">Copiar código</button></div></div>
+</section>
+<h2 class="section-title" id="tools">Ferramentas</h2>
+<section class="grid">
+<article class="card tile"><div class="icon">🔎</div><h3>Monster Search</h3><p>Pesquisa monstros por nome, família ou elemento.</p></article>
+<article class="card tile"><div class="icon">⚔️</div><h3>Battle Tools</h3><p>Área preparada para futuras ferramentas de combate, counters e equipas.</p></article>
+<article class="card tile"><div class="icon">📜</div><h3>Game Codes</h3><p>Lista de códigos ativos para Summoners War, com cópia rápida.</p></article>
+<article class="card tile"><div class="icon">💎</div><h3>Rune Tools</h3><p>Ferramentas de runas e builds que serão adicionadas ao YunaRunes.</p></article>
+<article class="card tile" id="guides"><div class="icon">📚</div><h3>Game Guides</h3><p>Guias e dicas para ajudar jogadores novos e experientes.</p></article>
+<article class="card tile"><div class="icon">🏆</div><h3>Leaderboards</h3><p>Estrutura preparada para rankings e estatísticas da comunidade.</p></article>
+</section>
+<section class="card" id="about" style="margin-top:20px"><h2>YunaRunes</h2><p style="color:var(--muted);line-height:1.6">Projeto independente criado para a comunidade de Summoners War. YunaRunes não é afiliado, patrocinado ou associado à Com2uS.</p></section>
+<footer class="footer">YunaRunes © 2026 · Projeto independente da comunidade Summoners War</footer>
+</main>
+<script>function copyCode(){navigator.clipboard.writeText(document.getElementById('code').textContent);alert('Código copiado!')}function searchSite(){const q=document.getElementById('search').value.trim();if(q)alert('Pesquisa: '+q+'\nA pesquisa avançada será adicionada nesta próxima etapa.')}</script>
+</body>
+</html>
