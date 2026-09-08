@@ -15,9 +15,14 @@ permissions:
 jobs:
   update-monsters:
     runs-on: ubuntu-latest
+    concurrency:
+      group: update-monster-data
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -36,5 +41,6 @@ jobs:
             echo 'No monster data changes.'
           else
             git commit -m 'Auto-update complete monster database'
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
