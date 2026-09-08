@@ -1,0 +1,47 @@
+{
+  "_schema": {
+    "description": "YunaRunes monster detail database. Empty fields are intentional until verified game data is added.",
+    "stats": ["HP", "ATK", "DEF", "SPD", "CRI Rate", "CRI Dmg", "Resistance", "Accuracy"],
+    "skills": "Array of verified skill records"
+  },
+  "Veromos": {
+    "stats": {},
+    "skills": [],
+    "leaderSkill": "",
+    "awakening": "",
+    "runes": {"sets": [], "mainStats": {}, "subStats": []},
+    "notes": "Dados detalhados aguardam verificação antes de serem publicados."
+  },
+  "Lushen": {
+    "stats": {},
+    "skills": [],
+    "leaderSkill": "",
+    "awakening": "",
+    "runes": {"sets": [], "mainStats": {}, "subStats": []},
+    "notes": "Dados detalhados aguardam verificação antes de serem publicados."
+  },
+  "Fran": {
+    "stats": {},
+    "skills": [],
+    "leaderSkill": "",
+    "awakening": "",
+    "runes": {"sets": [], "mainStats": {}, "subStats": []},
+    "notes": "Dados detalhados aguardam verificação antes de serem publicados."
+  },
+  "Loren": {
+    "stats": {},
+    "skills": [],
+    "leaderSkill": "",
+    "awakening": "",
+    "runes": {"sets": [], "mainStats": {}, "subStats": []},
+    "notes": "Dados detalhados aguardam verificação antes de serem publicados."
+  },
+  "Sigmarus": {
+    "stats": {},
+    "skills": [],
+    "leaderSkill": "",
+    "awakening": "",
+    "runes": {"sets": [], "mainStats": {}, "subStats": []},
+    "notes": "Dados detalhados aguardam verificação antes de serem publicados."
+  }
+}
