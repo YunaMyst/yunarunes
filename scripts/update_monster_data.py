@@ -12,26 +12,35 @@ IMAGE_BASE = "https://swarfarm.com/static/herders/images/monsters/"
 TRANSLATION_CACHE = Path(".translation-cache-pt.json")
 
 
-def get_json(url):
-    req = Request(url, headers={"User-Agent": "YunaRunes/1.0 (community tool)"})
-    with urlopen(req, timeout=60) as r:
-        return json.load(r)
+def get_json(url, retries=3):
+    last = None
+    for attempt in range(retries):
+        try:
+            req = Request(url, headers={"User-Agent": "YunaRunes/1.0 (community tool)"})
+            with urlopen(req, timeout=30) as r:
+                return json.load(r)
+        except Exception as exc:
+            last = exc
+            if attempt < retries - 1:
+                time.sleep(1)
+    raise last
 
 
 def paged(endpoint):
     page = 1
     out = []
+    # SWARFARM accepts large page sizes; this avoids dozens of slow HTTP requests.
     while True:
-        data = get_json(f"{BASE}/{endpoint}/?page={page}&page_size=100")
-        out.extend(data.get("results", []))
-        if not data.get("next"):
+        data = get_json(f"{BASE}/{endpoint}/?page={page}&page_size=1000")
+        results = data.get("results", []) or []
+        out.extend(results)
+        if not data.get("next") or not results:
             return out
         page += 1
-        time.sleep(0.4)
 
 
 def has_non_latin(text):
-    return bool(re.search(r"[\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff\\uac00-\\ud7af]", str(text or "")))
+    return bool(re.search(r"[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af]", str(text or "")))
 
 
 def load_translation_cache():
@@ -45,9 +54,6 @@ translation_cache = load_translation_cache()
 
 
 def translate_pt(text):
-    """Translate Japanese/CJK text to Portuguese using Google's public translation endpoint.
-    Falls back to the original text if translation is unavailable.
-    """
     text = str(text or "")
     if not text or not has_non_latin(text):
         return text
@@ -59,12 +65,11 @@ def translate_pt(text):
             "?client=gtx&sl=auto&tl=pt&dt=t&q=" + quote(text)
         )
         req = Request(url, headers={"User-Agent": "YunaRunes/1.0"})
-        with urlopen(req, timeout=30) as r:
+        with urlopen(req, timeout=15) as r:
             data = json.load(r)
         translated = "".join(part[0] for part in (data[0] or []) if part and part[0])
         if translated:
             translation_cache[text] = translated
-            time.sleep(0.15)
             return translated
     except Exception as exc:
         print(f"Translation fallback for {text[:60]!r}: {exc}")
