@@ -1,12 +1,15 @@
 import json
 import time
+import re
 from pathlib import Path
 from urllib.request import Request, urlopen
+from urllib.parse import quote
 
 BASE = "https://swarfarm.com/api/v2"
 DETAILS_OUT = Path("monster-details.json")
 CATALOG_OUT = Path("monster-catalog.json")
 IMAGE_BASE = "https://swarfarm.com/static/herders/images/monsters/"
+TRANSLATION_CACHE = Path(".translation-cache-pt.json")
 
 
 def get_json(url):
@@ -27,6 +30,53 @@ def paged(endpoint):
         time.sleep(0.4)
 
 
+def has_non_latin(text):
+    return bool(re.search(r"[\\u3040-\\u30ff\\u3400-\\u4dbf\\u4e00-\\u9fff\\uac00-\\ud7af]", str(text or "")))
+
+
+def load_translation_cache():
+    try:
+        return json.loads(TRANSLATION_CACHE.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+translation_cache = load_translation_cache()
+
+
+def translate_pt(text):
+    """Translate Japanese/CJK text to Portuguese using Google's public translation endpoint.
+    Falls back to the original text if translation is unavailable.
+    """
+    text = str(text or "")
+    if not text or not has_non_latin(text):
+        return text
+    if text in translation_cache:
+        return translation_cache[text]
+    try:
+        url = (
+            "https://translate.googleapis.com/translate_a/single"
+            "?client=gtx&sl=auto&tl=pt&dt=t&q=" + quote(text)
+        )
+        req = Request(url, headers={"User-Agent": "YunaRunes/1.0"})
+        with urlopen(req, timeout=30) as r:
+            data = json.load(r)
+        translated = "".join(part[0] for part in (data[0] or []) if part and part[0])
+        if translated:
+            translation_cache[text] = translated
+            time.sleep(0.15)
+            return translated
+    except Exception as exc:
+        print(f"Translation fallback for {text[:60]!r}: {exc}")
+    return text
+
+
+def save_translation_cache():
+    TRANSLATION_CACHE.write_text(
+        json.dumps(translation_cache, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+
+
 def skill_record(skill, skill_id):
     if not skill:
         return None
@@ -35,18 +85,18 @@ def skill_record(skill, skill_id):
         effect = e.get("effect") or {}
         name = effect.get("name")
         if name:
-            effects.append(name)
+            effects.append(translate_pt(name))
     return {
         "id": skill.get("id", skill_id),
-        "name": skill.get("name", ""),
-        "description": skill.get("description", ""),
+        "name": translate_pt(skill.get("name", "")),
+        "description": translate_pt(skill.get("description", "")),
         "slot": skill.get("slot"),
         "cooltime": skill.get("cooltime"),
         "hits": skill.get("hits"),
         "passive": skill.get("passive"),
         "aoe": skill.get("aoe"),
         "multiplier": skill.get("multiplier_formula"),
-        "scalesWith": skill.get("scales_with", []),
+        "scalesWith": [translate_pt(x) if isinstance(x, str) else x for x in (skill.get("scales_with", []) or [])],
         "effects": effects,
         "upgrades": skill.get("upgrades", []),
     }
@@ -55,9 +105,9 @@ def skill_record(skill, skill_id):
 def leader_text(leader):
     if not leader:
         return ""
-    attr = leader.get("attribute") or ""
+    attr = translate_pt(leader.get("attribute") or "")
     amount = leader.get("amount")
-    area = leader.get("area") or ""
+    area = translate_pt(leader.get("area") or "")
     return " ".join(str(x) for x in [attr, f"{amount}%" if amount is not None else "", area] if x)
 
 
@@ -65,7 +115,7 @@ def awakening_costs(monster):
     costs = []
     for c in monster.get("awaken_cost") or []:
         item = c.get("item") or {}
-        costs.append({"item": item.get("name", ""), "quantity": c.get("quantity", 0)})
+        costs.append({"item": translate_pt(item.get("name", "")), "quantity": c.get("quantity", 0)})
     return costs
 
 
@@ -82,7 +132,8 @@ def main():
             "generatedBy": "YunaRunes",
             "naturalStars": "1-5",
             "includesSecondAwakening": True,
-            "note": "Static snapshot generated automatically by GitHub Actions."
+            "language": "pt-PT",
+            "note": "Static snapshot generated automatically by GitHub Actions. Texts are translated to Portuguese when the source data is not Portuguese."
         }
     }
     catalog = []
@@ -92,7 +143,7 @@ def main():
         natural = int(m.get("natural_stars") or 0)
         if natural < 1 or natural > 5:
             continue
-        name = str(m.get("name") or "").strip()
+        name = translate_pt(str(m.get("name") or "").strip())
         element = str(m.get("element") or "").strip()
         if not name or not element:
             continue
@@ -139,12 +190,12 @@ def main():
             "isSecondAwakening": awakening_level >= 2,
             "familyId": m.get("family_id"),
             "com2usId": m.get("com2us_id"),
-            "archetype": m.get("archetype"),
+            "archetype": translate_pt(m.get("archetype") or ""),
             "stats": stats,
             "baseStats": base_stats,
             "skills": skill_list,
             "leaderSkill": leader_text(m.get("leader_skill") or {}),
-            "awakening": m.get("awaken_bonus") or "",
+            "awakening": translate_pt(m.get("awaken_bonus") or ""),
             "awakeningCost": awakening_costs(m),
             "skillUpsToMax": m.get("skill_ups_to_max"),
             "canAwaken": m.get("can_awaken"),
@@ -160,8 +211,8 @@ def main():
                 "id": m.get("id"),
                 "name": name,
                 "element": element,
-                "family": m.get("family_id"),
-                "role": m.get("archetype") or "",
+                "family": translate_pt(str(m.get("family_id") or "")),
+                "role": translate_pt(m.get("archetype") or ""),
                 "stars": natural,
                 "awakeningLevel": awakening_level,
                 "isSecondAwakening": awakening_level >= 2,
@@ -169,13 +220,14 @@ def main():
                 "detailsKey": key,
             })
 
+    save_translation_cache()
     catalog.sort(key=lambda x: (x["name"].lower(), x["element"], x["stars"], x["awakeningLevel"]))
     DETAILS_OUT.write_text(json.dumps(details, ensure_ascii=False, indent=2), encoding="utf-8")
     CATALOG_OUT.write_text(json.dumps({
-        "_meta": {"source": "SWARFARM Bestiary API", "includesSecondAwakening": True},
+        "_meta": {"source": "SWARFARM Bestiary API", "includesSecondAwakening": True, "language": "pt-PT"},
         "monsters": catalog
     }, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Generated {len(catalog)} monster variants, including second awakenings")
+    print(f"Generated {len(catalog)} monster variants, including second awakenings, translated to Portuguese")
 
 
 if __name__ == "__main__":
