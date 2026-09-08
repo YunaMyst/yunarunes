@@ -4,7 +4,8 @@
     "generatedBy": "YunaRunes",
     "naturalStars": "1-5",
     "includesSecondAwakening": true,
-    "note": "Static snapshot generated automatically by GitHub Actions."
+    "language": "pt-PT",
+    "note": "Static snapshot generated automatically by GitHub Actions. Texts are translated to Portuguese when the source data is not Portuguese."
   },
   "Forest Keeper|Fire|1|A0": {
     "name": "Forest Keeper",
@@ -184156,8 +184157,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23605-dark-beast-rider"
   },
-  "데몬(물)|Water|5|A0": {
-    "name": "데몬(물)",
+  "Demônio (água)|Water|5|A0": {
+    "name": "Demônio (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -184309,8 +184310,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23201-water"
   },
-  "데몬(어둠)|Dark|5|A0": {
-    "name": "데몬(어둠)",
+  "Demônio (escuro)|Dark|5|A0": {
+    "name": "Demônio (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -184463,8 +184464,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23205-dark"
   },
-  "데몬(물)|Water|5|A1": {
-    "name": "데몬(물)",
+  "Demônio (água)|Water|5|A1": {
+    "name": "Demônio (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 6,
@@ -184599,8 +184600,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23211-water"
   },
-  "데몬(어둠)|Dark|5|A1": {
-    "name": "데몬(어둠)",
+  "Demônio (escuro)|Dark|5|A1": {
+    "name": "Demônio (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 6,
@@ -184736,8 +184737,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23215-dark"
   },
-  "가고일(물)|Water|4|A0": {
-    "name": "가고일(물)",
+  "Gárgula (água)|Water|4|A0": {
+    "name": "Gárgula (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -184878,8 +184879,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23401-water"
   },
-  "가고일(불)|Fire|4|A0": {
-    "name": "가고일(불)",
+  "Gárgula (Fogo)|Fire|4|A0": {
+    "name": "Gárgula (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -185009,8 +185010,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23402-fire"
   },
-  "가고일(바람)|Wind|4|A0": {
-    "name": "가고일(바람)",
+  "Gárgula (Vento)|Wind|4|A0": {
+    "name": "Gárgula (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -185151,8 +185152,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23403-wind"
   },
-  "가고일(빛)|Light|4|A0": {
-    "name": "가고일(빛)",
+  "Gárgula (Luz)|Light|4|A0": {
+    "name": "Gárgula (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -185293,8 +185294,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23404-light"
   },
-  "가고일(어둠)|Dark|4|A0": {
-    "name": "가고일(어둠)",
+  "Gárgula (escuro)|Dark|4|A0": {
+    "name": "Gárgula (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -185424,8 +185425,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23405-dark"
   },
-  "가고일(물)|Water|4|A1": {
-    "name": "가고일(물)",
+  "Gárgula (água)|Water|4|A1": {
+    "name": "Gárgula (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 5,
@@ -185566,8 +185567,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23411-water"
   },
-  "가고일(불)|Fire|4|A1": {
-    "name": "가고일(불)",
+  "Gárgula (Fogo)|Fire|4|A1": {
+    "name": "Gárgula (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 5,
@@ -185697,8 +185698,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23412-fire"
   },
-  "가고일(바람)|Wind|4|A1": {
-    "name": "가고일(바람)",
+  "Gárgula (Vento)|Wind|4|A1": {
+    "name": "Gárgula (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 5,
@@ -185839,8 +185840,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23413-wind"
   },
-  "가고일(빛)|Light|4|A1": {
-    "name": "가고일(빛)",
+  "Gárgula (Luz)|Light|4|A1": {
+    "name": "Gárgula (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 5,
@@ -185981,8 +185982,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23414-light"
   },
-  "가고일(어둠)|Dark|4|A1": {
-    "name": "가고일(어둠)",
+  "Gárgula (escuro)|Dark|4|A1": {
+    "name": "Gárgula (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 5,
@@ -186112,8 +186113,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23415-dark"
   },
-  "형상아이템용 더미(물)|Water|1|A0": {
-    "name": "형상아이템용 더미(물)",
+  "Manequim para itens de forma (água)|Water|1|A0": {
+    "name": "Manequim para itens de forma (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186153,8 +186154,8 @@
     },
     "source": "https://swarfarm.com/bestiary/45001-water"
   },
-  "형상아이템용 더미(불)|Fire|1|A0": {
-    "name": "형상아이템용 더미(불)",
+  "Manequim para itens de forma (fogo)|Fire|1|A0": {
+    "name": "Manequim para itens de forma (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186194,8 +186195,8 @@
     },
     "source": "https://swarfarm.com/bestiary/45002-fire"
   },
-  "형상아이템용 더미(바람)|Wind|1|A0": {
-    "name": "형상아이템용 더미(바람)",
+  "Manequim para itens de forma (vento)|Wind|1|A0": {
+    "name": "Manequim para itens de forma (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186235,8 +186236,8 @@
     },
     "source": "https://swarfarm.com/bestiary/45003-wind"
   },
-  "형상아이템용 더미(빛)|Light|1|A0": {
-    "name": "형상아이템용 더미(빛)",
+  "Manequim para itens de forma (leve)|Light|1|A0": {
+    "name": "Manequim para itens de forma (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186276,8 +186277,8 @@
     },
     "source": "https://swarfarm.com/bestiary/45004-light"
   },
-  "형상아이템용 더미(어둠)|Dark|1|A0": {
-    "name": "형상아이템용 더미(어둠)",
+  "Manequim para itens de forma (escuro)|Dark|1|A0": {
+    "name": "Manequim para itens de forma (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186317,8 +186318,8 @@
     },
     "source": "https://swarfarm.com/bestiary/45005-dark"
   },
-  "미궁 보스 머리|Pure|1|A0": {
-    "name": "미궁 보스 머리",
+  "Cabeça do Chefe do Labirinto|Pure|1|A0": {
+    "name": "Cabeça do Chefe do Labirinto",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186373,8 +186374,8 @@
     },
     "source": "https://swarfarm.com/bestiary/46002-pure"
   },
-  "미궁 보스 왼쪽팔|Pure|1|A0": {
-    "name": "미궁 보스 왼쪽팔",
+  "Braço esquerdo do chefe do labirinto|Pure|1|A0": {
+    "name": "Braço esquerdo do chefe do labirinto",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186429,8 +186430,8 @@
     },
     "source": "https://swarfarm.com/bestiary/46003-pure"
   },
-  "미궁 보스 오른쪽팔|Pure|1|A0": {
-    "name": "미궁 보스 오른쪽팔",
+  "Braço direito do chefe do labirinto|Pure|1|A0": {
+    "name": "Braço direito do chefe do labirinto",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186485,8 +186486,8 @@
     },
     "source": "https://swarfarm.com/bestiary/46004-pure"
   },
-  "미궁 룬문양 (물)|Water|1|A0": {
-    "name": "미궁 룬문양 (물)",
+  "Emblema da Runa do Labirinto (Água)|Water|1|A0": {
+    "name": "Emblema da Runa do Labirinto (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186541,8 +186542,8 @@
     },
     "source": "https://swarfarm.com/bestiary/46201-water"
   },
-  "미궁 룬문양 (불)|Fire|1|A0": {
-    "name": "미궁 룬문양 (불)",
+  "Emblema da Runa do Labirinto (Fogo)|Fire|1|A0": {
+    "name": "Emblema da Runa do Labirinto (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -186597,8 +186598,8 @@
     },
     "source": "https://swarfarm.com/bestiary/46202-fire"
   },
-  "미궁 룬문양 (바람)|Wind|1|A0": {
-    "name": "미궁 룬문양 (바람)",
+  "Emblema da Runa do Labirinto (Vento)|Wind|1|A0": {
+    "name": "Emblema da Runa do Labirinto (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190141,8 +190142,8 @@
     },
     "source": "https://swarfarm.com/bestiary/47605-dark-martial-cat-2a"
   },
-  "월드보스-고대골렘|Water|1|A0": {
-    "name": "월드보스-고대골렘",
+  "Chefe Mundial - Golem Antigo|Water|1|A0": {
+    "name": "Chefe Mundial - Golem Antigo",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190240,8 +190241,8 @@
     },
     "source": "https://swarfarm.com/bestiary/102166-pure-tower"
   },
-  "타워(물) - 전체 충격 수정|Pure|1|A0": {
-    "name": "타워(물) - 전체 충격 수정",
+  "Torre (Água) – Correções de impacto global|Pure|1|A0": {
+    "name": "Torre (Água) – Correções de impacto global",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190298,8 +190299,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101616-pure-"
   },
-  "타워(물) - 공속 게이지|Pure|1|A0": {
-    "name": "타워(물) - 공속 게이지",
+  "Torre (Água) – Medidor de Velocidade de Ataque|Pure|1|A0": {
+    "name": "Torre (Água) – Medidor de Velocidade de Ataque",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190354,8 +190355,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101716-pure-"
   },
-  "타워(불) - 전체 충격 수정|Pure|1|A0": {
-    "name": "타워(불) - 전체 충격 수정",
+  "Torre (Fogo) – Correção de impacto total|Pure|1|A0": {
+    "name": "Torre (Fogo) – Correção de impacto total",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190412,8 +190413,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101626-pure-"
   },
-  "타워(불) - 공속 게이지|Pure|1|A0": {
-    "name": "타워(불) - 공속 게이지",
+  "Torre (Fogo) - Medidor de Velocidade de Ataque|Pure|1|A0": {
+    "name": "Torre (Fogo) - Medidor de Velocidade de Ataque",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190468,8 +190469,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101726-pure-"
   },
-  "타워(바람) - 전체 충격 수정|Pure|1|A0": {
-    "name": "타워(바람) - 전체 충격 수정",
+  "Torre (Vento) – Correção de impacto global|Pure|1|A0": {
+    "name": "Torre (Vento) – Correção de impacto global",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190526,8 +190527,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101636-pure-"
   },
-  "타워(바람) - 공속 게이지|Pure|1|A0": {
-    "name": "타워(바람) - 공속 게이지",
+  "Torre (Vento) – Medidor de Velocidade de Ataque|Pure|1|A0": {
+    "name": "Torre (Vento) – Medidor de Velocidade de Ataque",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190582,8 +190583,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101736-pure-"
   },
-  "타워(빛) - 전체 충격 수정|Pure|1|A0": {
-    "name": "타워(빛) - 전체 충격 수정",
+  "Torre (Luz) – Correção total do impacto|Pure|1|A0": {
+    "name": "Torre (Luz) – Correção total do impacto",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190640,8 +190641,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101646-pure-"
   },
-  "타워(빛) - 공속 게이지|Pure|1|A0": {
-    "name": "타워(빛) - 공속 게이지",
+  "Torre (Luz) - Medidor de Velocidade de Ataque|Pure|1|A0": {
+    "name": "Torre (Luz) - Medidor de Velocidade de Ataque",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190696,8 +190697,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101746-pure-"
   },
-  "타워(어둠) - 전체 충격 수정|Pure|1|A0": {
-    "name": "타워(어둠) - 전체 충격 수정",
+  "Torre (Escura) – Correção de Impacto Global|Pure|1|A0": {
+    "name": "Torre (Escura) – Correção de Impacto Global",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190754,8 +190755,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101656-pure-"
   },
-  "타워(어둠) - 공속 게이지|Pure|1|A0": {
-    "name": "타워(어둠) - 공속 게이지",
+  "Torre (Escura) – Medidor de Velocidade de Ataque|Pure|1|A0": {
+    "name": "Torre (Escura) – Medidor de Velocidade de Ataque",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190810,8 +190811,8 @@
     },
     "source": "https://swarfarm.com/bestiary/101756-pure-"
   },
-  "시험의탑 타워(왼쪽)|Pure|1|A0": {
-    "name": "시험의탑 타워(왼쪽)",
+  "Torre da Torre de Teste (esquerda)|Pure|1|A0": {
+    "name": "Torre da Torre de Teste (esquerda)",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -190866,8 +190867,8 @@
     },
     "source": "https://swarfarm.com/bestiary/110106-pure"
   },
-  "시험의탑 타워(오른쪽)|Pure|1|A0": {
-    "name": "시험의탑 타워(오른쪽)",
+  "Torre da Torre de Teste (direita)|Pure|1|A0": {
+    "name": "Torre da Torre de Teste (direita)",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194601,8 +194602,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23705-dark-art-master-mookwol"
   },
-  "족자(물)|Water|1|A0": {
-    "name": "족자(물)",
+  "rolar (água)|Water|1|A0": {
+    "name": "rolar (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194642,8 +194643,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23801-water"
   },
-  "족자(불)|Fire|1|A0": {
-    "name": "족자(불)",
+  "rolar (fogo)|Fire|1|A0": {
+    "name": "rolar (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194683,8 +194684,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23802-fire"
   },
-  "족자(바람)|Wind|1|A0": {
-    "name": "족자(바람)",
+  "rolar (vento)|Wind|1|A0": {
+    "name": "rolar (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194724,8 +194725,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23803-wind"
   },
-  "족자(빛)|Light|1|A0": {
-    "name": "족자(빛)",
+  "rolar (leve)|Light|1|A0": {
+    "name": "rolar (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194765,8 +194766,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23804-light"
   },
-  "족자(어둠)|Dark|1|A0": {
-    "name": "족자(어둠)",
+  "rolar (escuro)|Dark|1|A0": {
+    "name": "rolar (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -194806,8 +194807,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23805-dark"
   },
-  "족자(무)|Pure|1|A0": {
-    "name": "족자(무)",
+  "rolar (rabanete)|Pure|1|A0": {
+    "name": "rolar (rabanete)",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196384,8 +196385,8 @@
     },
     "source": "https://swarfarm.com/bestiary/23905-dark-string-master-mirinae"
   },
-  "만랩튜토리얼보스(불)|Fire|1|A0": {
-    "name": "만랩튜토리얼보스(불)",
+  "Chefe do tutorial Manlab (fogo)|Fire|1|A0": {
+    "name": "Chefe do tutorial Manlab (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196472,8 +196473,8 @@
     },
     "source": "https://swarfarm.com/bestiary/63102-fire"
   },
-  "만랩튜토리얼_드래곤(불)|Fire|1|A0": {
-    "name": "만랩튜토리얼_드래곤(불)",
+  "Tutorial Manlab_Dragão (Fogo)|Fire|1|A0": {
+    "name": "Tutorial Manlab_Dragão (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196584,8 +196585,8 @@
     },
     "source": "https://swarfarm.com/bestiary/63202-fire-_"
   },
-  "만랩튜토리얼_가고일(물)|Water|1|A0": {
-    "name": "만랩튜토리얼_가고일(물)",
+  "Tutorial Manlab_Gárgula (Água)|Water|1|A0": {
+    "name": "Tutorial Manlab_Gárgula (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196614,7 +196615,7 @@
       {
         "id": 2683,
         "name": "skill_13516",
-        "description": "만랩튜토리얼_가고일(물) 1스킬",
+        "description": "Manlab Tutorial_Gárgula (Água) 1 Habilidade",
         "slot": 1,
         "cooltime": null,
         "hits": 1,
@@ -196668,8 +196669,8 @@
     },
     "source": "https://swarfarm.com/bestiary/63301-water-_"
   },
-  "만랩튜토리얼_가고일(불)|Fire|1|A0": {
-    "name": "만랩튜토리얼_가고일(불)",
+  "Tutorial Manlab_Gárgula (Fogo)|Fire|1|A0": {
+    "name": "Tutorial Manlab_Gárgula (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196698,7 +196699,7 @@
       {
         "id": 2684,
         "name": "skill_13517",
-        "description": "만랩튜토리얼_가고일(불) 1스킬",
+        "description": "Manlab Tutorial_Gargoyle (Fogo) 1 habilidade",
         "slot": 1,
         "cooltime": null,
         "hits": 1,
@@ -196752,8 +196753,8 @@
     },
     "source": "https://swarfarm.com/bestiary/63302-fire-_"
   },
-  "만랩튜토리얼_가고일(바람)|Wind|1|A0": {
-    "name": "만랩튜토리얼_가고일(바람)",
+  "Tutorial Manlab_Gárgula (Vento)|Wind|1|A0": {
+    "name": "Tutorial Manlab_Gárgula (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196782,7 +196783,7 @@
       {
         "id": 2685,
         "name": "skill_13518",
-        "description": "만랩튜토리얼_가고일(바람) 1스킬",
+        "description": "Manlab Tutorial_Gárgula (Vento) Habilidade 1",
         "slot": 1,
         "cooltime": null,
         "hits": 1,
@@ -196836,8 +196837,8 @@
     },
     "source": "https://swarfarm.com/bestiary/63303-wind-_"
   },
-  "만랩튜토타워_방어 약화|Pure|1|A0": {
-    "name": "만랩튜토타워_방어 약화",
+  "Manlab Tuto Tower_Enfraquecer defesa|Pure|1|A0": {
+    "name": "Manlab Tuto Tower_Enfraquecer defesa",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196892,8 +196893,8 @@
     },
     "source": "https://swarfarm.com/bestiary/111006-pure-_"
   },
-  "만랩튜토타워_공격 강화|Pure|1|A0": {
-    "name": "만랩튜토타워_공격 강화",
+  "Manlab Tuto Tower_Ataque reforçado|Pure|1|A0": {
+    "name": "Manlab Tuto Tower_Ataque reforçado",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -196948,8 +196949,8 @@
     },
     "source": "https://swarfarm.com/bestiary/111016-pure-_"
   },
-  "류(물)|Water|5|A0": {
-    "name": "류(물)",
+  "Ryu (água)|Water|5|A0": {
+    "name": "Ryu (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -197105,8 +197106,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24001-water"
   },
-  "류(불)|Fire|5|A0": {
-    "name": "류(불)",
+  "Ryu (fogo)|Fire|5|A0": {
+    "name": "Ryu (fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -197256,8 +197257,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24002-fire"
   },
-  "류(바람)|Wind|5|A0": {
-    "name": "류(바람)",
+  "Ryu (vento)|Wind|5|A0": {
+    "name": "Ryu (vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -197425,8 +197426,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24003-wind"
   },
-  "류(빛)|Light|5|A0": {
-    "name": "류(빛)",
+  "Ryu (luz)|Light|5|A0": {
+    "name": "Ryu (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -197589,8 +197590,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24004-light"
   },
-  "류(어둠)|Dark|5|A0": {
-    "name": "류(어둠)",
+  "Ryu (escuro)|Dark|5|A0": {
+    "name": "Ryu (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -198485,8 +198486,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24015-dark-ryu"
   },
-  "켄(불)|Fire|5|A0": {
-    "name": "켄(불)",
+  "Ken (touro)|Fire|5|A0": {
+    "name": "Ken (touro)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -198796,8 +198797,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24112-fire-ken"
   },
-  "바이슨(물)|Water|5|A0": {
-    "name": "바이슨(물)",
+  "Bisão (água)|Water|5|A0": {
+    "name": "Bisão (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -198955,8 +198956,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24201-water"
   },
-  "바이슨(불)|Fire|5|A0": {
-    "name": "바이슨(불)",
+  "Bisão (touro)|Fire|5|A0": {
+    "name": "Bisão (touro)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -199124,8 +199125,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24202-fire"
   },
-  "바이슨(바람)|Wind|5|A0": {
-    "name": "바이슨(바람)",
+  "Bisão (Vento)|Wind|5|A0": {
+    "name": "Bisão (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -199295,8 +199296,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24203-wind"
   },
-  "바이슨(빛)|Light|5|A0": {
-    "name": "바이슨(빛)",
+  "Bisão (leve)|Light|5|A0": {
+    "name": "Bisão (leve)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -199459,8 +199460,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24204-light"
   },
-  "바이슨(어둠)|Dark|5|A0": {
-    "name": "바이슨(어둠)",
+  "Bisão (escuro)|Dark|5|A0": {
+    "name": "Bisão (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -200353,8 +200354,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24215-dark-m-bison"
   },
-  "달심(물)|Water|4|A0": {
-    "name": "달심(물)",
+  "Dhalsim (água)|Water|4|A0": {
+    "name": "Dhalsim (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -200507,8 +200508,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24301-water"
   },
-  "달심(불)|Fire|4|A0": {
-    "name": "달심(불)",
+  "Dhalsim (fogo)|Fire|4|A0": {
+    "name": "Dhalsim (fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -200673,8 +200674,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24302-fire"
   },
-  "달심(바람)|Wind|4|A0": {
-    "name": "달심(바람)",
+  "Dhalsim (vento)|Wind|4|A0": {
+    "name": "Dhalsim (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -200840,8 +200841,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24303-wind"
   },
-  "달심(빛)|Light|4|A0": {
-    "name": "달심(빛)",
+  "Dhalsim (luz)|Light|4|A0": {
+    "name": "Dhalsim (luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -201006,8 +201007,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24304-light"
   },
-  "달심(어둠)|Dark|4|A0": {
-    "name": "달심(어둠)",
+  "Dhalsim (escuro)|Dark|4|A0": {
+    "name": "Dhalsim (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -201882,8 +201883,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24315-dark-dhalsim"
   },
-  "춘리(물)|Water|4|A0": {
-    "name": "춘리(물)",
+  "Chun-Li (água)|Water|4|A0": {
+    "name": "Chun-Li (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -202047,8 +202048,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24401-water"
   },
-  "춘리(불)|Fire|4|A0": {
-    "name": "춘리(불)",
+  "Chun-Li (Fogo)|Fire|4|A0": {
+    "name": "Chun-Li (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -202207,8 +202208,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24402-fire"
   },
-  "춘리(바람)|Wind|4|A0": {
-    "name": "춘리(바람)",
+  "Chun-Li (Vento)|Wind|4|A0": {
+    "name": "Chun-Li (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -202360,8 +202361,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24403-wind"
   },
-  "춘리(빛)|Light|4|A0": {
-    "name": "춘리(빛)",
+  "Chun-Li (Luz)|Light|4|A0": {
+    "name": "Chun-Li (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -202513,8 +202514,8 @@
     },
     "source": "https://swarfarm.com/bestiary/24404-light"
   },
-  "춘리(어둠)|Dark|4|A0": {
-    "name": "춘리(어둠)",
+  "Chun-Li (escuro)|Dark|4|A0": {
+    "name": "Chun-Li (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -217507,8 +217508,8 @@
     },
     "source": "https://swarfarm.com/bestiary/12005-dark-high-elemental-jumaline"
   },
-  "하이엘리멘탈 2차 각성 보스(물)|Water|1|A0": {
-    "name": "하이엘리멘탈 2차 각성 보스(물)",
+  "Chefe do 2º Despertar do Elemental Alto (Água)|Water|1|A0": {
+    "name": "Chefe do 2º Despertar do Elemental Alto (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -217632,8 +217633,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48001-water-2"
   },
-  "하이엘리멘탈 2차 각성 보스(불)|Fire|1|A0": {
-    "name": "하이엘리멘탈 2차 각성 보스(불)",
+  "Chefe do 2º Despertar do Elemental Alto (Fogo)|Fire|1|A0": {
+    "name": "Chefe do 2º Despertar do Elemental Alto (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -217746,8 +217747,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48002-fire-2"
   },
-  "하이엘리멘탈 2차 각성 보스(바람)|Wind|1|A0": {
-    "name": "하이엘리멘탈 2차 각성 보스(바람)",
+  "Chefe do 2º Despertar do Elemental Alto (Vento)|Wind|1|A0": {
+    "name": "Chefe do 2º Despertar do Elemental Alto (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -217866,8 +217867,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48003-wind-2"
   },
-  "하이엘리멘탈 2차 각성 보스(빛)|Light|1|A0": {
-    "name": "하이엘리멘탈 2차 각성 보스(빛)",
+  "Chefe do 2º Despertar do Elemental Alto (Luz)|Light|1|A0": {
+    "name": "Chefe do 2º Despertar do Elemental Alto (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -217981,8 +217982,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48004-light-2"
   },
-  "하이엘리멘탈 2차 각성 보스(어둠)|Dark|1|A0": {
-    "name": "하이엘리멘탈 2차 각성 보스(어둠)",
+  "Chefe do 2º Despertar do Elemental Alto (Escuro)|Dark|1|A0": {
+    "name": "Chefe do 2º Despertar do Elemental Alto (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218107,8 +218108,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48005-dark-2"
   },
-  "2차각성 하이엘리멘탈 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_왼쪽(물)",
+  "2º despertar elementar elevado cristal_esquerdo (água)|Water|1|A0": {
+    "name": "2º despertar elementar elevado cristal_esquerdo (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218165,8 +218166,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121001-water-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_왼쪽(불)",
+  "2º Despertar High Elemental Modification_left (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar High Elemental Modification_left (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218223,8 +218224,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121002-fire-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_왼쪽(바람)",
+  "2º despertar modificação elementar alta_esquerda (vento)|Wind|1|A0": {
+    "name": "2º despertar modificação elementar alta_esquerda (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218281,8 +218282,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121003-wind-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_왼쪽(빛)",
+  "2º despertar modificação elementar alta_esquerda (luz)|Light|1|A0": {
+    "name": "2º despertar modificação elementar alta_esquerda (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218339,8 +218340,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121004-light-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_왼쪽(어둠)",
+  "2º Despertar High Elemental Modificação_esquerda (escuro)|Dark|1|A0": {
+    "name": "2º Despertar High Elemental Modificação_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218397,8 +218398,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121005-dark-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_오른쪽(물)",
+  "2º despertar cristal elemental_direito (água)|Water|1|A0": {
+    "name": "2º despertar cristal elemental_direito (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218455,8 +218456,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121011-water-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_오른쪽(불)",
+  "2º Despertar Cristal Elemental Superior_Direito (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar Cristal Elemental Superior_Direito (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218513,8 +218514,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121012-fire-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_오른쪽(바람)",
+  "2º despertar, modificação do alto elementar_direita (vento)|Wind|1|A0": {
+    "name": "2º despertar, modificação do alto elementar_direita (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218571,8 +218572,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121013-wind-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_오른쪽(빛)",
+  "2º despertar cristal elemental_direito (luz)|Light|1|A0": {
+    "name": "2º despertar cristal elemental_direito (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -218627,8 +218628,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121014-light-2-_"
   },
-  "2차각성 하이엘리멘탈 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 하이엘리멘탈 수정_오른쪽(어둠)",
+  "Cristal Elemental Superior do 2º Despertar_Direito (Escuro)|Dark|1|A0": {
+    "name": "Cristal Elemental Superior do 2º Despertar_Direito (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -223208,8 +223209,8 @@
     },
     "source": "https://swarfarm.com/bestiary/25405-dark-robo"
   },
-  "ROBO(물)_잔해|Water|4|A0": {
-    "name": "ROBO(물)_잔해",
+  "ROBO(Água)_Destroços|Water|4|A0": {
+    "name": "ROBO(Água)_Destroços",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -223338,8 +223339,8 @@
     },
     "source": "https://swarfarm.com/bestiary/25501-water-robo_"
   },
-  "ROBO(물)_잔해|Water|4|A1": {
-    "name": "ROBO(물)_잔해",
+  "ROBO(Água)_Destroços|Water|4|A1": {
+    "name": "ROBO(Água)_Destroços",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 5,
@@ -231008,8 +231009,8 @@
     },
     "source": "https://swarfarm.com/bestiary/50005-dark-gina"
   },
-  "2차각성 방랑 기사 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 방랑 기사 수정_왼쪽(물)",
+  "2º Cavaleiro Errante do Despertar Edit_Left (Água)|Water|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Left (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231066,8 +231067,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121101-water-2-_"
   },
-  "2차각성 방랑 기사 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 방랑 기사 수정_왼쪽(불)",
+  "2º Cavaleiro Errante do Despertar Edit_Left (Fogo)|Fire|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Left (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231124,8 +231125,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121102-fire-2-_"
   },
-  "2차각성 방랑 기사 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 방랑 기사 수정_왼쪽(바람)",
+  "Artigo Errante do 2º Despertar Edit_Left (Vento)|Wind|1|A0": {
+    "name": "Artigo Errante do 2º Despertar Edit_Left (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231182,8 +231183,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121103-wind-2-_"
   },
-  "2차각성 방랑 기사 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 방랑 기사 수정_왼쪽(빛)",
+  "2º Cavaleiro Errante do Despertar Edit_Left (Luz)|Light|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Left (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231240,8 +231241,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121104-light-2-_"
   },
-  "2차각성 방랑 기사 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 방랑 기사 수정_왼쪽(어둠)",
+  "Modificação do segundo cavaleiro errante do despertar_esquerda (escuro)|Dark|1|A0": {
+    "name": "Modificação do segundo cavaleiro errante do despertar_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231296,8 +231297,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121105-dark-2-_"
   },
-  "2차각성 방랑 기사 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 방랑 기사 수정_오른쪽(물)",
+  "2º Cavaleiro Errante do Despertar Edit_Right (Água)|Water|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Right (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231354,8 +231355,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121111-water-2-_"
   },
-  "2차각성 방랑 기사 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 방랑 기사 수정_오른쪽(불)",
+  "Artigo Errante do 2º Despertar Edit_Right (Fogo)|Fire|1|A0": {
+    "name": "Artigo Errante do 2º Despertar Edit_Right (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231412,8 +231413,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121112-fire-2-_"
   },
-  "2차각성 방랑 기사 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 방랑 기사 수정_오른쪽(바람)",
+  "Artigo Errante do 2º Despertar Edit_Right (Vento)|Wind|1|A0": {
+    "name": "Artigo Errante do 2º Despertar Edit_Right (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231470,8 +231471,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121113-wind-2-_"
   },
-  "2차각성 방랑 기사 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 방랑 기사 수정_오른쪽(빛)",
+  "2º Cavaleiro Errante do Despertar Edit_Right (Luz)|Light|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Right (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231528,8 +231529,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121114-light-2-_"
   },
-  "2차각성 방랑 기사 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 방랑 기사 수정_오른쪽(어둠)",
+  "2º Cavaleiro Errante do Despertar Edit_Right (Escuro)|Dark|1|A0": {
+    "name": "2º Cavaleiro Errante do Despertar Edit_Right (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231586,8 +231587,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121115-dark-2-_"
   },
-  "2차각성 미스틱 위치 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_왼쪽(물)",
+  "Modificação da localização mística do 2º despertar_esquerda (água)|Water|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_esquerda (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231644,8 +231645,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121201-water-2-_"
   },
-  "2차각성 미스틱 위치 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_왼쪽(불)",
+  "Modificação da localização mística do 2º despertar_esquerda (fogo)|Fire|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_esquerda (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231702,8 +231703,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121202-fire-2-_"
   },
-  "2차각성 미스틱 위치 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_왼쪽(바람)",
+  "Modificação da localização mística do 2º despertar_esquerda (vento)|Wind|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_esquerda (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231760,8 +231761,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121203-wind-2-_"
   },
-  "2차각성 미스틱 위치 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_왼쪽(빛)",
+  "Modificação da localização mística do 2º despertar_esquerda (luz)|Light|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_esquerda (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231818,8 +231819,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121204-light-2-_"
   },
-  "2차각성 미스틱 위치 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_왼쪽(어둠)",
+  "Local místico do 2º despertar modificado_esquerda (escuro)|Dark|1|A0": {
+    "name": "Local místico do 2º despertar modificado_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231876,8 +231877,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121205-dark-2-_"
   },
-  "2차각성 미스틱 위치 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_오른쪽(물)",
+  "Modificação da localização mística do 2º despertar_direita (água)|Water|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_direita (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231934,8 +231935,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121211-water-2-_"
   },
-  "2차각성 미스틱 위치 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_오른쪽(불)",
+  "Modificação da localização mística do 2º despertar_direita (fogo)|Fire|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_direita (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -231992,8 +231993,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121212-fire-2-_"
   },
-  "2차각성 미스틱 위치 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_오른쪽(바람)",
+  "Local místico do 2º despertar modificado_direita (vento)|Wind|1|A0": {
+    "name": "Local místico do 2º despertar modificado_direita (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -232050,8 +232051,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121213-wind-2-_"
   },
-  "2차각성 미스틱 위치 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_오른쪽(빛)",
+  "Modificação da localização mística do 2º despertar_direita (luz)|Light|1|A0": {
+    "name": "Modificação da localização mística do 2º despertar_direita (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -232108,8 +232109,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121214-light-2-_"
   },
-  "2차각성 미스틱 위치 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 미스틱 위치 수정_오른쪽(어둠)",
+  "Local místico do 2º despertar modificado_direita (escuro)|Dark|1|A0": {
+    "name": "Local místico do 2º despertar modificado_direita (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -236605,8 +236606,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26105-dark-battle-angel"
   },
-  "용감한 쿠키|Wind|5|A0": {
-    "name": "용감한 쿠키",
+  "biscoitos corajosos|Wind|5|A0": {
+    "name": "biscoitos corajosos",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -236873,8 +236874,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26213-wind-gingerbrave"
   },
-  "퓨어바닐라 쿠키(물)|Water|5|A0": {
-    "name": "퓨어바닐라 쿠키(물)",
+  "Biscoito Puro Baunilha (Água)|Water|5|A0": {
+    "name": "Biscoito Puro Baunilha (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -237016,8 +237017,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26301-water"
   },
-  "퓨어바닐라 쿠키(불)|Fire|5|A0": {
-    "name": "퓨어바닐라 쿠키(불)",
+  "Biscoito Pura Baunilha (Touro)|Fire|5|A0": {
+    "name": "Biscoito Pura Baunilha (Touro)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -237155,8 +237156,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26302-fire"
   },
-  "퓨어바닐라 쿠키(바람)|Wind|5|A0": {
-    "name": "퓨어바닐라 쿠키(바람)",
+  "Biscoito Pura Baunilha (Vento)|Wind|5|A0": {
+    "name": "Biscoito Pura Baunilha (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -237296,8 +237297,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26303-wind"
   },
-  "퓨어바닐라 쿠키(빛)|Light|5|A0": {
-    "name": "퓨어바닐라 쿠키(빛)",
+  "Biscoito Puro Baunilha (Light)|Light|5|A0": {
+    "name": "Biscoito Puro Baunilha (Light)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -237441,8 +237442,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26304-light"
   },
-  "퓨어바닐라 쿠키(어둠)|Dark|5|A0": {
-    "name": "퓨어바닐라 쿠키(어둠)",
+  "Biscoito Puro Baunilha (Escuro)|Dark|5|A0": {
+    "name": "Biscoito Puro Baunilha (Escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -238295,8 +238296,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26315-dark-pure-vanilla-cookie"
   },
-  "홀리베리 쿠키(물)|Water|5|A0": {
-    "name": "홀리베리 쿠키(물)",
+  "Biscoitos Holly Berry (Água)|Water|5|A0": {
+    "name": "Biscoitos Holly Berry (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -238438,8 +238439,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26401-water"
   },
-  "홀리베리 쿠키(불)|Fire|5|A0": {
-    "name": "홀리베리 쿠키(불)",
+  "Biscoitos Holly Berry (Touro)|Fire|5|A0": {
+    "name": "Biscoitos Holly Berry (Touro)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -238585,8 +238586,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26402-fire"
   },
-  "홀리베리 쿠키(바람)|Wind|5|A0": {
-    "name": "홀리베리 쿠키(바람)",
+  "Biscoitos Holly Berry (Vento)|Wind|5|A0": {
+    "name": "Biscoitos Holly Berry (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -238733,8 +238734,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26403-wind"
   },
-  "홀리베리 쿠키(빛)|Light|5|A0": {
-    "name": "홀리베리 쿠키(빛)",
+  "Biscoitos Holly Berry (claros)|Light|5|A0": {
+    "name": "Biscoitos Holly Berry (claros)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -238873,8 +238874,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26404-light"
   },
-  "홀리베리 쿠키(어둠)|Dark|5|A0": {
-    "name": "홀리베리 쿠키(어둠)",
+  "Biscoitos Holly Berry (escuros)|Dark|5|A0": {
+    "name": "Biscoitos Holly Berry (escuros)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -239733,8 +239734,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26415-dark-hollyberry-cookie"
   },
-  "에스프레소맛 쿠키(물)|Water|4|A0": {
-    "name": "에스프레소맛 쿠키(물)",
+  "Biscoitos sabor expresso (água)|Water|4|A0": {
+    "name": "Biscoitos sabor expresso (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -239871,8 +239872,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26501-water"
   },
-  "에스프레소맛 쿠키(불)|Fire|4|A0": {
-    "name": "에스프레소맛 쿠키(불)",
+  "Biscoito sabor expresso (light)|Fire|4|A0": {
+    "name": "Biscoito sabor expresso (light)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -240017,8 +240018,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26502-fire"
   },
-  "에스프레소맛 쿠키(바람)|Wind|4|A0": {
-    "name": "에스프레소맛 쿠키(바람)",
+  "Biscoitos sabor expresso (vento)|Wind|4|A0": {
+    "name": "Biscoitos sabor expresso (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -240156,8 +240157,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26503-wind"
   },
-  "에스프레소맛 쿠키(빛)|Light|4|A0": {
-    "name": "에스프레소맛 쿠키(빛)",
+  "Biscoitos sabor expresso (light)|Light|4|A0": {
+    "name": "Biscoitos sabor expresso (light)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -240300,8 +240301,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26504-light"
   },
-  "에스프레소맛 쿠키(어둠)|Dark|4|A0": {
-    "name": "에스프레소맛 쿠키(어둠)",
+  "Biscoito sabor expresso (escuro)|Dark|4|A0": {
+    "name": "Biscoito sabor expresso (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -241165,8 +241166,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26515-dark-espresso-cookie"
   },
-  "마들렌맛 쿠키(물)|Water|4|A0": {
-    "name": "마들렌맛 쿠키(물)",
+  "Biscoitos sabor Madeleine (água)|Water|4|A0": {
+    "name": "Biscoitos sabor Madeleine (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -241301,8 +241302,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26601-water"
   },
-  "마들렌맛 쿠키(불)|Fire|4|A0": {
-    "name": "마들렌맛 쿠키(불)",
+  "Biscoitos Sabor Madeleine (Fogo)|Fire|4|A0": {
+    "name": "Biscoitos Sabor Madeleine (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -241431,8 +241432,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26602-fire"
   },
-  "마들렌맛 쿠키(바람)|Wind|4|A0": {
-    "name": "마들렌맛 쿠키(바람)",
+  "Biscoitos sabor Madeleine (vento)|Wind|4|A0": {
+    "name": "Biscoitos sabor Madeleine (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -241572,8 +241573,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26603-wind"
   },
-  "마들렌맛 쿠키(빛)|Light|4|A0": {
-    "name": "마들렌맛 쿠키(빛)",
+  "Biscoitos sabor Madeleine (light)|Light|4|A0": {
+    "name": "Biscoitos sabor Madeleine (light)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -241703,8 +241704,8 @@
     },
     "source": "https://swarfarm.com/bestiary/26604-light"
   },
-  "마들렌맛 쿠키(어둠)|Dark|4|A0": {
-    "name": "마들렌맛 쿠키(어둠)",
+  "Biscoitos sabor Madeleine (escuros)|Dark|4|A0": {
+    "name": "Biscoitos sabor Madeleine (escuros)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -249122,8 +249123,8 @@
     },
     "source": "https://swarfarm.com/bestiary/72003-wind-king-slime"
   },
-  "길드보스(물)|Water|1|A0": {
-    "name": "길드보스(물)",
+  "Chefe da Guilda (Água)|Water|1|A0": {
+    "name": "Chefe da Guilda (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249224,8 +249225,8 @@
     },
     "source": "https://swarfarm.com/bestiary/72061-water"
   },
-  "길드보스(불)|Fire|1|A0": {
-    "name": "길드보스(불)",
+  "Chefe da Guilda (Fogo)|Fire|1|A0": {
+    "name": "Chefe da Guilda (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249326,8 +249327,8 @@
     },
     "source": "https://swarfarm.com/bestiary/72062-fire"
   },
-  "길드보스(바람)|Wind|1|A0": {
-    "name": "길드보스(바람)",
+  "Chefe da Guilda (Vento)|Wind|1|A0": {
+    "name": "Chefe da Guilda (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249428,8 +249429,8 @@
     },
     "source": "https://swarfarm.com/bestiary/72063-wind"
   },
-  "킹덤 콜라보 케이크 늑대|Pure|1|A0": {
-    "name": "킹덤 콜라보 케이크 늑대",
+  "Bolo de Colaboração do Reino Lobo|Pure|1|A0": {
+    "name": "Bolo de Colaboração do Reino Lobo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249486,8 +249487,8 @@
     },
     "source": "https://swarfarm.com/bestiary/320001-pure"
   },
-  "킹덤 콜라보 케이크 들개|Pure|1|A0": {
-    "name": "킹덤 콜라보 케이크 들개",
+  "Bolo de Colaboração do Reino Cachorro Selvagem|Pure|1|A0": {
+    "name": "Bolo de Colaboração do Reino Cachorro Selvagem",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249544,8 +249545,8 @@
     },
     "source": "https://swarfarm.com/bestiary/320002-pure"
   },
-  "케이크 늑대 대체 유닛|Pure|1|A0": {
-    "name": "케이크 늑대 대체 유닛",
+  "Unidade de substituição Cake Wolf|Pure|1|A0": {
+    "name": "Unidade de substituição Cake Wolf",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -249602,8 +249603,8 @@
     },
     "source": "https://swarfarm.com/bestiary/320101-pure"
   },
-  "케이크 들개 대체 유닛|Pure|1|A0": {
-    "name": "케이크 들개 대체 유닛",
+  "Unidade de substituição para cachorro-quente|Pure|1|A0": {
+    "name": "Unidade de substituição para cachorro-quente",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -251455,8 +251456,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27205-dark-puppeteer"
   },
-  "알타이어(빛)|Light|5|A0": {
-    "name": "알타이어(빛)",
+  "Altair (Luz)|Light|5|A0": {
+    "name": "Altair (Luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -251731,8 +251732,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27314-light-altair"
   },
-  "에지오(물)|Water|5|A0": {
-    "name": "에지오(물)",
+  "Ezio (água)|Water|5|A0": {
+    "name": "Ezio (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -251875,8 +251876,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27401-water"
   },
-  "에지오(불)|Fire|5|A0": {
-    "name": "에지오(불)",
+  "Ezio (Fogo)|Fire|5|A0": {
+    "name": "Ezio (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -252017,8 +252018,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27402-fire"
   },
-  "에지오(바람)|Wind|4|A0": {
-    "name": "에지오(바람)",
+  "Ezio (vento)|Wind|4|A0": {
+    "name": "Ezio (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -252171,8 +252172,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27403-wind"
   },
-  "에지오(빛)|Light|5|A0": {
-    "name": "에지오(빛)",
+  "Ezio (luz)|Light|5|A0": {
+    "name": "Ezio (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -252315,8 +252316,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27404-light"
   },
-  "에지오(어둠)|Dark|4|A0": {
-    "name": "에지오(어둠)",
+  "Ezio (escuro)|Dark|4|A0": {
+    "name": "Ezio (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -253203,8 +253204,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27415-dark-ezio"
   },
-  "바예크(물)|Water|4|A0": {
-    "name": "바예크(물)",
+  "Bayek (água)|Water|4|A0": {
+    "name": "Bayek (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -253357,8 +253358,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27501-water"
   },
-  "바예크(불)|Fire|5|A0": {
-    "name": "바예크(불)",
+  "Bayek (Fogo)|Fire|5|A0": {
+    "name": "Bayek (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -253515,8 +253516,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27502-fire"
   },
-  "바예크(바람)|Wind|5|A0": {
-    "name": "바예크(바람)",
+  "Bayek (Vento)|Wind|5|A0": {
+    "name": "Bayek (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -253660,8 +253661,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27503-wind"
   },
-  "바예크(빛)|Light|4|A0": {
-    "name": "바예크(빛)",
+  "Bayek (luz)|Light|4|A0": {
+    "name": "Bayek (luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -253817,8 +253818,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27504-light"
   },
-  "바예크(어둠)|Dark|5|A0": {
-    "name": "바예크(어둠)",
+  "Bayek (escuro)|Dark|5|A0": {
+    "name": "Bayek (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -254735,8 +254736,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27515-dark-bayek"
   },
-  "카산드라(물)|Water|4|A0": {
-    "name": "카산드라(물)",
+  "Cassandra (água)|Water|4|A0": {
+    "name": "Cassandra (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -254880,8 +254881,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27601-water"
   },
-  "카산드라(불)|Fire|5|A0": {
-    "name": "카산드라(불)",
+  "Cassandra (Fogo)|Fire|5|A0": {
+    "name": "Cassandra (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -255021,8 +255022,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27602-fire"
   },
-  "카산드라(바람)|Wind|5|A0": {
-    "name": "카산드라(바람)",
+  "Cassandra (Vento)|Wind|5|A0": {
+    "name": "Cassandra (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -255170,8 +255171,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27603-wind"
   },
-  "카산드라(빛)|Light|4|A0": {
-    "name": "카산드라(빛)",
+  "Cassandra (Luz)|Light|4|A0": {
+    "name": "Cassandra (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -255316,8 +255317,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27604-light"
   },
-  "카산드라(어둠)|Dark|5|A0": {
-    "name": "카산드라(어둠)",
+  "Cassandra (Escuro)|Dark|5|A0": {
+    "name": "Cassandra (Escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -256177,8 +256178,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27615-dark-kassandra"
   },
-  "에이보르(물)|Water|5|A0": {
-    "name": "에이보르(물)",
+  "Eivor (água)|Water|5|A0": {
+    "name": "Eivor (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -256325,8 +256326,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27701-water"
   },
-  "에이보르(불)|Fire|4|A0": {
-    "name": "에이보르(불)",
+  "Eivor (Fogo)|Fire|4|A0": {
+    "name": "Eivor (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -256468,8 +256469,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27702-fire"
   },
-  "에이보르(바람)|Wind|4|A0": {
-    "name": "에이보르(바람)",
+  "Eivor (Vento)|Wind|4|A0": {
+    "name": "Eivor (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -256621,8 +256622,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27703-wind"
   },
-  "에이보르(빛)|Light|5|A0": {
-    "name": "에이보르(빛)",
+  "Eivor (luz)|Light|5|A0": {
+    "name": "Eivor (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -256766,8 +256767,8 @@
     },
     "source": "https://swarfarm.com/bestiary/27704-light"
   },
-  "에이보르(어둠)|Dark|5|A0": {
-    "name": "에이보르(어둠)",
+  "Eivor (escuro)|Dark|5|A0": {
+    "name": "Eivor (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -258295,8 +258296,8 @@
     },
     "source": "https://swarfarm.com/bestiary/320233-wind-templar-elite-guard"
   },
-  "만우절이벤트 아이린|Water|1|A0": {
-    "name": "만우절이벤트 아이린",
+  "Evento do Dia da Mentira Irene|Water|1|A0": {
+    "name": "Evento do Dia da Mentira Irene",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -269161,8 +269162,8 @@
     },
     "source": "https://swarfarm.com/bestiary/62106-dark-abyssal-ancient-lich-king"
   },
-  "가드_보라(중)_심연층|Pure|1|A0": {
-    "name": "가드_보라(중)_심연층",
+  "Guard_Purple (Médio)_Camada do Abismo|Pure|1|A0": {
+    "name": "Guard_Purple (Médio)_Camada do Abismo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272044,8 +272045,8 @@
     },
     "source": "https://swarfarm.com/bestiary/28801-water-demon-bag"
   },
-  "리빙 아머 2차 각성 보스(물)|Water|1|A0": {
-    "name": "리빙 아머 2차 각성 보스(물)",
+  "Living Armor 2º Chefe do Despertar (Água)|Water|1|A0": {
+    "name": "Living Armor 2º Chefe do Despertar (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272162,8 +272163,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48101-water-2"
   },
-  "리빙 아머 2차 각성 보스(불)|Fire|1|A0": {
-    "name": "리빙 아머 2차 각성 보스(불)",
+  "2º Chefe do Despertar da Armadura Viva (Fogo)|Fire|1|A0": {
+    "name": "2º Chefe do Despertar da Armadura Viva (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272276,8 +272277,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48102-fire-2"
   },
-  "리빙 아머 2차 각성 보스(바람)|Wind|1|A0": {
-    "name": "리빙 아머 2차 각성 보스(바람)",
+  "2º Chefe do Despertar da Armadura Viva (Vento)|Wind|1|A0": {
+    "name": "2º Chefe do Despertar da Armadura Viva (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272397,8 +272398,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48103-wind-2"
   },
-  "리빙 아머 2차 각성 보스(빛)|Light|1|A0": {
-    "name": "리빙 아머 2차 각성 보스(빛)",
+  "2º Chefe do Despertar da Armadura Viva (Leve)|Light|1|A0": {
+    "name": "2º Chefe do Despertar da Armadura Viva (Leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272521,8 +272522,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48104-light-2"
   },
-  "리빙 아머 2차 각성 보스(어둠)|Dark|1|A0": {
-    "name": "리빙 아머 2차 각성 보스(어둠)",
+  "2º Chefe do Despertar da Armadura Viva (Escuro)|Dark|1|A0": {
+    "name": "2º Chefe do Despertar da Armadura Viva (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272648,8 +272649,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48105-dark-2"
   },
-  "프랑켄 2차 각성 보스(물)|Water|1|A0": {
-    "name": "프랑켄 2차 각성 보스(물)",
+  "Franken 2º Chefe do Despertar (Água)|Water|1|A0": {
+    "name": "Franken 2º Chefe do Despertar (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272761,8 +272762,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48201-water-2"
   },
-  "프랑켄 2차 각성 보스(불)|Fire|1|A0": {
-    "name": "프랑켄 2차 각성 보스(불)",
+  "Franken 2º Chefe do Despertar (Fogo)|Fire|1|A0": {
+    "name": "Franken 2º Chefe do Despertar (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -272883,8 +272884,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48202-fire-2"
   },
-  "프랑켄 2차 각성 보스(바람)|Wind|1|A0": {
-    "name": "프랑켄 2차 각성 보스(바람)",
+  "Franken 2º Chefe do Despertar (Vento)|Wind|1|A0": {
+    "name": "Franken 2º Chefe do Despertar (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273002,8 +273003,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48203-wind-2"
   },
-  "프랑켄 2차 각성 보스(빛)|Light|1|A0": {
-    "name": "프랑켄 2차 각성 보스(빛)",
+  "Franken 2º Chefe do Despertar (Luz)|Light|1|A0": {
+    "name": "Franken 2º Chefe do Despertar (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273124,8 +273125,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48204-light-2"
   },
-  "프랑켄 2차 각성 보스(어둠)|Dark|1|A0": {
-    "name": "프랑켄 2차 각성 보스(어둠)",
+  "Franken 2º Chefe do Despertar (Escuro)|Dark|1|A0": {
+    "name": "Franken 2º Chefe do Despertar (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273444,8 +273445,8 @@
     },
     "source": "https://swarfarm.com/bestiary/74106-pure-enraged-dimension-predator"
   },
-  "2차각성 리빙 아머 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 리빙 아머 수정_왼쪽(물)",
+  "Modificação da armadura viva do 2º despertar_esquerda (água)|Water|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_esquerda (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273500,8 +273501,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121301-water-2-_"
   },
-  "2차각성 리빙 아머 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 리빙 아머 수정_왼쪽(불)",
+  "Modificação da armadura viva do 2º despertar_esquerda (fogo)|Fire|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_esquerda (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273558,8 +273559,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121302-fire-2-_"
   },
-  "2차각성 리빙 아머 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 리빙 아머 수정_왼쪽(바람)",
+  "Modificação da armadura viva do 2º despertar_esquerda (vento)|Wind|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_esquerda (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273616,8 +273617,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121303-wind-2-_"
   },
-  "2차각성 리빙 아머 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 리빙 아머 수정_왼쪽(빛)",
+  "Modificação da armadura viva do 2º despertar_esquerda (leve)|Light|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_esquerda (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273674,8 +273675,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121304-light-2-_"
   },
-  "2차각성 리빙 아머 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 리빙 아머 수정_왼쪽(어둠)",
+  "Modificação da armadura viva do 2º despertar_esquerda (escuro)|Dark|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273732,8 +273733,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121305-dark-2-_"
   },
-  "2차각성 리빙 아머 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 리빙 아머 수정_오른쪽(물)",
+  "Modificação da armadura viva do 2º despertar_direita (água)|Water|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_direita (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273790,8 +273791,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121311-water-2-_"
   },
-  "2차각성 리빙 아머 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 리빙 아머 수정_오른쪽(불)",
+  "Modificação da armadura viva do 2º despertar_direita (fogo)|Fire|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_direita (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273848,8 +273849,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121312-fire-2-_"
   },
-  "2차각성 리빙 아머 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 리빙 아머 수정_오른쪽(바람)",
+  "Modificação da armadura viva do 2º despertar_direita (vento)|Wind|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_direita (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273906,8 +273907,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121313-wind-2-_"
   },
-  "2차각성 리빙 아머 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 리빙 아머 수정_오른쪽(빛)",
+  "Modificação da armadura viva do 2º despertar_direita (leve)|Light|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_direita (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -273962,8 +273963,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121314-light-2-_"
   },
-  "2차각성 리빙 아머 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 리빙 아머 수정_오른쪽(어둠)",
+  "Modificação da armadura viva do 2º despertar_direita (escuro)|Dark|1|A0": {
+    "name": "Modificação da armadura viva do 2º despertar_direita (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274020,8 +274021,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121315-dark-2-_"
   },
-  "2차각성 프랑켄 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 프랑켄 수정_왼쪽(물)",
+  "2º Despertar Franken Crystal_Left (Água)|Water|1|A0": {
+    "name": "2º Despertar Franken Crystal_Left (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274076,8 +274077,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121401-water-2-_"
   },
-  "2차각성 프랑켄 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 프랑켄 수정_왼쪽(불)",
+  "2º Despertar Franken Crystal_Left (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar Franken Crystal_Left (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274134,8 +274135,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121402-fire-2-_"
   },
-  "2차각성 프랑켄 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 프랑켄 수정_왼쪽(바람)",
+  "2º Despertar Franken Crystal_Left (Vento)|Wind|1|A0": {
+    "name": "2º Despertar Franken Crystal_Left (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274190,8 +274191,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121403-wind-2-_"
   },
-  "2차각성 프랑켄 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 프랑켄 수정_왼쪽(빛)",
+  "2º Despertar Franken Crystal_Left (Luz)|Light|1|A0": {
+    "name": "2º Despertar Franken Crystal_Left (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274248,8 +274249,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121404-light-2-_"
   },
-  "2차각성 프랑켄 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 프랑켄 수정_왼쪽(어둠)",
+  "2º Despertar Franken Crystal_Left (Escuro)|Dark|1|A0": {
+    "name": "2º Despertar Franken Crystal_Left (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274306,8 +274307,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121405-dark-2-_"
   },
-  "2차각성 프랑켄 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 프랑켄 수정_오른쪽(물)",
+  "2º Despertar Franken Crystal_Right (Água)|Water|1|A0": {
+    "name": "2º Despertar Franken Crystal_Right (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274364,8 +274365,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121411-water-2-_"
   },
-  "2차각성 프랑켄 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 프랑켄 수정_오른쪽(불)",
+  "2º Despertar Franken Crystal_Right (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar Franken Crystal_Right (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274422,8 +274423,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121412-fire-2-_"
   },
-  "2차각성 프랑켄 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 프랑켄 수정_오른쪽(바람)",
+  "2º Despertar Franken Crystal_Right (Vento)|Wind|1|A0": {
+    "name": "2º Despertar Franken Crystal_Right (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274480,8 +274481,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121413-wind-2-_"
   },
-  "2차각성 프랑켄 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 프랑켄 수정_오른쪽(빛)",
+  "2º Despertar Franken Crystal_Right (Luz)|Light|1|A0": {
+    "name": "2º Despertar Franken Crystal_Right (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274538,8 +274539,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121414-light-2-_"
   },
-  "2차각성 프랑켄 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 프랑켄 수정_오른쪽(어둠)",
+  "2º Despertar Franken Crystal_Right (Escuro)|Dark|1|A0": {
+    "name": "2º Despertar Franken Crystal_Right (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274596,8 +274597,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121415-dark-2-_"
   },
-  "가드_정령(소)_심연층|Pure|1|A0": {
-    "name": "가드_정령(소)_심연층",
+  "Guard_Spirit (Pequeno)_Camada do Abismo|Pure|1|A0": {
+    "name": "Guard_Spirit (Pequeno)_Camada do Abismo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -274654,8 +274655,8 @@
     },
     "source": "https://swarfarm.com/bestiary/211406-pure-__"
   },
-  "가드_정령(중)_심연층|Pure|1|A0": {
-    "name": "가드_정령(중)_심연층",
+  "Guard_Spirit (Médio)_Camada do Abismo|Pure|1|A0": {
+    "name": "Guard_Spirit (Médio)_Camada do Abismo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275058,8 +275059,8 @@
     },
     "source": "https://swarfarm.com/bestiary/320406-pure-void"
   },
-  "차원홀 레이드 1페이즈 왼쪽 수정|Pure|1|A0": {
-    "name": "차원홀 레이드 1페이즈 왼쪽 수정",
+  "Modificação no lado esquerdo da Fase 1 do Dimension Hole Raid|Pure|1|A0": {
+    "name": "Modificação no lado esquerdo da Fase 1 do Dimension Hole Raid",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275114,8 +275115,8 @@
     },
     "source": "https://swarfarm.com/bestiary/401006-pure-1"
   },
-  "차원홀 레이드 1페이즈 오른쪽 수정|Pure|1|A0": {
-    "name": "차원홀 레이드 1페이즈 오른쪽 수정",
+  "Modificação no lado direito da Fase 1 do Dimension Hole Raid|Pure|1|A0": {
+    "name": "Modificação no lado direito da Fase 1 do Dimension Hole Raid",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275172,8 +275173,8 @@
     },
     "source": "https://swarfarm.com/bestiary/401106-pure-1"
   },
-  "차원홀 레이드 3페이즈 왼쪽 수정|Pure|1|A0": {
-    "name": "차원홀 레이드 3페이즈 왼쪽 수정",
+  "Modificação no lado esquerdo da Fase 3 do Dimension Hole Raid|Pure|1|A0": {
+    "name": "Modificação no lado esquerdo da Fase 3 do Dimension Hole Raid",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275228,8 +275229,8 @@
     },
     "source": "https://swarfarm.com/bestiary/401206-pure-3"
   },
-  "차원홀 레이드 3페이즈 오른쪽 수정|Pure|1|A0": {
-    "name": "차원홀 레이드 3페이즈 오른쪽 수정",
+  "Modificação no lado direito da Fase 3 do Dimension Hole Raid|Pure|1|A0": {
+    "name": "Modificação no lado direito da Fase 3 do Dimension Hole Raid",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275386,8 +275387,8 @@
     },
     "source": "https://swarfarm.com/bestiary/62803-wind-abyssal-ancient-spirit"
   },
-  "타워(정령) - 1_심연층|Pure|1|A0": {
-    "name": "타워(정령) - 1_심연층",
+  "Torre (Espírito) - 1_Andar do Abismo|Pure|1|A0": {
+    "name": "Torre (Espírito) - 1_Andar do Abismo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -275444,8 +275445,8 @@
     },
     "source": "https://swarfarm.com/bestiary/102266-pure-1_"
   },
-  "타워(정령) - 2_심연층|Pure|1|A0": {
-    "name": "타워(정령) - 2_심연층",
+  "Torre (Espírito) - 2_Andar do Abismo|Pure|1|A0": {
+    "name": "Torre (Espírito) - 2_Andar do Abismo",
     "element": "Pure",
     "naturalStars": 1,
     "baseStars": 1,
@@ -278978,8 +278979,8 @@
     },
     "source": "https://swarfarm.com/bestiary/62406-wind-abyssal-ancient-tormentor"
   },
-  "아티펙트1 - 보스 수정_기절방무_심연층|Wind|1|A0": {
-    "name": "아티펙트1 - 보스 수정_기절방무_심연층",
+  "Artefato 1 – Modificação do Chefe_Sem Prevenção de Atordoamento_Piso do Abismo|Wind|1|A0": {
+    "name": "Artefato 1 – Modificação do Chefe_Sem Prevenção de Atordoamento_Piso do Abismo",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -279036,8 +279037,8 @@
     },
     "source": "https://swarfarm.com/bestiary/112043-wind-1-__"
   },
-  "아티펙트1 - 보스 수정_빗맞음_심연층|Wind|1|A0": {
-    "name": "아티펙트1 - 보스 수정_빗맞음_심연층",
+  "Artefato 1 - Camada Boss Modification_Missing_Abyss|Wind|1|A0": {
+    "name": "Artefato 1 - Camada Boss Modification_Missing_Abyss",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -280593,8 +280594,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29104-light-twin-angels-miruel-and-graciah"
   },
-  "게롤트(물)|Water|5|A0": {
-    "name": "게롤트(물)",
+  "Geralt (água)|Water|5|A0": {
+    "name": "Geralt (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -280740,8 +280741,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29201-water"
   },
-  "게롤트(불)|Fire|5|A0": {
-    "name": "게롤트(불)",
+  "Geralt (Fogo)|Fire|5|A0": {
+    "name": "Geralt (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -280886,8 +280887,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29202-fire"
   },
-  "게롤트(바람)|Wind|5|A0": {
-    "name": "게롤트(바람)",
+  "Geralt (Vento)|Wind|5|A0": {
+    "name": "Geralt (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -281028,8 +281029,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29203-wind"
   },
-  "게롤트(빛)|Light|5|A0": {
-    "name": "게롤트(빛)",
+  "Geralt (Luz)|Light|5|A0": {
+    "name": "Geralt (Luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -281162,8 +281163,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29204-light"
   },
-  "게롤트(어둠)|Dark|5|A0": {
-    "name": "게롤트(어둠)",
+  "Geralt (escuro)|Dark|5|A0": {
+    "name": "Geralt (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -282009,8 +282010,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29215-dark-geralt"
   },
-  "시리(물)|Water|5|A0": {
-    "name": "시리(물)",
+  "Siri (água)|Water|5|A0": {
+    "name": "Siri (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -282147,8 +282148,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29301-water"
   },
-  "시리(불)|Fire|4|A0": {
-    "name": "시리(불)",
+  "Siri (fogo)|Fire|4|A0": {
+    "name": "Siri (fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -282285,8 +282286,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29302-fire"
   },
-  "시리(바람)|Wind|5|A0": {
-    "name": "시리(바람)",
+  "Siri (vento)|Wind|5|A0": {
+    "name": "Siri (vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -282434,8 +282435,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29303-wind"
   },
-  "시리(빛)|Light|5|A0": {
-    "name": "시리(빛)",
+  "Siri (leve)|Light|5|A0": {
+    "name": "Siri (leve)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -282583,8 +282584,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29304-light"
   },
-  "시리(어둠)|Dark|4|A0": {
-    "name": "시리(어둠)",
+  "Siri (escuro)|Dark|4|A0": {
+    "name": "Siri (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -283455,8 +283456,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29315-dark-ciri"
   },
-  "예니퍼(물)|Water|5|A0": {
-    "name": "예니퍼(물)",
+  "Yennefer (água)|Water|5|A0": {
+    "name": "Yennefer (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -283610,8 +283611,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29401-water"
   },
-  "예니퍼(불)|Fire|5|A0": {
-    "name": "예니퍼(불)",
+  "Yennefer (Fogo)|Fire|5|A0": {
+    "name": "Yennefer (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -283754,8 +283755,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29402-fire"
   },
-  "예니퍼(바람)|Wind|4|A0": {
-    "name": "예니퍼(바람)",
+  "Yennefer (Vento)|Wind|4|A0": {
+    "name": "Yennefer (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -283898,8 +283899,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29403-wind"
   },
-  "예니퍼(빛)|Light|4|A0": {
-    "name": "예니퍼(빛)",
+  "Yennefer (Luz)|Light|4|A0": {
+    "name": "Yennefer (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -284042,8 +284043,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29404-light"
   },
-  "예니퍼(어둠)|Dark|5|A0": {
-    "name": "예니퍼(어둠)",
+  "Yennefer (escuro)|Dark|5|A0": {
+    "name": "Yennefer (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -284919,8 +284920,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29415-dark-yennefer"
   },
-  "트리스(물)|Water|4|A0": {
-    "name": "트리스(물)",
+  "tris (água)|Water|4|A0": {
+    "name": "tris (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -285058,8 +285059,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29501-water"
   },
-  "트리스(불)|Fire|5|A0": {
-    "name": "트리스(불)",
+  "Tris (fogo)|Fire|5|A0": {
+    "name": "Tris (fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -285210,8 +285211,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29502-fire"
   },
-  "트리스(바람)|Wind|4|A0": {
-    "name": "트리스(바람)",
+  "Tris (vento)|Wind|4|A0": {
+    "name": "Tris (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -285360,8 +285361,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29503-wind"
   },
-  "트리스(빛)|Light|5|A0": {
-    "name": "트리스(빛)",
+  "Tris (luz)|Light|5|A0": {
+    "name": "Tris (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -285499,8 +285500,8 @@
     },
     "source": "https://swarfarm.com/bestiary/29504-light"
   },
-  "트리스(어둠)|Dark|5|A0": {
-    "name": "트리스(어둠)",
+  "Tris (escuro)|Dark|5|A0": {
+    "name": "Tris (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -297891,8 +297892,8 @@
     },
     "source": "https://swarfarm.com/bestiary/2002305-dark-lyrith"
   },
-  "스쿠나(어둠)|Dark|5|A0": {
-    "name": "스쿠나(어둠)",
+  "Sukuna (escuro)|Dark|5|A0": {
+    "name": "Sukuna (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -298161,8 +298162,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30215-dark-ryomen-sukuna"
   },
-  "고죠 사토루(물)|Water|5|A0": {
-    "name": "고죠 사토루(물)",
+  "Satoru Gojo (Água)|Water|5|A0": {
+    "name": "Satoru Gojo (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -298300,8 +298301,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30301-water"
   },
-  "고죠 사토루(불)|Fire|5|A0": {
-    "name": "고죠 사토루(불)",
+  "Satoru Gojo (Fogo)|Fire|5|A0": {
+    "name": "Satoru Gojo (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -298434,8 +298435,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30302-fire"
   },
-  "고죠 사토루(바람)|Wind|5|A0": {
-    "name": "고죠 사토루(바람)",
+  "Satoru Gojo (Vento)|Wind|5|A0": {
+    "name": "Satoru Gojo (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -298584,8 +298585,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30303-wind"
   },
-  "고죠 사토루(빛)|Light|5|A0": {
-    "name": "고죠 사토루(빛)",
+  "Satoru Gojo (Luz)|Light|5|A0": {
+    "name": "Satoru Gojo (Luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -298734,8 +298735,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30304-light"
   },
-  "고죠 사토루(어둠)|Dark|5|A0": {
-    "name": "고죠 사토루(어둠)",
+  "Satoru Gojo (escuro)|Dark|5|A0": {
+    "name": "Satoru Gojo (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -299597,8 +299598,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30315-dark-satoru-gojo"
   },
-  "이타도리 유지(물)|Water|5|A0": {
-    "name": "이타도리 유지(물)",
+  "Itadori Yuji (água)|Water|5|A0": {
+    "name": "Itadori Yuji (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -299737,8 +299738,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30401-water"
   },
-  "이타도리 유지(불)|Fire|5|A0": {
-    "name": "이타도리 유지(불)",
+  "Itadori Yuji (fogo)|Fire|5|A0": {
+    "name": "Itadori Yuji (fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -299885,8 +299886,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30402-fire"
   },
-  "이타도리 유지(바람)|Wind|4|A0": {
-    "name": "이타도리 유지(바람)",
+  "Itadori Yuji (vento)|Wind|4|A0": {
+    "name": "Itadori Yuji (vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -300028,8 +300029,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30403-wind"
   },
-  "이타도리 유지(빛)|Light|4|A0": {
-    "name": "이타도리 유지(빛)",
+  "Yuji Itadori (Luz)|Light|4|A0": {
+    "name": "Yuji Itadori (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -300168,8 +300169,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30404-light"
   },
-  "이타도리 유지(어둠)|Dark|5|A0": {
-    "name": "이타도리 유지(어둠)",
+  "Yuji Itadori (sombrio)|Dark|5|A0": {
+    "name": "Yuji Itadori (sombrio)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -301027,8 +301028,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30415-dark-yuji-itadori"
   },
-  "후시구로 메구미(물)|Water|4|A0": {
-    "name": "후시구로 메구미(물)",
+  "Megumi Fushiguro (água)|Water|4|A0": {
+    "name": "Megumi Fushiguro (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -301177,8 +301178,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30501-water"
   },
-  "후시구로 메구미(불)|Fire|5|A0": {
-    "name": "후시구로 메구미(불)",
+  "Megumi Fushiguro (Fogo)|Fire|5|A0": {
+    "name": "Megumi Fushiguro (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -301316,8 +301317,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30502-fire"
   },
-  "후시구로 메구미(바람)|Wind|5|A0": {
-    "name": "후시구로 메구미(바람)",
+  "Megumi Fushiguro (Vento)|Wind|5|A0": {
+    "name": "Megumi Fushiguro (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -301462,8 +301463,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30503-wind"
   },
-  "후시구로 메구미(빛)|Light|4|A0": {
-    "name": "후시구로 메구미(빛)",
+  "Megumi Fushiguro (luz)|Light|4|A0": {
+    "name": "Megumi Fushiguro (luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -301612,8 +301613,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30504-light"
   },
-  "후시구로 메구미(어둠)|Dark|5|A0": {
-    "name": "후시구로 메구미(어둠)",
+  "Megumi Fushiguro (Escuro)|Dark|5|A0": {
+    "name": "Megumi Fushiguro (Escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -302501,8 +302502,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30515-dark-megumi-fushiguro"
   },
-  "쿠기사키 노바라(물)|Water|5|A0": {
-    "name": "쿠기사키 노바라(물)",
+  "Kugisaki Nobara (água)|Water|5|A0": {
+    "name": "Kugisaki Nobara (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -302647,8 +302648,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30601-water"
   },
-  "쿠기사키 노바라(불)|Fire|4|A0": {
-    "name": "쿠기사키 노바라(불)",
+  "Kugisaki Nobara (Fogo)|Fire|4|A0": {
+    "name": "Kugisaki Nobara (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -302795,8 +302796,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30602-fire"
   },
-  "쿠기사키 노바라(바람)|Wind|5|A0": {
-    "name": "쿠기사키 노바라(바람)",
+  "Kugisaki Nobara (Vento)|Wind|5|A0": {
+    "name": "Kugisaki Nobara (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -302933,8 +302934,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30603-wind"
   },
-  "쿠기사키 노바라(빛)|Light|5|A0": {
-    "name": "쿠기사키 노바라(빛)",
+  "Kugisaki Nobara (Luz)|Light|5|A0": {
+    "name": "Kugisaki Nobara (Luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -303072,8 +303073,8 @@
     },
     "source": "https://swarfarm.com/bestiary/30604-light"
   },
-  "쿠기사키 노바라(어둠)|Dark|4|A0": {
-    "name": "쿠기사키 노바라(어둠)",
+  "Kugisaki Nobara (escuro)|Dark|4|A0": {
+    "name": "Kugisaki Nobara (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -306926,8 +306927,8 @@
     },
     "source": "https://swarfarm.com/bestiary/48305-dark-seren"
   },
-  "2차각성 하르퓨 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 하르퓨 수정_왼쪽(물)",
+  "2º Despertar Harpyu Crystal_Left (Água)|Water|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Left (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -306984,8 +306985,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121501-water-2-_"
   },
-  "2차각성 하르퓨 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 하르퓨 수정_왼쪽(불)",
+  "2º Despertar Harpyu Crystal_Left (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Left (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307042,8 +307043,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121502-fire-2-_"
   },
-  "2차각성 하르퓨 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 하르퓨 수정_왼쪽(바람)",
+  "2º Despertar Harpyu Crystal_Left (Vento)|Wind|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Left (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307100,8 +307101,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121503-wind-2-_"
   },
-  "2차각성 하르퓨 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 하르퓨 수정_왼쪽(빛)",
+  "Cristal Harpyu do 2º Despertar_Esquerdo (Luz)|Light|1|A0": {
+    "name": "Cristal Harpyu do 2º Despertar_Esquerdo (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307158,8 +307159,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121504-light-2-_"
   },
-  "2차각성 하르퓨 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 하르퓨 수정_왼쪽(어둠)",
+  "2º Despertar Harpyu Crystal_Left (Escuro)|Dark|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Left (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307216,8 +307217,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121505-dark-2-_"
   },
-  "2차각성 하르퓨 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 하르퓨 수정_오른쪽(물)",
+  "2º Despertar Harpyu Crystal_Right (Água)|Water|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Right (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307274,8 +307275,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121511-water-2-_"
   },
-  "2차각성 하르퓨 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 하르퓨 수정_오른쪽(불)",
+  "2º Despertar Harpyu Crystal_Right (Fogo)|Fire|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Right (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307333,8 +307334,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121512-fire-2-_"
   },
-  "2차각성 하르퓨 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 하르퓨 수정_오른쪽(바람)",
+  "2º Despertar Harpyu Crystal_Right (Vento)|Wind|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Right (Vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307391,8 +307392,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121513-wind-2-_"
   },
-  "2차각성 하르퓨 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 하르퓨 수정_오른쪽(빛)",
+  "Cristal Harpyu do 2º Despertar_Direito (Luz)|Light|1|A0": {
+    "name": "Cristal Harpyu do 2º Despertar_Direito (Luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -307449,8 +307450,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121514-light-2-_"
   },
-  "2차각성 하르퓨 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 하르퓨 수정_오른쪽(어둠)",
+  "2º Despertar Harpyu Crystal_Right (Escuro)|Dark|1|A0": {
+    "name": "2º Despertar Harpyu Crystal_Right (Escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -316583,8 +316584,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31405-dark-tomb-warden"
   },
-  "묘비(빛)|Light|1|A0": {
-    "name": "묘비(빛)",
+  "lápide (luz)|Light|1|A0": {
+    "name": "lápide (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -316624,8 +316625,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31504-light"
   },
-  "묘비(어둠)|Dark|1|A0": {
-    "name": "묘비(어둠)",
+  "Lápide (escuro)|Dark|1|A0": {
+    "name": "Lápide (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -316665,8 +316666,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31605-dark"
   },
-  "히메지마 교메이(바람)|Wind|5|A0": {
-    "name": "히메지마 교메이(바람)",
+  "Himejima Gyomei (Vento)|Wind|5|A0": {
+    "name": "Himejima Gyomei (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -316953,8 +316954,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31713-wind-gyomei-himejima"
   },
-  "카마도 탄지로(물)|Water|4|A0": {
-    "name": "카마도 탄지로(물)",
+  "Tanjiro Kamado (Água)|Water|4|A0": {
+    "name": "Tanjiro Kamado (Água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -317101,8 +317102,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31801-water"
   },
-  "카마도 탄지로(불)|Fire|5|A0": {
-    "name": "카마도 탄지로(불)",
+  "Tanjiro Kamado (Fogo)|Fire|5|A0": {
+    "name": "Tanjiro Kamado (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -317244,8 +317245,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31802-fire"
   },
-  "카마도 탄지로(바람)|Wind|5|A0": {
-    "name": "카마도 탄지로(바람)",
+  "Tanjiro Kamado (Vento)|Wind|5|A0": {
+    "name": "Tanjiro Kamado (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -317387,8 +317388,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31803-wind"
   },
-  "카마도 탄지로(빛)|Light|5|A0": {
-    "name": "카마도 탄지로(빛)",
+  "Tanjiro Kamado (Luz)|Light|5|A0": {
+    "name": "Tanjiro Kamado (Luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -317530,8 +317531,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31804-light"
   },
-  "카마도 탄지로(어둠)|Dark|4|A0": {
-    "name": "카마도 탄지로(어둠)",
+  "Tanjiro Kamado (escuro)|Dark|4|A0": {
+    "name": "Tanjiro Kamado (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -318399,8 +318400,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31815-dark-tanjiro-kamado"
   },
-  "카마도 네즈코(물)|Water|5|A0": {
-    "name": "카마도 네즈코(물)",
+  "Nezuko Kamado (Água)|Water|5|A0": {
+    "name": "Nezuko Kamado (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -318546,8 +318547,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31901-water"
   },
-  "카마도 네즈코(불)|Fire|5|A0": {
-    "name": "카마도 네즈코(불)",
+  "Nezuko Kamado (Fogo)|Fire|5|A0": {
+    "name": "Nezuko Kamado (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -318697,8 +318698,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31902-fire"
   },
-  "카마도 네즈코(바람)|Wind|4|A0": {
-    "name": "카마도 네즈코(바람)",
+  "Nezuko Kamado (Vento)|Wind|4|A0": {
+    "name": "Nezuko Kamado (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -318841,8 +318842,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31903-wind"
   },
-  "카마도 네즈코(빛)|Light|4|A0": {
-    "name": "카마도 네즈코(빛)",
+  "Nezuko Kamado (Luz)|Light|4|A0": {
+    "name": "Nezuko Kamado (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -318979,8 +318980,8 @@
     },
     "source": "https://swarfarm.com/bestiary/31904-light"
   },
-  "카마도 네즈코(어둠)|Dark|5|A0": {
-    "name": "카마도 네즈코(어둠)",
+  "Nezuko Kamado (Escuro)|Dark|5|A0": {
+    "name": "Nezuko Kamado (Escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -322090,8 +322091,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32115-dark-inosuke-hashibira"
   },
-  "아가츠마 젠이츠(물)|Water|5|A0": {
-    "name": "아가츠마 젠이츠(물)",
+  "Agatsuma Zenitsu (Água)|Water|5|A0": {
+    "name": "Agatsuma Zenitsu (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -322255,8 +322256,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32201-water"
   },
-  "아가츠마 젠이츠(불)|Fire|4|A0": {
-    "name": "아가츠마 젠이츠(불)",
+  "Agatsuma Zenitsu (Fogo)|Fire|4|A0": {
+    "name": "Agatsuma Zenitsu (Fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -322419,8 +322420,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32202-fire"
   },
-  "아가츠마 젠이츠(바람)|Wind|5|A0": {
-    "name": "아가츠마 젠이츠(바람)",
+  "Agatsuma Zenitsu (Vento)|Wind|5|A0": {
+    "name": "Agatsuma Zenitsu (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -322591,8 +322592,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32203-wind"
   },
-  "아가츠마 젠이츠(빛)|Light|4|A0": {
-    "name": "아가츠마 젠이츠(빛)",
+  "Agatsuma Zenitsu (Luz)|Light|4|A0": {
+    "name": "Agatsuma Zenitsu (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -322755,8 +322756,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32204-light"
   },
-  "아가츠마 젠이츠(어둠)|Dark|5|A0": {
-    "name": "아가츠마 젠이츠(어둠)",
+  "Agatsuma Zenitsu (escuro)|Dark|5|A0": {
+    "name": "Agatsuma Zenitsu (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -331613,8 +331614,8 @@
     },
     "source": "https://swarfarm.com/bestiary/32305-dark-beetle-guardian"
   },
-  "미시마 헤이하치(불)|Fire|5|A0": {
-    "name": "미시마 헤이하치(불)",
+  "Heihachi Mishima (Fogo)|Fire|5|A0": {
+    "name": "Heihachi Mishima (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -331915,8 +331916,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33012-fire-heihachi-mishima"
   },
-  "카자마 진(물)|Water|4|A0": {
-    "name": "카자마 진(물)",
+  "Jin Kazama (água)|Water|4|A0": {
+    "name": "Jin Kazama (água)",
     "element": "Water",
     "naturalStars": 4,
     "baseStars": 4,
@@ -332049,8 +332050,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33101-water"
   },
-  "카자마 진(불)|Fire|5|A0": {
-    "name": "카자마 진(불)",
+  "Jin Kazama (Fogo)|Fire|5|A0": {
+    "name": "Jin Kazama (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -332199,8 +332200,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33102-fire"
   },
-  "카자마 진(바람)|Wind|5|A0": {
-    "name": "카자마 진(바람)",
+  "Jin Kazama (Vento)|Wind|5|A0": {
+    "name": "Jin Kazama (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -332349,8 +332350,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33103-wind"
   },
-  "카자마 진(빛)|Light|4|A0": {
-    "name": "카자마 진(빛)",
+  "Jin Kazama (luz)|Light|4|A0": {
+    "name": "Jin Kazama (luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -332487,8 +332488,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33104-light"
   },
-  "카자마 진(어둠)|Dark|5|A0": {
-    "name": "카자마 진(어둠)",
+  "Jin Kazama (escuro)|Dark|5|A0": {
+    "name": "Jin Kazama (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -333353,8 +333354,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33115-dark-jin-kazama"
   },
-  "화랑(물)|Water|5|A0": {
-    "name": "화랑(물)",
+  "Hwarang (água)|Water|5|A0": {
+    "name": "Hwarang (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -333504,8 +333505,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33201-water"
   },
-  "화랑(불)|Fire|4|A0": {
-    "name": "화랑(불)",
+  "Hwarang (fogo)|Fire|4|A0": {
+    "name": "Hwarang (fogo)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -333646,8 +333647,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33202-fire"
   },
-  "화랑(바람)|Wind|5|A0": {
-    "name": "화랑(바람)",
+  "Hwarang (Vento)|Wind|5|A0": {
+    "name": "Hwarang (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -333796,8 +333797,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33203-wind"
   },
-  "화랑(빛)|Light|5|A0": {
-    "name": "화랑(빛)",
+  "Hwarang (luz)|Light|5|A0": {
+    "name": "Hwarang (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -333934,8 +333935,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33204-light"
   },
-  "화랑(어둠)|Dark|4|A0": {
-    "name": "화랑(어둠)",
+  "Hwarang (escuro)|Dark|4|A0": {
+    "name": "Hwarang (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -334813,8 +334814,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33215-dark-hwoarang"
   },
-  "폴 피닉스(물)|Water|5|A0": {
-    "name": "폴 피닉스(물)",
+  "Paul Phoenix (Água)|Water|5|A0": {
+    "name": "Paul Phoenix (Água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -334952,8 +334953,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33301-water"
   },
-  "폴 피닉스(불)|Fire|5|A0": {
-    "name": "폴 피닉스(불)",
+  "Paul Phoenix (Fogo)|Fire|5|A0": {
+    "name": "Paul Phoenix (Fogo)",
     "element": "Fire",
     "naturalStars": 5,
     "baseStars": 5,
@@ -335103,8 +335104,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33302-fire"
   },
-  "폴 피닉스(바람)|Wind|5|A0": {
-    "name": "폴 피닉스(바람)",
+  "Paul Phoenix (Vento)|Wind|5|A0": {
+    "name": "Paul Phoenix (Vento)",
     "element": "Wind",
     "naturalStars": 5,
     "baseStars": 5,
@@ -335248,8 +335249,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33303-wind"
   },
-  "폴 피닉스(빛)|Light|4|A0": {
-    "name": "폴 피닉스(빛)",
+  "Paul Phoenix (Luz)|Light|4|A0": {
+    "name": "Paul Phoenix (Luz)",
     "element": "Light",
     "naturalStars": 4,
     "baseStars": 4,
@@ -335405,8 +335406,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33304-light"
   },
-  "폴 피닉스(어둠)|Dark|4|A0": {
-    "name": "폴 피닉스(어둠)",
+  "Paul Phoenix (escuro)|Dark|4|A0": {
+    "name": "Paul Phoenix (escuro)",
     "element": "Dark",
     "naturalStars": 4,
     "baseStars": 4,
@@ -336299,8 +336300,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33315-dark-paul-phoenix"
   },
-  "니나 윌리엄스(물)|Water|5|A0": {
-    "name": "니나 윌리엄스(물)",
+  "Nina Williams (água)|Water|5|A0": {
+    "name": "Nina Williams (água)",
     "element": "Water",
     "naturalStars": 5,
     "baseStars": 5,
@@ -336441,8 +336442,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33401-water"
   },
-  "니나 윌리엄스(불)|Fire|4|A0": {
-    "name": "니나 윌리엄스(불)",
+  "Nina Williams (Touro)|Fire|4|A0": {
+    "name": "Nina Williams (Touro)",
     "element": "Fire",
     "naturalStars": 4,
     "baseStars": 4,
@@ -336593,8 +336594,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33402-fire"
   },
-  "니나 윌리엄스(바람)|Wind|4|A0": {
-    "name": "니나 윌리엄스(바람)",
+  "Nina Williams (Vento)|Wind|4|A0": {
+    "name": "Nina Williams (Vento)",
     "element": "Wind",
     "naturalStars": 4,
     "baseStars": 4,
@@ -336741,8 +336742,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33403-wind"
   },
-  "니나 윌리엄스(빛)|Light|5|A0": {
-    "name": "니나 윌리엄스(빛)",
+  "Nina Williams (luz)|Light|5|A0": {
+    "name": "Nina Williams (luz)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 5,
@@ -336891,8 +336892,8 @@
     },
     "source": "https://swarfarm.com/bestiary/33404-light"
   },
-  "니나 윌리엄스(어둠)|Dark|5|A0": {
-    "name": "니나 윌리엄스(어둠)",
+  "Nina Williams (escuro)|Dark|5|A0": {
+    "name": "Nina Williams (escuro)",
     "element": "Dark",
     "naturalStars": 5,
     "baseStars": 5,
@@ -351714,8 +351715,8 @@
     },
     "source": "https://swarfarm.com/bestiary/34415-dark-gandalf"
   },
-  "간달프(빛)(강화)|Light|5|A1": {
-    "name": "간달프(빛)(강화)",
+  "Gandalf (Luz) (Aprimorado)|Light|5|A1": {
+    "name": "Gandalf (Luz) (Aprimorado)",
     "element": "Light",
     "naturalStars": 5,
     "baseStars": 6,
@@ -357677,8 +357678,8 @@
     },
     "source": "https://swarfarm.com/bestiary/11705-dark-inferno-drogan"
   },
-  "2차각성 인페르노 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 인페르노 수정_왼쪽(물)",
+  "2º Despertar Inferno Modificação_esquerda (água)|Water|1|A0": {
+    "name": "2º Despertar Inferno Modificação_esquerda (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -357735,8 +357736,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121601-water-2-_"
   },
-  "2차각성 인페르노 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 인페르노 수정_왼쪽(불)",
+  "2º Despertar Inferno Modificação_esquerda (fogo)|Fire|1|A0": {
+    "name": "2º Despertar Inferno Modificação_esquerda (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -357793,8 +357794,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121602-fire-2-_"
   },
-  "2차각성 인페르노 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 인페르노 수정_왼쪽(바람)",
+  "2º Despertar Inferno Modificação_esquerda (vento)|Wind|1|A0": {
+    "name": "2º Despertar Inferno Modificação_esquerda (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -357849,8 +357850,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121603-wind-2-_"
   },
-  "2차각성 인페르노 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 인페르노 수정_왼쪽(빛)",
+  "2º Despertar Inferno Modificação_esquerda (luz)|Light|1|A0": {
+    "name": "2º Despertar Inferno Modificação_esquerda (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -357907,8 +357908,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121604-light-2-_"
   },
-  "2차각성 인페르노 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 인페르노 수정_왼쪽(어둠)",
+  "2º Despertar Inferno Modificação_esquerda (escuro)|Dark|1|A0": {
+    "name": "2º Despertar Inferno Modificação_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -357965,8 +357966,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121605-dark-2-_"
   },
-  "2차각성 인페르노 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 인페르노 수정_오른쪽(물)",
+  "2º Despertar Cristal Infernal_Direita (Água)|Water|1|A0": {
+    "name": "2º Despertar Cristal Infernal_Direita (Água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358023,8 +358024,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121611-water-2-_"
   },
-  "2차각성 인페르노 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 인페르노 수정_오른쪽(불)",
+  "2º Despertar Inferno Modificação_direita (fogo)|Fire|1|A0": {
+    "name": "2º Despertar Inferno Modificação_direita (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358081,8 +358082,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121612-fire-2-_"
   },
-  "2차각성 인페르노 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 인페르노 수정_오른쪽(바람)",
+  "2ª modificação do inferno do despertar_direita (vento)|Wind|1|A0": {
+    "name": "2ª modificação do inferno do despertar_direita (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358140,8 +358141,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121613-wind-2-_"
   },
-  "2차각성 인페르노 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 인페르노 수정_오른쪽(빛)",
+  "Modificação do 2º inferno do despertar_direita (luz)|Light|1|A0": {
+    "name": "Modificação do 2º inferno do despertar_direita (luz)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358198,8 +358199,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121614-light-2-_"
   },
-  "2차각성 인페르노 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 인페르노 수정_오른쪽(어둠)",
+  "Modificação do segundo inferno do despertar_direita (escuro)|Dark|1|A0": {
+    "name": "Modificação do segundo inferno do despertar_direita (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358256,8 +358257,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121615-dark-2-_"
   },
-  "2차각성 헬하운드 수정_왼쪽(물)|Water|1|A0": {
-    "name": "2차각성 헬하운드 수정_왼쪽(물)",
+  "2º despertar do cão infernal modificação_esquerda (água)|Water|1|A0": {
+    "name": "2º despertar do cão infernal modificação_esquerda (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358314,8 +358315,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121701-water-2-_"
   },
-  "2차각성 헬하운드 수정_왼쪽(불)|Fire|1|A0": {
-    "name": "2차각성 헬하운드 수정_왼쪽(불)",
+  "2º despertar do cão infernal, modificação_esquerda (fogo)|Fire|1|A0": {
+    "name": "2º despertar do cão infernal, modificação_esquerda (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358372,8 +358373,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121702-fire-2-_"
   },
-  "2차각성 헬하운드 수정_왼쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 헬하운드 수정_왼쪽(바람)",
+  "2º despertar do cão infernal modificação_esquerda (vento)|Wind|1|A0": {
+    "name": "2º despertar do cão infernal modificação_esquerda (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358428,8 +358429,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121703-wind-2-_"
   },
-  "2차각성 헬하운드 수정_왼쪽(빛)|Light|1|A0": {
-    "name": "2차각성 헬하운드 수정_왼쪽(빛)",
+  "2º despertar do cão infernal modificação_esquerda (leve)|Light|1|A0": {
+    "name": "2º despertar do cão infernal modificação_esquerda (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358486,8 +358487,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121704-light-2-_"
   },
-  "2차각성 헬하운드 수정_왼쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 헬하운드 수정_왼쪽(어둠)",
+  "2º despertar do cão infernal modificação_esquerda (escuro)|Dark|1|A0": {
+    "name": "2º despertar do cão infernal modificação_esquerda (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358544,8 +358545,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121705-dark-2-_"
   },
-  "2차각성 헬하운드 수정_오른쪽(물)|Water|1|A0": {
-    "name": "2차각성 헬하운드 수정_오른쪽(물)",
+  "2º despertar da modificação do cão infernal_direita (água)|Water|1|A0": {
+    "name": "2º despertar da modificação do cão infernal_direita (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358602,8 +358603,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121711-water-2-_"
   },
-  "2차각성 헬하운드 수정_오른쪽(불)|Fire|1|A0": {
-    "name": "2차각성 헬하운드 수정_오른쪽(불)",
+  "Modificação do 2º Despertar do Hellhound_Right (Fogo)|Fire|1|A0": {
+    "name": "Modificação do 2º Despertar do Hellhound_Right (Fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358660,8 +358661,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121712-fire-2-_"
   },
-  "2차각성 헬하운드 수정_오른쪽(바람)|Wind|1|A0": {
-    "name": "2차각성 헬하운드 수정_오른쪽(바람)",
+  "2º despertar da modificação do cão infernal_direita (vento)|Wind|1|A0": {
+    "name": "2º despertar da modificação do cão infernal_direita (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358718,8 +358719,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121713-wind-2-_"
   },
-  "2차각성 헬하운드 수정_오른쪽(빛)|Light|1|A0": {
-    "name": "2차각성 헬하운드 수정_오른쪽(빛)",
+  "Modificação do segundo despertar do cão infernal_direita (leve)|Light|1|A0": {
+    "name": "Modificação do segundo despertar do cão infernal_direita (leve)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -358776,8 +358777,8 @@
     },
     "source": "https://swarfarm.com/bestiary/121714-light-2-_"
   },
-  "2차각성 헬하운드 수정_오른쪽(어둠)|Dark|1|A0": {
-    "name": "2차각성 헬하운드 수정_오른쪽(어둠)",
+  "Modificação do segundo despertar do cão infernal_direita (escuro)|Dark|1|A0": {
+    "name": "Modificação do segundo despertar do cão infernal_direita (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
@@ -367737,7 +367738,7 @@
       },
       {
         "id": 5301,
-        "name": "Ordinary Offensive Magic・Penetrate",
+        "name": "Magia Ofensiva Comum・Penetrar",
         "description": "Attacks the enemy to deal damage that ignores its Defense. Grants Endure on yourself for 1 turn if the enemy is defeated by this attack.",
         "slot": 3,
         "cooltime": 5,
@@ -368433,7 +368434,7 @@
       },
       {
         "id": 5301,
-        "name": "Ordinary Offensive Magic・Penetrate",
+        "name": "Magia Ofensiva Comum・Penetrar",
         "description": "Attacks the enemy to deal damage that ignores its Defense. Grants Endure on yourself for 1 turn if the enemy is defeated by this attack.",
         "slot": 3,
         "cooltime": 5,
@@ -369098,7 +369099,7 @@
       },
       {
         "id": 5311,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -369244,7 +369245,7 @@
       },
       {
         "id": 5312,
-        "name": "Zoltraak・Bombardment",
+        "name": "Zolraak・Bombardeio",
         "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
         "slot": 2,
         "cooltime": 4,
@@ -369383,7 +369384,7 @@
       },
       {
         "id": 5313,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -369524,7 +369525,7 @@
       },
       {
         "id": 5314,
-        "name": "Zoltraak・Bombardment",
+        "name": "Zolraak・Bombardeio",
         "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
         "slot": 2,
         "cooltime": 4,
@@ -369665,7 +369666,7 @@
       },
       {
         "id": 5315,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -369701,7 +369702,7 @@
       },
       {
         "id": 5320,
-        "name": "Zoltraak・Heavy Fire",
+        "name": "Zoltraak・Fogo Pesado",
         "description": "Attacks all enemies to increase their chance of landing a Glancing Hit for 2 turns and decrease their Attack Bar by 30%.",
         "slot": 3,
         "cooltime": 5,
@@ -369811,7 +369812,7 @@
       },
       {
         "id": 5311,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -369957,7 +369958,7 @@
       },
       {
         "id": 5312,
-        "name": "Zoltraak・Bombardment",
+        "name": "Zolraak・Bombardeio",
         "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
         "slot": 2,
         "cooltime": 4,
@@ -370096,7 +370097,7 @@
       },
       {
         "id": 5313,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -370237,7 +370238,7 @@
       },
       {
         "id": 5314,
-        "name": "Zoltraak・Bombardment",
+        "name": "Zolraak・Bombardeio",
         "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
         "slot": 2,
         "cooltime": 4,
@@ -370378,7 +370379,7 @@
       },
       {
         "id": 5315,
-        "name": "Zoltraak・Barrage",
+        "name": "Zolraak・Barragem",
         "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
         "slot": 2,
         "cooltime": 4,
@@ -370414,7 +370415,7 @@
       },
       {
         "id": 5320,
-        "name": "Zoltraak・Heavy Fire",
+        "name": "Zoltraak・Fogo Pesado",
         "description": "Attacks all enemies to increase their chance of landing a Glancing Hit for 2 turns and decrease their Attack Bar by 30%.",
         "slot": 3,
         "cooltime": 5,
@@ -372079,7 +372080,7 @@
       },
       {
         "id": 5342,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -372224,7 +372225,7 @@
       },
       {
         "id": 5343,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -372369,7 +372370,7 @@
       },
       {
         "id": 5344,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -372802,7 +372803,7 @@
       },
       {
         "id": 5342,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -372947,7 +372948,7 @@
       },
       {
         "id": 5343,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -373092,7 +373093,7 @@
       },
       {
         "id": 5344,
-        "name": "Reelseiden・Ambush",
+        "name": "Reelsiden・Emboscada",
         "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
         "slot": 2,
         "cooltime": 4,
@@ -373315,8 +373316,8 @@
     },
     "source": "https://swarfarm.com/bestiary/36015-dark-ubel"
   },
-  "스킬 미리보기 수정(물)|Water|1|A0": {
-    "name": "스킬 미리보기 수정(물)",
+  "Editar visualização da habilidade (água)|Water|1|A0": {
+    "name": "Editar visualização da habilidade (água)",
     "element": "Water",
     "naturalStars": 1,
     "baseStars": 1,
@@ -373373,8 +373374,8 @@
     },
     "source": "https://swarfarm.com/bestiary/900101-water"
   },
-  "스킬 미리보기 수정(불)|Fire|1|A0": {
-    "name": "스킬 미리보기 수정(불)",
+  "Editar visualização da habilidade (fogo)|Fire|1|A0": {
+    "name": "Editar visualização da habilidade (fogo)",
     "element": "Fire",
     "naturalStars": 1,
     "baseStars": 1,
@@ -373431,8 +373432,8 @@
     },
     "source": "https://swarfarm.com/bestiary/900102-fire"
   },
-  "스킬 미리보기 수정(바람)|Wind|1|A0": {
-    "name": "스킬 미리보기 수정(바람)",
+  "Editar visualização da habilidade (vento)|Wind|1|A0": {
+    "name": "Editar visualização da habilidade (vento)",
     "element": "Wind",
     "naturalStars": 1,
     "baseStars": 1,
@@ -373489,8 +373490,8 @@
     },
     "source": "https://swarfarm.com/bestiary/900103-wind"
   },
-  "스킬 미리보기 수정(빛)|Light|1|A0": {
-    "name": "스킬 미리보기 수정(빛)",
+  "Editar visualização da habilidade (clara)|Light|1|A0": {
+    "name": "Editar visualização da habilidade (clara)",
     "element": "Light",
     "naturalStars": 1,
     "baseStars": 1,
@@ -373547,8 +373548,8 @@
     },
     "source": "https://swarfarm.com/bestiary/900104-light"
   },
-  "스킬 미리보기 수정(어둠)|Dark|1|A0": {
-    "name": "스킬 미리보기 수정(어둠)",
+  "Editar visualização da habilidade (escuro)|Dark|1|A0": {
+    "name": "Editar visualização da habilidade (escuro)",
     "element": "Dark",
     "naturalStars": 1,
     "baseStars": 1,
