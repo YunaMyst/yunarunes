@@ -12,12 +12,13 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: monster-data-update
+  cancel-in-progress: false
+
 jobs:
   update-monsters:
     runs-on: ubuntu-latest
-    concurrency:
-      group: update-monster-data
-      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,8 +40,9 @@ jobs:
           git add monster-details.json monster-catalog.json
           if git diff --cached --quiet; then
             echo 'No monster data changes.'
-          else
-            git commit -m 'Auto-update complete monster database'
-            git pull --rebase origin main
-            git push origin HEAD:main
+            exit 0
           fi
+          git commit -m 'Auto-update complete monster database'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
