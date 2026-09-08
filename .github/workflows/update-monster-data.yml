@@ -13,8 +13,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: monster-data-update
-  cancel-in-progress: false
+  group: monster-data-update-pt
+  cancel-in-progress: true
 
 jobs:
   update-monsters:
