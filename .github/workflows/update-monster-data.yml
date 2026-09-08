@@ -37,12 +37,12 @@ jobs:
         run: |
           git config user.name 'YunaRunes Bot'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add monster-details.json monster-catalog.json
+          git add monster-details.json monster-catalog.json .translation-cache-pt.json
           if git diff --cached --quiet; then
             echo 'No monster data changes.'
             exit 0
           fi
-          git commit -m 'Auto-update complete monster database'
+          git commit -m 'Auto-update Portuguese monster database'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
