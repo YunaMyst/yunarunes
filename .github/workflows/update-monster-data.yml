@@ -2,6 +2,10 @@ name: Update monster data
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/update_monster_data.py'
+      - '.github/workflows/update-monster-data.yml'
   schedule:
     - cron: '17 4 * * 1'
 
