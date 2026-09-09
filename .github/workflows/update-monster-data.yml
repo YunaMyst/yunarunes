@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'scripts/update_monster_data.py'
+      - 'scripts/filter_playable_monsters.py'
       - '.github/workflows/update-monster-data.yml'
   schedule:
     - cron: '17 4 * * 1'
@@ -33,6 +34,9 @@ jobs:
       - name: Fetch SWARFARM Bestiary data
         run: python scripts/update_monster_data.py
 
+      - name: Keep only playable unique monsters
+        run: python scripts/filter_playable_monsters.py
+
       - name: Commit updated data
         run: |
           git config user.name 'YunaRunes Bot'
@@ -42,7 +46,7 @@ jobs:
             echo 'No monster data changes.'
             exit 0
           fi
-          git commit -m 'Auto-update Portuguese monster database'
+          git commit -m 'Auto-update clean playable monster database'
           git fetch origin main
           git rebase origin/main
           git push origin HEAD:main
