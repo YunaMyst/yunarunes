@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/update_monster_data.py'
       - 'scripts/filter_playable_monsters.py'
+      - 'scripts/refresh_playable_monsters.py'
       - '.github/workflows/update-monster-data.yml'
   schedule:
     - cron: '17 4 * * 1'
@@ -35,7 +36,7 @@ jobs:
         run: python scripts/update_monster_data.py
 
       - name: Keep only playable unique monsters
-        run: python scripts/filter_playable_monsters.py
+        run: python scripts/refresh_playable_monsters.py
 
       - name: Commit updated data
         run: |
