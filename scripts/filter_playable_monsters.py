@@ -40,9 +40,10 @@ def main():
         if detail and str(detail.get("archetype") or "").strip().lower() in MATERIAL_ROLES:
             continue
 
-        awakening = int(monster.get("awakeningLevel") or 0)
-        # One entry per real family + element + awakening state.
-        unique_key = (family, element, awakening)
+        # One displayed entry per real monster family + element.
+        # Normal awakening and Second Awakening are states of the same monster,
+        # not separate monsters for the YunaRunes catalog.
+        unique_key = (family, element)
         if unique_key in seen:
             continue
         seen.add(unique_key)
@@ -62,8 +63,8 @@ def main():
     meta = dict(catalog_data.get("_meta", {}))
     meta.update({
         "generatedBy": "YunaRunes",
-        "filter": "playable monsters only; natural 2-5 stars; materials, technical placeholders and duplicate family/element/awakening entries removed",
-        "playableMonsterVariants": len(clean),
+        "filter": "playable monsters only; natural 2-5 stars; materials, technical placeholders and duplicate family/element entries removed; awakening states are not separate catalog entries",
+        "playableMonsters": len(clean),
     })
 
     CATALOG.write_text(
@@ -74,7 +75,7 @@ def main():
         json.dumps(filtered_details, ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    print(f"Playable monster variants: {len(clean)}")
+    print(f"Playable monsters: {len(clean)}")
 
 
 if __name__ == "__main__":
