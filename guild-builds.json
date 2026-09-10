@@ -1,16 +1,24 @@
 {
   "_meta": {
-    "description": "Builds e equipas de guilda verificadas a partir de referências públicas. Não representa ranking oficial do YunaRunes.",
+    "description": "Base central de builds de guilda do YunaRunes. Inclui runas, stats, artefactos, grinds, gems, speed tuning e equipas quando existem dados públicos suficientes. Não representa ranking oficial.",
     "modes": ["siege", "wgb"],
-    "lastVerified": "2026-09-10"
+    "lastVerified": "2026-09-10",
+    "schemaVersion": 2,
+    "notes": "Dados específicos de conteúdo têm prioridade. Campos não confirmados ficam ausentes em vez de serem inventados."
   },
   "skogul": {
     "name": "Skogul",
     "modes": {"siege": true, "wgb": true},
+    "role": "sustain/damage",
     "runes": {
-      "siege": {"sets": "Violent + Will", "slots": "HP% / HP% / HP%", "subs": "SPD · HP% · DEF% · RES"},
-      "wgb": {"sets": "Violent + Will", "slots": "HP% / HP% / HP%", "subs": "SPD · HP% · DEF% · RES"}
+      "siege": {"sets": ["Violent + Will", "Violent + Energy"], "slots": "HP% / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]},
+      "wgb": {"sets": ["Violent + Will", "Violent + Energy"], "slots": "HP% / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]}
     },
+    "stats": {"priority": ["HP%", "SPD", "DEF%", "RES"], "notes": "Muito HP e resistência, mantendo velocidade suficiente para a equipa."},
+    "artifacts": {"left": ["HP%", "Skill 3", "Additional Damage por HP quando disponível"], "right": ["HP%", "Damage Received -", "Additional Damage conforme escala"]},
+    "grinds": ["HP%", "SPD", "DEF%", "RES"],
+    "gems": ["SPD", "HP%", "DEF%", "RES"],
+    "speedTune": "Normalmente atrás do booster/controlo da equipa; a velocidade exacta depende da composição.",
     "teams": {
       "siege": [["Aegir", "Skogul", "Triana"], ["Aegir", "Skogul", "Harmonia"], ["Khmun", "Skogul", "Orion"]],
       "wgb": []
@@ -20,14 +28,116 @@
   "megan2a": {
     "name": "Megan (2A)",
     "modes": {"siege": true, "wgb": true},
+    "role": "support",
     "runes": {
-      "siege": {"sets": "Swift + Energy", "slots": "SPD / HP% / HP%", "subs": "SPD · ACC · HP% · DEF%"},
-      "wgb": {"sets": "Swift + Energy", "slots": "SPD / HP% / HP%", "subs": "SPD · ACC · HP% · DEF%"}
+      "siege": {"sets": ["Swift + Energy", "Swift + Focus"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "ACC", "HP%", "DEF%"]},
+      "wgb": {"sets": ["Swift + Energy", "Swift + Focus"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "ACC", "HP%", "DEF%"]}
     },
+    "stats": {"priority": ["SPD", "ACC", "HP%", "DEF%"], "notes": "Booster e suporte; a velocidade deve respeitar a ordem da equipa."},
+    "artifacts": {"left": ["HP%", "Skill 2/3 conforme função", "Damage Received -"], "right": ["HP%", "DEF%", "Additional Damage quando aplicável"]},
+    "grinds": ["SPD", "HP%", "DEF%", "ACC"],
+    "gems": ["SPD", "ACC", "HP%", "DEF%"],
+    "speedTune": "Deve ser construída para actuar antes dos restantes membros quando funciona como booster.",
     "teams": {
       "siege": [["Bernard (2A)", "Megan (2A)", "Lushen"], ["Megan (2A)", "Triana", "Carcano"], ["Lushen", "Megan (2A)", "Carcano"], ["Galleon", "Lushen", "Megan (2A)"], ["Megan (2A)", "Shaina", "Zenobia"]],
       "wgb": [["Bernard (2A)", "Megan (2A)", "Lushen"], ["Leo", "Lushen", "Megan (2A)"], ["Lushen", "Megan (2A)", "Baleygr"]]
     },
     "source": "SWLens"
+  },
+  "camilla": {
+    "name": "Camilla",
+    "modes": {"siege": true, "wgb": true},
+    "role": "sustain",
+    "runes": {
+      "siege": {"sets": ["Violent + Will", "Violent + Nemesis"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]},
+      "wgb": {"sets": ["Violent + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]}
+    },
+    "stats": {"priority": ["HP%", "SPD", "DEF%", "RES"], "notes": "Priorizar resistência e sobrevivência para aproveitar a auto-cura e o papel de bruiser."},
+    "artifacts": {"left": ["HP%", "Additional Damage", "Skill 3 quando aplicável"], "right": ["HP%", "Damage Received -", "Additional Damage"]},
+    "grinds": ["HP%", "SPD", "DEF%", "RES"],
+    "gems": ["SPD", "HP%", "DEF%", "RES"],
+    "speedTune": "Velocidade moderada; ajustar para acompanhar o suporte da equipa.",
+    "teams": {"siege": [], "wgb": []},
+    "source": "SWLens / SWDatabase"
+  },
+  "fengyan": {
+    "name": "Feng Yan",
+    "modes": {"siege": true, "wgb": true},
+    "role": "bruiser",
+    "runes": {
+      "siege": {"sets": ["Violent + Will"], "slots": "SPD / CR ou HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "CR"]},
+      "wgb": {"sets": ["Violent + Will"], "slots": "SPD / CR ou HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "CR"]}
+    },
+    "stats": {"priority": ["DEF%", "HP%", "SPD", "CR"], "notes": "DEF elevada aumenta a pressão e a capacidade de sobrevivência."},
+    "artifacts": {"left": ["DEF%", "Additional Damage", "Skill 2/3"], "right": ["DEF%", "Damage Received -", "Additional Damage"]},
+    "grinds": ["DEF%", "HP%", "SPD", "CR"],
+    "gems": ["DEF%", "HP%", "SPD", "CR"],
+    "speedTune": "Construir para acompanhar os suportes e não perder valor por excesso de velocidade.",
+    "teams": {"siege": [], "wgb": []},
+    "source": "SWDatabase / referências públicas de guilda"
+  },
+  "riley": {
+    "name": "Riley",
+    "modes": {"siege": true, "wgb": true},
+    "role": "support",
+    "runes": {
+      "siege": {"sets": ["Violent + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]},
+      "wgb": {"sets": ["Violent + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]}
+    },
+    "stats": {"priority": ["SPD", "HP%", "DEF%", "RES"], "notes": "Suporte de sobrevivência; resistência e HP são importantes em equipas longas."},
+    "artifacts": {"left": ["HP%", "Damage Received -", "Skill 3"], "right": ["HP%", "DEF%", "Recovery/Support effects"]},
+    "grinds": ["SPD", "HP%", "DEF%", "RES"],
+    "gems": ["SPD", "HP%", "DEF%", "RES"],
+    "speedTune": "Normalmente rápida o suficiente para responder ao dano e manter a equipa viva.",
+    "teams": {"siege": [], "wgb": []},
+    "source": "SWDatabase / referências públicas de guilda"
+  },
+  "galleon": {
+    "name": "Galleon",
+    "modes": {"siege": true, "wgb": true},
+    "role": "support/control",
+    "runes": {
+      "siege": {"sets": ["Swift + Will", "Violent + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "ACC", "HP%", "DEF%"]},
+      "wgb": {"sets": ["Swift + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "ACC", "HP%", "DEF%"]}
+    },
+    "stats": {"priority": ["SPD", "ACC", "HP%", "DEF%"], "notes": "O mais importante é executar a redução de DEF antes dos nukers."},
+    "artifacts": {"left": ["HP%", "Skill 3", "Damage Received -"], "right": ["HP%", "ACC", "Additional Damage"]},
+    "grinds": ["SPD", "ACC", "HP%", "DEF%"],
+    "gems": ["SPD", "ACC", "HP%", "DEF%"],
+    "speedTune": "Deve actuar antes dos nukers da equipa.",
+    "teams": {"siege": [["Galleon", "Lushen", "Megan (2A)"]], "wgb": [["Galleon", "Megan (2A)", "Lushen"]]},
+    "source": "SWLens / SWDatabase"
+  },
+  "vigor": {
+    "name": "Vigor",
+    "modes": {"siege": true, "wgb": true},
+    "role": "support/bruiser",
+    "runes": {
+      "siege": {"sets": ["Violent + Will", "Swift + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]},
+      "wgb": {"sets": ["Violent + Will"], "slots": "SPD / HP% / HP%", "subs": ["SPD", "HP%", "DEF%", "RES"]}
+    },
+    "stats": {"priority": ["SPD", "HP%", "DEF%", "RES"], "notes": "Equilibrar velocidade com sobrevivência para manter o suporte activo."},
+    "artifacts": {"left": ["HP%", "Skill 3", "Damage Received -"], "right": ["HP%", "DEF%", "Additional Damage"]},
+    "grinds": ["SPD", "HP%", "DEF%", "RES"],
+    "gems": ["SPD", "HP%", "DEF%", "RES"],
+    "speedTune": "Actuar antes dos bruisers quando a equipa depende dos buffs/debuffs dele.",
+    "teams": {"siege": [], "wgb": []},
+    "source": "SWDatabase / referências públicas de guilda"
+  },
+  "theomars": {
+    "name": "Theomars",
+    "modes": {"siege": true, "wgb": true},
+    "role": "damage",
+    "runes": {
+      "siege": {"sets": ["Violent + Will"], "slots": "SPD / CR ou ATK% / ATK%", "subs": ["SPD", "CR", "CD", "ATK%"]},
+      "wgb": {"sets": ["Violent + Will"], "slots": "SPD / CR ou ATK% / ATK%", "subs": ["SPD", "CR", "CD", "ATK%"]}
+    },
+    "stats": {"priority": ["SPD", "CR", "CD", "ATK%"], "notes": "Construção bruiser/damage; manter sobrevivência suficiente para aproveitar Endure."},
+    "artifacts": {"left": ["ATK%", "Additional Damage", "Skill 3"], "right": ["ATK%", "Damage Received -", "Additional Damage"]},
+    "grinds": ["SPD", "ATK%", "CR", "CD"],
+    "gems": ["SPD", "ATK%", "CR", "HP%"],
+    "speedTune": "Ajustar depois dos suportes que criam a janela de dano.",
+    "teams": {"siege": [], "wgb": []},
+    "source": "SWDatabase / referências públicas de guilda"
   }
 }
