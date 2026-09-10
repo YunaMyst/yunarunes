@@ -1,0 +1,33 @@
+{
+  "_meta": {
+    "description": "Builds e equipas de guilda verificadas a partir de referências públicas. Não representa ranking oficial do YunaRunes.",
+    "modes": ["siege", "wgb"],
+    "lastVerified": "2026-09-10"
+  },
+  "skogul": {
+    "name": "Skogul",
+    "modes": {"siege": true, "wgb": true},
+    "runes": {
+      "siege": {"sets": "Violent + Will", "slots": "HP% / HP% / HP%", "subs": "SPD · HP% · DEF% · RES"},
+      "wgb": {"sets": "Violent + Will", "slots": "HP% / HP% / HP%", "subs": "SPD · HP% · DEF% · RES"}
+    },
+    "teams": {
+      "siege": [["Aegir", "Skogul", "Triana"], ["Aegir", "Skogul", "Harmonia"], ["Khmun", "Skogul", "Orion"]],
+      "wgb": []
+    },
+    "source": "SWLens / SWDatabase / Summoners War Sky Arena"
+  },
+  "megan2a": {
+    "name": "Megan (2A)",
+    "modes": {"siege": true, "wgb": true},
+    "runes": {
+      "siege": {"sets": "Swift + Energy", "slots": "SPD / HP% / HP%", "subs": "SPD · ACC · HP% · DEF%"},
+      "wgb": {"sets": "Swift + Energy", "slots": "SPD / HP% / HP%", "subs": "SPD · ACC · HP% · DEF%"}
+    },
+    "teams": {
+      "siege": [["Bernard (2A)", "Megan (2A)", "Lushen"], ["Megan (2A)", "Triana", "Carcano"], ["Lushen", "Megan (2A)", "Carcano"], ["Galleon", "Lushen", "Megan (2A)"], ["Megan (2A)", "Shaina", "Zenobia"]],
+      "wgb": [["Bernard (2A)", "Megan (2A)", "Lushen"], ["Leo", "Lushen", "Megan (2A)"], ["Lushen", "Megan (2A)", "Baleygr"]]
+    },
+    "source": "SWLens"
+  }
+}
