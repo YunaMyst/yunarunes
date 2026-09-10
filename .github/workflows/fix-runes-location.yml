@@ -1,0 +1,35 @@
+name: Fix rune details location
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-runes-location.yml'
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: "!contains(github.event.head_commit.message, 'runes-local-fix')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch team builder
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('team-builder.html')
+          s=p.read_text(encoding='utf-8')
+          s=s.replace('.clicked-runes{margin-top:18px}.clicked-runes:not(.open){display:none}', '.clicked-runes{margin-top:18px}.clicked-runes:not(.open){display:none}.local-runes{margin-top:10px;padding:10px;text-align:left}.local-runes .runes-box{margin-top:8px}')
+          old="function showClickedRunes(name){const m=findMonster(name),panel=$('clickedRunes');if(!m||!panel)return;document.querySelectorAll('.detail').forEach(x=>x.classList.remove('open'));document.querySelectorAll('.clicked-runes').forEach(x=>x.classList.remove('open'));panel.innerHTML='<div class=\"head\">'+img(m)+'<div><h2>'+esc(clean(m.name))+'</h2><span class=\"tag\">'+esc(m.element)+'</span><span class=\"tag\">'+esc(m.role)+'</span></div></div><p class=\"muted\">Função sugerida: <b>'+esc(kind(m))+'</b>.</p>'+renderRunes(m);panel.classList.add('open');panel.scrollIntoView({behavior:'smooth',block:'nearest'})}"
+          new="function showClickedRunes(el){const m=findMonster(el.getAttribute('data-rune-name'));if(!m)return;document.querySelectorAll('.local-runes').forEach(x=>x.remove());const p=document.createElement('div');p.className='local-runes';p.innerHTML=renderRunes(m);el.appendChild(p)}"
+          s=s.replace(old,new)
+          s=s.replace("document.querySelectorAll('[data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el.getAttribute('data-rune-name')))" , "document.querySelectorAll('[data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el))")
+          s=s.replace("document.querySelectorAll('#synergyResults [data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el.getAttribute('data-rune-name')))" , "document.querySelectorAll('#synergyResults [data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el))")
+          p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add team-builder.html
+          git diff --cached --quiet || git commit -m 'Fix rune details location runes-local-fix'
+          git push
