@@ -1,0 +1,7 @@
+{
+  "_meta": {
+    "description": "Mapa de utilização por conteúdo do YunaRunes. X só deve ser usado quando há indicação de utilização; ausente significa sem dado confirmado.",
+    "modes": ["rta", "arena", "siege", "pve"]
+  },
+  "monsters": {}
+}
