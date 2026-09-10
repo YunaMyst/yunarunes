@@ -33,4 +33,4 @@ function setInventoryText(){const imported=localStorage.getItem('yunarunes-inven
 $('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data)||!data.length)throw Error('formato');localStorage.setItem('yunarunes-inventory',JSON.stringify(data));runes=data;setInventoryText();$('results').innerHTML='<span class="ok">Inventário importado. Agora podes otimizar.</span>'}catch(err){$('inventory').innerHTML='<span class="bad">JSON inválido. Usa um ficheiro de inventário de runas em formato de lista.</span>'}});
 function clearImported(){localStorage.removeItem('yunarunes-inventory');runes=demoRunes;setInventoryText();$('results').textContent='Inventário de demonstração restaurado.'}
 const p=new URLSearchParams(location.search).get('monster');if(p)$('monster').value=p;load();
-</script></body></html>
+</script><script src="language.js"></script></body></html>
