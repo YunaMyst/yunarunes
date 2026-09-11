@@ -61,12 +61,17 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile' versionCode='5' versionName='1.2.0'"
+          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile' versionCode='6' versionName='1.3.0'"
           "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
 
-      - name: Verify APK signature
+      - name: Verify APK signature schemes
         run: |
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs android/app/build/outputs/apk/release/app-release.apk
+          APK="android/app/build/outputs/apk/release/app-release.apk"
+          SIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+          "$SIGNER" verify --verbose --print-certs "$APK" | tee /tmp/apksigner.txt
+          grep -F "Verified using v1 scheme (JAR signing): true" /tmp/apksigner.txt
+          grep -F "Verified using v2 scheme (APK Signature Scheme v2): true" /tmp/apksigner.txt
+          grep -F "Verified using v3 scheme (APK Signature Scheme v3): true" /tmp/apksigner.txt
 
       - name: Test APK installation on Android 15 emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -78,14 +83,15 @@ jobs:
           emulator-options: -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect
           disable-animations: true
           script: |
-            adb install -r android/app/build/outputs/apk/release/app-release.apk
+            adb uninstall com.yunarunes.mobile || true
+            adb install android/app/build/outputs/apk/release/app-release.apk
             adb shell pm path com.yunarunes.mobile
             adb shell monkey -p com.yunarunes.mobile 1
 
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release
+          name: YunaRunes-Android-Release-1.3.0
           path: |
             android/app/build/outputs/apk/release/app-release.apk
             android/app/build/outputs/bundle/release/app-release.aab
@@ -103,7 +109,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish signed YunaRunes release APK"
+            git commit -m "Publish signed YunaRunes release APK 1.3.0"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
@@ -116,5 +122,3 @@ jobs:
               git rebase origin/main
             done
           fi
-
-# Force workflow execution after APK installation diagnostics update.
