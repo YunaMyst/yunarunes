@@ -116,3 +116,5 @@ jobs:
               git rebase origin/main
             done
           fi
+
+# Trigger a fresh validation run.
