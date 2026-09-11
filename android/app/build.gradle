@@ -1,5 +1,37 @@
 plugins { id 'com.android.application' }
 
-android { namespace 'com.yunarunes.app'; compileSdk 35
-    defaultConfig { applicationId 'com.yunarunes.app'; minSdk 23; targetSdk 35; versionCode 1; versionName '1.0.0' }
+android {
+    namespace 'com.yunarunes.app'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.yunarunes.app'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            def keystorePath = System.getenv('YUNARUNES_KEYSTORE_PATH')
+            def storePasswordValue = System.getenv('YUNARUNES_KEYSTORE_PASSWORD')
+            def keyAliasValue = System.getenv('YUNARUNES_KEY_ALIAS')
+            def keyPasswordValue = System.getenv('YUNARUNES_KEY_PASSWORD')
+
+            if (keystorePath && storePasswordValue && keyAliasValue && keyPasswordValue) {
+                storeFile file(keystorePath)
+                storePassword storePasswordValue
+                keyAlias keyAliasValue
+                keyPassword keyPasswordValue
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+        }
+    }
 }
