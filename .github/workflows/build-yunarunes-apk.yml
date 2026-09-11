@@ -10,12 +10,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: yunarunes-apk
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -42,10 +48,22 @@ jobs:
           cp android/app/build/outputs/apk/debug/app-debug.apk downloads/yunarunes.apk
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git rebase origin/main
           git add downloads/yunarunes.apk
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
             git commit -m "Publish latest YunaRunes APK"
-            git push
+            for attempt in 1 2 3; do
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [ "$attempt" -eq 3 ]; then
+                echo "Unable to publish APK after 3 attempts"
+                exit 1
+              fi
+              git fetch origin main
+              git rebase origin/main
+            done
           fi
