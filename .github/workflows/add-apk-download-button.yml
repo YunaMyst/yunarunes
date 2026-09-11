@@ -1,9 +1,12 @@
 name: Add APK download button
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - '.github/workflows/add-apk-download-button.yml'
+      - 'index.html'
+      - 'downloads/yunarunes.apk'
 
 permissions:
   contents: write
@@ -22,6 +25,8 @@ jobs:
           marker = '<section class="tools">'
           button = '<section class="card" style="margin:20px 0;border-color:var(--a);text-align:center"><h2>📱 YunaRunes para Android</h2><p class="muted">Instala o YunaRunes no teu telemóvel gratuitamente.</p><a class="btn" href="downloads/yunarunes.apk" download>⬇️ Baixar APK</a></section>'
           if 'downloads/yunarunes.apk' not in s:
+              if marker not in s:
+                  raise SystemExit('Marker for APK section not found in index.html')
               s = s.replace(marker, button + marker, 1)
               p.write_text(s, encoding='utf-8')
           PY
@@ -31,6 +36,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Button already present"
           else
-            git commit -m "Add YunaRunes Android APK download button"
+            git commit -m "Restore YunaRunes Android APK download button"
             git push
           fi
