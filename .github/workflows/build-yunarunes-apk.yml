@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -75,16 +76,21 @@ jobs:
 
       - name: Test APK installation on Android 15 emulator
         uses: reactivecircus/android-emulator-runner@v2
+        env:
+          ANDROID_EMULATOR_WAIT_TIME_BEFORE_KILL: 5
+        timeout-minutes: 8
         with:
           api-level: 35
           target: google_apis
           arch: x86_64
           profile: pixel_6
-          emulator-options: -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect
+          emulator-boot-timeout: 300
+          emulator-options: -no-window -no-audio -no-snapshot -no-boot-anim -gpu swiftshader_indirect
           disable-animations: true
           script: |
+            set -e
             adb uninstall com.yunarunes.mobile || true
-            adb install android/app/build/outputs/apk/release/app-release.apk
+            adb install -r android/app/build/outputs/apk/release/app-release.apk
             adb shell pm path com.yunarunes.mobile
             adb shell monkey -p com.yunarunes.mobile 1
 
