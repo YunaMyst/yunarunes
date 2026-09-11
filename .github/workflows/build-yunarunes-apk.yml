@@ -61,8 +61,10 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          EXPECTED_VERSION_CODE=$(awk -F"versionCode '" 'NF>1 {split($2,a,"'"); print a[1]; exit}' android/app/build.gradle)
-          EXPECTED_VERSION_NAME=$(awk -F"versionName '" 'NF>1 {split($2,a,"'"); print a[1]; exit}' android/app/build.gradle)
+          EXPECTED_VERSION_CODE=$(grep -oP "versionCode '\\K[0-9]+" android/app/build.gradle | head -1)
+          EXPECTED_VERSION_NAME=$(grep -oP "versionName '\\K[^']+" android/app/build.gradle | head -1)
+          test -n "$EXPECTED_VERSION_CODE"
+          test -n "$EXPECTED_VERSION_NAME"
           echo "Expected versionCode=$EXPECTED_VERSION_CODE versionName=$EXPECTED_VERSION_NAME"
           "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.app' versionCode='$EXPECTED_VERSION_CODE' versionName='$EXPECTED_VERSION_NAME'"
           "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
