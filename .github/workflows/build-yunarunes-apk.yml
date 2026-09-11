@@ -48,24 +48,26 @@ jobs:
           test -n "$KEY_PASSWORD" || { echo "Missing YUNARUNES_KEY_PASSWORD secret"; exit 1; }
           echo "$KEYSTORE_BASE64" | base64 --decode > android/yunarunes-release.jks
 
-      - name: Build signed release APK
+      - name: Build signed release APK and AAB
         working-directory: android
         env:
           YUNARUNES_KEYSTORE_PATH: ${{ github.workspace }}/android/yunarunes-release.jks
           YUNARUNES_KEYSTORE_PASSWORD: ${{ secrets.YUNARUNES_KEYSTORE_PASSWORD }}
           YUNARUNES_KEY_ALIAS: ${{ secrets.YUNARUNES_KEY_ALIAS }}
           YUNARUNES_KEY_PASSWORD: ${{ secrets.YUNARUNES_KEY_PASSWORD }}
-        run: gradle assembleRelease --no-daemon
+        run: gradle assembleRelease bundleRelease --no-daemon
 
       - name: Verify APK signature
         run: |
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
 
-      - name: Upload APK artifact
+      - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release
-          path: android/app/build/outputs/apk/release/app-release.apk
+          name: YunaRunes-Android-Release-1.1.0
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android/app/build/outputs/bundle/release/app-release.aab
           if-no-files-found: error
 
       - name: Publish APK to website
@@ -80,7 +82,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish signed YunaRunes release APK"
+            git commit -m "Publish signed YunaRunes release APK 1.1.0"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
