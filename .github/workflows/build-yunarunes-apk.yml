@@ -54,6 +54,7 @@ jobs:
       - name: Build signed release APK
         working-directory: android
         env:
+          YUNARUNES_KEYSTORE_PATH: ${{ github.workspace }}/android/yunarunes-release.jks
           YUNARUNES_KEYSTORE_PASSWORD: ${{ secrets.YUNARUNES_KEYSTORE_PASSWORD }}
           YUNARUNES_KEY_ALIAS: ${{ secrets.YUNARUNES_KEY_ALIAS }}
           YUNARUNES_KEY_PASSWORD: ${{ secrets.YUNARUNES_KEY_PASSWORD }}
