@@ -68,6 +68,20 @@ jobs:
         run: |
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
 
+      - name: Test APK installation on Android 15 emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          emulator-options: -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect
+          disable-animations: true
+          script: |
+            adb install -r android/app/build/outputs/apk/release/app-release.apk
+            adb shell pm path com.yunarunes.mobile
+            adb shell monkey -p com.yunarunes.mobile 1
+
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
