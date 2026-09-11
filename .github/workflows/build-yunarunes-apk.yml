@@ -66,7 +66,7 @@ jobs:
 
       - name: Verify APK signature
         run: |
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose android/app/build/outputs/apk/release/app-release.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs android/app/build/outputs/apk/release/app-release.apk
 
       - name: Test APK installation on Android 15 emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -117,4 +117,4 @@ jobs:
             done
           fi
 
-# Trigger a fresh validation run.
+# Force workflow execution after APK installation diagnostics update.
