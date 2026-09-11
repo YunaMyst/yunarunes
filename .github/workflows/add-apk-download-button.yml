@@ -1,0 +1,36 @@
+name: Add APK download button
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-apk-download-button.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Android download button
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<section class="tools">'
+          button = '<section class="card" style="margin:20px 0;border-color:var(--a);text-align:center"><h2>📱 YunaRunes para Android</h2><p class="muted">Instala o YunaRunes no teu telemóvel gratuitamente.</p><a class="btn" href="downloads/yunarunes.apk" download>⬇️ Baixar APK</a></section>'
+          if 'downloads/yunarunes.apk' not in s:
+              s = s.replace(marker, button + marker, 1)
+              p.write_text(s, encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Button already present"
+          else
+            git commit -m "Add YunaRunes Android APK download button"
+            git push
+          fi
