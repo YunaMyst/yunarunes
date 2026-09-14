@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   patch:
-    if: ${{ !contains(github.event.head_commit.message, 'language-switcher-fix') }}
+    if: ${{ !contains(github.event.head_commit.message, 'skip-header-patch') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,5 +28,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add '*.html' language.js header-fix.js
-          git diff --cached --quiet || git commit -m 'language-switcher-fix: restore APK and PT/BR ENG controls'
+          git diff --cached --quiet || git commit -m 'restore header controls'
           git push
