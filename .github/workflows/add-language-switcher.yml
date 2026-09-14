@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Keep one header translator and add dynamic translator
+      - name: Keep one language system and add advanced tools access
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -21,14 +21,22 @@ jobs:
               s=s.replace('<script src="language-dynamic.js"></script>','')
               tag='<script src="language.js"></script>'
               if tag not in s:
-                  s=s.replace('</body>', tag+'</body>')
+                  s=s.replace('</body>',tag+'</body>')
               s=s.replace('</body>','<script src="language-dynamic.js"></script></body>')
               p.write_text(s,encoding='utf-8')
+          home=Path('index.html')
+          if home.exists():
+              s=home.read_text(encoding='utf-8')
+              marker='<!-- YUNARUNES-ADVANCED-TOOLS -->'
+              if marker not in s:
+                  block='''<section class="card" style="margin-top:18px"><h2>⚡ Advanced Tools</h2><p class="muted">Ferramentas avançadas para artefactos, decks, análise de conta e Guild/Siege.</p><section class="tools"><a class="tool-card" href="tools.html"><b>🧰 Ferramentas</b><br><span>Artifact Optimizer · Decks · Account Analyzer · Guild / Siege</span></a><a class="tool-card" href="artifact-optimizer.html"><b>💠 Artifact Optimizer</b><br><span>Ordenar artefactos e encontrar a melhor combinação.</span></a><a class="tool-card" href="decks.html"><b>🃏 Decks</b><br><span>Guardar e organizar equipas por conteúdo.</span></a><a class="tool-card" href="account-analyzer.html"><b>📊 Account Analyzer</b><br><span>Analisar a evolução e a qualidade da conta.</span></a><a class="tool-card" href="guild-tools.html"><b>⚔️ Guild / Siege</b><br><span>Planeamento de defs, ataques e matchups.</span></a></section></section>'''
+                  s=s.replace('</main>',marker+block+'</main>',1)
+                  home.write_text(s,encoding='utf-8')
           PY
       - name: Commit and push
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add '*.html'
-          git diff --cached --quiet || git commit -m 'enable complete PT BR and ENG translation'
+          git diff --cached --quiet || git commit -m 'add advanced tools to site'
           git push
