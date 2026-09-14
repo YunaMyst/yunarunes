@@ -7,7 +7,16 @@ function fixHeader(){
  if(!bar)return;
  const style=document.getElementById('yuna-pc-header-fix')||document.createElement('style');
  style.id='yuna-pc-header-fix';
- style.textContent='@media(min-width:601px){header.top{position:sticky!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:0 22px!important;gap:0!important}.logo{position:absolute!important;left:22px!important;top:50%!important;transform:translateY(-50%)!important}.nav{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:18px!important;margin:0!important;white-space:nowrap!important}.langbar{position:absolute!important;right:22px!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;visibility:visible!important;opacity:1!important;z-index:9999!important}.langbar a,.langbar button{display:inline-flex!important;visibility:visible!important;opacity:1!important;align-items:center!important;justify-content:center!important;height:40px!important;padding:0 11px!important}}';
+ style.textContent=`
+@media(min-width:601px){
+ header.top{position:sticky!important;top:0!important;display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;min-height:64px!important;padding:0 22px!important;gap:0!important}
+ header.top .logo{grid-column:1!important;grid-row:1!important;justify-self:start!important;position:static!important;margin:0!important;transform:none!important}
+ header.top .nav{grid-column:2!important;grid-row:1!important;position:static!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:18px!important;margin:0!important;transform:none!important;white-space:nowrap!important}
+ header.top .langbar{grid-column:3!important;grid-row:1!important;justify-self:end!important;position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;margin:0!important;transform:none!important;visibility:visible!important;opacity:1!important;z-index:9999!important}
+ header.top .langbar a,header.top .langbar button{display:inline-flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;height:40px!important;padding:0 11px!important;white-space:nowrap!important}
+}
+@media(max-width:600px){header.top .nav{display:none!important}}
+`;
  if(!style.parentNode)document.head.appendChild(style);
 }
 function bind(){
