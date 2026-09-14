@@ -1,0 +1,43 @@
+name: Remove duplicate bottom tools
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove bottom Team Builder, Rune Builder, Optimizer and Database cards
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          pattern = r'<h2 class="section-title">🛠️ Ferramentas YunaRunes</h2><section class="tools">.*?</section><footer class="footer">'
+          new, n = re.subn(pattern, '<footer class="footer">', s, count=1, flags=re.S)
+
+          if n:
+              p.write_text(new, encoding='utf-8')
+          else:
+              print('Bottom tools already removed or markup changed; no edit needed.')
+          PY
+
+      - name: Commit website change and remove this one-time workflow
+        run: |
+          git config user.name "YunaRunes Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "No website change needed."
+            exit 0
+          fi
+          git commit -m "Remove duplicate bottom tools from YunaRunes"
+          git push
