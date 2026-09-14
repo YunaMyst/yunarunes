@@ -22,13 +22,27 @@ function ensureHeader(){
  }
  let nav=header.querySelector('.nav');
  if(!nav){
-  const oldNav=[...header.children].find(el=>el.tagName==='NAV'&&!el.classList.contains('mobile-nav'));
-  if(oldNav){nav=oldNav;nav.classList.add('nav');}
-  else{nav=document.createElement('nav');nav.className='nav';header.insertBefore(nav,bar)}
+  nav=Array.from(header.children).find(function(el){return el.tagName==='NAV'&&!el.classList.contains('mobile-nav')})||null;
+  if(nav)nav.classList.add('nav');
  }
- if(!nav.querySelector('a[href="index.html"]')){
-  nav.innerHTML=links.map(([href,label])=>'<a href="'+href+'" data-i18n="'+label+'">'+label+'</a>').join('');
+ if(!nav){
+  nav=document.createElement('nav');
+  nav.className='nav';
+  header.insertBefore(nav,bar);
  }
+ nav.querySelectorAll('a').forEach(function(a){
+  if(a.getAttribute('href')&&/^(index|database|team-builder|runes|optimizer)\.html/.test(a.getAttribute('href'))===false)a.remove();
+ });
+ const existing=Array.from(nav.querySelectorAll('a')).map(a=>(a.getAttribute('href')||'').split('?')[0]);
+ links.forEach(function(pair){
+  if(!existing.includes(pair[0])){
+   const a=document.createElement('a');
+   a.href=pair[0];
+   a.dataset.i18n=pair[1];
+   a.textContent=pair[1];
+   nav.appendChild(a);
+  }
+ });
  const af=activeFile();
  nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',(a.getAttribute('href')||'').split('?')[0]===af));
  let mobile=header.querySelector('.mobile-nav');
@@ -51,7 +65,7 @@ function fixHeader(){
  header.top{position:sticky!important;top:0!important;display:grid!important;grid-template-columns:1fr auto 1fr!important;align-items:center!important;min-height:64px!important;padding:0 22px!important;gap:0!important}
  header.top .logo{grid-column:1!important;grid-row:1!important;justify-self:start!important;position:static!important;margin:0!important;transform:none!important}
  header.top .nav{grid-column:2!important;grid-row:1!important;position:static!important;display:flex!important;align-items:center!important;justify-content:center!important;gap:18px!important;margin:0!important;transform:none!important;white-space:nowrap!important;overflow:visible!important}
- header.top .nav a{color:#cbd5dd!important;text-decoration:none!important;font-weight:700!important;font-size:14px!important}
+ header.top .nav a{color:#cbd5dd!important;text-decoration:none!important;font-weight:700!important}
  header.top .nav a.active,header.top .nav a:hover{color:#5fc7f5!important}
  header.top .langbar{grid-column:3!important;grid-row:1!important;justify-self:end!important;position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;margin:0!important;transform:none!important;visibility:visible!important;opacity:1!important;z-index:9999!important}
  header.top .langbar a,header.top .langbar button{display:inline-flex!important;align-items:center!important;justify-content:center!important;visibility:visible!important;opacity:1!important;height:40px!important;padding:0 11px!important;white-space:nowrap!important;border:0!important;border-radius:7px!important;font-size:12px!important;font-weight:900!important;text-decoration:none!important;cursor:pointer!important}
@@ -68,10 +82,10 @@ function fixHeader(){
 }
 function bind(){
  document.querySelectorAll('.langbar button[data-lang]').forEach(function(b){
-  b.classList.toggle('active',b.dataset.lang===getLang());
   if(b.dataset.yunaBound)return;
   b.dataset.yunaBound='1';
   b.addEventListener('click',function(){try{localStorage.setItem(KEY,b.dataset.lang)}catch(e){};window.location.reload()});
+  b.classList.toggle('active',b.dataset.lang===getLang());
  });
 }
 function boot(){ensureHeader();fixHeader();bind();}
