@@ -46,5 +46,5 @@ function render(){const q=document.getElementById('search').value.toLowerCase().
 document.getElementById('search').addEventListener('input',render);document.getElementById('element').addEventListener('change',render);document.getElementById('stars').addEventListener('change',render);document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{state.a2=b.dataset.a2;document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}));
 applyLang();load();
 </script>
-<script src="language.js"></script></body>
+<script src="language.js"></script><script src="language-dynamic.js"></script></body>
 </html>
