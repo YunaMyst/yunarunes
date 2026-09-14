@@ -11,15 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add language script to all HTML pages
+      - name: Remove legacy header fixer and keep one language script
         run: |
           python - <<'PY'
           from pathlib import Path
           for p in Path('.').glob('*.html'):
               s=p.read_text(encoding='utf-8')
-              tag='<script src="language.js"></script>'
-              # Remove any old conflicting header fixer references.
               s=s.replace('<script src="header-fix.js"></script>','')
+              tag='<script src="language.js"></script>'
               if tag not in s:
                   s=s.replace('</body>', tag+'</body>')
               p.write_text(s,encoding='utf-8')
@@ -29,5 +28,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add '*.html'
-          git diff --cached --quiet || git commit -m 'remove conflicting header fixer'
+          git diff --cached --quiet || git commit -m 'remove legacy header fixer references'
           git push
