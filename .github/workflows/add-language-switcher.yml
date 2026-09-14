@@ -11,22 +11,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add language and header scripts to all HTML pages
+      - name: Add language script to all HTML pages
         run: |
           python - <<'PY'
           from pathlib import Path
           for p in Path('.').glob('*.html'):
               s=p.read_text(encoding='utf-8')
-              tags=['<script src="language.js"></script>','<script src="header-fix.js"></script>']
-              for tag in tags:
-                  if tag not in s:
-                      s=s.replace('</body>', tag+'</body>')
+              tag='<script src="language.js"></script>'
+              # Remove any old conflicting header fixer references.
+              s=s.replace('<script src="header-fix.js"></script>','')
+              if tag not in s:
+                  s=s.replace('</body>', tag+'</body>')
               p.write_text(s,encoding='utf-8')
           PY
       - name: Commit and push
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add '*.html' language.js header-fix.js
-          git diff --cached --quiet || git commit -m 'restore header controls'
+          git add '*.html'
+          git diff --cached --quiet || git commit -m 'remove conflicting header fixer'
           git push
