@@ -3,8 +3,8 @@
     <application
         android:theme="@style/AppTheme"
         android:label="YunaRunes"
-        android:icon="@drawable/yunarunes_icon"
-        android:roundIcon="@drawable/yunarunes_icon"
+        android:icon="@drawable/yunarunes_icon_webp"
+        android:roundIcon="@drawable/yunarunes_icon_webp"
         android:usesCleartextTraffic="false"
         android:allowBackup="false"
         android:supportsRtl="true"
