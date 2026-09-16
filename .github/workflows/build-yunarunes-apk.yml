@@ -30,11 +30,16 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Android SDK 35
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Prepare Android SDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          SDKMANAGER="${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager"
+          if [ ! -x "$SDKMANAGER" ]; then
+            SDKMANAGER="${ANDROID_HOME}/cmdline-tools/16.0/bin/sdkmanager"
+          fi
+          yes | "$SDKMANAGER" --licenses >/dev/null || true
+          "$SDKMANAGER" "platforms;android-35" "build-tools;35.0.0" "platform-tools"
 
       - name: Prepare release signing when configured
         env:
@@ -60,13 +65,13 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          "$ANDROID_HOME/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile' versionCode='9' versionName='1.4.2'"
-          "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
+          "${ANDROID_HOME}/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile' versionCode='10' versionName='1.4.3'"
+          "${ANDROID_HOME}/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
 
       - name: Verify APK signature schemes
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
-          SIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+          SIGNER="${ANDROID_HOME}/build-tools/35.0.0/apksigner"
           "$SIGNER" verify --verbose --print-certs "$APK" | tee /tmp/apksigner.txt
           grep -F "Verified using v1 scheme (JAR signing): true" /tmp/apksigner.txt
           grep -F "Verified using v2 scheme (APK Signature Scheme v2): true" /tmp/apksigner.txt
@@ -75,7 +80,7 @@ jobs:
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release-1.4.2
+          name: YunaRunes-Android-Release-1.4.3
           path: |
             android/app/build/outputs/apk/release/app-release.apk
             android/app/build/outputs/bundle/release/app-release.aab
@@ -83,6 +88,7 @@ jobs:
 
       - name: Publish APK to website
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main
@@ -93,7 +99,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish YunaRunes release APK 1.4.2"
+            git commit -m "Publish YunaRunes release APK 1.4.3"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
