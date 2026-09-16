@@ -10,8 +10,8 @@ android {
         applicationId 'com.yunarunes.mobile'
         minSdk 23
         targetSdk 35
-        versionCode 8
-        versionName '1.4.1'
+        versionCode 9
+        versionName '1.4.2'
     }
 
     signingConfigs {
@@ -35,7 +35,11 @@ android {
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            def hasReleaseSigning = System.getenv('YUNARUNES_KEYSTORE_PATH') &&
+                    System.getenv('YUNARUNES_KEYSTORE_PASSWORD') &&
+                    System.getenv('YUNARUNES_KEY_ALIAS') &&
+                    System.getenv('YUNARUNES_KEY_PASSWORD')
+            signingConfig hasReleaseSigning ? signingConfigs.release : signingConfigs.debug
             minifyEnabled false
             debuggable false
         }
