@@ -1,0 +1,62 @@
+name: Fix broken index
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-index-now.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Restore index and repair loader
+        run: |
+          git checkout 2bc60aea5f6cf5bdc9f94c981cac4495227a597d -- index.html
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          start = s.find('async function load(){')
+          end_marker = '\napplyLang();load();'
+          end = s.find(end_marker, start)
+          if start < 0 or end < 0:
+              raise SystemExit('load() markers not found')
+          new_load = """async function load(){
+            const status=document.getElementById('status');
+            const listBox=document.getElementById('monsterList');
+            const urls=[
+              'https://raw.githubusercontent.com/YunaMyst/yunarunes/main/monster-catalog.json?cb='+Date.now(),
+              new URL('monster-catalog.json?cb='+Date.now(),document.baseURI).href
+            ];
+            let lastError='';
+            for(const url of urls){
+              try{
+                const r=await fetch(url,{cache:'no-store',mode:'cors',credentials:'omit'});
+                if(!r.ok) throw new Error('HTTP '+r.status);
+                const d=await r.json();
+                const list=normalizeCatalog(d);
+                if(!list.length) throw new Error('Catálogo sem monstros');
+                state.all=list;
+                status.textContent='';
+                render();
+                if(!listBox.children.length) throw new Error('Os monstros foram carregados, mas a renderização falhou');
+                return;
+              }catch(e){
+                lastError=e&&e.message?e.message:String(e);
+              }
+            }
+            status.textContent=tr('Erro ao carregar a base de monstros.')+' '+lastError;
+            listBox.innerHTML='<div class="muted">'+esc(tr('Nenhum monstro encontrado.'))+'</div>';
+          }"""
+          p.write_text(s[:start] + new_load + s[end:], encoding='utf-8')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Restore index and fix monster loader"
+          git push
