@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Restore index and repair loader
         run: |
+          git fetch --no-tags origin 2bc60aea5f6cf5bdc9f94c981cac4495227a597d --depth=1
           git checkout 2bc60aea5f6cf5bdc9f94c981cac4495227a597d -- index.html
           python3 - <<'PY'
           from pathlib import Path
