@@ -1,6 +1,6 @@
-plugins { id 'com.android.application' }
-
 import java.util.Base64
+
+plugins { id 'com.android.application' }
 
 android {
     namespace 'com.yunarunes.app'
