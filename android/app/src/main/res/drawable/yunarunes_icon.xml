@@ -1,48 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
 
     <path android:fillColor="#12071F" android:pathData="M0,0h108v108h-108z"/>
     <path android:fillColor="#2B0D4A" android:pathData="M4,4h100v100h-100z"/>
     <path android:fillColor="#6D35A8" android:pathData="M8,8h92v92h-92z"/>
     <path android:fillColor="#170A2B" android:pathData="M11,11h86v86h-86z"/>
 
-    <!-- celestial summoning seal -->
-    <path android:fillColor="#5C2B91" android:pathData="M54,13a41,41 0,1 0,0.1 0M54,18a36,36 0,1 1,-0.1 0z"/>
-    <path android:fillColor="#B96CFF" android:pathData="M54,20a34,34 0,1 0,0.1 0M54,23a31,31 0,1 1,-0.1 0z"/>
-
-    <!-- magical tails -->
     <path android:fillColor="#CFC5FF" android:pathData="M42,70C25,81 13,73 18,60c4,-10 14,-13 22,-7c-9,1 -13,7 -10,12c2,4 7,6 12,5z"/>
     <path android:fillColor="#F4F0FF" android:pathData="M45,73C29,91 14,88 15,75c1,-9 9,-15 19,-14c-7,4 -8,10 -4,14c4,4 10,3 15,-2z"/>
-    <path android:fillColor="#B9A8F2" android:pathData="M48,76C39,96 23,98 19,86c-3,-9 3,-17 13,-19c-4,6 -2,11 3,13c5,2 10,-1 13,-6z"/>
     <path android:fillColor="#E9E3FF" android:pathData="M66,70C83,81 95,73 90,60c-4,-10 -14,-13 -22,-7c9,1 13,7 10,12c-2,4 -7,6 -12,5z"/>
     <path android:fillColor="#CFC5FF" android:pathData="M63,73C79,91 94,88 93,75c-1,-9 -9,-15 -19,-14c7,4 8,10 4,14c-4,4 -10,3 -15,-2z"/>
-    <path android:fillColor="#A994E8" android:pathData="M60,76C69,96 85,98 89,86c3,-9 -3,-17 -13,-19c4,6 2,11 -3,13c-5,2 -10,-1 -13,-6z"/>
 
-    <!-- white kitsune -->
     <path android:fillColor="#FBF9FF" android:pathData="M36,57C29,47 30,35 37,27l-1,-12l10,8c5,-3 11,-3 16,0l10,-8l-1,12c7,8 8,20 1,30c-6,9 -11,14 -18,14c-7,0 -12,-5 -18,-14z"/>
-    <path android:fillColor="#E5DEFF" android:pathData="M38,28l-1,-8l7,6zM70,28l1,-8l-7,6z"/>
-    <path android:fillColor="#BFA8FF" android:pathData="M42,33c3,-5 8,-7 12,-7c4,0 9,2 12,7c-5,-2 -9,-1 -12,2c-3,-3 -7,-4 -12,-2z"/>
-    <path android:fillColor="#160B25" android:pathData="M42,43c3,-4 7,-6 12,-6c5,0 9,2 12,6c-4,8 -8,12 -12,12c-4,0 -8,-4 -12,-12z"/>
-    <path android:fillColor="#9B67FF" android:pathData="M47,43a3,3 0,1 0,0.1 0zM61,43a3,3 0,1 0,0.1 0z"/>
+    <path android:fillColor="#C4AEFF" android:pathData="M38,28l-1,-8l7,6zM70,28l1,-8l-7,6z"/>
+    <path android:fillColor="#170A2B" android:pathData="M42,43c3,-4 7,-6 12,-6c5,0 9,2 12,6c-4,8 -8,12 -12,12c-4,0 -8,-4 -12,-12z"/>
+    <path android:fillColor="#9B67FF" android:pathData="M47,43a3,3 0,1 0,0.1,0zM61,43a3,3 0,1 0,0.1,0z"/>
     <path android:fillColor="#FFFFFF" android:pathData="M52,53c2,-2 4,-2 6,0c-1,3 -2,4 -3,4c-1,0 -2,-1 -3,-4z"/>
-
-    <!-- forehead rune -->
     <path android:fillColor="#B76CFF" android:pathData="M54,29l3,5l-3,5l-3,-5z"/>
-    <path android:fillColor="#6F32A5" android:pathData="M54,31l1,3l-1,2l-1,-2z"/>
 
-    <!-- gold crest -->
-    <path android:fillColor="#D9A84E" android:pathData="M54,9l2,5l5,2l-5,2l-2,5l-2,-5l-5,-2l5,-2z"/>
-    <path android:fillColor="#FFF0A8" android:pathData="M54,12l1,3l3,1l-3,1l-1,3l-1,-3l-3,-1l3,-1z"/>
+    <!-- YunaRunes -->
+    <path android:fillColor="#F4F0FF" android:pathData="M18.89 87.89H21.18L23.03 90.78L24.87 87.89H27.17L24.08 92.58V96H21.98V92.58ZM27.93 93.63V89.91H29.88V90.52Q29.88 91.02 29.88 91.76Q29.87 92.51 29.87 92.76Q29.87 93.49 29.91 93.82Q29.95 94.14 30.04 94.29Q30.16 94.48 30.35 94.58Q30.55 94.68 30.8 94.68Q31.41 94.68 31.75 94.22Q32.1 93.75 32.1 92.92V89.91H34.05V96H32.1V95.12Q31.66 95.65 31.17 95.9Q30.68 96.16 30.09 96.16Q29.03 96.16 28.48 95.51Q27.93 94.86 27.93 93.63ZM42.03 92.29V96H40.08V95.4V93.16Q40.08 92.38 40.04 92.08Q40.01 91.78 39.92 91.64Q39.81 91.45 39.61 91.34Q39.42 91.23 39.17 91.23Q38.56 91.23 38.21 91.7Q37.86 92.17 37.86 93.01V96H35.92V89.91H37.86V90.81Q38.3 90.27 38.8 90.02Q39.29 89.77 39.89 89.77Q40.94 89.77 41.49 90.41Q42.03 91.06 42.03 92.29ZM46.57 93.26Q45.96 93.26 45.65 93.47Q45.34 93.67 45.34 94.08Q45.34 94.45 45.59 94.66Q45.84 94.86 46.28 94.86Q46.83 94.86 47.2 94.47Q47.58 94.08 47.58 93.48V93.26ZM49.54 92.53V96H47.58V95.1Q47.19 95.65 46.7 95.9Q46.21 96.16 45.51 96.16Q44.56 96.16 43.97 95.61Q43.38 95.05 43.38 94.17Q43.38 93.1 44.12 92.6Q44.85 92.1 46.43 92.1H47.58V91.95Q47.58 91.49 47.21 91.28Q46.85 91.06 46.08 91.06Q45.45 91.06 44.91 91.19Q44.38 91.31 43.91 91.56V90.08Q44.54 89.92 45.17 89.85Q45.8 89.77 46.43 89.77Q48.08 89.77 48.81 90.42Q49.54 91.07 49.54 92.53ZM54.41 91.48Q55.07 91.48 55.35 91.24Q55.64 91 55.64 90.44Q55.64 89.88 55.35 89.64Q55.07 89.4 54.41 89.4H53.53V91.48ZM53.53 92.93V96H51.44V87.89H54.63Q56.23 87.89 56.98 88.43Q57.73 88.96 57.73 90.13Q57.73 90.93 57.34 91.45Q56.95 91.96 56.17 92.21Q56.6 92.3 56.94 92.65Q57.28 93 57.62 93.7L58.76 96H56.53L55.54 93.98Q55.24 93.38 54.94 93.15Q54.63 92.93 54.12 92.93ZM59.85 93.63V89.91H61.81V90.52Q61.81 91.02 61.8 91.76Q61.8 92.51 61.8 92.76Q61.8 93.49 61.84 93.82Q61.87 94.14 61.97 94.29Q62.09 94.48 62.28 94.58Q62.47 94.68 62.72 94.68Q63.33 94.68 63.68 94.22Q64.03 93.75 64.03 92.92V89.91H65.97V96H64.03V95.12Q63.59 95.65 63.09 95.9Q62.6 96.16 62.01 96.16Q60.96 96.16 60.4 95.51Q59.85 94.86 59.85 93.63ZM73.96 92.29V96H72V95.4V93.16Q72 92.38 71.97 92.08Q71.93 91.78 71.85 91.64Q71.73 91.45 71.54 91.34Q71.34 91.23 71.09 91.23Q70.48 91.23 70.13 91.7Q69.79 92.17 69.79 93.01V96H67.84V89.91H69.79V90.81Q70.23 90.27 70.72 90.02Q71.21 89.77 71.81 89.77Q72.87 89.77 73.41 90.41Q73.96 91.06 73.96 92.29ZM81.84 92.94V93.49H77.29Q77.36 94.18 77.78 94.52Q78.21 94.86 78.97 94.86Q79.58 94.86 80.23 94.68Q80.87 94.5 81.55 94.13V95.63Q80.86 95.89 80.17 96.02Q79.48 96.16 78.79 96.16Q77.14 96.16 76.22 95.32Q75.31 94.48 75.31 92.96Q75.31 91.47 76.21 90.62Q77.11 89.77 78.68 89.77Q80.12 89.77 80.98 90.63Q81.84 91.5 81.84 92.94ZM79.84 92.29Q79.84 91.74 79.52 91.4Q79.19 91.06 78.67 91.06Q78.1 91.06 77.75 91.38Q77.4 91.7 77.31 92.29ZM88.07 90.1V91.58Q87.44 91.32 86.86 91.19Q86.28 91.06 85.76 91.06Q85.21 91.06 84.94 91.2Q84.67 91.34 84.67 91.63Q84.67 91.86 84.87 91.98Q85.08 92.11 85.6 92.17L85.95 92.22Q87.44 92.41 87.96 92.84Q88.47 93.28 88.47 94.21Q88.47 95.18 87.76 95.67Q87.04 96.16 85.61 96.16Q85.01 96.16 84.37 96.06Q83.72 95.97 83.04 95.78V94.3Q83.63 94.58 84.24 94.72Q84.85 94.86 85.48 94.86Q86.05 94.86 86.34 94.71Q86.63 94.55 86.63 94.24Q86.63 93.98 86.43 93.85Q86.23 93.72 85.64 93.65L85.29 93.61Q84 93.45 83.47 93.01Q82.95 92.57 82.95 91.67Q82.95 90.7 83.61 90.23Q84.28 89.77 85.65 89.77Q86.19 89.77 86.78 89.85Q87.37 89.93 88.07 90.1Z"/>
 
-    <!-- YunaRunes badge -->
-    <path android:fillColor="#170A2B" android:pathData="M22,78h64v20h-64z"/>
-    <path android:fillColor="#6E38A5" android:pathData="M24,80h60v2h-60z"/>
-    <path android:fillColor="#F4F0FF" android:pathData="M29,84h4v3h-4zM35,84h4v3h-4zM41,84h4v3h-4zM47,84h4v3h-4zM53,84h4v3h-4zM59,84h4v3h-4zM65,84h4v3h-4zM71,84h4v3h-4z"/>
-    <path android:fillColor="#E3AA4F" android:pathData="M38,89h32v4h-32z"/>
-    <path android:fillColor="#A96CFF" android:pathData="M54,92l3,3l-3,3l-3,-3z"/>
-
+    <path android:fillColor="#E3AA4F" android:pathData="M48,100h12l-6,6z"/>
 </vector>
