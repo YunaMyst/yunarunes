@@ -11,10 +11,112 @@ const EXTRA={'O seu hub de mobs, runas e equipes.':'Your hub for monsters, runes
 const R=Object.fromEntries(Object.entries(P).map(([a,b])=>[b,a]));
 const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}};
 function tr(s){if(!s)return s;const m=isEN()?P:R;let out=String(s);const brand='YunaRunes';const token='__YUNARUNES_BRAND__';out=out.replace(/Yuna(?:Runes?|Build\s+de\s+Runas?|Rune\s+Builders?)/gi,token);for(const k of Object.keys(m).sort((a,b)=>b.length-a.length)){if(out.includes(k))out=out.split(k).join(m[k])}return out.replaceAll(token,brand)}
-function header(){const h=document.querySelector('header.top');if(!h)return;const cur=location.pathname.split('/').pop()||'index.html';h.innerHTML='<a class="logo" href="index.html">Yuna<span>Runes</span></a><nav class="yuna-nav"></nav><div class="langbar yuna-controls"></div>';const n=h.querySelector('.yuna-nav');n.innerHTML=NAV.map(x=>'<a href="'+x[0]+'">'+(isEN()?x[2]:x[1])+'</a>').join('');n.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===cur));const b=h.querySelector('.yuna-controls');b.innerHTML=(isApp()?'':'<a class="apk-link" href="./downloads/yunarunes.apk" download>📱 APK</a>')+'<button type="button" data-yuna-lang="pt">🇧🇷 PT/BR</button><button type="button" data-yuna-lang="en">🇬🇧 ENG</button>';b.querySelectorAll('[data-yuna-lang]').forEach(x=>{x.classList.toggle('active',x.dataset.yunaLang===(isEN()?'en':'pt'));x.addEventListener('click',()=>{try{localStorage.setItem(K,x.dataset.yunaLang)}catch(_){}location.reload()})})}
+function header(){
+  const h=document.querySelector('header.top');
+  if(!h)return;
+  const nav=h.querySelector('.nav');
+  if(!nav)return;
+  const brand=nav.querySelector('.brand');
+  const img=brand&&brand.querySelector('img');
+  if(img)img.remove();
+  if(brand){
+    brand.innerHTML='<span>YunaRunes</span>';
+    brand.setAttribute('aria-label','YunaRunes');
+  }
+  let b=nav.querySelector('.yuna-controls');
+  if(!b){
+    b=document.createElement('div');
+    b.className='langbar yuna-controls';
+    nav.appendChild(b);
+  }
+  b.innerHTML=(isApp()?'':'<a class="apk-link" href="./downloads/yunarunes.apk" download>📱 APK</a>')+
+    '<button type="button" data-yuna-lang="pt">🇧🇷 PT/BR</button>'+
+    '<button type="button" data-yuna-lang="en">🇬🇧 ENG</button>';
+  b.querySelectorAll('[data-yuna-lang]').forEach(x=>{
+    x.classList.toggle('active',x.dataset.yunaLang===(isEN()?'en':'pt'));
+    x.addEventListener('click',()=>{
+      try{localStorage.setItem(K,x.dataset.yunaLang)}catch(_){}
+      location.reload();
+    });
+  });
+  const links=nav.querySelectorAll('.nav-links a');
+  const cur=location.pathname.split('/').pop()||'index.html';
+  links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===cur));
+}
 function translateElement(e){if(!e||e.nodeType!==1||e.closest('script,style,noscript,.yuna-controls,.yuna-nav'))return;if(e.children.length===0&&e.firstChild&&e.firstChild.nodeType===3){const raw=e.firstChild.nodeValue,t=raw.trim(),v=tr(t);if(t&&v!==t)e.firstChild.nodeValue=raw.replace(t,v)}['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}})}
 function translateTree(root){if(!root)return; if(root.nodeType===3){const t=root.nodeValue.trim(),v=tr(t);if(t&&v!==t)root.nodeValue=root.nodeValue.replace(t,v);return} if(root.nodeType!==1)return;translateElement(root);root.querySelectorAll('*').forEach(translateElement)}
-function style(){if(document.getElementById('yuna-language-style'))return;const s=document.createElement('style');s.id='yuna-language-style';s.textContent=`header.top{position:relative!important;z-index:9999!important;display:block!important;height:auto!important;min-height:58px!important;overflow:visible!important}header.top>.nav{position:relative!important;max-width:1250px!important;margin:auto!important;min-height:58px!important;padding-left:16px!important;padding-right:175px!important;display:flex!important;align-items:center!important;gap:7px!important}header.top .brand{flex:0 0 auto!important;white-space:nowrap!important}header.top .nav-links{min-width:0!important;overflow:hidden!important}header.top .yuna-controls{position:absolute!important;left:auto!important;right:10px!important;top:13px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;width:auto!important;min-width:0!important;z-index:10000!important;pointer-events:auto!important;white-space:nowrap!important}header.top .yuna-controls .apk-link{margin-left:0!important;display:none!important}header.top .yuna-controls a,header.top .yuna-controls button{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:32px!important;padding:0 7px!important;border:1px solid #2b3742!important;border-radius:6px!important;font:900 11px Arial,sans-serif!important;white-space:nowrap!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}header.top .yuna-controls .apk-link,header.top .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}header.top .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}@media(max-width:1200px) and (min-width:601px){header.top>.nav{padding-left:8px!important;padding-right:155px!important;gap:5px!important}header.top .brand{font-size:16px!important}header.top .nav-links{gap:1px!important}header.top .nav-links a{font-size:12px!important;padding:7px 5px!important}header.top .yuna-controls{left:auto!important;right:8px!important;top:11px!important}}@media(max-width:600px){header.top .yuna-controls .apk-link{display:inline-flex!important}header.top{min-height:0!important;height:auto!important;padding:0!important}header.top>.nav{display:block!important;min-height:0!important;padding:66px 8px 0!important;margin:0!important;max-width:none!important}header.top .brand{display:flex!important;justify-content:center!important;align-items:center!important;margin:0!important;padding:5px 0 8px!important;font-size:21px!important;line-height:1!important}header.top .brand img{width:32px!important;height:32px!important}header.top .menu-btn{position:absolute!important;right:8px!important;top:72px!important;display:block!important;z-index:5!important}header.top .nav-toggle{position:absolute!important;opacity:0!important;width:1px!important;height:1px!important;margin:0!important;padding:0!important;pointer-events:none!important}header.top .nav-links{display:none!important;visibility:hidden!important;opacity:0!important;width:100%!important;margin:0!important;padding:8px 0 4px!important;gap:6px!important;overflow:visible!important;white-space:normal!important;border-top:1px solid #2b3742!important;grid-template-columns:1fr 1fr!important}header.top .nav-toggle:checked~.nav-links{display:grid!important;visibility:visible!important;opacity:1!important}header.top .nav-links a{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;min-width:0!important;min-height:48px!important;font-size:11px!important;line-height:1.1!important;padding:8px 5px!important;gap:2px!important;white-space:normal!important;background:#101923!important;border:1px solid #202d3b!important;border-radius:7px!important}header.top .nav-links a:nth-child(1):before{content:'⌂';font-size:19px!important}header.top .nav-links a:nth-child(2):before{content:'⭐';font-size:19px!important}header.top .nav-links a:nth-child(3):before{content:'▤';font-size:19px!important}header.top .nav-links a:nth-child(4):before{content:'⚔';font-size:19px!important}header.top .nav-links a:nth-child(5):before{content:'◇';font-size:19px!important}header.top .nav-links a:nth-child(6):before{content:'⚙';font-size:19px!important}header.top .nav-links .nav-divider{display:none!important}header.top .nav-links .nav-advanced{flex:0 0 72px!important}header.top .yuna-controls{left:7px!important;right:7px!important;top:14px!important;height:36px!important;gap:3px!important}header.top .yuna-controls .apk-link{margin-left:0!important}header.top .yuna-controls a,header.top .yuna-controls button{height:34px!important;padding:0 6px!important;font-size:9px!important;border-radius:6px!important}header.top .yuna-controls button{min-width:61px!important}}`;;document.head.appendChild(s)}
+function style(){
+  if(document.getElementById('yuna-language-style'))return;
+  const s=document.createElement('style');
+  s.id='yuna-language-style';
+  s.textContent=`
+    header.top{position:relative!important;z-index:9999!important}
+    header.top>.nav{position:relative!important;min-height:58px!important;display:flex!important;align-items:center!important;gap:8px!important}
+    header.top .brand{flex:0 0 auto!important;margin-right:4px!important}
+    header.top .brand img{display:none!important}
+    header.top .yuna-controls{display:flex!important;align-items:center!important;gap:5px!important;flex:0 0 auto!important;order:0!important;margin-right:4px!important}
+    header.top .yuna-controls a,header.top .yuna-controls button{
+      height:32px!important;padding:0 8px!important;border:1px solid #2b3742!important;border-radius:7px!important;
+      font:800 11px Arial,sans-serif!important;white-space:nowrap!important;text-decoration:none!important;
+      display:inline-flex!important;align-items:center!important;justify-content:center!important;cursor:pointer!important
+    }
+    header.top .yuna-controls .apk-link{display:none!important;background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
+    header.top .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
+    header.top .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
+    header.top .nav-links{order:2!important;min-width:0!important}
+    @media(max-width:1200px) and (min-width:601px){
+      header.top>.nav{padding-left:10px!important;padding-right:10px!important}
+      header.top .nav-links a{font-size:12px!important;padding:8px 5px!important}
+      header.top .yuna-controls{gap:3px!important}
+      header.top .yuna-controls a,header.top .yuna-controls button{padding:0 6px!important;font-size:10px!important}
+    }
+    @media(max-width:600px){
+      header.top{height:auto!important;min-height:0!important}
+      header.top>.nav{
+        min-height:0!important;padding:10px 10px 8px!important;display:grid!important;
+        grid-template-columns:1fr auto!important;grid-template-areas:
+          "brand menu"
+          "langs langs"
+          "links links"!important;gap:8px!important
+      }
+      header.top .brand{
+        grid-area:brand!important;margin:0!important;justify-self:start!important;
+        font-size:20px!important;line-height:1!important
+      }
+      header.top .menu-btn{
+        grid-area:menu!important;position:static!important;align-self:center!important;
+        display:block!important;padding:8px 11px!important
+      }
+      header.top .yuna-controls{
+        grid-area:langs!important;order:initial!important;justify-self:start!important;
+        width:100%!important;margin:0!important;display:flex!important;
+        justify-content:flex-start!important;gap:6px!important;padding:2px 0 0!important
+      }
+      header.top .yuna-controls .apk-link{display:inline-flex!important}
+      header.top .yuna-controls a,header.top .yuna-controls button{
+        height:34px!important;min-width:72px!important;padding:0 9px!important;font-size:10px!important
+      }
+      header.top .nav-links{
+        grid-area:links!important;order:initial!important;width:100%!important;margin:0!important;
+        padding:0!important;display:none!important;grid-template-columns:1fr 1fr!important;gap:6px!important
+      }
+      header.top .nav-toggle:checked~.nav-links{display:grid!important}
+      header.top .nav-links a{
+        min-height:46px!important;padding:8px 5px!important;font-size:11px!important;
+        display:flex!important;align-items:center!important;justify-content:center!important;
+        text-align:center!important;white-space:normal!important
+      }
+      header.top .nav-divider{display:none!important}
+    }
+    @media(min-width:601px){
+      header.top .yuna-controls .apk-link{display:none!important}
+    }
+    body.yunarunes-app header.top .yuna-controls .apk-link{display:none!important}
+    body.yunarunes-app header.top>.nav{padding-top:14px!important;padding-bottom:10px!important}
+    body.yunarunes-app header.top .yuna-controls{margin-top:0!important}
+  `;
+  document.head.appendChild(s);
+}
 function brandClean(s){
   return String(s??'')
     .replace(/YunaBuild\s*de\s*Runas?/gi,'YunaRunes')
@@ -46,7 +148,6 @@ function cleanBrandTree(root){
 function bootLanguage(){
   style();
   header();
-  document.body.classList.toggle('yunarunes-app',isApp());
   document.body.classList.toggle('yunarunes-app',isApp());
   const body=document.body;
   if(!body)return;
