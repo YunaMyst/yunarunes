@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/add-language-switcher.yml'
       - 'monster-view.html'
+      - 'monster-gallery.html'
 permissions:
   contents: write
 jobs:
