@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '.github/workflows/add-language-switcher.yml'
+      - 'monster-view.html'
 permissions:
   contents: write
 jobs:
