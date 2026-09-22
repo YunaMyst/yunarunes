@@ -24,7 +24,7 @@ jobs:
               s=re.sub(r'<script src="language-dynamic\.js(?:\\?v=[^"\']+)?"></script>','',s)
               for pat in [r'<script src="language\.js(?:\\?v=[^"\\']+)?"></script>', r'<script src="language-dynamic\.js(?:\\?v=[^"\\']+)?"></script>']:
                   s=re.sub(pat,'',s)
-              s=s.replace('</body>','<script src="language.js?v=20260922-yunarunes-final"></script><script src="language-dynamic.js?v=20260922-yunarunes-final"></script></body>')
+              s=s.replace('</body>','<script src="language.js?v=20260922-lang-v5"></script><script src="language-dynamic.js?v=20260922-lang-v5"></script></body>')
               p.write_text(s,encoding='utf-8')
           home=Path('index.html')
           if home.exists():
