@@ -46,7 +46,6 @@ function bootLanguage(){
   style();
   const body=document.body;
   if(!body)return;
-  header();
   translateTree(body);
   cleanBrandTree(body);
   const mo=new MutationObserver(ms=>{
