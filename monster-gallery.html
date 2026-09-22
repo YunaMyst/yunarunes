@@ -15,7 +15,7 @@
 <div class="title"><h1 id="name">A carregar...</h1><div class="muted">Modelo 3D — corpo inteiro</div><div class="badge">Gira • Zoom • 360°</div></div>
 <div class="stage">
 <div class="loading" id="loading">A carregar o modelo 3D do mob...</div>
-<iframe id="viewer" title="Modelo 3D do monstro" allowfullscreen></iframe>
+<div id="viewer" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px"></div>
 </div>
 <div class="controls"><button onclick="document.getElementById('viewer').requestFullscreen?.()">⛶ Ecrã inteiro</button><button onclick="history.back()">← Voltar ao mob</button></div>
 <div class="info">Dentro do visor podes arrastar para girar o modelo, usar a roda/gesto para aproximar e explorar o corpo inteiro.</div>
@@ -43,31 +43,18 @@ const MODELS={
 "yeti":"https://www.models-resource.com/mobile/summonerswar/model/9586/"
 };
 async function load(){
- const title=wanted||'Monstro';
- document.getElementById('name').textContent=title;
+ const title=wanted||'Monstro'; document.getElementById('name').textContent=title;
  const key=norm(title);
  let url=MODELS[key];
  if(!url && /awakened$/.test(key)) url=MODELS[key.replace(/awakened$/,'')+'awakened'];
- if(!url && key) {
-   try{
-     const r=await fetch('./monster-catalog.json?v=20260922',{cache:'no-store'});
-     const d=await r.json(); const arr=d.monsters||d.data||[];
-     const m=arr.find(x=>norm(x.name)===key);
-     if(m && MODELS[norm(m.name)]) url=MODELS[norm(m.name)];
-   }catch(e){}
- }
+ const box=document.getElementById('viewer');
+ document.getElementById('loading').classList.add('hidden');
  if(url){
-   const frame=document.getElementById('viewer');
-   frame.src=url;
-   frame.addEventListener('load',()=>document.getElementById('loading').classList.add('hidden'),{once:true});
-   setTimeout(()=>document.getElementById('loading').classList.add('hidden'),3500);
+   box.innerHTML='<div><div style="font-size:22px;font-weight:900;margin-bottom:10px">Modelo 3D disponível</div><div style="color:#9eabb5;margin-bottom:18px">O site de modelos não permite que o visor seja incorporado dentro do YunaRunes.</div><a href="'+url+'" target="_blank" rel="noopener" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#202a34;border:1px solid #3a4a58;color:#fff;text-decoration:none;font-weight:900">Abrir modelo 3D e girar 360° ↗</a></div>';
  }else{
-   document.getElementById('viewer').style.display='none';
-   document.getElementById('loading').style.display='none';
-   document.getElementById('fallback').style.display='block';
+   box.innerHTML='<div><div style="font-size:22px;font-weight:900;margin-bottom:10px">Modelo 3D ainda não catalogado</div><div style="color:#9eabb5">Não vou mostrar o ícone 2D como se fosse um modelo 3D.</div><a href="https://models.spriters-resource.com/mobile/summonerswar/" target="_blank" rel="noopener" style="display:inline-block;margin-top:18px;color:#69c7ff;font-weight:900">Ver modelos disponíveis ↗</a></div>';
  }
 }
-load();
-</script>
+load();</script>
 <script src="language.js"></script>
 <script src="language-dynamic.js"></script></body></html>
