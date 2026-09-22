@@ -20,4 +20,47 @@ function brandClean(s){
     .replace(/YunaRune\s+Builders?/gi,'YunaRunes')
     .replace(/YunaRune\s+Builder/gi,'YunaRunes')
     .replace(/YunaRunes?/gi,'YunaRunes');
+}
+function cleanBrandTree(root){
+  if(!root)return;
+  const fix=s=>brandClean(s);
+  if(root.nodeType===3){
+    const v=fix(root.nodeValue);
+    if(v!==root.nodeValue)root.nodeValue=v;
+    return;
+  }
+  if(root.nodeType!==1)return;
+  if(root.matches('script,style,noscript'))return;
+  if(root.children.length===0&&root.firstChild&&root.firstChild.nodeType===3){
+    const v=fix(root.firstChild.nodeValue);
+    if(v!==root.firstChild.nodeValue)root.firstChild.nodeValue=v;
+  }
+  ['title','placeholder','aria-label','alt'].forEach(a=>{
+    if(root.hasAttribute(a)){
+      const v=fix(root.getAttribute(a));
+      if(v!==root.getAttribute(a))root.setAttribute(a,v);
+    }
+  });
+}
+function bootLanguage(){
+  style();
+  const body=document.body;
+  if(!body)return;
+  header();
+  translateTree(body);
+  cleanBrandTree(body);
+  const mo=new MutationObserver(ms=>{
+    for(const m of ms){
+      for(const n of m.addedNodes){
+        if(n.nodeType===1||n.nodeType===3){
+          translateTree(n);
+          cleanBrandTree(n);
+        }
+      }
+    }
+  });
+  mo.observe(body,{childList:true,subtree:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootLanguage,{once:true});
+else bootLanguage();
 })();
