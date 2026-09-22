@@ -45,6 +45,8 @@ function cleanBrandTree(root){
 }
 function bootLanguage(){
   style();
+  header();
+  document.body.classList.toggle('yunarunes-app',isApp());
   document.body.classList.toggle('yunarunes-app',isApp());
   const body=document.body;
   if(!body)return;
