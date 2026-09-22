@@ -7,19 +7,64 @@ body{margin:0;background:#080d12;color:#eef3f7;font-family:Arial,sans-serif}.top
 <script>
 const params=new URLSearchParams(location.search),wanted=params.get('name')||'';let views=[],idx=0,drag=false,lastX=0,timer=null;
 const clean=s=>String(s||'').replace(/\s*(2ª\s*modifica(?:ção|c)ão|edit|direita|esquerda)\s*/gi,' ').replace(/\s+/g,' ').trim();
-async function findWikiImages(name){
- const q=encodeURIComponent(name+' (front) OR '+name+' (back) OR '+name+' (left) OR '+name+' (right)');
- const url='https://summonerswar.fandom.com/api.php?action=query&generator=search&gsrsearch='+q+'&gsrnamespace=6&gsrlimit=20&prop=imageinfo&iiprop=url&iiurlwidth=900&format=json&origin=*';
- try{const r=await fetch(url);const j=await r.json();const pages=Object.values(j.query?.pages||{});const found={};
- pages.forEach(p=>{const title=(p.title||'').replace(/^File:/,'').replace(/\.png$|\.jpg$|\.jpeg$/i,'').toLowerCase();const ii=p.imageinfo?.[0];if(!ii?.url)return;for(const side of ['front','back','left','right'])if(title.includes(side)&&title.includes(name.toLowerCase()))found[side]=ii.thumburl||ii.url});
- return [found.front,found.right,found.back,found.left].filter(Boolean);
- }catch(e){return[]}
+const api=async p=>{const u='https://summonerswar.fandom.com/api.php?'+new URLSearchParams({...p,format:'json',origin:'*'});const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw Error();return r.json()};
+async function imageInfo(titles){
+ const list=[...new Set(titles.filter(Boolean))];if(!list.length)return[];
+ try{const j=await api({action:'query',titles:list.join('|'),prop:'imageinfo',iiprop:'url',iiurlwidth:'1000'});return Object.values(j.query?.pages||{}).map(p=>{const i=p.imageinfo?.[0];return i?.thumburl||i?.url}).filter(Boolean)}catch(e){return[]}
+}
+async function findGalleryImages(name){
+ const sides=['front','right','back','left'],out=[];
+ try{
+  const s=await api({action:'query',list:'search',srsearch:name+' Gallery and trivia',srnamespace:'0',srlimit:'8'});
+  const pages=(s.query?.search||[]).map(x=>x.title).filter(t=>/gallery/i.test(t));
+  for(const page of pages){
+   const j=await api({action:'query',prop:'images',titles:page,imlimit:'500'});
+   const titles=Object.values(j.query?.pages||{}).flatMap(p=>(p.images||[]).map(x=>x.title));
+   for(const side of sides){
+    const match=titles.find(t=>{const q=t.toLowerCase();return q.includes(side)&&q.includes(name.toLowerCase())});
+    if(match){const got=await imageInfo([match]);if(got[0])out.push(got[0])}
+   }
+   if(out.length>=2)break;
+  }
+ }catch(e){}
+ return [...new Set(out)];
+}
+async function findFileImages(name){
+ const out=[];
+ for(const side of ['front','right','back','left']){
+  try{
+   const s=await api({action:'query',list:'search',srsearch:name+' '+side,srnamespace:'6',srlimit:'10'});
+   const titles=(s.query?.search||[]).map(x=>x.title).filter(t=>/front|right|back|left/i.test(t));
+   const exact=titles.find(t=>t.toLowerCase().includes(name.toLowerCase())&&t.toLowerCase().includes(side));
+   const got=await imageInfo([exact||titles[0]]);
+   if(got[0])out.push(got[0]);
+  }catch(e){}
+ }
+ return [...new Set(out)];
 }
 function render(){const im=document.getElementById('mob');if(!views[idx])return;im.src=views[idx];document.getElementById('dots').innerHTML=views.map((_,i)=>'<span class="dot '+(i===idx?'active':'')+'"></span>').join('');}
 function step(n){if(!views.length)return;idx=(idx+n+views.length)%views.length;render()}
 function toggleAuto(){if(timer){clearInterval(timer);timer=null;document.getElementById('auto').textContent='▶ Girar automaticamente'}else{timer=setInterval(()=>step(1),900);document.getElementById('auto').textContent='⏸ Parar rotação'}}
-async function load(){document.getElementById('name').textContent=clean(wanted)||'Monstro';const r=await fetch('./monster-catalog.json?v=20260922',{cache:'no-store'}),d=await r.json();const arr=Array.isArray(d)?d:(d.monsters||d.data||[]);const m=arr.find(x=>clean(x.name).toLowerCase()===clean(wanted).toLowerCase())||arr.find(x=>clean(x.name).toLowerCase().includes(clean(wanted).toLowerCase()));if(!m)return;const wiki=await findWikiImages(clean(m.name));views=wiki.length?wiki:[m.image];render()}
+async function load(){
+ document.getElementById('name').textContent=clean(wanted)||'Monstro';
+ try{
+  const r=await fetch('./monster-catalog.json?v=20260922',{cache:'no-store'}),d=await r.json(),arr=Array.isArray(d)?d:(d.monsters||d.data||[]);
+  const m=arr.find(x=>clean(x.name).toLowerCase()===clean(wanted).toLowerCase())||arr.find(x=>clean(x.name).toLowerCase().includes(clean(wanted).toLowerCase()));
+  if(!m)throw Error();
+  let found=await findGalleryImages(clean(m.name));
+  if(found.length<2)found=await findFileImages(clean(m.name));
+  views=[...new Set(found)].slice(0,4);
+  if(views.length<2){
+   document.getElementById('name').textContent=clean(m.name);
+   document.getElementById('mob').style.display='none';
+   document.getElementById('stage').insertAdjacentHTML('beforeend','<div style="position:absolute;z-index:3;text-align:center;padding:30px;color:#aab6c0"><b>As imagens de corpo inteiro deste mob não foram encontradas na galeria pública.</b><br><br>Estamos a procurar automaticamente as vistas disponíveis.</div>');
+   document.getElementById('dots').innerHTML='';
+   return;
+  }
+  render();
+ }catch(e){document.getElementById('name').textContent='Monstro não encontrado';}
+}
 document.getElementById('prev').onclick=()=>step(-1);document.getElementById('next').onclick=()=>step(1);document.getElementById('auto').onclick=toggleAuto;document.getElementById('reset').onclick=()=>{idx=0;render()};
 const s=document.getElementById('stage');s.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;s.setPointerCapture(e.pointerId)});s.addEventListener('pointermove',e=>{if(!drag)return;const d=e.clientX-lastX;if(Math.abs(d)>25){step(d<0?1:-1);lastX=e.clientX}});s.addEventListener('pointerup',()=>drag=false);s.addEventListener('pointercancel',()=>drag=false);
 load();
-</script><script src="language.js"></script><script src="language-dynamic.js"></script></body></html>
+</script>><script src="language.js"></script><script src="language-dynamic.js"></script></body></html>
