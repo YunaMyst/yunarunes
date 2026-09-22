@@ -22,4 +22,4 @@ async function load(){document.getElementById('name').textContent=clean(wanted)|
 document.getElementById('prev').onclick=()=>step(-1);document.getElementById('next').onclick=()=>step(1);document.getElementById('auto').onclick=toggleAuto;document.getElementById('reset').onclick=()=>{idx=0;render()};
 const s=document.getElementById('stage');s.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;s.setPointerCapture(e.pointerId)});s.addEventListener('pointermove',e=>{if(!drag)return;const d=e.clientX-lastX;if(Math.abs(d)>25){step(d<0?1:-1);lastX=e.clientX}});s.addEventListener('pointerup',()=>drag=false);s.addEventListener('pointercancel',()=>drag=false);
 load();
-</script></body></html>
+</script><script src="language.js"></script><script src="language-dynamic.js"></script></body></html>
