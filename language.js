@@ -170,12 +170,65 @@ function forceAppHeader(){
   const langs=document.querySelector('header.top .yuna-controls');
   if(!nav||!brand||!menu||!langs)return;
   const imp=(el,p,v)=>el.style.setProperty(p,v,'important');
-  imp(nav,'display','flex'); imp(nav,'flex-direction','row'); imp(nav,'align-items','center'); imp(nav,'flex-wrap','nowrap');
-  imp(nav,'width','100%'); imp(nav,'max-width','none'); imp(nav,'box-sizing','border-box'); imp(nav,'padding','12px 8px'); imp(nav,'gap','10px');
-  imp(brand,'display','block'); imp(brand,'position','static'); imp(brand,'order','1'); imp(brand,'flex','0 0 auto'); imp(brand,'margin','0'); imp(brand,'padding','0'); imp(brand,'width','max-content'); imp(brand,'visibility','visible'); imp(brand,'opacity','1');
-  imp(menu,'display','block'); imp(menu,'position','static'); imp(menu,'order','2'); imp(menu,'flex','0 0 auto'); imp(menu,'margin','0'); imp(menu,'padding','8px 10px'); imp(menu,'min-height','40px'); imp(menu,'width','max-content'); imp(menu,'transform','none');
-  imp(langs,'display','flex'); imp(langs,'position','static'); imp(langs,'order','3'); imp(langs,'flex','0 0 auto'); imp(langs,'margin','0 0 0 auto'); imp(langs,'padding','0'); imp(langs,'width','auto'); imp(langs,'min-height','0'); imp(langs,'gap','6px');
-  langs.querySelectorAll('button').forEach(b=>{imp(b,'display','inline-flex');imp(b,'height','34px');imp(b,'min-height','34px');imp(b,'min-width','58px');imp(b,'padding','0 7px');imp(b,'margin','0');});
+
+  // APP HEADER: exactly one horizontal row.
+  imp(nav,'display','flex');
+  imp(nav,'flex-direction','row');
+  imp(nav,'align-items','center');
+  imp(nav,'justify-content','flex-start');
+  imp(nav,'flex-wrap','nowrap');
+  imp(nav,'box-sizing','border-box');
+  imp(nav,'width','100%');
+  imp(nav,'max-width','none');
+  imp(nav,'min-height','56px');
+  imp(nav,'padding','8px 10px');
+  imp(nav,'gap','8px');
+
+  imp(brand,'display','block');
+  imp(brand,'position','static');
+  imp(brand,'order','1');
+  imp(brand,'flex','0 0 auto');
+  imp(brand,'width','auto');
+  imp(brand,'max-width','none');
+  imp(brand,'margin','0');
+  imp(brand,'padding','0');
+  imp(brand,'transform','none');
+  imp(brand,'text-align','left');
+
+  imp(menu,'display','block');
+  imp(menu,'position','static');
+  imp(menu,'order','2');
+  imp(menu,'flex','0 0 auto');
+  imp(menu,'width','auto');
+  imp(menu,'margin','0');
+  imp(menu,'padding','8px 10px');
+  imp(menu,'min-height','40px');
+  imp(menu,'transform','none');
+
+  imp(langs,'display','flex');
+  imp(langs,'align-items','center');
+  imp(langs,'position','static');
+  imp(langs,'order','3');
+  imp(langs,'flex','0 0 auto');
+  imp(langs,'width','auto');
+  imp(langs,'margin','0 0 0 auto');
+  imp(langs,'padding','0');
+  imp(langs,'min-height','0');
+  imp(langs,'gap','6px');
+
+  langs.querySelectorAll('button').forEach(b=>{
+    imp(b,'display','inline-flex');
+    imp(b,'align-items','center');
+    imp(b,'justify-content','center');
+    imp(b,'box-sizing','border-box');
+    imp(b,'height','34px');
+    imp(b,'min-height','34px');
+    imp(b,'min-width','58px');
+    imp(b,'width','auto');
+    imp(b,'margin','0');
+    imp(b,'padding','0 7px');
+    imp(b,'transform','none');
+  });
 }
 function cleanAppUI(){
   if(!isApp())return;
