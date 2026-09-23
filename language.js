@@ -162,6 +162,26 @@ function cleanBrandTree(root){
     }
   });
 }
+function forceAppHeader(){
+  if(!isApp())return;
+  const nav=document.querySelector('header.top>.nav');
+  const brand=document.querySelector('header.top .brand');
+  const menu=document.querySelector('header.top .menu-btn');
+  const langs=document.querySelector('header.top .yuna-controls');
+  if(!nav||!brand||!menu||!langs)return;
+  const imp=(el,p,v)=>el.style.setProperty(p,v,'important');
+  imp(nav,'display','flex'); imp(nav,'flex-direction','row'); imp(nav,'flex-wrap','nowrap');
+  imp(nav,'align-items','center'); imp(nav,'justify-content','flex-start'); imp(nav,'width','100%');
+  imp(nav,'max-width','none'); imp(nav,'padding','12px 8px'); imp(nav,'gap','8px');
+  imp(brand,'display','flex'); imp(brand,'position','static'); imp(brand,'order','0'); imp(brand,'flex','0 0 auto');
+  imp(brand,'margin','0'); imp(brand,'padding','0'); imp(brand,'width','max-content'); imp(brand,'visibility','visible'); imp(brand,'opacity','1');
+  imp(menu,'display','block'); imp(menu,'position','static'); imp(menu,'order','1'); imp(menu,'flex','0 0 auto');
+  imp(menu,'margin','0'); imp(menu,'padding','8px 10px'); imp(menu,'min-height','40px'); imp(menu,'transform','none');
+  imp(langs,'display','flex'); imp(langs,'position','static'); imp(langs,'order','2'); imp(langs,'flex','0 0 auto');
+  imp(langs,'width','auto'); imp(langs,'margin','0 0 0 auto'); imp(langs,'padding','0'); imp(langs,'min-height','0');
+  imp(langs,'gap','6px'); imp(langs,'justify-content','flex-start');
+  langs.querySelectorAll('button').forEach(b=>{imp(b,'height','34px');imp(b,'min-height','34px');imp(b,'min-width','58px');imp(b,'padding','0 7px');});
+}
 function cleanAppUI(){
   if(!isApp())return;
   document.documentElement.classList.add('yunarunes-app');
@@ -228,6 +248,7 @@ function bootLanguage(){
   header();
   document.body.classList.toggle('yunarunes-app',isApp());
   cleanAppUI();
+  forceAppHeader();
   const body=document.body;
   if(!body)return;
   translateTree(body);
@@ -239,6 +260,7 @@ function bootLanguage(){
           translateTree(n);
           cleanBrandTree(n);
           cleanAppUI();
+          forceAppHeader();
         }
       }
     }
