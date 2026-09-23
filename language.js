@@ -181,7 +181,7 @@ function forceAppHeader(){
   imp(nav,'width','100%');
   imp(nav,'max-width','none');
   imp(nav,'min-height','56px');
-  imp(nav,'padding','8px 10px');
+  imp(nav,'padding','24px 10px 12px');
   imp(nav,'gap','8px');
 
   imp(brand,'display','block');
