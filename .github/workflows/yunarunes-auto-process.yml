@@ -1,0 +1,67 @@
+name: YunaRunes - Auto Process Changes
+
+run-name: YunaRunes update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yunarunes-auto-process
+  cancel-in-progress: true
+
+jobs:
+  process:
+    name: Process YunaRunes changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout latest YunaRunes
+        uses: actions/checkout@v4
+
+      - name: Show changed files
+        shell: bash
+        run: |
+          echo "YunaRunes update detected."
+          echo "Commit: $GITHUB_SHA"
+          git diff --name-only "$GITHUB_EVENT_BEFORE" "$GITHUB_SHA" || true
+
+      - name: Validate HTML
+        shell: bash
+        run: |
+          set -e
+          test -f index.html
+          grep -qi '<html' index.html
+          grep -qi '</html>' index.html
+          echo "HTML check passed."
+
+      - name: Validate JavaScript
+        shell: bash
+        run: |
+          set -e
+          files=$(find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*')
+          if [ -z "$files" ]; then
+            echo "No JavaScript files found."
+            exit 0
+          fi
+          for file in $files; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+          echo "JavaScript checks passed."
+
+      - name: Confirm YunaRunes update completed
+        run: |
+          echo "========================================"
+          echo " YunaRunes changes processed successfully"
+          echo "========================================"
+          echo "The update is visible in GitHub Actions."
