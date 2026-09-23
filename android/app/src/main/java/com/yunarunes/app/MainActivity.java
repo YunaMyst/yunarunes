@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
         + "if(h && /YunaRunes no celular|YunaRunes on mobile/i.test(h.textContent)){"
         + "var n=e.nextElementSibling;if(n)n.remove();e.remove();}});"
         // Remove every APK/download control from the app, including dynamically-created controls.
-        + "document.querySelectorAll('a,button,label,[role="button"]').forEach(function(e){"
+        + "document.querySelectorAll('a,button,label,[role=\"button\"]').forEach(function(e){"
         + "var t=(e.textContent||'').trim();var href=(e.getAttribute('href')||'').toLowerCase();"
         + "if(/\\bAPK\\b/i.test(t)||href.indexOf('.apk')!==-1||href.indexOf('download')!==-1&&/apk/i.test(href))e.remove();"
         + "});"
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
         settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
-        settings.setUserAgentString(settings.getUserAgentString() + " YunaRunesApp/1.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " YunaRunesApp/1.1");
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) { return false; }
