@@ -184,7 +184,7 @@ function cleanAppUI(){
   document.querySelectorAll('.mobile-download,.apk-link,[href*=".apk" i],[download]').forEach(e=>e.remove());
   document.querySelectorAll('a,button,label,[role="button"]').forEach(e=>{
     const t=(e.textContent||'').trim();
-    if(/\bAPK\b|baixar.*apk|download.*apk|instalar.*apk/i.test(t))e.remove();
+    if(/\\bAPK\\b|baixar.*apk|download.*apk|instalar.*apk/i.test(t))e.remove();
   });
   document.querySelectorAll('.section-title').forEach(e=>{
     const t=(e.textContent||'').trim();
@@ -194,49 +194,7 @@ function cleanAppUI(){
       e.remove();
     }
   });
-  const nav=document.querySelector('header.top>.nav');
-  const menu=document.querySelector('header.top .menu-btn');
-  const brand=document.querySelector('header.top .brand');
-  if(brand){
-    brand.style.justifySelf='start';
-    brand.style.marginLeft='0';
-    brand.style.marginRight='0';
-    brand.style.textAlign='left';
-    brand.style.position='absolute';
-    brand.style.left='0';
-    brand.style.width='max-content';
-    brand.style.marginRight='0';
-    brand.style.paddingLeft='0';
-    brand.style.display='flex';
-    brand.style.visibility='visible';
-    brand.style.opacity='1';
-    const bs=brand.querySelector('span');
-    if(bs){bs.style.display='block';bs.style.visibility='visible';bs.style.opacity='1';bs.style.color='#fff';}
-  }
-  if(menu){
-    menu.style.position='static';
-    menu.style.right='auto';
-    menu.style.left='auto';
-    menu.style.top='auto';
-    menu.style.transform='none';
-    menu.style.margin='0';
-    menu.style.order='1';
-  }
-  if(menu){
-    menu.style.marginTop='0';
-    menu.style.minHeight='40px';
-    menu.style.padding='8px 10px';
-  }
-  document.querySelectorAll('header.top .yuna-controls').forEach(e=>{
-    e.style.marginTop='14px';
-    e.style.marginBottom='4px';
-    e.style.gap='8px';
-    e.style.minHeight='40px';
-  });
-  document.querySelectorAll('header.top .yuna-controls button').forEach(e=>{
-    e.style.minHeight='38px';
-    e.style.padding='0 11px';
-  });
+  // No app header positioning here: forceAppHeader() is the single source of truth.
 }
 function bootLanguage(){
   style();
