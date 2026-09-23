@@ -162,18 +162,25 @@ function cleanAppUI(){
   });
   const nav=document.querySelector('header.top>.nav');
   if(nav){
-    nav.style.paddingTop='20px';
-    nav.style.paddingBottom='14px';
+    nav.style.paddingTop='24px';
+    nav.style.paddingBottom='16px';
     nav.style.gap='12px';
+  }
+  const brand=document.querySelector('header.top .brand');
+  if(brand){
+    brand.style.justifySelf='start';
+    brand.style.marginLeft='0';
+    brand.style.marginRight='auto';
+    brand.style.textAlign='left';
   }
   const menu=document.querySelector('header.top .menu-btn');
   if(menu){
-    menu.style.marginTop='8px';
+    menu.style.marginTop='12px';
     menu.style.minHeight='44px';
     menu.style.padding='10px 13px';
   }
   document.querySelectorAll('header.top .yuna-controls').forEach(e=>{
-    e.style.marginTop='10px';
+    e.style.marginTop='14px';
     e.style.marginBottom='4px';
     e.style.gap='8px';
     e.style.minHeight='40px';
