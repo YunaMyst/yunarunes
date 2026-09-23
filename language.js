@@ -118,7 +118,9 @@ function style(){
     body.yunarunes-app header.top>.nav{padding-top:14px!important;padding-bottom:10px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:0!important}
     body.yunarunes-app header.top>.nav{padding-top:24px!important;padding-bottom:16px!important;gap:12px!important;padding-left:0!important;padding-right:0!important;max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important}
-    body.yunarunes-app header.top .brand{justify-self:start!important;margin-left:0!important;margin-right:auto!important;text-align:left!important;width:max-content!important;position:absolute!important;left:0!important;transform:none!important;padding-left:0!important}
+    body.yunarunes-app header.top .brand{display:flex!important;visibility:visible!important;opacity:1!important;justify-self:start!important;margin-left:0!important;margin-right:0!important;text-align:left!important;width:max-content!important;position:absolute!important;left:0!important;transform:none!important;padding-left:0!important;z-index:5!important}
+    body.yunarunes-app header.top .brand span{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important}
+    body.yunarunes-app header.top .menu-btn{position:absolute!important;right:0!important;left:auto!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important;z-index:6!important}
     body.yunarunes-app header.top .menu-btn{margin-top:12px!important;min-height:44px!important;padding:10px 13px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:14px!important;margin-bottom:4px!important;gap:8px!important;min-height:40px!important}
   `;
@@ -186,6 +188,21 @@ function cleanAppUI(){
     brand.style.width='max-content';
     brand.style.marginRight='0';
     brand.style.paddingLeft='0';
+    brand.style.display='flex';
+    brand.style.visibility='visible';
+    brand.style.opacity='1';
+    const bs=brand.querySelector('span');
+    if(bs){bs.style.display='block';bs.style.visibility='visible';bs.style.opacity='1';bs.style.color='#fff';}
+  }
+  if(menu){
+    menu.style.position='absolute';
+    menu.style.right='0';
+    menu.style.left='auto';
+    menu.style.top='50%';
+    menu.style.transform='translateY(-50%)';
+    menu.style.margin='0';
+  }
+  if(menu){
   }
   const menu=document.querySelector('header.top .menu-btn');
   if(menu){
