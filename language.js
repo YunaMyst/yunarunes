@@ -145,10 +145,49 @@ function cleanBrandTree(root){
     }
   });
 }
+function cleanAppUI(){
+  if(!isApp())return;
+  document.querySelectorAll('.mobile-download,.apk-link,[href*=".apk" i],[download]').forEach(e=>e.remove());
+  document.querySelectorAll('a,button,label,[role="button"]').forEach(e=>{
+    const t=(e.textContent||'').trim();
+    if(/\bAPK\b|baixar.*apk|download.*apk|instalar.*apk/i.test(t))e.remove();
+  });
+  document.querySelectorAll('.section-title').forEach(e=>{
+    const t=(e.textContent||'').trim();
+    if(/YunaRunes no celular|YunaRunes on mobile/i.test(t)){
+      const n=e.nextElementSibling;
+      if(n)n.remove();
+      e.remove();
+    }
+  });
+  const nav=document.querySelector('header.top>.nav');
+  if(nav){
+    nav.style.paddingTop='20px';
+    nav.style.paddingBottom='14px';
+    nav.style.gap='12px';
+  }
+  const menu=document.querySelector('header.top .menu-btn');
+  if(menu){
+    menu.style.marginTop='8px';
+    menu.style.minHeight='44px';
+    menu.style.padding='10px 13px';
+  }
+  document.querySelectorAll('header.top .yuna-controls').forEach(e=>{
+    e.style.marginTop='10px';
+    e.style.marginBottom='4px';
+    e.style.gap='8px';
+    e.style.minHeight='40px';
+  });
+  document.querySelectorAll('header.top .yuna-controls button').forEach(e=>{
+    e.style.minHeight='38px';
+    e.style.padding='0 11px';
+  });
+}
 function bootLanguage(){
   style();
   header();
   document.body.classList.toggle('yunarunes-app',isApp());
+  cleanAppUI();
   const body=document.body;
   if(!body)return;
   translateTree(body);
@@ -159,6 +198,7 @@ function bootLanguage(){
         if(n.nodeType===1||n.nodeType===3){
           translateTree(n);
           cleanBrandTree(n);
+          cleanAppUI();
         }
       }
     }
