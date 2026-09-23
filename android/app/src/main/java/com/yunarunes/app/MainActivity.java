@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 
     private static final String APP_CLEANUP =
         "(function(){"
+        + "function injectMenuStyle(){var s=document.getElementById(\'yunarunes-app-menu-v2\');if(!s){s=document.createElement(\'style\');s.id=\'yunarunes-app-menu-v2\';document.head.appendChild(s);}s.textContent=\'@media(max-width:600px){header.top{z-index:1000!important}.nav{min-height:64px!important;padding:8px 10px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;gap:8px!important}.brand{order:1!important;margin:0!important;font-size:21px!important}.menu-btn{display:block!important;position:static!important;order:3!important;margin:0 0 0 auto!important;background:#172638!important;border:1px solid #38516a!important;border-radius:12px!important;padding:11px 14px!important;font-size:18px!important;font-weight:900!important;line-height:1!important;box-shadow:0 4px 16px rgba(0,0,0,.25)!important}.nav-links{display:none!important;position:absolute!important;top:calc(100% + 8px)!important;left:10px!important;right:10px!important;width:auto!important;max-height:calc(100vh - 88px)!important;overflow-y:auto!important;padding:14px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;background:rgba(7,16,29,.98)!important;border:1px solid #33485d!important;border-radius:18px!important;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 0 1px rgba(53,169,225,.08)!important;backdrop-filter:blur(12px)!important}.nav-toggle:checked~.nav-links{display:grid!important}.nav-links a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:68px!important;padding:12px 10px!important;background:#101b29!important;border:1px solid #2c4053!important;border-radius:14px!important;text-align:center!important;font-size:18px!important;line-height:1.15!important;font-weight:900!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;color:#f2f6fa!important}.nav-divider{display:none!important}.nav-advanced{color:#c7b5ff!important}}\';}"
         + "function clean(){"
         + "document.querySelectorAll('.mobile-download').forEach(function(e){e.remove();});"
         + "document.querySelectorAll('.section-title').forEach(function(e){"
@@ -60,7 +61,7 @@ public class MainActivity extends Activity {
         + "});"
         + "}"
         + "}"
-        + "clean();"
+        + "injectMenuStyle();clean();"
         + "new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});"
         + "})();";
 
