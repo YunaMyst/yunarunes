@@ -75,33 +75,33 @@ function style(){
     @media(max-width:600px){
       header.top{height:auto!important;min-height:0!important}
       header.top>.nav{
-        min-height:0!important;padding:10px 10px 8px!important;display:grid!important;
-        grid-template-columns:1fr auto!important;grid-template-areas:
-          "brand menu"
-          "langs langs"
-          "links links"!important;gap:8px!important
+        min-height:64px!important;padding:22px 8px 12px!important;display:flex!important;
+        flex-direction:row!important;align-items:center!important;flex-wrap:nowrap!important;
+        gap:7px!important;width:100%!important;box-sizing:border-box!important
       }
       header.top .brand{
-        grid-area:brand!important;margin:0!important;justify-self:start!important;
-        font-size:20px!important;line-height:1!important
+        display:block!important;position:static!important;flex:0 0 auto!important;
+        margin:0!important;font-size:18px!important;line-height:1!important;
+        white-space:nowrap!important
       }
       header.top .menu-btn{
-        grid-area:menu!important;position:static!important;align-self:center!important;
-        display:block!important;padding:8px 11px!important
+        display:block!important;position:static!important;flex:0 0 auto!important;
+        margin:0!important;padding:9px 10px!important;min-height:42px!important
       }
       header.top .yuna-controls{
-        grid-area:langs!important;order:initial!important;justify-self:start!important;
-        width:100%!important;margin:0!important;display:flex!important;
-        justify-content:flex-start!important;gap:6px!important;padding:2px 0 0!important
+        display:flex!important;align-items:center!important;position:static!important;
+        flex:0 0 auto!important;width:auto!important;margin:0 0 0 auto!important;
+        padding:0!important;gap:5px!important
       }
       header.top .yuna-controls .apk-link{display:inline-flex!important}
       body.yunarunes-app header.top .yuna-controls .apk-link{display:none!important}
       header.top .yuna-controls a,header.top .yuna-controls button{
-        height:34px!important;min-width:72px!important;padding:0 9px!important;font-size:10px!important
+        height:36px!important;min-width:58px!important;padding:0 6px!important;font-size:9px!important
       }
       header.top .nav-links{
-        grid-area:links!important;order:initial!important;width:100%!important;margin:0!important;
-        padding:0!important;display:none!important;grid-template-columns:1fr 1fr!important;gap:6px!important
+        position:absolute!important;left:8px!important;right:8px!important;top:100%!important;
+        width:auto!important;margin:0!important;padding:0!important;display:none!important;
+        grid-template-columns:1fr 1fr!important;gap:6px!important
       }
       header.top .nav-toggle:checked~.nav-links{display:grid!important}
       header.top .nav-links a{
