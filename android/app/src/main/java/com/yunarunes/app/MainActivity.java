@@ -15,31 +15,50 @@ public class MainActivity extends Activity {
     private static final String APP_CLEANUP =
         "(function(){"
         + "function clean(){"
-        // Remove the mobile-download section and its title inside the APK.
         + "document.querySelectorAll('.mobile-download').forEach(function(e){e.remove();});"
         + "document.querySelectorAll('.section-title').forEach(function(e){"
         + "var h=e.querySelector('h2');"
         + "if(h && /YunaRunes no celular|YunaRunes on mobile/i.test(h.textContent)){"
         + "var n=e.nextElementSibling;if(n)n.remove();e.remove();}});"
-        // Remove every APK/download control from the app, including dynamically-created controls.
-        + "document.querySelectorAll('a,button,label,[role=\"button\"]').forEach(function(e){"
+        + "document.querySelectorAll('a,button,label,[role=\\\"button\\\"]').forEach(function(e){"
         + "var t=(e.textContent||'').trim();var href=(e.getAttribute('href')||'').toLowerCase();"
-        + "if(/\\bAPK\\b/i.test(t)||href.indexOf('.apk')!==-1||href.indexOf('download')!==-1&&/apk/i.test(href))e.remove();"
+        + "if(/\\\\bAPK\\\\b/i.test(t)||href.indexOf('.apk')!==-1)e.remove();"
         + "});"
-        // Give the mobile header more breathing room so Menu and language buttons are easy to tap.
-        + "var top=document.querySelector('header.top');"
-        + "var nav=top&&top.querySelector('.nav');"
-        + "if(top&&nav){top.style.paddingTop='10px';top.style.paddingBottom='8px';"
-        + "nav.style.paddingTop='18px';nav.style.paddingBottom='14px';nav.style.gap='12px';}"
-        + "var brand=document.querySelector('header.top .brand');
-        if(brand){brand.style.marginLeft='0';brand.style.marginRight='auto';brand.style.justifySelf='start';brand.style.textAlign='left';}
-        var menu=document.querySelector('.menu-btn');"
-        + "if(menu){menu.style.marginTop='12px';menu.style.minHeight='44px';menu.style.padding='10px 13px';}"
-        + "document.querySelectorAll('.yuna-controls').forEach(function(e){"
-        + "e.style.marginTop='14px';e.style.marginBottom='4px';e.style.gap='8px';e.style.minHeight='40px';"
+        + "var nav=document.querySelector('header.top>.nav');"
+        + "var brand=document.querySelector('header.top .brand');"
+        + "var menu=document.querySelector('header.top .menu-btn');"
+        + "var langs=document.querySelector('header.top .yuna-controls');"
+        + "if(nav&&brand&&menu&&langs){"
+        + "nav.style.setProperty('display','flex','important');"
+        + "nav.style.setProperty('flex-direction','row','important');"
+        + "nav.style.setProperty('align-items','center','important');"
+        + "nav.style.setProperty('justify-content','flex-start','important');"
+        + "nav.style.setProperty('flex-wrap','nowrap','important');"
+        + "nav.style.setProperty('width','100%','important');"
+        + "nav.style.setProperty('padding','24px 10px 12px','important');"
+        + "nav.style.setProperty('gap','8px','important');"
+        + "brand.style.setProperty('display','block','important');"
+        + "brand.style.setProperty('position','static','important');"
+        + "brand.style.setProperty('order','1','important');"
+        + "brand.style.setProperty('margin','0','important');"
+        + "menu.style.setProperty('display','block','important');"
+        + "menu.style.setProperty('position','static','important');"
+        + "menu.style.setProperty('order','2','important');"
+        + "menu.style.setProperty('margin','0','important');"
+        + "menu.style.setProperty('min-height','40px','important');"
+        + "menu.style.setProperty('padding','8px 10px','important');"
+        + "langs.style.setProperty('display','flex','important');"
+        + "langs.style.setProperty('align-items','center','important');"
+        + "langs.style.setProperty('position','static','important');"
+        + "langs.style.setProperty('order','3','important');"
+        + "langs.style.setProperty('margin','0 0 0 auto','important');"
+        + "langs.style.setProperty('gap','6px','important');"
+        + "langs.querySelectorAll('button').forEach(function(b){"
+        + "b.style.setProperty('height','34px','important');"
+        + "b.style.setProperty('min-width','58px','important');"
+        + "b.style.setProperty('margin','0','important');"
         + "});"
-        + "document.querySelectorAll('.yuna-controls a,.yuna-controls button').forEach(function(e){"
-        + "e.style.minHeight='40px';e.style.padding='0 11px';}"
+        + "}"
         + "}"
         + "clean();"
         + "new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});"
@@ -56,6 +75,7 @@ public class MainActivity extends Activity {
         settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setUserAgentString(settings.getUserAgentString() + " YunaRunesApp/1.1");
         webView.setWebChromeClient(new WebChromeClient());
         webView.setWebViewClient(new WebViewClient() {
