@@ -255,6 +255,10 @@ function bootLanguage(){
   document.body.classList.toggle('yunarunes-app',isApp());
   cleanAppUI();
   forceAppHeader();
+  // Keep the APK/native WebView from moving the header back after page load.
+  if(!window.__yunaAppHeaderTimer && isApp()){
+    window.__yunaAppHeaderTimer=setInterval(forceAppHeader,300);
+  }
   const body=document.body;
   if(!body)return;
   translateTree(body);
