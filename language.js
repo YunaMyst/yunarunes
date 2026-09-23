@@ -117,8 +117,8 @@ function style(){
     body.yunarunes-app header.top .yuna-controls .apk-link{display:none!important}
     body.yunarunes-app header.top>.nav{padding-top:14px!important;padding-bottom:10px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:0!important}
-    body.yunarunes-app header.top>.nav{padding-top:24px!important;padding-bottom:16px!important;gap:12px!important}
-    body.yunarunes-app header.top .brand{justify-self:start!important;margin-left:0!important;margin-right:auto!important;text-align:left!important};width:max-content!important;position:relative!important;left:0!important;transform:none!important;padding-left:0!important
+    body.yunarunes-app header.top>.nav{padding-top:24px!important;padding-bottom:16px!important;gap:12px!important;padding-left:0!important}
+    body.yunarunes-app header.top .brand{justify-self:start!important;margin-left:0!important;margin-right:auto!important;text-align:left!important;width:max-content!important;position:absolute!important;left:0!important;transform:none!important;padding-left:0!important}
     body.yunarunes-app header.top .menu-btn{margin-top:12px!important;min-height:44px!important;padding:10px 13px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:14px!important;margin-bottom:4px!important;gap:8px!important;min-height:40px!important}
   `;
@@ -181,6 +181,9 @@ function cleanAppUI(){
     brand.style.marginLeft='0';
     brand.style.marginRight='auto';
     brand.style.textAlign='left';
+    brand.style.position='absolute';
+    brand.style.left='0';
+    brand.style.width='max-content';
   }
   const menu=document.querySelector('header.top .menu-btn');
   if(menu){
