@@ -12,6 +12,22 @@ public class MainActivity extends Activity {
     private WebView webView;
     private static final String HOME = "https://yunamyst.github.io/yunarunes/";
 
+    private static final String APP_CLEANUP =
+        "(function(){"
+        + "function clean(){"
+        + "document.querySelectorAll('.mobile-download').forEach(function(e){e.remove();});"
+        + "document.querySelectorAll('.section-title').forEach(function(e){"
+        + "var h=e.querySelector('h2');"
+        + "if(h && /YunaRunes no celular/i.test(h.textContent)){"
+        + "var n=e.nextElementSibling;if(n&&n.classList.contains('mobile-download'))n.remove();"
+        + "e.remove();}});"
+        + "document.querySelectorAll('a,button').forEach(function(e){"
+        + "if(/\\bAPK\\b/i.test((e.textContent||'').trim()))e.remove();});"
+        + "}"
+        + "clean();"
+        + "new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});"
+        + "})();";
+
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         webView = new WebView(this);
@@ -29,7 +45,7 @@ public class MainActivity extends Activity {
             @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) { return false; }
             @Override public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                view.evaluateJavascript("(function(){document.querySelectorAll(\".mobile-download\").forEach(function(e){var p=e.previousElementSibling;if(p&&p.classList.contains(\"section-title\"))p.remove();e.remove()});document.querySelectorAll(\".section-title\").forEach(function(e){var h=e.querySelector(\"h2\");if(h&&/YunaRunes no celular/i.test(h.textContent))e.remove()});})();", null);
+                view.evaluateJavascript(APP_CLEANUP, null);
             }
         });
 
