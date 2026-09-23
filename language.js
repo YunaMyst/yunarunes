@@ -117,10 +117,18 @@ function style(){
     body.yunarunes-app header.top .yuna-controls .apk-link{display:none!important}
     body.yunarunes-app header.top>.nav{padding-top:14px!important;padding-bottom:10px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:0!important}
-    body.yunarunes-app header.top>.nav{padding-top:24px!important;padding-bottom:16px!important;gap:12px!important;padding-left:0!important;padding-right:0!important;max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important}
-    body.yunarunes-app header.top .brand{display:flex!important;visibility:visible!important;opacity:1!important;justify-self:start!important;margin-left:0!important;margin-right:0!important;text-align:left!important;width:max-content!important;position:absolute!important;left:0!important;transform:none!important;padding-left:0!important;z-index:5!important}
+    body.yunarunes-app header.top>.nav{padding:14px 10px!important;gap:10px!important;max-width:none!important;width:100%!important;margin:0!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;flex-wrap:nowrap!important}
+    body.yunarunes-app header.top .brand{display:flex!important;visibility:visible!important;opacity:1!important;position:static!important;order:0!important;flex:0 0 auto!important;margin:0!important;width:max-content!important;padding:0!important;text-align:left!important;transform:none!important}
     body.yunarunes-app header.top .brand span{display:block!important;visibility:visible!important;opacity:1!important;color:#fff!important}
-    body.yunarunes-app header.top .menu-btn{position:absolute!important;right:0!important;left:auto!important;top:50%!important;transform:translateY(-50%)!important;margin:0!important;z-index:6!important}
+    body.yunarunes-app header.top .menu-btn{position:static!important;order:1!important;flex:0 0 auto!important;margin:0!important;transform:none!important;z-index:6!important}
+    body.yunarunes-app header.top .yuna-controls{order:2!important;margin:0 0 0 auto!important;flex:0 0 auto!important;width:auto!important;min-height:0!important;display:flex!important;gap:6px!important}
+    @media(max-width:600px){
+      body.yunarunes-app header.top>.nav{display:flex!important;flex-wrap:nowrap!important;padding:14px 8px!important;gap:8px!important}
+      body.yunarunes-app header.top .brand{font-size:18px!important}
+      body.yunarunes-app header.top .menu-btn{display:block!important;padding:8px 10px!important;min-height:40px!important}
+      body.yunarunes-app header.top .yuna-controls{margin-left:auto!important}
+      body.yunarunes-app header.top .yuna-controls button{min-width:58px!important;height:34px!important;padding:0 6px!important;font-size:9px!important}
+    }
     body.yunarunes-app header.top .menu-btn{margin-top:12px!important;min-height:44px!important;padding:10px 13px!important}
     body.yunarunes-app header.top .yuna-controls{margin-top:14px!important;margin-bottom:4px!important;gap:8px!important;min-height:40px!important}
   `;
@@ -172,16 +180,12 @@ function cleanAppUI(){
     }
   });
   const nav=document.querySelector('header.top>.nav');
-  if(nav){
-    nav.style.paddingTop='24px';
-    nav.style.paddingBottom='16px';
-    nav.style.gap='12px';
-  }
+  const menu=document.querySelector('header.top .menu-btn');
   const brand=document.querySelector('header.top .brand');
   if(brand){
     brand.style.justifySelf='start';
     brand.style.marginLeft='0';
-    brand.style.marginRight='auto';
+    brand.style.marginRight='0';
     brand.style.textAlign='left';
     brand.style.position='absolute';
     brand.style.left='0';
@@ -195,20 +199,18 @@ function cleanAppUI(){
     if(bs){bs.style.display='block';bs.style.visibility='visible';bs.style.opacity='1';bs.style.color='#fff';}
   }
   if(menu){
-    menu.style.position='absolute';
-    menu.style.right='0';
+    menu.style.position='static';
+    menu.style.right='auto';
     menu.style.left='auto';
-    menu.style.top='50%';
-    menu.style.transform='translateY(-50%)';
+    menu.style.top='auto';
+    menu.style.transform='none';
     menu.style.margin='0';
+    menu.style.order='1';
   }
   if(menu){
-  }
-  const menu=document.querySelector('header.top .menu-btn');
-  if(menu){
-    menu.style.marginTop='12px';
-    menu.style.minHeight='44px';
-    menu.style.padding='10px 13px';
+    menu.style.marginTop='0';
+    menu.style.minHeight='40px';
+    menu.style.padding='8px 10px';
   }
   document.querySelectorAll('header.top .yuna-controls').forEach(e=>{
     e.style.marginTop='14px';
