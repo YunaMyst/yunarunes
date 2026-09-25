@@ -1,5 +1,5 @@
 name: Build YunaRunes APK
-# Force rebuild for release 1.7.0
+# Universal compatibility release 1.8.1
 
 on:
   workflow_dispatch:
@@ -71,7 +71,7 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          "${ANDROID_HOME}/build-tools/36.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v4' versionCode='17' versionName='1.8.0'"
+          "${ANDROID_HOME}/build-tools/36.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v4' versionCode='18' versionName='1.8.1'"
           "${ANDROID_HOME}/build-tools/36.0.0/zipalign" -c -v 4 "$APK"
 
       - name: Verify APK signature schemes
@@ -86,7 +86,7 @@ jobs:
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release-1.8.0
+          name: YunaRunes-Android-Release-1.8.1
           path: |
             android/app/build/outputs/apk/release/app-release.apk
             android/app/build/outputs/bundle/release/app-release.aab
@@ -101,12 +101,12 @@ jobs:
           git rebase origin/main
           mkdir -p downloads
           cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes.apk
-          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.8.0.apk
+          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.8.1.apk
           git add downloads/yunarunes.apk downloads/yunarunes-1.8.0.apk
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish YunaRunes release APK 1.8.0"
+            git commit -m "Publish YunaRunes release APK 1.8.1"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
