@@ -39,7 +39,7 @@ jobs:
             SDKMANAGER="${ANDROID_HOME}/cmdline-tools/16.0/bin/sdkmanager"
           fi
           yes | "$SDKMANAGER" --licenses >/dev/null || true
-          "$SDKMANAGER" "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+          "$SDKMANAGER" "platforms;android-36" "build-tools;36.0.0" "platform-tools"
 
       - name: Require stable release signing
         env:
@@ -70,13 +70,13 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          "${ANDROID_HOME}/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v3' versionCode='14' versionName='1.6.0'"
-          "${ANDROID_HOME}/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
+          "${ANDROID_HOME}/build-tools/36.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v3' versionCode='15' versionName='1.6.1'"
+          "${ANDROID_HOME}/build-tools/36.0.0/zipalign" -c -v 4 "$APK"
 
       - name: Verify APK signature schemes
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
-          SIGNER="${ANDROID_HOME}/build-tools/35.0.0/apksigner"
+          SIGNER="${ANDROID_HOME}/build-tools/36.0.0/apksigner"
           "$SIGNER" verify --verbose --print-certs "$APK" | tee /tmp/apksigner.txt
           grep -F "Verified using v1 scheme (JAR signing): true" /tmp/apksigner.txt
           grep -F "Verified using v2 scheme (APK Signature Scheme v2): true" /tmp/apksigner.txt
@@ -85,7 +85,7 @@ jobs:
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release-1.6.0
+          name: YunaRunes-Android-Release-1.6.1
           path: |
             android/app/build/outputs/apk/release/app-release.apk
             android/app/build/outputs/bundle/release/app-release.aab
@@ -100,12 +100,12 @@ jobs:
           git rebase origin/main
           mkdir -p downloads
           cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes.apk
-          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.6.0.apk
-          git add downloads/yunarunes.apk downloads/yunarunes-1.6.0.apk
+          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.6.1.apk
+          git add downloads/yunarunes.apk downloads/yunarunes-1.6.1.apk
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish YunaRunes release APK 1.6.0"
+            git commit -m "Publish YunaRunes release APK 1.6.1"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
