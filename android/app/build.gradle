@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId 'com.yunarunes.mobile.v4'
-        minSdk 21
-        targetSdk 36
-        versionCode 17
-        versionName '1.8.0'
+        minSdk 19
+        targetSdk 35
+        versionCode 18
+        versionName '1.8.1'
     }
 
     signingConfigs {
