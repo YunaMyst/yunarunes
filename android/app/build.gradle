@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'com.yunarunes.mobile'
+        applicationId 'com.yunarunes.mobile.v2'
         minSdk 23
         targetSdk 35
-        versionCode 12
-        versionName '1.4.5'
+        versionCode 13
+        versionName '1.5.0'
     }
 
     signingConfigs {
