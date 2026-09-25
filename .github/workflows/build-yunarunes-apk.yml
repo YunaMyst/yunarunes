@@ -41,16 +41,21 @@ jobs:
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "platforms;android-35" "build-tools;35.0.0" "platform-tools"
 
-      - name: Prepare release signing when configured
+      - name: Require stable release signing
         env:
           KEYSTORE_BASE64: ${{ secrets.YUNARUNES_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.YUNARUNES_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.YUNARUNES_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.YUNARUNES_KEY_PASSWORD }}
         run: |
-          if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 --decode > android/yunarunes-release.jks
-            echo "Release keystore configured."
-          else
-            echo "Release keystore secrets are not configured; Gradle will use the standard debug signing key as a build fallback."
-          fi
+          set -euo pipefail
+          test -n "$KEYSTORE_BASE64" || { echo "Missing YUNARUNES_KEYSTORE_BASE64"; exit 1; }
+          test -n "$KEYSTORE_PASSWORD" || { echo "Missing YUNARUNES_KEYSTORE_PASSWORD"; exit 1; }
+          test -n "$KEY_ALIAS" || { echo "Missing YUNARUNES_KEY_ALIAS"; exit 1; }
+          test -n "$KEY_PASSWORD" || { echo "Missing YUNARUNES_KEY_PASSWORD"; exit 1; }
+          echo "$KEYSTORE_BASE64" | base64 --decode > android/yunarunes-release.jks
+          test -s android/yunarunes-release.jks
+          echo "Stable release signing configured. Debug signing is not permitted for distribution."
 
       - name: Build release APK and AAB
         working-directory: android
