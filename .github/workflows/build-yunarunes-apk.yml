@@ -70,7 +70,7 @@ jobs:
         run: |
           APK="android/app/build/outputs/apk/release/app-release.apk"
           test -s "$APK"
-          "${ANDROID_HOME}/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v2' versionCode='13' versionName='1.5.0'"
+          "${ANDROID_HOME}/build-tools/35.0.0/aapt2" dump badging "$APK" | grep -F "package: name='com.yunarunes.mobile.v3' versionCode='14' versionName='1.6.0'"
           "${ANDROID_HOME}/build-tools/35.0.0/zipalign" -c -v 4 "$APK"
 
       - name: Verify APK signature schemes
@@ -85,7 +85,7 @@ jobs:
       - name: Upload Android release artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: YunaRunes-Android-Release-1.5.0
+          name: YunaRunes-Android-Release-1.6.0
           path: |
             android/app/build/outputs/apk/release/app-release.apk
             android/app/build/outputs/bundle/release/app-release.aab
@@ -100,12 +100,12 @@ jobs:
           git rebase origin/main
           mkdir -p downloads
           cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes.apk
-          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.5.0.apk
+          cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.6.0.apk
           git add downloads/yunarunes.apk downloads/yunarunes-1.5.0.apk
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
-            git commit -m "Publish YunaRunes release APK 1.5.0"
+            git commit -m "Publish YunaRunes release APK 1.6.0"
             for attempt in 1 2 3; do
               if git push origin HEAD:main; then
                 break
