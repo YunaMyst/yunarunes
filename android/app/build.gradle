@@ -5,11 +5,13 @@ android {
     compileSdk 36
 
     defaultConfig {
-        applicationId 'com.yunarunes.mobile.v4'
+        // Keep the original YunaRunes package so existing phone installs can
+        // receive this release as an update, while the APK remains tablet-compatible.
+        applicationId 'com.yunarunes.mobile.v3'
         minSdk 19
         targetSdk 35
-        versionCode 18
-        versionName '1.8.1'
+        versionCode 19
+        versionName '1.8.2'
     }
 
     signingConfigs {
