@@ -10,7 +10,7 @@ import android.webkit.WebViewClient;
 
 public class MainActivity extends Activity {
     private WebView webView;
-    private static final String HOME = "https://yunamyst.github.io/yunarunes/";
+    private static final String HOME = "https://yunarunes.com/";
 
     private static final String APP_CLEANUP =
         "(function(){"
