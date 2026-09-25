@@ -10,5 +10,45 @@ function makeTeam(t,mode,side,exclude=[]){const size=teamSize(mode),team=[t],use
 function makeOptions(t,mode,side){const size=teamSize(mode),options=[],signatures=new Set(),ranked=rankCompanions(t,mode,side);const max=12;for(let i=0;i<max&&ranked.length>=size-1;i++){const exclude=ranked.slice(0,i).map(x=>x.m.name);const team=makeTeam(t,mode,side,exclude);if(team.length!==size)continue;const sig=team.slice(1).map(m=>key(m.name)).sort().join('|');if(signatures.has(sig))continue;signatures.add(sig);options.push(team)}return options}
 function renderTeamOption(team,i,mode,side){const size=teamSize(mode),labels=['Equipe principal','Alternativa 2','Alternativa 3','Alternativa 4','Alternativa 5','Alternativa 6','Alternativa 7','Alternativa 8','Alternativa 9','Alternativa 10','Alternativa 11','Alternativa 12'];return '<div class="team-option"><h3>⚔️ '+labels[i]+'</h3><div class="team-label">'+esc(mode.toUpperCase())+' · '+(side==='attack'?'⚔️ Ataque':'🛡️ Defesa')+' · '+size+' mobs</div><div class="mini-team size-'+size+'">'+team.map((m,j)=>'<div class="mini-slot" data-rune-name="'+esc(clean(m.name))+'">'+img(m)+'<b>'+esc(clean(m.name))+'</b><span class="tag">'+(j===0?'⭐ PESQUISADO':'🤝')+'</span></div>').join('')+'</div><p class="muted" style="font-size:12px">'+(i===0?'Combinação de referência baseada nas funções e sinergias conhecidas.':'Variação automática para oferecer outra composição.')+'</p></div>'}
 function build(){const t=findMonster($('search').value);if(!t){$('out').innerHTML='<div class="empty error">Monstro não encontrado. Primeiro espera os monstros carregarem e escolhe um nome da lista.</div>';return}const mode=$('mode').value,side=$('side').value,size=teamSize(mode),options=makeOptions(t,mode,side);$('limitInfo').textContent=limitText(mode);if(!options.length){$('out').innerHTML='<div class="empty error">Não foi possível criar uma equipe válida com '+size+' mobs.</div>';return}$('out').innerHTML='<h2>⚔️ Equipes sugeridas com '+esc(clean(t.name))+'</h2><p class="muted">Foram geradas <b>'+options.length+'</b> opções diferentes. <b>'+esc(mode.toUpperCase())+'</b> permite no máximo <b>'+size+' mobs</b>.</p><div class="team-options">'+options.map((team,i)=>renderTeamOption(team,i,mode,side)).join('')+'</div><div id="clickedRunes" class="detail clicked-runes"></div><div style="margin-top:18px"><h3>🔍 Ver detalhes da equipe principal</h3><div class="team size-'+size+'">'+options[0].map((m,i)=>'<div class="slot" data-rune-name="'+esc(clean(m.name))+'">'+img(m)+'<h3>'+esc(clean(m.name))+'</h3><span class="tag '+(i===0?'selected':'recommended')+'">'+(i===0?'⭐ PESQUISADO':'🤝 RECOMENDADO')+'</span><span class="tag">'+esc(m.element)+'</span><span class="tag">'+esc(m.role)+'</span></div>').join('')+'</div></div>';document.querySelectorAll('[data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el))}
-function showSynergy(){const t=findMonster($('search').value),box=$('synergyResults');if(!box)return;if(!t){box.innerHTML='<div class="empty error">Pesquisa primeiro um monstro válido para ver a sinergia.</div>';return}const mode=$('mode').value,side=$('side').value,ranked=rankCompanions(t,mode,side).slice(0,10);if(!ranked.length){box.innerHTML='<div class="empty error">Não encontrei companheiros válidos para este monstro.</div>';return}box.innerHTML='<div class="card" style="margin:0"><h3>🤝 Sinergia com '+esc(clean(t.name))+'</h3><p class="muted">Sugestões automáticas para '+esc(mode.toUpperCase())+' · '+(side==='attack'?'Ataque':'Defesa')+'.</p><div class="synergy-grid">'+ranked.map((x,i)=>'<div class="synergy-card" data-rune-name="'+esc(clean(x.m.name))+'"><span class="badge">#'+(i+1)+'</span>'+img(x.m)+'<b>'+esc(clean(x.m.name))+'</b><span class="tag">'+esc(x.m.element||'')+'</span><span class="tag">'+esc(x.m.role||'')+'</span><p class="synergy-reason">'+(kind(x.m)!==kind(t)?'✓ Complementa a função do monstro':'• Função semelhante; pode variar conforme a composição')+'</p></div>').join('')+'</div></div>';box.querySelectorAll('[data-rune-name]').forEach(el=>el.onclick=()=>showClickedRunes(el))}
-function updateLimit(){$('limitInfo').textContent=limitText($('mode').value)}async function loadJSON(path){const r=await fetch(path+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(path+' HTTP '+r.status);return r.json()}async function init(){try{const j=await loadJSON('monster-catalog.json');const raw=Array.isArray(j)?j:(Array.isArray(j.monsters)?j.monsters:[]);catalog=raw.filter(playable);if(!catalog.length)throw new Error('A base não contém monstros jogáveis.');$('status').innerHTML='<span class="ok">✓ '+catalog.length+' monstros carregados.</span>';$('monsterNames').innerHTML=[...new Set(catalog.map(m=>clean(m.name)))].sort((a,b)=>a.localeCompare(b,'pt-PT')).map(n=>'<option value="'+esc(n)+'">').join('');try{guildBuilds=await loadJSON('guild-builds.json')}catch(e){guildBuilds={}}updateLimit();const p=new URLSearchParams(location.search);const requested=p.get('name');if(requested){$('search').value=requested;build();showSynergy();document.getElementById('out').scrollIntoView({behavior:'smooth',block:'start'})}}catch(e){console.error(e);$('status').innerHTML='<span class="error">Não foi possível carregar os monstros. '+esc(e.message)+'</span>'}}$('buildBtn').onclick=build;$('synergyBtn').onclick=showSynergy;$('mode').onchange=updateLimit;$('search').onkeydown=e=>{if(e.key==='Enter')build()};init();</script><script src="language.js?v=20260925-lang-v14"></script><script src="language-dynamic.js?v=20260925-lang-v29"></script></body></html>
+function showSynergy(){
+  const box=$('synergyResults');
+  if(!box)return;
+  box.innerHTML='<div class="muted">A procurar sinergias...</div>';
+  try{
+    const t=findMonster($('search').value);
+    if(!t){
+      box.innerHTML='<div class="empty error">Pesquisa primeiro um monstro válido para ver a sinergia.</div>';
+      return;
+    }
+    const mode=$('mode').value;
+    const side=$('side').value;
+    const companions=catalog
+      .filter(m=>playable(m)&&m!==t&&String(m.family)!==String(t.family))
+      .map(m=>({m,s:score(m,t,mode,side)}))
+      .sort((a,b)=>b.s-a.s)
+      .slice(0,10);
+    if(!companions.length){
+      box.innerHTML='<div class="empty error">Não encontrei outros monstros disponíveis.</div>';
+      return;
+    }
+    box.innerHTML='<div class="card" style="margin:0"><h3>🤝 Sinergia com '+esc(clean(t.name))+'</h3><p class="muted">Monstros que podem complementar '+esc(clean(t.name))+' em '+esc(mode.toUpperCase())+' · '+(side==='attack'?'Ataque':'Defesa')+'.</p><div class="synergy-grid">'+companions.map((x,i)=>{
+      const reason=kind(x.m)!==kind(t)?'✓ Complementa a função':'• Pode funcionar com a mesma função';
+      return '<div class="synergy-card" data-rune-name="'+esc(clean(x.m.name))+'" role="button" tabindex="0">'+
+        '<span class="badge">#'+(i+1)+'</span>'+img(x.m)+
+        '<b>'+esc(clean(x.m.name))+'</b>'+
+        '<span class="tag">'+esc(x.m.element||'')+'</span>'+
+        '<span class="tag">'+esc(x.m.role||'')+'</span>'+
+        '<p class="synergy-reason">'+reason+'</p></div>';
+    }).join('')+'</div></div>';
+    box.querySelectorAll('.synergy-card').forEach(el=>{
+      const open=()=>showClickedRunes(el);
+      el.addEventListener('click',open);
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+    });
+    box.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(err){
+    console.error('YunaRunes Sinergia:',err);
+    box.innerHTML='<div class="empty error">A sinergia encontrou um erro. Tenta novamente depois de carregar os monstros.</div>';
+  }
+}
+function updateLimit(){$('limitInfo').textContent=limitText($('mode').value)}async function loadJSON(path){const r=await fetch(path+'?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error(path+' HTTP '+r.status);return r.json()}async function init(){try{const j=await loadJSON('monster-catalog.json');const raw=Array.isArray(j)?j:(Array.isArray(j.monsters)?j.monsters:[]);catalog=raw.filter(playable);if(!catalog.length)throw new Error('A base não contém monstros jogáveis.');$('status').innerHTML='<span class="ok">✓ '+catalog.length+' monstros carregados.</span>';$('monsterNames').innerHTML=[...new Set(catalog.map(m=>clean(m.name)))].sort((a,b)=>a.localeCompare(b,'pt-PT')).map(n=>'<option value="'+esc(n)+'">').join('');try{guildBuilds=await loadJSON('guild-builds.json')}catch(e){guildBuilds={}}updateLimit();const p=new URLSearchParams(location.search);const requested=p.get('name');if(requested){$('search').value=requested;build();showSynergy();document.getElementById('out').scrollIntoView({behavior:'smooth',block:'start'})}}catch(e){console.error(e);$('status').innerHTML='<span class="error">Não foi possível carregar os monstros. '+esc(e.message)+'</span>'}}$('buildBtn').addEventListener('click',build);$('synergyBtn').addEventListener('click',showSynergy);$('mode').addEventListener('change',updateLimit);$('search').onkeydown=e=>{if(e.key==='Enter')build()};init();</script><script src="language.js?v=20260925-lang-v14"></script><script src="language-dynamic.js?v=20260925-lang-v29"></script></body></html>
