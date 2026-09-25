@@ -1,4 +1,5 @@
 name: Build YunaRunes APK
+# Force rebuild for release 1.7.0
 
 on:
   workflow_dispatch:
