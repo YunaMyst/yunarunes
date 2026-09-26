@@ -1,0 +1,31 @@
+name: Update Summoners War Codes
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-codes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update codes
+        run: python3 scripts/update_codes.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "YunaRunes Codes Bot"
+          git config user.email "actions@github.com"
+          git add codes.json
+          if git diff --cached --quiet; then
+            echo "No code changes."
+            exit 0
+          fi
+          git commit -m "Auto-update Summoners War codes"
+          git push
