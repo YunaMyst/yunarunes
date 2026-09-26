@@ -1,25 +1,5 @@
 {
   "updated": "2026-09-26",
   "source": "Current active-code verification",
-  "codes": [
-    {
-      "code": "WEEK2SKYFEVER26",
-      "rewards": [
-        "Energy ×100",
-        "Mana ×100,000",
-        "Mystical Scroll ×2"
-      ],
-      "ios": "https://withhive.me/313/WEEK2SKYFEVER26",
-      "expires": null
-    },
-    {
-      "code": "SEPSW2026I8B",
-      "rewards": [
-        "Legendary Water Scroll ×3",
-        "Mana ×300,000"
-      ],
-      "ios": "https://withhive.me/313/SEPSW2026I8B",
-      "expires": "2026-09-30T14:59:00Z"
-    }
-  ]
+  "codes": []
 }
