@@ -106,7 +106,10 @@
     },350);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  var queued=false;
   new MutationObserver(function(){
-    databaseFavorites();monsterPageFavorite();refreshFavoriteButtons();
+    if(queued)return;
+    queued=true;
+    setTimeout(function(){queued=false;databaseFavorites();monsterPageFavorite();refreshFavoriteButtons()},250);
   }).observe(document.body,{childList:true,subtree:true});
 })();
