@@ -36,3 +36,25 @@ html.yunarunes-app .yr-upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr)
   html.yr-mobile-device .yr-upgrade-grid{grid-template-columns:1fr!important}
   html.yr-mobile-device .yr-upgrade-card{min-height:104px!important}
 }
+
+/* YunaRunes complete mobile/phone/app refinement */
+.yr-quickbar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 14px}
+.yr-quickbar a{flex:1 1 150px;min-height:42px;display:flex;align-items:center;justify-content:center;background:#101923;border:1px solid #293746;border-radius:9px;color:#eaf2f8;text-decoration:none;font-size:12px;font-weight:900}
+.yr-quickbar a:hover{border-color:#35a9e1;background:#162636}
+.yr-skeleton{height:12px;border-radius:8px;background:#202b36;margin:8px 0;opacity:.7}
+.yr-page-tools{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 12px}
+.yr-page-tools .yr-count{color:#8fa0af;font-size:12px}
+@media(max-width:600px){
+ .yr-quickbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0 12px}
+ .yr-quickbar a{min-height:46px;padding:8px 6px;font-size:13px}
+ .yr-page-tools{gap:6px}
+ .yr-page-tools input,.yr-page-tools select,.yr-page-tools button{min-height:44px}
+ body{overflow-x:hidden}
+ img{max-width:100%}
+ input,select,button,.btn,.chip{min-height:44px}
+}
+@media(max-width:380px){.yr-quickbar{grid-template-columns:1fr}.yr-quickbar a{min-height:48px}}
+html.yunarunes-app .yr-quickbar{margin-left:2px;margin-right:2px}
+html.yunarunes-app .yr-quickbar a{min-height:48px;font-size:13px}
+html.yunarunes-app .wrap{padding-bottom:28px}
+html.yunarunes-app input,html.yunarunes-app select,html.yunarunes-app button{font-size:16px}
