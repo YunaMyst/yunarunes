@@ -17,3 +17,22 @@
 .yr-focus{outline:2px solid var(--yr-accent)!important;outline-offset:2px}
 @media(max-width:900px){.yr-upgrade-grid{grid-template-columns:repeat(2,1fr)}.yr-news-list{grid-template-columns:1fr}}
 @media(max-width:600px){.yr-upgrade-grid{grid-template-columns:1fr 1fr;gap:9px}.yr-upgrade-card{padding:14px}.yr-upgrade-card h3{font-size:13px}.yr-upgrade-card p{font-size:11px}.yr-news{padding:14px}.yr-top{right:12px;bottom:12px}}
+
+/* Mobile + APK pass */
+@media (max-width:600px), (max-device-width:600px){
+  html.yr-mobile-device body{overflow-x:hidden}
+  html.yr-mobile-device .wrap{padding-left:10px!important;padding-right:10px!important}
+  html.yr-mobile-device .yr-upgrade-grid{grid-template-columns:1fr 1fr!important}
+  html.yr-mobile-device .yr-upgrade-card{min-height:118px!important}
+  html.yr-mobile-device .yr-upgrade-card p{line-height:1.4!important}
+  html.yr-mobile-device input,html.yr-mobile-device select,html.yr-mobile-device button{font-size:16px}
+  html.yr-mobile-device img{max-width:100%}
+}
+html.yunarunes-app .yr-top{bottom:14px}
+html.yunarunes-app .yr-upgrade-card{touch-action:manipulation}
+html.yunarunes-app a,html.yunarunes-app button{touch-action:manipulation}
+html.yunarunes-app .yr-upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:420px){
+  html.yr-mobile-device .yr-upgrade-grid{grid-template-columns:1fr!important}
+  html.yr-mobile-device .yr-upgrade-card{min-height:104px!important}
+}
