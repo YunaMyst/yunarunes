@@ -1,0 +1,19 @@
+/* YunaRunes visual upgrade — additive only */
+:root{--yr-accent:#35a9e1;--yr-purple:#8b5cf6;--yr-surface:#111923;--yr-border:#293746}
+.yr-upgrade-card{background:linear-gradient(145deg,#151e29,#0f151d);border:1px solid var(--yr-border);border-radius:14px;padding:18px;color:#fff;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;display:block}
+.yr-upgrade-card:hover{transform:translateY(-3px);border-color:var(--yr-accent);box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.yr-upgrade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
+.yr-upgrade-card .yr-icon{font-size:25px;display:block;margin-bottom:9px}
+.yr-upgrade-card h3{margin:0 0 6px;font-size:15px}
+.yr-upgrade-card p{margin:0;color:#8fa0af;font-size:12px;line-height:1.5}
+.yr-news{margin-top:22px;background:linear-gradient(135deg,#151d28,#10161f);border:1px solid #2b3a4b;border-radius:14px;padding:18px}
+.yr-news h2{margin:0 0 12px;font-size:19px}
+.yr-news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.yr-news-item{padding:13px;background:#0d141c;border:1px solid #293746;border-radius:10px}
+.yr-news-item b{display:block;font-size:13px;margin-bottom:5px}
+.yr-news-item span{color:#8fa0af;font-size:11px;line-height:1.45}
+.yr-top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;border:1px solid #38516a;background:#101b29;color:#fff;font-size:18px;font-weight:900;cursor:pointer;z-index:9998;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s}
+.yr-top.show{opacity:1;pointer-events:auto;transform:none}
+.yr-focus{outline:2px solid var(--yr-accent)!important;outline-offset:2px}
+@media(max-width:900px){.yr-upgrade-grid{grid-template-columns:repeat(2,1fr)}.yr-news-list{grid-template-columns:1fr}}
+@media(max-width:600px){.yr-upgrade-grid{grid-template-columns:1fr 1fr;gap:9px}.yr-upgrade-card{padding:14px}.yr-upgrade-card h3{font-size:13px}.yr-upgrade-card p{font-size:11px}.yr-news{padding:14px}.yr-top{right:12px;bottom:12px}}
