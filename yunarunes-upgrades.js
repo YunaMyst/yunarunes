@@ -16,6 +16,6 @@
     '</div>';anchor.insertAdjacentElement('afterend',sec);
     var news=document.createElement('section');news.className='yr-news';news.innerHTML='<h2>✨ YunaRunes</h2><div class="yr-news-list"><div class="yr-news-item"><b>🔎 Pesquisa rápida</b><span>Usa a pesquisa da página inicial para abrir diretamente o monstro que procuras.</span></div><div class="yr-news-item"><b>📱 Feito para PC e telemóvel</b><span>A navegação e os cartões adaptam-se a ecrãs pequenos.</span></div><div class="yr-news-item"><b>💾 Sem login obrigatório</b><span>As ferramentas que suportam dados locais podem guardar trabalho neste dispositivo.</span></div></div>';sec.insertAdjacentElement('afterend',news)}
   function markCards(){document.querySelectorAll('.card,.tool,.mob').forEach(function(x){x.addEventListener('keydown',function(e){if(e.key==='Enter')x.click()})})}
-  function boot(){addStyles();addTop();keyboard();home();markCards()}
+  function boot(){if(/YunaRunesApp|Android|iPhone|iPad|Mobile/i.test(navigator.userAgent)){document.documentElement.classList.add('yr-mobile-device')}if(/YunaRunesApp/i.test(navigator.userAgent)){document.documentElement.classList.add('yunarunes-app')}addStyles();addTop();keyboard();home();markCards()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
