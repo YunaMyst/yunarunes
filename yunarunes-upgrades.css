@@ -1,60 +1,28 @@
-/* YunaRunes visual upgrade — additive only */
+/* YunaRunes visual + usability upgrade */
 :root{--yr-accent:#35a9e1;--yr-purple:#8b5cf6;--yr-surface:#111923;--yr-border:#293746}
-.yr-upgrade-card{background:linear-gradient(145deg,#151e29,#0f151d);border:1px solid var(--yr-border);border-radius:14px;padding:18px;color:#fff;text-decoration:none;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;display:block}
-.yr-upgrade-card:hover{transform:translateY(-3px);border-color:var(--yr-accent);box-shadow:0 14px 30px rgba(0,0,0,.22)}
-.yr-upgrade-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0}
-.yr-upgrade-card .yr-icon{font-size:25px;display:block;margin-bottom:9px}
-.yr-upgrade-card h3{margin:0 0 6px;font-size:15px}
-.yr-upgrade-card p{margin:0;color:#8fa0af;font-size:12px;line-height:1.5}
-.yr-news{margin-top:22px;background:linear-gradient(135deg,#151d28,#10161f);border:1px solid #2b3a4b;border-radius:14px;padding:18px}
-.yr-news h2{margin:0 0 12px;font-size:19px}
-.yr-news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.yr-news-item{padding:13px;background:#0d141c;border:1px solid #293746;border-radius:10px}
-.yr-news-item b{display:block;font-size:13px;margin-bottom:5px}
-.yr-news-item span{color:#8fa0af;font-size:11px;line-height:1.45}
 .yr-top{position:fixed;right:18px;bottom:18px;width:42px;height:42px;border-radius:50%;border:1px solid #38516a;background:#101b29;color:#fff;font-size:18px;font-weight:900;cursor:pointer;z-index:9998;opacity:0;pointer-events:none;transform:translateY(8px);transition:.2s}
 .yr-top.show{opacity:1;pointer-events:auto;transform:none}
 .yr-focus{outline:2px solid var(--yr-accent)!important;outline-offset:2px}
-@media(max-width:900px){.yr-upgrade-grid{grid-template-columns:repeat(2,1fr)}.yr-news-list{grid-template-columns:1fr}}
-@media(max-width:600px){.yr-upgrade-grid{grid-template-columns:1fr 1fr;gap:9px}.yr-upgrade-card{padding:14px}.yr-upgrade-card h3{font-size:13px}.yr-upgrade-card p{font-size:11px}.yr-news{padding:14px}.yr-top{right:12px;bottom:12px}}
-
-/* Mobile + APK pass */
-@media (max-width:600px), (max-device-width:600px){
-  html.yr-mobile-device body{overflow-x:hidden}
-  html.yr-mobile-device .wrap{padding-left:10px!important;padding-right:10px!important}
-  html.yr-mobile-device .yr-upgrade-grid{grid-template-columns:1fr 1fr!important}
-  html.yr-mobile-device .yr-upgrade-card{min-height:118px!important}
-  html.yr-mobile-device .yr-upgrade-card p{line-height:1.4!important}
-  html.yr-mobile-device input,html.yr-mobile-device select,html.yr-mobile-device button{font-size:16px}
-  html.yr-mobile-device img{max-width:100%}
-}
-html.yunarunes-app .yr-top{bottom:14px}
-html.yunarunes-app .yr-upgrade-card{touch-action:manipulation}
-html.yunarunes-app a,html.yunarunes-app button{touch-action:manipulation}
-html.yunarunes-app .yr-upgrade-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-@media(max-width:420px){
-  html.yr-mobile-device .yr-upgrade-grid{grid-template-columns:1fr!important}
-  html.yr-mobile-device .yr-upgrade-card{min-height:104px!important}
-}
-
-/* YunaRunes complete mobile/phone/app refinement */
-.yr-quickbar{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 14px}
-.yr-quickbar a{flex:1 1 150px;min-height:42px;display:flex;align-items:center;justify-content:center;background:#101923;border:1px solid #293746;border-radius:9px;color:#eaf2f8;text-decoration:none;font-size:12px;font-weight:900}
-.yr-quickbar a:hover{border-color:#35a9e1;background:#162636}
-.yr-skeleton{height:12px;border-radius:8px;background:#202b36;margin:8px 0;opacity:.7}
-.yr-page-tools{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 12px}
-.yr-page-tools .yr-count{color:#8fa0af;font-size:12px}
+.yr-fav{position:absolute;top:9px;right:9px;width:36px;height:36px;border-radius:50%;border:1px solid #405162;background:#0d141c;color:#aab8c5;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;box-shadow:0 5px 14px rgba(0,0,0,.3)}
+.yr-fav:hover,.yr-fav.is-favorite{color:#f4d35e;border-color:#8c7330;background:#1b1910}
+.yr-favorites{margin-top:22px}
+.yr-favorites .section-title{display:flex;align-items:center;justify-content:space-between}
+.yr-clear-favs{border:1px solid #293746;background:#101923;color:#9eacb8;border-radius:8px;padding:7px 10px;cursor:pointer;font-size:11px;font-weight:800}
+.yr-fav-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.yr-fav-card{display:flex;flex-direction:column;gap:4px;padding:13px;background:#111923;border:1px solid #293746;border-radius:10px;color:#fff;text-decoration:none;min-height:82px}
+.yr-fav-card:hover{border-color:#35a9e1;transform:translateY(-2px)}
+.yr-fav-card span{color:#f4d35e;font-size:16px}.yr-fav-card b{font-size:13px}.yr-fav-card small{color:#8fa0af;font-size:10px}
+.yr-monster-favorite{margin:8px 0}
+.yr-monster-favorite.is-favorite{border-color:#8c7330;color:#f4d35e}
+@media(max-width:900px){.yr-fav-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){
- .yr-quickbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin:8px 0 12px}
- .yr-quickbar a{min-height:46px;padding:8px 6px;font-size:13px}
- .yr-page-tools{gap:6px}
- .yr-page-tools input,.yr-page-tools select,.yr-page-tools button{min-height:44px}
- body{overflow-x:hidden}
- img{max-width:100%}
- input,select,button,.btn,.chip{min-height:44px}
+  .yr-fav-grid{grid-template-columns:1fr 1fr;gap:7px}
+  .yr-fav-card{padding:11px;min-height:76px}
+  .yr-fav{width:38px;height:38px;top:7px;right:7px}
+  .yr-top{right:12px;bottom:12px}
+  input,select,button,.btn,.chip{min-height:44px}
+  body{overflow-x:hidden}
 }
-@media(max-width:380px){.yr-quickbar{grid-template-columns:1fr}.yr-quickbar a{min-height:48px}}
-html.yunarunes-app .yr-quickbar{margin-left:2px;margin-right:2px}
-html.yunarunes-app .yr-quickbar a{min-height:48px;font-size:13px}
-html.yunarunes-app .wrap{padding-bottom:28px}
-html.yunarunes-app input,html.yunarunes-app select,html.yunarunes-app button{font-size:16px}
+@media(max-width:380px){.yr-fav-grid{grid-template-columns:1fr}}
+html.yunarunes-app .yr-fav{width:42px;height:42px}
+html.yunarunes-app a,html.yunarunes-app button{touch-action:manipulation}
