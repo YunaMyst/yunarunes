@@ -237,12 +237,182 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('
 </div>
 <div class="quiz-result" id="quizResult"></div>
 </section>
+
+<style id="yuna-academy-expansion-css">
+.academy-levels,.academy-extra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.level-card,.extra-card,.lab-card{background:#0d141c;border:1px solid var(--line);border-radius:12px;padding:15px}
+.level-card{position:relative;overflow:hidden}
+.level-card .level-icon{font-size:30px}.level-card h3,.extra-card h3,.lab-card h3{margin:8px 0 5px}.level-card p,.extra-card p,.lab-card p{color:var(--muted);font-size:12px;line-height:1.5;margin:0}
+.level-card.beginner{border-color:#3b7654}.level-card.intermediate{border-color:#365c85}.level-card.advanced{border-color:#62458a}
+.progress-wrap{margin:12px 0}.progress-track{height:12px;background:#080c11;border:1px solid var(--line);border-radius:20px;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--purple));transition:.3s}.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:5px}
+.academy-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-top:10px}.academy-check{display:flex;gap:8px;align-items:center;background:#0d141c;border:1px solid var(--line);border-radius:9px;padding:10px;color:#dce6ee;font-size:12px;cursor:pointer}.academy-check input{accent-color:var(--blue)}
+.lab-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}.lab-controls label{color:var(--muted);font-size:11px}.lab-controls input{width:100%;margin-top:5px;background:#090f15;color:#fff;border:1px solid #3b4b5a;border-radius:8px;padding:9px}.lab-result{margin-top:10px;background:#101923;border:1px solid #3b5064;border-radius:9px;padding:11px;color:#dce6ee;font-size:12px;line-height:1.5;min-height:42px}
+.scenario{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.scenario button{border:1px solid var(--line);background:#202b36;color:#fff;border-radius:9px;padding:11px;font-weight:800;cursor:pointer;text-align:left}.scenario button:hover{border-color:var(--blue)}
+.certificate{background:linear-gradient(135deg,#171324,#10161f);border:1px solid #5d477d;border-radius:15px;padding:20px;text-align:center}.certificate .seal{font-size:42px}.certificate h3{font-size:22px;margin:7px 0}.certificate p{color:var(--muted);font-size:12px;line-height:1.5}.certificate button{background:var(--blue);border:0;border-radius:9px;padding:10px 15px;font-weight:900;cursor:pointer}
+@media(max-width:850px){.academy-levels,.academy-extra-grid{grid-template-columns:1fr 1fr}.lab-controls{grid-template-columns:1fr}.academy-checks{grid-template-columns:1fr}}
+@media(max-width:600px){.academy-levels,.academy-extra-grid{grid-template-columns:1fr}.scenario{grid-template-columns:1fr}}
+</style>
+<section class="section" id="academy-levels">
+<h2 data-pt="🎓 Os 3 níveis da Yuna Academy" data-en="🎓 The 3 Yuna Academy levels"></h2>
+<p data-pt="Aprende por etapas: primeiro sobreviver e progredir, depois otimizar, e finalmente dominar PvP e construção avançada." data-en="Learn in stages: first survive and progress, then optimize, and finally master PvP and advanced building."></p>
+<div class="academy-levels">
+<div class="level-card beginner"><div class="level-icon">🟢</div><h3 data-pt="Iniciante" data-en="Beginner"></h3><p data-pt="Elementos, combate, stats, runas, primeiros monstros, dungeons e progressão." data-en="Elements, combat, stats, runes, first monsters, dungeons and progression."></p></div>
+<div class="level-card intermediate"><div class="level-icon">🔵</div><h3 data-pt="Intermediário" data-en="Intermediate"></h3><p data-pt="Speed tuning, eficiência de runas, artefatos, grindstones, equipas especializadas e farming." data-en="Speed tuning, rune efficiency, artifacts, grindstones, specialized teams and farming."></p></div>
+<div class="level-card advanced"><div class="level-icon">🟣</div><h3 data-pt="Avançado" data-en="Advanced"></h3><p data-pt="RTA, Arena, Siege, draft, counter, win condition, análise de matchups e otimização." data-en="RTA, Arena, Siege, drafting, counters, win conditions, matchups and optimization."></p></div>
+</div>
+</section>
+
+<section class="section" id="academy-progress">
+<h2 data-pt="📈 O teu progresso" data-en="📈 Your progress"></h2>
+<p data-pt="Marca as aulas que já dominaste. O progresso fica guardado neste navegador." data-en="Check the lessons you have mastered. Progress is saved in this browser."></p>
+<div class="progress-wrap"><div class="progress-label"><span data-pt="Progresso da Academy" data-en="Academy progress"></span><strong id="academyProgressText">0%</strong></div><div class="progress-track"><div class="progress-fill" id="academyProgressFill"></div></div></div>
+<div class="academy-checks" id="academyChecks">
+<label class="academy-check"><input type="checkbox" data-lesson="fundamentos"> 🟢 <span data-pt="Fundamentos" data-en="Fundamentals"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="combat"> ⚔️ <span data-pt="Combate" data-en="Combat"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="runes"> 💎 <span data-pt="Runas" data-en="Runes"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="stats"> 📊 <span data-pt="Stats" data-en="Stats"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="teams"> 🧙 <span data-pt="Equipas" data-en="Teams"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="dungeons"> 🏰 <span data-pt="Dungeons" data-en="Dungeons"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="artifacts"> 💠 <span data-pt="Artefatos" data-en="Artifacts"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="speed"> ⚡ <span data-pt="Speed Tuning" data-en="Speed Tuning"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="pvp"> 🏆 <span data-pt="PvP" data-en="PvP"></span></label>
+<label class="academy-check"><input type="checkbox" data-lesson="thinking"> 🧠 <span data-pt="Aprender a pensar" data-en="Learn to think"></span></label>
+</div></section>
+
+<section class="section" id="speed-tuning">
+<h2 data-pt="⚡ Speed Tuning" data-en="⚡ Speed Tuning"></h2>
+<p data-pt="Speed tuning é ajustar as velocidades para que a equipa jogue na ordem certa. A ordem pode depender de SPD, ATB, buffs, líder de velocidade e do conteúdo." data-en="Speed tuning means adjusting speeds so the team takes turns in the right order. Turn order can depend on SPD, ATB, buffs, speed leads and content."></p>
+<div class="academy-extra-grid">
+<div class="extra-card"><h3>1️⃣ Booster</h3><p data-pt="Normalmente cria a abertura: aumenta ATB ou SPD." data-en="Usually creates the opening by increasing ATB or SPD."></p></div>
+<div class="extra-card"><h3>2️⃣ Setup</h3><p data-pt="Strip, buff, debuff ou preparação para o dano." data-en="Strip, buff, debuff or setup before damage."></p></div>
+<div class="extra-card"><h3>3️⃣ Nuker</h3><p data-pt="Entra depois da preparação para aproveitar os debuffs e buffs." data-en="Acts after setup to capitalize on buffs and debuffs."></p></div>
+</div>
+<div class="tip" style="margin-top:10px" data-pt="💡 Não procures simplesmente a maior SPD. Uma velocidade maior pode quebrar a ordem da equipa. O objetivo é a velocidade certa para a função certa." data-en="💡 Do not simply chase the highest SPD. Higher speed can break your team's order. The goal is the right speed for the right role."></div>
+<div class="cta"><a class="primary" href="team-builder.html">⚔️ <span data-pt="Abrir Team Builder" data-en="Open Team Builder"></span></a><a href="optimizer.html">⚙️ <span data-pt="Abrir Optimizer" data-en="Open Optimizer"></span></a></div>
+</section>
+
+<section class="section" id="dungeons">
+<h2 data-pt="🏰 Escola de Dungeons" data-en="🏰 Dungeon School"></h2>
+<p data-pt="Aprende o objetivo de cada conteúdo antes de tentar copiar uma equipa." data-en="Learn the purpose of each piece of content before copying a team."></p>
+<div class="academy-extra-grid">
+<div class="extra-card"><h3>🏔️ Giants</h3><p data-pt="Grande foco inicial em farming de runas. Aprende estabilidade antes de procurar velocidade." data-en="A major early rune-farming focus. Learn stability before chasing speed."></p></div>
+<div class="extra-card"><h3>🐉 Dragons</h3><p data-pt="Exige atenção a sobrevivência, debuffs e consistência." data-en="Requires attention to survival, debuffs and consistency."></p></div>
+<div class="extra-card"><h3>💀 Necropolis</h3><p data-pt="Mecânica favorece ataques multi-hit e builds adequadas ao conteúdo." data-en="Its mechanics favor multi-hit attacks and appropriate builds."></p></div>
+<div class="extra-card"><h3>⚙️ Steel Fortress</h3><p data-pt="Conteúdo para conjuntos utilitários e builds específicas." data-en="Content for utility sets and specialized builds."></p></div>
+<div class="extra-card"><h3>☠️ Punisher's Crypt</h3><p data-pt="Outro conteúdo de farming que recompensa builds preparadas para as suas mecânicas." data-en="Another farming activity that rewards builds prepared for its mechanics."></p></div>
+<div class="extra-card"><h3>🌌 Rift / Raid</h3><p data-pt="Conteúdo para materiais, grindstones e progressão avançada." data-en="Content for materials, grindstones and advanced progression."></p></div>
+</div>
+</section>
+
+<section class="section" id="artifacts">
+<h2 data-pt="💠 Artefatos, Grindstones e Gems" data-en="💠 Artifacts, Grindstones and Gems"></h2>
+<div class="academy-extra-grid">
+<div class="extra-card"><h3>💠 Artefatos</h3><p data-pt="Usa Type e Attribute Artifacts para reforçar a função do monstro. Não olhes só para o número principal: os sub-effects podem mudar completamente o valor." data-en="Use Type and Attribute Artifacts to reinforce a monster's role. Do not look only at the main number: sub-effects can completely change its value."></p></div>
+<div class="extra-card"><h3>🔨 Grindstones</h3><p data-pt="Servem para melhorar determinados substats de runas. Prioriza as runas que já têm uma base excelente." data-en="They improve certain rune substats. Prioritize runes that already have an excellent base."></p></div>
+<div class="extra-card"><h3>💎 Enchanted Gems</h3><p data-pt="Permitem substituir um substat em condições específicas. Não gastes recursos raros numa runa que não vais usar." data-en="They can replace a substat under specific conditions. Do not spend rare resources on a rune you will not use."></p></div>
+</div>
+</section>
+
+<section class="section" id="pvp">
+<h2 data-pt="🏆 PvP Academy" data-en="🏆 PvP Academy"></h2>
+<div class="academy-extra-grid">
+<div class="extra-card"><h3>⚔️ Arena</h3><p data-pt="Pensa em velocidade, abertura, controlo, defesa e condição de vitória." data-en="Think about speed, opening, control, defense and win condition."></p></div>
+<div class="extra-card"><h3>🏰 Siege / Guild</h3><p data-pt="No 3v3, consistência e counters são tão importantes quanto dano bruto." data-en="In 3v3, consistency and counters matter as much as raw damage."></p></div>
+<div class="extra-card"><h3>👑 RTA</h3><p data-pt="Aprende draft, ban, picks, sinergia, counter-pick e como identificar a win condition adversária." data-en="Learn drafting, bans, picks, synergy, counter-picks and how to identify the opponent's win condition."></p></div>
+</div>
+</section>
+
+<section class="section" id="why-lost">
+<h2 data-pt="🧠 Por que perdi?" data-en="🧠 Why did I lose?"></h2>
+<p data-pt="Escolhe o problema. A Academy ajuda-te a pensar antes de simplesmente trocar todas as runas." data-en="Choose the problem. The Academy helps you think before simply changing every rune."></p>
+<div class="scenario">
+<button onclick="academyScenario('dead')">💀 <span data-pt="Meu monstro morre rápido" data-en="My monster dies too fast"></span></button>
+<button onclick="academyScenario('slow')">🐌 <span data-pt="Nunca jogo primeiro" data-en="I never move first"></span></button>
+<button onclick="academyScenario('debuff')">🎯 <span data-pt="Meus debuffs não entram" data-en="My debuffs do not land"></span></button>
+<button onclick="academyScenario('damage')">💥 <span data-pt="Meu dano é baixo" data-en="My damage is low"></span></button>
+<button onclick="academyScenario('order')">🔄 <span data-pt="Minha equipa joga fora de ordem" data-en="My team moves out of order"></span></button>
+<button onclick="academyScenario('content')">🧩 <span data-pt="A build funciona num conteúdo e falha noutro" data-en="The build works in one content but fails in another"></span></button>
+</div>
+<div class="lab-result" id="scenarioResult"></div>
+</section>
+
+<section class="section" id="laboratory">
+<h2 data-pt="🧪 Laboratório: experimenta com Stats" data-en="🧪 Laboratory: experiment with Stats"></h2>
+<p data-pt="Um laboratório simples para entender por que Accuracy e Resistance não funcionam como uma garantia absoluta." data-en="A simple lab to understand why Accuracy and Resistance are not an absolute guarantee."></p>
+<div class="lab-card">
+<div class="lab-controls">
+<label>ACC %<input id="labAcc" type="number" min="0" max="100" value="45"></label>
+<label>RES %<input id="labRes" type="number" min="0" max="100" value="100"></label>
+<label>ATB %<input id="labAtb" type="number" min="0" max="100" value="30"></label>
+</div>
+<button class="btn" style="margin-top:10px" onclick="runAcademyLab()" data-pt="🧪 Testar" data-en="🧪 Test"></button>
+<div class="lab-result" id="labResult"></div>
+</div>
+<div class="tip" style="margin-top:10px" data-pt="📚 A Academy explica o conceito; os valores exatos devem sempre ser interpretados de acordo com as regras atuais do jogo e da skill." data-en="📚 The Academy explains the concept; exact values should always be interpreted according to the current game and skill rules."></div>
+</section>
+
+<section class="section" id="build-monster">
+<h2 data-pt="🧙 Aprende a construir um monstro" data-en="🧙 Learn to build a monster"></h2>
+<div class="steps">
+<div class="step"><div><b data-pt="1. Qual é a função?" data-en="1. What is its role?"></b><span data-pt="Damage, tank, support, control, cleanser, booster ou combinação?" data-en="Damage, tank, support, control, cleanser, booster or a combination?"></span></div></div>
+<div class="step"><div><b data-pt="2. Qual skill quero maximizar?" data-en="2. Which skill do I want to maximize?"></b><span data-pt="Lê as skills e identifica scaling, debuffs, buffs, cooldowns e condições." data-en="Read the skills and identify scaling, debuffs, buffs, cooldowns and conditions."></span></div></div>
+<div class="step"><div><b data-pt="3. Qual conteúdo?" data-en="3. Which content?"></b><span data-pt="PvE, Arena, Siege ou RTA podem exigir construções diferentes." data-en="PvE, Arena, Siege or RTA may require different builds."></span></div></div>
+<div class="step"><div><b data-pt="4. Só depois escolhe as runas" data-en="4. Only then choose runes"></b><span data-pt="Escolhe sets, main stats e substats para cumprir o objetivo." data-en="Choose sets, main stats and substats to meet the goal."></span></div></div>
+</div>
+<div class="cta"><a class="primary" href="database.html">👹 <span data-pt="Pesquisar Monstro" data-en="Search Monster"></span></a><a href="team-builder.html">🧙 <span data-pt="Montar Equipa" data-en="Build Team"></span></a></div>
+</section>
+
+<section class="section" id="certificate">
+<div class="certificate">
+<div class="seal">🏆</div>
+<h3 data-pt="Certificado Yuna Academy" data-en="Yuna Academy Certificate"></h3>
+<p data-pt="Completa pelo menos 80% das aulas e o teste de conhecimentos para desbloquear o teu certificado de conclusão no navegador." data-en="Complete at least 80% of the lessons and the knowledge test to unlock your completion certificate in this browser."></p>
+<strong id="certificateStatus"></strong>
+</div>
+</section>
 </div></div>
 </main>
 <script>
 function academyQuiz(ok){const e=document.getElementById("quizResult");e.textContent=ok?"✅ "+(document.documentElement.lang==="en"?"Correct! Stun prevents the monster from acting.":"Correto! Stun impede o monstro de agir."):"❌ "+(document.documentElement.lang==="en"?"Not quite. Stun prevents the monster from acting.":"Ainda não. Stun impede o monstro de agir.");}
 (()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};document.querySelectorAll('#side button').forEach(b=>b.onclick=()=>{document.getElementById(b.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#'+b.dataset.target);document.querySelectorAll('#side button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')location.reload()});})();
 </script>
-<script src="language.js?v=20260923-lang-v23"></script>
+<script>
+function academyScenario(type){
+ const en=document.documentElement.lang==='en';
+ const data={
+ dead:[en?'Check HP, DEF, damage reduction, healing and whether the monster is taking too many turns from the enemy.':'Verifica HP, DEF, redução de dano, cura e se o monstro está a sofrer demasiados turnos do inimigo.'],
+ slow:[en?'Check base SPD, rune SPD, speed lead, ATB boosts and whether your team is speed tuned.':'Verifica SPD base, SPD das runas, líder de velocidade, boosts de ATB e se a equipa está speed tuned.'],
+ debuff:[en?'Check skill activation chance first, then Accuracy versus Resistance, and make sure the skill actually applies the effect.':'Verifica primeiro a chance de ativação da skill, depois Accuracy contra Resistance, e confirma que a skill realmente aplica o efeito.'],
+ damage:[en?'Check the skill scaling, ATK/DEF/HP, CR, CD, debuffs and whether the target has damage mitigation.':'Verifica o scaling da skill, ATK/DEF/HP, CR, CD, debuffs e se o alvo possui redução de dano.'],
+ order:[en?'Write the intended sequence: booster → setup → debuff → damage. Then tune the minimum speeds needed.':'Escreve a sequência pretendida: booster → setup → debuff → damage. Depois ajusta as velocidades mínimas necessárias.'],
+ content:[en?'Ask what the content requires. A PvE build, Siege build and RTA build can have different priorities.':'Pergunta o que o conteúdo exige. Uma build PvE, Siege e RTA podem ter prioridades diferentes.']
+ };
+ document.getElementById('scenarioResult').textContent=data[type]?.[0]||'';
+}
+function runAcademyLab(){
+ const acc=Math.max(0,Math.min(100,Number(document.getElementById('labAcc').value)||0));
+ const res=Math.max(0,Math.min(100,Number(document.getElementById('labRes').value)||0));
+ const atb=Math.max(0,Math.min(100,Number(document.getElementById('labAtb').value)||0));
+ const resist=Math.max(15,res-acc);
+ const en=document.documentElement.lang==='en';
+ document.getElementById('labResult').textContent=en
+ ? 'Resistance check example: '+res+'% RES − '+acc+'% ACC = '+resist+'% minimum resistance floor. ATB boost entered: '+atb+'%. This is a teaching model, not a battle simulator.'
+ : 'Exemplo de verificação: '+res+'% RES − '+acc+'% ACC = '+resist+'% de resistência mínima. Boost de ATB introduzido: '+atb+'%. Isto é um modelo educativo, não um simulador de batalha.';
+}
+(function(){
+ const key='yuna-academy-progress-v1';
+ const boxes=[...document.querySelectorAll('.academy-check input')];
+ let saved={};try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(_){}
+ boxes.forEach(b=>{b.checked=!!saved[b.dataset.lesson];b.addEventListener('change',()=>{saved[b.dataset.lesson]=b.checked;try{localStorage.setItem(key,JSON.stringify(saved))}catch(_){};updateAcademyProgress()})});
+ function updateAcademyProgress(){
+  const pct=Math.round(boxes.filter(b=>b.checked).length/boxes.length*100);
+  const p=document.getElementById('academyProgressText'),f=document.getElementById('academyProgressFill');
+  if(p)p.textContent=pct+'%';if(f)f.style.width=pct+'%';
+  const cert=document.getElementById('certificateStatus');
+  if(cert){const passed=pct>=80;cert.textContent=passed?(document.documentElement.lang==='en'?'🎓 Certificate unlocked!':'🎓 Certificado desbloqueado!'):(document.documentElement.lang==='en'?'🔒 Complete 80% to unlock.':'🔒 Completa 80% para desbloquear.');cert.style.color=passed?'#35a9e1':''}
+ }
+ updateAcademyProgress();
+})();
+</script><script src="language.js?v=20260923-lang-v23"></script>
 <script src="language-dynamic.js?v=20261003-header-controls-v14"></script>
 </body></html>
