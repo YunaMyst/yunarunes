@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080c11">
+<title>YunaRunes — Yuna Academy</title>
+<style>
+:root{--bg:#080c11;--panel:#111923;--panel2:#0d141c;--line:#293746;--text:#f2f6fa;--muted:#8fa0af;--blue:#35a9e1;--purple:#8b5cf6;--gold:#e7c85a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% -10%,#24113d 0,#0b1016 34%,var(--bg) 65%);color:var(--text);font-family:Arial,sans-serif}
+.wrap{max-width:1250px;margin:auto;padding:24px 16px 50px}.hero{background:linear-gradient(135deg,#171f2b,#10161f);border:1px solid #35475a;border-radius:18px;padding:30px;position:relative;overflow:hidden}.hero:after{content:"🎓";position:absolute;right:35px;top:18px;font-size:100px;opacity:.08}.eyebrow{color:#c8b6ff;font-weight:900;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:42px;margin:8px 0}.hero h1 span{color:var(--blue)}.hero p{max-width:820px;color:var(--muted);line-height:1.65;font-size:15px}.search{display:flex;gap:8px;max-width:720px;margin-top:20px}.search input{flex:1;background:#090f15;color:#fff;border:1px solid #3b4b5a;border-radius:10px;padding:14px;font-size:15px}.search button{border:0;border-radius:10px;padding:12px 18px;background:var(--blue);font-weight:900;cursor:pointer}.layout{display:grid;grid-template-columns:230px 1fr;gap:14px;margin-top:16px}.side{position:sticky;top:82px;height:max-content;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:10px}.side button{display:block;width:100%;text-align:left;background:transparent;color:#dce6ee;border:0;border-radius:9px;padding:11px;cursor:pointer;font-weight:800}.side button:hover,.side button.active{background:#182638;color:var(--blue)}.content{min-width:0}.section{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:14px}.section h2{margin:0 0 7px;font-size:24px}.section>p{color:var(--muted);line-height:1.6}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.card{background:#0d141c;border:1px solid var(--line);border-radius:12px;padding:14px}.card h3{margin:7px 0 5px;font-size:16px}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.5}.term{cursor:pointer}.term:hover{border-color:var(--blue);transform:translateY(-1px)}.element{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.el{border-radius:12px;padding:15px;text-align:center;border:1px solid var(--line);background:#0d141c}.el b{display:block;font-size:25px;margin-bottom:8px}.el span{display:block;color:var(--muted);font-size:11px;margin-top:4px}.arrow{color:var(--gold);font-weight:900}.steps{counter-reset:step;display:grid;gap:9px}.step{display:grid;grid-template-columns:45px 1fr;align-items:center;background:#0d141c;border:1px solid var(--line);border-radius:12px;padding:12px}.step:before{counter-increment:step;content:counter(step);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#1b2d3e;color:var(--blue);font-weight:900}.step b{display:block}.step span{display:block;color:var(--muted);font-size:12px;margin-top:3px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.stat b{color:var(--blue);font-size:17px}.stat span{display:block;color:var(--muted);font-size:11px;margin-top:4px}.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.gloss{background:#0d141c;border:1px solid var(--line);border-radius:10px;padding:12px}.gloss strong{color:#fff}.gloss span{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:4px}.tip{border-left:3px solid var(--purple);background:#151324;padding:12px 14px;border-radius:8px;color:#d9d0ef;font-size:12px;line-height:1.5}.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.cta a{background:#202b36;border:1px solid var(--line);color:#fff;text-decoration:none;padding:10px 13px;border-radius:9px;font-weight:800;font-size:12px}.cta a.primary{background:var(--blue);color:#061018;border-color:var(--blue)}.hidden{display:none!important}@media(max-width:850px){.layout{grid-template-columns:1fr}.side{position:static;display:grid;grid-template-columns:repeat(2,1fr);gap:4px}.cards{grid-template-columns:repeat(2,1fr)}.element{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.wrap{padding:14px 10px 35px}.hero{padding:20px}.hero h1{font-size:31px}.hero:after{font-size:70px;right:10px}.search{display:grid;grid-template-columns:1fr}.side{grid-template-columns:1fr 1fr}.cards,.glossary,.stats{grid-template-columns:1fr 1fr}.element{grid-template-columns:1fr 1fr}.section{padding:15px}.section h2{font-size:20px}}
+</style>
+</head>
+<body>
+<header class="top"></header>
+<main class="wrap">
+<section class="hero">
+<div class="eyebrow">🦊 YunaRunes • Yuna Academy</div>
+<h1 data-pt="Aprende Summoners War do <span>zero</span>" data-en="Learn Summoners War from <span>zero</span>"></h1>
+<p data-pt="Um guia simples para novos jogadores entenderem combate, elementos, runas, stats, funções dos monstros e a ordem de progressão. Aprende primeiro os fundamentos e depois usa as ferramentas do YunaRunes para montar as tuas builds." data-en="A simple guide for new players to understand combat, elements, runes, stats, monster roles, and progression. Learn the fundamentals first, then use YunaRunes tools to build your teams and builds."></p>
+<div class="search"><input id="academySearch" data-pt-placeholder="Pesquisar um termo: stun, proc, SPD, runa..." data-en-placeholder="Search a term: stun, proc, SPD, rune..."><button id="searchBtn" data-pt="Pesquisar" data-en="Search"></button></div>
+</section>
+
+<div class="layout">
+<aside class="side" id="side">
+<button class="active" data-target="start">🎓 <span data-pt="Comece Aqui" data-en="Start Here"></span></button>
+<button data-target="combat">⚔️ <span data-pt="Combate" data-en="Combat"></span></button>
+<button data-target="elements">🔥 <span data-pt="Elementos" data-en="Elements"></span></button>
+<button data-target="runes">🧿 <span data-pt="Runas" data-en="Runes"></span></button>
+<button data-target="stats">📊 <span data-pt="Stats" data-en="Stats"></span></button>
+<button data-target="roles">🧙 <span data-pt="Funções" data-en="Roles"></span></button>
+<button data-target="progress">🏰 <span data-pt="Progressão" data-en="Progression"></span></button>
+<button data-target="glossary">📖 <span data-pt="Glossário" data-en="Glossary"></span></button>
+</aside>
+
+<div class="content">
+<section class="section" id="start">
+<h2 data-pt="🎓 Comece Aqui" data-en="🎓 Start Here"></h2>
+<p data-pt="Se acabaste de começar, não precisas entender tudo de uma vez. Segue esta ordem e vais aprender o jogo sem te perder." data-en="If you just started, you do not need to understand everything at once. Follow this order and learn the game without getting lost."></p>
+<div class="steps">
+<div class="step"><div><b data-pt="Aprende os elementos" data-en="Learn the elements"></b><span data-pt="Fogo, Água, Vento, Luz e Trevas." data-en="Fire, Water, Wind, Light and Dark."></span></div></div>
+<div class="step"><div><b data-pt="Aprende o básico do combate" data-en="Learn basic combat"></b><span data-pt="Turnos, velocidade, efeitos, vantagem elemental e resistência." data-en="Turns, speed, effects, elemental advantage and resistance."></span></div></div>
+<div class="step"><div><b data-pt="Monta os primeiros 6★" data-en="Build your first 6★ monsters"></b><span data-pt="Concentra recursos nos monstros que realmente vais usar." data-en="Focus resources on monsters you will actually use."></span></div></div>
+<div class="step"><div><b data-pt="Começa a farmar runas" data-en="Start farming runes"></b><span data-pt="Aprende sets, slots, main stats e substats antes de tentar builds perfeitas." data-en="Learn sets, slots, main stats and substats before chasing perfect builds."></span></div></div>
+<div class="step"><div><b data-pt="Usa o YunaRunes" data-en="Use YunaRunes"></b><span data-pt="Pesquisa monstros, testa equipas e usa o Optimizer quando tiveres inventário suficiente." data-en="Search monsters, test teams and use the Optimizer when you have enough inventory."></span></div></div>
+</div>
+<div class="cta"><a class="primary" href="database.html">👹 <span data-pt="Base de Monstros" data-en="Monster Database"></span></a><a href="runes.html">🧿 <span data-pt="Ver Runas" data-en="View Runes"></span></a><a href="optimizer.html">⚙️ <span data-pt="Abrir Optimizer" data-en="Open Optimizer"></span></a></div>
+</section>
+
+<section class="section" id="combat">
+<h2 data-pt="⚔️ Combate: aprende os termos" data-en="⚔️ Combat: learn the terms"></h2>
+<p data-pt="Os termos abaixo aparecem constantemente em guias e builds. Clica neles para pesquisar rapidamente." data-en="These terms appear constantly in guides and builds. Click them to search quickly."></p>
+<div class="cards">
+<div class="card term" data-term="proc"><b>🎯 PROC</b><h3 data-pt="Ativação de um efeito" data-en="Effect activation"></h3><p data-pt="É quando uma condição ou efeito é ativado. Exemplo: uma skill pode ter uma chance de ativar um efeito adicional." data-en="When a condition or effect activates. For example, a skill may have a chance to trigger an additional effect."></p></div>
+<div class="card term" data-term="stun"><b>💫 STUN</b><h3 data-pt="Impedido de agir" data-en="Unable to act"></h3><p data-pt="Um monstro atordoado não consegue realizar a sua ação enquanto o efeito estiver ativo." data-en="A stunned monster cannot take its action while the effect is active."></p></div>
+<div class="card term" data-term="freeze"><b>❄️ FREEZE</b><h3 data-pt="Controle por congelamento" data-en="Freeze control"></h3><p data-pt="Impede a ação do monstro enquanto o efeito de congelamento estiver ativo." data-en="Prevents the monster from taking action while frozen."></p></div>
+<div class="card term" data-term="sleep"><b>😴 SLEEP</b><h3 data-pt="Sono" data-en="Sleep"></h3><p data-pt="O monstro fica incapaz de agir até o efeito terminar ou ser interrompido conforme as regras da skill." data-en="The monster cannot act until the effect ends or is interrupted according to the skill rules."></p></div>
+<div class="card term" data-term="strip"><b>🧹 STRIP</b><h3 data-pt="Remover buffs" data-en="Remove buffs"></h3><p data-pt="É a remoção de efeitos positivos de um inimigo, normalmente através de uma skill." data-en="Removing positive effects from an enemy, usually through a skill."></p></div>
+<div class="card term" data-term="cleanse"><b>✨ CLEANSE</b><h3 data-pt="Remover debuffs" data-en="Remove debuffs"></h3><p data-pt="Remove efeitos negativos de um aliado, quando a skill permite." data-en="Removes negative effects from an ally when the skill allows it."></p></div>
+<div class="card term" data-term="dot"><b>☠️ DoT</b><h3 data-pt="Dano ao longo do tempo" data-en="Damage over time"></h3><p data-pt="Dano que é aplicado posteriormente por um efeito, em vez de acontecer todo no golpe inicial." data-en="Damage applied over time by an effect rather than all at the initial hit."></p></div>
+<div class="card term" data-term="cc"><b>🔒 CC</b><h3 data-pt="Controle de grupo" data-en="Crowd control"></h3><p data-pt="Termo usado para efeitos que limitam ou impedem as ações dos inimigos." data-en="A term for effects that limit or prevent enemy actions."></p></div>
+<div class="card term" data-term="atb"><b>⚡ ATB</b><h3 data-pt="Barra de ação" data-en="Action bar"></h3><p data-pt="Representa a progressão até o próximo turno. Vários efeitos podem aumentar ou reduzir esta barra." data-en="Represents progress toward the next turn. Various effects can increase or decrease it."></p></div>
+<div class="card term" data-term="dps"><b>🗡️ DPS</b><h3 data-pt="Damage dealer" data-en="Damage dealer"></h3><p data-pt="Monstro cuja função principal é causar dano." data-en="A monster whose main role is dealing damage."></p></div>
+</div>
+</section>
+
+<section class="section" id="elements">
+<h2 data-pt="🔥 Elementos e vantagem elemental" data-en="🔥 Elements and elemental advantage"></h2>
+<p data-pt="A relação básica é: Fogo → Vento → Água → Fogo. Luz e Trevas formam o par entre si. A vantagem elemental pode afetar a consistência dos ataques e de certos efeitos." data-en="The basic relationship is: Fire → Wind → Water → Fire. Light and Dark form a pair with each other. Elemental advantage can affect attack consistency and certain effects."></p>
+<div class="element">
+<div class="el"><b>🔥</b><strong data-pt="Fogo" data-en="Fire"></strong><span>→ <span class="arrow">Vento</span></span><span>← Água</span></div>
+<div class="el"><b>🌿</b><strong data-pt="Vento" data-en="Wind"></strong><span>→ <span class="arrow">Água</span></span><span>← Fogo</span></div>
+<div class="el"><b>💧</b><strong data-pt="Água" data-en="Water"></strong><span>→ <span class="arrow">Fogo</span></span><span>← Vento</span></div>
+<div class="el"><b>☀️</b><strong data-pt="Luz" data-en="Light"></strong><span>↔ <span class="arrow">Trevas</span></span><span>e vice-versa</span></div>
+<div class="el"><b>🌑</b><strong data-pt="Trevas" data-en="Dark"></strong><span>↔ <span class="arrow">Luz</span></span><span>e vice-versa</span></div>
+</div>
+<div class="tip" style="margin-top:10px" data-pt="💡 Dica: vantagem elemental não significa que um monstro vai ganhar automaticamente. Stats, skills, runas, ordem dos turnos e composição da equipa continuam a importar." data-en="💡 Tip: elemental advantage does not automatically mean a monster will win. Stats, skills, runes, turn order and team composition still matter."></div>
+</section>
+
+<section class="section" id="runes">
+<h2 data-pt="🧿 Runas: aprende antes de otimizar" data-en="🧿 Runes: learn before optimizing"></h2>
+<div class="cards">
+<div class="card"><b>1️⃣</b><h3 data-pt="Slots 1–6" data-en="Slots 1–6"></h3><p data-pt="Cada slot tem regras específicas para main stats. Aprende primeiro o que pode aparecer em cada slot." data-en="Each slot has specific main-stat rules. First learn what can appear in each slot."></p></div>
+<div class="card"><b>📌</b><h3 data-pt="Main stat" data-en="Main stat"></h3><p data-pt="É o atributo principal da runa. Em geral, slots 2, 4 e 6 são os que mais mudam a construção." data-en="The rune's main attribute. In general, slots 2, 4 and 6 have the biggest impact on a build."></p></div>
+<div class="card"><b>➕</b><h3 data-pt="Substats" data-en="Substats"></h3><p data-pt="São os atributos adicionais que fazem uma runa crescer e definem grande parte do potencial da build." data-en="Additional attributes that make a rune scale and define much of a build's potential."></p></div>
+<div class="card"><b>🔷</b><h3 data-pt="Sets" data-en="Sets"></h3><p data-pt="Sets de 2 e 4 runas ativam bónus específicos. O melhor set depende do monstro e do objetivo." data-en="2- and 4-rune sets activate specific bonuses. The right set depends on the monster and goal."></p></div>
+<div class="card"><b>💎</b><h3 data-pt="Grind / Gem" data-en="Grind / Gem"></h3><p data-pt="Ferramentas avançadas para melhorar ou trocar determinados substats em runas, conforme as regras do jogo." data-en="Advanced tools to improve or replace certain substats according to the game's rules."></p></div>
+<div class="card"><b>🧹</b><h3 data-pt="Quando vender" data-en="When to sell"></h3><p data-pt="Não guardes tudo. Aprende a avaliar qualidade, substats, slot e utilidade para os monstros que tens." data-en="Do not keep everything. Learn to evaluate quality, substats, slot and usefulness for your monsters."></p></div>
+</div>
+<div class="tip" style="margin-top:10px" data-pt="💡 Depois de entenderes os fundamentos, abre o Optimizer e deixa o inventário fazer o trabalho pesado." data-en="💡 Once you understand the fundamentals, open the Optimizer and let your inventory do the heavy lifting."></div>
+</section>
+
+<section class="section" id="stats">
+<h2 data-pt="📊 Stats essenciais" data-en="📊 Essential stats"></h2>
+<div class="stats">
+<div class="card stat"><b>HP</b><span data-pt="Vida. Define quanto dano o monstro aguenta." data-en="Health. How much damage the monster can take."></span></div>
+<div class="card stat"><b>ATK</b><span data-pt="Ataque. Afeta o dano de habilidades que usam ATK." data-en="Attack. Affects damage from skills that scale with ATK."></span></div>
+<div class="card stat"><b>DEF</b><span data-pt="Defesa. Afeta a resistência a dano conforme as fórmulas do jogo." data-en="Defense. Affects damage mitigation according to game formulas."></span></div>
+<div class="card stat"><b>SPD</b><span data-pt="Velocidade. Influencia a ordem dos turnos e várias interações." data-en="Speed. Influences turn order and many interactions."></span></div>
+<div class="card stat"><b>CR</b><span data-pt="Taxa crítica. Probabilidade de causar um golpe crítico quando aplicável." data-en="Critical Rate. Chance to land a critical hit when applicable."></span></div>
+<div class="card stat"><b>CD</b><span data-pt="Dano crítico. Aumenta o dano dos golpes críticos." data-en="Critical Damage. Increases critical-hit damage."></span></div>
+<div class="card stat"><b>ACC</b><span data-pt="Precisão. Ajuda a aplicar efeitos quando a skill usa uma verificação de precisão." data-en="Accuracy. Helps apply effects when a skill uses an accuracy check."></span></div>
+<div class="card stat"><b>RES</b><span data-pt="Resistência. Ajuda a resistir a efeitos que fazem uma verificação de resistência." data-en="Resistance. Helps resist effects that perform a resistance check."></span></div>
+</div>
+</section>
+
+<section class="section" id="roles">
+<h2 data-pt="🧙 Funções dos monstros" data-en="🧙 Monster roles"></h2>
+<div class="cards">
+<div class="card"><b>⚔️</b><h3 data-pt="Damage Dealer" data-en="Damage Dealer"></h3><p data-pt="Focado em causar dano." data-en="Focused on dealing damage."></p></div>
+<div class="card"><b>🛡️</b><h3 data-pt="Tank" data-en="Tank"></h3><p data-pt="Construído para sobreviver e absorver pressão." data-en="Built to survive and absorb pressure."></p></div>
+<div class="card"><b>💚</b><h3 data-pt="Healer" data-en="Healer"></h3><p data-pt="Recupera HP ou mantém aliados vivos." data-en="Restores HP or keeps allies alive."></p></div>
+<div class="card"><b>✨</b><h3 data-pt="Cleanser" data-en="Cleanser"></h3><p data-pt="Remove debuffs dos aliados." data-en="Removes debuffs from allies."></p></div>
+<div class="card"><b>🔒</b><h3 data-pt="Control / CC" data-en="Control / CC"></h3><p data-pt="Limita ações através de efeitos de controlo." data-en="Limits actions through control effects."></p></div>
+<div class="card"><b>⚡</b><h3 data-pt="Booster" data-en="Booster"></h3><p data-pt="Aumenta ATB, SPD ou outros recursos da equipa." data-en="Boosts ATB, SPD or other team resources."></p></div>
+</div>
+</section>
+
+<section class="section" id="progress">
+<h2 data-pt="🏰 Progressão: o que fazer primeiro?" data-en="🏰 Progression: what should you do first?"></h2>
+<div class="steps">
+<div class="step"><div><b data-pt="Tutorial e missões iniciais" data-en="Tutorial and early missions"></b><span data-pt="Aprende as mecânicas e recolhe os recursos iniciais." data-en="Learn the mechanics and collect starting resources."></span></div></div>
+<div class="step"><div><b data-pt="Primeiros monstros úteis" data-en="First useful monsters"></b><span data-pt="Escolhe uma equipa que consiga avançar no conteúdo PvE inicial." data-en="Build a team that can progress through early PvE content."></span></div></div>
+<div class="step"><div><b data-pt="Runas e farming" data-en="Runes and farming"></b><span data-pt="Melhora a qualidade das runas gradualmente; não precisas de perfeição logo no início." data-en="Improve rune quality gradually; you do not need perfection at the start."></span></div></div>
+<div class="step"><div><b data-pt="Conteúdo intermédio" data-en="Mid-game content"></b><span data-pt="Começa a diversificar equipas para diferentes conteúdos e requisitos." data-en="Start diversifying teams for different content and requirements."></span></div></div>
+<div class="step"><div><b data-pt="Conteúdo avançado" data-en="Advanced content"></b><span data-pt="Usa builds especializadas, otimização e conhecimento de matchups." data-en="Use specialized builds, optimization and matchup knowledge."></span></div></div>
+</div>
+</section>
+
+<section class="section" id="glossary">
+<h2 data-pt="📖 Glossário YunaRunes" data-en="📖 YunaRunes Glossary"></h2>
+<p data-pt="Uma referência rápida para termos que vais encontrar no jogo e nas comunidades." data-en="A quick reference for terms you will find in the game and community."></p>
+<div class="glossary">
+<div class="gloss"><strong>Proc</strong><span data-pt="Ativação de uma condição ou efeito." data-en="Activation of a condition or effect."></span></div>
+<div class="gloss"><strong>CC</strong><span data-pt="Crowd Control: efeitos que limitam ações." data-en="Crowd Control: effects that limit actions."></span></div>
+<div class="gloss"><strong>Buff</strong><span data-pt="Efeito positivo aplicado a um aliado." data-en="A positive effect applied to an ally."></span></div>
+<div class="gloss"><strong>Debuff</strong><span data-pt="Efeito negativo aplicado a um inimigo." data-en="A negative effect applied to an enemy."></span></div>
+<div class="gloss"><strong>Strip</strong><span data-pt="Remoção de buffs." data-en="Removal of buffs."></span></div>
+<div class="gloss"><strong>Cleanse</strong><span data-pt="Remoção de debuffs." data-en="Removal of debuffs."></span></div>
+<div class="gloss"><strong>ATB</strong><span data-pt="Barra que determina a progressão para o próximo turno." data-en="Bar that determines progress toward the next turn."></span></div>
+<div class="gloss"><strong>DoT</strong><span data-pt="Damage over Time: dano aplicado ao longo do tempo." data-en="Damage over Time: damage applied over time."></span></div>
+<div class="gloss"><strong>DPS</strong><span data-pt="Damage Dealer: monstro focado em causar dano." data-en="Damage Dealer: monster focused on dealing damage."></span></div>
+<div class="gloss"><strong>Nuke</strong><span data-pt="Ataque ou build focada em causar grande quantidade de dano." data-en="An attack or build focused on dealing a large amount of damage."></span></div>
+<div class="gloss"><strong>Speed Tune</strong><span data-pt="Ajuste da velocidade para controlar a ordem dos turnos." data-en="Adjusting speed to control turn order."></span></div>
+<div class="gloss"><strong>Win Condition</strong><span data-pt="Objetivo ou condição que permite à equipa alcançar a vitória." data-en="The objective or condition that allows a team to win."></span></div>
+</div>
+</section>
+</div></div>
+</main>
+<script>
+(()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};document.querySelectorAll('#side button').forEach(b=>b.onclick=()=>{document.getElementById(b.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#'+b.dataset.target);document.querySelectorAll('#side button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')location.reload()});})();
+</script>
+<script src="language.js?v=20260923-lang-v23"></script>
+<script src="language-dynamic.js?v=20261003-header-controls-v10"></script>
+</body></html>
