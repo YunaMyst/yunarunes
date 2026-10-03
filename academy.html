@@ -894,4 +894,122 @@ window.bsGrad=n=>{document.getElementById('bsGradResult').textContent=n===2?'�
 })();
 </script>
 
+
+<style id="yuna-academy-deep-school-css">
+.deep-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.deep-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.deep-card h3{margin:0 0 7px}.deep-card p,.deep-card li{color:#9aa9b6;font-size:12px;line-height:1.6}.deep-card ul{padding-left:18px}.deep-select,.deep-input{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px;margin-top:7px}.deep-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:10px 12px;font-weight:800;cursor:pointer;margin-top:8px}.deep-btn:hover{border-color:#35a9e1}.deep-result{margin-top:10px;padding:12px;background:#101923;border:1px solid #293746;border-radius:10px;color:#dce6ee;line-height:1.55}.rune-grade{font-size:28px;font-weight:900;color:#35a9e1}.check-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.check-card{background:#101923;border:1px solid #293746;border-radius:10px;padding:11px}.check-card label{display:flex;gap:8px;font-size:12px;color:#cbd6de}.check-card input{accent-color:#35a9e1}.quiz-deep{background:linear-gradient(145deg,#171324,#10161f);border:1px solid #4a3b68;border-radius:14px;padding:18px}.deep-progress{height:10px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:8px 0}.deep-progress i{display:block;height:100%;width:0;background:#35a9e1}.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.timeline div{background:#0d141c;border:1px solid #293746;border-radius:10px;padding:11px}.timeline b{color:#35a9e1;display:block}.timeline span{display:block;color:#9aa9b6;font-size:11px;line-height:1.5;margin-top:4px}@media(max-width:900px){.deep-grid{grid-template-columns:repeat(2,1fr)}.timeline{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.deep-grid,.check-grid,.timeline{grid-template-columns:1fr}}
+</style>
+
+<section class="section" id="skill-school">
+<h2>📖 16. Skill School — aprenda a ler habilidades</h2>
+<p>Antes de escolher runas, leia cada skill e procure estas cinco respostas: <b>o que faz?</b> <b>em quem?</b> <b>com que chance?</b> <b>com qual scaling?</b> <b>qual é o cooldown?</b></p>
+<div class="timeline">
+<div><b>1. Alvo</b><span>Aliado, inimigo, todos, alvo aleatório?</span></div>
+<div><b>2. Efeito</b><span>Dano, buff, debuff, cura, controle?</span></div>
+<div><b>3. Chance</b><span>Existe chance de aplicar o efeito?</span></div>
+<div><b>4. Scaling</b><span>Escala com ATK, DEF, HP ou outro atributo?</span></div>
+<div><b>5. Cooldown</b><span>Com que frequência a skill pode ser usada?</span></div>
+</div>
+<div class="deep-card" style="margin-top:10px"><h3>🧠 Exercício de leitura</h3><select id="skillCase" class="deep-select"><option value="atk">A skill causa dano baseado em ATK e ganha dano extra em crítico.</option><option value="def">A skill causa dano baseado em DEF e aplica debuff.</option><option value="support">A skill cura aliados e remove um debuff.</option><option value="control">A skill aplica um controle com chance e cooldown.</option></select><button class="deep-btn" onclick="deepSkillCheck()">O que você procura nas runas?</button><div id="skillResult" class="deep-result"></div></div>
+</section>
+
+<section class="section" id="rune-decision-school">
+<h2>🔍 17. Rune Decision School — vender, guardar ou investir?</h2>
+<p>Ensine o iniciante a tomar uma decisão antes de gastar mana. Uma runa não precisa ser perfeita para ser útil, mas precisa ter uma função.</p>
+<div class="deep-grid">
+<div class="deep-card"><h3>🟢 Guardar</h3><p>Main stat útil + substats coerentes + potencial para uma build atual ou futura.</p></div>
+<div class="deep-card"><h3>🟡 Investigar</h3><p>Boa base, mas você ainda precisa testar rolls, eficiência ou qual monstro poderá usar.</p></div>
+<div class="deep-card"><h3>🔴 Vender</h3><p>Não tem função clara, main stat inadequada para o slot/objetivo ou combinação muito ruim para sua conta.</p></div>
+</div>
+<div class="deep-card" style="margin-top:10px"><h3>🧪 Avaliador educativo</h3><select id="runeDecision" class="deep-select"><option value="keep">Slot 2 SPD + substats SPD/HP%/DEF% para suporte</option><option value="sell">Slot 2 DEF% para um suporte que depende de SPD e sem SPD nos substats</option><option value="test">Boa runa, mas ainda não sabe em qual monstro usar</option><option value="dps">CR/CD/ATK% coerentes para um DPS que escala com ATK</option></select><button class="deep-btn" onclick="deepRuneDecision()">Tomar decisão</button><div id="runeDecisionResult" class="deep-result"></div></div>
+</section>
+
+<section class="section" id="build-planner-school">
+<h2>🧙 18. Build Planner — monte uma build pensando na função</h2>
+<div class="deep-grid">
+<div class="deep-card"><h3>🎯 Escolha o objetivo</h3><select id="buildGoal" class="deep-select"><option value="fast">Ser rápido e jogar primeiro</option><option value="damage">Causar muito dano</option><option value="control">Controlar e aplicar debuffs</option><option value="survive">Sobreviver e apoiar</option></select><button class="deep-btn" onclick="deepBuildPlan()">Gerar prioridades</button><div id="buildPlanResult" class="deep-result"></div></div>
+<div class="deep-card"><h3>⚠️ Diagnóstico</h3><p>Escolha uma reclamação:</p><select id="buildProblem" class="deep-select"><option value="slow">Está lento</option><option value="dead">Morre rápido</option><option value="miss">Debuffs falham</option><option value="weak">Dano baixo</option></select><button class="deep-btn" onclick="deepProblem()">Descobrir o que investigar</button><div id="buildProblemResult" class="deep-result"></div></div>
+<div class="deep-card"><h3>🧩 Regra</h3><p>Primeiro defina a função. Depois escolha as stats. Só depois pense em sets e otimização.</p><div class="deep-result">Função → condição de vitória → stats → runas → Speed Tune → teste → ajuste.</div></div>
+</div>
+</section>
+
+<section class="section" id="buff-debuff-school">
+<h2>🟦 19. Buffs e Debuffs — aprenda a diferença</h2>
+<div class="deep-grid">
+<div class="deep-card"><h3>🟦 Buff</h3><ul><li>Benefício para uma unidade.</li><li>Pode aumentar dano, defesa, velocidade ou proteção.</li><li>Alguns buffs podem ser removidos por strip.</li></ul></div>
+<div class="deep-card"><h3>🟥 Debuff</h3><ul><li>Efeito negativo no inimigo.</li><li>Pode reduzir atributos, causar dano ou controlar.</li><li>Alguns podem ser removidos por cleanse.</li></ul></div>
+<div class="deep-card"><h3>🛡️ Immunity</h3><ul><li>Protege contra determinados efeitos.</li><li>Não significa invulnerabilidade.</li><li>Aprenda quando usar strip antes do controle.</li></ul></div>
+</div>
+<div class="deep-card" style="margin-top:10px"><h3>🔄 Ordene a jogada</h3><div class="check-grid"><div class="check-card"><label><input type="checkbox" id="orderStrip"> Primeiro: remover proteção/buffs relevantes</label></div><div class="check-card"><label><input type="checkbox" id="orderDebuff"> Depois: aplicar debuffs/setup</label></div><div class="check-card"><label><input type="checkbox" id="orderControl"> Depois: controlar quando necessário</label></div><div class="check-card"><label><input type="checkbox" id="orderDamage"> Final: causar dano</label></div></div><button class="deep-btn" onclick="deepOrderCheck()">Verificar minha lógica</button><div id="orderResult" class="deep-result"></div></div>
+</section>
+
+<section class="section" id="speed-tune-school">
+<h2>⚡ 20. Speed Tune School — não basta ser rápido</h2>
+<p>Uma equipe pode ter quatro monstros rápidos e ainda assim jogar mal se a ordem não fizer sentido.</p>
+<div class="deep-grid">
+<div class="deep-card"><h3>⚡ Booster</h3><p>Ajuda a equipe a chegar ao turno ou aumentar a barra.</p></div>
+<div class="deep-card"><h3>🧹 Setup/Strip</h3><p>Prepara o inimigo ou remove o que impede sua jogada.</p></div>
+<div class="deep-card"><h3>🎯 Debuffer/CC</h3><p>Aplica o efeito que cria a condição de vitória.</p></div>
+<div class="deep-card"><h3>💥 DPS</h3><p>Usa a janela criada para finalizar.</p></div>
+<div class="deep-card"><h3>🛡️ Suporte</h3><p>Entra na sequência conforme a necessidade de proteção.</p></div>
+<div class="deep-card"><h3>🔬 Teste</h3><p>Entre numa batalha e confirme se a sequência planejada realmente acontece.</p></div>
+</div>
+</section>
+
+<section class="section" id="account-checklist-school">
+<h2>📋 21. Checklist da conta — saiba o que falta</h2>
+<div class="check-grid" id="accountChecklist">
+<div class="check-card"><label><input type="checkbox"> Tenho monstros 6★ para minhas funções principais.</label></div>
+<div class="check-card"><label><input type="checkbox"> Consigo farmar um conteúdo de runas de forma consistente.</label></div>
+<div class="check-card"><label><input type="checkbox"> Sei identificar main stat e substats.</label></div>
+<div class="check-card"><label><input type="checkbox"> Entendo SPD e ordem de turnos.</label></div>
+<div class="check-card"><label><input type="checkbox"> Sei o que ACC e RES fazem.</label></div>
+<div class="check-card"><label><input type="checkbox"> Tenho pelo menos uma equipe PvE funcional.</label></div>
+<div class="check-card"><label><input type="checkbox"> Consigo explicar por que minha equipe perdeu.</label></div>
+<div class="check-card"><label><input type="checkbox"> Já consigo adaptar uma equipe em vez de copiar uma fixa.</label></div>
+</div>
+<p id="accountChecklistText">0/8 concluídos</p>
+<div class="deep-progress"><i id="accountChecklistBar"></i></div>
+</section>
+
+<section class="section" id="deep-quiz-school">
+<h2>📝 22. Prova do novo jogador</h2>
+<div class="quiz-deep">
+<div class="deep-progress"><i id="deepQuizBar"></i></div>
+<p id="deepQuizQuestion"></p>
+<div class="bs-choice" id="deepQuizOptions"></div>
+<div id="deepQuizResult" class="deep-result"></div>
+</div>
+</section>
+
+<section class="section" id="academy-philosophy">
+<h2>🧠 23. A regra de ouro da Yuna Academy</h2>
+<div class="deep-card">
+<p style="font-size:15px"><b>Não queremos ensinar o jogador a decorar builds.</b></p>
+<p>Queremos que ele consiga olhar para um monstro, uma runa, uma equipe ou uma derrota e perguntar:</p>
+<ul><li>Qual é a minha condição de vitória?</li><li>Qual é o meu maior problema?</li><li>Qual stat resolve esse problema?</li><li>Qual unidade deve agir primeiro?</li><li>O que posso testar sem mudar tudo?</li><li>Como sei se a mudança funcionou?</li></ul>
+<p><b>Se o jogador aprende isso, ele deixa de depender de copiar builds e começa a entender o jogo.</b></p>
+</div>
+</section>
+
+<script id="yuna-academy-deep-school-js">
+(()=> {
+const q=id=>document.getElementById(id);
+window.deepSkillCheck=()=>{const v=q('skillCase').value,m={atk:'⚔️ Procure ATK, CR/CD e a frequência da skill. Se a habilidade depende de crítico, consistência de CR também importa.',def:'🛡️ Procure DEF, sobrevivência e ACC se o debuff depender dela. Não assuma que ATK é sempre a prioridade.',support:'🧹 Procure SPD, HP/DEF, resistência/sobrevivência e consistência das skills. Dano pode ser secundário.',control:'🧠 Procure SPD, ACC quando aplicável, sobrevivência e cooldown/ordem de turno.'};q('skillResult').textContent=m[v]};
+window.deepRuneDecision=()=>{const v=q('runeDecision').value,m={keep:'🟢 GUARDAR. A runa tem função clara e stats coerentes para o suporte.',sell:'🔴 PROVAVELMENTE VENDER. Sem SPD e com main stat desalinhada do objetivo, a peça tem pouca utilidade para essa função.',test:'🟡 INVESTIGAR. Guarde se a peça tiver potencial e teste em um monstro antes de decidir.',dps:'🟢 GUARDAR. A combinação faz sentido para um DPS que escala com ATK.'};q('runeDecisionResult').textContent=m[v]};
+window.deepBuildPlan=()=>{const v=q('buildGoal').value,m={fast:'⚡ Priorize SPD, ordem de turnos, ATB e sobrevivência suficiente.',damage:'💥 Priorize a stat de scaling, CR/CD conforme a skill e depois sobrevivência/SPD.',control:'🧠 Priorize SPD, ACC quando necessário, sobrevivência e consistência do controle.',survive:'🛡️ Priorize HP/DEF, SPD, resistência/utility e a consistência das skills.'};q('buildPlanResult').textContent=m[v]};
+window.deepProblem=()=>{const v=q('buildProblem').value,m={slow:'⚡ Investigue SPD base, SPD das runas, leader skill, boosts de ATB e Speed Tune.',dead:'❤️ Investigue HP/DEF, proteção, cura, ordem de turnos e se o monstro está recebendo dano cedo demais.',miss:'🎯 Investigue ACC, RES do alvo, chance da skill e imunidade/proteção.',weak:'💥 Investigue scaling da skill, stats ofensivas, setup, debuffs, elemento e mitigação.'};q('buildProblemResult').textContent=m[v]};
+window.deepOrderCheck=()=>{const ids=['orderStrip','orderDebuff','orderControl','orderDamage'],n=ids.filter(id=>q(id).checked).length; q('orderResult').textContent=n===4?'✅ Excelente. Você identificou uma sequência coerente de preparação → efeito → controle → dano.':'🧠 Você marcou '+n+'/4. Pense na condição de vitória e no que precisa acontecer antes do DPS atacar.'};
+const checks=[...document.querySelectorAll('#accountChecklist input')];function renderChecks(){const n=checks.filter(x=>x.checked).length;q('accountChecklistText').textContent=n+'/8 concluídos';q('accountChecklistBar').style.width=(n/8*100)+'%';try{localStorage.setItem('yuna-academy-account-checklist',JSON.stringify(checks.map(x=>x.checked)))}catch(e){}};try{const a=JSON.parse(localStorage.getItem('yuna-academy-account-checklist')||'[]');checks.forEach((x,i)=>x.checked=!!a[i])}catch(e){}checks.forEach(x=>x.addEventListener('change',renderChecks));renderChecks();
+const quiz=[
+['Qual é a primeira pergunta antes de montar uma build?',['Qual é a condição de vitória?','Qual é a cor da runa?','Qual é o maior ATK possível?'],0],
+['Se o debuff falha repetidamente, o que você investiga?',['ACC/RES e chance da skill','Só CR','Só HP'],0],
+['Se o DPS nunca chega ao turno, o que você investiga primeiro?',['SPD/ATB/Speed Tune','Só CD','Só DEF'],0],
+['Uma runa tem bons números mas nenhuma relação com a função. O que fazer?',['Avaliar se existe outra função que a use','Sempre upar +15','Sempre usar porque tem números altos'],0],
+['Por que quatro DPS podem ser uma equipe ruim?',['Pode faltar setup, controle, suporte ou ordem','Porque DPS é proibido','Porque dano nunca é útil'],0],
+['Qual é a melhor forma de aprender depois de uma derrota?',['Encontrar o gargalo e testar uma mudança','Trocar todas as runas','Culpar o RNG'],0]
+];
+let qi=0,score=0;function renderQuiz(){q('deepQuizQuestion').textContent='Pergunta '+(qi+1)+'/'+quiz.length+' — '+quiz[qi][0];q('deepQuizOptions').innerHTML=quiz[qi][1].map((x,i)=>'<button class="u-btn" onclick="deepQuizAnswer('+i+')">'+x+'</button>').join('');q('deepQuizBar').style.width=(qi/quiz.length*100)+'%';q('deepQuizResult').textContent='';}window.deepQuizAnswer=i=>{if(i===quiz[qi][2]){score++;q('deepQuizResult').textContent='✅ Correto!'}else q('deepQuizResult').textContent='❌ Reveja a lógica da Academy.';qi++;if(qi<quiz.length)setTimeout(renderQuiz,500);else{q('deepQuizQuestion').textContent='🎓 Prova concluída: '+score+'/'+quiz.length; q('deepQuizOptions').innerHTML='<button class="u-btn" onclick="deepQuizRestart()">Refazer prova</button>';q('deepQuizBar').style.width='100%';q('deepQuizResult').textContent=score===quiz.length?'🏆 Perfeito! Você está pensando como a Academy quer ensinar.':'💡 Bom começo. Refaça e use as aulas para corrigir as dúvidas.'}};window.deepQuizRestart=()=>{qi=0;score=0;renderQuiz()};renderQuiz();
+})();
+</script>
+
 </body></html>
