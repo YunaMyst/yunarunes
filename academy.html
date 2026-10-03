@@ -1012,4 +1012,99 @@ let qi=0,score=0;function renderQuiz(){q('deepQuizQuestion').textContent='Pergun
 })();
 </script>
 
+
+<style id="yuna-academy-campaign-css">
+.campaign{margin:18px 0;background:linear-gradient(145deg,#151c29,#10161f);border:1px solid #3b4d60;border-radius:16px;padding:20px}
+.campaign-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}
+.campaign h2{margin:0 0 6px;font-size:25px}.campaign p{color:#9aa9b6;line-height:1.55}
+.campaign-progress{height:13px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:12px 0}
+.campaign-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.3s}
+.campaign-status{font-weight:900;color:#dce6ee}.campaign-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.campaign-level{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:14px;position:relative}
+.campaign-level.locked{opacity:.48}.campaign-level.done{border-color:#35a9e1}
+.campaign-level .num{font-size:11px;color:#35a9e1;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.campaign-level h3{margin:5px 0}.campaign-level p{font-size:12px;margin:5px 0 10px}
+.campaign-level small{display:block;color:#8fa0af;margin-bottom:8px}
+.campaign-btns{display:flex;gap:7px;flex-wrap:wrap}
+.campaign-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:9px 11px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}
+.campaign-btn.primary{background:#35a9e1;color:#061018;border-color:#35a9e1}
+.campaign-btn:disabled{cursor:not-allowed;opacity:.55}
+.campaign-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.campaign-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}.campaign-badge{padding:7px 10px;border-radius:999px;background:#101923;border:1px solid #293746;font-size:11px}.campaign-badge.locked{opacity:.4}
+@media(max-width:700px){.campaign-grid{grid-template-columns:1fr}.campaign{padding:15px}}
+</style>
+
+<section class="campaign" id="academy-campaign">
+<div class="campaign-head">
+<div>
+<div class="eyebrow">🎓 Yuna Academy • Jornada</div>
+<h2 data-pt="Aprenda por etapas e desbloqueie a Academy" data-en="Learn step by step and unlock the Academy"></h2>
+<p data-pt="Complete cada nível, abra a aula correspondente e avance. Seu progresso fica salvo neste dispositivo." data-en="Complete each level, open the matching lesson and advance. Your progress is saved on this device."></p>
+</div>
+<div class="campaign-status" id="campaignStatus"></div>
+</div>
+<div class="campaign-progress"><i id="campaignBar"></i></div>
+<div class="campaign-grid" id="campaignGrid"></div>
+<div class="campaign-tools">
+<button class="campaign-btn" id="campaignContinue" type="button" data-pt="▶ Continuar de onde parei" data-en="▶ Continue where I left off"></button>
+<button class="campaign-btn" id="campaignReset" type="button" data-pt="↺ Resetar progresso" data-en="↺ Reset progress"></button>
+</div>
+<div class="campaign-badges" id="campaignBadges"></div>
+</section>
+
+<script id="yuna-academy-campaign-js">
+(()=> {
+const key='yuna-academy-campaign-v1';
+const levels=[
+{id:1,icon:'🍼',pt:'Comecei hoje',en:'I started today',desc:'Fundamentos, interface, energia, mana e primeiros objetivos.',target:'first-days',reward:'Novato Yuna'},
+{id:2,icon:'🧬',pt:'Monstros e Skills',en:'Monsters and Skills',desc:'Funções, skills, scaling, cooldowns e como ler um monstro.',target:'monster-school',reward:'Aluno de Monstros'},
+{id:3,icon:'📊',pt:'Stats',en:'Stats',desc:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',target:'stat-school',reward:'Aluno de Stats'},
+{id:4,icon:'💎',pt:'Runas',en:'Runes',desc:'Slots, main stats, substats, sets, rolls e decisões.',target:'rune-school',reward:'Estudante de Runas'},
+{id:5,icon:'⚔️',pt:'Combate',en:'Combat',desc:'Turnos, vantagem elemental, buffs, debuffs, CC e PROC.',target:'battle-school',reward:'Aluno de Combate'},
+{id:6,icon:'🧙',pt:'Equipes',en:'Teams',desc:'Funções, condição de vitória, ordem e Speed Tune.',target:'team-thinking-school',reward:'Montador de Equipes'},
+{id:7,icon:'🏰',pt:'PvE e Progressão',en:'PvE and Progression',desc:'Conteúdos, farm, evolução da conta e prioridades.',target:'content-school',reward:'Especialista PvE'},
+{id:8,icon:'🏆',pt:'PvP',en:'PvP',desc:'Arena, Guild/Siege, RTA e adaptação ao adversário.',target:'progress',reward:'Aprendiz PvP'},
+{id:9,icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',desc:'Descobrir por que perdeu, testar hipóteses e corrigir.',target:'detective-school',reward:'Detetive Yuna'},
+{id:10,icon:'👑',pt:'Modo Mestre',en:'Master Mode',desc:'Prova final sem depender de copiar builds.',target:'academy-master',reward:'Mestre Yuna'}
+];
+const badges=['Novato Yuna','Aluno de Monstros','Aluno de Stats','Estudante de Runas','Aluno de Combate','Montador de Equipes','Especialista PvE','Aprendiz PvP','Detetive Yuna','Mestre Yuna'];
+let state={done:[]};
+try{state=JSON.parse(localStorage.getItem(key)||'{"done":[]}');if(!Array.isArray(state.done))state.done=[]}catch(e){}
+const isDone=id=>state.done.includes(id), unlocked=id=>id===1||isDone(id-1);
+function lang(){try{return localStorage.getItem('yunarunes-language')==='en'?'en':'pt'}catch(e){return 'pt'}}
+function label(l){return lang()==='en'?l.en:l.pt}
+function render(){
+const grid=document.getElementById('campaignGrid'); if(!grid)return;
+grid.innerHTML=levels.map(l=>{
+const d=isDone(l.id),u=unlocked(l.id);
+return '<div class="campaign-level '+(d?'done ':'')+(!u?'locked':'')+'"><div class="num">Nível '+l.id+(d?' • ✓ Concluído':'')+'</div><h3>'+l.icon+' '+label(l)+'</h3><p>'+l.desc+'</p><small>🎁 '+l.reward+'</small><div class="campaign-btns">'+
+'<a class="campaign-btn '+(u?'primary':'')+'" '+(u?'href="#'+l.target+'"':'aria-disabled="true"')+'>'+ (u?'📖 Abrir aula':'🔒 Bloqueado') +'</a>'+
+(!d&&u?'<button class="campaign-btn primary" type="button" onclick="academyCampaignComplete('+l.id+')">✓ Concluir nível</button>':'')+
+(d?'<button class="campaign-btn" type="button" onclick="academyCampaignUndo('+l.id+')">↩ Reabrir</button>':'')+
+'</div></div>'
+}).join('');
+const n=state.done.length;document.getElementById('campaignBar').style.width=(n/levels.length*100)+'%';
+document.getElementById('campaignStatus').textContent=n+'/'+levels.length+' • '+Math.round(n/levels.length*100)+'%';
+document.getElementById('campaignBadges').innerHTML=badges.map((b,i)=>'<span class="campaign-badge '+(i<n?'':'locked')+'">'+(i<n?'🏅 ':'🔒 ')+b+'</span>').join('');
+}
+window.academyCampaignComplete=id=>{
+if(!unlocked(id))return;
+if(!state.done.includes(id))state.done.push(id);
+state.done.sort((a,b)=>a-b);
+localStorage.setItem(key,JSON.stringify(state));render();
+if(id<levels.length){const next=levels[id];setTimeout(()=>{const el=document.getElementById('academy-campaign');if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},100)}
+};
+window.academyCampaignUndo=id=>{state.done=state.done.filter(x=>x<id);localStorage.setItem(key,JSON.stringify(state));render()};
+document.getElementById('campaignContinue').addEventListener('click',()=>{
+const next=levels.find(l=>!isDone(l.id));const target=next?document.getElementById(next.target):document.getElementById('academy-master');
+if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+});
+document.getElementById('campaignReset').addEventListener('click',()=>{
+if(!confirm(lang()==='en'?'Reset all Yuna Academy progress?':'Resetar todo o progresso da Yuna Academy?'))return;
+state={done:[]};localStorage.setItem(key,JSON.stringify(state));render();
+});
+render();
+})();
+</script>
+
 </body></html>
