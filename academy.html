@@ -227,16 +227,7 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('
 <div class="gloss"><strong>Win Condition</strong><span data-pt="Objetivo ou condição que permite à equipa alcançar a vitória." data-en="The objective or condition that allows a team to win."></span></div>
 </div>
 </section>
-<section class="section" id="academy-quiz">
-<h2 data-pt="🏆 Testar meus conhecimentos" data-en="🏆 Test My Knowledge"></h2>
-<p data-pt="Primeira pergunta: o que significa STUN?" data-en="First question: what does STUN mean?"></p>
-<div class="quiz-options">
-<button onclick="academyQuiz(false)" data-pt="Aumenta o dano" data-en="Increases damage"></button>
-<button onclick="academyQuiz(true)" data-pt="Impede o monstro de agir" data-en="Prevents the monster from acting"></button>
-<button onclick="academyQuiz(false)" data-pt="Aumenta a SPD" data-en="Increases SPD"></button>
-</div>
-<div class="quiz-result" id="quizResult"></div>
-</section>
+<section class="section" id="academy-quiz"><h2 data-pt="🏆 Testar meus conhecimentos" data-en="🏆 Test My Knowledge"></h2><p data-pt="Responde a 15 perguntas. O teste começa fácil e vai ficando mais difícil." data-en="Answer 15 questions. The test starts easy and gets harder."></p><div class="progress-label"><span><span data-pt="Pergunta" data-en="Question"></span> <strong id="quizNumber">1</strong>/15</span><strong id="quizScore">0/0</strong></div><div class="progress-track"><div class="progress-fill" id="quizProgress" style="width:6.67%"></div></div><div class="quiz-result" id="quizQuestion" style="font-size:17px;margin-top:14px"></div><div class="quiz-options" id="quizOptions"></div><div class="quiz-result" id="quizFeedback"></div><div class="cta"><button id="quizNext" type="button" onclick="nextAcademyQuestion()" style="display:none;border:0;border-radius:9px;padding:10px 15px;background:#35a9e1;color:#061018;font-weight:900;cursor:pointer" data-pt="➡️ Próxima pergunta" data-en="➡️ Next question"></button><button id="quizRestart" type="button" onclick="startAcademyQuiz()" style="display:none;border:1px solid #293746;border-radius:9px;padding:10px 15px;background:#202b36;color:#fff;font-weight:900;cursor:pointer" data-pt="🔄 Fazer novamente" data-en="🔄 Try again"></button></div></section>
 
 <style id="yuna-academy-expansion-css">
 .academy-levels,.academy-extra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
