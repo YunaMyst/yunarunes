@@ -691,4 +691,207 @@ function renderPath(){wrap.innerHTML=path.map((x,i)=>'<label class="checkrow"><i
 function renderBadges(){const all=[['detective','🕵️ Detetive'],['battle','⚔️ Estrategista'],['rune','💎 Mestre das Runas'],['team','🧙 Team Builder'],['lab','🧪 Cientista'],['master','👑 Mestre'],['graduate','🎓 Formado']];document.getElementById('uBadges').innerHTML=all.map(x=>'<span class="u-badge '+(medals[x[0]]?'':'locked')+'">'+x[1]+'</span>').join('')};renderBadges();
 })();
 </script>
+
+<style id="yuna-academy-beginner-school-css">
+.beginner-school{margin-top:18px}.bs-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.bs-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.bs-card h3{margin:0 0 8px;font-size:17px}.bs-card p,.bs-card li{color:#9aa9b6;font-size:12px;line-height:1.6}.bs-card ul{padding-left:18px}.bs-table{width:100%;border-collapse:collapse;font-size:12px}.bs-table th,.bs-table td{padding:9px;border-bottom:1px solid #293746;text-align:left}.bs-table th{color:#35a9e1}.bs-table td{color:#cbd6de}.bs-select,.bs-input{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px;margin-top:7px}.bs-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bs-choice button{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:10px;font-weight:800;cursor:pointer;text-align:left}.bs-choice button:hover{border-color:#35a9e1}.bs-result{margin-top:10px;padding:12px;background:#101923;border:1px solid #293746;border-radius:10px;line-height:1.55;color:#dce6ee}.bs-roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.bs-road{background:#0d141c;border:1px solid #293746;border-radius:10px;padding:12px}.bs-road b{display:block;color:#35a9e1}.bs-road span{display:block;color:#9aa9b6;font-size:11px;line-height:1.5;margin-top:5px}.bs-term{padding:11px;border:1px solid #293746;border-radius:10px;background:#0d141c}.bs-term b{color:#fff}.bs-term span{display:block;color:#9aa9b6;font-size:11px;line-height:1.5;margin-top:4px}.bs-terms{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}@media(max-width:900px){.bs-grid{grid-template-columns:repeat(2,1fr)}.bs-roadmap{grid-template-columns:repeat(2,1fr)}.bs-terms{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.bs-grid,.bs-roadmap,.bs-terms,.bs-choice{grid-template-columns:1fr}}
+</style>
+<section class="section beginner-school" id="beginner-school">
+<h2>🍼 Yuna Academy — Escola para quem começou hoje</h2>
+<p>Uma trilha completa para quem nunca jogou Summoners War ou ainda está perdido. A ideia é entender <b>por que</b> fazer cada coisa, e não apenas copiar builds.</p>
+<div class="bs-roadmap">
+<div class="bs-road"><b>1. Primeiros dias</b><span>Mana, cristais, energia, monstros, evolução e despertar.</span></div>
+<div class="bs-road"><b>2. Primeiro time</b><span>Funções, 6★, skills, Devilmon e sobrevivência.</span></div>
+<div class="bs-road"><b>3. Primeiras runas</b><span>Slots, sets, atributos e decisões de venda.</span></div>
+<div class="bs-road"><b>4. Farm</b><span>Progressão PvE, dungeons, artefatos e grind.</span></div>
+<div class="bs-road"><b>5. Pensamento</b><span>SPD, turn order, ACC/RES e Speed Tune.</span></div>
+<div class="bs-road"><b>6. Equipes</b><span>Booster, setup, debuff, controle, dano e suporte.</span></div>
+<div class="bs-road"><b>7. PvP</b><span>Arena, Guild/Siege e RTA sem copiar cegamente.</span></div>
+<div class="bs-road"><b>8. Endgame</b><span>Otimização, eficiência, diagnóstico e adaptação.</span></div>
+</div>
+</section>
+
+<section class="section" id="first-days">
+<h2>🌱 1. Comecei hoje: o que é o quê?</h2>
+<div class="bs-grid">
+<div class="bs-card"><h3>💰 Recursos</h3><ul><li><b>Mana:</b> usada para evoluir, despertar, melhorar runas e várias ações.</li><li><b>Energia:</b> permite entrar em conteúdos PvE.</li><li><b>Cristais:</b> recurso premium; evite gastar sem objetivo.</li><li><b>Devilmon:</b> recurso raro para skills de monstros apropriados.</li></ul></div>
+<div class="bs-card"><h3>👹 Monstros</h3><ul><li><b>Nat:</b> indica a raridade natural do monstro.</li><li><b>Evolução:</b> aumenta estrelas e potencial de stats.</li><li><b>Despertar:</b> melhora o monstro e pode alterar nome/skills.</li><li><b>Skill-up:</b> aumenta níveis de habilidades quando aplicável.</li></ul></div>
+<div class="bs-card"><h3>🍖 O que não fazer</h3><ul><li>Não alimente um monstro importante sem confirmar.</li><li>Não use Devilmon em qualquer monstro.</li><li>Não venda uma runa boa só porque parece estranha.</li><li>Não copie uma build sem entender a função.</li></ul></div>
+</div>
+<div class="bs-card" style="margin-top:10px"><h3>🧠 Teste: qual recurso merece mais cuidado?</h3><div class="bs-choice"><button onclick="bsAnswer('devil')">😈 Devilmon, porque é raro</button><button onclick="bsAnswer('mana')">💰 Mana, porque nunca pode gastar</button><button onclick="bsAnswer('all')">🎲 Todos têm exatamente o mesmo valor</button><button onclick="bsAnswer('random')">📦 Nada precisa de planejamento</button></div><div id="bsFirstResult" class="bs-result"></div></div>
+</section>
+
+<section class="section" id="monster-school">
+<h2>🧬 2. Monster School — aprenda a ler um monstro</h2>
+<p>Antes de olhar uma build, leia as skills. Pergunte: <b>o que este monstro tenta fazer?</b></p>
+<div class="bs-grid">
+<div class="bs-card"><h3>⚔️ Dano</h3><p>DPS, nuker e bruiser existem para causar dano, mas podem precisar de velocidades, sobrevivência ou setup diferentes.</p></div>
+<div class="bs-card"><h3>🧠 Controle</h3><p>Stun, freeze, sleep, provoke, pushback, reset e outros efeitos limitam as ações do inimigo.</p></div>
+<div class="bs-card"><h3>🧹 Utilidade</h3><p>Strip, cleanse, buff, debuff, heal, revive, proteção e boosts de ATB podem ser a verdadeira condição de vitória.</p></div>
+<div class="bs-card"><h3>⚡ Booster</h3><p>Acelera a equipe ou altera a ordem dos turnos. Muitas equipes começam a funcionar quando a velocidade está correta.</p></div>
+<div class="bs-card"><h3>🛡️ Suporte</h3><p>Nem todo suporte deve ter o máximo de dano. Sobrevivência, velocidade e consistência podem ser mais importantes.</p></div>
+<div class="bs-card"><h3>🎯 Líder</h3><p>Uma leader skill pode mudar completamente a forma como a equipe deve ser montada.</p></div>
+</div>
+<div class="bs-card" style="margin-top:10px"><h3>🔎 Exercício: descubra a função</h3><select id="bsMonster" class="bs-select"><option value="dps">Tem alto scaling de dano e bônus de crítico.</option><option value="control">Tem várias habilidades que impedem ações.</option><option value="support">Remove debuffs, cura e protege aliados.</option><option value="strip">Remove buffs antes da equipe atacar.</option></select><button class="u-btn" onclick="bsMonsterCheck()">Identificar função</button><div id="bsMonsterResult" class="bs-result"></div></div>
+</section>
+
+<section class="section" id="stat-school">
+<h2>❤️ 3. Stat School — entenda cada atributo</h2>
+<table class="bs-table"><tr><th>Stat</th><th>O que significa</th><th>Pergunta do iniciante</th></tr>
+<tr><td>HP</td><td>Vida</td><td>Meu monstro está morrendo rápido?</td></tr>
+<tr><td>ATK</td><td>Ataque</td><td>A skill escala com ATK?</td></tr>
+<tr><td>DEF</td><td>Defesa</td><td>Preciso sobreviver a dano físico?</td></tr>
+<tr><td>SPD</td><td>Velocidade</td><td>Quem joga primeiro e em que ordem?</td></tr>
+<tr><td>CR</td><td>Chance de crítico</td><td>Meu dano crítico acontece com consistência?</td></tr>
+<tr><td>CD</td><td>Dano crítico</td><td>Quanto dano faço quando crito?</td></tr>
+<tr><td>ACC</td><td>Accuracy</td><td>Consigo aplicar efeitos que dependem dela?</td></tr>
+<tr><td>RES</td><td>Resistance</td><td>Quão difícil é aplicar efeitos contra mim?</td></tr>
+</table>
+<div class="bs-card" style="margin-top:10px"><h3>⚠️ Regra de ouro</h3><p>Não existe “a melhor stat”. Existe a stat que resolve o problema da função do monstro. Um DPS, um stripper e um healer podem querer números muito diferentes.</p></div>
+</section>
+
+<section class="section" id="rune-school">
+<h2>💎 4. Rune School — runas desde o zero</h2>
+<div class="bs-grid">
+<div class="bs-card"><h3>🔢 Slots 1–6</h3><p>Aprenda primeiro a reconhecer slot, main stat e substats. Não escolha uma runa apenas pela cor.</p></div>
+<div class="bs-card"><h3>🎨 Raridade</h3><p>Normal, Magic, Rare, Hero e Legend têm quantidades diferentes de substats e potencial de rolls.</p></div>
+<div class="bs-card"><h3>⬆️ +0 → +15</h3><p>Upgrades aumentam a main stat e revelam/melhoram substats conforme a raridade e os rolls.</p></div>
+<div class="bs-card"><h3>🎲 Rolls</h3><p>O valor final importa. Uma runa com uma boa combinação de substats pode ser excelente mesmo sem parecer perfeita no +0.</p></div>
+<div class="bs-card"><h3>⚡ Speed rolls</h3><p>SPD pode ser especialmente valiosa porque altera turn order. Avalie sempre dentro da função.</p></div>
+<div class="bs-card"><h3>📈 Eficiência</h3><p>Compare a qualidade dos substats com o objetivo da build, não apenas a soma bruta.</p></div>
+</div>
+<div class="bs-card" style="margin-top:10px"><h3>🧪 Decisão de runa</h3><select id="bsRuneCase" class="bs-select"><option value="spd">Slot 2 SPD com bons substats para um suporte rápido</option><option value="tank">Runa defensiva excelente para um tanque</option><option value="bad">Runa com stats aleatórios sem relação com a função</option><option value="dps">Runa de dano com CR/CD/ATK% coerentes</option></select><button class="u-btn" onclick="bsRuneCheck()">Avaliar</button><div id="bsRuneResult" class="bs-result"></div></div>
+</section>
+
+<section class="section" id="terminology-school">
+<h2>🎲 5. Dicionário de combate — palavras que você vai ouvir</h2>
+<div class="bs-terms">
+<div class="bs-term"><b>PROC</b><span>Ativação adicional de uma mecânica. Não é sinônimo de qualquer efeito.</span></div>
+<div class="bs-term"><b>Violent Proc</b><span>Ativação extra associada ao conjunto/mecânica Violent.</span></div>
+<div class="bs-term"><b>Crit</b><span>Acerto crítico, quando a condição de crítico é satisfeita.</span></div>
+<div class="bs-term"><b>Glancing</b><span>Acerto desfavorável que pode impedir/alterar determinadas interações.</span></div>
+<div class="bs-term"><b>Strip</b><span>Remover buffs do inimigo.</span></div>
+<div class="bs-term"><b>Cleanse</b><span>Remover debuffs de um aliado.</span></div>
+<div class="bs-term"><b>Immunity</b><span>Buff que impede determinados debuffs enquanto estiver ativo.</span></div>
+<div class="bs-term"><b>Oblivion</b><span>Efeito que interfere em passivas de acordo com a mecânica da habilidade.</span></div>
+<div class="bs-term"><b>Silence</b><span>Limita o uso de habilidades conforme a mecânica.</span></div>
+<div class="bs-term"><b>ATB</b><span>Barra de ataque; mudanças nela alteram quem chega ao turno.</span></div>
+<div class="bs-term"><b>Pushback</b><span>Reduz a barra de ataque do alvo.</span></div>
+<div class="bs-term"><b>Reset</b><span>Reduz/zera recursos de turno conforme a habilidade específica.</span></div>
+<div class="bs-term"><b>Revenge</b><span>Contra-ataque/ativação defensiva dependendo da mecânica.</span></div>
+<div class="bs-term"><b>Passive</b><span>Efeito automático descrito na habilidade passiva.</span></div>
+<div class="bs-term"><b>Multihit</b><span>A habilidade acerta várias vezes; cada hit pode ter regras próprias.</span></div>
+<div class="bs-term"><b>DoT</b><span>Dano ao longo do tempo, como efeitos de dano contínuo.</span></div>
+<div class="bs-term"><b>Brand</b><span>Debuff que aumenta o dano recebido conforme a mecânica.</span></div>
+<div class="bs-term"><b>Speed Tune</b><span>Ajuste de SPD para manter uma ordem planejada.</span></div>
+</div>
+</section>
+
+<section class="section" id="battle-school">
+<h2>⚔️ 6. Como uma batalha realmente funciona</h2>
+<div class="bs-card"><p><b>1.</b> A velocidade e o ATB determinam quem chega ao turno → <b>2.</b> o monstro usa uma skill → <b>3.</b> a habilidade verifica suas condições → <b>4.</b> buffs/debuffs e dano são aplicados conforme a skill → <b>5.</b> a barra/ordem muda → <b>6.</b> próximo turno.</p><p>Quando você perde, não pense apenas “faltou dano”. Pergunte: <b>quem jogou primeiro?</b> <b>quem deveria agir depois?</b> <b>o debuff entrou?</b> <b>o alvo tinha proteção?</b> <b>o DPS sobreviveu?</b></p></div>
+</section>
+
+<section class="section" id="team-thinking-school">
+<h2>🧠 7. Aprenda a pensar como um Team Builder</h2>
+<div class="bs-grid">
+<div class="bs-card"><h3>1️⃣ Quem começa?</h3><p>Booster, velocidade, ATB e Speed Tune.</p></div>
+<div class="bs-card"><h3>2️⃣ Quem prepara?</h3><p>Setup, strip, defesa reduzida, buffs ou outras condições.</p></div>
+<div class="bs-card"><h3>3️⃣ Quem controla?</h3><p>CC, pushback, reset, provoke ou outras formas de impedir resposta.</p></div>
+<div class="bs-card"><h3>4️⃣ Quem finaliza?</h3><p>DPS/nuker/bruiser conforme a condição de vitória.</p></div>
+<div class="bs-card"><h3>5️⃣ Quem mantém?</h3><p>Heal, cleanse, proteção, revive ou resistência quando necessário.</p></div>
+<div class="bs-card"><h3>6️⃣ O conteúdo exige o quê?</h3><p>Boss, PvE e PvP não têm exatamente as mesmas prioridades.</p></div>
+</div>
+</section>
+
+<section class="section" id="content-school">
+<h2>🏰 8. Content School — para que serve cada conteúdo?</h2>
+<table class="bs-table"><tr><th>Conteúdo</th><th>O que aprender</th><th>Pergunta certa</th></tr>
+<tr><td>Scenario</td><td>Progressão e recursos básicos</td><td>Como fortalecer a conta?</td></tr>
+<tr><td>Cairos</td><td>Farm de runas</td><td>Qual dungeon ajuda minha build?</td></tr>
+<tr><td>Giants / Dragons / Necropolis</td><td>Conjuntos de runas</td><td>Qual conjunto resolve meu problema?</td></tr>
+<tr><td>Steel Fortress / Punisher's Crypt</td><td>Farm especializado</td><td>Quando já vale a pena farmar aqui?</td></tr>
+<tr><td>Abyss / ToA</td><td>Progressão e desafios</td><td>Que mecânica preciso entender?</td></tr>
+<tr><td>Rift / Raid</td><td>Materiais e progressão avançada</td><td>Como otimizar minha conta?</td></tr>
+<tr><td>Arena / Guild / Siege</td><td>PvP e defesa/ataque</td><td>Como adaptar a equipe ao adversário?</td></tr>
+<tr><td>RTA</td><td>Draft, adaptação e leitura do oponente</td><td>Consigo pensar sem depender de uma equipe fixa?</td></tr>
+</table>
+</section>
+
+<section class="section" id="account-roadmap">
+<h2>🗺️ 9. Roadmap da primeira conta</h2>
+<div class="steps">
+<div class="step"><div><b>Começou → sobreviva</b><span>Entenda elementos, monstros, evolução e recursos.</span></div></div>
+<div class="step"><div><b>Primeiros 6★ → estabilize</b><span>Priorize monstros que ajudam a progressão real da conta.</span></div></div>
+<div class="step"><div><b>Primeiras runas → farme</b><span>Aprenda a identificar main stat, substats e sets úteis.</span></div></div>
+<div class="step"><div><b>Primeiras dungeons → repita</b><span>Farmar bem é mais importante do que procurar uma runa perfeita imediatamente.</span></div></div>
+<div class="step"><div><b>Artefatos → refinamento</b><span>Use-os quando suas bases já estiverem funcionando.</span></div></div>
+<div class="step"><div><b>PvP → adapte</b><span>Comece a observar adversários, drafts e condições de vitória.</span></div></div>
+<div class="step"><div><b>Endgame → otimize</b><span>Eficiência, rolls, speed tuning e decisões específicas por conteúdo.</span></div></div>
+</div>
+</section>
+
+<section class="section" id="mistakes-school">
+<h2>🚨 10. Os erros que mais atrasam novos jogadores</h2>
+<div class="bs-grid">
+<div class="bs-card"><h3>😈 Devilmon sem pensar</h3><p>Use o recurso raro com planejamento. Nem todo monstro merece skill-up imediato.</p></div>
+<div class="bs-card"><h3>💎 Vender runas sem olhar</h3><p>Confira slot, main stat e substats antes de decidir.</p></div>
+<div class="bs-card"><h3>📈 Só ATK/CR/CD</h3><p>Se o monstro não chega ao turno ou morre antes de agir, dano bruto não resolve.</p></div>
+<div class="bs-card"><h3>⚡ Ignorar SPD</h3><p>Uma equipe fora de ordem pode parecer “fraca” quando na verdade está mal sincronizada.</p></div>
+<div class="bs-card"><h3>🎲 Copiar build cegamente</h3><p>A build de outro jogador pode ter runas e objetivos completamente diferentes.</p></div>
+<div class="bs-card"><h3>🧩 Quatro DPS</h3><p>Mais dano não substitui controle, setup, suporte ou uma condição de vitória coerente.</p></div>
+<div class="bs-card"><h3>📖 Não ler skills</h3><p>A skill explica o que o monstro quer fazer. Leia antes de escolher as runas.</p></div>
+<div class="bs-card"><h3>💰 Gastar cristais aleatoriamente</h3><p>Planeje a progressão e entenda o que realmente acelera sua conta.</p></div>
+</div>
+</section>
+
+<section class="section" id="spd-lab-school">
+<h2>⚡ 11. Laboratório de SPD — veja a ordem dos turnos</h2>
+<p>Digite a SPD de quatro monstros. O laboratório ordena do mais rápido para o mais lento e mostra por que Speed Tune importa.</p>
+<div class="bs-grid">
+<div class="bs-card"><input class="bs-input" id="bsSpd1" type="number" value="300" placeholder="Monstro 1 SPD"><input class="bs-input" id="bsSpd2" type="number" value="280" placeholder="Monstro 2 SPD"><input class="bs-input" id="bsSpd3" type="number" value="250" placeholder="Monstro 3 SPD"><input class="bs-input" id="bsSpd4" type="number" value="210" placeholder="Monstro 4 SPD"><button class="u-btn" onclick="bsSpeedLab()">Ver ordem</button></div>
+<div class="bs-card"><div id="bsSpeedResult" class="bs-result">A ordem aparecerá aqui.</div></div>
+</div>
+</section>
+
+<section class="section" id="damage-school">
+<h2>💥 12. Laboratório de dano — pense antes de culpar a build</h2>
+<p>Este é um modelo didático, não uma reprodução completa de todas as fórmulas do jogo. O objetivo é ensinar quais fatores procurar.</p>
+<div class="bs-grid">
+<div class="bs-card"><input class="bs-input" id="bsAtk" type="number" value="2000" placeholder="ATK"><input class="bs-input" id="bsCd" type="number" value="150" placeholder="CD %"><input class="bs-input" id="bsMult" type="number" value="2" step="0.1" placeholder="Multiplicador"><button class="u-btn" onclick="bsDamageLab()">Calcular modelo</button></div>
+<div class="bs-card"><div id="bsDamageResult" class="bs-result"></div></div>
+</div>
+</section>
+
+<section class="section" id="mission-school">
+<h2>🧩 13. Mission Team Challenge</h2>
+<p>Monte a lógica de uma equipe para uma missão. Não existe uma única resposta universal; o objetivo é reconhecer o que está faltando.</p>
+<select id="bsMission" class="bs-select"><option value="boss">Boss difícil: precisa sobreviver e aplicar debuffs</option><option value="speed">Fase rápida: quero terminar antes do inimigo</option><option value="control">Inimigos perigosos: preciso limitar ações</option><option value="cleanse">Inimigos aplicam muitos debuffs</option></select>
+<button class="u-btn" onclick="bsMissionCheck()">O que não pode faltar?</button><div id="bsMissionResult" class="bs-result"></div>
+</section>
+
+<section class="section" id="detective-school">
+<h2>🕵️ 14. Detective Yuna — descubra por que perdeu</h2>
+<select id="bsDetective" class="bs-select"><option value="one">Meu DPS morreu antes de atacar.</option><option value="two">Meu debuffer quase nunca aplica o efeito.</option><option value="three">Minha equipe começa bem e depois perde a ordem.</option><option value="four">Eu não consigo matar mesmo quando controlo o inimigo.</option></select>
+<button class="u-btn" onclick="bsDetectiveCheck()">Investigar</button><div id="bsDetectiveResult" class="bs-result"></div>
+</section>
+
+<section class="section" id="graduation-school">
+<h2>🎓 15. Formatura Yuna Academy</h2>
+<p>Você está pronto para sair da fase de “copiar build” quando consegue explicar <b>por que</b> uma equipe funciona, <b>qual é o gargalo</b> e <b>qual mudança testar primeiro</b>.</p>
+<div class="bs-card"><h3>🏆 Desafio de formatura</h3><div class="bs-choice"><button onclick="bsGrad(1)">Aumentar tudo sem diagnóstico</button><button onclick="bsGrad(2)">Identificar a condição de vitória e o gargalo</button><button onclick="bsGrad(3)">Copiar o jogador mais forte</button><button onclick="bsGrad(4)">Trocar todas as runas</button></div><div id="bsGradResult" class="bs-result"></div></div>
+</section>
+
+<script id="yuna-academy-beginner-school-js">
+(()=> {
+window.bsAnswer=x=>{const m={devil:'✅ Correto. Devilmon é um recurso raro e deve ser usado com planejamento.',mana:'⚠️ Mana é importante, mas não é o recurso que você deve tratar como irreversível da mesma forma que Devilmon.',all:'❌ Recursos têm valores e usos diferentes.',random:'❌ Planejamento de recursos faz parte da progressão.'};document.getElementById('bsFirstResult').textContent=m[x]};
+window.bsMonsterCheck=()=>{const v=document.getElementById('bsMonster').value;const m={dps:'⚔️ DPS/Nuker: o foco é causar dano.',control:'🧠 Control: o foco é limitar ações.',support:'🛡️ Support: cura/proteção/limpeza e utilidade.',strip:'🧹 Stripper: remove buffs para abrir a jogada.'};document.getElementById('bsMonsterResult').textContent=m[v]};
+window.bsRuneCheck=()=>{const v=document.getElementById('bsRuneCase').value;const m={spd:'✅ Forte candidata: slot 2 SPD pode ser muito valioso para um suporte rápido, desde que os substats façam sentido.',tank:'✅ Pode ser excelente. O valor depende da função do tanque e dos substats.',bad:'❌ Comece pela função. Stats sem relação com o objetivo normalmente são um mau investimento.',dps:'✅ Pode ser uma boa peça de dano se os stats realmente combinarem com a skill e a função.'};document.getElementById('bsRuneResult').textContent=m[v]};
+window.bsSpeedLab=()=>{const a=[Number(document.getElementById('bsSpd1').value)||0,Number(document.getElementById('bsSpd2').value)||0,Number(document.getElementById('bsSpd3').value)||0,Number(document.getElementById('bsSpd4').value)||0].map((x,i)=>({spd:x,n:i+1})).sort((x,y)=>y.spd-x.spd);document.getElementById('bsSpeedResult').innerHTML=a.map((x,i)=>(i+1)+'º → Monstro '+x.n+' — <b>'+x.spd+' SPD</b>').join('<br>')+'<br><br>⚡ A ideia é visualizar a ordem. Em uma equipe real, ATB, skills e efeitos também podem alterar o resultado.'};
+window.bsDamageLab=()=>{const atk=Number(document.getElementById('bsAtk').value)||0,cd=Number(document.getElementById('bsCd').value)||0,m=Number(document.getElementById('bsMult').value)||0;const normal=atk*m,crit=normal*(1+cd/100);document.getElementById('bsDamageResult').innerHTML='Modelo sem mitigação: <b>'+Math.round(normal)+'</b><br>Modelo com crítico de '+cd+'% CD: <b>'+Math.round(crit)+'</b><br><br>💡 No jogo real, investigue skill scaling, buffs, debuffs, defesa do alvo, elemento e outras regras antes de concluir que “faltou ATK”.'};
+window.bsMissionCheck=()=>{const v=document.getElementById('bsMission').value;const m={boss:'🛡️ Sobrevivência + debuffs consistentes + dano seguro. Boss exige mais do que quatro DPS.',speed:'⚡ SPD/ATB + uma sequência rápida e consistente. Não adianta ter dano se a equipe perde a corrida.',control:'🧠 Controle/CC + velocidade/ordem. Primeiro pense em impedir a resposta inimiga.',cleanse:'🧹 Cleanse/proteção + sobrevivência. Se os debuffs estão desmontando a equipe, trate a causa.'};document.getElementById('bsMissionResult').textContent=m[v]};
+window.bsDetectiveCheck=()=>{const v=document.getElementById('bsDetective').value;const m={one:'💀 Verifique SPD/ordem, sobrevivência, proteção e se o DPS deveria mesmo ser o primeiro alvo.',two:'🎯 Verifique chance da skill, ACC, RES do alvo e se o efeito pode ser aplicado naquela situação.',three:'⚡ Verifique Speed Tune, mudanças de ATB, boosts e se uma unidade está ultrapassando outra.',four:'💥 Verifique setup, debuffs, scaling, CR/CD/ATK e se o alvo tem mitigação/proteção.'};document.getElementById('bsDetectiveResult').textContent=m[v]};
+window.bsGrad=n=>{document.getElementById('bsGradResult').textContent=n===2?'🎓 Excelente. Esse é o pensamento que a Academy quer ensinar: identificar condição de vitória, encontrar o gargalo e testar uma mudança por vez.':'❌ Isso pode funcionar por acaso, mas não ensina você a diagnosticar a conta.'};
+})();
+</script>
+
 </body></html>
