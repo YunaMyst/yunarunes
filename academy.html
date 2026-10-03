@@ -1163,4 +1163,128 @@ render();
 })();
 </script>
 
+
+<style id="yuna-academy-next-level-css">
+.next-level{margin:18px 0;background:linear-gradient(145deg,#121b27,#0d141c);border:1px solid #3b4d60;border-radius:16px;padding:20px}
+.next-level h2{margin:0 0 7px;font-size:24px}.next-level>p{color:#9aa9b6;line-height:1.55}
+.nl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.nl-card{background:#0b1219;border:1px solid #293746;border-radius:12px;padding:15px}
+.nl-card h3{margin:0 0 7px;font-size:16px}.nl-card p,.nl-card li{color:#a9b5bf;font-size:12px;line-height:1.55}.nl-card ul{padding-left:18px}
+.nl-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:9px 11px;font-weight:900;cursor:pointer;margin:4px 4px 0 0}.nl-btn:hover{border-color:#35a9e1}
+.nl-select{width:100%;background:#0b1219;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px;margin-top:6px}
+.nl-result{margin-top:9px;background:#101923;border:1px solid #293746;border-radius:9px;padding:11px;line-height:1.55;color:#dce6ee;min-height:20px}
+.nl-boss{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.nl-chip{padding:10px;border:1px solid #293746;border-radius:10px;background:#101923}.nl-chip b{display:block;color:#35a9e1}.nl-chip span{display:block;color:#9aa9b6;font-size:11px;margin-top:4px}
+.nl-check{display:flex;gap:8px;align-items:flex-start;margin:8px 0;color:#cbd6de;font-size:12px}.nl-check input{margin-top:3px}
+.nl-score{font-size:18px;font-weight:900;color:#e7c85a;margin-top:10px}
+@media(max-width:750px){.nl-grid,.nl-boss{grid-template-columns:1fr}}
+</style>
+<section class="next-level" id="academy-next-level">
+<div class="eyebrow">🚀 Yuna Academy • Nível seguinte</div>
+<h2 data-pt="24. Treino de decisão — pare de decorar e comece a diagnosticar" data-en="24. Decision Training — stop memorizing and start diagnosing"></h2>
+<p data-pt="A partir daqui, a Academy começa a testar decisões reais: o jogador precisa identificar o problema antes de escolher a solução." data-en="From here on, the Academy tests real decisions: identify the problem before choosing the solution."></p>
+<div class="nl-grid">
+<div class="nl-card">
+<h3>🩺 Diagnóstico rápido</h3>
+<p>Escolha o sintoma principal. A resposta mostra quais sistemas você deve investigar primeiro.</p>
+<select class="nl-select" id="nlSymptom">
+<option value="slow">Minha equipe perde porque é lenta.</option>
+<option value="dead">Meus monstros morrem cedo.</option>
+<option value="miss">Meus debuffs falham.</option>
+<option value="weak">Meu DPS não causa dano.</option>
+<option value="boss">Chego ao chefe, mas não consigo terminar.</option>
+</select>
+<button class="nl-btn" type="button" onclick="nlDiagnose()">🔎 Diagnosticar</button><div class="nl-result" id="nlDiagnosis"></div>
+</div>
+<div class="nl-card">
+<h3>💎 Decisão de runa</h3>
+<p>Não escolha pela quantidade de números. Pense na função do monstro e no objetivo da build.</p>
+<select class="nl-select" id="nlRune">
+<option value="spd">SPD main + substats úteis para um suporte rápido.</option>
+<option value="dps">ATK% main + CR/CD úteis para um DPS.</option>
+<option value="bad">Main stat incompatível com a função e substats sem direção.</option>
+<option value="hybrid">Stats medianos, mas a peça pode completar uma build específica.</option>
+</select>
+<button class="nl-btn" type="button" onclick="nlRuneDecision()">🧠 Decidir</button><div class="nl-result" id="nlRuneResult"></div>
+</div>
+<div class="nl-card">
+<h3>⚔️ Ordem de batalha</h3>
+<p>Monte a lógica da equipe antes de pensar no dano final.</p>
+<div class="nl-boss"><div class="nl-chip"><b>1. Preparar</b><span>ATB/boost, setup ou proteção.</span></div><div class="nl-chip"><b>2. Preparar o alvo</b><span>Strip, debuff ou redução.</span></div><div class="nl-chip"><b>3. Finalizar</b><span>Controle, dano ou condição de vitória.</span></div></div>
+<button class="nl-btn" type="button" onclick="nlOrder()">⚡ Verificar lógica</button><div class="nl-result" id="nlOrderResult"></div>
+</div>
+<div class="nl-card">
+<h3>🏰 Boss School</h3><p>Antes de entrar num conteúdo difícil, marque o que você sabe.</p>
+<label class="nl-check"><input type="checkbox" class="bossCheck"> Sei como o chefe ameaça minha equipe.</label>
+<label class="nl-check"><input type="checkbox" class="bossCheck"> Tenho uma forma de sobreviver ao padrão principal.</label>
+<label class="nl-check"><input type="checkbox" class="bossCheck"> Tenho dano suficiente para encerrar a luta.</label>
+<label class="nl-check"><input type="checkbox" class="bossCheck"> Minha ordem de turnos faz sentido.</label>
+<label class="nl-check"><input type="checkbox" class="bossCheck"> Sei qual parte da equipe está falhando.</label>
+<button class="nl-btn" type="button" onclick="nlBoss()">🏰 Avaliar preparação</button><div class="nl-result" id="nlBossResult"></div>
+</div>
+<div class="nl-card">
+<h3>🧩 Team Doctor</h3><p>Uma equipe não precisa ter cinco monstros fortes. Ela precisa cobrir o que a missão exige.</p>
+<select class="nl-select" id="nlTeam">
+<option value="damage">Tenho muito dano, mas morro antes de atacar.</option><option value="control">Tenho controle, mas não consigo finalizar.</option><option value="speed">Tenho bons monstros, mas a ordem é uma bagunça.</option><option value="support">Tenho suporte demais e pouca condição de vitória.</option>
+</select>
+<button class="nl-btn" type="button" onclick="nlTeamDoctor()">🩺 Tratar equipe</button><div class="nl-result" id="nlTeamResult"></div>
+</div>
+<div class="nl-card">
+<h3>🎯 Farm School</h3><p>Aprenda a escolher o próximo farm pelo gargalo da conta, não pelo conteúdo mais difícil que você consegue entrar.</p>
+<select class="nl-select" id="nlFarm">
+<option value="runes">Minhas builds estão fracas e inconsistentes.</option><option value="monsters">Tenho poucas unidades desenvolvidas.</option><option value="skill">Minhas skills ainda precisam de melhorias.</option><option value="materials">Estou travado por materiais de evolução.</option>
+</select>
+<button class="nl-btn" type="button" onclick="nlFarmPlan()">🗺️ Montar prioridade</button><div class="nl-result" id="nlFarmResult"></div>
+</div>
+</div></section>
+
+<section class="next-level" id="academy-final-training">
+<div class="eyebrow">🏆 Yuna Academy • Prova prática</div>
+<h2 data-pt="25. Desafio final — explique a sua decisão" data-en="25. Final Challenge — explain your decision"></h2>
+<p data-pt="O objetivo não é acertar por sorte. Escolha a melhor resposta e entenda por quê." data-en="The goal is not to guess. Choose the best answer and understand why."></p>
+<div class="nl-card">
+<p><b>Caso:</b> sua equipe tem dano suficiente, mas o inimigo sempre joga primeiro, coloca controle e sua equipe perde antes de conseguir executar a rotação.</p>
+<button class="nl-btn" type="button" onclick="nlFinal(0)">Aumentar apenas o CD do DPS.</button>
+<button class="nl-btn" type="button" onclick="nlFinal(1)">Investigar SPD, ATB, Speed Tune e sobrevivência.</button>
+<button class="nl-btn" type="button" onclick="nlFinal(2)">Trocar todas as cinco builds imediatamente.</button>
+<div class="nl-result" id="nlFinalResult"></div><div class="nl-score" id="nlFinalScore"></div>
+</div></section>
+
+<script id="yuna-academy-next-level-js">
+(()=>{
+window.nlDiagnose=()=>{
+const v=document.getElementById('nlSymptom').value;
+const m={slow:'⚡ Investigue SPD, barra de ataque, boosts, debuffs que atrasam o inimigo e a Speed Tune. Não comece trocando tudo.',dead:'❤️ Verifique HP/DEF, proteção, cura, elemento, ordem de turnos e se o time está recebendo dano antes de agir.',miss:'🎯 Verifique ACC/RES, chance da habilidade, imunidade e se o efeito realmente pode ser aplicado ao alvo.',weak:'💥 Leia a skill: descubra o scaling, depois revise ATK/CR/CD, setup, elemento e mitigação do alvo.',boss:'🏰 Identifique o padrão do chefe, a condição de sobrevivência e o ponto em que sua equipe perde consistência.'};
+document.getElementById('nlDiagnosis').textContent=m[v];
+};
+window.nlRuneDecision=()=>{
+const v=document.getElementById('nlRune').value;
+const m={spd:'🟢 Boa candidata para suporte rápido. O valor da peça depende de quão bem ela atende a função.',dps:'🟢 Faz sentido para um DPS se a skill e a função aproveitarem esses atributos.',bad:'🔴 Provavelmente vender ou reservar apenas para uma função muito específica. Números altos não corrigem uma função errada.',hybrid:'🟡 Investigue. Uma peça mediana pode ser excelente se fechar um breakpoint ou resolver um gargalo específico.'};
+document.getElementById('nlRuneResult').textContent=m[v];
+};
+window.nlOrder=()=>document.getElementById('nlOrderResult').textContent='🧠 Pense em cadeia: quem faz o time funcionar primeiro → quem prepara o alvo → quem aplica a condição de vitória. A ordem exata depende das skills e do conteúdo.';
+window.nlBoss=()=>{
+const n=[...document.querySelectorAll('.bossCheck')].filter(x=>x.checked).length;
+document.getElementById('nlBossResult').textContent=n===5?'🏆 Excelente preparação. Você consegue explicar o plano antes de entrar.':'🧠 '+n+'/5. Antes de aumentar o dano, descubra qual pergunta ainda não consegue responder.';
+};
+window.nlTeamDoctor=()=>{
+const v=document.getElementById('nlTeam').value;
+const m={damage:'🛡️ Falta sobrevivência/controle. Faça o DPS chegar vivo ao turno em que precisa finalizar.',control:'💥 Falta condição de vitória. Depois de controlar, sua equipe precisa converter controle em dano ou outro objetivo.',speed:'⚡ Corrija a ordem: defina quem precisa agir primeiro e ajuste SPD/ATB para essa sequência.',support:'🎯 Reduza funções redundantes e adicione uma condição de vitória clara.'};
+document.getElementById('nlTeamResult').textContent=m[v];
+};
+window.nlFarmPlan=()=>{
+const v=document.getElementById('nlFarm').value;
+const m={runes:'💎 Prioridade: farm de runas consistente. Uma conta com boas unidades e builds fracas continuará inconsistente.',monsters:'🧬 Prioridade: desenvolver as unidades que cobrem suas funções principais antes de espalhar recursos.',skill:'📖 Prioridade: melhorar skills das unidades que você realmente usa e medir o impacto.',materials:'🏗️ Prioridade: farmar o material que bloqueia a próxima evolução, sem abandonar seu gargalo principal.'};
+document.getElementById('nlFarmResult').textContent=m[v];
+};
+let finalScore=Number(localStorage.getItem('yuna-academy-final-score-v1')||0);
+window.nlFinal=i=>{
+const r=document.getElementById('nlFinalResult');
+if(i===1){finalScore=1;localStorage.setItem('yuna-academy-final-score-v1','1');r.textContent='🏆 Correto! Você atacou o gargalo: a equipe não consegue executar a rotação. SPD, ATB, Speed Tune e sobrevivência são pontos de investigação.'}
+else r.textContent='❌ Ainda não. O problema descrito acontece antes do dano do DPS: descubra por que a equipe não consegue jogar.';
+document.getElementById('nlFinalScore').textContent=finalScore?'🏅 Desafio final concluído!':'';
+};
+document.getElementById('nlFinalScore').textContent=finalScore?'🏅 Desafio final concluído!':'';
+})();
+</script>
+
 </body></html>
