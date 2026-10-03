@@ -71,7 +71,7 @@ if(!document.getElementById('yunaHeaderPCFinal')){const s=document.createElement
 @media(min-width:601px){
  header.top>.nav{max-width:1500px!important;padding:8px 14px!important;display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;grid-template-areas:"left controls" "links links"!important;gap:8px 16px!important}
  header.top .yuna-left{grid-area:left!important;min-width:190px!important}
- header.top .yuna-controls{grid-area:controls!important;position:static!important;width:100%!important;min-width:0!important;display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:8px!important}
+ header.top .yuna-controls{grid-area:controls!important;position:absolute!important;right:14px!important;top:8px!important;width:auto!important;min-width:max-content!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;gap:8px!important}
  header.top .yuna-controls button,header.top .yuna-controls .donate-link{height:40px!important;padding:0 13px!important;font-size:13px!important;white-space:nowrap!important}
  header.top .yuna-controls .apk-link{display:none!important}
  header.top .nav-links{grid-area:links!important;display:block!important;width:100%!important;min-width:0!important}
