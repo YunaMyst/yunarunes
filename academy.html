@@ -42,7 +42,37 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.addEventListener('
 document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===current));
 })();
 </script>
-<header class="top"></header>
+<div id="academy-visible-controls" class="academy-visible-controls">
+<a href="./index.html">🦊 YunaRunes</a>
+<div>
+<button type="button" onclick="academySetLanguage('pt')">🇧🇷 PT/BR</button>
+<button type="button" onclick="academySetLanguage('en')">🇬🇧 ENG</button>
+<a class="academy-mobile-apk" href="https://yunarunes.com/downloads/yunarunes.apk" download="yunarunes.apk">📱 APK</a>
+</div>
+</div>
+<style>
+#academy-visible-controls{position:relative;z-index:100000;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#0b1015;border:2px solid #35a9e1;border-radius:12px;padding:10px 12px;margin:0 0 14px;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+#academy-visible-controls>a,#academy-visible-controls button{min-height:42px;border:1px solid #425364;border-radius:9px;background:#202a34;color:#fff;text-decoration:none;font-weight:900;font-size:14px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+#academy-visible-controls>a:first-child{background:#17222d;border-color:#35a9e1}
+#academy-visible-controls>div{display:flex;gap:7px}
+#academy-visible-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}
+#academy-visible-controls .academy-mobile-apk{display:none}
+@media(max-width:600px){#academy-visible-controls{display:block}#academy-visible-controls>a:first-child{width:100%;margin-bottom:8px}#academy-visible-controls>div{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}#academy-visible-controls>a,#academy-visible-controls button{width:100%;padding:0 5px;font-size:12px}.academy-mobile-apk{display:inline-flex!important}}
+</style>
+<script>
+function academySetLanguage(lang){
+try{localStorage.setItem('yunarunes-language',lang)}catch(e){}
+document.documentElement.lang=lang==='en'?'en':'pt-BR';
+document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===lang));
+if(typeof window.applyLanguage==='function'){window.applyLanguage();}
+else{
+document.querySelectorAll('[data-pt][data-en]').forEach(el=>{el.innerHTML=lang==='en'?el.dataset.en:el.dataset.pt});
+document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(el=>{el.placeholder=lang==='en'?el.dataset.enPlaceholder:el.dataset.ptPlaceholder});
+}
+document.querySelectorAll('#academy-visible-controls button').forEach(b=>b.classList.toggle('active',b.textContent.includes(lang==='en'?'ENG':'PT/BR')));
+}
+(function(){let l='pt';try{l=localStorage.getItem('yunarunes-language')||'pt'}catch(e){}academySetLanguage(l)})();
+</script>
 <main class="wrap">
 <section class="hero">
 <div class="eyebrow">🦊 YunaRunes • Yuna Academy</div>
