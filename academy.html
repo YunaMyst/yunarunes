@@ -1287,4 +1287,75 @@ document.getElementById('nlFinalScore').textContent=finalScore?'🏅 Desafio fin
 })();
 </script>
 
+
+<style id="yuna-academy-skill-tree-css">
+.skill-tree{margin:18px 0;background:linear-gradient(145deg,#151324,#0d141c);border:1px solid #4a3b68;border-radius:16px;padding:20px}
+.skill-tree h2{margin:0 0 7px;font-size:25px}.skill-tree>p{color:#a9b5bf;line-height:1.55}
+.skill-path{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+.skill-node{position:relative;background:#0b1219;border:1px solid #293746;border-radius:12px;padding:13px;text-align:center;min-height:125px}
+.skill-node.locked{opacity:.45}.skill-node.current{border-color:#35a9e1;box-shadow:0 0 0 1px #35a9e1}.skill-node.done{border-color:#8b5cf6}
+.skill-node .skill-icon{font-size:27px}.skill-node b{display:block;margin:7px 0 4px;font-size:13px}.skill-node span{display:block;color:#8fa0af;font-size:10px;line-height:1.4}
+.skill-xp{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:900;margin-top:8px}.skill-xp strong{color:#e7c85a}
+.skill-meter{height:12px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:8px 0}.skill-meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.25s}
+.skill-lessons{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.skill-lesson{background:#0b1219;border:1px solid #293746;border-radius:11px;padding:13px}.skill-lesson h3{margin:0 0 5px;font-size:15px}.skill-lesson p{color:#9aa9b6;font-size:11px;line-height:1.5;margin:0 0 8px}
+.skill-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.skill-btn.primary{background:#35a9e1;color:#061018;border-color:#35a9e1}.skill-btn:disabled{opacity:.5;cursor:not-allowed}
+.skill-tree-result{margin-top:10px;background:#101923;border:1px solid #293746;border-radius:10px;padding:11px;line-height:1.5;color:#dce6ee}
+@media(max-width:900px){.skill-path{grid-template-columns:repeat(3,1fr)}.skill-lessons{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.skill-path,.skill-lessons{grid-template-columns:1fr}.skill-node{min-height:95px}}
+</style>
+<section class="skill-tree" id="academy-skill-tree">
+<div class="eyebrow">🌳 Yuna Academy • Árvore de habilidades</div>
+<h2 data-pt="26. Árvore de Habilidades — evolua o seu conhecimento" data-en="26. Skill Tree — evolve your knowledge"></h2>
+<p data-pt="A árvore funciona como uma progressão de RPG: você desbloqueia fundamentos antes de avançar para decisões complexas. O progresso fica salvo neste dispositivo." data-en="The tree works like RPG progression: unlock fundamentals before advancing to complex decisions. Progress is saved on this device."></p>
+<div class="skill-xp"><span id="skillTreeStatus">Nível 1 • 0/6 habilidades</span><strong id="skillTreeXP">0 XP</strong></div>
+<div class="skill-meter"><i id="skillTreeBar"></i></div>
+<div class="skill-path" id="skillTreeNodes"></div>
+<div class="skill-lessons" id="skillTreeLessons"></div>
+<div class="skill-tree-result" id="skillTreeResult">🌱 Comece pelo primeiro nó: Fundamentos.</div>
+<button class="skill-btn" type="button" id="skillTreeReset">↺ Resetar árvore</button>
+</section>
+<script id="yuna-academy-skill-tree-js">
+(()=>{
+const key='yuna-academy-skill-tree-v1';
+const nodes=[
+{id:'base',icon:'🌱',name:'Fundamentos',desc:'Interface, elementos e objetivo da batalha.',xp:20},
+{id:'combat',icon:'⚔️',name:'Combate',desc:'Turnos, alvo, efeitos e lógica de batalha.',xp:25},
+{id:'stats',icon:'📊',name:'Stats',desc:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',xp:30},
+{id:'runes',icon:'💎',name:'Runas',desc:'Slots, main stats, substats e sets.',xp:35},
+{id:'skills',icon:'📖',name:'Skills',desc:'Leia alvo, efeito, chance, scaling e cooldown.',xp:40},
+{id:'teams',icon:'🧙',name:'Equipes',desc:'Funções, condição de vitória e Speed Tune.',xp:45},
+{id:'diagnosis',icon:'🕵️',name:'Diagnóstico',desc:'Encontre o gargalo antes de trocar a build.',xp:50},
+{id:'pve',icon:'🏰',name:'PvE',desc:'Planeje farm e progressão pelo gargalo da conta.',xp:55},
+{id:'pvp',icon:'🏆',name:'PvP',desc:'Adapte a equipe ao adversário e ao objetivo.',xp:60},
+{id:'master',icon:'👑',name:'Mestre',desc:'Resolva problemas sem depender de builds copiadas.',xp:80}
+];
+let state={done:[]};
+try{state=JSON.parse(localStorage.getItem(key)||'{"done":[]}');if(!Array.isArray(state.done))state.done=[]}catch(e){}
+const done=id=>state.done.includes(id);
+const unlocked=i=>i===0||done(nodes[i-1].id);
+const total=nodes.reduce((a,n)=>a+n.xp,0);
+function render(){
+const n=document.getElementById('skillTreeNodes');
+n.innerHTML=nodes.map((x,i)=>'<div class="skill-node '+(done(x.id)?'done ':!unlocked(i)?'locked ':'current')+'"><div class="skill-icon">'+x.icon+'</div><b>'+x.name+'</b><span>'+x.desc+'</span><span style="margin-top:7px">+'+x.xp+' XP</span></div>').join('');
+const xp=nodes.filter(x=>done(x.id)).reduce((a,n)=>a+n.xp,0),count=state.done.length;
+document.getElementById('skillTreeXP').textContent=xp+' XP';
+document.getElementById('skillTreeStatus').textContent='Nível '+(Math.min(nodes.length,count+1))+' • '+count+'/'+nodes.length+' habilidades';
+document.getElementById('skillTreeBar').style.width=(xp/total*100)+'%';
+const lessons=document.getElementById('skillTreeLessons');
+lessons.innerHTML=nodes.map((x,i)=>'<div class="skill-lesson"><h3>'+x.icon+' '+x.name+'</h3><p>'+x.desc+'</p><button class="skill-btn '+(unlocked(i)&&!done(x.id)?'primary':'')+'" '+(!unlocked(i)?'disabled':'')+' onclick="skillTreeLearn('+i+')">'+(done(x.id)?'✓ Concluído':unlocked(i)?'Aprender':'🔒 Bloqueado')+'</button></div>').join('');
+}
+window.skillTreeLearn=i=>{
+if(!unlocked(i)||done(nodes[i].id))return;
+const x=nodes[i];state.done.push(x.id);localStorage.setItem(key,JSON.stringify(state));
+document.getElementById('skillTreeResult').textContent='🎉 '+x.name+' desbloqueado! Agora você ganhou +'+x.xp+' XP. O próximo nó está liberado.';
+render();
+};
+document.getElementById('skillTreeReset').addEventListener('click',()=>{
+if(!confirm('Resetar toda a Árvore de Habilidades?'))return;
+state={done:[]};localStorage.setItem(key,JSON.stringify(state));document.getElementById('skillTreeResult').textContent='🌱 Árvore resetada. Comece novamente pelos fundamentos.';render();
+});
+render();
+})();
+</script>
+
 </body></html>
