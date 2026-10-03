@@ -614,4 +614,81 @@ window.detective=n=>{const m={slow:'Investiga SPD, ATB, líder de velocidade e S
 window.masterAnswer=ok=>{el('masterResult').textContent=ok?'✅ Correto. Primeiro verifica SPD, ATB e Speed Tune. +20 XP':'❌ Não precisas trocar tudo. Encontra primeiro o gargalo.';if(ok)yunaAcademyEarn(20)};
 window.askAcademy=()=>{const q=el('academyAsk').value.toLowerCase().trim();if(!q)return;const f=[...document.querySelectorAll('.section')].find(s=>s.textContent.toLowerCase().includes(q));el('askResult').textContent=f?'🦊 Aula encontrada: '+f.querySelector('h2')?.textContent:'🦊 Tenta stun, proc, speed, rune, ACC ou RTA.';if(f)f.scrollIntoView({behavior:'smooth',block:'center'})};
 el('medalsGrid').innerHTML=['🌱 Primeiro passo','💎 Mestre das runas','🧪 Cientista','⚔️ Estrategista','💯 Perfeito'].map((x,i)=>'<span class="medal '+(i?'locked':'')+'">'+x+'</span>').join('');
-})();</script></body></html>
+})();</script>
+<style id="yuna-academy-ultimate-css">
+.ultimate-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.ultimate-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.ultimate-card h3{margin:0 0 7px}.ultimate-card p,.ultimate-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.ultimate-card ul{padding-left:18px}.u-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:10px 12px;font-weight:800;cursor:pointer;margin:4px}.u-btn:hover{border-color:#35a9e1}.u-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}.u-choice .u-btn{margin:0;text-align:left}.u-result{margin-top:10px;padding:12px;background:#101923;border:1px solid #293746;border-radius:10px;line-height:1.55;color:#dce6ee}.u-progress{height:12px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden}.u-progress i{display:block;width:0;height:100%;background:#35a9e1;transition:.3s}.badge-row{display:flex;gap:7px;flex-wrap:wrap}.u-badge{padding:8px 10px;border:1px solid #293746;border-radius:999px;background:#101923;font-size:12px}.locked{opacity:.4}.dictionary-search{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:11px;margin-bottom:10px}@media(max-width:900px){.ultimate-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.ultimate-grid,.u-choice{grid-template-columns:1fr}}
+</style>
+<section class="section" id="ultimate-academy">
+<h2>🚀 Yuna Academy — Modo Interativo</h2>
+<p>Agora a Academy não serve apenas para ler. Você pode testar decisões, diagnosticar equipes, avaliar runas e aprender através de situações práticas.</p>
+<div class="ultimate-grid">
+<div class="ultimate-card"><h3>🕵️ Descubra o erro</h3><p>Uma equipe está falhando. Escolha o diagnóstico mais importante.</p><div class="u-choice"><button class="u-btn" onclick="uDiag('dead')">💀 Morre rápido</button><button class="u-btn" onclick="uDiag('slow')">🐌 Nunca joga</button><button class="u-btn" onclick="uDiag('debuff')">🎯 Debuff falha</button><button class="u-btn" onclick="uDiag('damage')">💥 Dano baixo</button></div><div id="uDiagResult" class="u-result"></div></div>
+<div class="ultimate-card"><h3>⚔️ Simulador de batalha</h3><p>Seu time precisa manter a ordem booster → setup → debuff → dano. O que você prioriza?</p><div class="u-choice"><button class="u-btn" onclick="uBattle('spd')">⚡ Ajustar SPD/ATB</button><button class="u-btn" onclick="uBattle('damage')">💥 Colocar mais dano</button><button class="u-btn" onclick="uBattle('random')">🎲 Deixar aleatório</button><button class="u-btn" onclick="uBattle('hp')">❤️ Colocar HP em todos</button></div><div id="uBattleResult" class="u-result"></div></div>
+<div class="ultimate-card"><h3>💎 Essa runa é boa?</h3><p>Para um DPS rápido, qual opção faz mais sentido?</p><div class="u-choice"><button class="u-btn" onclick="uRune(1)">SPD +18, CR +12, ATK% +8</button><button class="u-btn" onclick="uRune(2)">HP% +20, DEF% +15, RES +20</button><button class="u-btn" onclick="uRune(3)">RES +20, HP +500, DEF +10</button><button class="u-btn" onclick="uRune(4)">ATK +20, HP +8, DEF +7</button></div><div id="uRuneResult" class="u-result"></div></div>
+<div class="ultimate-card"><h3>🧙 Monte uma equipe do zero</h3><p>Escolha a condição de vitória e o primeiro papel.</p><select id="uGoal" class="master-select"><option value="damage">💥 Dano rápido</option><option value="control">🧠 Controle</option><option value="safe">🛡️ Segurança</option></select><select id="uRole" class="master-select" style="margin-top:7px"><option>Booster</option><option>Setup / Strip</option><option>Debuffer / CC</option><option>DPS</option><option>Healer / Support</option></select><button class="u-btn" onclick="uBuild()">Montar estratégia</button><div id="uBuildResult" class="u-result"></div></div>
+<div class="ultimate-card"><h3>🧪 Laboratório de ACC/RES</h3><p>Digite os valores para testar um modelo educativo.</p><input id="uAcc" class="master-input" type="number" min="0" max="100" value="85" placeholder="ACC %"><input id="uRes" class="master-input" type="number" min="0" max="100" value="50" placeholder="RES %" style="margin-top:7px"><button class="u-btn" onclick="uLab()">Testar</button><div id="uLabResult" class="u-result"></div></div>
+<div class="ultimate-card"><h3>🧠 Por que você perdeu?</h3><p>Escolha o sintoma e veja por onde começar a investigação.</p><select id="uLoss" class="master-select"><option value="dead">Minha equipe morre rápido</option><option value="slow">Nunca jogo primeiro</option><option value="debuff">Meus debuffs não entram</option><option value="damage">Meu dano é baixo</option><option value="order">Minha equipe sai da ordem</option></select><button class="u-btn" onclick="uLoss()">Diagnosticar</button><div id="uLossResult" class="u-result"></div></div>
+</div>
+</section>
+
+<section class="section" id="academy-dictionary">
+<h2>📖 Dicionário Yuna Academy</h2>
+<p>Pesquise um termo e aprenda o significado, o uso e o erro mais comum.</p>
+<input id="uDictSearch" class="dictionary-search" placeholder="Pesquisar ACC, SPD, STUN, PROC...">
+<div class="ultimate-grid" id="uDictGrid"></div>
+</section>
+
+<section class="section" id="academy-path">
+<h2>🗺️ Trilha completa de aprendizado</h2>
+<p>Conclua as etapas na ordem. O progresso fica salvo neste dispositivo.</p>
+<div class="u-progress"><i id="uPathFill"></i></div><p id="uPathText">0/12 etapas concluídas</p>
+<div id="uPath"></div>
+</section>
+
+<section class="section" id="academy-master">
+<h2>👑 Modo Mestre</h2>
+<p>Sem dicas: tome a decisão que você considera correta.</p>
+<div class="ultimate-card"><h3>Desafio final</h3><p>Seu booster está pronto para agir, mas o debuffer é lento demais e o DPS tem dano alto. Qual é o primeiro problema a corrigir?</p><div class="u-choice"><button class="u-btn" onclick="uMaster(false)">Trocar todas as runas</button><button class="u-btn" onclick="uMaster(true)">Ajustar SPD/Speed Tune</button><button class="u-btn" onclick="uMaster(false)">Aumentar apenas HP</button><button class="u-btn" onclick="uMaster(false)">Trocar o elemento</button></div><div id="uMasterResult" class="u-result"></div></div>
+</section>
+
+<section class="section" id="academy-cert">
+<h2>🏆 Certificação Yuna Academy</h2>
+<p>Complete a trilha, desafios e provas para desbloquear títulos.</p>
+<div class="badge-row" id="uBadges"></div>
+</section>
+
+<script id="yuna-academy-ultimate-js">
+(()=>{const xpKey='yuna-academy-xp-v1',pathKey='yuna-academy-ultimate-path-v1',medalKey='yuna-academy-ultimate-medals-v1';
+let xp=Number(localStorage.getItem(xpKey)||0),medals=JSON.parse(localStorage.getItem(medalKey)||'{}');
+const earn=n=>{xp+=n;localStorage.setItem(xpKey,xp);if(window.yunaAcademyEarn)window.yunaAcademyEarn(n);renderBadges()};
+const award=k=>{medals[k]=true;localStorage.setItem(medalKey,JSON.stringify(medals));renderBadges()};
+window.uDiag=t=>{const d={dead:'💀 Comece por HP/DEF, cura, escudos, redução de dano e pela ordem dos turnos. Não aumente dano sem resolver sobrevivência.',slow:'🐌 Verifique SPD base, SPD das runas, líder de velocidade, boosts de ATB e Speed Tune.',debuff:'🎯 Verifique chance da skill, ACC, RES do alvo e se a skill realmente aplica o debuff.',damage:'💥 Verifique scaling da skill, ATK/DEF/HP, CR/CD, debuffs e mitigação do alvo.'};document.getElementById('uDiagResult').textContent=d[t];earn(5);award('detective')};
+window.uBattle=t=>{const ok=t==='spd';document.getElementById('uBattleResult').textContent=ok?'✅ Correto. Primeiro preserve a ordem dos turnos com SPD/ATB/Speed Tune. Depois otimize o dano.':'❌ Isso pode ajudar depois, mas não resolve a ordem de turnos. Comece por SPD/ATB/Speed Tune.';if(ok){earn(10);award('battle')}};
+window.uRune=n=>{const ok=n===1;document.getElementById('uRuneResult').textContent=ok?'✅ Boa escolha para um DPS rápido. SPD + CR + ATK% aponta para dano e frequência de turnos.':'⚠️ Pode ser útil para outro papel, mas não é a melhor prioridade para este DPS. Pense na função da build.';if(ok){earn(10);award('rune')}};
+window.uBuild=()=>{const g=document.getElementById('uGoal').value,r=document.getElementById('uRole').value;const seq=g==='control'?'Booster → Setup/Strip → Debuffer/CC → DPS':g==='damage'?'Booster → Setup → Debuffer → DPS':'Proteção/Healer → Controle → Dano seguro';document.getElementById('uBuildResult').textContent='🎯 Objetivo: '+g+' • Primeiro papel: '+r+' • Sequência sugerida: '+seq;earn(10);award('team')};
+window.uLab=()=>{const a=Math.max(0,Number(document.getElementById('uAcc').value)||0),r=Math.max(0,Number(document.getElementById('uRes').value)||0),floor=Math.max(15,r-a);document.getElementById('uLabResult').textContent='🧪 Modelo educativo: '+r+'% RES − '+a+'% ACC = '+floor+'% de resistência mínima no exemplo. A mecânica real depende das regras específicas da habilidade e do jogo.';earn(10);award('lab')};
+window.uLoss=()=>{const t=document.getElementById('uLoss').value;uDiag(t);};
+window.uMaster=ok=>{document.getElementById('uMasterResult').textContent=ok?'👑 Correto! Primeiro corrija SPD/Speed Tune para que a equipe faça o que foi planejado. +20 XP':'❌ Não troque tudo de uma vez. Encontre primeiro o gargalo da equipe.';if(ok){earn(20);award('master')}};
+const dict=[
+['SPD','Speed: influencia a ordem e frequência dos turnos.','Erro comum: achar que o maior SPD sozinho garante vitória.'],
+['ACC','Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.','Erro comum: pensar que 100% ACC significa 100% de aplicação.'],
+['RES','Resistance: participa das verificações de resistência contra efeitos.','Erro comum: ignorar o alvo e olhar apenas sua própria ACC.'],
+['STUN','Controle que impede o monstro de agir durante o efeito.','Erro comum: confundir STUN com STRIP.'],
+['PROC','Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.','Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.'],
+['STRIP','Remoção de buffs.','Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.'],
+['CLEANSE','Remoção de debuffs de um aliado.','Erro comum: confundir cleanse com imunidade.'],
+['CC','Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.','Erro comum: considerar apenas STUN como CC.'],
+['DPS','Função focada em causar dano.','Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.'],
+['SPEED TUNING','Ajuste de velocidades para preservar uma sequência planejada.','Erro comum: montar velocidades isoladamente sem testar a equipe inteira.'],
+['BUFF','Efeito positivo aplicado a um aliado.','Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.'],
+['DEBUFF','Efeito negativo aplicado a um inimigo.','Erro comum: esquecer ACC, RES ou chance da skill.']
+];
+const grid=document.getElementById('uDictGrid'),search=document.getElementById('uDictSearch');
+function renderDict(){const q=(search.value||'').toLowerCase();grid.innerHTML=dict.filter(x=>(x[0]+' '+x[1]+' '+x[2]).toLowerCase().includes(q)).map(x=>'<div class="ultimate-card"><h3>'+x[0]+'</h3><p>'+x[1]+'</p><p>⚠️ '+x[2]+'</p></div>').join('')||'<div class="ultimate-card">Nenhum termo encontrado.</div>'}search.addEventListener('input',renderDict);renderDict();
+const path=[['fund','🌱 Fundamentos: elementos, funções e 6★'],['combat','⚔️ Combate: turnos, ATB, buffs e debuffs'],['runes','💎 Runas: slots, main stats e substats'],['stats','📊 Stats: SPD, CR, CD, ACC, RES, HP, DEF, ATK'],['speed','⚡ Speed Tune e ordem de turnos'],['pve','🏰 PvE: farm e progressão'],['pvp','🏆 PvP: Arena, Siege e RTA'],['diagnose','🕵️ Diagnosticar derrotas'],['teams','🧙 Montar equipes'],['lab','🧪 Laboratórios'],['practice','🎮 Desafios práticos'],['master','👑 Modo Mestre']];
+let state=JSON.parse(localStorage.getItem(pathKey)||'{}'),wrap=document.getElementById('uPath');
+function renderPath(){wrap.innerHTML=path.map((x,i)=>'<label class="checkrow"><input type="checkbox" '+(state[x[0]]?'checked':'')+' data-u-path="'+x[0]+'"><span><b>'+x[1]+'</b><small>Etapa '+(i+1)+' de '+path.length+'</small></span></label>').join('');wrap.querySelectorAll('input').forEach(b=>b.onchange=()=>{state[b.dataset.uPath]=b.checked;localStorage.setItem(pathKey,JSON.stringify(state));renderPath();if(b.checked)earn(10)});const n=path.filter(x=>state[x[0]]).length;document.getElementById('uPathFill').style.width=(n/path.length*100)+'%';document.getElementById('uPathText').textContent=n+'/'+path.length+' etapas concluídas';if(n===path.length)award('graduate')};renderPath();
+function renderBadges(){const all=[['detective','🕵️ Detetive'],['battle','⚔️ Estrategista'],['rune','💎 Mestre das Runas'],['team','🧙 Team Builder'],['lab','🧪 Cientista'],['master','👑 Mestre'],['graduate','🎓 Formado']];document.getElementById('uBadges').innerHTML=all.map(x=>'<span class="u-badge '+(medals[x[0]]?'':'locked')+'">'+x[1]+'</span>').join('')};renderBadges();
+})();
+</script>
+</body></html>
