@@ -13,7 +13,35 @@
 <style id="yuna-academy-hub-css">
 .academy-hub{margin:18px 0 24px}.academy-hub h2{margin:0 0 8px;font-size:25px}.academy-hub>p{color:var(--muted);margin:0 0 14px}.academy-hub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.academy-hub-card{display:block;background:linear-gradient(145deg,#151f2b,#10161f);border:1px solid var(--line);border-radius:13px;padding:16px;color:#fff;text-decoration:none;transition:.18s;cursor:pointer}.academy-hub-card:hover{transform:translateY(-2px);border-color:var(--blue);background:#172431}.academy-hub-card .icon{font-size:27px}.academy-hub-card b{display:block;margin-top:8px;font-size:14px}.academy-hub-card span{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:5px}.academy-quiz{margin-top:16px;background:linear-gradient(145deg,#171324,#10161f);border:1px solid #4a3b68;border-radius:14px;padding:18px}.academy-quiz h3{margin:0 0 7px}.quiz-options{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.quiz-options button{border:1px solid var(--line);background:#202b36;color:#fff;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer}.quiz-options button:hover{border-color:var(--blue)}.quiz-result{margin-top:10px;font-weight:800;min-height:18px}.thinking-box{background:#0d141c;border:1px solid var(--line);border-radius:11px;padding:16px;line-height:1.6;color:#dce5ed}.thinking-box b{color:#fff}@media(max-width:850px){.academy-hub-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.academy-hub-grid{grid-template-columns:1fr 1fr}.academy-hub-card{padding:13px}.academy-hub-card .icon{font-size:23px}}
 </style></head>
-<body>
+<body><header class="academy-top" aria-label="YunaRunes navigation">
+<div class="academy-top-inner">
+<a class="academy-brand" href="./index.html">🦊 <span>YunaRunes</span></a>
+<div class="academy-controls">
+<button type="button" data-academy-lang="pt">🇧🇷 PT/BR</button>
+<button type="button" data-academy-lang="en">🇬🇧 ENG</button>
+<a class="academy-apk" href="https://yunarunes.com/downloads/yunarunes.apk" download="yunarunes.apk">📱 APK</a>
+</div>
+</div>
+</header>
+<style>
+.academy-top{position:sticky;top:0;z-index:999999;background:#0b1015;border-bottom:1px solid #293746;box-shadow:0 3px 15px rgba(0,0,0,.35)}
+.academy-top-inner{max-width:1250px;margin:auto;min-height:62px;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.academy-brand{color:#fff;text-decoration:none;font-size:24px;font-weight:900;white-space:nowrap}
+.academy-controls{display:flex;gap:7px;align-items:center}
+.academy-controls button,.academy-controls a{height:42px;padding:0 14px;border:1px solid #293746;border-radius:9px;background:#202a34;color:#fff;font-weight:900;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.academy-controls button.active,.academy-controls .academy-apk{background:#35a9e1;color:#061018}
+@media(min-width:601px){.academy-apk{display:none!important}}
+@media(max-width:600px){.academy-top-inner{padding:8px}.academy-brand{font-size:19px}.academy-controls{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}.academy-top-inner{flex-wrap:wrap}.academy-brand{width:100%}.academy-controls button,.academy-controls a{height:40px;padding:0 6px;font-size:12px}.academy-apk{display:inline-flex!important}}
+</style>
+<script>
+(function(){
+const key='yunarunes-language';
+function setLang(lang){try{localStorage.setItem(key,lang)}catch(e){}document.documentElement.lang=lang==='en'?'en':'pt-BR';document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===lang));if(typeof window.applyLanguage==='function')window.applyLanguage();else location.reload();}
+const current=(()=>{try{return localStorage.getItem(key)||'pt'}catch(e){return 'pt'}})();
+document.querySelectorAll('[data-academy-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.academyLang)));
+document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===current));
+})();
+</script>
 <header class="top"></header>
 <main class="wrap">
 <section class="hero">
