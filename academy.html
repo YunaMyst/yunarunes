@@ -12,6 +12,10 @@
 </style>
 <style id="yuna-academy-hub-css">
 .academy-hub{margin:18px 0 24px}.academy-hub h2{margin:0 0 8px;font-size:25px}.academy-hub>p{color:var(--muted);margin:0 0 14px}.academy-hub-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.academy-hub-card{display:block;background:linear-gradient(145deg,#151f2b,#10161f);border:1px solid var(--line);border-radius:13px;padding:16px;color:#fff;text-decoration:none;transition:.18s;cursor:pointer}.academy-hub-card:hover{transform:translateY(-2px);border-color:var(--blue);background:#172431}.academy-hub-card .icon{font-size:27px}.academy-hub-card b{display:block;margin-top:8px;font-size:14px}.academy-hub-card span{display:block;color:var(--muted);font-size:11px;line-height:1.45;margin-top:5px}.academy-quiz{margin-top:16px;background:linear-gradient(145deg,#171324,#10161f);border:1px solid #4a3b68;border-radius:14px;padding:18px}.academy-quiz h3{margin:0 0 7px}.quiz-options{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.quiz-options button{border:1px solid var(--line);background:#202b36;color:#fff;border-radius:9px;padding:10px 13px;font-weight:800;cursor:pointer}.quiz-options button:hover{border-color:var(--blue)}.quiz-result{margin-top:10px;font-weight:800;min-height:18px}.thinking-box{background:#0d141c;border:1px solid var(--line);border-radius:11px;padding:16px;line-height:1.6;color:#dce5ed}.thinking-box b{color:#fff}@media(max-width:850px){.academy-hub-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.academy-hub-grid{grid-template-columns:1fr 1fr}.academy-hub-card{padding:13px}.academy-hub-card .icon{font-size:23px}}
+</style>
+<style id="yuna-academy-expansion-css">
+.acx{margin-top:16px}.acx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.acx-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.acx-card h3{margin:0 0 7px;font-size:16px}.acx-card p,.acx-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.acx-card ul{margin:8px 0 0;padding-left:18px}.acx-btns{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.acx-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:9px 11px;font-weight:800;cursor:pointer}.acx-btn:hover{border-color:#35a9e1}.acx-btn.good{border-color:#35a9e1}.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.journey-step{position:relative;background:#0d141c;border:1px solid #293746;border-radius:12px;padding:14px}.journey-step b{display:block}.journey-step small{display:block;color:#8fa0af;margin-top:5px;line-height:1.4}.checkrow{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid #202d39}.checkrow:last-child{border-bottom:0}.checkrow input{accent-color:#35a9e1;margin-top:3px}.meter{height:10px;background:#0b1015;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:10px 0}.meter>i{display:block;height:100%;width:0;background:#35a9e1;transition:.25s}.meter-label{font-weight:900}.sim-answer{margin-top:10px;min-height:20px;color:#dce6ee;line-height:1.5}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.resource-table{width:100%;border-collapse:collapse;font-size:12px}.resource-table th,.resource-table td{border-bottom:1px solid #293746;padding:9px;text-align:left}.resource-table th{color:#35a9e1}.resource-table td{color:#c5d0d9}.achievement{display:flex;align-items:center;gap:10px;padding:10px;background:#0d141c;border:1px solid #293746;border-radius:10px}.achievement.locked{opacity:.5}.achievement b{display:block}.achievement span{display:block;color:#8fa0af;font-size:11px;margin-top:3px}.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.academy-note{border-left:3px solid #8b5cf6;background:#151324;padding:12px;border-radius:8px;color:#d9d0ef;font-size:12px;line-height:1.55}.role-pill{display:inline-block;padding:4px 7px;border:1px solid #293746;border-radius:999px;margin:3px;color:#cbd7df;font-size:11px}.acx-result{margin-top:10px;background:#101923;border:1px solid #293746;border-radius:10px;padding:12px;line-height:1.55}.monster-choice{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px}.pve-pvp{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pve-pvp .acx-card{height:100%}
+@media(max-width:900px){.acx-grid,.ach-grid{grid-template-columns:repeat(2,1fr)}.journey{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.acx-grid,.ach-grid,.pve-pvp,.choice-grid{grid-template-columns:1fr}.journey{grid-template-columns:1fr 1fr}.resource-table{font-size:11px}}
 </style></head>
 <body><header class="academy-top" aria-label="YunaRunes navigation">
 <div class="academy-top-inner">
@@ -362,7 +366,133 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('
 </div>
 </section>
 </div></div>
-</main>
+
+<section class="section acx" id="journey">
+<h2 data-pt="🗺️ Minha Jornada — o caminho do jogador" data-en="🗺️ My Journey — the player's path"></h2>
+<p data-pt="Segue uma progressão simples. Marca cada etapa quando entenderes o objetivo, não apenas quando terminares o conteúdo." data-en="Follow a simple progression. Mark each stage when you understand the goal, not just when you finish the content."></p>
+<div class="journey">
+<div class="journey-step"><b>1. 🟢 Fundamentos</b><small data-pt="Elementos, turnos, buffs, debuffs e funções." data-en="Elements, turns, buffs, debuffs and roles."></small></div>
+<div class="journey-step"><b>2. 💎 Runas</b><small data-pt="Slots, main stats, substats e eficiência." data-en="Slots, main stats, substats and efficiency."></small></div>
+<div class="journey-step"><b>3. 🏰 PvE</b><small data-pt="Criar equipas estáveis e farmar recursos." data-en="Build stable teams and farm resources."></small></div>
+<div class="journey-step"><b>4. 🧪 Otimização</b><small data-pt="Speed Tune, artefactos, grindstones e gems." data-en="Speed Tune, artifacts, grindstones and gems."></small></div>
+<div class="journey-step"><b>5. 🏆 PvP</b><small data-pt="Arena, Siege, RTA, draft e counters." data-en="Arena, Siege, RTA, draft and counters."></small></div>
+</div>
+<div class="acx-card" style="margin-top:10px">
+<div class="meter-label"><span data-pt="Progresso da minha jornada" data-en="My journey progress"></span>: <span id="journeyPct">0%</span></div>
+<div class="meter"><i id="journeyFill"></i></div>
+<div id="journeyChecks"></div>
+</div>
+</section>
+
+<section class="section acx" id="diagnostic">
+<h2 data-pt="🔍 Qual é o meu problema?" data-en="🔍 What is my problem?"></h2>
+<p data-pt="Escolhe o sintoma e aprende o que verificar primeiro." data-en="Choose the symptom and learn what to check first."></p>
+<div class="choice-grid">
+<button class="acx-btn" onclick="acxDiag('dead')">💀 <span data-pt="Morro rápido" data-en="I die quickly"></span></button>
+<button class="acx-btn" onclick="acxDiag('slow')">🐌 <span data-pt="Nunca jogo primeiro" data-en="I never move first"></span></button>
+<button class="acx-btn" onclick="acxDiag('debuff')">🎯 <span data-pt="Debuffs não entram" data-en="Debuffs do not land"></span></button>
+<button class="acx-btn" onclick="acxDiag('damage')">💥 <span data-pt="Dano baixo" data-en="Low damage"></span></button>
+<button class="acx-btn" onclick="acxDiag('order')">🔄 <span data-pt="Equipa fora de ordem" data-en="Team out of order"></span></button>
+<button class="acx-btn" onclick="acxDiag('content')">🧩 <span data-pt="Funciona num conteúdo, falha noutro" data-en="Works in one content, fails in another"></span></button>
+</div>
+<div class="acx-result" id="acxDiagResult" data-pt="Escolhe um problema acima." data-en="Choose a problem above."></div>
+</section>
+
+<section class="section acx" id="simulators">
+<h2 data-pt="🧪 Simuladores de decisão" data-en="🧪 Decision simulators"></h2>
+<div class="acx-grid">
+<div class="acx-card">
+<h3>⚡ Speed Tune</h3>
+<p data-pt="Bernard: 220 SPD. Loren: 190 SPD. Kro: 180 SPD. Qual é a ideia principal?" data-en="Bernard: 220 SPD. Loren: 190 SPD. Kro: 180 SPD. What is the main idea?"></p>
+<div class="acx-btns"><button class="acx-btn" onclick="acxSim(1)">A) Ter todos com a mesma SPD</button><button class="acx-btn" onclick="acxSim(2)">B) Garantir a ordem pretendida</button><button class="acx-btn" onclick="acxSim(3)">C) Ignorar ATB</button></div>
+<div class="sim-answer" id="sim1"></div>
+</div>
+<div class="acx-card">
+<h3>🎯 ACC vs RES</h3>
+<p data-pt="Um monstro precisa aplicar um debuff. O que deves analisar além de ACC?" data-en="A monster needs to apply a debuff. What should you analyze besides ACC?"></p>
+<div class="acx-btns"><button class="acx-btn" onclick="acxSim(4)">A) RES do alvo e a skill</button><button class="acx-btn" onclick="acxSim(5)">B) Apenas CR</button><button class="acx-btn" onclick="acxSim(6)">C) Apenas HP</button></div>
+<div class="sim-answer" id="sim2"></div>
+</div>
+<div class="acx-card">
+<h3>🧙 Construção</h3>
+<p data-pt="Antes de escolher a runa, qual pergunta vem primeiro?" data-en="Before choosing the rune, which question comes first?"></p>
+<div class="acx-btns"><button class="acx-btn" onclick="acxSim(7)">A) Qual é a função?</button><button class="acx-btn" onclick="acxSim(8)">B) Qual é a cor?</button><button class="acx-btn" onclick="acxSim(9)">C) Qual é o nome?</button></div>
+<div class="sim-answer" id="sim3"></div>
+</div>
+</div>
+</section>
+
+<section class="section acx" id="resources">
+<h2 data-pt="💰 Gestão de recursos" data-en="💰 Resource management"></h2>
+<p data-pt="Aprende o que cada recurso faz antes de gastá-lo. A Academy deve ensinar o jogador a decidir, não apenas a clicar." data-en="Learn what each resource does before spending it. The Academy should teach players to decide, not just click."></p>
+<table class="resource-table"><thead><tr><th data-pt="Recurso" data-en="Resource"></th><th data-pt="Regra simples" data-en="Simple rule"></th></tr></thead><tbody>
+<tr><td>💎 Cristais</td><td data-pt="Prioriza progressão/farming e guarda uma reserva para necessidades reais." data-en="Prioritize progression/farming and keep a reserve for real needs."></td></tr>
+<tr><td>💰 Mana</td><td data-pt="É essencial para melhorar e gerir runas; não gastes sem avaliar o inventário." data-en="Essential for upgrading and managing runes; do not spend it without evaluating your inventory."></td></tr>
+<tr><td>🔥 Devilmons</td><td data-pt="Recurso raro: decide skill-ups com cuidado." data-en="Rare resource: choose skill-ups carefully."></td></tr>
+<tr><td>⚡ Energia</td><td data-pt="Usa-a de forma coerente com o teu objetivo atual de progressão." data-en="Use it consistently with your current progression goal."></td></tr>
+<tr><td>🏰 Glory/Guild Points</td><td data-pt="Compra pensando no impacto a médio prazo, não apenas no item que parece mais brilhante." data-en="Spend with medium-term impact in mind, not just the shiniest item."></td></tr>
+</tbody></table>
+</section>
+
+<section class="section acx" id="monster-priority">
+<h2 data-pt="⭐ O que vale a pena construir?" data-en="⭐ What is worth building?"></h2>
+<div class="acx-grid">
+<div class="acx-card"><h3>⭐⭐⭐⭐⭐ Prioridade</h3><p data-pt="Monstros que resolvem um problema real da tua progressão, têm uso consistente e merecem recursos." data-en="Monsters that solve a real progression problem, have consistent use and deserve resources."></p></div>
+<div class="acx-card"><h3>⭐⭐⭐ Situacional</h3><p data-pt="Pode ser excelente num conteúdo específico, mas não precisa ser o teu próximo projeto." data-en="Can be excellent in a specific content, but does not need to be your next project."></p></div>
+<div class="acx-card"><h3>⭐ Espera</h3><p data-pt="Não invistas só porque o monstro é raro. Primeiro pergunta: que problema ele resolve?" data-en="Do not invest just because the monster is rare. First ask: what problem does it solve?"></p></div>
+</div>
+<div class="academy-note" style="margin-top:10px" data-pt="🧠 Regra Yuna Academy: função → conteúdo → objetivo → stats → runas. Nunca comeces pelas runas." data-en="🧠 Yuna Academy rule: role → content → goal → stats → runes. Never start with the runes."></div>
+</section>
+
+<section class="section acx" id="pve-pvp-academy">
+<h2 data-pt="🛡️ PvE vs PvP — pensa diferente" data-en="🛡️ PvE vs PvP — think differently"></h2>
+<div class="pve-pvp">
+<div class="acx-card"><h3>🏰 PvE</h3><span class="role-pill">Consistência</span><span class="role-pill">Farming</span><span class="role-pill">Sobrevivência</span><span class="role-pill">Speed Tune</span><p data-pt="O objetivo costuma ser repetir conteúdo com segurança e eficiência. Uma build funcional e estável pode ser melhor do que perseguir stats extremos." data-en="The goal is often to repeat content safely and efficiently. A functional, stable build can be better than chasing extreme stats."></p></div>
+<div class="acx-card"><h3>🏆 PvP</h3><span class="role-pill">Draft</span><span class="role-pill">Counter</span><span class="role-pill">Win condition</span><span class="role-pill">Speed</span><p data-pt="O adversário reage às tuas escolhas. Precisarás de adaptação, eficiência e compreensão da condição de vitória." data-en="The opponent reacts to your choices. You need adaptation, efficiency and an understanding of the win condition."></p></div>
+</div>
+</section>
+
+<section class="section acx" id="team-challenge">
+<h2 data-pt="🧙 Desafio: monta uma equipa" data-en="🧙 Challenge: build a team"></h2>
+<p data-pt="Imagina que precisas de uma equipa para uma dungeon. Escolhe uma função para cada espaço." data-en="Imagine you need a dungeon team. Choose a role for each slot."></p>
+<div class="acx-grid">
+<div class="acx-card"><h3>Slot 1</h3><select class="monster-choice" id="team1"><option>Booster / Speed Lead</option><option>Healer</option><option>DPS</option><option>Debuffer</option><option>Tank</option></select></div>
+<div class="acx-card"><h3>Slot 2</h3><select class="monster-choice" id="team2"><option>Setup / Buffer</option><option>DPS</option><option>Healer</option><option>Stripper</option><option>Tank</option></select></div>
+<div class="acx-card"><h3>Slot 3</h3><select class="monster-choice" id="team3"><option>Debuffer / Defense Break</option><option>DPS</option><option>Healer</option><option>Control</option><option>Tank</option></select></div>
+</div>
+<div class="acx-btns"><button class="acx-btn good" onclick="acxTeamCheck()">🧠 <span data-pt="Analisar a minha equipa" data-en="Analyze my team"></span></button></div>
+<div class="acx-result" id="teamResult"></div>
+</section>
+
+<section class="section acx" id="mistakes-academy">
+<h2 data-pt="🚫 Erros que atrasam uma conta" data-en="🚫 Mistakes that slow an account"></h2>
+<div class="acx-grid">
+<div class="acx-card"><h3>❌ Construir tudo</h3><p data-pt="Muitos monstros medianos deixam poucos recursos para os projetos que realmente importam." data-en="Too many mediocre monsters leave fewer resources for projects that really matter."></p></div>
+<div class="acx-card"><h3>❌ Copiar stats cegamente</h3><p data-pt="Uma build depende do conteúdo, das skills, do turno pretendido e das runas disponíveis." data-en="A build depends on content, skills, intended turn order and available runes."></p></div>
+<div class="acx-card"><h3>❌ Ignorar runas</h3><p data-pt="Ter o monstro certo não substitui uma build funcional." data-en="Having the right monster does not replace a functional build."></p></div>
+<div class="acx-card"><h3>❌ Upar sem objetivo</h3><p data-pt="Antes de gastar mana ou materiais, define qual problema estás a resolver." data-en="Before spending mana or materials, define which problem you are solving."></p></div>
+<div class="acx-card"><h3>❌ Trocar tudo quando perdes</h3><p data-pt="Diagnostica primeiro: sobrevivência, velocidade, ordem, debuff, dano ou mecânica." data-en="Diagnose first: survival, speed, order, debuff, damage or mechanic."></p></div>
+<div class="acx-card"><h3>❌ Comparar a tua conta com endgame</h3><p data-pt="Compara a tua conta contigo mesmo: progresso, consistência e qualidade das runas." data-en="Compare your account with yourself: progress, consistency and rune quality."></p></div>
+</div>
+</section>
+
+<section class="section acx" id="achievements">
+<h2 data-pt="🏅 Conquistas da Yuna Academy" data-en="🏅 Yuna Academy achievements"></h2>
+<p data-pt="Desbloqueia conquistas enquanto aprendes. Estas ficam guardadas neste navegador." data-en="Unlock achievements as you learn. They are saved in this browser."></p>
+<div class="ach-grid" id="achievementGrid"></div>
+</section>
+
+<section class="section acx" id="think">
+<h2 data-pt="🧠 Não copies builds. Entende builds." data-en="🧠 Don't copy builds. Understand builds."></h2>
+<div class="acx-grid">
+<div class="acx-card"><h3>1️⃣ Função</h3><p data-pt="O monstro é DPS, suporte, controlo, healer, booster, tank ou híbrido?" data-en="Is the monster a DPS, support, control, healer, booster, tank or hybrid?"></p></div>
+<div class="acx-card"><h3>2️⃣ Conteúdo</h3><p data-pt="PvE, Arena, Siege e RTA podem mudar completamente as prioridades." data-en="PvE, Arena, Siege and RTA can completely change priorities."></p></div>
+<div class="acx-card"><h3>3️⃣ Objetivo</h3><p data-pt="Define a condição de sucesso: sobreviver, jogar primeiro, controlar, aplicar debuff ou matar." data-en="Define the win condition: survive, move first, control, land a debuff or kill."></p></div>
+<div class="acx-card"><h3>4️⃣ Stats</h3><p data-pt="Escolhe os atributos necessários para cumprir o objetivo antes de pensar no set." data-en="Choose the attributes needed to meet the goal before thinking about the set."></p></div>
+<div class="acx-card"><h3>5️⃣ Runas</h3><p data-pt="Só agora escolhe sets, main stats, substats e velocidade." data-en="Only now choose sets, main stats, substats and speed."></p></div>
+<div class="acx-card"><h3>6️⃣ Teste</h3><p data-pt="Testa, identifica o gargalo e muda uma coisa de cada vez." data-en="Test, identify the bottleneck and change one thing at a time."></p></div>
+</div>
+</section></main>
 <script>
 function academyQuiz(ok){const e=document.getElementById("quizResult");e.textContent=ok?"✅ "+(document.documentElement.lang==="en"?"Correct! Stun prevents the monster from acting.":"Correto! Stun impede o monstro de agir."):"❌ "+(document.documentElement.lang==="en"?"Not quite. Stun prevents the monster from acting.":"Ainda não. Stun impede o monstro de agir.");}
 (()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};document.querySelectorAll('#side button').forEach(b=>b.onclick=()=>{document.getElementById(b.dataset.target)?.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#'+b.dataset.target);document.querySelectorAll('#side button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')location.reload()});})();
@@ -431,4 +561,34 @@ function renderAcademyQuestion(){const en=academyLang(),q=academyQuestions[acade
 function answerAcademyQuestion(i){if(academyQuizAnswered)return;academyQuizAnswered=true;const en=academyLang(),q=academyQuestions[academyQuizIndex],ok=i===q[6];if(ok)academyQuizScore++;const pct=Math.round(academyQuizScore/(academyQuizIndex+1)*100);document.getElementById("quizScore").textContent=pct+"%";document.getElementById("quizFeedback").textContent=ok?"✅ "+(en?"Correct!":"Correto!"):"❌ "+(en?"Incorrect. Correct answer: ":"Incorreto. Resposta correta: ")+q[q[6]+2][en?1:0];[...document.querySelectorAll("#quizOptions button")].forEach((b,n)=>{b.disabled=true;if(n===q[6])b.style.borderColor="#35a9e1"});const next=document.getElementById("quizNext");next.style.display="inline-flex";next.textContent=academyQuizIndex===academyQuestions.length-1?(en?"🏁 Finish test":"🏁 Finalizar teste"):(en?"➡️ Next question":"➡️ Próxima pergunta")}
 function nextAcademyQuestion(){if(academyQuizIndex<academyQuestions.length-1){academyQuizIndex++;academyQuizAnswered=false;renderAcademyQuestion();return}const en=academyLang(),pct=Math.round(academyQuizScore/academyQuestions.length*100);document.getElementById("quizQuestion").textContent=en?"Test finished!":"Teste concluído!";document.getElementById("quizOptions").innerHTML="";document.getElementById("quizFeedback").textContent=(en?"Final score: ":"Pontuação final: ")+academyQuizScore+"/"+academyQuestions.length+" — "+pct+"%"+(pct===100?(en?" 🎉 Perfect score!":" 🎉 Pontuação perfeita!"):(en?"":""));document.getElementById("quizNext").style.display="none";document.getElementById("quizRestart").style.display="inline-flex"}
 startAcademyQuiz();
+</script>
+<script id="yuna-academy-expansion-js">
+(()=>{
+const key='yuna-academy-journey-v2';
+const lessons=[
+['fund','🟢 Fundamentos','🟢 Fundamentals'],['runes','💎 Runas','💎 Runes'],['pve','🏰 PvE','🏰 PvE'],['opt','🧪 Otimização','🧪 Optimization'],['pvp','🏆 PvP','🏆 PvP']];
+const wrap=document.getElementById('journeyChecks');
+let state={};try{state=JSON.parse(localStorage.getItem(key)||'{}')}catch(_){}
+if(wrap){wrap.innerHTML=lessons.map(x=>'<label class="checkrow"><input type="checkbox" data-jlesson="'+x[0]+'" '+(state[x[0]]?'checked':'')+'><span data-pt="'+x[1]+'" data-en="'+x[2]+'"></span></label>').join('');wrap.querySelectorAll('input').forEach(i=>i.onchange=()=>{state[i.dataset.jlesson]=i.checked;try{localStorage.setItem(key,JSON.stringify(state))}catch(_){};updateJourney()});}
+function updateJourney(){const n=wrap?[...wrap.querySelectorAll('input')].filter(x=>x.checked).length:0,pct=Math.round(n/lessons.length*100);const t=document.getElementById('journeyPct'),f=document.getElementById('journeyFill');if(t)t.textContent=pct+'%';if(f)f.style.width=pct+'%';}
+updateJourney();
+
+window.acxDiag=(type)=>{
+const en=document.documentElement.lang==='en';const d={
+dead:en?'Check HP/DEF, healing, shields, damage reduction and whether the enemy gets too many turns.':'Verifica HP/DEF, cura, escudos, redução de dano e se o inimigo está a ter demasiados turnos.',
+slow:en?'Check base SPD, rune SPD, leader skills, ATB boosts and speed tuning.':'Verifica SPD base, SPD das runas, líder, boosts de ATB e Speed Tune.',
+debuff:en?'Check the skill activation chance, Accuracy, target Resistance and whether the skill actually applies the debuff.':'Verifica a chance de ativação, Accuracy, Resistance do alvo e se a skill realmente aplica o debuff.',
+damage:en?'Check skill scaling, ATK/DEF/HP, CR/CD, debuffs and target mitigation.':'Verifica o scaling da skill, ATK/DEF/HP, CR/CD, debuffs e mitigação do alvo.',
+order:en?'Write the intended order, then tune SPD and ATB so the sequence stays intact.':'Escreve a ordem pretendida e depois ajusta SPD e ATB para manter a sequência.',
+content:en?'Ask what the content requires. The best PvE build is not automatically the best PvP build.':'Pergunta o que o conteúdo exige. A melhor build PvE não é automaticamente a melhor build PvP.'
+};document.getElementById('acxDiagResult').textContent=d[type]||'';};
+window.acxSim=(n)=>{const en=document.documentElement.lang==='en';const answers={1:['sim1',en?'Correct: Speed Tune exists to preserve the intended turn order.':'Correto: Speed Tune serve para manter a ordem de turnos pretendida.'],2:['sim1',en?'Correct!':'Correto!'],3:['sim1',en?'The goal is not identical speed; it is the correct sequence.':'O objetivo não é ter a mesma velocidade; é ter a sequência correta.'],4:['sim2',en?'Correct: check the skill, target RES and ACC.':'Correto: verifica a skill, a RES do alvo e ACC.'],5:['sim2',en?'CR is not the main check for landing a debuff.':'CR não é a verificação principal para aplicar um debuff.'],6:['sim2',en?'HP alone does not explain debuff accuracy.':'HP sozinho não explica a aplicação de debuffs.'],7:['sim3',en?'Correct: role comes before rune selection.':'Correto: a função vem antes da escolha das runas.'],8:['sim3',en?'Rune color is not the first decision.':'A cor da runa não é a primeira decisão.'],9:['sim3',en?'The monster name alone does not tell you the correct build.':'O nome do monstro sozinho não determina a build correta.']};const a=answers[n];if(a)document.getElementById(a[0]).textContent=a[1]};
+window.acxTeamCheck=()=>{const en=document.documentElement.lang==='en';const vals=[team1.value,team2.value,team3.value];let score=0;if(vals[0].includes('Booster'))score++;if(vals[1].includes('Setup'))score++;if(vals[2].includes('Debuffer'))score++;document.getElementById('teamResult').textContent=en?'Analysis: '+score+'/3 core roles selected. A common sequence is booster → setup → debuff → damage. Add healing/control only when the content requires it.':'Análise: '+score+'/3 funções principais escolhidas. Uma sequência comum é booster → setup → debuff → damage. Adiciona cura/controlo quando o conteúdo exigir.'};
+
+const achKey='yuna-academy-achievements-v1';const ach=[
+['first','🌱','Primeira aula','First lesson'],['rune','💎','Mestre das Runas','Rune student'],['lab','🧪','Cientista','Lab scientist'],['team','🧙','Team Builder','Team Builder'],['pvp','🏆','Pensamento PvP','PvP thinker'],['perfect','💯','Pontuação perfeita','Perfect score']];
+let achState={};try{achState=JSON.parse(localStorage.getItem(achKey)||'{}')}catch(_){}
+const grid=document.getElementById('achievementGrid');if(grid){grid.innerHTML=ach.map(a=>'<div class="achievement '+(achState[a[0]]?'':'locked')+'" data-ach="'+a[0]+'"><div style="font-size:24px">'+a[1]+'</div><div><b data-pt="'+a[2]+'" data-en="'+a[3]+'"></b><span data-pt="'+(achState[a[0]]?'Desbloqueada':'Bloqueada')+'" data-en="'+(achState[a[0]]?'Unlocked':'Locked')+'"></span></div></div>').join('');}
+window.yunaAcademyUnlock=(id)=>{achState[id]=true;try{localStorage.setItem(achKey,JSON.stringify(achState))}catch(_){};const el=document.querySelector('[data-ach="'+id+'"]');if(el)el.classList.remove('locked')};
+})();
 </script></body></html>
