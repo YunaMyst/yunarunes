@@ -1107,4 +1107,60 @@ render();
 })();
 </script>
 
+
+<style id="yuna-academy-missions-css">
+.mission-board{margin:18px 0;background:#101923;border:1px solid #3b4d60;border-radius:16px;padding:20px}.mission-board h2{margin:0 0 6px}.mission-board>p{color:#9aa9b6;line-height:1.55}.mission-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.mission{background:#0d141c;border:1px solid #293746;border-radius:11px;padding:13px}.mission.done{border-color:#35a9e1}.mission b{display:block}.mission small{display:block;color:#8fa0af;line-height:1.45;margin:5px 0 9px}.mission button{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:8px 10px;font-weight:800;cursor:pointer}.mission button.primary{background:#35a9e1;color:#061018}.mission-xp{font-size:12px;color:#e7c85a;font-weight:900}.week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.week-day{background:#0d141c;border:1px solid #293746;border-radius:10px;padding:10px;text-align:center}.week-day b{display:block;color:#35a9e1}.week-day span{display:block;color:#9aa9b6;font-size:10px;line-height:1.4;margin-top:4px}.academy-toast{position:fixed;right:18px;bottom:18px;z-index:999999;background:#111923;border:1px solid #35a9e1;border-radius:12px;padding:12px 15px;color:#fff;font-weight:800;box-shadow:0 8px 30px rgba(0,0,0,.4);display:none}.academy-toast.show{display:block}@media(max-width:700px){.mission-list{grid-template-columns:1fr}.week-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<section class="mission-board" id="academy-missions">
+<div class="eyebrow">🎯 Yuna Academy • Missões</div>
+<h2 data-pt="Aprenda fazendo — Missões práticas" data-en="Learn by doing — Practical missions"></h2>
+<p data-pt="Estas missões foram feitas para transformar as aulas em prática. Complete-as conforme avança e ganhe XP da Academy." data-en="These missions turn the lessons into practice. Complete them as you progress and earn Academy XP."></p>
+<div class="mission-list" id="missionList"></div>
+</section>
+<section class="mission-board" id="academy-week">
+<div class="eyebrow">📅 Plano de 7 dias</div>
+<h2 data-pt="Sua primeira semana na Yuna Academy" data-en="Your first week at Yuna Academy"></h2>
+<p data-pt="Uma rotina simples para o jogador novo não tentar aprender tudo de uma vez." data-en="A simple routine so a new player does not try to learn everything at once."></p>
+<div class="week-grid">
+<div class="week-day"><b>Dia 1</b><span>Elementos + interface + funções</span></div>
+<div class="week-day"><b>Dia 2</b><span>Stats + SPD + ordem</span></div>
+<div class="week-day"><b>Dia 3</b><span>Runas + slots + substats</span></div>
+<div class="week-day"><b>Dia 4</b><span>Skills + buffs + debuffs</span></div>
+<div class="week-day"><b>Dia 5</b><span>Montar uma equipe</span></div>
+<div class="week-day"><b>Dia 6</b><span>Diagnosticar uma derrota</span></div>
+<div class="week-day"><b>Dia 7</b><span>Prova + certificado</span></div>
+</div>
+</section>
+<div class="academy-toast" id="academyToast"></div>
+<script id="yuna-academy-missions-js">
+(()=> {
+const key='yuna-academy-missions-v1';
+const missions=[
+['first','🍼','Identifique os 5 elementos','Abra a aula de elementos e explique para você mesma a vantagem elemental.',20],
+['stats','📊','Monte um objetivo de stats','Escolha um monstro e diga qual stat é mais importante para a função dele.',20],
+['rune','💎','Analise uma runa','Pegue uma runa do seu inventário e decida: guardar, testar ou vender.',25],
+['skill','📖','Leia uma skill','Antes de olhar uma build pronta, identifique alvo, efeito, chance, scaling e cooldown.',25],
+['speed','⚡','Teste a ordem','Anote a SPD de 4 monstros e determine quem deve agir primeiro.',25],
+['team','🧙','Monte uma equipe','Escolha 4-5 monstros e explique a função de cada um na equipe.',30],
+['loss','🕵️','Investigue uma derrota','Escolha uma batalha perdida e escreva o maior gargalo antes de trocar a build.',30],
+['boss','🏰','Faça um plano PvE','Escolha um conteúdo PvE e defina condição de vitória, suporte, setup e dano.',30],
+['pvp','🏆','Pense como PvP','Escolha um adversário e identifique qual unidade inimiga deve ser neutralizada primeiro.',35],
+['master','👑','Passe no Modo Mestre','Conclua a prova final da Academy.',50]
+];
+let done=[];try{done=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
+if(!Array.isArray(done))done=[];
+function render(){
+const el=document.getElementById('missionList');if(!el)return;
+el.innerHTML=missions.map(m=>{const d=done.includes(m[0]);return '<div class="mission '+(d?'done':'')+'"><b>'+m[1]+' '+m[2]+'</b><small>'+m[3]+'</small><span class="mission-xp">+'+m[4]+' XP</span><br><button class="'+(d?'':'primary')+'" onclick="academyMission('+JSON.stringify(m[0])+')">'+(d?'✓ Concluída':'Concluir missão')+'</button></div>'}).join('');
+}
+window.academyMission=id=>{
+if(done.includes(id))return;
+done.push(id);localStorage.setItem(key,JSON.stringify(done));render();
+const m=missions.find(x=>x[0]===id),toast=document.getElementById('academyToast');
+if(toast){toast.textContent='🎉 Missão concluída! +'+m[4]+' XP';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)}
+};
+render();
+})();
+</script>
+
 </body></html>
