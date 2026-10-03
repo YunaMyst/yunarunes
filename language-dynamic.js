@@ -69,10 +69,10 @@ header.top .nav-links a{font-size:11px!important;padding:6px 7px!important}
 
 if(!document.getElementById('yunaHeaderPCFinal')){const s=document.createElement('style');s.id='yunaHeaderPCFinal';s.textContent=`
 @media(min-width:601px){
- header.top>.nav{max-width:1500px!important;padding:8px 14px!important;display:grid!important;grid-template-columns:1fr!important;grid-template-areas:"left" "links"!important;gap:8px!important}
- header.top .yuna-left{grid-area:left!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:14px!important;min-width:0!important;width:100%!important}
+ header.top>.nav{max-width:1500px!important;padding:8px 14px!important;display:grid!important;grid-template-columns:auto 1fr auto!important;grid-template-areas:"left right right" "links links links"!important;gap:8px 16px!important}
+ header.top .yuna-left{grid-area:left!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important;width:auto!important}
  header.top .brand{flex:0 0 auto!important}
- header.top .yuna-controls{position:static!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:auto!important;min-width:max-content!important;margin:0!important}
+ header.top .yuna-controls{grid-area:right!important;position:static!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important;width:auto!important;min-width:max-content!important;margin-left:auto!important}
  header.top .yuna-controls button,header.top .yuna-controls .donate-link{height:40px!important;padding:0 13px!important;font-size:13px!important;white-space:nowrap!important}
  header.top .yuna-controls .apk-link{display:none!important}
  header.top .nav-links{grid-area:links!important;display:block!important;width:100%!important;min-width:0!important}
