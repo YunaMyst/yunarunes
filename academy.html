@@ -40,7 +40,7 @@
 <script>
 (function(){
 const key='yunarunes-language';
-function setLang(lang){try{localStorage.setItem(key,lang)}catch(e){}document.documentElement.lang=lang==='en'?'en':'pt-BR';document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===lang));if(typeof window.applyLanguage==='function')window.applyLanguage();else location.reload();}
+function setLang(lang){try{localStorage.setItem(key,lang)}catch(e){}document.documentElement.lang=lang==='en'?'en':'pt-BR';document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===lang));/* ACADEMY LANGUAGE ENGINE V2 HOOK */ if(typeof window.applyLanguage==='function')window.applyLanguage();else location.reload();}
 const current=(()=>{try{return localStorage.getItem(key)||'pt'}catch(e){return 'pt'}})();
 document.querySelectorAll('[data-academy-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.academyLang)));
 document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===current));
