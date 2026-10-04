@@ -444,7 +444,91 @@
     pointer-events:auto!important;
   }
 }
-</style></head><body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes"><span>YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a class="nav-advanced" href="artifact-optimizer.html">💠 Artifacts</a><a class="nav-advanced" href="decks.html">🃏 Decks</a><a class="nav-advanced" href="account-analyzer.html">📊 Análise de Conta</a><a class="nav-advanced" href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💰 Donate</a></div></div></nav></header><main class="wrap"><section class="hero"><div><div class="eyebrow">🦊 YunaRunes • Summoners War</div><h1>O seu hub de <span>mobs, runas</span> e equipes.</h1><p>pesquisa um monstro, monta uma equipe, cria builds, otimiza o seu inventário e salva os seus mobs favoritos. Tudo num só lugar, preparado para PC e celular.</p><div class="search"><input id="homeSearch" list="homeNames" placeholder="🔎 Pesquisar um mob..."><datalist id="homeNames"></datalist><button class="btn" id="searchBtn">Pesquisar</button></div><div id="status" class="status">Carregando a base de monstros...</div></div><div class="fox"><img src="android/app/src/main/res/drawable/yunarunes_icon_image.webp" alt="YunaRunes fox"></div></section><a href="academy.html" class="academy-home-card" aria-label="Yuna Academy — Aprender Summoners War"><div class="academy-home-icon">🎓</div><div class="academy-home-content"><span class="academy-home-kicker">NOVOS PLAYERS</span><h2>Yuna Academy — Aprender Summoners War</h2><p>Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.</p><span class="academy-home-cta">Começar a aprender →</span></div><div class="academy-home-fox">🦊</div></a><div class="category-label"><span>ACESSO RÁPIDO</span><small>Escolhe a categoria de monstros</small></div><section class="quick"><a class="star-card s2" href="database.html?stars=2"><strong>◆</strong><b>Nat 2</b><span>Monstros de 2 estrelas</span><em>Ver monstros →</em></a><a class="star-card s3" href="database.html?stars=3"><strong>◆</strong><b>Nat 3</b><span>Monstros de 3 estrelas</span><em>Ver monstros →</em></a><a class="star-card s4" href="database.html?stars=4"><strong>◆</strong><b>Nat 4</b><span>Monstros de 4 estrelas</span><em>Ver monstros →</em></a><a class="star-card s5" href="nat5.html"><strong>⭐</strong><b>Nat 5</b><span>Monstros de 5 estrelas</span><em>Abrir →</em></a></section><div class="section-title"><h2>⭐ Nat 5 em destaque</h2><a href="nat5.html">Abrir Nat 5 →</a></div><section id="featured" class="featured"></section><section id="yuna-retention" style="margin:22px 0 0">
+</style><style id="yunarunes-header-working-fix">
+/* CLEAN HEADER FIX — one row, readable menu, real clickable language links */
+header.top{position:sticky!important;top:0!important;z-index:100000!important}
+header.top>.nav{
+  display:grid!important;
+  grid-template-columns:140px minmax(0,1fr) 252px!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:64px!important;
+  padding:7px 12px!important;
+  max-width:1280px!important;
+  margin:0 auto!important;
+  overflow:visible!important;
+}
+header.top .header-brand{min-width:0!important;display:flex!important;align-items:center!important}
+header.top .header-brand .brand{font-size:20px!important;margin:0!important;white-space:nowrap!important}
+header.top .header-menu{min-width:0!important;overflow:hidden!important}
+header.top .header-menu .nav-links{
+  display:flex!important;align-items:center!important;flex-wrap:nowrap!important;
+  gap:0!important;width:100%!important;min-width:0!important;overflow:hidden!important;
+}
+header.top .header-menu .nav-links a{
+  flex:0 1 auto!important;min-width:0!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;white-space:nowrap!important;
+  font-size:12px!important;font-weight:900!important;padding:9px 5px!important;
+  pointer-events:auto!important;cursor:pointer!important;
+}
+header.top .header-controls{
+  position:static!important;min-width:0!important;width:auto!important;height:auto!important;
+  margin:0!important;padding:0!important;display:flex!important;align-items:center!important;
+  z-index:100001!important;
+}
+header.top .yuna-controls{
+  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+  align-items:center!important;justify-content:flex-end!important;gap:6px!important;
+  width:100%!important;min-width:0!important;margin:0!important;
+}
+header.top .yuna-controls .lang-btn,
+header.top .yuna-controls .donate-link{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  flex:0 0 auto!important;height:40px!important;padding:0 9px!important;
+  border:1px solid #293746!important;border-radius:9px!important;background:#202a34!important;
+  color:#fff!important;text-decoration:none!important;font-size:12px!important;font-weight:900!important;
+  line-height:1!important;white-space:nowrap!important;cursor:pointer!important;
+  pointer-events:auto!important;position:relative!important;z-index:100002!important;
+  touch-action:manipulation!important;
+}
+header.top .yuna-controls .lang-btn:hover,
+header.top .yuna-controls .donate-link:hover{
+  background:#172b3c!important;border-color:#35a9e1!important;
+}
+header.top .yuna-controls .lang-btn.active{
+  background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important;
+}
+@media(max-width:1100px) and (min-width:601px){
+  header.top>.nav{grid-template-columns:125px minmax(0,1fr) 225px!important;padding-left:8px!important;padding-right:8px!important}
+  header.top .header-menu .nav-links a{font-size:11px!important;padding-left:4px!important;padding-right:4px!important}
+  header.top .yuna-controls{gap:4px!important}
+  header.top .yuna-controls .lang-btn,header.top .yuna-controls .donate-link{height:36px!important;font-size:10px!important;padding:0 6px!important}
+}
+@media(max-width:600px){
+  header.top>.nav{
+    display:flex!important;flex-wrap:nowrap!important;min-height:60px!important;
+    padding:8px 10px!important;gap:6px!important;
+  }
+  header.top .header-brand{order:1!important;flex:0 0 auto!important}
+  header.top .header-brand .brand{font-size:18px!important}
+  header.top .header-controls{order:2!important;margin-left:auto!important;flex:0 0 auto!important}
+  header.top .yuna-controls{width:auto!important;gap:3px!important}
+  header.top .yuna-controls .lang-btn,header.top .yuna-controls .donate-link{
+    height:34px!important;font-size:10px!important;padding:0 5px!important;border-radius:7px!important;
+  }
+  header.top .header-menu{order:3!important;flex:0 0 auto!important;overflow:visible!important}
+  header.top .header-menu .menu-btn{display:block!important;position:static!important;margin:0!important;z-index:100003!important}
+  header.top .header-menu .nav-links{
+    display:none!important;position:absolute!important;left:10px!important;right:10px!important;
+    top:calc(100% + 6px)!important;width:auto!important;max-height:calc(100vh - 90px)!important;
+    overflow-y:auto!important;padding:10px!important;grid-template-columns:1fr 1fr!important;
+    gap:8px!important;background:#0b1015!important;border:1px solid #293746!important;
+    border-radius:12px!important;z-index:100004!important;
+  }
+  header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
+  header.top .header-menu .nav-links a{font-size:14px!important;min-height:54px!important;padding:10px!important;white-space:normal!important}
+}
+</style></head><body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes"><span>YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a class="nav-advanced" href="artifact-optimizer.html">💠 Artifacts</a><a class="nav-advanced" href="decks.html">🃏 Decks</a><a class="nav-advanced" href="account-analyzer.html">📊 Análise de Conta</a><a class="nav-advanced" href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls" aria-label="Language and support"><div class="yuna-controls"><a class="lang-btn" data-lang="pt" href="./index.html?lang=pt" aria-label="Português do Brasil">🇧🇷 PT/BR</a><a class="lang-btn" data-lang="en" href="./index.html?lang=en" aria-label="English">🇬🇧 ENG</a><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💰 Donate</a></div></div></nav></header><main class="wrap"><section class="hero"><div><div class="eyebrow">🦊 YunaRunes • Summoners War</div><h1>O seu hub de <span>mobs, runas</span> e equipes.</h1><p>pesquisa um monstro, monta uma equipe, cria builds, otimiza o seu inventário e salva os seus mobs favoritos. Tudo num só lugar, preparado para PC e celular.</p><div class="search"><input id="homeSearch" list="homeNames" placeholder="🔎 Pesquisar um mob..."><datalist id="homeNames"></datalist><button class="btn" id="searchBtn">Pesquisar</button></div><div id="status" class="status">Carregando a base de monstros...</div></div><div class="fox"><img src="android/app/src/main/res/drawable/yunarunes_icon_image.webp" alt="YunaRunes fox"></div></section><a href="academy.html" class="academy-home-card" aria-label="Yuna Academy — Aprender Summoners War"><div class="academy-home-icon">🎓</div><div class="academy-home-content"><span class="academy-home-kicker">NOVOS PLAYERS</span><h2>Yuna Academy — Aprender Summoners War</h2><p>Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.</p><span class="academy-home-cta">Começar a aprender →</span></div><div class="academy-home-fox">🦊</div></a><div class="category-label"><span>ACESSO RÁPIDO</span><small>Escolhe a categoria de monstros</small></div><section class="quick"><a class="star-card s2" href="database.html?stars=2"><strong>◆</strong><b>Nat 2</b><span>Monstros de 2 estrelas</span><em>Ver monstros →</em></a><a class="star-card s3" href="database.html?stars=3"><strong>◆</strong><b>Nat 3</b><span>Monstros de 3 estrelas</span><em>Ver monstros →</em></a><a class="star-card s4" href="database.html?stars=4"><strong>◆</strong><b>Nat 4</b><span>Monstros de 4 estrelas</span><em>Ver monstros →</em></a><a class="star-card s5" href="nat5.html"><strong>⭐</strong><b>Nat 5</b><span>Monstros de 5 estrelas</span><em>Abrir →</em></a></section><div class="section-title"><h2>⭐ Nat 5 em destaque</h2><a href="nat5.html">Abrir Nat 5 →</a></div><section id="featured" class="featured"></section><section id="yuna-retention" style="margin:22px 0 0">
 <div style="display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:9px"><div><h2 style="margin:0">🔥 YunaRunes — Atividades</h2><span style="color:#8fa0af;font-size:12px">Conteúdo para voltar todos os dias.</span></div></div>
 <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
 <a href="#yuna-daily-result" id="yuna-daily-card" style="background:#111923;border:1px solid #2b3a4b;border-radius:12px;padding:15px;color:#fff;text-decoration:none"><div style="font-size:24px">💎</div><b style="display:block;margin-top:7px">Rune do Dia</b><span style="display:block;color:#8fa0af;font-size:12px;margin-top:5px">Uma runa em destaque para analisar, comparar e melhorar.</span><strong id="yuna-daily-rune" style="display:block;color:#35a9e1;font-size:11px;margin-top:10px">Abrir Runas →</strong></a>
@@ -481,5 +565,25 @@
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
+})();
+</script><script id="yunarunes-language-links-fix">
+(function(){
+  function bindLanguageLinks(){
+    document.querySelectorAll('header.top .yuna-controls .lang-btn[data-lang]').forEach(function(a){
+      a.addEventListener('click',function(){
+        var lang=a.getAttribute('data-lang')==='en'?'en':'pt';
+        try{localStorage.setItem('yunarunes-language',lang)}catch(e){}
+      },false);
+    });
+  }
+  function markActive(){
+    var lang='pt';
+    try{lang=localStorage.getItem('yunarunes-language')==='en'?'en':'pt'}catch(e){}
+    document.querySelectorAll('header.top .lang-btn[data-lang]').forEach(function(a){
+      a.classList.toggle('active',a.getAttribute('data-lang')===lang);
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){bindLanguageLinks();markActive()},{once:true});
+  else {bindLanguageLinks();markActive();}
 })();
 </script></body></html>
