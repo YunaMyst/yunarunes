@@ -1703,4 +1703,179 @@ document.querySelectorAll('[data-yamp-reason]').forEach(b=>b.onclick=()=>documen
 })();
 </script>
 
+<!-- YUNA ACADEMY GUIDED CAMPAIGN V1 -->
+<style id="yuna-guided-campaign-css">
+.ygc{margin:28px 0}.ygc-hero{background:linear-gradient(135deg,#17152a,#101b28);border:1px solid #4b3d68;border-radius:18px;padding:22px}.ygc-hero h2{margin:0 0 8px;font-size:28px}.ygc-hero p{color:#aeb8c5;line-height:1.6;max-width:900px}.ygc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.ygc-card{background:#0d141c;border:1px solid #293746;border-radius:13px;padding:15px}.ygc-card h3{margin:0 0 7px}.ygc-card p,.ygc-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.ygc-card ul{padding-left:18px}.ygc-progress{height:12px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:10px 0}.ygc-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.25s}.ygc-lessons{display:grid;gap:8px;margin-top:14px}.ygc-lesson{display:grid;grid-template-columns:48px 1fr auto;gap:10px;align-items:center;background:#0d141c;border:1px solid #293746;border-radius:12px;padding:11px}.ygc-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#182838;color:#35a9e1;font-weight:900}.ygc-lesson b{display:block}.ygc-lesson small{display:block;color:#8fa0af;margin-top:3px;line-height:1.4}.ygc-lesson a,.ygc-btn{border:1px solid #40576c;background:#172333;color:#fff;border-radius:9px;padding:9px 11px;font-weight:800;text-decoration:none;cursor:pointer}.ygc-lesson a:hover,.ygc-btn:hover{border-color:#35a9e1}.ygc-checks{display:grid;gap:7px}.ygc-check{display:flex;gap:8px;align-items:flex-start;padding:8px;background:#0a1118;border:1px solid #263544;border-radius:10px}.ygc-check input{accent-color:#8b5cf6;margin-top:3px}.ygc-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ygc-choice button{min-height:48px}.ygc-result{margin-top:10px;padding:11px;background:#101923;border:1px solid #293746;border-radius:10px;line-height:1.55;color:#dce6ee}.ygc-badge{display:inline-block;padding:4px 8px;border:1px solid #40576c;border-radius:999px;color:#cbd7df;font-size:11px;margin:2px}.ygc-events{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.ygc-event{background:#0a1118;border:1px solid #293746;border-radius:11px;padding:12px}.ygc-event b{display:block}.ygc-event span{display:block;color:#9aa9b6;font-size:11px;line-height:1.5;margin-top:5px}.ygc-event a{display:inline-block;margin-top:8px;color:#35a9e1;font-weight:800;font-size:11px}.ygc-score{font-size:25px;font-weight:900;color:#35a9e1}.ygc-lock{opacity:.58}.ygc-note{border-left:3px solid #8b5cf6;background:#151324;padding:12px;border-radius:8px;color:#d9d0ef;font-size:12px;line-height:1.55;margin-top:10px}
+@media(max-width:900px){.ygc-grid{grid-template-columns:repeat(2,1fr)}.ygc-events{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ygc-grid,.ygc-events,.ygc-choice{grid-template-columns:1fr}.ygc-lesson{grid-template-columns:40px 1fr}.ygc-lesson a{grid-column:2;justify-self:start}}
+</style>
+
+<section class="ygc" id="academy-guided-campaign">
+<div class="ygc-hero">
+<div class="eyebrow">🎓 YUNA ACADEMY • <span data-pt="TRILHA GUIADA" data-en="GUIDED CAMPAIGN"></span></div>
+<h2 data-pt="Começa aqui: aprende em ordem, pratica e desbloqueia o próximo nível" data-en="Start here: learn in order, practice, and unlock the next level"></h2>
+<p data-pt="Em vez de uma página gigante, a Academy agora pode ser feita como um curso. Conclui cada etapa, usa as ferramentas quando necessário e avança até a graduação." data-en="Instead of one giant page, the Academy can now be completed as a course. Finish each step, use the tools when needed, and progress toward graduation."></p>
+<div class="ygc-badge" data-pt="12 aulas" data-en="12 lessons"></div>
+<div class="ygc-badge" data-pt="Progresso salvo no navegador" data-en="Progress saved in your browser"></div>
+<div class="ygc-badge" data-pt="Modo iniciante → Mestre" data-en="Beginner → Master path"></div>
+<div class="ygc-progress"><i id="ygc-progress-bar"></i></div>
+<div id="ygc-progress-text" class="ygc-score"></div>
+</div>
+
+<div class="ygc-grid">
+<div class="ygc-card">
+<h3 data-pt="🗺️ Como funciona" data-en="🗺️ How it works"></h3>
+<ul>
+<li data-pt="Começa na Aula 1 e segue a ordem." data-en="Start at Lesson 1 and follow the order."></li>
+<li data-pt="Cada aula tem uma tarefa curta." data-en="Each lesson has a short task."></li>
+<li data-pt="O progresso fica salvo mesmo se fechares a página." data-en="Progress stays saved even if you close the page."></li>
+<li data-pt="No fim, faz a Prova de Graduação." data-en="At the end, take the Graduation Exam."></li>
+</ul>
+</div>
+<div class="ygc-card">
+<h3 data-pt="📈 Minha conta está pronta?" data-en="📈 Is My Account Ready?"></h3>
+<p data-pt="Marca o que já consegues fazer sem depender de outra pessoa." data-en="Check what you can already do without depending on someone else."></p>
+<button class="ygc-btn" id="ygc-check-open" data-pt="Avaliar minha conta" data-en="Assess my account"></button>
+<div id="ygc-check-result" class="ygc-result"></div>
+</div>
+<div class="ygc-card">
+<h3 data-pt="🧩 Desafios reais" data-en="🧩 Real Challenges"></h3>
+<p data-pt="Não basta decorar. Aprende a escolher a resposta certa quando algo dá errado numa batalha." data-en="Memorizing is not enough. Learn to choose the right answer when something goes wrong in battle."></p>
+<button class="ygc-btn" id="ygc-challenge" data-pt="Começar desafio" data-en="Start challenge"></button>
+<div id="ygc-challenge-result" class="ygc-result"></div>
+</div>
+</div>
+
+<div class="ygc-card" style="margin-top:14px">
+<h3 data-pt="🎯 As 12 aulas da campanha" data-en="🎯 The 12 campaign lessons"></h3>
+<p data-pt="As aulas apontam para conteúdos que já existem na Yuna Academy. Assim não duplicamos a matéria: a campanha apenas organiza o caminho." data-en="The lessons point to content that already exists in Yuna Academy. This avoids duplicating material: the campaign simply organizes the path."></p>
+<div class="ygc-lessons" id="ygc-lessons">
+<div class="ygc-lesson" data-i="1"><div class="ygc-num">1</div><div><b data-pt="🌱 Comecei Hoje" data-en="🌱 I Just Started"></b><small data-pt="Conta, energia, evolução e primeiros objetivos." data-en="Account, energy, growth and first goals."></small></div><a href="#beginner-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="2"><div class="ygc-num">2</div><div><b data-pt="🧬 Monstros & Skills" data-en="🧬 Monsters & Skills"></b><small data-pt="Funções, skills, passivas, líderes e skill-ups." data-en="Roles, skills, passives, leader skills and skill-ups."></small></div><a href="#skill-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="3"><div class="ygc-num">3</div><div><b data-pt="📊 Stats" data-en="📊 Stats"></b><small data-pt="HP, ATK, DEF, SPD, CR, CD, ACC e RES." data-en="HP, ATK, DEF, SPD, CR, CD, ACC and RES."></small></div><a href="#stat-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="4"><div class="ygc-num">4</div><div><b data-pt="💎 Runas" data-en="💎 Runes"></b><small data-pt="Sets, slots, main stats, substats e decisões de upgrade." data-en="Sets, slots, main stats, substats and upgrade decisions."></small></div><a href="#rune-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="5"><div class="ygc-num">5</div><div><b data-pt="⚔️ Combate" data-en="⚔️ Combat"></b><small data-pt="Turnos, ATB, PROC, STUN, buffs, debuffs e controle." data-en="Turns, ATB, PROC, STUN, buffs, debuffs and control."></small></div><a href="#battle-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="6"><div class="ygc-num">6</div><div><b data-pt="🧙 Equipes" data-en="🧙 Teams"></b><small data-pt="DPS, suporte, controle, sustain, líder e sinergia." data-en="DPS, support, control, sustain, leader skills and synergy."></small></div><a href="#team-thinking-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="7"><div class="ygc-num">7</div><div><b data-pt="🏰 PvE & Progressão" data-en="🏰 PvE & Progression"></b><small data-pt="Escolhe o próximo conteúdo com base no objetivo da conta." data-en="Choose the next content based on your account goal."></small></div><a href="#content-school" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="8"><div class="ygc-num">8</div><div><b data-pt="🧪 Artefatos & Upgrades" data-en="🧪 Artifacts & Upgrades"></b><small data-pt="Artefatos, grindstones, gems, refinamento e prioridades." data-en="Artifacts, grindstones, gems, refinement and priorities."></small></div><a href="#yamp-artifacts" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="9"><div class="ygc-num">9</div><div><b data-pt="⚡ Speed Tune" data-en="⚡ Speed Tune"></b><small data-pt="Ordem de turnos, ATB, margem de velocidade e consistência." data-en="Turn order, ATB, speed margin and consistency."></small></div><a href="#yamp-speed" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="10"><div class="ygc-num">10</div><div><b data-pt="🏆 PvP" data-en="🏆 PvP"></b><small data-pt="Arena, Guilda/Siege e RTA: pensar antes de escolher o monstro." data-en="Arena, Guild/Siege and RTA: think before choosing the monster."></small></div><a href="#yamp-pvp" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="11"><div class="ygc-num">11</div><div><b data-pt="🕵️ Diagnóstico" data-en="🕵️ Diagnosis"></b><small data-pt="Descobre por que perdeste antes de mexer nas runas." data-en="Find out why you lost before changing your runes."></small></div><a href="#yae-doctor" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+<div class="ygc-lesson" data-i="12"><div class="ygc-num">12</div><div><b data-pt="👑 Modo Mestre" data-en="👑 Master Mode"></b><small data-pt="Raciocínio, decisões difíceis e preparação para a graduação." data-en="Reasoning, difficult decisions and graduation preparation."></small></div><a href="#yamp-reasoning" data-pt="Abrir aula" data-en="Open lesson"></a></div>
+</div>
+</div>
+
+<div class="ygc-grid">
+<div class="ygc-card">
+<h3 data-pt="📋 Checklist de prontidão" data-en="📋 Readiness Checklist"></h3>
+<div class="ygc-checks">
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Consigo explicar por que uma runa é boa ou ruim." data-en="I can explain why a rune is good or bad."></span></label>
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Consigo identificar o papel de cada monstro da minha equipe." data-en="I can identify each monster's role in my team."></span></label>
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Consigo olhar para SPD/ATB e prever quem joga primeiro." data-en="I can use SPD/ATB to predict who moves first."></span></label>
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Quando perco, procuro a causa antes de trocar tudo." data-en="When I lose, I look for the cause before changing everything."></span></label>
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Consigo montar uma equipe para um objetivo específico." data-en="I can build a team for a specific objective."></span></label>
+<label class="ygc-check"><input type="checkbox" data-ready="1"><span data-pt="Sei quando devo priorizar consistência em vez de dano máximo." data-en="I know when to prioritize consistency over maximum damage."></span></label>
+</div>
+<div class="ygc-progress"><i id="ygc-ready-bar"></i></div>
+<div id="ygc-ready-text" class="ygc-small"></div>
+</div>
+
+<div class="ygc-card">
+<h3 data-pt="🧠 Aprender a pensar" data-en="🧠 Learn to Think"></h3>
+<p data-pt="A pergunta certa não é “qual é a melhor build?”. É “qual problema estou tentando resolver?”" data-en="The right question is not “what is the best build?”. It is “what problem am I trying to solve?”"></p>
+<div class="ygc-choice">
+<button class="ygc-btn" data-think="speed" data-pt="Perco antes de jogar" data-en="I lose before moving"></button>
+<button class="ygc-btn" data-think="damage" data-pt="Não tenho dano" data-en="I lack damage"></button>
+<button class="ygc-btn" data-think="survive" data-pt="Morro rápido" data-en="I die too fast"></button>
+<button class="ygc-btn" data-think="control" data-pt="Não consigo controlar" data-en="I cannot control"></button>
+</div>
+<div id="ygc-thinking-result" class="ygc-result"></div>
+</div>
+
+<div class="ygc-card">
+<h3 data-pt="🏁 Próximo passo" data-en="🏁 Next Step"></h3>
+<p data-pt="Quando completares a campanha, a próxima etapa é a Prova de Graduação com teoria, prática e modo mestre." data-en="When you complete the campaign, the next step is the Graduation Exam with theory, practice and master mode."></p>
+<a class="ygc-btn" href="./graduation.html" data-pt="🏆 Fazer Prova de Graduação" data-en="🏆 Take Graduation Exam"></a>
+</div>
+</div>
+
+<div class="ygc-card" style="margin-top:14px">
+<h3 data-pt="🆕 Atualizações do jogo" data-en="🆕 Game Updates"></h3>
+<p data-pt="Esta caixa é atualizada manualmente com eventos oficiais importantes. Verifica sempre a página oficial antes de gastar recursos, porque eventos têm data de término." data-en="This box is manually updated with important official events. Always check the official page before spending resources because events have end dates."></p>
+<div class="ygc-events">
+<div class="ygc-event"><b data-pt="🔥 Sky Fever — Evocação" data-en="🔥 Sky Fever — Summon"></b><span data-pt="01/09/2026 → 25/10/2026. Evento para novos e retornantes, com opções de Nat 5★ e recompensas de progressão." data-en="Sep 1, 2026 → Oct 25, 2026. Event for new and returning Summoners, with Nat 5★ options and progression rewards."></span><a href="https://summonerswar.com/pt/skyarena/news/list/6944" target="_blank" rel="noopener" data-pt="Ver evento oficial" data-en="View official event"></a></div>
+<div class="ygc-event"><b data-pt="💎 Sky Fever — Runas" data-en="💎 Sky Fever — Runes"></b><span data-pt="01/09/2026 → 25/10/2026. Criação de conjuntos Legend 6★ com pontuação mínima por runa e conjunto." data-en="Sep 1, 2026 → Oct 25, 2026. Craft 6★ Legend Rune Sets with minimum score per rune and set."></span><a href="https://summonerswar.com/pt/skyarena/news/list/6946" target="_blank" rel="noopener" data-pt="Ver evento oficial" data-en="View official event"></a></div>
+<div class="ygc-event"><b data-pt="🏰 Sky Fever — Missões" data-en="🏰 Sky Fever — Missions"></b><span data-pt="01/09/2026 → 25/10/2026. Missões para novos/retornantes com monstros de progressão, moedas e recompensas de crescimento." data-en="Sep 1, 2026 → Oct 25, 2026. New/returning missions with progression monsters, coins and growth rewards."></span><a href="https://summonerswar.com/pt/skyarena/news/list/6947" target="_blank" rel="noopener" data-pt="Ver evento oficial" data-en="View official event"></a></div>
+</div>
+</div>
+</section>
+
+<script id="yuna-guided-campaign-js">
+(function(){
+'use strict';
+const KEY='yuna-academy-guided-campaign-v1', READY='yuna-academy-readiness-v1';
+const lessons=[1,2,3,4,5,6,7,8,9,10,11,12];
+let state={done:[]};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{"done":[]}')}catch(e){}
+if(!Array.isArray(state.done))state.done=[];
+function isEN(){try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}}
+function applyYGCLang(){
+const en=isEN();
+document.querySelectorAll('#academy-guided-campaign [data-pt]').forEach(el=>{
+const v=el.getAttribute(en?'data-en':'data-pt');if(v!==null)el.innerHTML=v;
+});
+document.querySelectorAll('#academy-guided-campaign [data-pt-placeholder]').forEach(el=>{el.placeholder=el.getAttribute(en?'data-en-placeholder':'data-pt-placeholder')});
+document.documentElement.lang=en?'en':'pt-BR';
+}
+function t(pt,en){return isEN()?en:pt}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render()}
+function render(){
+document.querySelectorAll('#ygc-lessons .ygc-lesson').forEach(row=>{
+const i=Number(row.dataset.i),a=row.querySelector('a'),num=row.querySelector('.ygc-num');
+if(state.done.includes(i)){row.style.borderColor='#35a9e1';num.textContent='✓';a.textContent=t('Concluída','Completed');a.style.background='#183a4b';}
+else{num.textContent=String(i);a.textContent=t('Abrir aula','Open lesson');a.style.background='';}
+});
+const p=Math.round(state.done.length/lessons.length*100);
+document.getElementById('ygc-progress-bar').style.width=p+'%';
+document.getElementById('ygc-progress-text').textContent=p+'% '+t('concluído','complete');
+}
+document.querySelectorAll('#ygc-lessons .ygc-lesson a').forEach(a=>a.addEventListener('click',function(){
+const i=Number(this.closest('.ygc-lesson').dataset.i);if(!state.done.includes(i)){state.done.push(i);state.done.sort((a,b)=>a-b);save();}
+}));
+const readyInputs=[...document.querySelectorAll('[data-ready]')];
+function readyRender(){
+let n=readyInputs.filter(x=>x.checked).length,p=Math.round(n/readyInputs.length*100);
+document.getElementById('ygc-ready-bar').style.width=p+'%';
+let msg=p<50?t('Ainda estás a construir a base. Continua as aulas 1–6.','You are still building the foundation. Continue lessons 1–6.'):p<85?t('Boa base! Foca em PvE, Speed Tune e diagnóstico.','Good foundation! Focus on PvE, Speed Tune and diagnosis.'):t('Conta muito bem preparada para avançar para a graduação.','Your account knowledge is well prepared for graduation.');
+document.getElementById('ygc-ready-text').textContent=p+'% — '+msg;
+localStorage.setItem(READY,JSON.stringify(readyInputs.map(x=>x.checked)));
+}
+try{const old=JSON.parse(localStorage.getItem(READY)||'[]');readyInputs.forEach((x,i)=>x.checked=!!old[i])}catch(e){}
+readyInputs.forEach(x=>x.addEventListener('change',readyRender));
+document.getElementById('ygc-check-open').addEventListener('click',()=>{document.querySelector('#academy-guided-campaign .ygc-card:nth-of-type(4)')?.scrollIntoView({behavior:'smooth'})});
+const thinking={
+speed:{pt:'Primeiro verifica SPD, ATB e Speed Tune. Se morres antes de jogar, dano extra não resolve o problema.',en:'First check SPD, ATB and Speed Tune. If you die before moving, extra damage does not solve the problem.'},
+damage:{pt:'Confirma CR/CD, ATK, multiplicadores e se o alvo tem proteção. Mais dano bruto nem sempre é a melhor solução.',en:'Check CR/CD, ATK, multipliers and whether the target has protection. More raw damage is not always the best solution.'},
+survive:{pt:'Olha HP, DEF, resistência a debuffs, sustain e ordem de turnos. Descobre qual golpe está realmente a matar a equipa.',en:'Check HP, DEF, debuff resistance, sustain and turn order. Find out which hit is actually killing the team.'},
+control:{pt:'Verifica ACC/RES, imunidade, cleanse e ordem de skills. Controle sem consistência não é controle confiável.',en:'Check ACC/RES, immunity, cleanse and skill order. Control without consistency is not reliable control.'}
+};
+document.querySelectorAll('[data-think]').forEach(b=>b.addEventListener('click',()=>{const x=thinking[b.dataset.think];document.getElementById('ygc-thinking-result').textContent=isEN()?x.en:x.pt}));
+const challenges=[
+{pt:'O teu DPS é rápido, mas morre antes de atacar. O que verificas primeiro?',en:'Your DPS is fast, but dies before attacking. What do you check first?',opts:[['SPD/ATB e ordem de turnos','SPD/ATB and turn order',1],['Só CR/CD','Only CR/CD',0],['Trocar todos os sets','Replace every set',0],['Ignorar porque é RNG','Ignore it because it is RNG',0]]},
+{pt:'A equipa vence, mas falha às vezes no mesmo ponto. O que procuras?',en:'The team wins, but sometimes fails at the same point. What do you look for?',opts:[['Consistência: Speed Tune, ACC/RES, sobrevivência ou condição de falha','Consistency: Speed Tune, ACC/RES, survival or failure condition',1],['Mais dano sempre','More damage always',0],['Uma runa aleatória','A random rune',0],['Apenas trocar o líder','Only change the leader',0]]},
+{pt:'Tens uma runa boa, mas ela não resolve o problema do monstro. O que fazes?',en:'You have a good rune, but it does not solve the monster problem. What do you do?',opts:[['Avaliar a função e o objetivo antes de equipar','Evaluate the role and goal before equipping it',1],['Equipar porque é Legend','Equip it because it is Legend',0],['Vender o monstro','Sell the monster',0],['Usar sempre SPD','Always use SPD',0]]}
+];
+let ci=0;
+function showChallenge(){
+const c=challenges[ci%challenges.length],box=document.getElementById('ygc-challenge-result');
+box.innerHTML='<b>'+ (isEN()?c.en:c.pt)+'</b><div class="ygc-choice" style="margin-top:8px">'+c.opts.map((o,i)=>'<button class="ygc-btn" data-c="'+o[2]+'">'+(isEN()?o[1]:o[0])+'</button>').join('')+'</div>';
+box.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{box.innerHTML=Number(b.dataset.c)?'✅ '+t('Boa decisão. Pensa sempre no problema antes da build.','Good decision. Always think about the problem before the build.'): '❌ '+t('Ainda não. Volta à pergunta: qual é o problema real?','Not yet. Ask again: what is the real problem?');ci++;});
+}
+document.getElementById('ygc-challenge').addEventListener('click',showChallenge);
+function boot(){applyYGCLang();render();readyRender()}
+boot();
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){setTimeout(()=>{applyYGCLang();render();readyRender()},30)}});
+})();
+</script>
+
 <!-- YUNA_GRADUATION_LINK --><div style="margin:24px 0;padding:20px;border:2px solid #a78bfa;border-radius:16px;background:#111923;text-align:center"><div style="font-size:24px;font-weight:900">🎓 Prova de Graduação</div><p style="color:#aeb8c5">Terminou a formação? Faça a avaliação oficial da Yuna Academy.</p><a href="./graduation.html" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#a78bfa;color:#111827;font-weight:900;text-decoration:none">🏆 Fazer Prova de Graduação</a></div></body></html>
