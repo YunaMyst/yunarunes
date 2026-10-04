@@ -42,7 +42,7 @@ const UI_PT_EN={'Carregar mais':'Load more','Mostrar mais':'Show more','Mostrar 
 const UI_EN_PT=Object.fromEntries(Object.entries(UI_PT_EN).map(([a,b])=>[b,a]));
 const INDEX_FRAG_PT_EN={'O seu hub de ':'Your hub for ','mobs, runas':'mobs, runes',' e equipes.':' and teams.','pesquisa um monstro, monta uma equipe, cria builds, otimiza o seu inventário e salva os seus mobs favoritos. Tudo num só lugar, preparado para PC e telefone.':'search a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. Everything in one place, ready for PC and mobile.','ACESSO RÁPIDO':'QUICK ACCESS'};
 const INDEX_FRAG_EN_PT=Object.fromEntries(Object.entries(INDEX_FRAG_PT_EN).map(([a,b])=>[b,a]));
-function escRe(s){return String(s).replace(/[.*+?^$()|[\\]\\\\]/g,'\\\\$&')}
+function escRe(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
 function applyMap(text,map){
  let out=String(text);
  for(const k of Object.keys(map).sort((a,b)=>b.length-a.length)){
@@ -56,7 +56,7 @@ function t(s){
  if(!s)return s;
  s=String(s);
  const guildToken='__YUNA_GUILD_SIEGE__',resultsToken='__YUNA_RESULTS__';
- s=s.replace(/Guilda\\/Siege/gi,guildToken).replace(/Resultados/gi,resultsToken);
+ s=s.replace(/Guilda\/Siege/gi,guildToken).replace(/Resultados/gi,resultsToken);
  s=s.replace(/Otimzarr|Otimzar|Otimz\\w*/gi,isEN()?'Optimize':'Otimizar');
  const map=isEN()?PT:EN_TO_PT;
  const extra=isEN()?EXTRA_PT:EXTRA_EN;
@@ -340,7 +340,7 @@ function apply(){
   document.querySelectorAll('input,textarea,select,button,[title],[aria-label]').forEach(el=>{
     for(const [pt,enAttr,target] of [['data-pt-placeholder','data-en-placeholder','placeholder'],['data-pt-title','data-en-title','title'],['data-pt-aria','data-en-aria','aria-label']]){
       if(el.hasAttribute(pt)||el.hasAttribute(enAttr)){
-        const v=en?(el.getAttribute(enAttr)??el.getAttribute(pt)||''):(el.getAttribute(pt)??el.getAttribute(enAttr)||'');
+        const v=en?(el.getAttribute(enAttr)||el.getAttribute(pt)||''):(el.getAttribute(pt)||el.getAttribute(enAttr)||'');
         el.setAttribute(target,v);
       }
     }
