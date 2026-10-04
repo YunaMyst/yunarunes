@@ -69,7 +69,121 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('
 
 <section class="academy-tools" id="academy-tools">
 <div style="margin:22px 0 10px"><div class="eyebrow">🧪 Yuna Academy • Ferramentas de aprendizagem</div><h2 style="margin:5px 0">Aprende fazendo</h2><p style="color:var(--muted);margin:0">Usa os simuladores e a árvore de habilidades enquanto avanças nas aulas.</p></div>
-<!-- tools moved from home -->
+<!-- YUNA ACADEMY TOOLS MOVED FROM HOME -->
+<!-- YUNA SKILL TREE HOME -->
+<style id="yuna-skill-tree-home-css">
+.yuna-skill-tree{margin:18px 0;padding:20px;background:linear-gradient(135deg,#151d2c,#0e151f);border:1px solid #7657b8;border-radius:15px;box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.yuna-skill-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.yuna-skill-head h2{margin:0;font-size:23px}.yuna-skill-head p{margin:5px 0 0;color:#9aa9b7;font-size:12px}
+.yuna-skill-status{background:#0b1118;border:1px solid #293746;border-radius:10px;padding:10px 12px;min-width:125px;text-align:center}.yuna-skill-status b{display:block;color:#d9c9ff;font-size:18px}.yuna-skill-status span{color:#8fa0af;font-size:10px}
+.yuna-skill-progress{height:8px;background:#080c11;border-radius:20px;overflow:hidden;margin:10px 0 16px}.yuna-skill-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.25s}
+.yuna-skill-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}.yuna-skill-node{position:relative;background:#111923;border:1px solid #293746;border-radius:11px;padding:12px;min-height:142px;transition:.15s}.yuna-skill-node.current{border-color:#35a9e1;box-shadow:0 0 0 1px rgba(53,169,225,.12)}.yuna-skill-node.done{border-color:#7657b8;background:#17172a}.yuna-skill-node.locked{opacity:.55}.yuna-skill-node .node-icon{font-size:25px}.yuna-skill-node h3{font-size:13px;margin:7px 0 4px}.yuna-skill-node p{font-size:10px;color:#8fa0af;line-height:1.35;margin:0 0 9px}.yuna-skill-node button{width:100%;border:0;border-radius:8px;padding:8px;background:#35a9e1;color:#061018;font-weight:900;cursor:pointer}.yuna-skill-node.done button{background:#29213e;color:#d9c9ff}.yuna-skill-node.locked button{background:#202b36;color:#71808d;cursor:not-allowed}
+.yuna-skill-lesson{display:none;margin-top:12px;background:#0b1118;border:1px solid #33485d;border-radius:12px;padding:15px}.yuna-skill-lesson.show{display:block}.yuna-skill-lesson h3{margin:0 0 6px}.yuna-skill-lesson p{color:#b9c5cf;font-size:12px;line-height:1.5}.yuna-skill-lesson button{border:0;border-radius:8px;padding:9px 12px;background:#8b5cf6;color:#fff;font-weight:900;cursor:pointer}
+@media(max-width:900px){.yuna-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.yuna-skill-tree{padding:15px}.yuna-skill-head{align-items:flex-start}.yuna-skill-head h2{font-size:19px}.yuna-skill-grid{grid-template-columns:1fr}.yuna-skill-status{min-width:100px}}
+</style>
+<section class="yuna-skill-tree" id="yuna-skill-tree-home">
+<div class="yuna-skill-head"><div><div class="eyebrow">🎓 YunaRunes • Progressão</div><h2>🌳 Árvore de Habilidades</h2><p>Aprenda Summoners War em etapas e desbloqueie o próximo conhecimento.</p></div><div class="yuna-skill-status"><b id="yst-count">0/10</b><span>habilidades concluídas</span></div></div>
+<div class="yuna-skill-progress"><i id="yst-bar"></i></div><div class="yuna-skill-grid" id="yst-grid"></div><div class="yuna-skill-lesson" id="yst-lesson"><h3 id="yst-title"></h3><p id="yst-text"></p><button id="yst-complete">Concluir habilidade + XP</button></div>
+</section>
+<script>
+(()=>{const K='yunarunes-skill-tree-v1',nodes=[
+['🌱','Fundamentos','Interface, elementos e objetivo da batalha.',20,'Aprenda que atributo, HP, barra de ataque e skills são informações essenciais para decidir uma ação.'],
+['⚔️','Combate','Turnos, alvo, efeitos e lógica da batalha.',25,'Leia a skill antes de agir, escolha o alvo correto e pense no efeito que precisa aplicar.'],
+['📊','Stats','HP, ATK, DEF, SPD, CR, CD, ACC e RES.',30,'Cada stat tem uma função. Não existe uma build boa sem considerar o papel do monstro.'],
+['💎','Runas','Slots, main stats, substats e sets.',35,'Aprenda a separar uma runa promissora de uma runa que deve ser vendida.'],
+['📖','Skills','Alvo, efeito, chance, scaling e cooldown.',40,'Uma skill pode causar dano, aplicar efeitos benéficos ou prejudiciais e mudar completamente uma build.'],
+['🧙','Equipes','Funções, condição de vitória e Speed Tune.',45,'Monte a equipe pensando em quem prepara, quem controla, quem causa dano e quem mantém o time vivo.'],
+['🕵️','Diagnóstico','Encontre o gargalo antes de trocar a build.',50,'Quando perder, procure a causa: velocidade, sobrevivência, precisão, dano ou ordem de ações.'],
+['🏰','PvE','Planeje farm e progressão pelo gargalo da conta.',55,'Priorize o conteúdo que resolve o maior problema atual da sua conta.'],
+['🏆','PvP','Adapte a equipe ao adversário e ao objetivo.',60,'No PvP, não copie uma equipe sem entender o adversário e a condição de vitória.'],
+['👑','Mestre','Resolva problemas sem depender de builds copiadas.',80,'O objetivo final é conseguir explicar por que uma decisão funciona e quando ela deixa de funcionar.']
+];let s=JSON.parse(localStorage.getItem(K)||'{"done":[],"xp":0}'),open=-1;const grid=document.getElementById('yst-grid'),lesson=document.getElementById('yst-lesson');
+function render(){grid.innerHTML=nodes.map((n,i)=>{const done=s.done.includes(i),locked=i>0&&!s.done.includes(i-1);return '<div class="yuna-skill-node '+(done?'done ':'')+(locked?'locked ':'')+(i===s.done.length&&!done?'current':'')+'"><div class="node-icon">'+n[0]+'</div><h3>'+n[1]+'</h3><p>'+n[2]+'</p><button data-i="'+i+'" '+(locked?'disabled':'')+'>'+(done?'✓ Concluída':'📖 Aprender')+'</button></div>'}).join('');document.getElementById('yst-count').textContent=s.done.length+'/10';document.getElementById('yst-bar').style.width=(s.done.length/10*100)+'%';grid.querySelectorAll('button').forEach(b=>b.onclick=()=>openLesson(+b.dataset.i))}
+function openLesson(i){if(i>0&&!s.done.includes(i-1))return;open=i;const n=nodes[i];document.getElementById('yst-title').textContent=n[0]+' '+n[1]+' • '+n[3]+' XP';document.getElementById('yst-text').textContent=n[4];lesson.classList.add('show');document.getElementById('yst-complete').textContent=s.done.includes(i)?'✓ Habilidade concluída':'Concluir habilidade + '+n[3]+' XP';document.getElementById('yst-complete').disabled=s.done.includes(i);lesson.scrollIntoView({behavior:'smooth',block:'nearest'})}
+document.getElementById('yst-complete').onclick=()=>{if(open<0||s.done.includes(open))return;s.done.push(open);s.xp+=nodes[open][3];localStorage.setItem(K,JSON.stringify(s));open=-1;lesson.classList.remove('show');render()};
+render()})();
+</script>
+<!-- YUNA RUNE SIMULATOR -->
+<style id="yuna-rune-simulator-css">
+.yuna-rune-sim{margin:18px 0;padding:20px;background:linear-gradient(135deg,#151d2c,#0e151f);border:1px solid #35a9e1;border-radius:15px}
+.yrs-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}.yrs-head h2{margin:0;font-size:23px}.yrs-head p{margin:5px 0 0;color:#9aa9b7;font-size:12px}
+.yrs-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;background:#0b1118;border:1px solid #293746;border-radius:12px;padding:13px}.yrs-field label{display:block;color:#9aa9b7;font-size:10px;font-weight:800;margin-bottom:5px}.yrs-field select{width:100%;background:#111923;color:#fff;border:1px solid #3b4b5a;border-radius:8px;padding:10px;font-size:12px;min-height:42px}.yrs-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.yrs-btn{border:0;border-radius:8px;padding:10px 13px;background:#35a9e1;color:#061018;font-weight:900;cursor:pointer}.yrs-btn.alt{background:#202b36;color:#fff;border:1px solid #293746}.yrs-result{display:grid;grid-template-columns:250px 1fr;gap:12px;margin-top:12px}.yrs-rune-card{background:#111923;border:1px solid #7657b8;border-radius:12px;padding:15px}.yrs-rune-name{font-size:19px;font-weight:900}.yrs-rune-meta{color:#8fa0af;font-size:11px;margin-top:5px}.yrs-main{margin:13px 0;padding:11px;background:#0b1118;border-radius:9px}.yrs-main b{font-size:17px}.yrs-subs{display:grid;gap:7px}.yrs-sub{display:flex;justify-content:space-between;gap:8px;padding:8px;background:#0d141c;border:1px solid #293746;border-radius:7px;font-size:12px}.yrs-sub span{color:#9aa9b7}.yrs-score{font-size:28px;font-weight:900;color:#d9c9ff}.yrs-panel{background:#0b1118;border:1px solid #293746;border-radius:12px;padding:15px}.yrs-panel h3{margin:0 0 8px}.yrs-log{max-height:230px;overflow:auto;display:grid;gap:6px}.yrs-log div{padding:8px;border-radius:7px;background:#111923;color:#b9c5cf;font-size:11px}.yrs-note{color:#71808d;font-size:10px;line-height:1.45;margin-top:10px}
+@media(max-width:900px){.yrs-form{grid-template-columns:repeat(2,minmax(0,1fr))}.yrs-result{grid-template-columns:1fr}}@media(max-width:600px){.yuna-rune-sim{padding:15px}.yrs-head h2{font-size:19px}.yrs-form{grid-template-columns:1fr}.yrs-btn{min-height:44px}.yrs-result{grid-template-columns:1fr}}
+</style>
+<section class="yuna-rune-sim" id="yuna-rune-simulator">
+<div class="yrs-head"><div><div class="eyebrow">💎 YunaRunes • Ferramenta</div><h2>🧪 Simulador de Runas</h2><p>Gere uma runa, melhore até +15 e veja como os rolls das substats evoluem.</p></div><div class="yrs-score" id="yrs-score">—</div></div>
+<div class="yrs-form">
+<div class="yrs-field"><label>Tipo</label><select id="yrs-set"><option>Violent</option><option>Swift</option><option>Will</option><option>Rage</option><option>Despair</option><option>Fatal</option><option>Focus</option><option>Blade</option><option>Energy</option><option>Guard</option><option>Revenge</option><option>Nemesis</option><option>Shield</option><option>Vampire</option><option>Destroy</option><option>Fighter</option><option>Determination</option><option>Enhance</option><option>Accuracy</option><option>Tolerance</option><option>Seal</option></select></div>
+<div class="yrs-field"><label>Slot</label><select id="yrs-slot"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
+<div class="yrs-field"><label>Raridade</label><select id="yrs-grade"><option>Normal</option><option>Magic</option><option>Rare</option><option>Hero</option><option selected>Legend</option></select></div>
+<div class="yrs-field"><label>Estrelas</label><select id="yrs-stars"><option value="5">5★</option><option value="6" selected>6★</option></select></div>
+</div>
+<div class="yrs-actions"><button class="yrs-btn" type="button" id="yrs-generate">🎲 Gerar Runa</button><button class="yrs-btn" type="button" id="yrs-upgrade">⬆️ Melhorar +3</button><button class="yrs-btn alt" type="button" id="yrs-reset">↻ Nova Runa</button></div>
+<div class="yrs-result">
+<div class="yrs-rune-card"><div class="yrs-rune-name" id="yrs-name">Nenhuma runa gerada</div><div class="yrs-rune-meta" id="yrs-meta">Escolha as opções e clique em Gerar Runa.</div><div class="yrs-main"><span style="color:#8fa0af;font-size:10px">MAIN STAT</span><br><b id="yrs-mainstat">—</b></div><div class="yrs-subs" id="yrs-subs"></div><div class="yrs-note">Simulador educativo para treinar análise de runas. Os valores são aproximados e não representam uma cópia das tabelas internas do jogo.</div></div>
+<div class="yrs-panel"><h3>📈 Histórico da melhoria</h3><div class="yrs-log" id="yrs-log"><div>Gere uma runa para começar.</div></div><div class="yrs-note">No jogo, o power-up pode ser escolhido diretamente em +3, +6, +9, +12 ou +15. O simulador usa esses marcos para mostrar os rolls.</div></div>
+</div>
+</section>
+<script>
+(()=>{const setPieces={Violent:4,Swift:4,Will:2,Rage:4,Despair:4,Fatal:4,Focus:2,Blade:2,Energy:2,Guard:2,Revenge:2,Nemesis:2,Shield:2,Vampire:4,Destroy:4,Fighter:2,Determination:2,Enhance:2,Accuracy:2,Tolerance:2,Seal:2};
+const fixed={1:'ATK flat',3:'DEF flat',5:'HP flat'},mains=['ATK%','HP%','DEF%','SPD','CR%','CD%','ACC%','RES%'];
+const pool=['ATK%','HP%','DEF%','SPD','CR%','CD%','ACC%','RES%','ATK flat','HP flat','DEF flat'];
+const ranges={'ATK%':[5,8],'HP%':[5,8],'DEF%':[5,8],'SPD':[4,6],'CR%':[4,6],'CD%':[4,7],'ACC%':[4,8],'RES%':[4,8],'ATK flat':[10,20],'HP flat':[100,200],'DEF flat':[10,20]};
+const weights={'SPD':1.3,'CR%':1.2,'CD%':1.2,'ATK%':1,'HP%':1,'DEF%':1,'ACC%':.9,'RES%':.7};
+let rune=null,openLog=[];
+const $=id=>document.getElementById(id),pick=a=>a[Math.floor(Math.random()*a.length)],roll=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+function mainStat(slot){return fixed[slot]||pick(mains)}
+function newSub(name){const r=ranges[name];return{name,value:roll(r[0],r[1]),rolls:0}}
+function generateSubs(count){const available=[...pool],out=[];while(out.length<count&&available.length){const i=Math.floor(Math.random()*available.length);const name=available.splice(i,1)[0];out.push(newSub(name))}return out}
+function score(){if(!rune||!rune.subs.length)return 0;let total=0,weight=0;rune.subs.forEach(s=>{const r=ranges[s.name],base=r[1]*4;total+=Math.min(100,s.value/base*100)*(weights[s.name]||.7);weight+=weights[s.name]||.7});return Math.min(100,Math.round(total/weight))}
+function render(){if(!rune)return;$('yrs-name').textContent=rune.set+' · '+rune.stars+'★ · Slot '+rune.slot;$('yrs-meta').textContent=rune.grade+' · +'+rune.level+' · Set de '+setPieces[rune.set];$('yrs-mainstat').textContent=rune.main;$('yrs-subs').innerHTML=rune.subs.map(s=>'<div class="yrs-sub"><span>'+s.name+'</span><b>+'+s.value+(s.name.includes('%')?'%':'')+(s.rolls?' · '+s.rolls+' roll'+(s.rolls>1?'s':''):'')+'</b></div>').join('');$('yrs-score').textContent=score()+'/100'}
+function log(t){const el=$('yrs-log');if(el.firstElementChild&&el.firstElementChild.textContent.includes('Gere uma'))el.innerHTML='';const d=document.createElement('div');d.textContent=t;el.prepend(d)}
+function generate(){const slot=+$('yrs-slot').value,grade=$('yrs-grade').value,count={Normal:0,Magic:1,Rare:2,Hero:3,Legend:4}[grade];rune={set:$('yrs-set').value,slot,stars:+$('yrs-stars').value,grade,level:0,main:mainStat(slot),subs:generateSubs(count)};render();$('yrs-log').innerHTML='';log('Runa criada em +0 · '+grade+' · '+rune.stars+'★')}
+function upgrade(){if(!rune){generate();return}if(rune.level>=15){log('A runa já está em +15.');return}const next=Math.min(15,rune.level+3);if(rune.subs.length<4){const available=pool.filter(x=>!rune.subs.some(s=>s.name===x));if(available.length){rune.subs.push(newSub(pick(available)));rune.subs[rune.subs.length-1].rolls=1;log('Power-up para +'+next+' · nova substat: '+rune.subs[rune.subs.length-1].name)}}else{const s=pick(rune.subs);s.value+=roll(...ranges[s.name]);s.rolls++;log('Power-up para +'+next+' · '+s.name+' recebeu o roll #'+s.rolls)}rune.level=next;render()}
+$('yrs-generate').addEventListener('click',generate);$('yrs-upgrade').addEventListener('click',upgrade);$('yrs-reset').addEventListener('click',()=>{rune=null;$('yrs-log').innerHTML='<div>Gere uma runa para começar.</div>';$('yrs-name').textContent='Nenhuma runa gerada';$('yrs-meta').textContent='Escolha as opções e clique em Gerar Runa.';$('yrs-mainstat').textContent='—';$('yrs-subs').innerHTML='';$('yrs-score').textContent='—'});
+})();
+</script>
+<!-- YUNA COMBAT SIMULATOR -->
+<style id="yuna-combat-simulator-css">
+.yuna-combat-sim{margin:18px 0;padding:20px;background:linear-gradient(135deg,#171d2c,#0e151f);border:1px solid #8b5cf6;border-radius:15px}
+.ycs-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}.ycs-head h2{margin:0;font-size:23px}.ycs-head p{margin:5px 0 0;color:#9aa9b7;font-size:12px}
+.ycs-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;background:#0b1118;border:1px solid #293746;border-radius:12px;padding:13px}.ycs-field label{display:block;color:#9aa9b7;font-size:10px;font-weight:800;margin-bottom:5px}.ycs-field select{width:100%;background:#111923;color:#fff;border:1px solid #3b4b5a;border-radius:8px;padding:10px;font-size:12px;min-height:42px}
+.ycs-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.ycs-btn{border:0;border-radius:8px;padding:10px 13px;background:#8b5cf6;color:#fff;font-weight:900;cursor:pointer}.ycs-btn.alt{background:#202b36;border:1px solid #293746}
+.ycs-board{display:grid;grid-template-columns:1fr 80px 1fr;gap:10px;align-items:center;margin-top:12px}.ycs-side{background:#111923;border:1px solid #293746;border-radius:12px;padding:14px}.ycs-side.enemy{border-color:#7657b8}.ycs-name{font-weight:900;font-size:17px}.ycs-hp{height:11px;background:#080c11;border-radius:20px;overflow:hidden;margin:10px 0 7px}.ycs-hp i{display:block;height:100%;width:100%;background:#35a9e1;transition:.2s}.enemy .ycs-hp i{background:#b94b65}.ycs-stats{display:grid;grid-template-columns:1fr 1fr;gap:5px;color:#9aa9b7;font-size:10px}.ycs-atb{margin-top:9px;font-size:11px;color:#dce6ee}.ycs-vs{text-align:center;font-size:25px;font-weight:900;color:#d9c9ff}
+.ycs-log{margin-top:12px;background:#0b1118;border:1px solid #293746;border-radius:12px;padding:12px;max-height:230px;overflow:auto;display:grid;gap:6px}.ycs-log div{padding:8px;background:#111923;border-radius:7px;color:#b9c5cf;font-size:11px}.ycs-note{color:#71808d;font-size:10px;line-height:1.45;margin-top:9px}
+@media(max-width:900px){.ycs-form{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.yuna-combat-sim{padding:15px}.ycs-head h2{font-size:19px}.ycs-form{grid-template-columns:1fr}.ycs-board{grid-template-columns:1fr}.ycs-vs{padding:2px}.ycs-btn{min-height:44px}}
+</style>
+<section class="yuna-combat-sim" id="yuna-combat-simulator">
+<div class="ycs-head"><div><div class="eyebrow">⚔️ YunaRunes • Treino</div><h2>⚔️ Simulador de Combate</h2><p>Treine velocidade, ordem de turnos, dano, controle e decisões de batalha.</p></div><div class="yrs-score" id="ycs-turn">Turno 0</div></div>
+<div class="ycs-form">
+<div class="ycs-field"><label>Seu monstro</label><select id="ycs-player"><option value="swift">Swift DPS</option><option value="control">Controlador</option><option value="support">Suporte</option><option value="tank">Tank</option></select></div>
+<div class="ycs-field"><label>Inimigo</label><select id="ycs-enemy"><option value="dps">DPS rápido</option><option value="tank">Tank resistente</option><option value="control">Controlador</option><option value="support">Suporte</option></select></div>
+<div class="ycs-field"><label>Estratégia</label><select id="ycs-strategy"><option value="speed">Priorizar velocidade</option><option value="control">Priorizar controle</option><option value="damage">Priorizar dano</option><option value="survive">Priorizar sobrevivência</option></select></div>
+<div class="ycs-field"><label>Dificuldade</label><select id="ycs-difficulty"><option value="normal">Normal</option><option value="hard">Difícil</option></select></div>
+</div>
+<div class="ycs-actions"><button class="ycs-btn" type="button" id="ycs-start">▶️ Iniciar combate</button><button class="ycs-btn" type="button" id="ycs-turn-btn" disabled>⚡ Próximo turno</button><button class="ycs-btn alt" type="button" id="ycs-reset">↻ Reiniciar</button></div>
+<div class="ycs-board">
+<div class="ycs-side"><div class="ycs-name" id="ycs-player-name">Seu monstro</div><div class="ycs-hp"><i id="ycs-player-hp"></i></div><div id="ycs-player-hp-text">HP 100%</div><div class="ycs-stats" id="ycs-player-stats"></div><div class="ycs-atb" id="ycs-player-atb">ATB: 0%</div></div>
+<div class="ycs-vs">VS</div>
+<div class="ycs-side enemy"><div class="ycs-name" id="ycs-enemy-name">Inimigo</div><div class="ycs-hp"><i id="ycs-enemy-hp"></i></div><div id="ycs-enemy-hp-text">HP 100%</div><div class="ycs-stats" id="ycs-enemy-stats"></div><div class="ycs-atb" id="ycs-enemy-atb">ATB: 0%</div></div>
+</div>
+<div class="ycs-log" id="ycs-log"><div>Configure os combatentes e clique em Iniciar combate.</div></div>
+<div class="ycs-note">Simulador educativo: os valores de dano e probabilidades são simplificados para ensinar conceitos como Speed, Attack Bar, ordem de turnos, dano, controle e sobrevivência.</div>
+</section>
+<script>
+(()=>{const P={swift:{name:'Swift DPS',hp:18000,atk:2400,def:900,spd:220,crit:85},control:{name:'Controlador',hp:21000,atk:1500,def:1100,spd:205,crit:70},support:{name:'Suporte',hp:26000,atk:1100,def:1500,spd:190,crit:40},tank:{name:'Tank',hp:34000,atk:1300,def:1900,spd:165,crit:30}};
+const E={dps:{name:'DPS rápido',hp:20000,atk:2200,def:1000,spd:215,crit:80},tank:{name:'Tank resistente',hp:36000,atk:1250,def:2000,spd:155,crit:25},control:{name:'Controlador',hp:23000,atk:1450,def:1200,spd:200,crit:60},support:{name:'Suporte',hp:28000,atk:1200,def:1550,spd:185,crit:35}};
+let battle=null;const $=id=>document.getElementById(id);
+function statHtml(x){return '<span>ATK '+x.atk+'</span><span>DEF '+x.def+'</span><span>SPD '+x.spd+'</span><span>CR '+x.crit+'%</span>'}
+function render(){if(!battle)return;const p=battle.p,e=battle.e;const pp=Math.max(0,p.hp/p.maxHp*100),ep=Math.max(0,e.hp/e.maxHp*100);$('ycs-player-name').textContent=p.name;$('ycs-enemy-name').textContent=e.name;$('ycs-player-hp').style.width=pp+'%';$('ycs-enemy-hp').style.width=ep+'%';$('ycs-player-hp-text').textContent='HP '+Math.ceil(pp)+'%';$('ycs-enemy-hp-text').textContent='HP '+Math.ceil(ep)+'%';$('ycs-player-stats').innerHTML=statHtml(p);$('ycs-enemy-stats').innerHTML=statHtml(e);$('ycs-player-atb').textContent='ATB: '+Math.floor(p.atb)+'%';$('ycs-enemy-atb').textContent='ATB: '+Math.floor(e.atb)+'%';$('ycs-turn').textContent='Turno '+battle.turn;$('ycs-turn-btn').disabled=!battle.active}
+function log(t){const d=document.createElement('div');d.textContent=t;$('ycs-log').prepend(d)}
+function start(){const p0=P[$('ycs-player').value],e0=E[$('ycs-enemy').value];battle={p:{...p0,maxHp:p0.hp,atb:0,stun:0},e:{...e0,maxHp:e0.hp,atb:0,stun:0},turn:0,active:true};$('ycs-log').innerHTML='';$('ycs-turn-btn').disabled=false;log('⚔️ Combate iniciado: '+battle.p.name+' vs '+battle.e.name);render()}
+function hit(att,def,isPlayer){let mult=$('ycs-strategy').value==='damage'&&isPlayer?1.18:1;let raw=att.atk*mult*(0.75+Math.random()*.5);let damage=Math.max(1,Math.round(raw*1000/(1000+def.def)));if(att.crit>Math.random()*100)damage=Math.round(damage*1.5);def.hp=Math.max(0,def.hp-damage);return damage}
+function next(){if(!battle||!battle.active)return;battle.turn++;battle.p.atb+=battle.p.spd/10;battle.e.atb+=battle.e.spd/10;let actor=null,isPlayer=false;if(battle.p.atb>=100&&battle.e.atb>=100){actor=battle.p.spd>=battle.e.spd?battle.p:battle.e;isPlayer=actor===battle.p}else if(battle.p.atb>=100){actor=battle.p;isPlayer=true}else if(battle.e.atb>=100){actor=battle.e}else{log('⏱️ Nenhum ATB chegou a 100%. A barra avança.');render();return}actor.atb-=100;const target=isPlayer?battle.e:battle.p;if(actor.stun>0){actor.stun--;log((isPlayer?'🛡️ Seu ':'🔴 ')+actor.name+' perdeu o turno por STUN.')}else{let dmg=hit(actor,target,isPlayer);let extra='';const strat=$('ycs-strategy').value;if(isPlayer&&strat==='control'&&Math.random()<.35){target.stun=1;extra=' • STUN aplicado'}if(isPlayer&&strat==='survive'&&Math.random()<.25){actor.hp=Math.min(actor.maxHp,actor.hp+Math.round(actor.maxHp*.08));extra+=' • cura 8%'}log((isPlayer?'🟦 ':'🟥 ')+actor.name+' causou '+dmg+' de dano'+extra+'.')}if(target.hp<=0){battle.active=false;log(isPlayer?'🏆 Vitória! Você venceu o combate.':'💀 Derrota! O inimigo venceu.')}render()}
+function reset(){battle=null;$('ycs-turn').textContent='Turno 0';$('ycs-turn-btn').disabled=true;$('ycs-log').innerHTML='<div>Configure os combatentes e clique em Iniciar combate.</div>';['ycs-player-hp','ycs-enemy-hp'].forEach(id=>$(id).style.width='100%');$('ycs-player-hp-text').textContent='HP 100%';$('ycs-enemy-hp-text').textContent='HP 100%';$('ycs-player-atb').textContent='ATB: 0%';$('ycs-enemy-atb').textContent='ATB: 0%'}
+$('ycs-start').addEventListener('click',start);$('ycs-turn-btn').addEventListener('click',next);$('ycs-reset').addEventListener('click',reset);reset();
+})();
+</script>
+
 </section>
 <div class="layout">
 <aside class="side" id="side">
