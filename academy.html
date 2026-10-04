@@ -69,6 +69,181 @@ document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('
 
 <section class="academy-tools" id="academy-tools">
 <div style="margin:22px 0 10px"><div class="eyebrow">🧪 Yuna Academy • Ferramentas de aprendizagem</div><h2 style="margin:5px 0">Aprende fazendo</h2><p style="color:var(--muted);margin:0">Usa os simuladores e a árvore de habilidades enquanto avanças nas aulas.</p></div>
+<!-- YUNA ACADEMY EXPANSION V1 -->
+<style>
+.yae{margin:28px 0}.yae-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.yae-card{background:linear-gradient(145deg,#111b27,#0c131b);border:1px solid #2c3c4d;border-radius:16px;padding:18px}.yae-card h3{margin:0 0 7px;font-size:20px}.yae-card p{color:var(--muted);line-height:1.55;margin:7px 0}.yae-tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#1b2a3a;border:1px solid #34485b;font-size:11px;font-weight:800;margin:3px}.yae-btn{border:1px solid #40576c;background:#172333;color:#fff;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}.yae-btn:hover{filter:brightness(1.15)}.yae-btn.primary{background:linear-gradient(135deg,#236b96,#4a328d);border-color:#5c83a1}.yae-list{display:grid;gap:8px;margin-top:12px}.yae-item{display:flex;gap:10px;align-items:flex-start;background:#0a1118;border:1px solid #263544;border-radius:11px;padding:10px}.yae-item input{margin-top:4px;accent-color:#8b5cf6}.yae-item label{cursor:pointer;line-height:1.4}.yae-meter{height:10px;background:#080d12;border-radius:99px;overflow:hidden;border:1px solid #293746}.yae-meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:width .25s}.yae-result{margin-top:12px;padding:12px;border-radius:11px;background:#0a1118;border:1px solid #2d4052;min-height:42px}.yae-choice{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.yae-choice button{min-height:48px}.yae-path{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}.yae-step{padding:12px;border:1px solid #293b4d;border-radius:12px;background:#0a1118;text-align:center}.yae-step strong{display:block;margin-bottom:4px}.yae-levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.yae-level{padding:13px;border-radius:12px;background:#0b1219;border:1px solid #293746}.yae-level b{display:block;margin-bottom:4px}.yae-small{font-size:12px;color:var(--muted)}@media(max-width:800px){.yae-grid,.yae-choice{grid-template-columns:1fr}.yae-path,.yae-levels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<section class="yae" id="yuna-academy-expansion">
+<div class="academy-tools" style="margin:0">
+<div class="eyebrow">🚀 Yuna Academy • Nova trilha</div>
+<h2 style="margin:5px 0">Aprende, pratica e prova que entendeu</h2>
+<p style="color:var(--muted);max-width:900px">A Academia agora funciona como uma jornada: primeiro aprende o básico, depois toma decisões, diagnostica erros e só então enfrenta a graduação.</p>
+</div>
+
+<div class="yae-grid">
+<div class="yae-card" id="yae-start">
+<span class="yae-tag">🗺️ PRIMEIROS PASSOS</span>
+<h3>Trilha “Comecei Hoje”</h3>
+<p>Uma ordem simples para quem acabou de começar. Não tenta ensinar tudo de uma vez.</p>
+<div class="yae-path">
+<div class="yae-step">1️⃣<strong>Conta</strong><span class="yae-small">Objetivo inicial</span></div>
+<div class="yae-step">2️⃣<strong>Monstros</strong><span class="yae-small">Funções e skills</span></div>
+<div class="yae-step">3️⃣<strong>Runas</strong><span class="yae-small">Stats principais</span></div>
+<div class="yae-step">4️⃣<strong>Equipe</strong><span class="yae-small">Primeiro time</span></div>
+</div>
+<div class="yae-list">
+<label class="yae-item"><input type="checkbox" data-yae-start> Entendi que o objetivo não é ter todos os monstros, e sim construir uma conta funcional.</label>
+<label class="yae-item"><input type="checkbox" data-yae-start> Sei diferenciar função de monstro: dano, suporte, controle, proteção e utilidade.</label>
+<label class="yae-item"><input type="checkbox" data-yae-start> Sei que runas melhoram stats e que o set deve servir ao monstro.</label>
+<label class="yae-item"><input type="checkbox" data-yae-start> Consigo montar um primeiro time com funções que se complementam.</label>
+</div>
+<div class="yae-result"><b>Progresso:</b> <span id="yae-start-score">0/4</span></div>
+</div>
+
+<div class="yae-card" id="yae-thinking">
+<span class="yae-tag">🧠 PENSAMENTO ESTRATÉGICO</span>
+<h3>Aprenda a pensar como jogador</h3>
+<p>Antes de copiar uma build, faça estas quatro perguntas:</p>
+<div class="yae-list">
+<div class="yae-item">🎯 <div><b>Qual é a função?</b><br><span class="yae-small">O que este monstro precisa fazer para o time funcionar?</span></div></div>
+<div class="yae-item">📊 <div><b>Qual é a condição de vitória?</b><br><span class="yae-small">Mais velocidade? Sobreviver? Controlar? Matar um alvo?</span></div></div>
+<div class="yae-item">⚙️ <div><b>Quais stats permitem isso?</b><br><span class="yae-small">Escolha stats pela função, não pelo número bonito.</span></div></div>
+<div class="yae-item">🔎 <div><b>O que realmente falhou?</b><br><span class="yae-small">Não troque todas as runas antes de descobrir o problema.</span></div></div>
+</div>
+</div>
+</div>
+
+<div class="yae-card" id="yae-lab" style="margin-top:14px">
+<span class="yae-tag">🧪 LABORATÓRIO</span>
+<h3>“Por que isso é melhor?”</h3>
+<p>Escolha a opção que melhor resolve o problema. A explicação aparece depois da resposta.</p>
+<div class="yae-choice" id="yae-lab-choices">
+<button class="yae-btn" data-yae-lab="a">A) +500 ATK, mas perco muita Velocidade</button>
+<button class="yae-btn" data-yae-lab="b">B) Menos ATK, mas mantenho o Speed Tune</button>
+<button class="yae-btn" data-yae-lab="c">C) Troco o set inteiro sem testar</button>
+<button class="yae-btn" data-yae-lab="d">D) Escolho a runa com maior valor de venda</button>
+</div>
+<div class="yae-result" id="yae-lab-result">💡 Pensa primeiro: se o time depende da ordem dos turnos, o que acontece quando você perde essa ordem?</div>
+</div>
+
+<div class="yae-grid" style="margin-top:14px">
+<div class="yae-card" id="yae-doctor">
+<span class="yae-tag">🕵️ DIAGNÓSTICO</span>
+<h3>Por que perdi?</h3>
+<p>Treine o diagnóstico antes de mexer nas runas.</p>
+<div class="yae-choice">
+<button class="yae-btn" data-yae-doc="spd">Meu suporte sempre joga depois do inimigo.</button>
+<button class="yae-btn" data-yae-doc="survive">Meu DPS morre antes de conseguir atacar.</button>
+<button class="yae-btn" data-yae-doc="control">Meu controle quase nunca aplica debuff.</button>
+<button class="yae-btn" data-yae-doc="damage">Eu sobrevivo, mas não consigo finalizar.</button>
+</div>
+<div class="yae-result" id="yae-doc-result">Escolha um problema para receber uma hipótese de diagnóstico.</div>
+</div>
+
+<div class="yae-card" id="yae-check">
+<span class="yae-tag">📋 CHECKLIST DA CONTA</span>
+<h3>Estou pronto para avançar?</h3>
+<p>Marque apenas o que você consegue fazer sem copiar cegamente uma build.</p>
+<div class="yae-list">
+<label class="yae-item"><input type="checkbox" data-yae-check> Consigo explicar a função de cada monstro do meu time.</label>
+<label class="yae-item"><input type="checkbox" data-yae-check> Sei olhar uma runa e dizer se os stats fazem sentido para o monstro.</label>
+<label class="yae-item"><input type="checkbox" data-yae-check> Consigo explicar o que é Speed Tune.</label>
+<label class="yae-item"><input type="checkbox" data-yae-check> Sei diferenciar ACC e RES.</label>
+<label class="yae-item"><input type="checkbox" data-yae-check> Consigo identificar uma possível causa de uma derrota.</label>
+<label class="yae-item"><input type="checkbox" data-yae-check> Consigo adaptar uma equipe quando o conteúdo muda.</label>
+</div>
+<div class="yae-meter"><span id="yae-check-meter"></span></div>
+<div class="yae-result"><b>Nível:</b> <span id="yae-check-score">0/6</span></div>
+</div>
+</div>
+
+<div class="yae-card" id="yae-missions" style="margin-top:14px">
+<span class="yae-tag">🎯 MISSÕES PRÁTICAS</span>
+<h3>Não apenas leia — faça</h3>
+<p>Complete as missões em jogo e volte para marcar. A Academia guarda o progresso neste navegador.</p>
+<div class="yae-list">
+<label class="yae-item"><input type="checkbox" data-yae-mission> 💎 Pegue uma runa e explique por que você a usaria ou venderia.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> ⚔️ Monte um time em que cada monstro tenha uma função clara.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> 🧭 Faça uma Speed Tune simples e escreva a ordem esperada.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> 🕵️ Analise uma derrota sem trocar nenhuma runa primeiro.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> 🧪 Use o Simulador de Runas e compare duas opções.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> 🎮 Use o Simulador de Combate e explique por que uma estratégia venceu.</label>
+<label class="yae-item"><input type="checkbox" data-yae-mission> 🏆 Faça a Prova de Graduação quando se sentir preparado.</label>
+</div>
+<div class="yae-result"><b>Missões:</b> <span id="yae-mission-score">0/7</span></div>
+</div>
+
+<div class="yae-card" id="yae-glossary" style="margin-top:14px">
+<span class="yae-tag">📖 DICIONÁRIO INTERATIVO</span>
+<h3>Palavras que você precisa entender</h3>
+<p>Clique para revelar uma explicação curta. Os termos também podem ser usados nas aulas e desafios.</p>
+<div class="yae-choice">
+<button class="yae-btn" data-yae-term="proc">PROC</button>
+<button class="yae-btn" data-yae-term="stun">STUN</button>
+<button class="yae-btn" data-yae-term="atb">ATB</button>
+<button class="yae-btn" data-yae-term="cc">CC</button>
+<button class="yae-btn" data-yae-term="dot">DoT</button>
+<button class="yae-btn" data-yae-term="cleanse">CLEANSE</button>
+<button class="yae-btn" data-yae-term="strip">STRIP</button>
+<button class="yae-btn" data-yae-term="immunity">IMUNIDADE</button>
+<button class="yae-btn" data-yae-term="glancing">GLANCING</button>
+<button class="yae-btn" data-yae-term="crcd">CR / CD</button>
+<button class="yae-btn" data-yae-term="accres">ACC / RES</button>
+<button class="yae-btn" data-yae-term="speedtune">SPEED TUNE</button>
+</div>
+<div class="yae-result" id="yae-term-result">Escolha um termo.</div>
+</div>
+
+<div class="yae-card" id="yae-levels" style="margin-top:14px">
+<span class="yae-tag">🎓 NÍVEIS DA ACADEMIA</span>
+<h3>Seu caminho até a graduação</h3>
+<div class="yae-levels">
+<div class="yae-level"><b>🌱 Recruta</b><span class="yae-small">Entende o básico.</span></div>
+<div class="yae-level"><b>📚 Aprendiz</b><span class="yae-small">Lê stats e runas.</span></div>
+<div class="yae-level"><b>⚔️ Invocador</b><span class="yae-small">Monta equipes funcionais.</span></div>
+<div class="yae-level"><b>🧠 Estrategista</b><span class="yae-small">Toma decisões.</span></div>
+<div class="yae-level"><b>🕵️ Analista</b><span class="yae-small">Diagnostica derrotas.</span></div>
+<div class="yae-level"><b>👑 Mestre</b><span class="yae-small">Resolve problemas novos.</span></div>
+<div class="yae-level"><b>🏆 Grand Master</b><span class="yae-small">Passa na graduação.</span></div>
+<div class="yae-level"><b>🎓 Graduado</b><span class="yae-small">Recebe o certificado.</span></div>
+</div>
+</div>
+</section>
+<script>
+(function(){
+const key='yuna-academy-expansion-v1';
+let state={start:[],check:[],mission:[]};
+try{state=Object.assign(state,JSON.parse(localStorage.getItem(key)||'{}'))}catch(e){}
+function save(){localStorage.setItem(key,JSON.stringify(state))}
+function wire(group,prop,scoreId){
+ const els=[...document.querySelectorAll('[data-yae-'+group+']')];
+ els.forEach((el,i)=>{el.checked=!!state[prop][i];el.addEventListener('change',()=>{state[prop][i]=el.checked;save();render()})});
+ function render(){const n=els.filter(x=>x.checked).length;document.getElementById(scoreId).textContent=n+'/'+els.length;if(group==='check')document.getElementById('yae-check-meter').style.width=(n/els.length*100)+'%'}
+ render()
+}
+wire('start','start','yae-start-score');wire('check','check','yae-check-score');wire('mission','mission','yae-mission-score');
+const lab={a:'❌ Não necessariamente. ATK sozinho não resolve se a perda de velocidade quebra a ordem da equipe.',b:'✅ Melhor resposta. Se o plano depende de Speed Tune, manter a ordem pode valer mais do que ganhar ATK bruto.',c:'❌ Trocar tudo sem diagnóstico impede você de saber qual era o problema.',d:'❌ Valor de venda não é critério de build. A pergunta é se a runa ajuda a função do monstro.'};
+document.querySelectorAll('[data-yae-lab]').forEach(b=>b.onclick=()=>document.getElementById('yae-lab-result').innerHTML=lab[b.dataset.yaeLab]);
+const docs={spd:'🔎 Hipótese: compare SPD real, set, buffs e Speed Tune. Primeiro descubra quem deveria agir antes.',survive:'🔎 Hipótese: verifique HP/DEF, resistência a dano, alvo recebido e se o DPS está sendo protegido.',control:'🔎 Hipótese: confira ACC, imunidade/limpeza do inimigo e se o skill realmente aplica o debuff.',damage:'🔎 Hipótese: compare stats ofensivos, multiplicadores, defesa do alvo e se a equipe está preparando o alvo corretamente.'};
+document.querySelectorAll('[data-yae-doc]').forEach(b=>b.onclick=()=>document.getElementById('yae-doc-result').textContent=docs[b.dataset.yaeDoc]);
+const terms={
+proc:'Um PROC é quando uma condição ou efeito com chance ocorre. Ex.: um efeito de conjunto ou habilidade ativa uma ocorrência adicional.',
+stun:'STUN é atordoamento: o monstro fica impedido de agir durante o efeito.',
+atb:'ATB significa Attack Bar, a Barra de Ataque que determina o avanço dos turnos.',
+cc:'CC significa Crowd Control: efeitos que limitam ou impedem as ações do inimigo.',
+dot:'DoT significa Damage over Time: dano aplicado ao longo dos turnos/tempo por um efeito.',
+cleanse:'CLEANSE remove efeitos maléficos do aliado, de acordo com o efeito/skill usado.',
+strip:'STRIP remove efeitos benéficos do inimigo, quando a habilidade consegue removê-los.',
+immunity:'IMUNIDADE impede a aplicação de determinados efeitos maléficos enquanto estiver ativa, conforme as regras do jogo.',
+glancing:'GLANCING é um golpe de dano reduzido e pode afetar a ocorrência de certos efeitos, conforme a habilidade.',
+crcd:'CR é Taxa Crítica. CD é Dano Crítico. Ambos trabalham juntos em builds que dependem de críticos.',
+accres:'ACC aumenta a chance efetiva de aplicar certos efeitos; RES é a resistência do alvo a efeitos. Eles não são a mesma coisa.',
+speedtune:'SPEED TUNE é organizar velocidades e barras para que a equipe aja numa ordem planejada.'
+};
+document.querySelectorAll('[data-yae-term]').forEach(b=>b.onclick=()=>document.getElementById('yae-term-result').innerHTML='<b>'+b.textContent+'</b><br>'+terms[b.dataset.yaeTerm]);
+})();
+</script>
+
 <!-- YUNA ACADEMY TOOLS MOVED FROM HOME -->
 <!-- YUNA SKILL TREE HOME -->
 <style id="yuna-skill-tree-home-css">
