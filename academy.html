@@ -1878,4 +1878,128 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){setTimeou
 })();
 </script>
 
+<!-- YUNA ACADEMY INTERACTIVE MASTER MODE V1 -->
+<style>
+.yim{margin:28px 0}.yim-hero{background:linear-gradient(135deg,#20182f,#101a27);border:1px solid #5a477a;border-radius:18px;padding:22px}.yim-hero h2{margin:0 0 8px;font-size:28px}.yim-hero p{color:#aeb8c5;line-height:1.6}.yim-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.yim-card{background:#0d141c;border:1px solid #293746;border-radius:14px;padding:16px}.yim-card h3{margin:0 0 7px}.yim-card p,.yim-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.yim-card ul{padding-left:18px}.yim-btn{border:1px solid #40576c;background:#172333;color:#fff;border-radius:9px;padding:9px 12px;font-weight:800;cursor:pointer}.yim-btn:hover{border-color:#35a9e1}.yim-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}.yim-options button{min-height:48px}.yim-result{margin-top:10px;padding:12px;background:#101923;border:1px solid #293746;border-radius:10px;color:#dce6ee;line-height:1.55;min-height:28px}.yim-medals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.yim-medal{background:#0a1118;border:1px solid #293746;border-radius:11px;padding:11px}.yim-medal.locked{opacity:.45}.yim-medal b{display:block}.yim-medal span{display:block;color:#8fa0af;font-size:11px;margin-top:3px}.yim-status{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.yim-pill{padding:5px 8px;border-radius:999px;border:1px solid #40576c;font-size:11px}.yim-start{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#35a9e1,#8b5cf6);color:#fff;border:0;border-radius:11px;padding:12px 17px;font-weight:900;text-decoration:none;cursor:pointer}.yim-restrictions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.yim-restrictions div{background:#0a1118;border:1px solid #293746;border-radius:10px;padding:10px;text-align:center;color:#cbd7df;font-size:12px}
+@media(max-width:800px){.yim-grid{grid-template-columns:1fr}.yim-medals{grid-template-columns:repeat(2,1fr)}.yim-restrictions{grid-template-columns:1fr 1fr}}@media(max-width:600px){.yim-options{grid-template-columns:1fr}.yim-medals,.yim-restrictions{grid-template-columns:1fr}}
+</style>
+<section class="yim" id="yuna-master-mode">
+<div class="yim-hero">
+<div class="eyebrow">👑 YUNA ACADEMY • <span data-pt="MODO INTERATIVO" data-en="INTERACTIVE MODE"></span></div>
+<h2 data-pt="🎓 Começar Academy — aprender, decidir, conquistar" data-en="🎓 Start Academy — learn, decide, conquer"></h2>
+<p data-pt="Agora a Academy tem uma camada final de treino. Aprende o conceito, toma decisões, recebe feedback e desbloqueia conquistas. Depois da graduação, o Modo Mestre fica disponível." data-en="The Academy now has a final training layer. Learn the concept, make decisions, get feedback, and unlock achievements. After graduation, Master Mode becomes available."></p>
+<a class="yim-start" href="#academy-guided-campaign" data-pt="🚀 Começar a Academy" data-en="🚀 Start the Academy"></a>
+<div class="yim-status" style="margin-top:12px"><span class="yim-pill" id="yim-status"></span><span class="yim-pill" id="yim-xp"></span><span class="yim-pill" id="yim-medal-count"></span></div>
+</div>
+
+<div class="yim-grid">
+<div class="yim-card">
+<h3 data-pt="🏅 Conquistas e Medalhas" data-en="🏅 Achievements & Medals"></h3>
+<p data-pt="As medalhas ficam guardadas no navegador. Algumas são desbloqueadas automaticamente conforme avanças." data-en="Medals are saved in your browser. Some unlock automatically as you progress."></p>
+<div class="yim-medals" id="yim-medals"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="🧪 Laboratório: E se...?" data-en="🧪 What If...? Lab"></h3>
+<p data-pt="Escolhe uma mudança e descobre qual problema ela pode resolver." data-en="Choose a change and discover which problem it can solve."></p>
+<div class="yim-options">
+<button class="yim-btn" data-whatif="spd" data-pt="+SPD" data-en="+SPD"></button>
+<button class="yim-btn" data-whatif="cd" data-pt="+CD / -CR" data-en="+CD / -CR"></button>
+<button class="yim-btn" data-whatif="acc" data-pt="+ACC" data-en="+ACC"></button>
+<button class="yim-btn" data-whatif="order" data-pt="Mudar ordem" data-en="Change turn order"></button>
+</div><div id="yim-whatif-result" class="yim-result"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="⚡ Treino de decisão rápida" data-en="⚡ Quick Decision Training"></h3>
+<p id="yim-quick-question"></p><div class="yim-options" id="yim-quick-options"></div><div id="yim-quick-result" class="yim-result"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="🧙 Desafio de montar equipe" data-en="🧙 Team Building Challenge"></h3>
+<p data-pt="Recebes um objetivo e tens de escolher a função que falta antes de pensar no monstro." data-en="You get a goal and must choose the missing role before thinking about the monster."></p>
+<button class="yim-btn" id="yim-team-start" data-pt="Começar desafio" data-en="Start challenge"></button>
+<div id="yim-team-result" class="yim-result"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="💎 Treinador de Runas" data-en="Rune Trainer"></h3>
+<p data-pt="Nem toda runa forte deve ser usada. Decide se deves vender, guardar ou upar." data-en="Not every strong rune should be used. Decide whether to sell, keep or upgrade."></p>
+<button class="yim-btn" id="yim-rune-start" data-pt="Mostrar uma runa" data-en="Show me a rune"></button>
+<div id="yim-rune-result" class="yim-result"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="🕵️ Modo Detetive" data-en="🕵️ Detective Mode"></h3>
+<p data-pt="Analisa uma derrota antes de culpar as runas. Descobre a causa mais provável." data-en="Analyze a defeat before blaming the runes. Find the most likely cause."></p>
+<button class="yim-btn" id="yim-detective-start" data-pt="Investigar derrota" data-en="Investigate defeat"></button>
+<div id="yim-detective-result" class="yim-result"></div>
+</div>
+
+<div class="yim-card">
+<h3 data-pt="👑 Modo Mestre" data-en="👑 Master Mode"></h3>
+<p data-pt="Desafios avançados para quem já domina os fundamentos: consistência, Speed Tune, draft e diagnóstico." data-en="Advanced challenges for players who master the fundamentals: consistency, Speed Tune, drafting and diagnosis."></p>
+<div class="yim-restrictions"><div>⚡ Speed Tune</div><div>🧠 Draft</div><div>🕵️ Diagnosis</div></div>
+<button class="yim-btn" id="yim-master-start" style="margin-top:10px" data-pt="Ver desafio mestre" data-en="View master challenge"></button>
+<div id="yim-master-result" class="yim-result"></div>
+</div>
+</div>
+</section>
+
+<script id="yuna-interactive-master-js">
+(function(){
+'use strict';
+const KEY='yuna-academy-interactive-v1';
+let st={xp:0,medals:[]};
+try{st=JSON.parse(localStorage.getItem(KEY)||'{"xp":0,"medals":[]}')}catch(e){}
+if(!Array.isArray(st.medals))st.medals=[];
+function en(){try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}}
+function t(pt,eng){return en()?eng:pt}
+function save(){localStorage.setItem(KEY,JSON.stringify(st));render()}
+function award(id,xp){if(!st.medals.includes(id)){st.medals.push(id);st.xp+=xp;save()}}
+const medals=[
+['first','🌱','Primeiro passo','First step','Conclui a primeira atividade', 'Complete your first activity',10],
+['rune','💎','Olho de Runa','Rune Eye','Acerta uma decisão de runa','Get a rune decision right',15],
+['team','🧙','Arquiteto de Equipes','Team Architect','Resolve um desafio de equipe','Solve a team challenge',15],
+['detective','🕵️','Detetive','Detective','Resolve uma derrota','Solve a defeat diagnosis',15],
+['thinker','🧠','Pensador','Thinker','Resolve um treino de decisão','Solve a quick decision',10],
+['master','👑','Mente de Mestre','Master Mind','Resolve um desafio mestre','Solve a master challenge',25]
+];
+function render(){
+const el=document.getElementById('yim-medals');if(!el)return;
+el.innerHTML=medals.map(m=>{const ok=st.medals.includes(m[0]);return '<div class="yim-medal '+(ok?'':'locked')+'"><b>'+m[1]+' '+t(m[2],m[3])+'</b><span>'+t(m[4],m[5])+(ok?' ✓':'')+'</span></div>'}).join('');
+document.getElementById('yim-xp').textContent='⭐ '+st.xp+' XP';
+document.getElementById('yim-medal-count').textContent='🏅 '+st.medals.length+'/'+medals.length;
+const graduated=localStorage.getItem('yuna-academy-master-graduation-v1');
+document.getElementById('yim-status').textContent=graduated?t('👑 Modo Mestre desbloqueado','👑 Master Mode unlocked'):t('🎓 Complete a graduação para desbloquear Mestre','🎓 Complete graduation to unlock Master');
+}
+const whatif={
+spd:['+SPD ajuda principalmente quando o problema é perder o primeiro turno ou quebrar a Speed Tune. Não substitui sobrevivência ou dano.','+SPD mainly helps when the problem is losing first turn or breaking Speed Tune. It does not replace survival or damage.','thinker'],
+cd:['+CD pode aumentar o dano crítico, mas reduzir CR pode tornar o dano inconsistente. A pergunta é: precisas de pico de dano ou consistência?','+CD can increase critical damage, but reducing CR can make damage inconsistent. Ask: do you need burst damage or consistency?','thinker'],
+acc:['+ACC pode melhorar a consistência de debuffs, mas só faz sentido se o monstro realmente depender deles.','+ACC can improve debuff consistency, but only if the monster actually depends on them.','thinker'],
+order:['Mudar a ordem pode resolver uma equipa que perde por falta de buff, strip, controle ou setup antes do DPS.','Changing turn order can fix a team that fails because buff, strip, control or setup happens too late.','thinker']
+};
+document.querySelectorAll('[data-whatif]').forEach(b=>b.onclick=()=>{const x=whatif[b.dataset.whatif];document.getElementById('yim-whatif-result').textContent=t(x[0],x[1]);award(x[2],0)});
+const quick=[
+{pt:'O teu suporte morre antes do turno 2. O que investigas primeiro?',en:'Your support dies before turn 2. What do you investigate first?',o:[['Sobrevivência e ordem de turnos','Survivability and turn order',1],['Apenas CR/CD','Only CR/CD',0],['Só o set','Only the set',0],['Nada, é RNG','Nothing, it is RNG',0]]},
+{pt:'O teu controle falha repetidamente. O que verificas?',en:'Your control repeatedly fails. What do you check?',o:[['ACC, RES e imunidade','ACC, RES and immunity',1],['Apenas ATK','Only ATK',0],['Apenas HP','Only HP',0],['Trocar tudo','Replace everything',0]]}
+];
+let qi=0;
+function quickShow(){const q=quick[qi++%quick.length];document.getElementById('yim-quick-question').textContent=en()?q.en:q.pt;const box=document.getElementById('yim-quick-options');box.innerHTML=q.o.map((x,i)=>'<button class="yim-btn" data-q="'+x[2]+'">'+(en()?x[1]:x[0])+'</button>').join('');document.getElementById('yim-quick-result').textContent='';box.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const ok=Number(b.dataset.q);document.getElementById('yim-quick-result').textContent=ok?'✅ '+t('Boa leitura. Identifica o problema antes de mudar a build.','Good read. Identify the problem before changing the build.'):'❌ '+t('Ainda não. Volta aos fundamentos: qual é a causa da derrota?','Not yet. Return to the fundamentals: what is causing the defeat?');if(ok)award('thinker',10);award('first',0);});}
+document.getElementById('yim-team-start').onclick=()=>{const box=document.getElementById('yim-team-result');box.innerHTML='<b>'+t('Desafio: a tua equipa morre porque não consegue sobreviver ao dano inicial. Qual função falta?','Challenge: your team dies because it cannot survive the opening damage. Which role is missing?')+'</b><div class="yim-options">'+['DPS','Suporte/Sustain','Segundo DPS','Farm'].map(x=>'<button class="yim-btn" data-team="'+(x==='Suporte/Sustain'?1:0)+'">'+(en()&&x==='Suporte/Sustain'?'Support/Sustain':x)+'</button>').join('')+'</div>';box.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{const ok=Number(b.dataset.team);box.innerHTML=(ok?'✅ ':'❌ ')+t(ok?'Boa escolha. Primeiro resolve a sobrevivência, depois otimiza o dano.':'Não. Se o problema é sobreviver ao primeiro impacto, mais DPS não resolve a causa.','Good choice. Fix survival first, then optimize damage.','Not quite. If the problem is surviving the opening hit, more DPS does not fix the cause.');if(ok)award('team',15);award('first',10);});};
+const runes=[
+['Guardada','Keep','Swift 6★ SPD main, 4 boas substats','Swift 6★ SPD main, 4 good substats',1],
+['Upada','Upgrade','Violent 6★ slot 6 HP% com SPD/CR/DEF% úteis','Violent 6★ slot 6 HP% with useful SPD/CR/DEF%',1],
+['Vendida','Sell','Energy 5★ flat DEF slot 2 sem valor relevante para o objetivo','Energy 5★ flat DEF slot 2 with no relevant value for the goal',1]
+];
+let ri=0;
+document.getElementById('yim-rune-start').onclick=()=>{const r=runes[ri++%runes.length],box=document.getElementById('yim-rune-result');box.innerHTML='<b>💎 '+t('Decisão: ','Decision: ')+(en()?r[3]:r[2])+'</b><div class="yim-options"><button class="yim-btn" data-r="keep">'+t('Guardar','Keep')+'</button><button class="yim-btn" data-r="upgrade">'+t('Upar','Upgrade')+'</button><button class="yim-btn" data-r="sell">'+t('Vender','Sell')+'</button></div>';box.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const ok=b.dataset.r===(r[0]==='Guardada'?'keep':r[0]==='Upada'?'upgrade':'sell');box.innerHTML=(ok?'✅ ':'❌ ')+t(ok?'Boa decisão. O valor da runa depende do objetivo, não apenas da raridade.':'Não é a melhor decisão para este caso. Analisa slot, main stat, substats e objetivo.','Good decision. A rune’s value depends on the goal, not just rarity.','Not the best decision here. Analyze slot, main stat, substats and goal.');if(ok)award('rune',15);award('first',0);});};
+document.getElementById('yim-detective-start').onclick=()=>{const box=document.getElementById('yim-detective-result');box.innerHTML='<b>'+t('Caso: a equipa perde sempre porque o inimigo controla o teu time no primeiro turno. Qual é a primeira pista?','Case: the team always loses because the enemy controls your team on turn one. What is the first clue?')+'</b><div class="yim-options">'+[['SPD/ATB','SPD/ATB',1],['Apenas dano','Damage only',0],['Apenas artefatos','Artifacts only',0],['Raridade dos monstros','Monster rarity',0]].map(x=>'<button class="yim-btn" data-d="'+x[2]+'">'+(en()?x[1]:x[0])+'</button>').join('')+'</div>';box.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const ok=Number(b.dataset.d);box.innerHTML=(ok?'✅ ':'❌ ')+t(ok?'Correto. Primeiro investiga quem joga primeiro e por quê.':'Ainda não. Começa pela ordem de turnos: quem joga primeiro?','Correct. First investigate who moves first and why.','Not yet. Start with turn order: who moves first and why.');if(ok)award('detective',15);award('first',0);});};
+document.getElementById('yim-master-start').onclick=()=>{const box=document.getElementById('yim-master-result');const unlocked=!!localStorage.getItem('yuna-academy-master-graduation-v1');if(!unlocked){box.textContent=t('🔒 Faz a Prova de Graduação primeiro.','🔒 Take the Graduation Exam first.');return}box.innerHTML='<b>'+t('Desafio Mestre: tens uma equipa que vence 9/10 vezes. O objetivo é chegar a 10/10 sem perder velocidade de clear. O que priorizas?','Master Challenge: your team wins 9/10 times. The goal is 10/10 without losing clear speed. What do you prioritize?')+'</b><div class="yim-options">'+[['Consistência','Consistency',1],['Mais dano máximo','More max damage',0],['Runa aleatória','Random rune',0],['Trocar todos os monstros','Replace every monster',0]].map(x=>'<button class="yim-btn" data-m="'+x[2]+'">'+(en()?x[1]:x[0])+'</button>').join('')+'</div>';box.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const ok=Number(b.dataset.m);box.innerHTML=(ok?'👑 ':'❌ ')+t(ok?'Mestre. Quando o objetivo é consistência, reduz variância antes de procurar mais pico de dano.':'Não. O objetivo é reduzir a variância sem destruir a velocidade.','Masterful. When the goal is consistency, reduce variance before chasing more burst damage.','Not quite. The goal is to reduce variance without destroying clear speed.');if(ok)award('master',25);});};
+render();quickShow();
+function lang(){document.querySelectorAll('#yuna-master-mode [data-pt]').forEach(e=>{const v=e.getAttribute(en()?'data-en':'data-pt');if(v!==null)e.innerHTML=v});render();quickShow()}
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout(lang,40)});
+})();
+</script>
+
 <!-- YUNA_GRADUATION_LINK --><div style="margin:24px 0;padding:20px;border:2px solid #a78bfa;border-radius:16px;background:#111923;text-align:center"><div style="font-size:24px;font-weight:900">🎓 Prova de Graduação</div><p style="color:#aeb8c5">Terminou a formação? Faça a avaliação oficial da Yuna Academy.</p><a href="./graduation.html" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#a78bfa;color:#111827;font-weight:900;text-decoration:none">🏆 Fazer Prova de Graduação</a></div></body></html>
