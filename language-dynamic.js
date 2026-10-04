@@ -55,7 +55,7 @@ function t(s){
  if(!s)return s;
  s=String(s);
  const guildToken='__YUNA_GUILD_SIEGE__',resultsToken='__YUNA_RESULTS__';
- s=s.replace(/Guilda*\\/Siege/gi,guildToken).replace(/Resultados/gi,resultsToken);
+ s=s.replace(/Guilda\\/Siege/gi,guildToken).replace(/Resultados/gi,resultsToken);
  s=s.replace(/Otimzarr|Otimzar|Otimz\\w*/gi,isEN()?'Optimize':'Otimizar');
  const map=isEN()?PT:EN_TO_PT;
  const extra=isEN()?EXTRA_PT:EXTRA_EN;
