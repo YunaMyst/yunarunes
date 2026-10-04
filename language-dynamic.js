@@ -189,3 +189,42 @@ function norm(s){let x=String(s);for(const [a,b] of Object.entries(N)){x=x.repla
 function run(){try{if(localStorage.getItem('yunarunes-language')==='en')return}catch(_){};const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),a=[];let n;while(n=w.nextNode()){if(n.parentElement?.closest('script,style,noscript'))continue;if(n.nodeValue.trim())a.push(n)}a.forEach(n=>{const x=norm(n.nodeValue);if(x!==n.nodeValue)n.nodeValue=x});if(document.title)document.title=norm(document.title)}
 setTimeout(run,120);new MutationObserver(()=>setTimeout(run,20)).observe(document.body,{childList:true,subtree:true});
 })();
+
+/* ACADEMY LANGUAGE ENGINE V2 */
+(function(){
+const K='yunarunes-language';
+const ACADEMY_PT_EN={
+'Yuna Academy':'Yuna Academy','Academia':'Academy','Aprende Summoners War':'Learn Summoners War','Aprender Runas':'Learn Runes','Aprender Combate':'Learn Combat','Montar Equipas':'Build Teams','Montar Equipes':'Build Teams','Dicionário':'Glossary','Laboratórios':'Labs','Aprender a pensar':'Learn to Think','Testar meus conhecimentos':'Test My Knowledge','Começar Academy':'Start Academy','Começar a Academy':'Start the Academy','Comecei hoje':'I Started Today','Monstros e Skills':'Monsters & Skills','Stats':'Stats','Runas':'Runes','Combate':'Combat','Equipes':'Teams','Equipas':'Teams','PvE e Progressão':'PvE & Progression','PvE & Progressão':'PvE & Progression','Artefatos e Upgrades':'Artifacts & Upgrades','Speed Tune':'Speed Tune','PvP':'PvP','Diagnóstico':'Diagnosis','Modo Mestre':'Master Mode','Modo Interativo':'Interactive Mode','Conquistas e Medalhas':'Achievements & Medals','Conquistas':'Achievements','Medalhas':'Medals','Laboratório':'Lab','Treino de decisão rápida':'Quick Decision Training','Desafio de montar equipe':'Team Building Challenge','Desafio de montar equipas':'Team Building Challenge','Treinador de Runas':'Rune Trainer','Modo Detetive':'Detective Mode','Prova de Graduação':'Graduation Exam','Graduação':'Graduation','nível':'level','Nível':'Level','aula':'lesson','Aula':'Lesson','missão':'mission','Missão':'Mission','desafio':'challenge','Desafio':'Challenge','progresso':'progress','Progresso':'Progress','concluído':'completed','Concluído':'Completed','bloqueado':'locked','Bloqueado':'Locked','desbloqueado':'unlocked','Desbloqueado':'Unlocked','Começar':'Start','Continuar':'Continue','Próximo':'Next','Anterior':'Previous','Voltar':'Back','Abrir aula':'Open lesson','Concluir aula':'Complete lesson','Pesquisar':'Search','Pesquisar um termo':'Search a term','Escolhe':'Choose','Escolha':'Choose','Aprende':'Learn','Aprenda':'Learn','Entende':'Understand','Use':'Use','Usa':'Use','Analisa':'Analyze','Analise':'Analyze','Descobre':'Discover','Descubra':'Discover','Explicação':'Explanation','Resposta':'Answer','Correto':'Correct','Correta':'Correct','Errado':'Wrong','Errada':'Wrong','Boa escolha':'Good choice','Não é a melhor decisão':'Not the best decision','Por que perdi?':'Why did I lose?','Por que isso é melhor?':'Why is this better?','Vendo, guardo ou upo?':'Sell, keep or upgrade?','Guardar':'Keep','Guardada':'Kept','Vender':'Sell','Vendida':'Sold','Upar':'Upgrade','Upada':'Upgraded','runa':'rune','Runa':'Rune','runas':'runes','Runas':'Runes','monstro':'monster','Monstro':'Monster','monstros':'monsters','Monstros':'Monsters','equipe':'team','equipe':'team','equipes':'teams','Equipes':'Teams','habilidade':'skill','Habilidades':'Skills','turno':'turn','Turnos':'Turns','dano':'damage','Dano':'Damage','velocidade':'speed','Velocidade':'Speed','sobrevivência':'survival','Sobrevivência':'Survival','controle':'control','Controle':'Control','efeito':'effect','Efeito':'Effect','efeitos':'effects','Efeitos':'Effects','ataque':'attack','Ataque':'Attack','defesa':'defense','Defesa':'Defense','suporte':'support','Suporte':'Support','resistência':'resistance','Resistência':'Resistance','precisão':'accuracy','Precisão':'Accuracy','elemento':'element','Elemento':'Element','atributo':'attribute','Atributo':'Attribute','objetivo':'goal','Objetivo':'Goal','função':'role','Função':'Role','ordem':'order','Ordem':'Order','primeiro':'first','Primeiro':'First','segundo':'second','Segundo':'Second','terceiro':'third','Terceiro':'Third','hoje':'today','agora':'now','depois':'after','antes':'before','sempre':'always','nunca':'never','porque':'because','Por que':'Why','quando':'when','Quando':'When','se':'if','Se':'If','mais':'more','menos':'less','apenas':'only','Apenas':'Only','todos':'all','Todos':'All','todas':'all','Todas':'All','cada':'each','Cada':'Each','sem':'without','com':'with','para':'for','completo':'complete','Completo':'Complete','falta':'missing','Falta':'Missing','problema':'problem','Problema':'Problem','causa':'cause','Causa':'Cause','resultado':'result','Resultado':'Result','explicação':'explanation','feedback':'feedback','aprendizado':'learning','jogador':'player','Jogador':'Player','novos jogadores':'new players','Novo jogador':'New player','novos jogadores':'new players','do zero':'from scratch','no teu ritmo':'at your own pace','no seu ritmo':'at your own pace','diretamente':'directly','correspondente':'corresponding','fundamentos':'fundamentals','Fundamentos':'Fundamentals','progressão':'progression','Progressão':'Progression','mecânicas':'mechanics','Mecânicas':'Mechanics','conhecimentos':'knowledge','Conhecimentos':'Knowledge','dicionário':'glossary','Dicionário':'Glossary','atualizações do jogo':'game updates','Atualizações do jogo':'Game updates','reais':'real','Real':'Real','conta':'account','Conta':'Account','pronta':'ready','Pronta':'Ready','sim':'yes','não':'no','Não':'No','Sim':'Yes'
+};
+function isEN(){try{return localStorage.getItem(K)==='en'}catch(_){return false}}
+function swap(el){
+ if(!el)return;
+ if(el.hasAttribute('data-en')){el.innerHTML=el.getAttribute(isEN()?'data-en':'data-pt')||'';return}
+ if(el.hasAttribute('data-en-placeholder'))el.setAttribute('placeholder',el.getAttribute(isEN()?'data-en-placeholder':'data-pt-placeholder')||'');
+}
+function translateFallback(text){
+ let x=String(text);
+ if(!isEN())return x;
+ const keys=Object.keys(ACADEMY_PT_EN).sort((a,b)=>b.length-a.length);
+ for(const k of keys)x=x.replace(new RegExp('(^|\\s|[—–,:;.!?()\\[\\]/])'+k.replace(/[.*+?^$\\{}()|[\\]\\\\]/g,'\\$&')+'(?=$|\\s|[—–,:;.!?()\\[\\]/])','g'),m=>m.replace(k,ACADEMY_PT_EN[k]));
+ return x;
+}
+window.applyLanguage=function(){
+ const en=isEN();
+ document.documentElement.lang=en?'en':'pt-BR';
+ document.documentElement.setAttribute('data-language',en?'en':'pt-BR');
+ document.querySelectorAll('[data-pt],[data-en]').forEach(swap);
+ document.querySelectorAll('[data-pt-placeholder],[data-en-placeholder]').forEach(e=>{const v=e.getAttribute(en?'data-en-placeholder':'data-pt-placeholder');if(v)e.setAttribute('placeholder',v)});
+ if(document.title)document.title=translateFallback(document.title);
+ if(!en)return;
+ const root=document.body;
+ const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];let n;
+ while(n=w.nextNode()){if(n.parentElement?.closest('script,style,noscript,[data-no-auto-translate]'))continue;if(n.nodeValue.trim())nodes.push(n)}
+ nodes.forEach(n=>{const v=translateFallback(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
+ document.querySelectorAll('input,textarea,[placeholder],[title],[aria-label],option').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=translateFallback(e.getAttribute(a));e.setAttribute(a,v)}}));
+};
+function run(){setTimeout(()=>window.applyLanguage(),30)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+window.addEventListener('storage',e=>{if(e.key===K)run()});
+new MutationObserver(()=>setTimeout(()=>window.applyLanguage(),30)).observe(document.body,{childList:true,subtree:true});
+})();
