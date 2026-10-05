@@ -12,7 +12,7 @@ public class MainActivity extends Activity {
     private static final String HOME = "https://yunarunes.com/";
 
     private static final String APP_CLEANUP =
-        + "(function(){\n"
+        "(function(){\n"
         + "  function apply(){\n"
         + "    var top=document.querySelector('header.top');\n"
         + "    var nav=top && top.querySelector(':scope > .nav');\n"
@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         + "    if(!nav||!menuWrap||!menu||!controls||!langs)return;\n"
         + "\n"
         + "    top.style.setProperty('width','100%','important');\n"
-        + "    top.style.setProperty('overflow','visible','important');\n"
+        + "    top.style.setProperty('overflow','visible','important');\n    document.documentElement.style.setProperty('width','100%','important');\n    document.body.style.setProperty('width','100%','important');\n    document.body.style.setProperty('min-width','0','important');\n    document.body.style.setProperty('margin','0','important');\n    document.body.style.setProperty('padding','0','important');\n    document.body.style.setProperty('overflow-x','hidden','important');\n    top.style.setProperty('position','relative','important');\n    top.style.setProperty('left','0','important');\n    top.style.setProperty('right','auto','important');\n    top.style.setProperty('transform','none','important');\n    top.style.setProperty('margin-left','0','important');\n    top.style.setProperty('margin-right','0','important');\n    top.style.setProperty('box-sizing','border-box','important');\n"
         + "\n"
         + "    nav.style.setProperty('display','flex','important');\n"
         + "    nav.style.setProperty('flex-direction','row','important');\n"
@@ -160,6 +160,7 @@ public class MainActivity extends Activity {
         settings.setDisplayZoomControls(false);
         settings.setLoadWithOverviewMode(false);
         settings.setUseWideViewPort(false);
+        webView.setInitialScale(100);
         settings.setTextZoom(100);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setUserAgentString(settings.getUserAgentString() + " YunaRunesApp/1.2");
