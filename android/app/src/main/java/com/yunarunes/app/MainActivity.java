@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 + "      brand.style.setProperty('padding','0','important');\n"
 + "    }\n"
 + "\n"
-+        + "    menuWrap.style.setProperty('display','block','important');\n"
+        + "    menuWrap.style.setProperty('display','block','important');\n"
         + "    menuWrap.style.setProperty('position','static','important');\n"
         + "    menuWrap.style.setProperty('flex','0 0 auto','important');\n"
         + "    menuWrap.style.setProperty('width','auto','important');\n"
