@@ -96,10 +96,21 @@ function header(){
  if(!bar){
    bar=document.createElement('div');
    bar.className=h?'yuna-unified-controls':'yuna-global-language-bar';
-   bar.innerHTML='<a href="index.html" class="home">🦊 YunaRunes</a><a class="donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button>';
+   bar.innerHTML='<a href="index.html" class="home">🦊 YunaRunes</a><a class="donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button><a class="apk-link" href="https://github.com/YunaMyst/yunarunes/releases/latest" target="_blank" rel="noopener noreferrer" aria-label="Baixar APK">📱 APK</a>';
    (h||document.body).appendChild(bar);
  }
- const nav=h?.querySelector('.header-menu .nav-links')||h?.querySelector('.nav-links');
+ const controls=bar.querySelector('.yuna-controls');
+ if(controls && !controls.querySelector('.apk-link')){
+   const a=document.createElement('a');
+   a.className='apk-link';
+   a.href='https://github.com/YunaMyst/yunarunes/releases/latest';
+   a.target='_blank';
+   a.rel='noopener noreferrer';
+   a.setAttribute('aria-label','Baixar APK');
+   a.textContent='📱 APK';
+   controls.appendChild(a);
+ }
+const nav=h?.querySelector('.header-menu .nav-links')||h?.querySelector('.nav-links');
  if(nav){
    nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){a.textContent=isEN()?NAV[i][2]:NAV[i][1];a.href=NAV[i][0]}});
  }
@@ -112,35 +123,21 @@ function style(){
  s.textContent=`
 header.top .header-controls .yuna-controls,header.top .yuna-unified-controls{display:flex!important;align-items:center!important;gap:5px!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important;overflow:visible!important}
 header.top .header-controls .yuna-controls [data-lang],header.top .yuna-unified-controls [data-lang]{position:relative!important;z-index:2147483647!important;pointer-events:auto!important;touch-action:manipulation!important;user-select:none!important}
-header.top .header-controls .yuna-controls>* ,header.top .yuna-unified-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important;cursor:pointer!important;pointer-events:auto!important}
+header.top .header-controls .yuna-controls>* ,header.top .yuna-unified-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important;cursor:pointer!important;pointer-events:auto!important;border-radius:7px!important}
+header.top .header-controls .yuna-controls .donate,header.top .yuna-unified-controls .donate{background:#7c3aed!important;border-color:#a78bfa!important;color:#fff!important;text-decoration:none!important}
+header.top .header-controls .yuna-controls .apk-link,header.top .yuna-unified-controls .apk-link{background:#172330!important;border:1px solid #3b4b5a!important;color:#fff!important;text-decoration:none!important}
+header.top .header-controls .yuna-controls button,header.top .yuna-unified-controls button{background:#202a34!important;border:1px solid #3b4b5a!important;color:#fff!important}
+header.top .header-controls .yuna-controls button.active,header.top .yuna-unified-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
 .yuna-global-language-bar{position:fixed!important;top:12px!important;right:12px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;gap:6px!important;padding:6px!important;border-radius:10px!important;background:rgba(8,12,17,.96)!important;border:1px solid #35475a!important;box-shadow:0 6px 24px rgba(0,0,0,.45)!important;pointer-events:auto!important}
 .yuna-global-language-bar>*{height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 9px!important;border-radius:7px!important;border:1px solid #293746!important;background:#202a34!important;color:#fff!important;font-weight:800!important;font-size:12px!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}
 .yuna-global-language-bar .home{background:#111923!important}.yuna-global-language-bar .donate{background:#7c3aed!important;border-color:#a78bfa!important}
-.yuna-global-language-bar button.active,header.top .yuna-unified-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
-@media(max-width:600px){.yuna-global-language-bar{top:58px!important;right:8px!important;gap:4px!important;padding:4px!important}.yuna-global-language-bar .home{display:none!important}.yuna-global-language-bar>*{height:32px!important;padding:0 7px!important;font-size:10px!important}}
-/* MOBILE HEADER — menu left, YunaRunes centered, Donate + languages right */
 @media(max-width:600px){
- header.top>.nav{display:grid!important;grid-template-columns:40px minmax(0,1fr) auto!important;grid-template-areas:"menu brand controls" "links links links"!important;align-items:center!important;min-height:54px!important;height:auto!important;padding:7px 10px!important;column-gap:6px!important;box-sizing:border-box!important}
- header.top .header-brand{grid-area:brand!important;display:flex!important;justify-content:center!important;align-items:center!important;min-width:0!important}
- header.top .header-brand .brand{margin:0!important;justify-content:center!important;white-space:nowrap!important}
- header.top .header-menu{grid-area:menu!important;min-width:40px!important}
- header.top .header-menu .menu-btn{display:block!important;position:static!important;width:38px!important;height:36px!important;padding:8px!important;box-sizing:border-box!important}
- header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;min-width:0!important}
- header.top .header-controls .yuna-controls{position:static!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:3px!important;overflow:visible!important}
- header.top .header-controls .yuna-controls .apk-link{display:none!important}
- header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important;order:1!important;height:32px!important;padding:0 7px!important;font-size:10px!important}
- header.top .header-controls .yuna-controls [data-lang="pt"],
- header.top .header-controls .yuna-controls [data-lang="en"]{display:inline-flex!important;order:2!important;min-width:48px!important;width:auto!important;height:32px!important;padding:0 5px!important;font-size:10px!important}
- header.top .header-menu .nav-links{grid-area:links!important;width:100%!important}
-}
-header.top .header-controls .yuna-controls [data-lang]{position:relative!important;isolation:isolate!important}
-@media(max-width:600px){
- header.top .header-controls .yuna-controls{position:fixed!important;top:8px!important;right:8px!important;z-index:2147483647!important;display:flex!important;gap:4px!important;overflow:visible!important}
- header.top .header-controls .yuna-controls .donate-link{display:none!important}
- header.top .header-controls .yuna-controls [data-lang]{display:inline-flex!important;width:auto!important;min-width:62px!important;height:36px!important;padding:0 8px!important;font-size:11px!important;background:#202a34!important;color:#fff!important;border:1px solid #3b4b5a!important;border-radius:8px!important}
-}
-@media(min-width:601px){
- header.top .header-controls .yuna-controls [data-lang]{min-width:74px!important;height:38px!important}
+ header.top .header-controls .yuna-controls{position:static!important;flex-wrap:nowrap!important;width:100%!important;justify-content:flex-end!important;gap:4px!important}
+ header.top .header-controls .yuna-controls>*{height:34px!important;padding:0 7px!important;font-size:10px!important;flex:0 0 auto!important}
+ header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}
+ .yuna-global-language-bar{position:static!important;margin:0!important;width:100%!important;justify-content:flex-end!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+ .yuna-global-language-bar .home{display:none!important}
+ .yuna-global-language-bar>*{height:34px!important;padding:0 7px!important;font-size:10px!important}
 }
 `;
  document.head.appendChild(s);
@@ -163,8 +160,7 @@ function setLanguage(lang){
  try{document.cookie='yunarunes-language='+encodeURIComponent(lang)+'; path=/; max-age=31536000; SameSite=Lax'}catch(_){}
  document.documentElement.lang=lang==='en'?'en':'pt-BR';
  header();applyText(document.body);header();
- /* Mantém o idioma também fora do localStorage e força todos os scripts da página a iniciarem no idioma escolhido. */
- try{const u=new URL(location.href);u.searchParams.set('lang',lang);window.location.assign(u.href)}catch(_){try{window.location.reload()}catch(__){}}
+ bindLanguageButtons();
 }
 function bindLanguageButtons(){
  document.querySelectorAll('[data-lang]').forEach(b=>{
