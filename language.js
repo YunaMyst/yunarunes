@@ -84,6 +84,8 @@ const PAIRS={
 , 'Não afiliado à Com2uS.':'Not affiliated with Com2uS.'
 };
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([pt,en])=>[en,pt]));
+const WORDS={'Início':'Home','Monstros':'Monsters','Monstro':'Monster','Runas':'Runes','Runas':'Runes','Início':'Home','Pesquisar':'Search','Pesquisa':'Search','Procurar':'Search','Abrir':'Open','Ver':'View','Guardar':'Save','Limpar':'Clear','Cancelar':'Cancel','Confirmar':'Confirm','Escolher':'Choose','Escolhe':'Choose','Adicionar':'Add','Remover':'Remove','Editar':'Edit','Fechar':'Close','Voltar':'Back','Carregando':'Loading','carregando':'loading','Erro':'Error','erro':'error','Não':'No','não':'no','Nenhum':'No','Nenhuma':'No','Todos':'All','Todas':'All','Qualquer':'Any','Elemento':'Element','Elementos':'Elements','Família':'Family','Estrelas':'Stars','Função':'Role','Funções':'Roles','Despertar':'Awakening','Segundo':'Second','Recomendadas':'Recommended','Recomendado':'Recommended','Resultados':'Results','Resultado':'Result','Combinações':'Combinations','Combinação':'Combination','Melhores':'Best','Melhor':'Best','Mínimas':'Minimum','Máximas':'Maximum','Dano':'Damage','Ataque':'Attack','Defesa':'Defense','Velocidade':'Speed','Sobrevivência':'Survival','Informações':'Information','Resumo':'Summary','Inventário':'Inventory','Perfil':'Profile','Histórico':'History','Desafio':'Challenge','Atividades':'Activities','Conteúdo':'Content','Dia':'Day','Semana':'Week','Hoje':'Today','Novo':'New','Novos':'New','Jogável':'Playable','Despertado':'Awakened','Instalar':'Install','Baixar':'Download','Telemóvel':'Phone','telemóvel':'phone','celular':'phone','Computador':'Computer','Aprende':'Learn','Aprender':'Learn','aprende':'learn','aprender':'learn','Criar':'Create','criar':'create','Encontra':'Find','encontra':'find','Descobre':'Discover','descobre':'discover','Usa':'Use','usa':'use','Leva':'Take','leva':'take','salva':'save','Salva':'Save','podes':'can','pode':'can','tem':'has','têm':'have','é':'is','são':'are','com':'with','para':'for','sobre':'about','onde':'where','como':'how','muito':'much','mais':'more','dispositivo':'device'}; 
+function fallbackEN(s){if(!isEN()||!s)return s;let out=s;for(const k of Object.keys(WORDS).sort((a,b)=>b.length-a.length)){const esc=k.replace(/[.*+?^()|[\\]\\]/g,'\\\\const REV=Object.fromEntries(Object.entries(PAIRS).map(([pt,en])=>[en,pt]));');out=out.replace(new RegExp('(^|[^A-Za-zÀ-ÿ])'+esc+'(?=$|[^A-Za-zÀ-ÿ])','g'),function(_,p){return p+WORDS[k]});}return out;}
 const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}};
 const tr=s=>{if(!s)return s;const m=isEN()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(m,s)?m[s]:s};
 function header(){
@@ -140,10 +142,10 @@ function applyText(root=document.body){
   const p=n.parentElement;
   if(p?.closest('script,style,noscript,.yuna-controls,.yuna-nav'))continue;
   const raw=n.nodeValue,t=raw.trim();
-  if(t){const v=tr(t);if(v!==t)n.nodeValue=raw.replace(t,v);}
+  if(t){const v=fallbackEN(tr(t));if(v!==t)n.nodeValue=raw.replace(t,v);}
  }
  root.querySelectorAll?.('input,textarea,option,[placeholder],[title],[aria-label]').forEach(e=>{
-  ['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}});
+  ['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=fallbackEN(tr(v));if(x!==v)e.setAttribute(a,x)}});
   if(e.tagName==='OPTION')e.textContent=tr(e.textContent);
  });
 }
