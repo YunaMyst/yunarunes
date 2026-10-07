@@ -84,7 +84,8 @@ const PAIRS={
 , 'Não afiliado à Com2uS.':'Not affiliated with Com2uS.'
 };
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([pt,en])=>[en,pt]));
-const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}};
+function getLang(){try{const m=document.cookie.match(/(?:^|; )yunarunes-language=([^;]+)/);if(m&&decodeURIComponent(m[1])==='en')return 'en'}catch(_){} try{if(localStorage.getItem(K)==='en')return 'en'}catch(_){} try{const q=new URLSearchParams(location.search).get('lang');if(q==='en')return 'en'}catch(_){} return 'pt'};
+const isEN=()=>getLang()==='en';
 const tr=s=>{if(!s)return s;const m=isEN()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(m,s)?m[s]:s};
 function header(){
  const h=document.querySelector('header.top');
@@ -145,9 +146,11 @@ function applyText(root=document.body){
 function setLanguage(lang){
  lang=lang==='en'?'en':'pt';
  try{localStorage.setItem(K,lang)}catch(_){}
+ try{document.cookie='yunarunes-language='+encodeURIComponent(lang)+'; path=/; max-age=31536000; SameSite=Lax'}catch(_){}
  document.documentElement.lang=lang==='en'?'en':'pt-BR';
- /* Recarrega a página para aplicar o idioma de forma completa em todos os scripts e conteúdos. */
- try{window.location.reload()}catch(_){header();applyText(document.body);header();}
+ header();applyText(document.body);header();
+ /* Mantém o idioma também fora do localStorage e força todos os scripts da página a iniciarem no idioma escolhido. */
+ try{const u=new URL(location.href);u.searchParams.set('lang',lang);window.location.assign(u.href)}catch(_){try{window.location.reload()}catch(__){}}
 }
 function bindLanguageButtons(){
  document.querySelectorAll('[data-lang]').forEach(b=>{
