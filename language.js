@@ -67,29 +67,21 @@ function header(){
  [pt,en].forEach(b=>{if(!b)return;b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));b.onclick=()=>{localStorage.setItem(K,b.dataset.lang);location.reload()}});
 }
 function style(){
- let s=document.getElementById('yuna-language-style');if(s)return;s=document.createElement('style');s.id='yuna-language-style';
+ let s=document.getElementById('yuna-language-style');
+ if(s)s.remove();
+ s=document.createElement('style');s.id='yuna-language-style';
  s.textContent=`
-header.top{position:relative!important;z-index:1000!important;overflow:visible!important}
-header.top .yuna-nav{position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;display:flex!important;align-items:center!important;gap:18px!important;margin:0!important;white-space:nowrap!important;z-index:20!important}
-header.top .yuna-controls{position:absolute!important;right:18px!important;top:50%!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;gap:6px!important;z-index:1001!important;pointer-events:auto!important;white-space:nowrap!important}
-header.top .yuna-controls a,header.top .yuna-controls button{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:40px!important;padding:0 10px!important;border:1px solid #2b3742!important;border-radius:7px!important;font:900 12px Arial,sans-serif!important;white-space:nowrap!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}
-header.top .yuna-controls .apk-link,header.top .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
-header.top .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
-@media(max-width:600px){header.top .yuna-nav{display:none!important}header.top .yuna-controls{top:8px!important;right:8px!important;transform:none!important;gap:4px!important}header.top .yuna-controls a,header.top .yuna-controls button{height:36px!important;padding:0 7px!important;font-size:10px!important}}
-`;
- document.head.appendChild(s);
-}
-function style(){
- let s=document.getElementById('yuna-language-style');if(s)return;s=document.createElement('style');s.id='yuna-language-style';
- s.textContent=`
-/* language.js: usa o cabeçalho original, sem criar um segundo menu */
-header.top .apk-link{display:none!important}
-header.top .header-controls .yuna-controls .apk-link{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
-header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important}
+/* YunaRunes language/header: do not create a second header */
+header.top .header-controls .yuna-controls{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;position:static!important;transform:none!important}
+header.top .header-controls .yuna-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;min-width:0!important;width:auto!important;padding:0 9px!important;margin:0!important;white-space:nowrap!important}
+header.top .header-controls .yuna-controls .apk-link{display:none!important}
+header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important;background:#7c3aed!important;color:#fff!important;border:1px solid #a78bfa!important}
 header.top .header-controls .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
 header.top .header-controls .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
 @media(max-width:600px){
+ header.top .header-controls .yuna-controls{gap:4px!important}
  header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}
+ header.top .header-controls .yuna-controls>*{height:36px!important;padding:0 7px!important;font-size:10px!important}
 }
 `;
  document.head.appendChild(s);
