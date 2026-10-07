@@ -61,6 +61,22 @@
  .academy-global-nav{padding:8px}
  .academy-global-nav a{font-size:10px}
 }
+</style><style id="yuna-academy-layout-final">
+/* Final Academy layout: one consistent full-width content column. */
+html{scroll-behavior:smooth}
+body{width:100%;min-width:0;overflow-x:hidden}
+main.wrap{display:block!important;width:min(1250px,calc(100% - 32px))!important;max-width:1250px!important;margin-left:auto!important;margin-right:auto!important;padding:24px 0 50px!important}
+.layout{display:block!important;width:100%!important;max-width:none!important;margin:16px 0 0!important}
+.content{display:block!important;width:100%!important;max-width:none!important;min-width:0!important}
+.section,.hero,.academy-hub,.academy-tools,.academy-quiz,.acx,.beginner-school{width:100%!important;max-width:none!important}
+.cards,.bs-grid,.bs-terms,.acx-grid,.master-grid,.academy-hub-grid,.ach-grid{width:100%!important}
+@media(max-width:900px){
+  main.wrap{width:calc(100% - 20px)!important;padding:14px 0 35px!important}
+}
+@media(max-width:600px){
+  main.wrap{width:calc(100% - 20px)!important}
+  .section{width:100%!important}
+}
 </style></head>
 <body><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
