@@ -486,3 +486,64 @@ window.addEventListener('storage',e=>{
   if(e.key===KEY) applyLanguageNow();
 });
 })();
+
+/* YUNARUNES — PT/EN FINAL CONSISTENCY LAYER */
+(function(){
+'use strict';
+const KEY='yunarunes-language';
+const EN_PT={
+'New Player Journey':'Jornada do Novo Jogador','Learn to play, not just copy builds':'Aprende a jogar, não apenas a copiar builds',
+'Start here — your first 7 days':'Começa aqui — os primeiros 7 dias','Start with Stage 1':'Começa pela Etapa 1',
+'Learn to read battle':'Aprende a ler a batalha','Learn Runes by making choices':'Aprende Runas através de escolhas',
+'Build teams by role':'Constrói equipas por função','Learn to diagnose defeats':'Aprende a diagnosticar derrotas',
+'Choose your next content':'Escolhe o próximo conteúdo','Master mode':'Modo Mestre',
+'What should I do now?':'O que faço agora?','Learn to think during battle':'Aprende a pensar durante a batalha',
+'Build a team with a purpose':'Monta uma equipa com propósito','Learn Runes without memorizing rules':'Aprende Runas sem decorar regras',
+'Mistakes beginners should avoid':'Erros que os iniciantes devem evitar','Progression road':'Rota de progressão',
+'Yuna Academy challenges':'Desafios da Yuna Academy','Personal ranking':'Ranking pessoal','Special medals':'Medalhas especiais',
+'New':'Novo','I have a team':'Já tenho equipa',"I'm stuck":'Estou preso','I want PvP':'Quero PvP',
+'Survival':'Sobrevivência','Support/Sustain':'Suporte/Sustain','Support':'Suporte','Healer':'Curador','Control':'Controlo',
+'Stripper':'Stripper','Buffer':'Buffer','Debuffer':'Debuffer','Tank':'Tank','Damage':'Dano','Fast damage':'Dano rápido',
+'Safety':'Segurança','Setup / Strip':'Setup / Strip','Debuffer / CC':'Debuffer / CC','Healer / Support':'Curador / Suporte',
+'Keep':'Guardar','Upgrade':'Upar','Sell':'Vender','Decision: ':'Decisão: ','Case: ':'Caso: ',
+'Challenge: ':'Desafio: ','Good choice.':'Boa escolha.','Not quite.':'Ainda não.','Correct.':'Correto.',
+'Start here':'Começa aqui','Battle':'Batalha','Runes':'Runas','Team':'Equipa','Strategy':'Estratégia','Progression':'Progressão','Optimize':'Otimizar',
+'Graduation Exam':'Prova de Graduação','Official assessment':'Avaliação oficial','Take Graduation Exam':'Fazer Prova de Graduação',
+'YUNA ACADEMY • OFFICIAL ASSESSMENT':'YUNA ACADEMY • AVALIAÇÃO OFICIAL','Graduation Exam':'Prova de Graduação',
+'An evaluation to verify whether the student can think like a player: analyze runes, stats, Speed Tune, skills, control, composition, PvE/PvP and diagnose defeats.':'Uma avaliação prática para verificar se o jogador consegue pensar como jogador: analisar runas, stats, Speed Tune, skills, controlo, composição, PvE/PvP e diagnosticar derrotas.',
+'12 questions. Passing score: 10/12 (83.3%). No going back to the previous question.':'12 perguntas. Aprovação: 10/12 (83,3%). Não é possível voltar à pergunta anterior.',
+'Click start to begin.':'Clica em começar para iniciar.','Start exam':'Começar prova','Retake':'Refazer',
+'You passed!':'Foste aprovado!','You did not pass yet.':'Ainda não foste aprovado.','Score':'Pontuação',
+'Read battle':'Ler a batalha','Identify the problem before changing the build.':'Identifica o problema antes de mudar a build.',
+'Stage completed':'Etapa concluída','Mark stage as complete':'Marcar etapa como concluída',
+'Goal: finish the first week understanding what you are doing, even if your account is not strong yet.':'Objetivo: terminar a primeira semana a entender o que estás a fazer, mesmo que ainda não tenhas uma conta forte.',
+'Good read.':'Boa leitura.','Not yet.':'Ainda não.','Your team loses turn order':'A tua equipa perde a ordem de turnos',
+'My team dies quickly':'A minha equipa morre rapidamente','My debuffs do not land':'Os meus debuffs não entram',
+'My damage is low':'O meu dano é baixo','Diagnose':'Diagnosticar','Test':'Testar','Evaluate':'Avaliar'
+};
+function en(){try{return localStorage.getItem(KEY)==='en'}catch(e){return false}}
+function translateText(v){
+ if(en()) return v;
+ let x=String(v);
+ const keys=Object.keys(EN_PT).sort((a,b)=>b.length-a.length);
+ for(const k of keys)x=x.split(k).join(EN_PT[k]);
+ return x;
+}
+function applyPT(){
+ if(en()||!document.body)return;
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
+ while(n=w.nextNode()){
+   if(n.parentElement?.closest('script,style,noscript,[data-no-auto-translate]'))continue;
+   if(n.nodeValue.trim()) {const x=translateText(n.nodeValue);if(x!==n.nodeValue)n.nodeValue=x;}
+ }
+ const title=document.title; document.title=translateText(title);
+ document.querySelectorAll('input,textarea').forEach(el=>{
+   if(el.placeholder)el.placeholder=translateText(el.placeholder);
+   if(el.title)el.title=translateText(el.title);
+   if(el.getAttribute('aria-label'))el.setAttribute('aria-label',translateText(el.getAttribute('aria-label')));
+ });
+}
+function run(){setTimeout(applyPT,60)}
+window.addEventListener('storage',e=>{if(e.key===KEY)run()});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+})();
