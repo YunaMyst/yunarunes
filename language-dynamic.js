@@ -650,3 +650,81 @@ window.addEventListener('storage',function(e){
   }
 });
 })();
+
+/* YUNARUNES — FINAL LANGUAGE REPAIR V1
+   Fixes explicit data-pt/data-en HTML being rendered as literal markup and
+   makes the existing language buttons switch language reliably by reloading
+   from the single localStorage source of truth.
+*/
+(function(){
+'use strict';
+const KEY='yunarunes-language';
+
+function currentLang(){
+  try{return localStorage.getItem(KEY)==='en'?'en':'pt'}catch(_){return 'pt'}
+}
+
+function repairExplicitTranslations(){
+  const en=currentLang()==='en';
+  if(!document.body)return;
+  document.querySelectorAll('[data-pt],[data-en]').forEach(el=>{
+    if(el.closest('script,style,noscript,[data-no-auto-translate]'))return;
+    const value=en
+      ? (el.getAttribute('data-en') ?? el.getAttribute('data-pt') ?? '')
+      : (el.getAttribute('data-pt') ?? el.getAttribute('data-en') ?? '');
+    if(el.innerHTML!==value)el.innerHTML=value;
+  });
+  document.querySelectorAll('[data-pt-placeholder],[data-en-placeholder]').forEach(el=>{
+    const value=en
+      ? (el.getAttribute('data-en-placeholder') ?? el.getAttribute('data-pt-placeholder') ?? '')
+      : (el.getAttribute('data-pt-placeholder') ?? el.getAttribute('data-en-placeholder') ?? '');
+    el.setAttribute('placeholder',value);
+  });
+  document.documentElement.lang=en?'en':'pt-BR';
+  document.documentElement.setAttribute('data-language',en?'en':'pt-BR');
+}
+
+function forceLanguageReload(lang){
+  const next=lang==='en'?'en':'pt';
+  try{localStorage.setItem(KEY,next)}catch(_){}
+  window.location.reload();
+}
+
+/* The existing authoritative click handler already catches these buttons.
+   Override its language function so its normal click path becomes reliable:
+   save the choice, reload, and let the page initialize cleanly in that language. */
+window.yunaLanguageReload=forceLanguageReload;
+window.yunaUniversalTranslate=function(){
+  repairExplicitTranslations();
+};
+
+/* Replace the final handler's target function indirectly on every load.
+   The click listener in the existing language authority calls this function. */
+if(typeof window.yunaUniversalTranslate==='function'){
+  repairExplicitTranslations();
+}
+
+function installButtonBridge(){
+  /* Existing handler calls window.yunaUniversalTranslate() after writing
+     localStorage. On a button click we cannot outrank its document-capture
+     listener, so a tiny capture listener on each button is intentionally not
+     used. Instead, observe the active language and reload if the value changed
+     after a click. */
+  let last=currentLang();
+  setInterval(()=>{
+    const now=currentLang();
+    if(now!==last){
+      last=now;
+      window.location.reload();
+    }
+  },100);
+  repairExplicitTranslations();
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',installButtonBridge,{once:true});
+}else{
+  installButtonBridge();
+}
+})();
+
