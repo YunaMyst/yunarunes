@@ -53,8 +53,13 @@ function header(){
  const bar=h.querySelector('.header-controls .yuna-controls');
  if(!bar)return;
  let apk=bar.querySelector('.apk-link');
- if(!apk){
-   apk=document.createElement('a');apk.className='apk-link';apk.href='./downloads/yunarunes.apk';apk.setAttribute('download','');apk.textContent='📱 APK';bar.insertBefore(apk,bar.firstChild);
+ const mobile=window.matchMedia('(max-width:600px)').matches;
+ if(mobile){
+   if(!apk){
+     apk=document.createElement('a');apk.className='apk-link';apk.href='./downloads/yunarunes.apk';apk.setAttribute('download','');apk.textContent='📱 APK';bar.insertBefore(apk,bar.firstChild);
+   }
+ }else if(apk){
+   apk.remove();
  }
  const pt=bar.querySelector('[data-lang="pt"]'), en=bar.querySelector('[data-lang="en"]');
  if(pt)pt.textContent='🇧🇷 PT/BR';
