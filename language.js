@@ -88,41 +88,34 @@ const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}
 const tr=s=>{if(!s)return s;const m=isEN()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(m,s)?m[s]:s};
 function header(){
  const h=document.querySelector('header.top');
- if(!h)return;
- let nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
+ let bar=h?.querySelector('.yuna-unified-controls');
+ if(!bar){
+   bar=document.querySelector('.yuna-global-language-bar');
+ }
+ if(!bar){
+   bar=document.createElement('div');
+   bar.className=h?'yuna-unified-controls':'yuna-global-language-bar';
+   bar.innerHTML='<a href="index.html" class="home">🦊 YunaRunes</a><a class="donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button>';
+   (h||document.body).appendChild(bar);
+ }
+ const nav=h?.querySelector('.header-menu .nav-links')||h?.querySelector('.nav-links');
  if(nav){
    nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){a.textContent=isEN()?NAV[i][2]:NAV[i][1];a.href=NAV[i][0]}});
  }
- let bar=h.querySelector('.yuna-unified-controls');
- if(!bar){
-   bar=document.createElement('div');bar.className='yuna-unified-controls';
-   bar.innerHTML='<a class="donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button>';
-   h.appendChild(bar);
- }
- bar.querySelectorAll('[data-lang]').forEach(b=>{
-   b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));
-   if(b.dataset.yunaBound==='1')return;
-   b.dataset.yunaBound='1';
-   b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();localStorage.setItem(K,b.dataset.lang);document.documentElement.lang=b.dataset.lang==='en'?'en':'pt-BR';location.reload()});
- });
+ document.documentElement.lang=isEN()?'en':'pt-BR';
+ bar.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt')));
 }
 function style(){
- let s=document.getElementById('yuna-language-style');
- if(s)s.remove();
+ let s=document.getElementById('yuna-language-style');if(s)s.remove();
  s=document.createElement('style');s.id='yuna-language-style';
  s.textContent=`
-/* YunaRunes language/header: do not create a second header */
-header.top .header-controls .yuna-controls{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;position:static!important;transform:none!important}
-header.top .header-controls .yuna-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;min-width:0!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important}
-header.top .header-controls .yuna-controls .apk-link{display:none!important}
-header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important;background:#7c3aed!important;color:#fff!important;border:1px solid #a78bfa!important}
-header.top .header-controls .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
-header.top .header-controls .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
-@media(max-width:600px){
- header.top .header-controls .yuna-controls{gap:4px!important}
- header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}
- header.top .header-controls .yuna-controls>*{height:36px!important;padding:0 7px!important;font-size:11px!important}
-}
+header.top .header-controls .yuna-controls,header.top .yuna-unified-controls{display:flex!important;align-items:center!important;gap:5px!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important}
+header.top .header-controls .yuna-controls>* ,header.top .yuna-unified-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important;cursor:pointer!important;pointer-events:auto!important}
+.yuna-global-language-bar{position:fixed!important;top:12px!important;right:12px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;gap:6px!important;padding:6px!important;border-radius:10px!important;background:rgba(8,12,17,.96)!important;border:1px solid #35475a!important;box-shadow:0 6px 24px rgba(0,0,0,.45)!important;pointer-events:auto!important}
+.yuna-global-language-bar>*{height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 9px!important;border-radius:7px!important;border:1px solid #293746!important;background:#202a34!important;color:#fff!important;font-weight:800!important;font-size:12px!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}
+.yuna-global-language-bar .home{background:#111923!important}.yuna-global-language-bar .donate{background:#7c3aed!important;border-color:#a78bfa!important}
+.yuna-global-language-bar button.active,header.top .yuna-unified-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
+@media(max-width:600px){.yuna-global-language-bar{top:8px!important;right:8px!important;gap:3px!important;padding:4px!important}.yuna-global-language-bar .home{display:none!important}.yuna-global-language-bar>*{height:34px!important;padding:0 6px!important;font-size:10px!important}}
 `;
  document.head.appendChild(s);
 }
@@ -138,6 +131,16 @@ function applyText(root=document.body){
  }
  root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}}));
 }
+document.addEventListener('click',e=>{
+ const b=e.target.closest?.('[data-lang]');
+ if(!b)return;
+ e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ const lang=b.dataset.lang==='en'?'en':'pt';
+ try{localStorage.setItem(K,lang)}catch(_){}
+ document.documentElement.lang=lang==='en'?'en':'pt-BR';
+ location.reload();
+},true);
+
 function boot(){
  header();style();applyText();
  setTimeout(header,0);
