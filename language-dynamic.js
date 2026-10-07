@@ -547,3 +547,88 @@ function run(){setTimeout(applyPT,60)}
 window.addEventListener('storage',e=>{if(e.key===KEY)run()});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
 })();
+
+/* YUNARUNES — FINAL HEADER + LANGUAGE AUTHORITY
+   The full navigation/header belongs only to the home screen.
+   Language controls remain available on every page. */
+(function(){
+'use strict';
+const KEY='yunarunes-language';
+const path=(location.pathname||'').toLowerCase();
+const isHome=path.endsWith('/') || path.endsWith('/index.html') || path.endsWith('index.html');
+
+function ensureSiteLanguageControls(){
+  if(isHome || !document.body || document.querySelector('.yuna-site-language')) return;
+  const box=document.createElement('div');
+  box.className='yuna-site-language';
+  box.setAttribute('aria-label','Language');
+  box.innerHTML='<button type="button" data-lang="pt" aria-label="Português">🇧🇷 PT/BR</button><button type="button" data-lang="en" aria-label="English">🇬🇧 ENG</button>';
+  document.body.appendChild(box);
+}
+
+function removeSubpageHeaders(){
+  if(isHome || !document.body) return;
+  document.querySelectorAll('header.top, header.academy-top').forEach(el=>el.remove());
+  document.querySelectorAll('.yuna-site-language').forEach(el=>el.remove());
+  ensureSiteLanguageControls();
+}
+
+function activeLanguage(){
+  try{return localStorage.getItem(KEY)==='en'?'en':'pt'}catch(_){return 'pt'}
+}
+
+function updateLanguageButtons(){
+  const lang=activeLanguage();
+  document.querySelectorAll('.yuna-site-language button[data-lang], .yuna-controls button[data-lang], [data-academy-lang]').forEach(btn=>{
+    const v=btn.getAttribute('data-lang')||btn.getAttribute('data-academy-lang');
+    btn.classList.toggle('active',v===lang);
+    btn.setAttribute('aria-pressed',v===lang?'true':'false');
+  });
+}
+
+function changeLanguage(lang){
+  const next=lang==='en'?'en':'pt';
+  try{localStorage.setItem(KEY,next)}catch(_){}
+  document.documentElement.lang=next==='en'?'en':'pt-BR';
+  document.documentElement.setAttribute('data-language',next==='en'?'en':'pt-BR');
+  updateLanguageButtons();
+  if(typeof window.yunaUniversalTranslate==='function'){
+    window.yunaUniversalTranslate();
+  }else if(typeof window.applyLanguage==='function'){
+    window.applyLanguage();
+  }
+  /* Re-run once after page scripts have rendered their dynamic content. */
+  setTimeout(()=>{
+    if(typeof window.yunaUniversalTranslate==='function') window.yunaUniversalTranslate();
+    updateLanguageButtons();
+  },80);
+}
+
+function bindAuthoritativeLanguageButtons(){
+  document.addEventListener('click',function(ev){
+    const btn=ev.target.closest?.('.yuna-site-language button[data-lang], .yuna-controls button[data-lang], [data-academy-lang]');
+    if(!btn) return;
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+    changeLanguage(btn.getAttribute('data-lang')||btn.getAttribute('data-academy-lang'));
+  },true);
+  updateLanguageButtons();
+}
+
+function initFinalHeader(){
+  removeSubpageHeaders();
+  bindAuthoritativeLanguageButtons();
+  updateLanguageButtons();
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',initFinalHeader,{once:true});
+}else{
+  initFinalHeader();
+}
+window.addEventListener('storage',function(e){
+  if(e.key===KEY){
+    updateLanguageButtons();
+    setTimeout(()=>{if(typeof window.yunaUniversalTranslate==='function')window.yunaUniversalTranslate()},20);
+  }
+});
+})();
