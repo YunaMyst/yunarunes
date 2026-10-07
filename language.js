@@ -108,7 +108,7 @@ function header(){
  const pt=bar.querySelector('[data-lang="pt"]'), en=bar.querySelector('[data-lang="en"]');
  if(pt)pt.textContent='🇧🇷 PT/BR';
  if(en)en.textContent='🇬🇧 ENG';
- [pt,en].forEach(b=>{if(!b)return;b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));b.onclick=(e)=>{e.preventDefault();e.stopPropagation();localStorage.setItem(K,b.dataset.lang);location.reload()}});
+ [pt,en].forEach(b=>{if(!b)return;b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));b.addEventListener("click",(e)=>{e.preventDefault();e.stopImmediatePropagation();localStorage.setItem(K,b.dataset.lang);document.documentElement.lang=b.dataset.lang==="en"?"en":"pt-BR";location.reload()})});
 }
 function style(){
  let s=document.getElementById('yuna-language-style');
@@ -149,6 +149,7 @@ function applyText(root=document.body){
 }
 function boot(){
  header();style();applyText();
+ setTimeout(header,0);
  const obs=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)applyText(n)}));
  obs.observe(document.body,{childList:true,subtree:true});
 }
