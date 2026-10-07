@@ -355,13 +355,29 @@
 (function(){
   function bind(){
     document.querySelectorAll('.yuna-controls button[data-lang]').forEach(function(btn){
+      if(btn.dataset.yunaLangBound==='1') return;
+      btn.dataset.yunaLangBound='1';
       btn.addEventListener('click',function(ev){
         ev.preventDefault();
         ev.stopImmediatePropagation();
         var lang=btn.getAttribute('data-lang')==='en'?'en':'pt';
         try{localStorage.setItem('yunarunes-language',lang)}catch(_){}
-        window.location.assign('./index.html?lang='+lang);
+        document.documentElement.lang=lang==='en'?'en':'pt-BR';
+        if(typeof window.applyLanguage==='function') window.applyLanguage();
+        if(typeof window.yunaUniversalTranslate==='function') window.yunaUniversalTranslate();
+        document.querySelectorAll('.yuna-controls button[data-lang]').forEach(function(b){
+          var active=b.getAttribute('data-lang')===lang;
+          b.classList.toggle('active',active);
+          b.setAttribute('aria-pressed',active?'true':'false');
+        });
       },true);
+    });
+    var current='pt';
+    try{current=localStorage.getItem('yunarunes-language')==='en'?'en':'pt'}catch(_){}
+    document.querySelectorAll('.yuna-controls button[data-lang]').forEach(function(b){
+      var active=b.getAttribute('data-lang')===current;
+      b.classList.toggle('active',active);
+      b.setAttribute('aria-pressed',active?'true':'false');
     });
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
