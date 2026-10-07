@@ -403,6 +403,9 @@ function applyLanguageNow(){
   clearLegacySnapshots();
 
   const en=isEN();
+  const title=document.querySelector('title');
+  if(title && !title.dataset.yunaSource) title.dataset.yunaSource=title.textContent;
+
   document.documentElement.lang=en?'en':'pt-BR';
   document.documentElement.setAttribute('data-language',en?'en':'pt-BR');
 
@@ -413,11 +416,7 @@ function applyLanguageNow(){
   translateExplicit(document);
   setActiveButtons();
 
-  const title=document.querySelector('title');
-  if(title){
-    if(!title.dataset.yunaSource) title.dataset.yunaSource=title.textContent;
-    if(!en) title.textContent=title.dataset.yunaSource;
-  }
+  if(title && !en) title.textContent=title.dataset.yunaSource;
 
   applying=false;
 }
