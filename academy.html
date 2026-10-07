@@ -40,8 +40,9 @@
   .academy-hub-card{min-height:115px;padding:13px!important}
 }
 </style><style id="yuna-academy-global-nav-css">
-.academy-nav-toggle{position:fixed;left:16px;top:92px;z-index:60;border:1px solid #293746;background:rgba(13,20,28,.97);color:#fff;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.28)}
-.academy-nav-toggle:hover{border-color:#35a9e1;color:#35a9e1}
+.academy-nav-toggle{position:fixed;left:18px;top:96px;z-index:60;border:1px solid #35485b;background:linear-gradient(145deg,#182536,#101923);color:#eaf3f9;border-radius:999px;padding:9px 14px;font-size:11px;font-weight:900;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.25);transition:transform .16s,border-color .16s,background .16s}
+.academy-nav-toggle:hover{border-color:#35a9e1;background:#172a3b;color:#fff;transform:translateY(-1px)}
+.academy-nav-toggle[aria-expanded="true"]{border-color:#35a9e1;background:#142a3d;color:#35a9e1}
 .academy-global-nav{position:fixed;left:16px;top:140px;width:245px;max-height:calc(100vh - 160px);overflow:auto;z-index:55;background:rgba(13,20,28,.98);border:1px solid #293746;border-radius:14px;padding:12px;box-shadow:0 14px 35px rgba(0,0,0,.3);display:none}
 .academy-global-nav.open{display:block}
 .academy-global-nav h3{margin:2px 6px 10px;color:#fff;font-size:15px}
@@ -50,7 +51,7 @@
 .academy-global-nav a:hover,.academy-global-nav a.active{background:#182638;color:#35a9e1}
 .wrap{padding-left:16px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:110px}
 @media(max-width:900px){
- .academy-nav-toggle{left:10px;top:8px}
+ .academy-nav-toggle{left:10px;top:10px}
  .academy-global-nav{left:10px;top:52px;width:calc(100% - 20px);max-height:calc(100vh - 62px);padding:9px}
  .academy-global-nav h3{margin:2px 5px 8px}
  .academy-global-nav .nav-group{margin:8px 3px 3px;padding:4px 5px}
@@ -58,7 +59,7 @@
  .wrap{padding-left:16px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:70px}
 }
 @media(max-width:600px){
- .academy-nav-toggle{font-size:11px;padding:9px 11px}
+ .academy-nav-toggle{font-size:10px;padding:8px 12px}
  .academy-global-nav{padding:8px}
  .academy-global-nav a{font-size:10px}
 }
