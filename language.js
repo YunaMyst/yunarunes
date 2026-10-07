@@ -148,15 +148,20 @@ function setLanguage(lang){
  document.documentElement.lang=lang==='en'?'en':'pt-BR';
  header();
  applyText(document.body);
+ header();
 }
-document.addEventListener('click',e=>{
- const b=e.target.closest?.('[data-lang]');
- if(!b)return;
- e.preventDefault();
- e.stopPropagation();
- e.stopImmediatePropagation();
- setLanguage(b.dataset.lang);
-},true);
+function bindLanguageButtons(){
+ document.querySelectorAll('[data-lang]').forEach(b=>{
+   if(b.dataset.yunaLangBound==='1')return;
+   b.dataset.yunaLangBound='1';
+   b.addEventListener('click',function(e){
+     e.preventDefault();
+     e.stopPropagation();
+     setLanguage(this.getAttribute('data-lang'));
+   },false);
+ });
+}
+
 document.addEventListener('keydown',e=>{
  if(e.key!=='Enter'&&e.key!==' ')return;
  const b=e.target.closest?.('[data-lang]');
@@ -167,8 +172,8 @@ document.addEventListener('keydown',e=>{
 },true);
 
 function boot(){
- header();style();applyText();
- setTimeout(header,0);
+ header();style();applyText();bindLanguageButtons();
+ setTimeout(()=>{header();bindLanguageButtons()},0);
  const obs=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)applyText(n)}));
  obs.observe(document.body,{childList:true,subtree:true});
 }
