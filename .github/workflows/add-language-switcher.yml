@@ -17,23 +17,24 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
+
           for p in Path('.').glob('*.html'):
-              s=p.read_text(encoding='utf-8')
-              s=s.replace('<script src="header-fix.js"></script>','')
-              import re
-              s=re.sub(r'<script src="language-dynamic\.js(?:\\?v=[^"\']+)?"></script>','',s)
-              for pat in [r'<script src="language\.js(?:\\?v=[^"\\']+)?"></script>', r'<script src="language-dynamic\.js(?:\\?v=[^"\\']+)?"></script>']:
-                  s=re.sub(pat,'',s)
-              s=s.replace('</body>','<script src="language.js?v=20260922-lang-v7"></script><script src="language-dynamic.js?v=20260922-lang-v7"></script></body>')
-              p.write_text(s,encoding='utf-8')
-          home=Path('index.html')
+              s = p.read_text(encoding='utf-8')
+              s = s.replace('<script src="header-fix.js"></script>', '')
+              s = re.sub(r'<script src="language-dynamic\\.js(?:\\?v=[^"\']+)?"></script>', '', s)
+              s = re.sub(r'<script src="language\\.js(?:\\?v=[^"\']+)?"></script>', '', s)
+              s = s.replace('</body>', '<script src="language.js?v=20261007-lang-v7"></script><script src="language-dynamic.js?v=20261007-lang-v7"></script></body>')
+              p.write_text(s, encoding='utf-8')
+
+          home = Path('index.html')
           if home.exists():
-              s=home.read_text(encoding='utf-8')
-              marker='<!-- YUNARUNES-ADVANCED-TOOLS -->'
+              s = home.read_text(encoding='utf-8')
+              marker = '<!-- YUNARUNES-ADVANCED-TOOLS -->'
               if marker not in s:
-                  block='''<section class="card" style="margin-top:18px"><h2>⚡ Advanced Tools</h2><p class="muted">Ferramentas avançadas para artefactos, decks, análise de conta e Guild/Siege.</p><section class="tools"><a class="tool-card" href="tools.html"><b>🧰 Ferramentas</b><br><span>Artifact Optimizer · Decks · Account Analyzer · Guild / Siege</span></a><a class="tool-card" href="artifact-optimizer.html"><b>💠 Artifact Optimizer</b><br><span>Ordenar artefactos e encontrar a melhor combinação.</span></a><a class="tool-card" href="decks.html"><b>🃏 Decks</b><br><span>Guardar e organizar equipas por conteúdo.</span></a><a class="tool-card" href="account-analyzer.html"><b>📊 Account Analyzer</b><br><span>Analisar a evolução e a qualidade da conta.</span></a><a class="tool-card" href="guild-tools.html"><b>⚔️ Guild / Siege</b><br><span>Planeamento de defs, ataques e matchups.</span></a></section></section>'''
-                  s=s.replace('</main>',marker+block+'</main>',1)
-                  home.write_text(s,encoding='utf-8')
+                  block = '''<section class="card" style="margin-top:18px"><h2>⚡ Advanced Tools</h2><p class="muted">Ferramentas avançadas para artefactos, decks, análise de conta e Guild/Siege.</p><section class="tools"><a class="tool-card" href="tools.html"><b>🧰 Ferramentas</b><br><span>Artifact Optimizer · Decks · Account Analyzer · Guild / Siege</span></a><a class="tool-card" href="artifact-optimizer.html"><b>💠 Artifact Optimizer</b><br><span>Ordenar artefactos e encontrar a melhor combinação.</span></a><a class="tool-card" href="decks.html"><b>🃏 Decks</b><br><span>Guardar e organizar equipas por conteúdo.</span></a><a class="tool-card" href="account-analyzer.html"><b>📊 Account Analyzer</b><br><span>Analisar a evolução e a qualidade da conta.</span></a><a class="tool-card" href="guild-tools.html"><b>⚔️ Guild / Siege</b><br><span>Planeamento de defs, ataques e matchups.</span></a></section></section>'''
+                  s = s.replace('</main>', marker + block + '</main>', 1)
+                  home.write_text(s, encoding='utf-8')
           PY
       - name: Commit and push
         run: |
