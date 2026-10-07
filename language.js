@@ -162,13 +162,21 @@ function bindLanguageButtons(){
  });
 }
 
+document.addEventListener('click',e=>{
+ const b=e.target.closest?.('[data-lang]');
+ if(!b)return;
+ e.preventDefault();
+ e.stopPropagation();
+ setLanguage(b.getAttribute('data-lang'));
+},true);
+
 document.addEventListener('keydown',e=>{
  if(e.key!=='Enter'&&e.key!==' ')return;
  const b=e.target.closest?.('[data-lang]');
  if(!b)return;
  e.preventDefault();
  e.stopPropagation();
- setLanguage(b.dataset.lang);
+ setLanguage(b.getAttribute('data-lang'));
 },true);
 
 function boot(){
