@@ -44,18 +44,22 @@ const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}
 const tr=s=>{if(!s)return s;const m=isEN()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(m,s)?m[s]:s};
 function header(){
  const h=document.querySelector('header.top');if(!h)return;
- let logo=h.querySelector('.logo');
- if(!logo){logo=document.createElement('a');logo.className='logo';h.prepend(logo)}
- logo.href='index.html';logo.innerHTML='Yuna<span>Runes</span>';
- let nav=h.querySelector('nav.yuna-nav');
- if(!nav){nav=document.createElement('nav');nav.className='nav yuna-nav';h.appendChild(nav)}
- nav.innerHTML=NAV.map(x=>`<a href="${x[0]}">${isEN()?x[2]:x[1]}</a>`).join('');
- const cur=location.pathname.split('/').pop()||'index.html';nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===cur));
- let bar=h.querySelector('.yuna-controls');
- if(!bar){bar=document.createElement('div');h.appendChild(bar)}
- bar.className='langbar yuna-controls';
- bar.innerHTML='<a class="apk-link" href="./downloads/yunarunes.apk" download>📱 APK</a><button type="button" data-yuna-lang="pt">🇧🇷 PT/BR</button><button type="button" data-yuna-lang="en">🇬🇧 ENG</button>';
- bar.querySelectorAll('[data-yuna-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.yunaLang===(isEN()?'en':'pt'));b.onclick=()=>{localStorage.setItem(K,b.dataset.yunaLang);location.reload()}});
+ const nav=h.querySelector('.header-menu .nav-links');
+ if(nav){
+   const links=nav.querySelectorAll('a');
+   const labels=NAV;
+   links.forEach((a,i)=>{if(labels[i]){a.textContent=(isEN()?labels[i][2]:labels[i][1]);a.href=labels[i][0]}});
+ }
+ const bar=h.querySelector('.header-controls .yuna-controls');
+ if(!bar)return;
+ let apk=bar.querySelector('.apk-link');
+ if(!apk){
+   apk=document.createElement('a');apk.className='apk-link';apk.href='./downloads/yunarunes.apk';apk.setAttribute('download','');apk.textContent='📱 APK';bar.insertBefore(apk,bar.firstChild);
+ }
+ const pt=bar.querySelector('[data-lang="pt"]'), en=bar.querySelector('[data-lang="en"]');
+ if(pt)pt.textContent='🇧🇷 PT/BR';
+ if(en)en.textContent='🇬🇧 ENG';
+ [pt,en].forEach(b=>{if(!b)return;b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));b.onclick=()=>{localStorage.setItem(K,b.dataset.lang);location.reload()}});
 }
 function style(){
  let s=document.getElementById('yuna-language-style');if(s)return;s=document.createElement('style');s.id='yuna-language-style';
@@ -67,6 +71,21 @@ header.top .yuna-controls a,header.top .yuna-controls button{display:inline-flex
 header.top .yuna-controls .apk-link,header.top .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
 header.top .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
 @media(max-width:600px){header.top .yuna-nav{display:none!important}header.top .yuna-controls{top:8px!important;right:8px!important;transform:none!important;gap:4px!important}header.top .yuna-controls a,header.top .yuna-controls button{height:36px!important;padding:0 7px!important;font-size:10px!important}}
+`;
+ document.head.appendChild(s);
+}
+function style(){
+ let s=document.getElementById('yuna-language-style');if(s)return;s=document.createElement('style');s.id='yuna-language-style';
+ s.textContent=`
+/* language.js: usa o cabeçalho original, sem criar um segundo menu */
+header.top .apk-link{display:none!important}
+header.top .header-controls .yuna-controls .apk-link{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
+header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important}
+header.top .header-controls .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
+header.top .header-controls .yuna-controls button:not(.active){background:#202a34!important;color:#fff!important}
+@media(max-width:600px){
+ header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}
+}
 `;
  document.head.appendChild(s);
 }
