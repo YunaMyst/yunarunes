@@ -2016,6 +2016,157 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 </script>
 
 <!-- YUNA_GRADUATION_LINK --><div style="margin:24px 0;padding:20px;border:2px solid #a78bfa;border-radius:16px;background:#111923;text-align:center"><div style="font-size:24px;font-weight:900" data-pt="🎓 Prova de Graduação" data-en="🎓 Graduation Exam"></div><p style="color:#aeb8c5" data-pt="Terminou a formação? Faça a avaliação oficial da Yuna Academy." data-en="Finished the training? Take the official Yuna Academy assessment."></p><a href="./graduation.html" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#a78bfa;color:#111827;font-weight:900;text-decoration:none" data-pt="🏆 Fazer Prova de Graduação" data-en="🏆 Take Graduation Exam"></a></div>
+<style id="yuna-new-player-academy-css">
+.ynp{margin:28px 0}.ynp-hero{background:linear-gradient(135deg,#171324,#101923);border:1px solid #4a3b68;border-radius:18px;padding:22px}.ynp-hero h2{margin:0 0 7px;font-size:27px}.ynp-hero p{color:#aeb8c5;line-height:1.6;margin:0;max-width:900px}.ynp-progress{height:12px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:14px 0 6px}.ynp-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.25s}.ynp-progress-label{font-size:12px;color:#aeb8c5}.ynp-path{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:16px}.ynp-path button{background:#0d141c;border:1px solid #293746;color:#fff;border-radius:12px;padding:12px 8px;cursor:pointer;text-align:center;font-weight:900}.ynp-path button.active,.ynp-path button.done{border-color:#35a9e1;background:#172638}.ynp-path small{display:block;color:#8fa0af;margin-top:4px;font-size:10px}.ynp-panel{margin-top:14px;background:#0d141c;border:1px solid #293746;border-radius:14px;padding:18px}.ynp-panel h3{margin:0 0 6px}.ynp-panel p{color:#aeb8c5;line-height:1.55}.ynp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.ynp-card{background:#101923;border:1px solid #293746;border-radius:12px;padding:14px}.ynp-card h4{margin:0 0 7px}.ynp-card p,.ynp-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.ynp-card ul{margin:8px 0 0;padding-left:18px}.ynp-options{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.ynp-options button,.ynp-action{border:1px solid #34485c;background:#172333;color:#fff;border-radius:9px;padding:10px 12px;font-weight:800;cursor:pointer}.ynp-options button:hover,.ynp-action:hover{border-color:#35a9e1}.ynp-result{margin-top:10px;min-height:22px;padding:11px;border-radius:10px;background:#080f16;border:1px solid #293746;line-height:1.5;color:#dce6ee}.ynp-warning{border-left:3px solid #e7c85a;background:#17150c;padding:12px;border-radius:8px;color:#e8dfbb;font-size:12px;line-height:1.55}.ynp-tip{border-left:3px solid #8b5cf6;background:#151324;padding:12px;border-radius:8px;color:#d9d0ef;font-size:12px;line-height:1.55}.ynp-achievements{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.ynp-ach{background:#0d141c;border:1px solid #293746;border-radius:11px;padding:12px;text-align:center;opacity:.48}.ynp-ach.on{opacity:1;border-color:#35a9e1}.ynp-ach b{display:block;margin-bottom:4px}.ynp-ach span{font-size:10px;color:#8fa0af}.ynp-mistakes{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.ynp-mistake{padding:11px;background:#101923;border:1px solid #293746;border-radius:10px;font-size:12px;line-height:1.45}.ynp-mistake b{display:block;margin-bottom:4px}.ynp-road{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.ynp-road div{background:#101923;border:1px solid #293746;border-radius:10px;padding:12px;text-align:center}.ynp-road b{display:block}.ynp-road span{display:block;color:#8fa0af;font-size:11px;margin-top:4px}.ynp-roles{display:flex;flex-wrap:wrap;gap:6px}.ynp-role{border:1px solid #34485c;border-radius:999px;padding:6px 9px;font-size:11px;color:#dce6ee;background:#101923}.ynp-status-demo{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.ynp-status-demo span{padding:6px 9px;border-radius:8px;background:#101923;border:1px solid #293746;font-size:11px}.ynp-status-demo .bad{border-color:#7f3341}.ynp-status-demo .good{border-color:#245c78}
+@media(max-width:900px){.ynp-path{grid-template-columns:repeat(4,1fr)}.ynp-achievements{grid-template-columns:repeat(3,1fr)}.ynp-road{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.ynp-grid,.ynp-options,.ynp-mistakes{grid-template-columns:1fr}.ynp-path{grid-template-columns:repeat(2,1fr)}.ynp-achievements{grid-template-columns:repeat(2,1fr)}.ynp-hero{padding:17px}.ynp-hero h2{font-size:22px}}
+</style><section class="ynp" id="yuna-new-player-journey">
+<div class="ynp-hero">
+<div class="eyebrow">🦊 YUNA ACADEMY • <span data-pt="JORNADA DO NOVO JOGADOR" data-en="NEW PLAYER JOURNEY"></span></div>
+<h2 data-pt="🎓 Aprende a jogar, não apenas a copiar builds" data-en="🎓 Learn to play, not just copy builds"></h2>
+<p data-pt="Esta é a rota principal para quem acabou de começar. Aprende uma coisa, pratica, responde a um desafio e só depois avança. O objetivo é chegar ao ponto em que consegues olhar para uma derrota e descobrir sozinho o que precisa de ser melhorado." data-en="This is the main route for a new player. Learn one thing, practice it, answer a challenge, and only then move on. The goal is to reach the point where you can look at a defeat and figure out what needs to improve."></p>
+<div class="ynp-progress"><i id="ynp-progress-bar"></i></div>
+<div class="ynp-progress-label" id="ynp-progress-label"></div>
+</div>
+
+<div class="ynp-path" id="ynp-path">
+<button data-step="0">🐣<br>Começar<small>0 → 7 dias</small></button>
+<button data-step="1">⚔️<br>Batalha<small>ler o combate</small></button>
+<button data-step="2">🧿<br>Runas<small>equipar melhor</small></button>
+<button data-step="3">🧩<br>Equipa<small>funções</small></button>
+<button data-step="4">🧠<br>Estratégia<small>pensar</small></button>
+<button data-step="5">🏰<br>Progressão<small>o que fazer</small></button>
+<button data-step="6">👑<br>Mestre<small>otimizar</small></button>
+</div>
+
+<div class="ynp-panel" id="ynp-panel"></div>
+
+<div class="ynp-panel">
+<h3 data-pt="🚦 O que faço agora?" data-en="🚦 What should I do now?"></h3>
+<p data-pt="Escolhe o teu estado atual e a Academy mostra uma rota simples. Não precisas fazer tudo ao mesmo tempo." data-en="Choose your current situation and the Academy will show a simple route. You do not need to do everything at once."></p>
+<div class="ynp-options" id="ynp-now-options">
+<button data-now="new">🐣 Sou novo / New</button>
+<button data-now="team">⚔️ Já tenho equipa / I have a team</button>
+<button data-now="stuck">🧱 Estou preso / I'm stuck</button>
+<button data-now="pvp">🏆 Quero PvP / I want PvP</button>
+</div>
+<div class="ynp-result" id="ynp-now-result"></div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🧠 Aprende a pensar durante a batalha" data-en="🧠 Learn to think during battle"></h3>
+<p data-pt="O jogo mostra HP, velocidade, skills, atributos e efeitos. Antes de clicar, pergunta: quem joga primeiro? Quem precisa de buff? Quem tem de ser controlado? Qual alvo é mais perigoso?" data-en="The game shows HP, speed, skills, attributes and effects. Before clicking, ask: who moves first? Who needs a buff? Who must be controlled? Which target is most dangerous?"></p>
+<div class="ynp-options" id="ynp-battle-options">
+<button data-battle="turn">⚡ Quem deve jogar primeiro?</button>
+<button data-battle="target">🎯 Qual alvo devo escolher?</button>
+<button data-battle="effects">🔴🔵 O que significam os efeitos?</button>
+<button data-battle="loss">❌ Por que perdi?</button>
+</div>
+<div class="ynp-result" id="ynp-battle-result"></div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🧩 Monta uma equipa com propósito" data-en="🧩 Build a team with a purpose"></h3>
+<div class="ynp-roles">
+<span class="ynp-role">🗡️ DPS</span><span class="ynp-role">🛡️ Tank / Sustain</span><span class="ynp-role">💚 Healer</span><span class="ynp-role">🔵 Buffer</span><span class="ynp-role">🔻 Debuffer</span><span class="ynp-role">🧹 Cleanser</span><span class="ynp-role">😴 Control</span><span class="ynp-role">🎯 Stripper</span><span class="ynp-role">⚡ Speed</span>
+</div>
+<div class="ynp-card" style="margin-top:10px">
+<h4 data-pt="Desafio: a equipa morre antes de conseguir jogar." data-en="Challenge: the team dies before it can play."></h4>
+<p data-pt="Qual é a primeira coisa que investigas?" data-en="What is the first thing you investigate?"></p>
+<div class="ynp-options" id="ynp-team-options">
+<button data-team="survive">🛡️ Sobrevivência / Survival</button><button data-team="damage">💥 Mais DPS</button><button data-team="crit">🎯 Mais CR/CD</button><button data-team="random">🎲 Trocar tudo</button>
+</div><div class="ynp-result" id="ynp-team-result"></div>
+</div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🧿 Aprende Runas fazendo escolhas" data-en="🧿 Learn Runes by making choices"></h3>
+<div class="ynp-card">
+<h4>💎 <span data-pt="Qual runa faz mais sentido para um suporte que precisa de jogar cedo?" data-en="Which rune makes more sense for a support that needs to move early?"></span></h4>
+<div class="ynp-options" id="ynp-rune-options">
+<button data-rune="spd">⚡ SPD como Main Stat</button><button data-rune="atk">⚔️ ATK como Main Stat</button><button data-rune="flat">📦 Flat Stat sem objetivo</button><button data-rune="set">🎲 Escolher só pelo nome do Set</button>
+</div><div class="ynp-result" id="ynp-rune-result"></div>
+</div>
+<div class="ynp-warning" style="margin-top:10px" data-pt="⚠️ A Academy deve ensinar o raciocínio: uma runa não é boa apenas por ser 6★ ou por ter um Set famoso. Slot, Main Stat, Substats, eficiência e objetivo do monstro importam." data-en="⚠️ The Academy should teach the reasoning: a rune is not good just because it is 6★ or has a famous Set. Slot, Main Stat, Substats, efficiency, and the monster's goal matter."></div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🚨 Erros que os iniciantes devem evitar" data-en="🚨 Mistakes beginners should avoid"></h3>
+<div class="ynp-mistakes">
+<div class="ynp-mistake"><b>❌ Copiar uma build sem saber porquê</b><span data-pt="Usa builds como referência, mas aprende o objetivo de cada stat." data-en="Use builds as reference, but learn the purpose of each stat."></span></div>
+<div class="ynp-mistake"><b>❌ Melhorar todas as runas</b><span data-pt="Aprende a filtrar e guardar recursos para peças que realmente ajudam." data-en="Learn to filter and save resources for pieces that actually help."></span></div>
+<div class="ynp-mistake"><b>❌ Fazer uma equipa só com dano</b><span data-pt="Dano sem setup, controlo ou sobrevivência pode morrer antes de funcionar." data-en="Damage without setup, control, or survival can die before it works."></span></div>
+<div class="ynp-mistake"><b>❌ Ignorar SPD e ordem de turnos</b><span data-pt="Muitas derrotas começam antes do primeiro ataque." data-en="Many defeats begin before the first attack."></span></div>
+<div class="ynp-mistake"><b>❌ Ignorar os efeitos</b><span data-pt="Lê os ícones e a descrição das skills antes de decidir." data-en="Read the icons and skill descriptions before deciding."></span></div>
+<div class="ynp-mistake"><b>❌ Mudar tudo depois de uma derrota</b><span data-pt="Descobre primeiro a causa da derrota; muda uma coisa de cada vez." data-en="Find the cause first; change one thing at a time."></span></div>
+</div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🏰 Rota de progressão" data-en="🏰 Progression road"></h3>
+<div class="ynp-road">
+<div><b>1. 🗺️ Cenário</b><span data-pt="Aprende o jogo e ganha recursos." data-en="Learn the game and gain resources."></span></div>
+<div><b>2. 🧿 Runas</b><span data-pt="Constrói bases para os teus monstros." data-en="Build foundations for your monsters."></span></div>
+<div><b>3. 🏰 Farm</b><span data-pt="Escolhe conteúdos que melhoram a conta." data-en="Choose content that improves the account."></span></div>
+<div><b>4. 🏆 Especializar</b><span data-pt="Depois pensa em PvE avançado e PvP." data-en="Then move into advanced PvE and PvP."></span></div>
+</div>
+<div class="ynp-tip" style="margin-top:10px"><b data-pt="🦊 Yuna explica" data-en="🦊 Yuna explains"></b><span data-pt="Não existe uma única ordem perfeita para todas as contas. A Academy ensina primeiro os fundamentos e depois ajuda-te a escolher o próximo passo." data-en="There is no single perfect order for every account. The Academy teaches the fundamentals first and then helps you choose the next step."></span></div>
+</div>
+
+<div class="ynp-panel">
+<h3 data-pt="🏆 Desafios da Yuna Academy" data-en="🏆 Yuna Academy challenges"></h3>
+<p data-pt="Completa pequenos desafios para provar que entendeste a matéria. O progresso fica guardado neste dispositivo." data-en="Complete small challenges to prove you understood the lessons. Progress is saved on this device."></p>
+<div class="ynp-achievements" id="ynp-achievements">
+<div class="ynp-ach" data-ach="battle"><b>⚔️</b><span>Leitor de Batalha</span></div>
+<div class="ynp-ach" data-ach="rune"><b>🧿</b><span>Aprendiz de Runas</span></div>
+<div class="ynp-ach" data-ach="team"><b>🧩</b><span>Team Builder</span></div>
+<div class="ynp-ach" data-ach="think"><b>🧠</b><span>Pensamento Estratégico</span></div>
+<div class="ynp-ach" data-ach="master"><b>👑</b><span>Yuna Academy Master</span></div>
+</div>
+</div>
+</section><script id="yuna-new-player-academy-js">
+(function(){
+const KEY='yuna-academy-new-player-v1';
+const state=JSON.parse(localStorage.getItem(KEY)||'{"steps":[false,false,false,false,false,false,false],"ach":[]}');
+const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}};
+const T=(pt,enText)=>en()?enText:pt;
+function save(){localStorage.setItem(KEY,JSON.stringify(state));render();}
+function award(id){if(!state.ach.includes(id))state.ach.push(id);save();}
+const panels=[
+{title:'🐣 '+T('Começa aqui — os primeiros 7 dias','Start here — your first 7 days'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>📅 Dias 1–2</h4><ul><li>Conhece elementos e vantagem de atributo.</li><li>Lê as skills dos teus monstros.</li><li>Aprende a selecionar alvos.</li></ul></div><div class="ynp-card"><h4>📅 Dias 3–4</h4><ul><li>Aprende HP, ATK, DEF, SPD, CR e CD.</li><li>Começa a entender buffs e debuffs.</li><li>Aprende a reconhecer STUN, FREEZE, SLEEP e DOT.</li></ul></div><div class="ynp-card"><h4>📅 Dias 5–6</h4><ul><li>Aprende slots, Main Stats e Substats.</li><li>Equipa runas com um objetivo.</li><li>Testa uma equipa equilibrada.</li></ul></div><div class="ynp-card"><h4>📅 Dia 7</h4><ul><li>Faz os desafios da Academy.</li><li>Analisa uma derrota.</li><li>Escolhe conscientemente o teu próximo conteúdo.</li></ul></div></div><div class="ynp-result">🦊 '+T('Objetivo: terminar a primeira semana a entender o que estás a fazer, mesmo que ainda não tenhas uma conta forte.','Goal: finish your first week understanding what you are doing, even if your account is not strong yet.')+'</div>','')},
+{title:'⚔️ '+T('Aprende a ler a batalha','Learn to read battle'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>1. ⚡ Turnos</h4><p>Quem joga primeiro? Quem está perto de encher a barra? A SPD e a ordem importam.</p></div><div class="ynp-card"><h4>2. 🎯 Alvo</h4><p>Considera atributo, HP, skills, ameaça e efeitos antes de escolher.</p></div><div class="ynp-card"><h4>3. 🔴🔵 Efeitos</h4><p>Buffs ajudam; debuffs atrapalham. Aprende os ícones antes de aprender dezenas de nomes.</p></div><div class="ynp-card"><h4>4. 🧠 Decisão</h4><p>Não uses uma skill só porque está disponível. Pergunta qual ação cria a melhor situação para o próximo turno.</p></div></div><div class="ynp-status-demo"><span class="bad">🔴 STUN</span><span class="bad">🔴 DEF BREAK</span><span class="bad">🔴 DOT</span><span class="good">🔵 ATK UP</span><span class="good">🔵 IMMUNITY</span><span class="good">🔵 SHIELD</span></div>','')},
+{title:'🧿 '+T('Runas sem decorar regras','Runes without memorizing rules'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>🔢 Slots 1–6</h4><p>Primeiro aprende a diferença entre slot, Main Stat e Substats.</p></div><div class="ynp-card"><h4>⚡ SPD</h4><p>Velocidade muda quem joga e quando. Não é automaticamente a melhor stat para todos os monstros.</p></div><div class="ynp-card"><h4>🎯 CR / CD</h4><p>Crítico precisa de consistência e dano. Não olhes para uma stat isoladamente.</p></div><div class="ynp-card"><h4>🧪 Eficiência</h4><p>Aprende a comparar uma runa com o objetivo do monstro, não apenas pela raridade.</p></div></div>','')},
+{title:'🧩 '+T('Constrói equipas por função','Build teams by role'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>🗡️ Dano</h4><p>DPS/Nuker cria pressão.</p></div><div class="ynp-card"><h4>🔵 Setup</h4><p>Buffer, stripper ou debuffer prepara a equipa.</p></div><div class="ynp-card"><h4>🛡️ Sobrevivência</h4><p>Healer, sustain, shield ou proteção mantém a equipa viva.</p></div><div class="ynp-card"><h4>😴 Controlo</h4><p>Control impede ou limita as ações inimigas.</p></div></div><div class="ynp-tip">🦊 '+T('Uma boa equipa não precisa ter todas as funções. Precisa das funções necessárias para resolver o problema do conteúdo.','A good team does not need every role. It needs the roles required to solve the content problem.')+'</div>','')},
+{title:'🧠 '+T('Aprende a diagnosticar derrotas','Learn to diagnose defeats'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>❓ Pergunta 1</h4><p>Perdi antes de jogar? Investiga SPD, ATB, controlo e sobrevivência.</p></div><div class="ynp-card"><h4>❓ Pergunta 2</h4><p>Joguei, mas não matei? Investiga dano, debuffs, setup e alvo.</p></div><div class="ynp-card"><h4>❓ Pergunta 3</h4><p>Morri depois de alguns turnos? Investiga sustain, defesa, cura e gestão de cooldowns.</p></div><div class="ynp-card"><h4>❓ Pergunta 4</h4><p>Falhei um debuff? Investiga ACC, RES, imunidade e a skill.</p></div></div>','')},
+{title:'🏰 '+T('Escolhe o próximo conteúdo','Choose your next content'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>🗺️ Cenário</h4><p>Bom para conhecer o jogo e continuar a progressão inicial.</p></div><div class="ynp-card"><h4>🏰 Masmorras</h4><p>Foca farming e construção de monstros/runas.</p></div><div class="ynp-card"><h4>🏆 PvP</h4><p>Entra quando já consegues compreender velocidade, draft, efeitos e win conditions.</p></div><div class="ynp-card"><h4>👥 Guilda</h4><p>Aprende composição, objetivos e consistência em conteúdo coletivo.</p></div></div>','')},
+{title:'👑 '+T('Modo Mestre','Master mode'),body:T('<div class="ynp-grid"><div class="ynp-card"><h4>📈 Otimização</h4><p>Já não perguntas apenas “qual é a build?”. Perguntas “qual é o objetivo e qual é o menor investimento que o resolve?”.</p></div><div class="ynp-card"><h4>🧠 Speed Tune</h4><p>Aprende a ordenar a equipa para que buffs, debuffs, control e DPS aconteçam no momento certo.</p></div><div class="ynp-card"><h4>🎯 Breakpoints</h4><p>Procura os pontos onde uma pequena mudança altera o resultado da equipa.</p></div><div class="ynp-card"><h4>🏆 Consistência</h4><p>Uma equipa forte não é apenas a que consegue um clear perfeito uma vez; é a que repete o resultado.</p></div></div><div class="ynp-tip">👑 '+T('Quando conseguires explicar por que uma build funciona, já não estás apenas a copiar uma build: estás a jogar.','When you can explain why a build works, you are no longer just copying a build: you are playing.')+'</div>','')}
+];
+function render(){
+const i=state.steps.findIndex(x=>!x);const step=i<0?6:i;
+document.querySelectorAll('#ynp-path button').forEach((b,n)=>b.classList.toggle('active',n===step),b=>{});
+document.querySelectorAll('#ynp-path button').forEach((b,n)=>b.classList.toggle('done',!!state.steps[n]));
+const done=state.steps.filter(Boolean).length;
+document.getElementById('ynp-progress-bar').style.width=Math.round(done/7*100)+'%';
+document.getElementById('ynp-progress-label').textContent=T(done+' de 7 etapas concluídas',''+done+' of 7 stages completed')+' • '+Math.round(done/7*100)+'%';
+document.getElementById('ynp-panel').innerHTML='<h3>'+panels[step].title+'</h3>'+panels[step].body+'<div style="margin-top:13px"><button class="ynp-action" id="ynp-complete">'+(state.steps[step]?T('✅ Etapa concluída','✅ Stage completed'):T('✓ Marcar etapa como concluída','✓ Mark stage as complete'))+'</button></div>';
+document.getElementById('ynp-complete').onclick=()=>{state.steps[step]=true;award(step===4?'think':step===3?'team':step===2?'rune':step===1?'battle':'first');save()};
+document.querySelectorAll('#ynp-achievements .ynp-ach').forEach(a=>a.classList.toggle('on',state.ach.includes(a.dataset.ach)));
+}
+document.querySelectorAll('#ynp-path button').forEach(b=>b.onclick=()=>{const n=+b.dataset.step;document.querySelectorAll('#ynp-path button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const p=panels[n];document.getElementById('ynp-panel').innerHTML='<h3>'+p.title+'</h3>'+p.body+'<div style="margin-top:13px"><button class="ynp-action" id="ynp-complete">'+(state.steps[n]?T('✅ Etapa concluída','✅ Stage completed'):T('✓ Marcar etapa como concluída','✓ Mark stage as complete'))+'</button></div>';document.getElementById('ynp-complete').onclick=()=>{state.steps[n]=true;award(n===4?'think':n===3?'team':n===2?'rune':n===1?'battle':'first');save()}});
+
+document.querySelectorAll('[data-now]').forEach(b=>b.onclick=()=>{
+const map={new:T('Começa pela Etapa 1 → aprende elementos, skills, efeitos e runas básicas. Depois faz os desafios.','Start with Stage 1 → learn elements, skills, effects, and basic runes. Then do the challenges.'),team:T('Vai para Equipa → identifica a função de cada monstro e descobre o que falta à tua composição.','Go to Team → identify each monster role and find what your composition is missing.'),stuck:T('Vai para “Por que perdi?” → primeiro identifica se o problema foi velocidade, sobrevivência, dano, controlo ou alvo.','Go to “Why did I lose?” → first identify whether the problem was speed, survival, damage, control, or target choice.'),pvp:T('Completa Batalha + Runas + Estratégia primeiro. Depois avança para Speed Tune, draft e counter teams.','Complete Battle + Runes + Strategy first. Then move into Speed Tune, drafting, and counter teams.')};document.getElementById('ynp-now-result').textContent=map[b.dataset.now]});
+
+document.querySelectorAll('[data-battle]').forEach(b=>b.onclick=()=>{
+const map={turn:T('⚡ Começa pela ordem de turnos: SPD, Attack Bar e skills que alteram a ordem.','⚡ Start with turn order: SPD, Attack Bar, and skills that alter turn order.'),target:T('🎯 Considera atributo, HP, ameaça e skill. O alvo certo pode valer mais do que mais dano.','🎯 Consider attribute, HP, threat, and skill. The right target can matter more than extra damage.'),effects:T('🔴🔵 Abre o Guia Visual logo abaixo e começa por STUN, FREEZE, SLEEP e DOT.','🔴🔵 Open the Visual Guide below and start with STUN, FREEZE, SLEEP, and DOT.'),loss:T('❌ Não mudes tudo. Descobre primeiro a causa: quem jogou primeiro, quem morreu, qual skill falhou e qual efeito faltou.','❌ Do not change everything. First find the cause: who moved first, who died, which skill failed, and which effect was missing.')};document.getElementById('ynp-battle-result').textContent=map[b.dataset.battle];award('battle')});
+
+document.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{const ok=b.dataset.team==='survive';document.getElementById('ynp-team-result').textContent=(ok?'✅ ':'❌ ')+T(ok?'Correto. Resolve primeiro o problema que está a causar a derrota. Depois procura mais dano.':'Ainda não. Se a equipa morre antes de funcionar, mais dano pode não resolver a causa.','Not quite. If the team dies before it can function, more damage may not fix the cause.');if(ok)award('team')});
+
+document.querySelectorAll('[data-rune]').forEach(b=>b.onclick=()=>{const ok=b.dataset.rune==='spd';document.getElementById('ynp-rune-result').textContent=(ok?'✅ ':'❌ ')+T(ok?'Boa escolha. Para um suporte que precisa de agir cedo, SPD como Main Stat pode ser fundamental. Depois analisa Substats, Set e objetivo.':'Não escolhas apenas pelo nome do Set ou pela raridade. Pergunta primeiro o que o monstro precisa de fazer.','Good choice. For a support that needs to act early, SPD as the Main Stat can be fundamental. Then analyze Substats, Set, and goal.');if(ok)award('rune')});
+
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout(render,30)});
+render();
+})();</script>
 <!-- YUNA_ACADEMY_STATUS_VISUAL_V1 -->
 <style>
 .ystatus{margin:28px 0}
