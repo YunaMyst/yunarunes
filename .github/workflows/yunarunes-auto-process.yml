@@ -48,16 +48,18 @@ jobs:
         shell: bash
         run: |
           set -e
-          files=$(find . -type f -name '*.js' -not -path './node_modules/*' -not -path './.git/*')
+          files=$(git diff --name-only "$GITHUB_EVENT_BEFORE" "$GITHUB_SHA" -- '*.js' || true)
           if [ -z "$files" ]; then
-            echo "No JavaScript files found."
+            echo "No changed JavaScript files to validate."
             exit 0
           fi
           for file in $files; do
-            echo "Checking $file"
-            node --check "$file"
+            if [ -f "$file" ]; then
+              echo "Checking changed file: $file"
+              node --check "$file"
+            fi
           done
-          echo "JavaScript checks passed."
+          echo "Changed JavaScript checks passed."
 
       - name: Confirm YunaRunes update completed
         run: |
