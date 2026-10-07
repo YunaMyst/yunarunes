@@ -109,13 +109,24 @@ function style(){
  let s=document.getElementById('yuna-language-style');if(s)s.remove();
  s=document.createElement('style');s.id='yuna-language-style';
  s.textContent=`
-header.top .header-controls .yuna-controls,header.top .yuna-unified-controls{display:flex!important;align-items:center!important;gap:5px!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important}
+header.top .header-controls .yuna-controls,header.top .yuna-unified-controls{display:flex!important;align-items:center!important;gap:5px!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important;overflow:visible!important}
+header.top .header-controls .yuna-controls [data-lang],header.top .yuna-unified-controls [data-lang]{position:relative!important;z-index:2147483647!important;pointer-events:auto!important;touch-action:manipulation!important;user-select:none!important}
 header.top .header-controls .yuna-controls>* ,header.top .yuna-unified-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important;cursor:pointer!important;pointer-events:auto!important}
 .yuna-global-language-bar{position:fixed!important;top:12px!important;right:12px!important;z-index:2147483647!important;display:flex!important;align-items:center!important;gap:6px!important;padding:6px!important;border-radius:10px!important;background:rgba(8,12,17,.96)!important;border:1px solid #35475a!important;box-shadow:0 6px 24px rgba(0,0,0,.45)!important;pointer-events:auto!important}
 .yuna-global-language-bar>*{height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 9px!important;border-radius:7px!important;border:1px solid #293746!important;background:#202a34!important;color:#fff!important;font-weight:800!important;font-size:12px!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}
 .yuna-global-language-bar .home{background:#111923!important}.yuna-global-language-bar .donate{background:#7c3aed!important;border-color:#a78bfa!important}
 .yuna-global-language-bar button.active,header.top .yuna-unified-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
 @media(max-width:600px){.yuna-global-language-bar{top:8px!important;right:8px!important;gap:3px!important;padding:4px!important}.yuna-global-language-bar .home{display:none!important}.yuna-global-language-bar>*{height:34px!important;padding:0 6px!important;font-size:10px!important}}
+/* LANGUAGE BUTTONS — always reachable */
+header.top .header-controls .yuna-controls [data-lang]{position:relative!important;isolation:isolate!important}
+@media(max-width:600px){
+ header.top .header-controls .yuna-controls{position:fixed!important;top:8px!important;right:8px!important;z-index:2147483647!important;display:flex!important;gap:4px!important;overflow:visible!important}
+ header.top .header-controls .yuna-controls .donate-link{display:none!important}
+ header.top .header-controls .yuna-controls [data-lang]{display:inline-flex!important;width:auto!important;min-width:62px!important;height:36px!important;padding:0 8px!important;font-size:11px!important;background:#202a34!important;color:#fff!important;border:1px solid #3b4b5a!important;border-radius:8px!important}
+}
+@media(min-width:601px){
+ header.top .header-controls .yuna-controls [data-lang]{min-width:74px!important;height:38px!important}
+}
 `;
  document.head.appendChild(s);
 }
