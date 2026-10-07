@@ -17,49 +17,7 @@
 .acx{margin-top:16px}.acx-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.acx-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.acx-card h3{margin:0 0 7px;font-size:16px}.acx-card p,.acx-card li{color:#9aa9b6;font-size:12px;line-height:1.55}.acx-card ul{margin:8px 0 0;padding-left:18px}.acx-btns{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.acx-btn{border:1px solid #293746;background:#18232e;color:#fff;border-radius:9px;padding:9px 11px;font-weight:800;cursor:pointer}.acx-btn:hover{border-color:#35a9e1}.acx-btn.good{border-color:#35a9e1}.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.journey-step{position:relative;background:#0d141c;border:1px solid #293746;border-radius:12px;padding:14px}.journey-step b{display:block}.journey-step small{display:block;color:#8fa0af;margin-top:5px;line-height:1.4}.checkrow{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid #202d39}.checkrow:last-child{border-bottom:0}.checkrow input{accent-color:#35a9e1;margin-top:3px}.meter{height:10px;background:#0b1015;border:1px solid #293746;border-radius:99px;overflow:hidden;margin:10px 0}.meter>i{display:block;height:100%;width:0;background:#35a9e1;transition:.25s}.meter-label{font-weight:900}.sim-answer{margin-top:10px;min-height:20px;color:#dce6ee;line-height:1.5}.choice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.resource-table{width:100%;border-collapse:collapse;font-size:12px}.resource-table th,.resource-table td{border-bottom:1px solid #293746;padding:9px;text-align:left}.resource-table th{color:#35a9e1}.resource-table td{color:#c5d0d9}.achievement{display:flex;align-items:center;gap:10px;padding:10px;background:#0d141c;border:1px solid #293746;border-radius:10px}.achievement.locked{opacity:.5}.achievement b{display:block}.achievement span{display:block;color:#8fa0af;font-size:11px;margin-top:3px}.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.academy-note{border-left:3px solid #8b5cf6;background:#151324;padding:12px;border-radius:8px;color:#d9d0ef;font-size:12px;line-height:1.55}.role-pill{display:inline-block;padding:4px 7px;border:1px solid #293746;border-radius:999px;margin:3px;color:#cbd7df;font-size:11px}.acx-result{margin-top:10px;background:#101923;border:1px solid #293746;border-radius:10px;padding:12px;line-height:1.55}.monster-choice{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px}.pve-pvp{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pve-pvp .acx-card{height:100%}
 @media(max-width:900px){.acx-grid,.ach-grid{grid-template-columns:repeat(2,1fr)}.journey{grid-template-columns:repeat(3,1fr)}}@media(max-width:600px){.acx-grid,.ach-grid,.pve-pvp,.choice-grid{grid-template-columns:1fr}.journey{grid-template-columns:1fr 1fr}.resource-table{font-size:11px}}
 </style><style id="yuna-academy-master-css">.master-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.master-card{background:#0d141c;border:1px solid #293746;border-radius:12px;padding:15px}.master-card h3{margin:0 0 7px}.master-card p{color:#9aa9b6;font-size:12px;line-height:1.55}.xp-bar{height:14px;background:#080d12;border:1px solid #293746;border-radius:99px;overflow:hidden}.xp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:.3s}.challenge-result,.battle-result,.rune-lab-result,.ask-result{margin-top:10px;background:#101923;border:1px solid #293746;border-radius:10px;padding:12px;color:#dce6ee;line-height:1.55}.tiny-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.master-select,.master-input{width:100%;background:#101923;color:#fff;border:1px solid #293746;border-radius:9px;padding:10px}.medals{display:flex;flex-wrap:wrap;gap:8px}.medal{padding:9px 11px;border:1px solid #293746;border-radius:999px;background:#101923;font-size:12px}.medal.locked{opacity:.4}@media(max-width:900px){.master-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.master-grid,.tiny-grid{grid-template-columns:1fr}}</style></head>
-<body><header class="academy-top" aria-label="YunaRunes navigation">
-<div class="academy-top-inner">
-<a class="academy-brand" href="./index.html">🦊 <span>YunaRunes</span></a>
-<div class="academy-controls">
-<button type="button" data-academy-lang="pt">🇧🇷 PT/BR</button>
-<button type="button" data-academy-lang="en">🇬🇧 ENG</button>
-<a class="academy-apk" href="https://yunarunes.com/downloads/yunarunes.apk" download="yunarunes.apk">📱 APK</a>
-</div>
-</div>
-</header>
-<style>
-.academy-top{position:sticky;top:0;z-index:999999;background:#0b1015;border-bottom:1px solid #293746;box-shadow:0 3px 15px rgba(0,0,0,.35)}
-.academy-top-inner{max-width:1250px;margin:auto;min-height:62px;padding:9px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:nowrap}
-.academy-brand{color:#fff;text-decoration:none;font-size:20px;font-weight:900;white-space:nowrap;line-height:1}
-.academy-controls{display:flex;gap:7px;align-items:center;flex-shrink:0}
-.academy-controls button,.academy-controls a{height:40px;padding:0 12px;border:1px solid #293746;border-radius:9px;background:#202a34;color:#fff;font-weight:900;font-size:12px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
-.academy-controls button.active,.academy-controls .academy-apk{background:#35a9e1;color:#061018}
-@media(min-width:601px){.academy-apk{display:none!important}}
-@media(max-width:600px){.academy-top-inner{padding:8px}.academy-brand{font-size:18px}.academy-controls{width:100%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}.academy-top-inner{flex-wrap:wrap}.academy-brand{width:100%}.academy-controls button,.academy-controls a{height:38px;padding:0 8px;font-size:11.5px}.academy-apk{display:inline-flex!important}}
-</style>
-<style id="yuna-academy-nav-balance">
-/* Ajuste fino: tamanho intermédio e separação segura dos idiomas */
-.academy-top-inner{position:relative}
-.academy-controls{position:relative;z-index:2}
-.academy-controls button,.academy-controls a{font-size:12px;letter-spacing:.1px}
-@media(max-width:600px){
-  .academy-top-inner{gap:7px}
-  .academy-brand{font-size:18px}
-  .academy-controls{margin-top:1px}
-  .academy-controls button,.academy-controls a{font-size:11.5px}
-}
-</style>
-<script src="./language-dynamic.js"></script>
-<script>
-(function(){
-const key='yunarunes-language';
-function setLang(lang){try{localStorage.setItem(key,lang)}catch(e){}document.documentElement.lang=lang==='en'?'en':'pt-BR';document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===lang));/* ACADEMY LANGUAGE ENGINE V2 HOOK */ if(typeof window.applyLanguage==='function')window.applyLanguage();else location.reload();}
-const current=(()=>{try{return localStorage.getItem(key)||'pt'}catch(e){return 'pt'}})();
-document.querySelectorAll('[data-academy-lang]').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.academyLang)));
-document.querySelectorAll('[data-academy-lang]').forEach(b=>b.classList.toggle('active',b.dataset.academyLang===current));
-})();
-</script>
-<main class="wrap">
+<body><main class="wrap">
 <section class="hero">
 <div class="eyebrow">🦊 YunaRunes • Yuna Academy</div>
 <h1 data-pt="Aprende Summoners War do <span>zero</span>" data-en="Learn Summoners War from <span>zero</span>"></h1>
