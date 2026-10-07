@@ -146,9 +146,8 @@ function setLanguage(lang){
  lang=lang==='en'?'en':'pt';
  try{localStorage.setItem(K,lang)}catch(_){}
  document.documentElement.lang=lang==='en'?'en':'pt-BR';
- header();
- applyText(document.body);
- header();
+ /* Recarrega a página para aplicar o idioma de forma completa em todos os scripts e conteúdos. */
+ try{window.location.reload()}catch(_){header();applyText(document.body);header();}
 }
 function bindLanguageButtons(){
  document.querySelectorAll('[data-lang]').forEach(b=>{
