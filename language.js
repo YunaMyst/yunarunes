@@ -117,7 +117,7 @@ function style(){
  s.textContent=`
 /* YunaRunes language/header: do not create a second header */
 header.top .header-controls .yuna-controls{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;position:static!important;transform:none!important}
-header.top .header-controls .yuna-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;min-width:0!important;width:auto!important;padding:0 9px!important;margin:0!important;white-space:nowrap!important}
+header.top .header-controls .yuna-controls>*{display:inline-flex!important;align-items:center!important;justify-content:center!important;height:38px!important;min-width:0!important;width:auto!important;padding:0 9px!important;font-size:12px!important;margin:0!important;white-space:nowrap!important}
 header.top .header-controls .yuna-controls .apk-link{display:none!important}
 header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important;background:#7c3aed!important;color:#fff!important;border:1px solid #a78bfa!important}
 header.top .header-controls .yuna-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
@@ -125,7 +125,7 @@ header.top .header-controls .yuna-controls button:not(.active){background:#202a3
 @media(max-width:600px){
  header.top .header-controls .yuna-controls{gap:4px!important}
  header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}
- header.top .header-controls .yuna-controls>*{height:36px!important;padding:0 7px!important;font-size:10px!important}
+ header.top .header-controls .yuna-controls>*{height:36px!important;padding:0 7px!important;font-size:11px!important}
 }
 `;
  document.head.appendChild(s);
@@ -152,4 +152,5 @@ function boot(){
  const obs=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)applyText(n)}));
  obs.observe(document.body,{childList:true,subtree:true});
 }
+boot();
 })();
