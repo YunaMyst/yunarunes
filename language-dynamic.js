@@ -651,80 +651,17 @@ window.addEventListener('storage',function(e){
 });
 })();
 
-/* YUNARUNES — FINAL LANGUAGE REPAIR V1
-   Fixes explicit data-pt/data-en HTML being rendered as literal markup and
-   makes the existing language buttons switch language reliably by reloading
-   from the single localStorage source of truth.
-*/
+/* YUNARUNES — ACADEMY HARD-CODED TEXT CONSISTENCY */
 (function(){
 'use strict';
 const KEY='yunarunes-language';
-
-function currentLang(){
-  try{return localStorage.getItem(KEY)==='en'?'en':'pt'}catch(_){return 'pt'}
-}
-
-function repairExplicitTranslations(){
-  const en=currentLang()==='en';
-  if(!document.body)return;
-  document.querySelectorAll('[data-pt],[data-en]').forEach(el=>{
-    if(el.closest('script,style,noscript,[data-no-auto-translate]'))return;
-    const value=en
-      ? (el.getAttribute('data-en') ?? el.getAttribute('data-pt') ?? '')
-      : (el.getAttribute('data-pt') ?? el.getAttribute('data-en') ?? '');
-    if(el.innerHTML!==value)el.innerHTML=value;
-  });
-  document.querySelectorAll('[data-pt-placeholder],[data-en-placeholder]').forEach(el=>{
-    const value=en
-      ? (el.getAttribute('data-en-placeholder') ?? el.getAttribute('data-pt-placeholder') ?? '')
-      : (el.getAttribute('data-pt-placeholder') ?? el.getAttribute('data-en-placeholder') ?? '');
-    el.setAttribute('placeholder',value);
-  });
-  document.documentElement.lang=en?'en':'pt-BR';
-  document.documentElement.setAttribute('data-language',en?'en':'pt-BR');
-}
-
-function forceLanguageReload(lang){
-  const next=lang==='en'?'en':'pt';
-  try{localStorage.setItem(KEY,next)}catch(_){}
-  window.location.reload();
-}
-
-/* The existing authoritative click handler already catches these buttons.
-   Override its language function so its normal click path becomes reliable:
-   save the choice, reload, and let the page initialize cleanly in that language. */
-window.yunaLanguageReload=forceLanguageReload;
-window.yunaUniversalTranslate=function(){
-  repairExplicitTranslations();
+const PT_EN={
+'🦊 Yuna Academy':'🦊 Yuna Academy','Aprende fazendo':'Learn by doing','Aprende, pratica e prova que entendeu':'Learn, practice and prove you understood','Trilha “Comecei Hoje”':'“I Started Today” Path','Aprenda a pensar como jogador':'Learn to think like a player','“Por que isso é melhor?”':'“Why is this better?”','Por que perdi?':'Why did I lose?','Estou pronto para avançar?':'Am I ready to advance?','Não apenas leia — faça':'Don’t just read — do it','Palavras que você precisa entender':'Words you need to understand','Seu caminho até a graduação':'Your path to graduation','🌳 Árvore de Habilidades':'🌳 Skill Tree','🧪 Simulador de Runas':'🧪 Rune Simulator','📈 Histórico da melhoria':'📈 Improvement History','⚔️ Simulador de Combate':'⚔️ Combat Simulator','🏔️ Giants':'🏔️ Giants','🐉 Dragons':'🐉 Dragons','💀 Necropolis':'💀 Necropolis','⚙️ Steel Fortress':'⚙️ Steel Fortress','☠️ Punisher\'s Crypt':'☠️ Punisher\'s Crypt','🌌 Rift / Raid':'🌌 Rift / Raid','💠 Artefatos':'💠 Artifacts','🔨 Grindstones':'🔨 Grindstones','💎 Enchanted Gems':'💎 Enchanted Gems','⚔️ Arena':'⚔️ Arena','🏰 Siege / Guild':'🏰 Siege / Guild','👑 RTA':'👑 RTA','⚡ Speed Tune':'⚡ Speed Tune','🎯 ACC vs RES':'🎯 ACC vs RES','🧙 Construção':'🧙 Team Building','⭐⭐⭐⭐⭐ Prioridade':'⭐⭐⭐⭐⭐ Priority','⭐⭐⭐ Situacional':'⭐⭐⭐ Situational','⭐ Espera':'⭐ Wait','❌ Construir tudo':'❌ Build everything','❌ Copiar stats cegamente':'❌ Copy stats blindly','❌ Ignorar runas':'❌ Ignore runes','❌ Upar sem objetivo':'❌ Upgrade without a goal','❌ Trocar tudo quando perdes':'❌ Change everything when you lose','❌ Comparar a tua conta com endgame':'❌ Compare your account to endgame','⭐ XP, níveis e progresso':'⭐ XP, levels and progress','🔥 Desafio do Dia':'🔥 Daily Challenge','🔬 Laboratório de Runas':'🔬 Rune Lab','🧩 Encontra a runa errada':'🧩 Find the wrong rune','⚔️ Quem ganha esta batalha?':'⚔️ Who wins this battle?','🧠 Monta uma equipa do zero':'🧠 Build a team from scratch','🏆 Ranking pessoal':'🏆 Personal ranking','🎖️ Medalhas especiais':'🎖️ Special Medals','📊 Teste inicial':'📊 Initial Test','🕵️ Build Detective':'🕵️ Build Detective','📖 Aulas de 60 segundos':'📖 60-Second Lessons','🔥 Master Mode':'🔥 Master Mode','Desafio':'Challenge','Pergunta à Yuna Academy':'Ask Yuna Academy','1️⃣ Função':'1️⃣ Role','2️⃣ Conteúdo':'2️⃣ Content','3️⃣ Objetivo':'3️⃣ Goal','4️⃣ Stats':'4️⃣ Stats','5️⃣ Runas':'5️⃣ Runes','6️⃣ Teste':'6️⃣ Test','Montar estratégia':'Build strategy','Identificar função':'Identify role','Testar':'Test','Diagnosticar':'Diagnose','Trocar todas as runas':'Change all runes','Ajustar SPD/Speed Tune':'Adjust SPD/Speed Tune','Aumentar apenas HP':'Increase HP only','Trocar o elemento':'Change element','❤️ Colocar HP em todos':'❤️ Put HP on everyone','😈 Devilmon, porque é raro':'😈 Devilmon, because it is rare','💰 Mana, porque nunca pode gastar':'💰 Mana, because you can never spend it','🎲 Todos têm exatamente o mesmo valor':'🎲 They all have exactly the same value','📦 Nada precisa de planejamento':'📦 Nothing needs planning','Concluir habilidade + XP':'Complete skill + XP','Resetar XP':'Reset XP','🔬 Comparar':'🔬 Compare','🎯 Concluir missão +25 XP':'🎯 Complete mission +25 XP','⚡ Sei o que é SPD':'⚡ I know what SPD is','💎 Sei escolher runas':'💎 I know how to choose runes','🧙 Sei montar equipas':'🧙 I know how to build teams','Nunca jogo primeiro':'I never move first','Debuffs falham':'Debuffs fail','Dano baixo':'Low damage','Trocar todas as runas':'Change all runes','Speed Tune / SPD / ATB':'Speed Tune / SPD / ATB','🔎 Perguntar':'🔎 Ask','💀 Morre rápido':'💀 Dies quickly','🐌 Nunca joga':'🐌 Never moves','🎯 Debuff falha':'🎯 Debuff fails','💥 Dano baixo':'💥 Low damage','💥 Colocar mais dano':'💥 Add more damage','🎲 Deixar aleatório':'🎲 Leave it random','Montar uma equipa':'Build a team','Analisar equipa':'Analyze team','Resetar':'Reset','Salvar':'Save','Guardar':'Save','Próximo':'Next','Anterior':'Previous','Finalizar teste':'Finish test','Próxima pergunta':'Next question','Correto!':'Correct!','Incorreto.':'Incorrect.','Teste concluído!':'Test finished!','Pontuação perfeita!':'Perfect score!'
 };
-
-/* Replace the final handler's target function indirectly on every load.
-   The click listener in the existing language authority calls this function. */
-if(typeof window.yunaUniversalTranslate==='function'){
-  repairExplicitTranslations();
-}
-
-function installButtonBridge(){
-  /* Existing handler calls window.yunaUniversalTranslate() after writing
-     localStorage. On a button click we cannot outrank its document-capture
-     listener, so a tiny capture listener on each button is intentionally not
-     used. Instead, observe the active language and reload if the value changed
-     after a click. */
-  let last=currentLang();
-  setInterval(()=>{
-    const now=currentLang();
-    if(now!==last){
-      last=now;
-      window.location.reload();
-    }
-  },100);
-  repairExplicitTranslations();
-}
-
-if(document.readyState==='loading'){
-  document.addEventListener('DOMContentLoaded',installButtonBridge,{once:true});
-}else{
-  installButtonBridge();
-}
+function en(){try{return localStorage.getItem(KEY)==='en'}catch(_){return false}}
+function apply(){if(!en()||!document.body)return;const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.parentElement?.closest('script,style,noscript,[data-no-auto-translate]'))continue;let v=n.nodeValue;if(!v.trim())continue;for(const k of Object.keys(PT_EN).sort((a,b)=>b.length-a.length))v=v.split(k).join(PT_EN[k]);if(v!==n.nodeValue)n.nodeValue=v}}
+window.yunaAcademyHardcodedEN=apply;
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,100),{once:true});else setTimeout(apply,100);
+window.addEventListener('storage',e=>{if(e.key===KEY)setTimeout(apply,50)});
+setInterval(()=>{if(en())apply()},700);
 })();
-
