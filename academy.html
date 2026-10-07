@@ -2073,7 +2073,7 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 <script id="yuna-status-guide-js">
 (function(){
 'use strict';
-const iconBase='https://summonerswar.fandom.com/wiki/Special:Redirect/file/';
+const iconBase='https://swanalise.wordpress.com/wp-content/uploads/2017/12/';
 const effects=[
 {id:'stun',name:'STUN',pt:'Atordoar',cat:'control',file:'Status_Stun.png',descPt:'Impede o monstro de agir no turno.',descEn:'Prevents the monster from acting on its turn.',abbr:'STUN'},
 {id:'freeze',name:'FREEZE',pt:'Congelar',cat:'control',file:'Status_Freeze.png',descPt:'Congela o monstro e impede a ação.',descEn:'Freezes the monster and prevents it from acting.',abbr:'FREEZE'},
@@ -2102,7 +2102,7 @@ function render(){
 const grid=document.getElementById('ystatus-grid');if(!grid)return;
 const filter=document.querySelector('.ystatus-tab.active')?.dataset.statusFilter||'all';
 const q=(document.getElementById('ystatus-search')?.value||'').toLowerCase().trim();
-grid.innerHTML=effects.filter(e=>(filter==='all'||e.cat===filter)&&( !q || [e.name,e.pt,e.abbr,e.descPt,e.descEn].join(' ').toLowerCase().includes(q))).map(e=>'<article class="ystatus-card"><div class="ystatus-icon"><img src="'+iconBase+encodeURIComponent(e.file)+'" alt="'+e.name+'" loading="lazy" onerror="this.parentElement.innerHTML=\'<span style=&quot;font-size:22px&quot;>◈</span>\'"></div><div><h3>'+e.name+' <span style="color:#8fa0af;font-size:11px">• '+(isEN()?e.name:e.pt)+'</span></h3><p>'+(isEN()?e.descEn:e.descPt)+'</p><span class="abbr">'+e.abbr+'</span></div></article>').join('');
+grid.innerHTML=effects.filter(e=>(filter==='all'||e.cat===filter)&&( !q || [e.name,e.pt,e.abbr,e.descPt,e.descEn].join(' ').toLowerCase().includes(q))).map(e=>'<article class="ystatus-card"><div class="ystatus-icon"><img src="'+iconBase+e.file.toLowerCase()+'?w=1086'+'" alt="'+e.name+'" loading="lazy" onerror="this.parentElement.innerHTML=\'<span style=&quot;font-size:22px&quot;>◈</span>\'"></div><div><h3>'+e.name+' <span style="color:#8fa0af;font-size:11px">• '+(isEN()?e.name:e.pt)+'</span></h3><p>'+(isEN()?e.descEn:e.descPt)+'</p><span class="abbr">'+e.abbr+'</span></div></article>').join('');
 }
 document.querySelectorAll('[data-status-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}));
 document.getElementById('ystatus-search')?.addEventListener('input',render);
