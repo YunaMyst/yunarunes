@@ -83,8 +83,17 @@ main.wrap{display:block!important;width:min(1250px,calc(100% - 32px))!important;
 html[lang="en"] .academy-title-pt{display:none!important}
 html[lang="en"] .academy-title-en{display:block!important}
 </style>
-</head>
-<body><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
+<style id="academy-header-fix">
+header.top{position:relative;z-index:99999;background:rgba(7,11,17,.97);border-bottom:1px solid #202b38;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+header.top>.nav{max-width:1400px;min-height:62px;height:62px;margin:auto;padding:7px 14px;display:grid;grid-template-columns:155px minmax(0,1fr) 250px;align-items:center;gap:10px}
+header.top .header-brand{grid-column:1}.brand{display:flex;align-items:center;color:#fff;text-decoration:none;font-weight:900;font-size:18px}
+header.top .header-menu{grid-column:2;min-width:0}.nav-links{display:flex;align-items:center;justify-content:center;gap:3px}.nav-links a{color:#dce6ee;text-decoration:none;font-size:12px;font-weight:800;padding:8px 6px;border-radius:7px;white-space:nowrap}.nav-links a:hover{background:#172330;color:#35a9e1}
+.nav-divider{width:1px;height:25px;background:#293746;margin:0 5px}.nav-toggle,.menu-btn{display:none}
+header.top .header-controls{grid-column:3;display:flex;justify-content:flex-end}.yuna-controls{display:flex;gap:5px;align-items:center}.yuna-controls>*{height:38px;padding:0 9px;border-radius:8px;font-size:12px;font-weight:900;cursor:pointer}.yuna-controls button{border:1px solid #293746;background:#202a34;color:#fff}.donate-link{display:inline-flex;align-items:center;text-decoration:none;background:#7c3aed;color:#fff;border:1px solid #a78bfa}
+.yuna-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}
+@media(max-width:600px){header.top>.nav{height:auto;min-height:54px;grid-template-columns:42px 1fr 42px;grid-template-areas:"menu brand controls" "links links links";padding:7px 10px}.header-brand{grid-area:brand!important;text-align:center}.header-menu{grid-area:menu!important}.header-controls{grid-area:controls!important}.menu-btn{display:block!important;position:static!important;background:#172330;color:#fff;border:1px solid #293746;border-radius:7px;padding:8px 10px;cursor:pointer}.nav-links{display:none;grid-area:links;width:100%;padding:8px 0 4px;grid-template-columns:1fr 1fr}.nav-toggle:checked~.nav-links{display:grid}.nav-links a{background:#101923;border:1px solid #202d3b;text-align:center;font-size:12px}.yuna-controls{gap:4px;flex-wrap:wrap;justify-content:flex-end}.yuna-controls>*{height:34px;padding:0 6px;font-size:10px}}
+</style></head>
+<body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes"><span>YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a href="artifact-optimizer.html">💠 Artifacts</a><a href="decks.html">🃏 Decks</a><a href="account-analyzer.html">📊 Análise de Conta</a><a href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
 <h3>🦊 Yuna Academy</h3>
 <div class="nav-group">Início</div>
@@ -922,8 +931,8 @@ function runAcademyLab(){
  }
  updateAcademyProgress();
 })();
-</script><script src="language.js?v=20260923-lang-v23"></script>
-<script src="language-dynamic.js?v=20261007-unified-v7"></script>
+</script>
+
 <script id="yuna-academy-quiz-v2">
 const academyQuestions=[
 ["O que significa STUN?","What does STUN mean?",["Aumenta o dano","Increases damage"],["Impede o monstro de agir","Prevents the monster from acting"],["Aumenta SPD","Increases SPD"],["Remove buffs","Removes buffs"],1],
@@ -2330,4 +2339,4 @@ render();
 window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
-<script src="language.js?v=20261007-lang-v7"></script><script src="language-dynamic.js?v=20261007-lang-v7"></script><script src="language.js?v=20261007-lang-v8"></script><script src="language.js?v=20261007-lang-v8"></script></body></html>
+<script src="language.js?v=20261007-lang-v10"></script></body></html>
