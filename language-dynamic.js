@@ -97,6 +97,7 @@ function updateButtons(){
 function apply(){
   if(!document.body||applying)return;
   applying=true;
+  if(observer) observer.disconnect();
   observerPausedUntil=performance.now()+250;
   scan();saveAttrs();
   setRootLanguage();
@@ -104,6 +105,7 @@ function apply(){
   scan();saveAttrs();
   applySnapshot();
   updateButtons();
+  if(observer) observer.observe(document.body,{subtree:true,childList:true});
   const title=document.title;
   if(!document.title.dataset){/* title has no dataset in some browsers; handled below */}
   applying=false;
