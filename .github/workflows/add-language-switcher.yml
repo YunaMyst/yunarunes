@@ -22,8 +22,8 @@ jobs:
           for p in Path('.').glob('*.html'):
               s = p.read_text(encoding='utf-8')
               s = s.replace('<script src="header-fix.js"></script>', '')
-              s = re.sub(r'<script src="language-dynamic\.js(?:\\?v=[^"\']+)?"></script>', '', s)
-              s = re.sub(r'<script src="language\.js(?:\\?v=[^"\']+)?"></script>', '', s)
+              s = re.sub(r'<script src="language-dynamic\.js(?:\?v=[^"\']+)?"></script>', '', s)
+              s = re.sub(r'<script src="language\.js(?:\?v=[^"\']+)?"></script>', '', s)
               s = s.replace('</body>', '<script src="language.js?v=20261007-lang-v8"></script></body>')
               p.write_text(s, encoding='utf-8')
 
