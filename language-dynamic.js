@@ -557,8 +557,17 @@ const KEY='yunarunes-language';
 const path=(location.pathname||'').toLowerCase();
 const isHome=path.endsWith('/') || path.endsWith('/index.html') || path.endsWith('index.html');
 
-function addLanguageStyles(){\n  if(document.getElementById('yuna-site-language-style')) return;\n  const style=document.createElement('style');\n  style.id='yuna-site-language-style';\n  style.textContent='.yuna-site-language{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:5px;background:rgba(7,11,17,.94);border:1px solid #293746;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35)}.yuna-site-language button{border:1px solid #293746;border-radius:7px;background:#17212b;color:#fff;height:34px;padding:0 9px;font:900 11px Arial,sans-serif;cursor:pointer;white-space:nowrap}.yuna-site-language button.active{outline:2px solid rgba(53,169,225,.8);background:#202f3d}@media(max-width:600px){.yuna-site-language{top:8px;right:8px;gap:4px}.yuna-site-language button{height:32px;padding:0 7px;font-size:10px}}';\n  document.head.appendChild(style);\n}\n\nfunction ensureSiteLanguageControls(){
-  if(isHome || !document.body || document.querySelector('.yuna-site-language')) return;\n  addLanguageStyles();
+function addLanguageStyles(){
+  if(document.getElementById('yuna-site-language-style')) return;
+  const style=document.createElement('style');
+  style.id='yuna-site-language-style';
+  style.textContent='.yuna-site-language{position:fixed;top:12px;right:12px;z-index:999999;display:flex;gap:6px;padding:5px;background:rgba(7,11,17,.94);border:1px solid #293746;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.35)}.yuna-site-language button{border:1px solid #293746;border-radius:7px;background:#17212b;color:#fff;height:34px;padding:0 9px;font:900 11px Arial,sans-serif;cursor:pointer;white-space:nowrap}.yuna-site-language button.active{outline:2px solid rgba(53,169,225,.8);background:#202f3d}@media(max-width:600px){.yuna-site-language{top:8px;right:8px;gap:4px}.yuna-site-language button{height:32px;padding:0 7px;font-size:10px}}';
+  document.head.appendChild(style);
+}
+
+function ensureSiteLanguageControls(){
+  if(isHome || !document.body || document.querySelector('.yuna-site-language')) return;
+  addLanguageStyles();
   const box=document.createElement('div');
   box.className='yuna-site-language';
   box.setAttribute('aria-label','Language');
