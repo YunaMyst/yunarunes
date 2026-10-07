@@ -2015,4 +2015,99 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 })();
 </script>
 
-<!-- YUNA_GRADUATION_LINK --><div style="margin:24px 0;padding:20px;border:2px solid #a78bfa;border-radius:16px;background:#111923;text-align:center"><div style="font-size:24px;font-weight:900" data-pt="🎓 Prova de Graduação" data-en="🎓 Graduation Exam"></div><p style="color:#aeb8c5" data-pt="Terminou a formação? Faça a avaliação oficial da Yuna Academy." data-en="Finished the training? Take the official Yuna Academy assessment."></p><a href="./graduation.html" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#a78bfa;color:#111827;font-weight:900;text-decoration:none" data-pt="🏆 Fazer Prova de Graduação" data-en="🏆 Take Graduation Exam"></a></div></body></html>
+<!-- YUNA_GRADUATION_LINK --><div style="margin:24px 0;padding:20px;border:2px solid #a78bfa;border-radius:16px;background:#111923;text-align:center"><div style="font-size:24px;font-weight:900" data-pt="🎓 Prova de Graduação" data-en="🎓 Graduation Exam"></div><p style="color:#aeb8c5" data-pt="Terminou a formação? Faça a avaliação oficial da Yuna Academy." data-en="Finished the training? Take the official Yuna Academy assessment."></p><a href="./graduation.html" style="display:inline-block;padding:12px 18px;border-radius:9px;background:#a78bfa;color:#111827;font-weight:900;text-decoration:none" data-pt="🏆 Fazer Prova de Graduação" data-en="🏆 Take Graduation Exam"></a></div>
+<!-- YUNA_ACADEMY_STATUS_VISUAL_V1 -->
+<style>
+.ystatus{margin:28px 0}
+.ystatus-hero{background:linear-gradient(135deg,#171d2b,#101721);border:1px solid #3a4b60;border-radius:18px;padding:22px}
+.ystatus-hero h2{margin:0 0 7px;font-size:27px}
+.ystatus-hero p{color:#aeb8c5;line-height:1.6;margin:0;max-width:900px}
+.ystatus-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.ystatus-tab{border:1px solid #33475b;background:#111c27;color:#fff;border-radius:999px;padding:8px 12px;font-weight:900;cursor:pointer}
+.ystatus-tab.active{background:#35a9e1;color:#061018;border-color:#35a9e1}
+.ystatus-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ystatus-card{background:#0d141c;border:1px solid #293746;border-radius:13px;padding:14px;display:flex;gap:12px;align-items:center;min-height:92px}
+.ystatus-icon{width:58px;height:58px;flex:0 0 58px;border-radius:12px;background:#080d13;border:1px solid #34485c;display:flex;align-items:center;justify-content:center;padding:5px}
+.ystatus-icon img{width:48px;height:48px;object-fit:contain;image-rendering:auto}
+.ystatus-card h3{margin:0 0 4px;font-size:15px}
+.ystatus-card p{margin:0;color:#9aa9b6;font-size:12px;line-height:1.45}
+.ystatus-card .abbr{display:inline-block;margin-top:6px;color:#35a9e1;font-weight:900;font-size:11px}
+.ystatus-note{margin-top:12px;border-left:3px solid #8b5cf6;background:#151324;border-radius:8px;padding:12px;color:#d9d0ef;font-size:12px;line-height:1.55}
+.ystatus-tip{margin-top:14px;background:#101923;border:1px solid #293746;border-radius:12px;padding:14px}
+.ystatus-tip b{display:block;margin-bottom:5px}
+.ystatus-mini{color:#8fa0af;font-size:11px;line-height:1.5}
+.ystatus-search{width:100%;background:#080f16;color:#fff;border:1px solid #33475b;border-radius:10px;padding:11px;margin-top:12px}
+.ystatus-hidden{display:none!important}
+@media(max-width:900px){.ystatus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.ystatus-grid{grid-template-columns:1fr}.ystatus-hero{padding:17px}.ystatus-hero h2{font-size:22px}.ystatus-card{min-height:84px}}
+</style>
+
+<section class="ystatus" id="status-guide">
+  <div class="ystatus-hero">
+    <div class="eyebrow">🧪 YUNA ACADEMY • <span data-pt="GUIA VISUAL" data-en="VISUAL GUIDE"></span></div>
+    <h2 data-pt="🎯 Aprende a reconhecer os efeitos no jogo" data-en="🎯 Learn to recognize effects in-game"></h2>
+    <p data-pt="Quando vires um destes símbolos sobre um monstro, já vais saber o que significa. Os ícones abaixo usam os nomes dos efeitos de Summoners War para ajudar quem está a começar a reconhecer o jogo visualmente." data-en="When you see one of these symbols over a monster, you will know what it means. The icons below use Summoners War effect names to help new players recognize them visually."></p>
+    <input id="ystatus-search" class="ystatus-search" data-pt-placeholder="Pesquisar efeito: stun, dot, sleep, freeze..." data-en-placeholder="Search effect: stun, dot, sleep, freeze..." aria-label="Pesquisar efeito">
+  </div>
+
+  <div class="ystatus-tabs" role="tablist" aria-label="Categorias de efeitos">
+    <button class="ystatus-tab active" data-status-filter="all" data-pt="Todos" data-en="All"></button>
+    <button class="ystatus-tab" data-status-filter="control" data-pt="Controle" data-en="Control"></button>
+    <button class="ystatus-tab" data-status-filter="debuff" data-pt="Debuffs" data-en="Debuffs"></button>
+    <button class="ystatus-tab" data-status-filter="buff" data-pt="Buffs" data-en="Buffs"></button>
+  </div>
+
+  <div class="ystatus-grid" id="ystatus-grid"></div>
+
+  <div class="ystatus-note">
+    <b data-pt="🦊 Dica da Yuna" data-en="🦊 Yuna Tip"></b>
+    <span data-pt="Não precisas decorar tudo de uma vez. Começa por STUN, FREEZE, SLEEP e DOT. São quatro efeitos que vais encontrar constantemente e que mudam diretamente o que um monstro consegue fazer no combate." data-en="You do not need to memorize everything at once. Start with STUN, FREEZE, SLEEP and DOT. These are four effects you will encounter often and they directly change what a monster can do in battle."></span>
+  </div>
+
+  <div class="ystatus-tip">
+    <b data-pt="⚡ Como ler rapidamente" data-en="⚡ How to read them quickly"></b>
+    <div class="ystatus-mini" data-pt="🔴 Ícones vermelhos = efeitos maléficos/debuffs. 🔵 Ícones azuis = efeitos benéficos/buffs. STUN, FREEZE e SLEEP são efeitos de incapacidade: quando entram, o monstro não pode agir no seu turno." data-en="🔴 Red icons = harmful effects/debuffs. 🔵 Blue icons = beneficial effects/buffs. STUN, FREEZE and SLEEP are inability effects: when applied, the monster cannot act on its turn."></div>
+  </div>
+</section>
+
+<script id="yuna-status-guide-js">
+(function(){
+'use strict';
+const iconBase='https://summonerswar.fandom.com/wiki/Special:Redirect/file/';
+const effects=[
+{id:'stun',name:'STUN',pt:'Atordoar',cat:'control',file:'Status_Stun.png',descPt:'Impede o monstro de agir no turno.',descEn:'Prevents the monster from acting on its turn.',abbr:'STUN'},
+{id:'freeze',name:'FREEZE',pt:'Congelar',cat:'control',file:'Status_Freeze.png',descPt:'Congela o monstro e impede a ação.',descEn:'Freezes the monster and prevents it from acting.',abbr:'FREEZE'},
+{id:'sleep',name:'SLEEP',pt:'Dormir',cat:'control',file:'Status_Sleep.png',descPt:'Impede o monstro de agir; dano pode acordá-lo.',descEn:'Prevents the monster from acting; damage can wake it.',abbr:'SLEEP'},
+{id:'dot',name:'CONTINUOUS DAMAGE',pt:'Dano Contínuo',cat:'debuff',file:'Status_Continuous_Damage.png',descPt:'Aplica dano baseado no HP máximo no início do turno.',descEn:'Deals damage based on Max HP at the start of the turn.',abbr:'DOT'},
+{id:'slow',name:'DECREASE ATK SPD',pt:'Reduzir Velocidade',cat:'debuff',file:'Status_Reduce_Speed.png',descPt:'Reduz a velocidade de ataque.',descEn:'Reduces Attack Speed.',abbr:'SLOW'},
+{id:'defbreak',name:'DECREASE DEF',pt:'Quebra de Defesa',cat:'debuff',file:'Status_Reduce_Defense.png',descPt:'Reduz a Defesa do alvo.',descEn:'Reduces the target’s Defense.',abbr:'DEF BREAK'},
+{id:'atkbreak',name:'DECREASE ATK',pt:'Reduzir Ataque',cat:'debuff',file:'Status_Reduce_Attack_Power.png',descPt:'Reduz o Poder de Ataque.',descEn:'Reduces Attack Power.',abbr:'ATK BREAK'},
+{id:'blockheal',name:'UNRECOVERABLE',pt:'Irrecuperável',cat:'debuff',file:'Status_Unrecoverable.png',descPt:'Bloqueia efeitos de cura.',descEn:'Blocks healing effects.',abbr:'BLOCK HEAL'},
+{id:'bomb',name:'BOMB',pt:'Bomba',cat:'control',file:'Status_Bomb.png',descPt:'Explode após a contagem e causa dano; a explosão também aplica STUN.',descEn:'Explodes after its timer, dealing damage; the explosion also applies STUN.',abbr:'BOMB'},
+{id:'provoke',name:'PROVOKE',pt:'Provocar',cat:'control',file:'Status_Provoke.png',descPt:'Força o monstro a atacar quem o provocou com a primeira skill.',descEn:'Forces the monster to attack the provoker with its first skill.',abbr:'PROVOKE'},
+{id:'blockbuff',name:'BLOCK BENEFICIAL EFFECT',pt:'Bloquear Benefícios',cat:'debuff',file:'Status_Block_Beneficial_Effect.png',descPt:'Impede a aplicação de efeitos benéficos.',descEn:'Prevents beneficial effects from being applied.',abbr:'BLOCK BUFF'},
+{id:'silence',name:'SILENCE',pt:'Silêncio',cat:'control',file:'Status_Silence.png',descPt:'Bloqueia o uso de skills com cooldown.',descEn:'Blocks skills with cooldowns from being used.',abbr:'SILENCE'},
+{id:'brand',name:'BRAND',pt:'Marca',cat:'debuff',file:'Brand.png',descPt:'Faz o alvo receber mais dano.',descEn:'Causes the target to receive increased damage.',abbr:'BRAND'},
+{id:'oblivion',name:'OBLIVION',pt:'Oblivion',cat:'debuff',file:'Status_Oblivious.png',descPt:'Desativa habilidades passivas enquanto o efeito durar.',descEn:'Disables passive skills while active.',abbr:'OBLIVION'},
+{id:'atkup',name:'INCREASE ATK',pt:'Aumentar Ataque',cat:'buff',file:'Status_Increase_Attack_Power.png',descPt:'Aumenta o Poder de Ataque.',descEn:'Increases Attack Power.',abbr:'ATK UP'},
+{id:'spdUp',name:'INCREASE ATK SPD',pt:'Aumentar Velocidade',cat:'buff',file:'Status_Increase_Speed.png',descPt:'Aumenta a Velocidade de Ataque.',descEn:'Increases Attack Speed.',abbr:'SPD UP'},
+{id:'defup',name:'INCREASE DEF',pt:'Aumentar Defesa',cat:'buff',file:'Status_Increase_Defense.png',descPt:'Aumenta a Defesa.',descEn:'Increases Defense.',abbr:'DEF UP'},
+{id:'immunity',name:'IMMUNITY',pt:'Imunidade',cat:'buff',file:'Status_Immunity.png',descPt:'Protege contra efeitos maléficos.',descEn:'Protects against harmful effects.',abbr:'IMMUNITY'},
+{id:'shield',name:'SHIELD',pt:'Escudo',cat:'buff',file:'Status_Shield.png',descPt:'Absorve uma quantidade de dano.',descEn:'Absorbs a certain amount of damage.',abbr:'SHIELD'},
+{id:'counter',name:'COUNTERATTACK',pt:'Contra-ataque',cat:'buff',file:'Status_Counterattack.png',descPt:'Permite contra-atacar quando atingido.',descEn:'Allows a counterattack when attacked.',abbr:'COUNTER'},
+{id:'invincible',name:'INVINCIBILITY',pt:'Invencível',cat:'buff',file:'Status_Invincibility.png',descPt:'Reduz a zero o dano recebido.',descEn:'Reduces incoming damage to zero.',abbr:'INVINCIBLE'}
+];
+function isEN(){try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}}
+function render(){
+const grid=document.getElementById('ystatus-grid');if(!grid)return;
+const filter=document.querySelector('.ystatus-tab.active')?.dataset.statusFilter||'all';
+const q=(document.getElementById('ystatus-search')?.value||'').toLowerCase().trim();
+grid.innerHTML=effects.filter(e=>(filter==='all'||e.cat===filter)&&( !q || [e.name,e.pt,e.abbr,e.descPt,e.descEn].join(' ').toLowerCase().includes(q))).map(e=>'<article class="ystatus-card"><div class="ystatus-icon"><img src="'+iconBase+encodeURIComponent(e.file)+'" alt="'+e.name+'" loading="lazy" onerror="this.parentElement.innerHTML=\'<span style=&quot;font-size:22px&quot;>◈</span>\'"></div><div><h3>'+e.name+' <span style="color:#8fa0af;font-size:11px">• '+(isEN()?e.name:e.pt)+'</span></h3><p>'+(isEN()?e.descEn:e.descPt)+'</p><span class="abbr">'+e.abbr+'</span></div></article>').join('');
+}
+document.querySelectorAll('[data-status-filter]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-status-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}));
+document.getElementById('ystatus-search')?.addEventListener('input',render);
+render();
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
+})();
+</script>
+</body></html>
