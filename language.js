@@ -2,11 +2,15 @@
 'use strict';
 const K='yunarunes-language';
 const NAV=[
- ['index.html','Monstros','Monsters'],
- ['database.html','Database','Database'],
- ['team-builder.html','Team Builder','Team Builder'],
- ['runes.html','Runas','Runes'],
- ['optimizer.html','Optimizer','Optimizer']
+ ['index.html','🏠 Início','🏠 Home'],
+ ['database.html','👹 Database','👹 Database'],
+ ['team-builder.html','⚔️ Team Builder','⚔️ Team Builder'],
+ ['runes.html','🧿 Runas','🧿 Runes'],
+ ['optimizer.html','⚙️ Optimizer','⚙️ Optimizer'],
+ ['artifact-optimizer.html','💠 Artifacts','💠 Artifacts'],
+ ['decks.html','🃏 Decks','🃏 Decks'],
+ ['account-analyzer.html','📊 Análise de Conta','📊 Account Analyzer'],
+ ['guild-tools.html','⚔️ Guild/Siege','⚔️ Guild/Siege']
 ];
 const PAIRS={
  'Monstros':'Monsters','Monstro':'Monster','monstros':'monsters','monstro':'monster','Runas':'Runes',
@@ -38,6 +42,46 @@ const PAIRS={
  'Leva as ferramentas contigo no telemóvel.':'Take the tools with you on your phone.','Instalar / Baixar APK':'Install / Download APK',
  'Não afiliado à Com2uS.':'Not affiliated with Com2uS.','Projeto independente da comunidade Summoners War':'Independent Summoners War community project',
  'YunaRunes para Android':'YunaRunes for Android','Abrir página do monstro →':'Open monster page →'
+, '🦊 YunaRunes • Summoners War':'🦊 YunaRunes • Summoners War'
+, 'O seu hub de':'Your hub for'
+, 'mobs, runas':'monsters, runes'
+, 'e equipes.':'and teams.'
+, 'pesquisa um monstro, monta uma equipe, cria builds, otimiza o seu inventário e salva os seus mobs favoritos. Tudo num só lugar, preparado para PC e celular.':'search for a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. All in one place, ready for PC and mobile.'
+, 'Pesquisar':'Search'
+, 'Carregando a base de monstros...':'Loading monster database...'
+, 'NOVOS PLAYERS':'NEW PLAYERS'
+, 'Yuna Academy — Aprender Summoners War':'Yuna Academy — Learn Summoners War'
+, 'Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.':'Learn the basics: elements, PROC, STUN, runes, stats, monster roles, and much more.'
+, 'Começar a aprender →':'Start learning →'
+, 'ACESSO RÁPIDO':'QUICK ACCESS'
+, 'Escolhe a categoria de monstros':'Choose a monster category'
+, 'Monstros de 2 estrelas':'2-star monsters'
+, 'Monstros de 3 estrelas':'3-star monsters'
+, 'Monstros de 4 estrelas':'4-star monsters'
+, 'Monstros de 5 estrelas':'5-star monsters'
+, 'Ver monstros →':'View monsters →'
+, 'Abrir →':'Open →'
+, '⭐ Nat 5 em destaque':'⭐ Featured Nat 5'
+, 'Abrir Nat 5 →':'Open Nat 5 →'
+, '🔥 YunaRunes — Atividades':'🔥 YunaRunes — Activities'
+, 'Conteúdo para voltar todos os dias.':'Content to come back to every day.'
+, 'Rune do Dia':'Rune of the Day'
+, 'Uma runa em destaque para analisar, comparar e melhorar.':'A featured rune to analyze, compare, and improve.'
+, 'Abrir Runas →':'Open Runes →'
+, 'Monstro da Semana':'Monster of the Week'
+, 'Descobre um monstro, parceiros e ideias de build.':'Discover a monster, partners, and build ideas.'
+, 'Explorar Database →':'Explore Database →'
+, 'Desafio YunaRunes':'YunaRunes Challenge'
+, 'Um objetivo semanal para testar as tuas builds.':'A weekly goal to test your builds.'
+, 'Criar uma build →':'Create a build →'
+, '📊 Histórico local':'📊 Local history'
+, 'As tuas últimas pesquisas e builds podem ficar guardadas neste dispositivo.':'Your latest searches and builds can be saved on this device.'
+, '💎 Score de runa':'💎 Rune score'
+, 'Usa o Optimizer para comparar potencial, stats e combinações.':'Use Optimizer to compare potential, stats, and combinations.'
+, 'Passa rapidamente da pesquisa de um monstro para uma equipa.':'Quickly go from a monster search to a team.'
+, '💎 Runa do Dia — Resultado':'💎 Rune of the Day — Result'
+, 'Projeto independente da comunidade Summoners War':'Independent Summoners War community project'
+, 'Não afiliado à Com2uS.':'Not affiliated with Com2uS.'
 };
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([pt,en])=>[en,pt]));
 const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}};
@@ -86,15 +130,26 @@ header.top .header-controls .yuna-controls button:not(.active){background:#202a3
 `;
  document.head.appendChild(s);
 }
-function applyText(){
+function applyText(root=document.body){
  document.documentElement.lang=isEN()?'en':'pt-BR';
  document.title=tr(document.title);
- document.querySelectorAll('body *').forEach(e=>{
-  if(e.closest('script,style,noscript,.yuna-controls,.yuna-nav'))return;
-  if(e.children.length===0&&e.firstChild&&e.firstChild.nodeType===3){const raw=e.firstChild.nodeValue,t=raw.trim();if(t){const v=tr(t);if(v!==t)e.firstChild.nodeValue=raw.replace(t,v)}}
+ if(!root)return;
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ let n;
+ while(n=walker.nextNode()){
+  const p=n.parentElement;
+  if(p?.closest('script,style,noscript,.yuna-controls,.yuna-nav'))continue;
+  const raw=n.nodeValue,t=raw.trim();
+  if(t){const v=tr(t);if(v!==t)n.nodeValue=raw.replace(t,v);}
+ }
+ root.querySelectorAll?.('input,textarea,option,[placeholder],[title],[aria-label]').forEach(e=>{
   ['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}});
+  if(e.tagName==='OPTION')e.textContent=tr(e.textContent);
  });
 }
-function boot(){header();style();applyText()}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+function boot(){
+ header();style();applyText();
+ const obs=new MutationObserver(muts=>muts.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1)applyText(n)}));
+ obs.observe(document.body,{childList:true,subtree:true});
+}
 })();
