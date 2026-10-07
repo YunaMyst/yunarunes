@@ -292,78 +292,198 @@ window.applyLanguage=function(){
 setTimeout(()=>window.applyLanguage&&window.applyLanguage(),80);
 })();
 
-/* YUNARUNES UNIVERSAL LANGUAGE ENGINE V5 — PT/BR ↔ EN, including data-pt/data-en Academy content */
-(function(){'use strict';
+/* YUNARUNES — UNIFIED PT/EN LANGUAGE ENGINE
+   One source of truth, no page reload, restores Portuguese source before English translation. */
+(function(){
+'use strict';
 const KEY='yunarunes-language';
-const DICT={"🏠 Início":"🏠 Home","⚔️ Team Builder":"⚔️ Team Builder","🧿 Runas":"🧿 Runes","⚙️ Optimizer":"⚙️ Optimizer","💠 Artifacts":"💠 Artifacts","🃏 Decks":"🃏 Decks","📊 Análise de Conta":"📊 Account Analysis","⚔️ Guild/Siege":"⚔️ Guild/Siege","YunaRunes • Yuna Academy":"YunaRunes • Yuna Academy","Aprende desde o básico":"Learn from the basics"};
-function isEN(){try{return localStorage.getItem(KEY)==='en'}catch(_){return false}}
-function attr(el,name){return el.getAttribute(name)}
-function setHTML(el,html){if(el.innerHTML!==html)el.innerHTML=html}
-function translateElement(el){
-  if(!el || el.closest('script,style,noscript,[data-no-auto-translate]')) return;
-  const en=isEN();
-  const p=attr(el,'data-pt'), e=attr(el,'data-en');
-  if(p!==null || e!==null){
-    const src=en ? (e!==null?e:p||'') : (p!==null?p:e||'');
-    setHTML(el,src);
-    return;
-  }
-  const pp=attr(el,'data-pt-placeholder'), ee=attr(el,'data-en-placeholder');
-  if(pp!==null || ee!==null){
-    el.setAttribute('placeholder',en ? (ee!==null?ee:pp||'') : (pp!==null?pp:ee||''));
-  }
-  const pt=attr(el,'data-pt-title'), et=attr(el,'data-en-title');
-  if(pt!==null || et!==null) el.setAttribute('title',en ? (et!==null?et:pt||'') : (pt!==null?pt:et||''));
+const legacyApply=window.applyLanguage;
+
+const DICT={
+  "🏠 Início":"🏠 Home",
+  "⚔️ Team Builder":"⚔️ Team Builder",
+  "🧿 Runas":"🧿 Runes",
+  "⚙️ Optimizer":"⚙️ Optimizer",
+  "💠 Artifacts":"💠 Artifacts",
+  "🃏 Decks":"🃏 Decks",
+  "📊 Análise de Conta":"📊 Account Analysis",
+  "⚔️ Guild/Siege":"⚔️ Guild/Siege",
+  "YunaRunes • Yuna Academy":"YunaRunes • Yuna Academy"
+};
+
+const isEN=()=>{try{return localStorage.getItem(KEY)==='en'}catch(_){return false}};
+const sourceAttr='data-yuna-source';
+let applying=false;
+let observerTimer=0;
+let ignoreObserverUntil=0;
+
+function sourceText(node){
+  if(!node || node.nodeType!==Node.TEXT_NODE) return;
+  if(node.parentElement?.closest('script,style,noscript,[data-no-auto-translate]')) return;
+  if(!node.nodeValue.trim()) return;
+  if(!node.dataset[sourceAttr]) node.dataset[sourceAttr]=node.nodeValue;
 }
-function tr(s){
-  if(!isEN()) return s;
-  let x=String(s);
-  for(const k of Object.keys(DICT).sort((a,b)=>b.length-a.length)) x=x.split(k).join(DICT[k]);
-  if(typeof window.academyFullEN==='function') x=window.academyFullEN(x);
-  return x;
+
+function snapshot(root=document.body){
+  if(!root) return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n=w.nextNode()) sourceText(n);
 }
-function apply(){
-  if(!document.body)return;
-  const en=isEN();
-  document.querySelectorAll('[data-pt],[data-en],[data-pt-placeholder],[data-en-placeholder],[data-pt-title],[data-en-title]').forEach(translateElement);
-  const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];let n;
+
+function restoreSource(root=document.body){
+  if(!root) return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let n;
   while(n=w.nextNode()){
-    if(n.parentElement?.closest('script,style,noscript,[data-no-auto-translate]'))continue;
-    if(n.parentElement?.hasAttribute('data-pt')||n.parentElement?.hasAttribute('data-en'))continue;
-    if(n.nodeValue.trim())nodes.push(n);
+    if(n.dataset[sourceAttr]!==undefined && n.nodeValue!==n.dataset[sourceAttr]){
+      n.nodeValue=n.dataset[sourceAttr];
+    }
   }
-  nodes.forEach(node=>{
-    if(!node.dataset.yunaOriginal) node.dataset.yunaOriginal=node.nodeValue;
-    const source=node.dataset.yunaOriginal;
-    node.nodeValue=en?tr(source):source;
+}
+
+function clearLegacySnapshots(root=document.body){
+  if(!root) return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  let n;
+  while(n=w.nextNode()){
+    if(n.dataset.yunaOriginal!==undefined) delete n.dataset.yunaOriginal;
+  }
+}
+
+function translateExplicit(root=document.body){
+  if(!root) return;
+  const en=isEN();
+  root.querySelectorAll?.('[data-pt],[data-en]').forEach(el=>{
+    if(el.closest('script,style,noscript,[data-no-auto-translate]')) return;
+    const v=en ? (el.getAttribute('data-en') ?? el.getAttribute('data-pt') ?? '')
+               : (el.getAttribute('data-pt') ?? el.getAttribute('data-en') ?? '');
+    if(el.innerHTML!==v) el.innerHTML=v;
   });
-  document.querySelectorAll('input,textarea,select,button,[title],[aria-label]').forEach(el=>{
-    for(const [pt,enAttr,target] of [['data-pt-placeholder','data-en-placeholder','placeholder'],['data-pt-title','data-en-title','title'],['data-pt-aria','data-en-aria','aria-label']]){
+  root.querySelectorAll?.('[data-pt-placeholder],[data-en-placeholder],[data-pt-title],[data-en-title],[data-pt-aria],[data-en-aria]').forEach(el=>{
+    const pairs=[
+      ['data-pt-placeholder','data-en-placeholder','placeholder'],
+      ['data-pt-title','data-en-title','title'],
+      ['data-pt-aria','data-en-aria','aria-label']
+    ];
+    for(const [pt,enAttr,target] of pairs){
       if(el.hasAttribute(pt)||el.hasAttribute(enAttr)){
-        const v=en?(el.getAttribute(enAttr)||el.getAttribute(pt)||''):(el.getAttribute(pt)||el.getAttribute(enAttr)||'');
+        const v=en ? (el.getAttribute(enAttr) ?? el.getAttribute(pt) ?? '')
+                   : (el.getAttribute(pt) ?? el.getAttribute(enAttr) ?? '');
         el.setAttribute(target,v);
       }
     }
   });
-  document.querySelectorAll('option').forEach(el=>{
-    if(el.hasAttribute('data-pt')||el.hasAttribute('data-en')) return;
-    if(!el.dataset.yunaOriginal)el.dataset.yunaOriginal=el.textContent;
-    el.textContent=en?tr(el.dataset.yunaOriginal):el.dataset.yunaOriginal;
-  });
-  document.documentElement.lang=en?'en':'pt-BR';
-  if(document.title){
-    if(!document.title.dataset){ /* noop for string */ }
-    const titleEl=document.querySelector('title');
-    if(titleEl){
-      if(!titleEl.dataset.yunaOriginal)titleEl.dataset.yunaOriginal=titleEl.textContent;
-      titleEl.textContent=en?tr(titleEl.dataset.yunaOriginal):titleEl.dataset.yunaOriginal;
-    }
-  }
 }
-window.yunaUniversalTranslate=apply;
-const previous=window.applyLanguage;
-window.applyLanguage=function(){if(typeof previous==='function')previous();setTimeout(apply,0)};
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(apply,80),{once:true});else setTimeout(apply,80);
-window.addEventListener('storage',e=>{if(e.key===KEY)setTimeout(apply,50)});
-/* Universal language observer disabled */;
+
+function translateFallbackText(text){
+  let x=String(text);
+  if(!isEN()) return x;
+  const keys=Object.keys(DICT).sort((a,b)=>b.length-a.length);
+  for(const k of keys) x=x.split(k).join(DICT[k]);
+  if(typeof window.academyFullEN==='function') x=window.academyFullEN(x);
+  return x;
+}
+
+function setActiveButtons(){
+  const lang=isEN()?'en':'pt';
+  document.querySelectorAll('.yuna-controls button[data-lang]').forEach(b=>{
+    const active=b.getAttribute('data-lang')===lang;
+    b.classList.toggle('active',active);
+    b.setAttribute('aria-pressed',active?'true':'false');
+  });
+}
+
+function applyLanguageNow(){
+  if(!document.body || applying) return;
+  applying=true;
+  ignoreObserverUntil=performance.now()+300;
+  snapshot();
+  restoreSource();
+  clearLegacySnapshots();
+
+  const en=isEN();
+  document.documentElement.lang=en?'en':'pt-BR';
+  document.documentElement.setAttribute('data-language',en?'en':'pt-BR');
+
+  if(en && typeof legacyApply==='function'){
+    legacyApply();
+  }
+
+  translateExplicit(document);
+  setActiveButtons();
+
+  const title=document.querySelector('title');
+  if(title){
+    if(!title.dataset.yunaSource) title.dataset.yunaSource=title.textContent;
+    if(!en) title.textContent=title.dataset.yunaSource;
+  }
+
+  applying=false;
+}
+
+function setLanguage(lang){
+  const next=lang==='en'?'en':'pt';
+  try{localStorage.setItem(KEY,next)}catch(_){}
+  applyLanguageNow();
+}
+
+function bindButtons(){
+  document.querySelectorAll('.yuna-controls button[data-lang]').forEach(btn=>{
+    if(btn.dataset.yunaUnifiedBound==='1') return;
+    btn.dataset.yunaUnifiedBound='1';
+    btn.addEventListener('click',function(ev){
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      setLanguage(btn.getAttribute('data-lang'));
+    },true);
+  });
+  setActiveButtons();
+}
+
+function scheduleDynamicApply(){
+  if(applying || performance.now()<ignoreObserverUntil) return;
+  clearTimeout(observerTimer);
+  observerTimer=setTimeout(()=>{
+    observerTimer=0;
+    if(!document.body) return;
+    snapshot();
+    if(isEN()){
+      applyLanguageNow();
+    }else{
+      translateExplicit(document);
+      setActiveButtons();
+    }
+  },40);
+}
+
+function init(){
+  snapshot();
+  bindButtons();
+  applyLanguageNow();
+
+  const observer=new MutationObserver(records=>{
+    if(applying || performance.now()<ignoreObserverUntil) return;
+    let relevant=false;
+    for(const record of records){
+      if(record.type==='childList' && record.addedNodes.length) relevant=true;
+      if(record.type==='characterData' && record.target?.nodeValue?.trim()) relevant=true;
+    }
+    if(relevant) scheduleDynamicApply();
+  });
+  observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+}
+
+window.yunaUniversalTranslate=applyLanguageNow;
+window.applyLanguage=applyLanguageNow;
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',init,{once:true});
+}else{
+  init();
+}
+
+window.addEventListener('storage',e=>{
+  if(e.key===KEY) applyLanguageNow();
+});
 })();
