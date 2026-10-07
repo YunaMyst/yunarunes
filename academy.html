@@ -40,26 +40,31 @@
   .academy-hub-card{min-height:115px;padding:13px!important}
 }
 </style><style id="yuna-academy-global-nav-css">
-.academy-global-nav{position:fixed;left:max(10px,calc((100vw - 1500px)/2));top:92px;width:245px;max-height:calc(100vh - 112px);overflow:auto;z-index:50;background:rgba(13,20,28,.97);border:1px solid #293746;border-radius:14px;padding:12px;box-shadow:0 14px 35px rgba(0,0,0,.3)}
+.academy-nav-toggle{position:fixed;left:16px;top:92px;z-index:60;border:1px solid #293746;background:rgba(13,20,28,.97);color:#fff;border-radius:10px;padding:10px 13px;font-size:12px;font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(0,0,0,.28)}
+.academy-nav-toggle:hover{border-color:#35a9e1;color:#35a9e1}
+.academy-global-nav{position:fixed;left:16px;top:140px;width:245px;max-height:calc(100vh - 160px);overflow:auto;z-index:55;background:rgba(13,20,28,.98);border:1px solid #293746;border-radius:14px;padding:12px;box-shadow:0 14px 35px rgba(0,0,0,.3);display:none}
+.academy-global-nav.open{display:block}
 .academy-global-nav h3{margin:2px 6px 10px;color:#fff;font-size:15px}
 .academy-global-nav .nav-group{margin:12px 0 4px;padding:7px 8px;color:#8fa0af;font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
 .academy-global-nav a{display:block;color:#dce6ee;text-decoration:none;border-radius:8px;padding:8px 9px;font-size:11px;font-weight:800;line-height:1.25}
 .academy-global-nav a:hover,.academy-global-nav a.active{background:#182638;color:#35a9e1}
-.wrap{padding-left:285px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:110px}
-@media(max-width:1250px){.academy-global-nav{left:8px;width:210px}.wrap{padding-left:235px}}
+.wrap{padding-left:16px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:110px}
 @media(max-width:900px){
- .academy-global-nav{position:sticky;top:8px;left:auto;width:100%;max-height:none;margin:0 0 12px;padding:9px;display:flex;gap:5px;flex-wrap:wrap;align-items:center}
- .academy-global-nav h3{width:100%;margin:2px 5px 3px}
- .academy-global-nav .nav-group{width:100%;margin:4px 3px 0;padding:4px 5px}
+ .academy-nav-toggle{left:10px;top:8px}
+ .academy-global-nav{left:10px;top:52px;width:calc(100% - 20px);max-height:calc(100vh - 62px);padding:9px}
+ .academy-global-nav h3{margin:2px 5px 8px}
+ .academy-global-nav .nav-group{margin:8px 3px 3px;padding:4px 5px}
  .academy-global-nav a{font-size:10px;padding:7px 8px;background:#101923;border:1px solid #293746}
- .wrap{padding-left:16px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:185px}
+ .wrap{padding-left:16px}.wrap section[id],.wrap > div[id],.wrap > article[id]{scroll-margin-top:70px}
 }
 @media(max-width:600px){
- .academy-global-nav{padding:8px;gap:4px}
+ .academy-nav-toggle{font-size:11px;padding:9px 11px}
+ .academy-global-nav{padding:8px}
  .academy-global-nav a{font-size:10px}
 }
 </style></head>
-<body><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
+<body><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav">☰ Navegação</button>
+<nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
 <h3>🦊 Yuna Academy</h3>
 <div class="nav-group">Início</div>
 <a href="#academy-menu">🎓 Menu da Academy</a>
@@ -857,7 +862,7 @@ $('ycs-start').addEventListener('click',start);$('ycs-turn-btn').addEventListene
 </section></main>
 <script>
 function academyQuiz(ok){const e=document.getElementById("quizResult");e.textContent=ok?"✅ "+(document.documentElement.lang==="en"?"Correct! Stun prevents the monster from acting.":"Correto! Stun impede o monstro de agir."):"❌ "+(document.documentElement.lang==="en"?"Not quite. Stun prevents the monster from acting.":"Ainda não. Stun impede o monstro de agir.");}
-(()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};document.querySelectorAll('#academy-global-nav a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('#academy-global-nav a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')location.reload()});})();
+(()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};(()=>{const nav=document.getElementById('academy-global-nav'),toggle=document.getElementById('academy-nav-toggle');if(!nav||!toggle)return;const closeNav=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰ Navegação'};const openNav=()=>{nav.classList.add('open');toggle.setAttribute('aria-expanded','true');toggle.textContent='✕ Fechar navegação'};toggle.addEventListener('click',()=>nav.classList.contains('open')?closeNav():openNav());nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));a.classList.add('active');setTimeout(closeNav,80)}));document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&e.target!==toggle)closeNav()});window.addEventListener('hashchange',()=>{const h=location.hash;nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===h));});})();document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')location.reload()});})();
 </script>
 <script>
 function academyScenario(type){
