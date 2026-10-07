@@ -117,8 +117,22 @@ header.top .header-controls .yuna-controls>* ,header.top .yuna-unified-controls>
 .yuna-global-language-bar>*{height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0 9px!important;border-radius:7px!important;border:1px solid #293746!important;background:#202a34!important;color:#fff!important;font-weight:800!important;font-size:12px!important;text-decoration:none!important;cursor:pointer!important;pointer-events:auto!important}
 .yuna-global-language-bar .home{background:#111923!important}.yuna-global-language-bar .donate{background:#7c3aed!important;border-color:#a78bfa!important}
 .yuna-global-language-bar button.active,header.top .yuna-unified-controls button.active{background:#35a9e1!important;color:#061018!important;border-color:#35a9e1!important}
-@media(max-width:600px){.yuna-global-language-bar{top:8px!important;right:8px!important;gap:3px!important;padding:4px!important}.yuna-global-language-bar .home{display:none!important}.yuna-global-language-bar>*{height:34px!important;padding:0 6px!important;font-size:10px!important}}
-/* LANGUAGE BUTTONS — always reachable */
+@media(max-width:600px){.yuna-global-language-bar{top:58px!important;right:8px!important;gap:4px!important;padding:4px!important}.yuna-global-language-bar .home{display:none!important}.yuna-global-language-bar>*{height:32px!important;padding:0 7px!important;font-size:10px!important}}
+/* MOBILE HEADER — menu left, YunaRunes centered, Donate + languages right */
+@media(max-width:600px){
+ header.top>.nav{display:grid!important;grid-template-columns:40px minmax(0,1fr) auto!important;grid-template-areas:"menu brand controls" "links links links"!important;align-items:center!important;min-height:54px!important;height:auto!important;padding:7px 10px!important;column-gap:6px!important;box-sizing:border-box!important}
+ header.top .header-brand{grid-area:brand!important;display:flex!important;justify-content:center!important;align-items:center!important;min-width:0!important}
+ header.top .header-brand .brand{margin:0!important;justify-content:center!important;white-space:nowrap!important}
+ header.top .header-menu{grid-area:menu!important;min-width:40px!important}
+ header.top .header-menu .menu-btn{display:block!important;position:static!important;width:38px!important;height:36px!important;padding:8px!important;box-sizing:border-box!important}
+ header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;min-width:0!important}
+ header.top .header-controls .yuna-controls{position:static!important;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:3px!important;overflow:visible!important}
+ header.top .header-controls .yuna-controls .apk-link{display:none!important}
+ header.top .header-controls .yuna-controls .donate-link{display:inline-flex!important;order:1!important;height:32px!important;padding:0 7px!important;font-size:10px!important}
+ header.top .header-controls .yuna-controls [data-lang="pt"],
+ header.top .header-controls .yuna-controls [data-lang="en"]{display:inline-flex!important;order:2!important;min-width:48px!important;width:auto!important;height:32px!important;padding:0 5px!important;font-size:10px!important}
+ header.top .header-menu .nav-links{grid-area:links!important;width:100%!important}
+}
 header.top .header-controls .yuna-controls [data-lang]{position:relative!important;isolation:isolate!important}
 @media(max-width:600px){
  header.top .header-controls .yuna-controls{position:fixed!important;top:8px!important;right:8px!important;z-index:2147483647!important;display:flex!important;gap:4px!important;overflow:visible!important}
