@@ -77,7 +77,13 @@ main.wrap{display:block!important;width:min(1250px,calc(100% - 32px))!important;
   main.wrap{width:calc(100% - 20px)!important}
   .section{width:100%!important}
 }
-</style></head>
+</style>
+<style id="yuna-academy-title-fix">
+.academy-title-en{display:none!important}.academy-title-pt{display:block!important}
+html[lang="en"] .academy-title-pt{display:none!important}
+html[lang="en"] .academy-title-en{display:block!important}
+</style>
+</head>
 <body><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
 <h3>🦊 Yuna Academy</h3>
@@ -136,7 +142,7 @@ main.wrap{display:block!important;width:min(1250px,calc(100% - 32px))!important;
 </nav>
 <section class="hero">
 <div class="eyebrow">🦊 YunaRunes • Yuna Academy</div>
-<h1 data-pt="Aprende Summoners War do <span>zero</span>" data-en="Learn Summoners War from <span>zero</span>"></h1>
+<h1 class="academy-title-pt">Aprende Summoners War do <span>zero</span></h1><h1 class="academy-title-en">Learn Summoners War from <span>zero</span></h1>
 <p data-pt="Um guia simples para novos jogadores entenderem combate, elementos, runas, stats, funções dos monstros e a ordem de progressão. Aprende primeiro os fundamentos e depois usa as ferramentas do YunaRunes para montar as tuas builds." data-en="A simple guide for new players to understand combat, elements, runes, stats, monster roles, and progression. Learn the fundamentals first, then use YunaRunes tools to build your teams and builds."></p>
 <div class="search"><input id="academySearch" data-pt-placeholder="Pesquisar um termo: stun, proc, SPD, runa..." data-en-placeholder="Search a term: stun, proc, SPD, rune..."><button id="searchBtn" data-pt="Pesquisar" data-en="Search"></button></div>
 </section>
