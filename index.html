@@ -363,7 +363,6 @@
         var lang=btn.getAttribute('data-lang')==='en'?'en':'pt';
         try{localStorage.setItem('yunarunes-language',lang)}catch(_){}
         document.documentElement.lang=lang==='en'?'en':'pt-BR';
-        if(typeof window.applyLanguage==='function') window.applyLanguage();
         if(typeof window.yunaUniversalTranslate==='function') window.yunaUniversalTranslate();
         document.querySelectorAll('.yuna-controls button[data-lang]').forEach(function(b){
           var active=b.getAttribute('data-lang')===lang;
