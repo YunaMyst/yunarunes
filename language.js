@@ -87,28 +87,24 @@ const REV=Object.fromEntries(Object.entries(PAIRS).map(([pt,en])=>[en,pt]));
 const isEN=()=>{try{return localStorage.getItem(K)==='en'}catch(_){return false}};
 const tr=s=>{if(!s)return s;const m=isEN()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(m,s)?m[s]:s};
 function header(){
- const h=document.querySelector('header.top');if(!h)return;
- const nav=h.querySelector('.header-menu .nav-links');
+ const h=document.querySelector('header.top');
+ if(!h)return;
+ let nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
  if(nav){
-   const links=nav.querySelectorAll('a');
-   const labels=NAV;
-   links.forEach((a,i)=>{if(labels[i]){a.textContent=(isEN()?labels[i][2]:labels[i][1]);a.href=labels[i][0]}});
+   nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){a.textContent=isEN()?NAV[i][2]:NAV[i][1];a.href=NAV[i][0]}});
  }
- const bar=h.querySelector('.header-controls .yuna-controls');
- if(!bar)return;
- let apk=bar.querySelector('.apk-link');
- const mobile=window.matchMedia('(max-width:600px)').matches;
- if(mobile){
-   if(!apk){
-     apk=document.createElement('a');apk.className='apk-link';apk.href='./downloads/yunarunes.apk';apk.setAttribute('download','');apk.textContent='📱 APK';bar.insertBefore(apk,bar.firstChild);
-   }
- }else if(apk){
-   apk.remove();
+ let bar=h.querySelector('.yuna-unified-controls');
+ if(!bar){
+   bar=document.createElement('div');bar.className='yuna-unified-controls';
+   bar.innerHTML='<a class="donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button>';
+   h.appendChild(bar);
  }
- const pt=bar.querySelector('[data-lang="pt"]'), en=bar.querySelector('[data-lang="en"]');
- if(pt)pt.textContent='🇧🇷 PT/BR';
- if(en)en.textContent='🇬🇧 ENG';
- [pt,en].forEach(b=>{if(!b)return;b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));b.addEventListener("click",(e)=>{e.preventDefault();e.stopImmediatePropagation();localStorage.setItem(K,b.dataset.lang);document.documentElement.lang=b.dataset.lang==="en"?"en":"pt-BR";location.reload()})});
+ bar.querySelectorAll('[data-lang]').forEach(b=>{
+   b.classList.toggle('active',b.dataset.lang===(isEN()?'en':'pt'));
+   if(b.dataset.yunaBound==='1')return;
+   b.dataset.yunaBound='1';
+   b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();localStorage.setItem(K,b.dataset.lang);document.documentElement.lang=b.dataset.lang==='en'?'en':'pt-BR';location.reload()});
+ });
 }
 function style(){
  let s=document.getElementById('yuna-language-style');
@@ -132,20 +128,15 @@ header.top .header-controls .yuna-controls button:not(.active){background:#202a3
 }
 function applyText(root=document.body){
  document.documentElement.lang=isEN()?'en':'pt-BR';
- document.title=tr(document.title);
  if(!root)return;
- const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
- let n;
+ root.querySelectorAll?.('[data-pt][data-en]').forEach(e=>{e.textContent=isEN()?e.getAttribute('data-en'):e.getAttribute('data-pt')});
+ root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(e=>{e.placeholder=isEN()?e.getAttribute('data-en-placeholder'):e.getAttribute('data-pt-placeholder')});
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
  while(n=walker.nextNode()){
-  const p=n.parentElement;
-  if(p?.closest('script,style,noscript,.yuna-controls,.yuna-nav'))continue;
-  const raw=n.nodeValue,t=raw.trim();
-  if(t){const v=tr(t);if(v!==t)n.nodeValue=raw.replace(t,v);}
+  const p=n.parentElement;if(p?.closest('script,style,noscript,.yuna-unified-controls'))continue;
+  const t=n.nodeValue.trim();if(t){const v=tr(t);if(v!==t)n.nodeValue=n.nodeValue.replace(t,v)}
  }
- root.querySelectorAll?.('input,textarea,option,[placeholder],[title],[aria-label]').forEach(e=>{
-  ['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}});
-  if(e.tagName==='OPTION')e.textContent=tr(e.textContent);
- });
+ root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}}));
 }
 function boot(){
  header();style();applyText();
