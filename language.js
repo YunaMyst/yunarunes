@@ -131,14 +131,28 @@ function applyText(root=document.body){
  }
  root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(x!==v)e.setAttribute(a,x)}}));
 }
+function setLanguage(lang){
+ lang=lang==='en'?'en':'pt';
+ try{localStorage.setItem(K,lang)}catch(_){}
+ document.documentElement.lang=lang==='en'?'en':'pt-BR';
+ header();
+ applyText(document.body);
+}
 document.addEventListener('click',e=>{
  const b=e.target.closest?.('[data-lang]');
  if(!b)return;
- e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
- const lang=b.dataset.lang==='en'?'en':'pt';
- try{localStorage.setItem(K,lang)}catch(_){}
- document.documentElement.lang=lang==='en'?'en':'pt-BR';
- location.reload();
+ e.preventDefault();
+ e.stopPropagation();
+ e.stopImmediatePropagation();
+ setLanguage(b.dataset.lang);
+},true);
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const b=e.target.closest?.('[data-lang]');
+ if(!b)return;
+ e.preventDefault();
+ e.stopPropagation();
+ setLanguage(b.dataset.lang);
 },true);
 
 function boot(){
