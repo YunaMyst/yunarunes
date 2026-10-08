@@ -1285,7 +1285,19 @@ Object.assign(PAIRS, {
  "Aprende a descobrir o que a tua equipa realmente precisa.": "Learn to identify what your team really needs.",
  "Os termos que vais encontrar no jogo.": "Terms you'll encounter in the game.",
  "Experimenta e entende as mecânicas na prática.": "Experiment with and understand the mechanics in practice.",
- "Responde a perguntas e vê se aprendeste.": "Answer questions and see what you've learned."
+ "Responde a perguntas e vê se aprendeste.": "Answer questions and see what you've learned.",
+ "monstros disponíveis": "monsters available",
+ "A base de monstros não pôde ser carregada.": "The monster database could not be loaded.",
+ "A carregar a base de monstros...": "Loading monster database...",
+ "Carregando a base de monstros...": "Loading monster database...",
+ "pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel.": "Search for a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. Everything in one place, ready for desktop and mobile.",
+ "ACESSO RÁPIDO": "QUICK ACCESS",
+ "Escolhe a categoria de monstros": "Choose a monster category",
+ "Conteúdo para voltar todos os dias.": "Content to come back to every day.",
+ "As tuas últimas pesquisas e builds podem ficar guardadas neste dispositivo.": "Your recent searches and builds can be saved on this device.",
+ "Usa o Optimizer para comparar potencial, stats e combinações.": "Use the Optimizer to compare potential, stats, and combinations.",
+ "Passa rapidamente da pesquisa de um monstro para uma equipa.": "Quickly go from searching for a monster to building a team.",
+ "A base de monstros": "The monster database"
 });
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
