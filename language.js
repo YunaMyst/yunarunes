@@ -48,6 +48,7 @@ function apply(root=document.body){
  if(!root)return;
  document.documentElement.lang=en()?'en':'pt-BR';
  const map=en()?PAIRS:REV;
+ const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
  // Translate explicitly marked elements first.
  if(root.querySelectorAll){
   root.querySelectorAll('[data-pt][data-en]').forEach(el=>{
@@ -84,7 +85,6 @@ function apply(root=document.body){
   let translated=map[trimmed];
   if(typeof translated!=='string'){
    translated=trimmed;
-   const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
    for(const key of keys)if(translated.includes(key))translated=translated.split(key).join(map[key]);
   }
   if(typeof translated==='string'&&translated!==trimmed){
