@@ -45,36 +45,24 @@ function updateHeader(){
 }
 function apply(root=document.body){
  document.documentElement.lang=en()?'en':'pt-BR';
- const map=en()?PAIRS:REV;
- root.querySelectorAll?.('[data-pt][data-en]').forEach(e=>{const value=en()?e.dataset.en:e.dataset.pt;if(e.textContent!==value)e.textContent=value});
- root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(e=>{const value=en()?e.dataset.enPlaceholder:e.dataset.ptPlaceholder;if(e.placeholder!==value)e.placeholder=value});
- root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(v!==x)e.setAttribute(a,x)}}));
- // Do not block the first paint with a full-document TreeWalker.
- // Legacy text translation is processed in small chunks after rendering.
- const keys=Object.keys(map).sort((a,b)=>b.length-a.length);
- const nodes=[];
- const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
- let n;
- while(n=walker.nextNode()){
-   const p=n.parentElement;
-   if(!p||p.closest('script,style,noscript,[data-lang],code,pre,[data-pt][data-en]'))continue;
-   if(n.nodeValue.trim())nodes.push(n);
- }
- let i=0;
- const chunk=()=>{
-   const end=Math.min(i+80,nodes.length);
-   for(;i<end;i++){
-     const node=nodes[i];
-     if(!node.isConnected)continue;
-     let value=node.nodeValue;
-     for(const source of keys){
-       if(source && source!==map[source] && value.includes(source))value=value.split(source).join(map[source]);
+ root.querySelectorAll?.('[data-pt][data-en]').forEach(el=>{
+   const value=en()?el.dataset.en:el.dataset.pt;
+   if(el.textContent!==value)el.textContent=value;
+ });
+ root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(el=>{
+   const value=en()?el.dataset.enPlaceholder:el.dataset.ptPlaceholder;
+   if(el.placeholder!==value)el.placeholder=value;
+ });
+ root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(el=>{
+   ['placeholder','title','aria-label'].forEach(attr=>{
+     if(!el.hasAttribute(attr))return;
+     const value=el.getAttribute(attr);
+     if(attr==='placeholder'){
+       const pt=el.getAttribute('data-pt-placeholder'), enValue=el.getAttribute('data-en-placeholder');
+       if(pt&&enValue)el.setAttribute(attr,en()?enValue:pt);
      }
-     if(value!==node.nodeValue)node.nodeValue=value;
-   }
-   if(i<nodes.length)requestAnimationFrame(chunk);
- };
- requestAnimationFrame(chunk);
+   });
+ });
 }
 
 function setLanguage(lang){save(lang==='en'?'en':'pt');document.documentElement.lang=en()?'en':'pt-BR';updateHeader();apply(document.body);updateHeader();}
