@@ -40,7 +40,7 @@ function save(lang){try{localStorage.setItem(K,lang);document.cookie='yunarunes-
 function updateHeader(){
  const h=document.querySelector('header.top'); if(!h)return;
  const nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
- if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){a.textContent=en()?NAV[i][2]:NAV[i][1];a.href=NAV[i][0]}});
+ if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){const label=en()?NAV[i][2]:NAV[i][1];if(a.textContent!==label)a.textContent=label;a.href=NAV[i][0]}});
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
 }
 function apply(root=document.body){
