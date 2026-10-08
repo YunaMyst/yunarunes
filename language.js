@@ -46,8 +46,8 @@ function updateHeader(){
 function apply(root=document.body){
  document.documentElement.lang=en()?'en':'pt-BR';
  const map=en()?PAIRS:REV;
- root.querySelectorAll?.('[data-pt][data-en]').forEach(e=>e.textContent=en()?e.dataset.en:e.dataset.pt);
- root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(e=>e.placeholder=en()?e.dataset.enPlaceholder:e.dataset.ptPlaceholder);
+ root.querySelectorAll?.('[data-pt][data-en]').forEach(e=>{const value=en()?e.dataset.en:e.dataset.pt;if(e.textContent!==value)e.textContent=value});
+ root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(e=>{const value=en()?e.dataset.enPlaceholder:e.dataset.ptPlaceholder;if(e.placeholder!==value)e.placeholder=value});
  root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(v!==x)e.setAttribute(a,x)}}));
  const keys=Object.keys(map).sort((a,b)=>b.length-a.length);
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
