@@ -1369,6 +1369,40 @@ Object.assign(PAIRS,{
  'Builds públicas':'Public builds','Defesa adversária':'Enemy defense','Defesas rápidas':'Quick defenses'
 
 });
+Object.assign(PAIRS,{
+ "Gere uma runa para começar.":"Generate a rune to get started.",
+ "Não guardada":"Not saved",
+ "✨ Analisa esta combinação no Optimizer e usa-a como referência para as tuas builds.":"✨ Analyze this combination in Optimizer and use it as a reference for your builds.",
+ "EHP — sobrevivência":"EHP — survivability",
+ "Stats mínimas":"Minimum stats",
+ "Usar inventário de demonstração":"Use demo inventory",
+ "Importar o seu inventário JSON":"Import your JSON inventory",
+ "Não existem runas suficientes para os filtros escolhidos.":"There are not enough runes for the selected filters.",
+ "Nenhuma combinação encontrada. Experimenta baixar os mínimos ou deixar algum set/main stat em “Qualquer”.":"No combinations found. Try lowering the minimums or setting a set/main stat to “Any”.",
+ "Erro ao carregar o inventário.":"Error loading inventory.",
+ "Inventário importado. Agora podes otimizar.":"Inventory imported. You can now optimize.",
+ "JSON inválido. Usa um arquivo de inventário de runas em formato de lista.":"Invalid JSON. Use a rune inventory file in list format.",
+ "Guarda as tuas equipas por conteúdo, adiciona notas e exporta/importa os decks.":"Save your teams by content, add notes, and export/import decks.",
+ "Usar análise de demonstração":"Use demo analysis",
+ "Exportar análise":"Export analysis",
+ "A analisar dados de demonstração.":"Analyzing demo data.",
+ "Qualidade média":"Average quality",
+ "Este monstro possui uma versão de Segundo Despertar.":"This monster has a Second Awakening version.",
+ "Monstro não encontrado":"Monster not found",
+ "Ordena artefactos por adequação ao monstro, tipo de dano e qualidade das linhas.":"Rank artifacts by monster fit, damage type, and line quality.",
+ "Função":"Role",
+ "A usar artefactos de demonstração.":"Using demo artifacts.",
+ "Builds públicas":"Public builds",
+ "Defesa adversária":"Enemy defense",
+ "Defesas rápidas":"Quick defenses",
+ "Pesquisa um monstro para começar.":"Search for a monster to get started.",
+ "Substats prioritárias:":"Priority substats:",
+ "Conteúdo":"Content",
+ "Pesquisa um monstro e o YunaRunes monta várias opções de equipes respeitando o limite de cada conteúdo.":"Search for a monster and YunaRunes will build team options that respect each content limit.",
+ "Escolhe qualquer monstro, elemento e evolução disponível na base. Cada variante usa a fotografia correspondente.":"Choose any monster, element, and evolution available in the database. Each variant uses its corresponding image.",
+ "O YunaRunes procura combinações reais do inventário, respeitando slots, conjuntos, main stats e requisitos mínimos.":"YunaRunes searches real inventory combinations, respecting slots, sets, main stats, and minimum requirements.",
+ "Analisa a tua conta a partir de monstros e inventário. Sem servidor: os dados ficam no teu navegador.":"Analyze your account using monsters and inventory. No server: your data stays in your browser."
+});
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
