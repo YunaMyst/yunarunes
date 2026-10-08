@@ -1464,6 +1464,22 @@ function apply(root=document.body){
    });
   });
  }
+ // Translate common form/control attributes too; these are not text nodes.
+ if(root.querySelectorAll){
+  root.querySelectorAll('input,textarea,button,select,[title],[aria-label]').forEach(el=>{
+   for(const attr of ['placeholder','title','aria-label']){
+    const raw=el.getAttribute(attr);
+    if(!raw)continue;
+    const trimmed=raw.trim();
+    let value=map[trimmed];
+    if(typeof value!=='string'){
+     value=trimmed;
+     for(const key of keys)if(value.includes(key))value=value.split(key).join(map[key]);
+    }
+    if(value!==trimmed)el.setAttribute(attr,raw.replace(trimmed,value));
+   }
+  });
+ }
  // One efficient pass: O(number of text nodes), rather than checking every
  // dictionary entry against every node. This also translates pages without data attributes.
  const doc=root.ownerDocument||document;
