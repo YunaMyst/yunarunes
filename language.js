@@ -49,23 +49,37 @@ function apply(root=document.body){
  root.querySelectorAll?.('[data-pt][data-en]').forEach(e=>{const value=en()?e.dataset.en:e.dataset.pt;if(e.textContent!==value)e.textContent=value});
  root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(e=>{const value=en()?e.dataset.enPlaceholder:e.dataset.ptPlaceholder;if(e.placeholder!==value)e.placeholder=value});
  root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(e=>['placeholder','title','aria-label'].forEach(a=>{if(e.hasAttribute(a)){const v=e.getAttribute(a),x=tr(v);if(v!==x)e.setAttribute(a,x)}}));
+ // Do not block the first paint with a full-document TreeWalker.
+ // Legacy text translation is processed in small chunks after rendering.
  const keys=Object.keys(map).sort((a,b)=>b.length-a.length);
- const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
+ const nodes=[];
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+ let n;
  while(n=walker.nextNode()){
-  const p=n.parentElement;if(!p||p.closest('script,style,noscript,[data-lang],code,pre,[data-pt][data-en]'))continue;
-  let value=n.nodeValue;
-  if(!value.trim())continue;
-  for(const source of keys){
-   if(!source||source===map[source])continue;
-   if(value.includes(source))value=value.split(source).join(map[source]);
-  }
-  if(value!==n.nodeValue)n.nodeValue=value;
+   const p=n.parentElement;
+   if(!p||p.closest('script,style,noscript,[data-lang],code,pre,[data-pt][data-en]'))continue;
+   if(n.nodeValue.trim())nodes.push(n);
  }
+ let i=0;
+ const chunk=()=>{
+   const end=Math.min(i+80,nodes.length);
+   for(;i<end;i++){
+     const node=nodes[i];
+     if(!node.isConnected)continue;
+     let value=node.nodeValue;
+     for(const source of keys){
+       if(source && source!==map[source] && value.includes(source))value=value.split(source).join(map[source]);
+     }
+     if(value!==node.nodeValue)node.nodeValue=value;
+   }
+   if(i<nodes.length)requestAnimationFrame(chunk);
+ };
+ requestAnimationFrame(chunk);
 }
 
 function setLanguage(lang){save(lang==='en'?'en':'pt');document.documentElement.lang=en()?'en':'pt-BR';updateHeader();apply(document.body);updateHeader();}
 function bind(){document.querySelectorAll('[data-lang]').forEach(b=>{if(b.dataset.bound==='1')return;b.dataset.bound='1';b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false);b.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false)});}
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-lang]');if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}},true);
-function boot(){updateHeader();apply();bind();setTimeout(()=>{updateHeader();apply();bind()},50);}
+function boot(){updateHeader();bind();apply();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
