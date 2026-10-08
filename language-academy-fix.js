@@ -21,6 +21,6 @@ function translate(root=document.body){
  if(out!==raw)n.nodeValue=n.nodeValue.replace(raw,out);
  }
 }
-function boot(){translate();new MutationObserver(records=>records.forEach(r=>r.addedNodes.forEach(n=>{if(n.nodeType===1)translate(n);else if(n.nodeType===3&&n.parentElement)translate(n.parentElement)}))).observe(document.body,{childList:true,subtree:true});}
+function boot(){translate();new MutationObserver(records=>records.forEach(r=>{if(r.type==='childList')r.addedNodes.forEach(n=>{if(n.nodeType===1)translate(n);else if(n.nodeType===3&&n.parentElement)translate(n.parentElement)});else if(r.type==='characterData'&&r.target.parentElement)translate(r.target.parentElement)})).observe(document.body,{childList:true,subtree:true,characterData:true});window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')translate()});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
