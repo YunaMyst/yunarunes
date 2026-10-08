@@ -66,6 +66,6 @@ function apply(root=document.body){
 function setLanguage(lang){save(lang==='en'?'en':'pt');document.documentElement.lang=en()?'en':'pt-BR';updateHeader();apply(document.body);updateHeader();}
 function bind(){document.querySelectorAll('[data-lang]').forEach(b=>{if(b.dataset.bound==='1')return;b.dataset.bound='1';b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false);b.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false)});}
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-lang]');if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}},true);
-function boot(){updateHeader();apply();bind();setTimeout(()=>{updateHeader();apply();bind()},50);const mo=new MutationObserver(records=>{if(records.some(r=>r.addedNodes.length)){apply();updateHeader();bind()}});if(document.body)mo.observe(document.body,{childList:true,subtree:true});}
+function boot(){updateHeader();apply();bind();setTimeout(()=>{updateHeader();apply();bind()},50);const mo=new MutationObserver(records=>{for(const record of records){record.addedNodes.forEach(node=>{if(node.nodeType!==1)return;apply(node);if(node.matches?.('[data-lang]'))bind();node.querySelectorAll?.('[data-lang]').forEach(()=>bind());});}});if(document.body)mo.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
