@@ -92,7 +92,61 @@ header.top .header-menu{grid-column:2;min-width:0}.nav-links{display:flex;align-
 header.top .header-controls{grid-column:3;display:flex;justify-content:flex-end}.yuna-controls{display:flex;gap:5px;align-items:center}.yuna-controls>*{height:38px;padding:0 9px;border-radius:8px;font-size:12px;font-weight:900;cursor:pointer}.yuna-controls button{border:1px solid #293746;background:#202a34;color:#fff}.donate-link{display:inline-flex;align-items:center;text-decoration:none;background:#7c3aed;color:#fff;border:1px solid #a78bfa}
 .yuna-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}
 @media(max-width:600px){header.top>.nav{height:auto;min-height:54px;grid-template-columns:42px 1fr 42px;grid-template-areas:"menu brand controls" "links links links";padding:7px 10px}.header-brand{grid-area:brand!important;text-align:center}.header-menu{grid-area:menu!important}.header-controls{grid-area:controls!important}.menu-btn{display:block!important;position:static!important;background:#172330;color:#fff;border:1px solid #293746;border-radius:7px;padding:8px 10px;cursor:pointer}.nav-links{display:none;grid-area:links;width:100%;padding:8px 0 4px;grid-template-columns:1fr 1fr}.nav-toggle:checked~.nav-links{display:grid}.nav-links a{background:#101923;border:1px solid #202d3b;text-align:center;font-size:12px}.yuna-controls{gap:4px;flex-wrap:wrap;justify-content:flex-end}.yuna-controls>*{height:34px;padding:0 6px;font-size:10px}}
-</style></head>
+</style>
+<style id="yuna-academy-polish-v2">
+/* Yuna Academy: visual cleanup, spacing and navigation that does not cover the site header. */
+:root{scroll-padding-top:82px}
+body{line-height:1.5}
+main.wrap{padding-top:22px!important;padding-bottom:56px!important}
+.hero{border-radius:20px!important;border-color:#2c4053!important;background:radial-gradient(circle at 95% 0%,rgba(53,169,225,.12),transparent 32%),linear-gradient(135deg,#151f2b,#0d141c)!important;box-shadow:0 12px 34px rgba(0,0,0,.16)}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:6px;background:#211b35;border:1px solid #443568;border-radius:999px;padding:6px 10px;letter-spacing:.8px}
+.hero h1{max-width:900px;font-size:clamp(30px,4vw,44px)!important;letter-spacing:-.6px}
+.hero>p{max-width:800px!important;font-size:15px!important}
+.search input{min-width:0;outline:none;transition:border-color .15s,box-shadow .15s}
+.search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(53,169,225,.13)}
+.search button{transition:filter .15s,transform .15s}
+.search button:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.section{padding:clamp(15px,2vw,22px)!important;border-radius:15px!important;background:linear-gradient(145deg,#111923,#0e151e)!important;box-shadow:0 7px 22px rgba(0,0,0,.10)}
+.section h2{line-height:1.25;letter-spacing:-.25px}
+.section>p{max-width:900px}
+.cards,.acx-grid,.master-grid,.academy-hub-grid,.ystatus-grid{align-items:stretch}
+.card,.acx-card,.master-card,.gloss,.academy-hub-card,.ystatus-card{min-width:0;overflow-wrap:anywhere}
+.card,.acx-card,.master-card,.gloss{transition:transform .16s,border-color .16s,background .16s}
+.card:hover,.acx-card:hover,.master-card:hover,.gloss:hover{border-color:#3b5369}
+.academy-hub-card{height:100%;min-height:120px;background:linear-gradient(145deg,#14202c,#0e151e)!important}
+.academy-hub-card b{line-height:1.35}
+.academy-quiz,.thinking-box,.acx-result,.challenge-result,.battle-result,.rune-lab-result,.ask-result{border-radius:13px}
+.academy-nav-toggle{top:74px!important;left:max(16px,calc((100vw - 1250px)/2))!important;width:42px!important;height:42px!important}
+.academy-global-nav{top:124px!important;left:max(16px,calc((100vw - 1250px)/2))!important}
+header.top{z-index:100!important}
+.academy-nav-toggle{z-index:110!important}
+.academy-global-nav{z-index:109!important}
+button,a,input,select{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #35a9e1!important;outline-offset:3px}
+@media(max-width:900px){
+ main.wrap{padding-top:16px!important}
+ .academy-nav-toggle{top:68px!important;left:10px!important}
+ .academy-global-nav{top:112px!important;left:10px!important}
+}
+@media(max-width:600px){
+ main.wrap{padding-bottom:36px!important}
+ .hero{padding:18px!important;border-radius:15px!important}
+ .hero h1{font-size:clamp(27px,8vw,35px)!important;max-width:100%;overflow-wrap:anywhere}
+ .hero>p{font-size:14px!important}
+ .section{margin-bottom:11px!important;padding:14px!important}
+ .section h2{font-size:19px!important}
+ .academy-hub-card{min-height:108px!important;padding:11px!important}
+ .academy-hub-card .icon{font-size:22px!important}
+ .academy-hub-card b{font-size:12px!important}
+ .academy-hub-card span{font-size:10px!important}
+ .academy-nav-toggle{top:62px!important;left:8px!important;width:38px!important;height:38px!important}
+ .academy-global-nav{top:106px!important;left:8px!important;width:calc(100% - 16px)!important;max-height:calc(100dvh - 116px)!important}
+ .ystatus-card{align-items:flex-start!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+
+</head>
 <body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes"><span>YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a href="artifact-optimizer.html">💠 Artifacts</a><a href="decks.html">🃏 Decks</a><a href="account-analyzer.html">📊 Análise de Conta</a><a href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
 <h3>🦊 Yuna Academy</h3>
