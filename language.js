@@ -1299,6 +1299,23 @@ Object.assign(PAIRS, {
  "Passa rapidamente da pesquisa de um monstro para uma equipa.": "Quickly go from searching for a monster to building a team.",
  "A base de monstros": "The monster database"
 });
+Object.assign(PAIRS,{
+ 'Todos os elementos':'All elements','Todos':'All','Carregando a base...':'Loading database...','Nenhum monstro encontrado.':'No monsters found.',
+ 'Monstros':'Monsters','Carregando monstros...':'Loading monsters...','Pesquisa um monstro para começar.':'Search for a monster to get started.',
+ 'Substats prioritárias:':'Priority substats:','Monstro não encontrado. Primeiro espera os monstros carregarem e escolhe um nome da lista.':'Monster not found. Wait for the monsters to load, then choose a name from the list.',
+ 'Não guardada':'Not saved','Escolher main stat':'Choose main stat','EHP — sobrevivência':'EHP — survivability','Stats mínimas':'Minimum stats',
+ 'Usar inventário de demonstração':'Use demo inventory','Importar o seu inventário JSON':'Import your JSON inventory','Carregando inventário...':'Loading inventory...',
+ 'Não existem runas suficientes para os filtros escolhidos.':'There are not enough runes for the selected filters.','Erro ao carregar o inventário.':'Error loading inventory.',
+ 'Inventário importado. Agora podes otimizar.':'Inventory imported. You can now optimize.','JSON inválido. Usa um arquivo de inventário de runas em formato de lista.':'Invalid JSON. Use a rune inventory file in list format.',
+ 'Guarda as tuas equipas por conteúdo, adiciona notas e exporta/importa os decks.':'Save your teams by content, add notes, and export/import decks.',
+ 'Conteúdo':'Content','Guardar deck':'Save deck','Usar análise de demonstração':'Use demo analysis','Exportar análise':'Export analysis',
+ 'A analisar dados de demonstração.':'Analyzing demo data.','Qualidade média':'Average quality','Boa base para evolução':'Good foundation for progression',
+ 'Grande margem para melhorar':'Plenty of room to improve','Runas ≥85%':'Runes ≥85%','Artefactos média':'Average artifacts',
+ 'Não foi possível carregar os monstros.':'Could not load monsters.','A carregar a base de monstros...':'Loading monster database...',
+ '✨ Analisa esta combinação no Optimizer e usa-a como referência para as tuas builds.':'✨ Analyze this combination in the Optimizer and use it as a reference for your builds.',
+ 'YunaRunes © 2026 · Projeto independente da comunidade Summoners War · Não afiliado à Com2uS.':'YunaRunes © 2026 · Independent Summoners War community project · Not affiliated with Com2uS.',
+ 'Início':'Home','Artefactos':'Artifacts','Guilda':'Guild','Defesa':'Defense','Ataque':'Attack','Velocidade':'Speed','Precisão':'Accuracy','Resistência':'Resistance','Nível':'Level','Dano':'Damage','Guardar':'Save','Cancelar':'Cancel','Voltar':'Back','Próximo':'Next','Anterior':'Previous'
+});
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
