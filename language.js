@@ -1314,7 +1314,23 @@ Object.assign(PAIRS,{
  'Não foi possível carregar os monstros.':'Could not load monsters.','A carregar a base de monstros...':'Loading monster database...',
  '✨ Analisa esta combinação no Optimizer e usa-a como referência para as tuas builds.':'✨ Analyze this combination in the Optimizer and use it as a reference for your builds.',
  'YunaRunes © 2026 · Projeto independente da comunidade Summoners War · Não afiliado à Com2uS.':'YunaRunes © 2026 · Independent Summoners War community project · Not affiliated with Com2uS.',
- 'Início':'Home','Artefactos':'Artifacts','Guilda':'Guild','Defesa':'Defense','Ataque':'Attack','Velocidade':'Speed','Precisão':'Accuracy','Resistência':'Resistance','Nível':'Level','Dano':'Damage','Guardar':'Save','Cancelar':'Cancel','Voltar':'Back','Próximo':'Next','Anterior':'Previous'
+ 'Início':'Home','Artefactos':'Artifacts','Guilda':'Guild','Defesa':'Defense','Ataque':'Attack','Velocidade':'Speed','Precisão':'Accuracy','Resistência':'Resistance','Nível':'Level','Dano':'Damage','Guardar':'Save','Cancelar':'Cancel','Voltar':'Back','Próximo':'Next','Anterior':'Previous',
+ 'Este monstro possui uma versão de Segundo Despertar.':'This monster has a Second Awakening version.',
+ 'Monstro não encontrado':'Monster not found',
+ 'Ordena artefactos por adequação ao monstro, tipo de dano e qualidade das linhas.':'Rank artifacts by monster fit, damage type, and line quality.',
+ 'Função':'Role',
+ 'Analisa a tua conta a partir de monstros e inventário. Sem servidor: os dados ficam no teu navegador.':'Analyze your account using monsters and inventory. No server: your data stays in your browser.',
+ 'Pesquisa monstros, filtra por elemento e estrelas e abre a ficha individual para ver mais informações.':'Search monsters, filter by element and stars, and open an individual profile for more information.',
+ 'Pesquisa um monstro e o YunaRunes monta várias opções de equipes respeitando o limite de cada conteúdo.':'Search for a monster and YunaRunes will build team options that respect each content limit.',
+ 'Escolhe qualquer monstro, elemento e evolução disponível na base. Cada variante usa a fotografia correspondente.':'Choose any monster, element, and evolution available in the database. Each variant uses its corresponding image.',
+ 'O YunaRunes procura combinações reais do inventário, respeitando slots, conjuntos, main stats e requisitos mínimos.':'YunaRunes searches real inventory combinations, respecting slots, sets, main stats, and minimum requirements.',
+ 'Nenhuma combinação encontrada. Experimenta baixar os mínimos ou deixar algum set/main stat em “Qualquer”.':'No combinations found. Try lowering the minimums or setting a set/main stat to “Any”.',
+ 'Não foi possível criar uma equipe válida com':'Could not create a valid team with',
+ 'opções diferentes.':'different options.',
+ 'permite no máximo':'allows a maximum of',
+ 'Carregando todos os monstros...':'Loading all monsters...',
+ 'Builds públicas':'Public builds','Defesa adversária':'Enemy defense','Defesas rápidas':'Quick defenses'
+
 });
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
