@@ -1412,11 +1412,11 @@ function ensureLanguageControls(){
  const h=document.querySelector('header.top'); if(!h||h.querySelector('[data-lang]'))return;
  const controls=document.createElement('div');
  controls.className='yuna-controls yuna-language-controls';
- controls.innerHTML='<a class="donate-link" href="https://www.paypal.com/donate/" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt" aria-label="Português">🇧🇷 PT/BR</button><button type="button" data-lang="en" aria-label="English">🇬🇧 ENG</button>';
+ controls.innerHTML='<button type="button" data-lang="pt" aria-label="Português">🇧🇷 PT/BR</button><button type="button" data-lang="en" aria-label="English">🇬🇧 ENG</button>';
  h.appendChild(controls);
  if(!document.getElementById('yuna-language-controls-style')){
   const style=document.createElement('style');style.id='yuna-language-controls-style';
-  style.textContent='header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header.top .yuna-language-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-left:auto}header.top .yuna-language-controls button{cursor:pointer;border:1px solid #34475a;border-radius:9px;padding:8px 10px;background:#111c27;color:#fff;font-weight:800}header.top .yuna-language-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}header.top .yuna-language-controls .donate-link{color:inherit;text-decoration:none;font-weight:800}';
+  style.textContent='header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header.top .yuna-language-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-left:auto}header.top .yuna-language-controls button{cursor:pointer;border:1px solid #34475a;border-radius:9px;padding:8px 10px;background:#111c27;color:#fff;font-weight:800}header.top .yuna-language-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}';
   document.head.appendChild(style);
  }
 }
