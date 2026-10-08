@@ -1458,16 +1458,39 @@ function apply(root=document.body){
    for(const key of keys)if(translated.includes(key))translated=translated.split(key).join(map[key]);
   }
   if(typeof translated==='string'&&translated!==trimmed){
-   const left=raw.match(/^\\s*/)?.[0]||'';
-   const right=raw.match(/\\s*$/)?.[0]||'';
+   const left=raw.match(/^\s*/)?.[0]||'';
+   const right=raw.match(/\s*$/)?.[0]||'';
    node.nodeValue=left+translated+right;
   }
  }
 }
 
-function setLanguage(lang){save(lang==='en'?'en':'pt');location.reload();}
-function bind(){document.querySelectorAll('[data-lang]').forEach(b=>{if(b.dataset.bound==='1')return;b.dataset.bound='1';b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false);b.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false)});}
-document.addEventListener('click',e=>{const b=e.target.closest?.('[data-lang]');if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}},true);
+function setLanguage(lang){
+ const next=lang==='en'?'en':'pt';
+ save(next);
+ document.documentElement.lang=next==='en'?'en':'pt-BR';
+ document.querySelectorAll('[data-lang]').forEach(b=>{
+  b.classList.toggle('active',b.dataset.lang===next);
+  b.setAttribute('aria-pressed',String(b.dataset.lang===next));
+ });
+ // Reload once so page-specific scripts and all dynamic widgets use the same language.
+ window.location.reload();
+}
+function bind(){
+ document.querySelectorAll('[data-lang]').forEach(b=>{
+  if(b.dataset.bound==='1')return;
+  b.dataset.bound='1';
+  b.addEventListener('click',e=>{
+   e.preventDefault();
+   e.stopImmediatePropagation();
+   setLanguage(b.dataset.lang);
+  },true);
+ });
+}
+document.addEventListener('click',e=>{
+ const b=e.target.closest?.('[data-lang]');
+ if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}
+},true);
 function boot(){updateHeader();bind();apply();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3)apply(node.nodeType===1?node:node.parentElement);});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
