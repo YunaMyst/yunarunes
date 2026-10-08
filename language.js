@@ -44,30 +44,54 @@ function updateHeader(){
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
 }
 function apply(root=document.body){
+ if(!root)return;
  document.documentElement.lang=en()?'en':'pt-BR';
- root.querySelectorAll?.('[data-pt][data-en]').forEach(el=>{
+ const map=en()?PAIRS:REV;
+ // Translate explicitly marked elements first.
+ if(root.querySelectorAll){
+  root.querySelectorAll('[data-pt][data-en]').forEach(el=>{
    const value=en()?el.dataset.en:el.dataset.pt;
    if(el.textContent!==value)el.textContent=value;
- });
- root.querySelectorAll?.('[data-pt-placeholder][data-en-placeholder]').forEach(el=>{
+  });
+  root.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(el=>{
    const value=en()?el.dataset.enPlaceholder:el.dataset.ptPlaceholder;
    if(el.placeholder!==value)el.placeholder=value;
- });
- root.querySelectorAll?.('input,textarea,[title],[aria-label]').forEach(el=>{
+  });
+  root.querySelectorAll('input,textarea,[title],[aria-label]').forEach(el=>{
    ['placeholder','title','aria-label'].forEach(attr=>{
-     if(!el.hasAttribute(attr))return;
-     const value=el.getAttribute(attr);
-     if(attr==='placeholder'){
-       const pt=el.getAttribute('data-pt-placeholder'), enValue=el.getAttribute('data-en-placeholder');
-       if(pt&&enValue)el.setAttribute(attr,en()?enValue:pt);
-     }
+    const pt=el.getAttribute('data-pt-'+attr), enValue=el.getAttribute('data-en-'+attr);
+    if(pt!==null&&enValue!==null)el.setAttribute(attr,en()?enValue:pt);
    });
+  });
+ }
+ // One efficient pass: O(number of text nodes), rather than checking every
+ // dictionary entry against every node. This also translates pages without data attributes.
+ const doc=root.ownerDocument||document;
+ const walker=doc.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+  acceptNode(node){
+   const p=node.parentElement;
+   if(!p||p.closest('script,style,noscript,textarea,code,pre,[contenteditable="true"]'))return NodeFilter.FILTER_REJECT;
+   return NodeFilter.FILTER_ACCEPT;
+  }
  });
+ const nodes=[];
+ while(walker.nextNode())nodes.push(walker.currentNode);
+ for(const node of nodes){
+  const raw=node.nodeValue;
+  const trimmed=raw.trim();
+  if(!trimmed)continue;
+  const translated=map[trimmed];
+  if(typeof translated==='string'&&translated!==trimmed){
+   const left=raw.match(/^\s*/)?.[0]||'';
+   const right=raw.match(/\s*$/)?.[0]||'';
+   node.nodeValue=left+translated+right;
+  }
+ }
 }
 
 function setLanguage(lang){save(lang==='en'?'en':'pt');document.documentElement.lang=en()?'en':'pt-BR';updateHeader();apply(document.body);updateHeader();}
 function bind(){document.querySelectorAll('[data-lang]').forEach(b=>{if(b.dataset.bound==='1')return;b.dataset.bound='1';b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false);b.addEventListener('pointerup',e=>{e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)},false)});}
 document.addEventListener('click',e=>{const b=e.target.closest?.('[data-lang]');if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}},true);
-function boot(){updateHeader();bind();apply();}
+function boot(){updateHeader();bind();apply();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3)apply(node.nodeType===1?node:node.parentElement);});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
