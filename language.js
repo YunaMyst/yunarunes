@@ -52,7 +52,7 @@ function apply(root=document.body){
  const keys=Object.keys(map).sort((a,b)=>b.length-a.length);
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
  while(n=walker.nextNode()){
-  const p=n.parentElement;if(!p||p.closest('script,style,noscript,[data-lang],code,pre'))continue;
+  const p=n.parentElement;if(!p||p.closest('script,style,noscript,[data-lang],code,pre,[data-pt][data-en]'))continue;
   let value=n.nodeValue;
   if(!value.trim())continue;
   for(const source of keys){
