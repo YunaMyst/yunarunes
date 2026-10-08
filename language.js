@@ -1408,8 +1408,21 @@ function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} t
 const en=()=>getLang()==='en';
 function tr(s){if(!s)return s;const map=en()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(map,s)?map[s]:s}
 function save(lang){try{localStorage.setItem(K,lang);document.cookie='yunarunes-language='+lang+'; path=/; max-age=31536000; SameSite=Lax'}catch(_){} }
+function ensureLanguageControls(){
+ const h=document.querySelector('header.top'); if(!h||h.querySelector('[data-lang]'))return;
+ const controls=document.createElement('div');
+ controls.className='yuna-controls yuna-language-controls';
+ controls.innerHTML='<a class="donate-link" href="https://www.paypal.com/donate/" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt" aria-label="Português">🇧🇷 PT/BR</button><button type="button" data-lang="en" aria-label="English">🇬🇧 ENG</button>';
+ h.appendChild(controls);
+ if(!document.getElementById('yuna-language-controls-style')){
+  const style=document.createElement('style');style.id='yuna-language-controls-style';
+  style.textContent='header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}header.top .yuna-language-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-left:auto}header.top .yuna-language-controls button{cursor:pointer;border:1px solid #34475a;border-radius:9px;padding:8px 10px;background:#111c27;color:#fff;font-weight:800}header.top .yuna-language-controls button.active{background:#35a9e1;color:#061018;border-color:#35a9e1}header.top .yuna-language-controls .donate-link{color:inherit;text-decoration:none;font-weight:800}';
+  document.head.appendChild(style);
+ }
+}
 function updateHeader(){
  const h=document.querySelector('header.top'); if(!h)return;
+ ensureLanguageControls();
  const nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
  if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){const label=en()?NAV[i][2]:NAV[i][1];if(a.textContent!==label)a.textContent=label;a.href=NAV[i][0]}});
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
