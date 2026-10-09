@@ -1756,6 +1756,39 @@ function updateHeader(){
    header.top>.nav>.nav-links{grid-area:links!important;min-width:0!important}
    @media(max-width:600px){header.top>.nav>.menu-btn{grid-area:menu!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;position:static!important;width:42px!important;min-width:42px!important;height:36px!important;padding:5px!important;color:#fff!important;background:#111c27!important;border:1px solid #34475a!important;border-radius:8px!important;font-size:12px!important;white-space:nowrap!important;cursor:pointer!important}header.top>.nav>.nav-toggle{display:none!important}header.top>.nav>.nav-links{grid-area:links!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}header.top>.nav>.nav-toggle:checked~.nav-links{display:grid!important}header.top>.nav>.nav-links a{min-width:0!important;text-align:center!important;white-space:normal!important}}
   `;
+  layout.textContent += `
+   /* Donate: identical appearance across all pages and interaction states. */
+   html body header.top .header-controls .yuna-controls>a.donate-link,
+   html body header.top .header-controls .yuna-controls>a.donate-link:link,
+   html body header.top .header-controls .yuna-controls>a.donate-link:visited,
+   html body header.top .header-controls .yuna-controls>a.donate-link:hover,
+   html body header.top .header-controls .yuna-controls>a.donate-link:focus,
+   html body header.top .header-controls .yuna-controls>a.donate-link:active,
+   html body header.top>.nav>.yuna-controls>a.donate-link,
+   html body header.top>.nav>.yuna-controls>a.donate-link:link,
+   html body header.top>.nav>.yuna-controls>a.donate-link:visited,
+   html body header.top>.nav>.yuna-controls>a.donate-link:hover,
+   html body header.top>.nav>.yuna-controls>a.donate-link:focus,
+   html body header.top>.nav>.yuna-controls>a.donate-link:active {
+     display:inline-flex!important;align-items:center!important;justify-content:center!important;
+     box-sizing:border-box!important;order:0!important;flex:0 0 auto!important;
+     height:36px!important;min-height:36px!important;min-width:92px!important;width:auto!important;
+     margin:0!important;padding:0 13px!important;border-radius:8px!important;
+     background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;
+     border:1px solid #a78bfa!important;color:#fff!important;
+     font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;
+     white-space:nowrap!important;box-shadow:0 2px 10px rgba(109,40,217,.22)!important;
+     opacity:1!important;transform:none!important;filter:none!important;
+   }
+   @media(max-width:1050px) and (min-width:601px){
+    html body header.top .header-controls .yuna-controls>a.donate-link,
+    html body header.top>.nav>.yuna-controls>a.donate-link{height:36px!important;min-height:36px!important;min-width:0!important;padding:0 7px!important;font-size:10px!important}
+   }
+   @media(max-width:600px){
+    html body header.top .header-controls .yuna-controls>a.donate-link,
+    html body header.top>.nav>.yuna-controls>a.donate-link{height:36px!important;min-height:36px!important;min-width:0!important;padding:0 10px!important;font-size:11px!important;flex:0 1 auto!important}
+   }
+  `;
   document.head.appendChild(layout);
  }
  let mobileFix=document.getElementById('yunarunes-mobile-language-fix');
