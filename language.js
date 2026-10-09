@@ -1935,43 +1935,63 @@ document.addEventListener('click',e=>{
  if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}
 },true);
 function enforceHeaderControlsLayout(){
- const id='yunarunes-header-language-authoritative-v2';
+ const id='yunarunes-header-controls-stable-v3';
  let style=document.getElementById(id);
  if(!style){style=document.createElement('style');style.id=id;document.head.appendChild(style);}
- style.textContent=`
- html body header.top{display:block!important;width:100%!important;overflow:visible!important}
+ const css=`
+ html body header.top{display:block!important;width:100%!important;overflow:visible!important;position:relative!important;z-index:20!important}
  html body header.top>.nav{display:grid!important;grid-template-columns:minmax(125px,165px) minmax(0,1fr) max-content!important;grid-template-areas:"brand links controls"!important;align-items:center!important;gap:8px 10px!important;width:100%!important;min-height:62px!important;height:auto!important;padding:8px 14px!important;box-sizing:border-box!important}
  html body header.top .header-brand{grid-area:brand!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important}
+ html body header.top .header-brand a.brand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;white-space:nowrap!important;color:#fff!important;text-decoration:none!important;font-size:18px!important;font-weight:900!important;line-height:1.2!important}
+ html body header.top .header-brand a.brand span{color:#fff!important;text-decoration:none!important;white-space:nowrap!important}
  html body header.top .header-menu{display:contents!important}
  html body header.top .header-menu .menu-btn{display:none!important}
  html body header.top .header-menu .nav-links{grid-area:links!important;display:flex!important;flex-flow:row wrap!important;justify-content:center!important;align-items:center!important;gap:4px!important;min-width:0!important;width:auto!important}
- html body header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;width:auto!important;min-width:0!important}
- html body header.top .header-controls .yuna-controls{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;width:auto!important;min-width:max-content!important}
- html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{display:inline-flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:auto!important;min-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 11px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;cursor:pointer!important}
+ html body header.top .header-menu .nav-links a{box-sizing:border-box!important;white-space:nowrap!important}
+ html body header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;width:auto!important;min-width:0!important;visibility:visible!important;opacity:1!important}
+ html body header.top .header-controls .yuna-controls{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;width:auto!important;min-width:0!important;overflow:visible!important}
+ html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{display:inline-flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:auto!important;min-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 11px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;cursor:pointer!important;transform:none!important;filter:none!important}
  html body header.top .header-controls .yuna-controls>button[data-lang="pt"]{order:1!important}
  html body header.top .header-controls .yuna-controls>button[data-lang="en"]{order:2!important}
- html body header.top .header-controls .yuna-controls>a.donate-link{order:0!important;min-width:92px!important;padding-inline:13px!important;background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;border:1px solid #a78bfa!important;color:#fff!important;box-shadow:0 2px 10px rgba(109,40,217,.22)!important}
+ html body header.top .header-controls .yuna-controls>a.donate-link{order:0!important;min-width:92px!important;padding-inline:13px!important;background:#7c3aed!important;border:1px solid #a78bfa!important;color:#fff!important;box-shadow:0 2px 10px rgba(124,58,237,.22)!important}
  html body header.top .header-controls .yuna-controls>button[data-lang].active{background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important}
  @media(max-width:1050px) and (min-width:601px){html body header.top>.nav{grid-template-columns:minmax(110px,140px) minmax(0,1fr) max-content!important;gap:6px!important;padding-inline:8px!important}html body header.top .header-menu .nav-links{gap:2px!important}html body header.top .header-menu .nav-links a{font-size:10px!important;padding:7px 4px!important}html body header.top .header-controls .yuna-controls{gap:4px!important}html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{font-size:10px!important;padding-inline:7px!important}}
- @media(max-width:600px){html body header.top>.nav{grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;gap:8px!important;min-height:0!important;padding:8px 10px 10px!important}html body header.top .header-brand{grid-area:brand!important;justify-content:center!important}html body header.top .header-menu .menu-btn{grid-area:menu!important;display:inline-flex!important;position:static!important;align-items:center!important;justify-content:center!important;width:40px!important;min-width:40px!important;height:38px!important;padding:0!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#fff!important;font-size:20px!important;line-height:1!important}html body header.top .header-controls{grid-area:controls!important;justify-content:center!important;width:100%!important}html body header.top .header-controls .yuna-controls{justify-content:center!important;width:100%!important;min-width:0!important;gap:7px!important}html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;min-height:40px!important;padding:0 5px!important;font-size:12px!important}html body header.top .header-menu .nav-links{grid-area:links!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}html body header.top .header-menu .nav-links a{min-width:0!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important}}
+ @media(max-width:600px){html body header.top>.nav{grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;gap:8px!important;min-height:0!important;padding:8px 10px 10px!important}html body header.top .header-brand{grid-area:brand!important;justify-content:center!important}html body header.top .header-menu .menu-btn{grid-area:menu!important;display:inline-flex!important;position:static!important;align-items:center!important;justify-content:center!important;width:40px!important;min-width:40px!important;height:38px!important;padding:0!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#fff!important;font-size:20px!important;line-height:1!important;cursor:pointer!important}html body header.top .header-controls{grid-area:controls!important;justify-content:center!important;width:100%!important}html body header.top .header-controls .yuna-controls{justify-content:center!important;width:100%!important;min-width:0!important;gap:7px!important}html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;min-height:40px!important;padding:0 5px!important;font-size:12px!important}html body header.top .header-menu .nav-links{grid-area:links!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}html body header.top .header-menu .nav-links a{min-width:0!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important}}
  `;
+ if(style.textContent!==css)style.textContent=css;
 }
 function enforceDonateAppearance(root=document){
  const links=root.querySelectorAll?root.querySelectorAll('header.top a.donate-link, .header-controls a.donate-link, a.donate-link'):[];
  links.forEach(a=>{
-  const rules={
-   display:'inline-flex', 'align-items':'center','justify-content':'center',
-   'box-sizing':'border-box',height:'40px','min-height':'40px','min-width':'92px',
-   padding:'0 13px',margin:'0', 'border-radius':'8px',
-   background:'#7c3aed','border':'1px solid #a78bfa',color:'#ffffff',
-   'font-family':'Arial,sans-serif','font-size':'12px','font-weight':'800','line-height':'1',
-   'text-decoration':'none','white-space':'nowrap',opacity:'1',filter:'none',
-   transform:'none','box-shadow':'0 2px 10px rgba(124,58,237,.22)',
-   cursor:'pointer','visibility':'visible','pointer-events':'auto'
-  };
-  Object.entries(rules).forEach(([k,v])=>a.style.setProperty(k,v,'important'));
+  const rules={'display':'inline-flex','align-items':'center','justify-content':'center','box-sizing':'border-box','height':'40px','min-height':'40px','min-width':'92px','padding':'0 13px','margin':'0','border-radius':'8px','background':'#7c3aed','border':'1px solid #a78bfa','color':'#ffffff','font-family':'Arial,sans-serif','font-size':'12px','font-weight':'800','line-height':'1','text-decoration':'none','white-space':'nowrap','opacity':'1','filter':'none','transform':'none','box-shadow':'0 2px 10px rgba(124,58,237,.22)','cursor':'pointer','visibility':'visible','pointer-events':'auto'};
+  Object.entries(rules).forEach(([k,v])=>{if(a.style.getPropertyValue(k)!==v||a.style.getPropertyPriority(k)!=='important')a.style.setProperty(k,v,'important');});
  });
 }
-function boot(){updateHeader();bind();apply();enforceHeaderControlsLayout();enforceDonateAppearance();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3){const target=node.nodeType===1?node:node.parentElement;apply(target);enforceDonateAppearance(target);}});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
+function stabilizeHeader(){
+ enforceHeaderControlsLayout();
+ enforceDonateAppearance();
+}
+function boot(){
+ updateHeader();bind();apply();stabilizeHeader();
+ if(!window.__yunaLanguageObserver){
+  window.__yunaLanguageObserver=new MutationObserver(records=>{
+   let shouldStabilize=false;
+   for(const record of records){
+    if(record.type==='childList'){
+     for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3){
+      const target=node.nodeType===1?node:node.parentElement;
+      if(target){apply(target);shouldStabilize=true;}
+     }
+    } else if(record.type==='attributes'){
+     if(record.target?.closest?.('header.top'))shouldStabilize=true;
+    }
+   }
+   if(shouldStabilize)stabilizeHeader();
+  });
+  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
+ }
+ document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
+ window.addEventListener('resize',stabilizeHeader,{passive:true});
+}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
