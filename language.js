@@ -1663,6 +1663,30 @@ function ensureLanguageControls(){
 function updateHeader(){
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
+ // Visual-only fix: prevent legacy YunaRunes home links from appearing as purple underlined text.
+ if(!document.getElementById('yunarunes-brand-visual-fix')){
+  const brandFix=document.createElement('style');
+  brandFix.id='yunarunes-brand-visual-fix';
+  brandFix.textContent=`
+   a.brand,.header-brand a,.header-brand a.brand,header.top .nav a.brand,.nav a.brand{
+    color:#fff!important;text-decoration:none!important;font-weight:900!important;
+    display:inline-flex!important;align-items:center!important;gap:8px!important;
+    white-space:nowrap!important;line-height:1.2!important;cursor:pointer!important;
+    -webkit-tap-highlight-color:transparent!important;
+   }
+   a.brand:link,a.brand:visited,a.brand:hover,a.brand:active,
+   .header-brand a:link,.header-brand a:visited,.header-brand a:hover,.header-brand a:active{
+    color:#fff!important;text-decoration:none!important;
+   }
+   a.brand span,.header-brand a span{
+    color:#fff!important;text-decoration:none!important;font-weight:900!important;
+   }
+   a.brand img,.header-brand a img{
+    display:block!important;object-fit:contain!important;flex:0 0 auto!important;
+   }
+  `;
+  document.head.appendChild(brandFix);
+ }
  // One shared, authoritative header layout for desktop, mobile and the Android WebView app.
  if(!document.getElementById('yunarunes-universal-header-layout')){
   const layout=document.createElement('style');
