@@ -1791,9 +1791,8 @@ function updateHeader(){
  // Ensure every page has the same APK and Donate controls, even when its older header omitted them.
  const controls=h.querySelector('.header-controls .yuna-controls')||h.querySelector('.yuna-controls');
  if(controls){
-  if(!controls.querySelector('.apk-link')){
-   const apk=document.createElement('a');apk.className='apk-link';apk.href='https://github.com/YunaMyst/yunarunes/releases/latest';apk.target='_blank';apk.rel='noopener noreferrer';apk.textContent='📱 APK';apk.setAttribute('aria-label','Download APK');controls.appendChild(apk);
-  }
+  // Não criar botão APK no site nem no cabeçalho partilhado.
+  h.querySelectorAll('.apk-link,.mobile-download,[data-download="apk"]').forEach(el=>el.remove());
   if(!controls.querySelector('.donate-link')){
    const donate=document.createElement('a');donate.className='donate-link';donate.href='https://www.paypal.com/myaccount/summary';donate.target='_blank';donate.rel='noopener noreferrer';donate.textContent='💜 Donate';controls.appendChild(donate);
   }
