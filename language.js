@@ -1661,6 +1661,28 @@ function ensureLanguageControls(){
  }
 }
 function updateHeader(){
+ // Apply the YunaRunes home-link appearance on every page, including pages without header.top.
+ document.querySelectorAll('a').forEach(a=>{
+  const label=(a.textContent||'').replace(/\s+/g,' ').trim();
+  if(label!=='YunaRunes' && !a.classList.contains('brand') && !a.classList.contains('yunarunes-home'))return;
+  if(!/yunarunes/i.test(label) && !a.classList.contains('brand') && !a.classList.contains('yunarunes-home'))return;
+  a.classList.add('yunarunes-home');
+  a.style.setProperty('color','#ffffff','important');
+  a.style.setProperty('text-decoration','none','important');
+  a.style.setProperty('font-weight','900','important');
+  a.style.setProperty('display','inline-flex','important');
+  a.style.setProperty('align-items','center','important');
+  a.style.setProperty('gap','8px','important');
+  a.style.setProperty('white-space','nowrap','important');
+  a.style.setProperty('line-height','1.2','important');
+  a.style.setProperty('cursor','pointer','important');
+  a.style.setProperty('-webkit-tap-highlight-color','transparent','important');
+  a.querySelectorAll('span').forEach(s=>{
+   s.style.setProperty('color','#ffffff','important');
+   s.style.setProperty('text-decoration','none','important');
+   s.style.setProperty('font-weight','900','important');
+  });
+ });
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
  // Visual-only fix: prevent legacy YunaRunes home links from appearing as purple underlined text.
