@@ -1772,8 +1772,11 @@ function setLanguage(lang){
   b.classList.toggle('active',b.dataset.lang===next);
   b.setAttribute('aria-pressed',String(b.dataset.lang===next));
  });
- // Reload once so page-specific scripts and all dynamic widgets use the same language.
- window.location.reload();
+ // Apply the selected language immediately without reloading the whole site.
+ // This keeps mobile navigation responsive and avoids getting stuck on loading screens.
+ apply(document.body);
+ updateHeader();
+ bind();
 }
 function bind(){
  document.querySelectorAll('[data-lang]').forEach(b=>{
