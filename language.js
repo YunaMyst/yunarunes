@@ -1915,6 +1915,7 @@ function setLanguage(lang){
  // This keeps mobile navigation responsive and avoids getting stuck on loading screens.
  apply(document.body);
  updateHeader();
+ enforceDonateAppearance();
  bind();
 }
 function bind(){
@@ -1928,6 +1929,7 @@ function bind(){
   },true);
  });
 }
+document.addEventListener('click',e=>{enforceDonateAppearance();},true);
 document.addEventListener('click',e=>{
  const b=e.target.closest?.('[data-lang]');
  if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}
@@ -1954,6 +1956,22 @@ function enforceHeaderControlsLayout(){
  @media(max-width:600px){html body header.top>.nav{grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;gap:8px!important;min-height:0!important;padding:8px 10px 10px!important}html body header.top .header-brand{grid-area:brand!important;justify-content:center!important}html body header.top .header-menu .menu-btn{grid-area:menu!important;display:inline-flex!important;position:static!important;align-items:center!important;justify-content:center!important;width:40px!important;min-width:40px!important;height:38px!important;padding:0!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#fff!important;font-size:20px!important;line-height:1!important}html body header.top .header-controls{grid-area:controls!important;justify-content:center!important;width:100%!important}html body header.top .header-controls .yuna-controls{justify-content:center!important;width:100%!important;min-width:0!important;gap:7px!important}html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;min-height:40px!important;padding:0 5px!important;font-size:12px!important}html body header.top .header-menu .nav-links{grid-area:links!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}html body header.top .header-menu .nav-links a{min-width:0!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important}}
  `;
 }
-function boot(){updateHeader();bind();apply();enforceHeaderControlsLayout();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3)apply(node.nodeType===1?node:node.parentElement);});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
+function enforceDonateAppearance(root=document){
+ const links=root.querySelectorAll?root.querySelectorAll('header.top a.donate-link, .header-controls a.donate-link, a.donate-link'):[];
+ links.forEach(a=>{
+  const rules={
+   display:'inline-flex', 'align-items':'center','justify-content':'center',
+   'box-sizing':'border-box',height:'40px','min-height':'40px','min-width':'92px',
+   padding:'0 13px',margin:'0', 'border-radius':'8px',
+   background:'#7c3aed','border':'1px solid #a78bfa',color:'#ffffff',
+   'font-family':'Arial,sans-serif','font-size':'12px','font-weight':'800','line-height':'1',
+   'text-decoration':'none','white-space':'nowrap',opacity:'1',filter:'none',
+   transform:'none','box-shadow':'0 2px 10px rgba(124,58,237,.22)',
+   cursor:'pointer','visibility':'visible','pointer-events':'auto'
+  };
+  Object.entries(rules).forEach(([k,v])=>a.style.setProperty(k,v,'important'));
+ });
+}
+function boot(){updateHeader();bind();apply();enforceHeaderControlsLayout();enforceDonateAppearance();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3){const target=node.nodeType===1?node:node.parentElement;apply(target);enforceDonateAppearance(target);}});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
