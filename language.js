@@ -1663,6 +1663,8 @@ function ensureLanguageControls(){
 function updateHeader(){
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
+ let mobileFix=document.getElementById('yunarunes-mobile-language-fix');
+ if(!mobileFix){mobileFix=document.createElement('style');mobileFix.id='yunarunes-mobile-language-fix';mobileFix.textContent='header.top{position:relative;z-index:99999}header.top .header-controls,header.top .yuna-controls{position:relative;z-index:100010;pointer-events:auto}header.top .yuna-controls button,header.top .yuna-controls a{position:relative;z-index:100011;pointer-events:auto;touch-action:manipulation;cursor:pointer}@media(max-width:600px){header.top .header-controls{display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}header.top .header-controls .yuna-controls{display:flex!important;flex-wrap:nowrap!important;justify-content:flex-end!important;gap:5px!important;width:100%!important}header.top .header-controls .yuna-controls button[data-lang]{display:inline-flex!important;min-height:38px!important;padding:0 10px!important;font-size:12px!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important}header.top .header-brand a.brand{cursor:pointer!important;touch-action:manipulation!important}}';document.head.appendChild(mobileFix);}
  // Keep the YunaRunes brand consistent and make it a reliable Home link on every page using this shared language engine.
  const brand=h.querySelector('.header-brand .brand')||h.querySelector('a.brand');
  if(brand){
