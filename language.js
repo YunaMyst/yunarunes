@@ -1704,6 +1704,12 @@ function updateHeader(){
    @media(max-width:600px){header.top>.nav>.yuna-controls{grid-area:controls!important;width:100%!important;justify-content:center!important;gap:5px!important}header.top>.nav>.yuna-controls>*{height:36px!important;padding:0 10px!important;font-size:11px!important;flex:0 1 auto!important}header.top>.nav>.yuna-controls .apk-link{display:inline-flex!important;order:3!important;background:#172330!important;color:#fff!important;border:1px solid #34475a!important;text-decoration:none!important}header.top>.nav>.yuna-controls .donate-link{order:4!important}}
    body.yunarunes-app header.top>.nav>.yuna-controls .apk-link{display:none!important}
   `;
+  layout.textContent += `
+   /* Correct grid placement for legacy shared headers (direct children of .nav). */
+   @media(min-width:601px){header.top>.nav>.menu-btn{display:none!important}}
+   header.top>.nav>.nav-links{grid-area:links!important;min-width:0!important}
+   @media(max-width:600px){header.top>.nav>.menu-btn{grid-area:menu!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;position:static!important;width:42px!important;min-width:42px!important;height:36px!important;padding:5px!important;color:#fff!important;background:#111c27!important;border:1px solid #34475a!important;border-radius:8px!important;font-size:12px!important;white-space:nowrap!important;cursor:pointer!important}header.top>.nav>.nav-toggle{display:none!important}header.top>.nav>.nav-links{grid-area:links!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important}header.top>.nav>.nav-toggle:checked~.nav-links{display:grid!important}header.top>.nav>.nav-links a{min-width:0!important;text-align:center!important;white-space:normal!important}}
+  `;
   document.head.appendChild(layout);
  }
  let mobileFix=document.getElementById('yunarunes-mobile-language-fix');
