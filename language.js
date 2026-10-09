@@ -1846,7 +1846,7 @@ function apply(root=document.body){
  const walker=doc.createTreeWalker(root,NodeFilter.SHOW_TEXT,{
   acceptNode(node){
    const p=node.parentElement;
-   if(!p||p.closest('script,style,noscript,textarea,code,pre,[contenteditable="true"]'))return NodeFilter.FILTER_REJECT;
+   if(!p||p.closest('script,style,noscript,textarea,code,pre,[contenteditable="true"],[data-no-translate]'))return NodeFilter.FILTER_REJECT;
    return NodeFilter.FILTER_ACCEPT;
   }
  });
