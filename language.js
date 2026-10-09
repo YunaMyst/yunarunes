@@ -1663,6 +1663,34 @@ function ensureLanguageControls(){
 function updateHeader(){
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
+ // Keep the YunaRunes brand consistent and make it a reliable Home link on every page using this shared language engine.
+ const brand=h.querySelector('.header-brand .brand')||h.querySelector('a.brand');
+ if(brand){
+  brand.href='/index.html';
+  brand.setAttribute('aria-label','YunaRunes — Home');
+  brand.style.display='flex';
+  brand.style.alignItems='center';
+  brand.style.gap='8px';
+  brand.style.color='#fff';
+  brand.style.textDecoration='none';
+  brand.style.whiteSpace='nowrap';
+  let logo=brand.querySelector('img.yunarunes-brand-icon');
+  if(!logo){
+   logo=document.createElement('img');
+   logo.className='yunarunes-brand-icon';
+   logo.src='/android/app/src/main/res/drawable/yunarunes_icon_image.webp';
+   logo.alt='';
+   logo.width=34;
+   logo.height=34;
+   logo.decoding='async';
+   logo.style.cssText='width:34px;height:34px;object-fit:contain;display:block;flex:none;border-radius:8px';
+   brand.prepend(logo);
+  }
+  let label=brand.querySelector('span');
+  if(!label){label=document.createElement('span');label.textContent='YunaRunes';brand.appendChild(label);}
+  label.textContent='YunaRunes';
+  label.style.cssText='color:#fff!important;font-weight:900!important;font-size:18px!important;line-height:1.2!important;text-decoration:none!important';
+ }
  const nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
  if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){const label=en()?NAV[i][2]:NAV[i][1];if(a.textContent!==label)a.textContent=label;a.href=NAV[i][0]}});
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
