@@ -1762,6 +1762,6 @@ document.addEventListener('click',e=>{
  const b=e.target.closest?.('[data-lang]');
  if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}
 },true);
-function boot(){updateHeader();bind();apply();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3)apply(node.nodeType===1?node:node.parentElement);});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true});}}
+function boot(){updateHeader();bind();apply();if(!window.__yunaLanguageObserver){window.__yunaLanguageObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3)apply(node.nodeType===1?node:node.parentElement);});window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
