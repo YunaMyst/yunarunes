@@ -1737,6 +1737,35 @@ Object.assign(PAIRS,{
 });
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 Object.assign(PAIRS,{
+"19. Buffs and Debuffs — learn the difference":"19. Buffs and Debuffs — learn the difference",
+"20. Speed Tune School — being fast is not enough":"20. Speed Tune School — being fast is not enough",
+"21. Checklist da account — saiba o que falta":"21. Account checklist — see what is missing",
+"22. Prova do new player":"22. New player test",
+"23. A regra de ouro da Yuna Academy":"23. The golden rule of Yuna Academy",
+"Aprender fazendo — missões práticas":"Learn by doing — practical missions",
+"Onde gastar os meus recursos?":"Where should you spend your resources?",
+"Vendo, guardo ou melhoro?":"Sell, save, or upgrade?",
+"Entenda o que acontece na batalha":"Understand what happens in battle",
+"Monte a equipe com base num plano, não numa classificação":"Build around a plan, not a ranking",
+"Erros que os iniciantes devem evitar":"Mistakes beginners should avoid",
+"Rota de progressão":"Progression road"
+});
+Object.assign(REV,{
+"19. Buffs and Debuffs — learn the difference":"19. Buffs e debuffs — aprenda a diferença",
+"20. Speed Tune School — being fast is not enough":"20. Escola de Speed Tune — ser rápido não é suficiente",
+"21. Checklist da account — saiba o que falta":"21. Lista da conta — saiba o que falta",
+"22. Prova do new player":"22. Prova do novo jogador",
+"23. A regra de ouro da Yuna Academy":"23. A regra de ouro da Yuna Academy",
+"Aprender fazendo — missões práticas":"Aprender fazendo — missões práticas",
+"Onde gastar os meus recursos?":"Onde gastar os meus recursos?",
+"Vendo, guardo ou melhoro?":"Vendo, guardo ou melhoro?",
+"Entenda o que acontece na batalha":"Entenda o que acontece na batalha",
+"Monte a equipe com base num plano, não numa classificação":"Monte a equipe com base num plano, não numa classificação",
+"Erros que os iniciantes devem evitar":"Erros que os iniciantes devem evitar",
+"Rota de progressão":"Rota de progressão"
+});
+
+Object.assign(PAIRS,{
 "4. Rune School — runes desde o zero":"4. Rune School — runes from scratch",
 "6. Como uma battle realmente funciona":"6. How a battle actually works",
 "7. Learn a pensar como um Construtor de Teams":"7. Learn to think like a team builder",
