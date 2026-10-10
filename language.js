@@ -1906,6 +1906,8 @@ function apply(root=document.body){
    node.nodeValue=left+translated+right;
   }
  }
+ // Final safety pass: the official game name must never be localized, regardless of language or page.
+ protectOfficialGameName(root);
 }
 
 function setLanguage(lang){
