@@ -18,6 +18,8 @@ function translate(root=document.body){
  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
  for(const n of nodes){const p=n.parentElement;if(!p||p.closest('script,style,noscript,textarea,code,pre,[contenteditable="true"]'))continue;
  const raw=n.nodeValue.trim();if(!raw)continue;
+ // Preserve the official game title in every language.
+ if(/Summoners\\s+War|Invocadores\\s+War/i.test(raw))continue;
  let out=map[raw];if(!out){out=raw;for(const [a,b] of Object.entries(map).sort((x,y)=>y[0].length-x[0].length))if(a.length>2&&out.includes(a))out=out.split(a).join(b)}
  if(out!==raw)n.nodeValue=n.nodeValue.replace(raw,out);
  }
