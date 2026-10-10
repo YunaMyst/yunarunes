@@ -1579,6 +1579,8 @@ if(!confirm(lang()==='en'?'Reset all Yuna Academy progress?':'Resetar todo o pro
 state={done:[]};localStorage.setItem(key,JSON.stringify(state));render();
 });
 render();
+window.addEventListener('yunarunes-language-change',render);
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
 
@@ -1632,7 +1634,7 @@ window.academyMission=id=>{
 if(done.includes(id))return;
 done.push(id);localStorage.setItem(key,JSON.stringify(done));render();
 const m=missions.find(x=>x[0]===id),toast=document.getElementById('academyToast');
-if(toast){toast.textContent='🎉 Missão concluída! +'+m[4]+' XP';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)}
+if(toast){const en=(()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}})();toast.textContent=(en?'🎉 Mission completed! +':'🎉 Missão concluída! +')+m[6]+' XP';toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2200)}
 };
 render();
 })();

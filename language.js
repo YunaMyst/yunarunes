@@ -1942,6 +1942,7 @@ function setLanguage(lang){
  // Apply the selected language immediately without reloading the whole site.
  // This keeps mobile navigation responsive and avoids getting stuck on loading screens.
  apply(document.body);
+ window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:{language:next}}));
  updateHeader();
  enforceDonateAppearance();
  bind();
