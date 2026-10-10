@@ -1994,4 +1994,45 @@ function boot(){
  window.addEventListener('resize',stabilizeHeader,{passive:true});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+
+/* yuna-official-game-name-guard: never translate the official game title */
+function protectOfficialGameName(root=document){
+ try{
+  document.documentElement.setAttribute('translate','no');
+  document.documentElement.classList.add('notranslate');
+  if(document.body){document.body.setAttribute('translate','no');document.body.classList.add('notranslate');}
+  const scope=root&&root.querySelectorAll?root:document;
+  const candidates=[];
+  if(scope.nodeType===1)candidates.push(scope);
+  if(scope.querySelectorAll)candidates.push(...scope.querySelectorAll('*'));
+  for(const el of candidates){
+   if(!el||!el.childNodes)continue;
+   for(const node of [...el.childNodes]){
+    if(node.nodeType===3&&/invocadores\s+war/i.test(node.nodeValue||'')){
+     node.nodeValue=node.nodeValue.replace(/invocadores\s+war/gi,'Summoners War');
+    }
+   }
+   if(el.childNodes.length===1&&el.firstChild.nodeType===3&&/summoners\s+war/i.test(el.textContent||'')){
+    el.setAttribute('translate','no');el.classList.add('notranslate');
+   }
+  }
+ }catch(_){}
+}
+function installOfficialGameNameGuard(){
+ protectOfficialGameName(document);
+ if(window.__yunaOfficialNameGuard)return;
+ window.__yunaOfficialNameGuard=new MutationObserver(records=>{
+  for(const r of records){
+   if(r.type==='characterData'){
+    const n=r.target;
+    if(n&&/invocadores\s+war/i.test(n.nodeValue||''))n.nodeValue=n.nodeValue.replace(/invocadores\s+war/gi,'Summoners War');
+   }else if(r.type==='childList'){
+    r.addedNodes.forEach(n=>{if(n.nodeType===1)protectOfficialGameName(n);else if(n.nodeType===3&&/invocadores\s+war/i.test(n.nodeValue||''))n.nodeValue=n.nodeValue.replace(/invocadores\s+war/gi,'Summoners War');});
+   }
+  }
+ });
+ if(document.documentElement)window.__yunaOfficialNameGuard.observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installOfficialGameNameGuard);else installOfficialGameNameGuard();
+
 })();
