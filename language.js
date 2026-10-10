@@ -1908,6 +1908,20 @@ function apply(root=document.body){
  }
  // Final safety pass: the official game name must never be localized, regardless of language or page.
  protectOfficialGameName(root);
+ // Keep Academy hub card headings exact: legacy text-node translations were duplicating suffixes.
+ const academyTitles={
+  '#combat':['Aprender Combate','Learn Combat'],
+  '#mechanics':['Laboratório','Laboratory']
+ };
+ if(root.querySelectorAll){
+  root.querySelectorAll('.academy-hub-card').forEach(card=>{
+   const link=card.getAttribute('href');
+   const pair=academyTitles[link];
+   if(!pair)return;
+   const title=card.querySelector('b');
+   if(title){const exact=en()?pair[1]:pair[0];if(title.textContent!==exact)title.textContent=exact;}
+  });
+ }
 }
 
 function setLanguage(lang){
