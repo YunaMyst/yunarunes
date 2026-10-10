@@ -1736,6 +1736,29 @@ Object.assign(PAIRS,{
 "Choose a lost battle and write down the biggest bottleneck before changing the build.":"Escolha uma batalha perdida e anote o maior problema antes de mudar a build."
 });
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
+Object.assign(PAIRS,{
+"4. Rune School — runes desde o zero":"4. Rune School — runes from scratch",
+"6. Como uma battle realmente funciona":"6. How a battle actually works",
+"7. Learn a pensar como um Construtor de Teams":"7. Learn to think like a team builder",
+"8. Content School — what is each game mode for?":"8. Content School — what is each game mode for?",
+"9. Roadmap da primeira account":"9. Roadmap for your first account",
+"10. Os erros que mais atrasam new players":"10. Mistakes that slow down new players",
+"14. Detective Yuna — descubra por que perdeu":"14. Detective Yuna — find out why you lost",
+"16. Skill School — aprenda a ler skills":"16. Skill School — learn to read skills",
+"17. Rune Decision School — vender, save ou investir?":"17. Rune Decision School — sell, save, or invest?"
+});
+Object.assign(REV,{
+"4. Rune School — runes desde o zero":"4. Escola de Runas — runas desde o zero",
+"6. Como uma battle realmente funciona":"6. Como uma batalha realmente funciona",
+"7. Learn a pensar como um Construtor de Teams":"7. Aprenda a pensar como um construtor de equipes",
+"8. Content School — what is each game mode for?":"8. Escola dos Conteúdos — para que serve cada modo?",
+"9. Roadmap da primeira account":"9. Roteiro da primeira conta",
+"10. Os erros que mais atrasam new players":"10. Os erros que mais atrasam novos jogadores",
+"14. Detective Yuna — descubra por que perdeu":"14. Detetive Yuna — descubra por que perdeu",
+"16. Skill School — aprenda a ler skills":"16. Escola de habilidades — aprenda a ler skills",
+"17. Rune Decision School — vender, save ou investir?":"17. Escola de decisão de runas — vender, guardar ou investir?"
+});
+
 Object.assign(PAIRS,{"Quem ganha esta battle?":"Who wins this battle?","Monta uma team do zero":"Build a team from scratch","Prioridade":"Priority","Espera":"Waiting","💎 Cristais":"💎 Crystals"});
 Object.assign(REV,{"Quem ganha esta battle?":"Quem ganha esta batalha?","Monta uma team do zero":"Monte uma equipe do zero"});
 
