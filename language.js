@@ -1863,12 +1863,14 @@ function apply(root=document.body){
     const raw=el.getAttribute(attr);
     if(!raw)continue;
     const trimmed=raw.trim();
-    let value=map[trimmed];
+    const protectedValue=trimmed.replace(/Summoners\\s+War|Invocadores\\s+War/gi,'\\uE000');
+    let value=map[protectedValue];
     if(typeof value!=='string'){
-     value=trimmed;
+     value=protectedValue;
      for(const key of keys)if(value.includes(key))value=value.split(key).join(map[key]);
      value=wordFallback(value,en());
     }
+    value=value.replace(/\\uE000/g,'Summoners War');
     if(value!==trimmed)el.setAttribute(attr,raw.replace(trimmed,value));
    }
   });
@@ -1889,12 +1891,15 @@ function apply(root=document.body){
   const raw=node.nodeValue;
   const trimmed=raw.trim();
   if(!trimmed)continue;
-  let translated=map[trimmed];
+  // Keep the official game title intact through BOTH phrase and word-level translation.
+  const protectedText=trimmed.replace(/Summoners\\s+War|Invocadores\\s+War/gi,'\\uE000');
+  let translated=map[protectedText];
   if(typeof translated!=='string'){
-   translated=trimmed;
+   translated=protectedText;
    for(const key of keys)if(translated.includes(key))translated=translated.split(key).join(map[key]);
    translated=wordFallback(translated,en());
   }
+  translated=translated.replace(/\\uE000/g,'Summoners War');
   if(typeof translated==='string'&&translated!==trimmed){
    const left=raw.match(/^\s*/)?.[0]||'';
    const right=raw.match(/\s*$/)?.[0]||'';
