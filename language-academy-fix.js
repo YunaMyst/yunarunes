@@ -20,9 +20,9 @@ function translate(root=document.body){
  const raw=n.nodeValue.trim();if(!raw)continue;
  // Preserve the official game title while translating the rest of the sentence.
  const GAME='Summoners War';
- let source=raw.replace(/Invocadores\\s+War/gi,GAME);
- const hasGame=/Summoners\\s+War/i.test(source);
- if(hasGame)source=source.replace(/Summoners\\s+War/gi,'__YUNA_OFFICIAL_GAME_NAME__');
+ let source=raw.replace(/Invocadores\s+War/gi,GAME);
+ const hasGame=/Summoners\s+War/i.test(source);
+ if(hasGame)source=source.replace(/Summoners\s+War/gi,'__YUNA_OFFICIAL_GAME_NAME__');
  let out=map[source];if(!out){out=source;for(const [a,b] of Object.entries(map).sort((x,y)=>y[0].length-x[0].length))if(a.length>2&&out.includes(a))out=out.split(a).join(b)}
  out=out.replace(/__YUNA_OFFICIAL_GAME_NAME__/g,GAME);
  if(out!==raw)n.nodeValue=n.nodeValue.replace(raw,out);
