@@ -408,7 +408,7 @@ const lab={a:'❌ Não necessariamente. ATK sozinho não resolve se a perda de v
 document.querySelectorAll('[data-yae-lab]').forEach(b=>b.onclick=()=>document.getElementById('yae-lab-result').innerHTML=lab[b.dataset.yaeLab]);
 const docs={spd:'🔎 Hipótese: compare SPD real, set, buffs e Speed Tune. Primeiro descubra quem deveria agir antes.',survive:'🔎 Hipótese: verifique HP/DEF, resistência a dano, alvo recebido e se o DPS está sendo protegido.',control:'🔎 Hipótese: confira ACC, imunidade/limpeza do inimigo e se o skill realmente aplica o debuff.',damage:'🔎 Hipótese: compare stats ofensivos, multiplicadores, defesa do alvo e se a equipe está preparando o alvo corretamente.'};
 document.querySelectorAll('[data-yae-doc]').forEach(b=>b.onclick=()=>document.getElementById('yae-doc-result').textContent=docs[b.dataset.yaeDoc]);
-cconst terms={
+const terms={
 proc:{pt:'Um PROC é quando uma condição ou efeito com chance ocorre. Ex.: um efeito de conjunto ou habilidade ativa uma ocorrência adicional.',en:'A PROC occurs when a chance-based condition or effect triggers, such as a set effect or skill activating an additional effect.'},
 stun:{pt:'STUN é atordoamento: o monstro fica impedido de agir durante o efeito.',en:'STUN prevents a monster from taking action while the effect lasts.'},
 atb:{pt:'ATB significa Attack Bar, a Barra de Ataque que determina o avanço dos turnos.',en:'ATB means Attack Bar, which determines turn progression.'},
