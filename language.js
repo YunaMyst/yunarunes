@@ -1736,6 +1736,9 @@ Object.assign(PAIRS,{
 "Choose a lost battle and write down the biggest bottleneck before changing the build.":"Escolha uma batalha perdida e anote o maior problema antes de mudar a build."
 });
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
+Object.assign(PAIRS,{"Quem ganha esta battle?":"Who wins this battle?","Monta uma team do zero":"Build a team from scratch","Prioridade":"Priority","Espera":"Waiting","💎 Cristais":"💎 Crystals"});
+Object.assign(REV,{"Quem ganha esta battle?":"Quem ganha esta batalha?","Monta uma team do zero":"Monte uma equipe do zero"});
+
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
 function tr(s){if(!s)return s;const map=en()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(map,s)?map[s]:s}
