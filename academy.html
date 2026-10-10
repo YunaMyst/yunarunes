@@ -2428,4 +2428,7 @@ render();
 window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
-<script src="language.js?v=20261010-academy-strategy-english-v4"></script></body></html>
+<script src="language.js?v=20261010-battle-simulator-fix-v6"></script>
+<script>
+(()=>{const fix=()=>{const en=document.documentElement.lang==="en"||localStorage.getItem("yunarunes-language")==="en";document.querySelectorAll("h2,h3").forEach(el=>{if(/battle\\s+yesulator|battle\\s+simulator|simulador de batalha/i.test(el.textContent||"")){const title="⚔️ "+(en?"Battle Simulator":"Simulador de Batalha");if(el.textContent.trim()!==title)el.textContent=title;}});const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const n=walker.currentNode;if(/Battle\\s+Yesulator/i.test(n.nodeValue||""))n.nodeValue=n.nodeValue.replace(/Battle\\s+Yesulator/gi,"Battle Simulator");}};fix();new MutationObserver(fix).observe(document.body,{subtree:true,childList:true,characterData:true});window.addEventListener("storage",fix);})();
+</script></body></html>
