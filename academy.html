@@ -367,7 +367,7 @@ html body header.top .nav .header-brand a.brand span { display:inline-block !imp
 <button class="yae-btn" data-yae-term="dot">DoT</button>
 <button class="yae-btn" data-yae-term="cleanse">CLEANSE</button>
 <button class="yae-btn" data-yae-term="strip">STRIP</button>
-<button class="yae-btn" data-yae-term="immunity">IMUNIDADE</button>
+<button class="yae-btn" data-yae-term="immunity">IMMUNITY</button>
 <button class="yae-btn" data-yae-term="glancing">GLANCING</button>
 <button class="yae-btn" data-yae-term="crcd">CR / CD</button>
 <button class="yae-btn" data-yae-term="accres">ACC / RES</button>
@@ -408,21 +408,30 @@ const lab={a:'❌ Não necessariamente. ATK sozinho não resolve se a perda de v
 document.querySelectorAll('[data-yae-lab]').forEach(b=>b.onclick=()=>document.getElementById('yae-lab-result').innerHTML=lab[b.dataset.yaeLab]);
 const docs={spd:'🔎 Hipótese: compare SPD real, set, buffs e Speed Tune. Primeiro descubra quem deveria agir antes.',survive:'🔎 Hipótese: verifique HP/DEF, resistência a dano, alvo recebido e se o DPS está sendo protegido.',control:'🔎 Hipótese: confira ACC, imunidade/limpeza do inimigo e se o skill realmente aplica o debuff.',damage:'🔎 Hipótese: compare stats ofensivos, multiplicadores, defesa do alvo e se a equipe está preparando o alvo corretamente.'};
 document.querySelectorAll('[data-yae-doc]').forEach(b=>b.onclick=()=>document.getElementById('yae-doc-result').textContent=docs[b.dataset.yaeDoc]);
-const terms={
-proc:'Um PROC é quando uma condição ou efeito com chance ocorre. Ex.: um efeito de conjunto ou habilidade ativa uma ocorrência adicional.',
-stun:'STUN é atordoamento: o monstro fica impedido de agir durante o efeito.',
-atb:'ATB significa Attack Bar, a Barra de Ataque que determina o avanço dos turnos.',
-cc:'CC significa Crowd Control: efeitos que limitam ou impedem as ações do inimigo.',
-dot:'DoT significa Damage over Time: dano aplicado ao longo dos turnos/tempo por um efeito.',
-cleanse:'CLEANSE remove efeitos maléficos do aliado, de acordo com o efeito/skill usado.',
-strip:'STRIP remove efeitos benéficos do inimigo, quando a habilidade consegue removê-los.',
-immunity:'IMUNIDADE impede a aplicação de determinados efeitos maléficos enquanto estiver ativa, conforme as regras do jogo.',
-glancing:'GLANCING é um golpe de dano reduzido e pode afetar a ocorrência de certos efeitos, conforme a habilidade.',
-crcd:'CR é Taxa Crítica. CD é Dano Crítico. Ambos trabalham juntos em builds que dependem de críticos.',
-accres:'ACC aumenta a chance efetiva de aplicar certos efeitos; RES é a resistência do alvo a efeitos. Eles não são a mesma coisa.',
-speedtune:'SPEED TUNE é organizar velocidades e barras para que a equipe aja numa ordem planejada.'
+cconst terms={
+proc:{pt:'Um PROC é quando uma condição ou efeito com chance ocorre. Ex.: um efeito de conjunto ou habilidade ativa uma ocorrência adicional.',en:'A PROC occurs when a chance-based condition or effect triggers, such as a set effect or skill activating an additional effect.'},
+stun:{pt:'STUN é atordoamento: o monstro fica impedido de agir durante o efeito.',en:'STUN prevents a monster from taking action while the effect lasts.'},
+atb:{pt:'ATB significa Attack Bar, a Barra de Ataque que determina o avanço dos turnos.',en:'ATB means Attack Bar, which determines turn progression.'},
+cc:{pt:'CC significa Crowd Control: efeitos que limitam ou impedem as ações do inimigo.',en:'CC means Crowd Control: effects that limit or prevent enemy actions.'},
+dot:{pt:'DoT significa Damage over Time: dano aplicado ao longo dos turnos/tempo por um efeito.',en:'DoT means Damage over Time: damage applied over multiple turns or over time.'},
+cleanse:{pt:'CLEANSE remove efeitos maléficos do aliado, de acordo com o efeito/skill usado.',en:'CLEANSE removes harmful effects from an ally, depending on the effect or skill used.'},
+strip:{pt:'STRIP remove efeitos benéficos do inimigo, quando a habilidade consegue removê-los.',en:'STRIP removes beneficial effects from an enemy when the skill can remove them.'},
+immunity:{pt:'IMUNIDADE impede a aplicação de determinados efeitos maléficos enquanto estiver ativa, conforme as regras do jogo.',en:'IMMUNITY prevents certain harmful effects from being applied while it is active, according to the game rules.'},
+glancing:{pt:'GLANCING é um golpe de dano reduzido e pode afetar a ocorrência de certos efeitos, conforme a habilidade.',en:'GLANCING is a reduced-damage hit and may affect certain effects, depending on the skill.'},
+crcd:{pt:'CR é Taxa Crítica. CD é Dano Crítico. Ambos trabalham juntos em builds que dependem de críticos.',en:'CR means Critical Rate. CD means Critical Damage. Both matter for builds that rely on critical hits.'},
+accres:{pt:'ACC aumenta a chance efetiva de aplicar certos efeitos; RES é a resistência do alvo a efeitos. Eles não são a mesma coisa.',en:'ACC affects the effective chance of landing certain effects; RES is the target’s resistance to effects. They are not the same.'},
+speedtune:{pt:'SPEED TUNE é organizar velocidades e barras para que a equipe aja numa ordem planejada.',en:'SPEED TUNE means arranging Speed and Attack Bars so the team acts in a planned order.'}
 };
-document.querySelectorAll('[data-yae-term]').forEach(b=>b.onclick=()=>document.getElementById('yae-term-result').innerHTML='<b>'+b.textContent+'</b><br>'+terms[b.dataset.yaeTerm]);
+const isEnglish=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}};
+document.querySelectorAll('[data-yae-term]').forEach(b=>{
+ const key=b.dataset.yaeTerm;
+ const labels={immunity:['IMUNIDADE','IMMUNITY']};
+ const update=()=>{if(labels[key])b.textContent=labels[key][isEnglish()?1:0]};
+ update();
+ b.onclick=()=>{const t=terms[key];document.getElementById('yae-term-result').innerHTML='<b>'+b.textContent+'</b><br>'+(t?(isEnglish()?t.en:t.pt):'')};
+});
+window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')document.querySelectorAll('[data-yae-term]').forEach(b=>{if(b.dataset.yaeTerm==='immunity')b.textContent=isEnglish()?'IMMUNITY':'IMUNIDADE'})});
+
 })();
 </script>
 
