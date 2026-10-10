@@ -1700,6 +1700,41 @@ Object.assign(PAIRS,{
 "Quem ganha esta battle?":"Who wins this battle?",
 "Monta uma team do zero":"Build a team from scratch"
 });
+Object.assign(PAIRS,{
+"4. Rune School — runes desde o zero":"4. Escola de Runas — runas desde o zero",
+"6. Como uma battle realmente funciona":"6. Como uma batalha realmente funciona",
+"7. Learn a pensar como um Construtor de Teams":"7. Aprenda a pensar como um construtor de equipes",
+"8. Content School — what is each game mode for?":"8. Escola dos Conteúdos — para que serve cada modo?",
+"9. Roadmap da primeira account":"9. Roteiro da primeira conta",
+"10. Os erros que mais atrasam new players":"10. Os erros que mais atrasam novos jogadores",
+"14. Detective Yuna — descubra por que perdeu":"14. Detetive Yuna — descubra por que perdeu",
+"16. Skill School — aprenda a ler skills":"16. Escola de habilidades — aprenda a ler skills",
+"17. Rune Decision School — vender, save ou investir?":"17. Escola de decisão de runas — vender, guardar ou investir?",
+"19. Buffs and Debuffs — learn the difference":"19. Buffs e debuffs — aprenda a diferença",
+"20. Speed Tune School — being fast is not enough":"20. Escola de Speed Tune — ser rápido não é suficiente",
+"21. Checklist da account — saiba o que falta":"21. Lista da conta — saiba o que falta",
+"22. Prova do new player":"22. Prova do novo jogador",
+"Getting started → survive":"Começar → sobreviver",
+"First 6★ → stabilize":"Primeiro 6★ → estabilizar",
+"First runes → farm":"Primeiras runas → farmar",
+"First dungeons → repeat":"Primeiras masmorras → repetir",
+"Artifacts → refinamento":"Artefatos → refinamento",
+"Fundamentals, interface, energy, mana e primeiros objetivos.":"Fundamentos, interface, energia, mana e primeiros objetivos.",
+"Funções, skills, scaling, cooldowns e como ler um monster.":"Funções, habilidades, escalamento, recargas e como ler um monstro.",
+"Slots, main stats, substats, sets, rolls e decisões.":"Slots, atributos principais, substats, conjuntos, rolls e decisões.",
+"Turnos, vantagem elemental, buffs, debuffs, CC e PROC.":"Turnos, vantagem elemental, buffs, debuffs, controle e PROC.",
+"Funções, condição de victory, ordem e Speed Tune.":"Funções, condição de vitória, ordem e Speed Tune.",
+"Contents, farm, evolução da account e prioridades.":"Conteúdos, farm, evolução da conta e prioridades.",
+"Descobrir por que perdeu, testar hipóteses e corrigir.":"Descubra por que perdeu, teste hipóteses e corrija.",
+"Complete each level, open the matching lesson and advance. Your progress is saved on this device.":"Conclua cada nível, abra a aula correspondente e avance. O progresso fica guardado neste dispositivo.",
+"These missions turn the lessons into practice. Complete them as you progress and earn Academy XP.":"Estas missões transformam as aulas em prática. Complete-as à medida que avança e ganhe XP da Academy.",
+"Choose a monster and say which stat is most important for its role.":"Escolha um monstro e diga qual atributo é mais importante para a função dele.",
+"Take a rune from your inventory and decide: save, test, or sell.":"Pegue uma runa do seu inventário e decida: guardar, testar ou vender.",
+"Before looking at a ready-made build, identify target, effect, chance, scaling, and cooldown.":"Antes de olhar uma build pronta, identifique alvo, efeito, chance, escalamento e recarga.",
+"Write down the SPD of 4 monsters and determine who should move first.":"Anote a SPD de 4 monstros e determine quem deve agir primeiro.",
+"Choose 4–5 monsters and explain each one's role on the team.":"Escolha 4–5 monstros e explique a função de cada um na equipe.",
+"Choose a lost battle and write down the biggest bottleneck before changing the build.":"Escolha uma batalha perdida e anote o maior problema antes de mudar a build."
+});
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
