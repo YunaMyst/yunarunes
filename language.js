@@ -1680,6 +1680,26 @@ function wordFallback(input,toEnglish=true){
 
 Object.assign(PAIRS,{'Prioridade':'Priority','Espera':'Waiting','💎 Cristais':'💎 Crystals','Quem ganha esta batalha?':'Who wins this battle?','Monte uma equipe do zero':'Build a team from scratch','Aprenda passo a passo e desbloqueie a Academy':'Learn step by step and unlock the Academy','Conclua cada nível, abra a aula correspondente e avance. O seu progresso fica guardado neste dispositivo.':'Complete each level, open the matching lesson, and advance. Your progress is saved on this device.','Aprender fazendo — missões práticas':'Learn by doing — practical missions','Onde gastar os meus recursos?':'Where should you spend your resources?','Vendo, guardo ou melhoro?':'Sell, save, or upgrade?','Entenda o que acontece na batalha':'Understand what happens in battle','Monte a equipe com base num plano, não numa classificação':'Build around a plan, not a ranking','Pronto para se formar?':'Ready to graduate?','Erros que os iniciantes devem evitar':'Mistakes beginners should avoid','Rota de progressão':'Progression road','Especializar':'Specialize','Concluir missão':'Complete mission','Investigar':'Investigate','Decidir':'Decide','Tratar equipe':'Treat team','Montar prioridade':'Set priorities','Comece a aprender':'Start learning','Abrir aula':'Open lesson','Concluir nível':'Complete level','Continuar de onde parei':'Continue where I left off','Reiniciar progresso':'Reset progress'});
 Object.assign(PAIRS,{'💎 4. Escola de Runas — runas desde o zero':'💎 4. Rune School — runes from scratch','🏰 8. Escola dos Conteúdos — para que serve cada modo?':'🏰 8. Content School — what is each game mode for?','🗺️ 9. Roteiro para a primeira conta':'🗺️ 9. Roadmap for your first account','🚨 10. Os erros que mais atrasam novos jogadores':'🚨 10. Mistakes that slow down new players','🕵️ 14. Detetive Yuna — descubra por que perdeu':'🕵️ 14. Detective Yuna — find out why you lost','🎓 15. Formatura Yuna Academy':'🎓 15. Yuna Academy Graduation'});
+Object.assign(PAIRS,{
+"## 4. Rune School — runes desde o zero":"## 4. Escola de Runas — runas desde o zero",
+"## 6. Como uma battle realmente funciona":"## 6. Como uma batalha realmente funciona",
+"🧠 7. Learn a pensar como um Construtor de Teams":"🧠 7. Aprenda a pensar como um construtor de equipes",
+"🏰 8. Content School — what is each mode for?":"🏰 8. Escola dos Conteúdos — para que serve cada modo?",
+"🗺️ 9. Roadmap da primeira account":"🗺️ 9. Roteiro da primeira conta",
+"🚨 10. Os erros que mais atrasam new players":"🚨 10. Os erros que mais atrasam novos jogadores",
+"🕵️ 14. Detective Yuna — descubra por que perdeu":"🕵️ 14. Detetive Yuna — descubra por que perdeu",
+"🎓 15. Formatura Yuna Academy":"🎓 15. Formatura da Yuna Academy",
+"📖 16. Skill School — aprenda a ler skills":"📖 16. Escola de habilidades — aprenda a ler skills",
+"🔍 17. Rune Decision School — vender, save ou investir?":"🔍 17. Escola de decisão de runas — vender, guardar ou investir?",
+"🟦 19. Buffs and Debuffs — learn the difference":"🟦 19. Buffs e debuffs — aprenda a diferença",
+"⚡ 20. Speed Tune School — being fast is not enough":"⚡ 20. Escola de Speed Tune — ser rápido não é suficiente",
+"📋 21. Checklist da account — saiba o que falta":"📋 21. Lista da conta — saiba o que falta",
+"📝 22. Prova do new player":"📝 22. Prova do novo jogador",
+"🧠 23. A regra de ouro da Yuna Academy":"🧠 23. A regra de ouro da Yuna Academy",
+"💎 Cristais":"💎 Crystals",
+"Quem ganha esta battle?":"Who wins this battle?",
+"Monta uma team do zero":"Build a team from scratch"
+});
 const REV=Object.fromEntries(Object.entries(PAIRS).map(([a,b])=>[b,a]));
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
