@@ -1891,7 +1891,7 @@ function apply(root=document.body){
   const raw=node.nodeValue;
   const trimmed=raw.trim();
   if(!trimmed)continue;
-  // Keep the official game title intact through BOTH phrase and word-level translation.
+  // Keep the official game title intact through BOTH phrase and word-level translation; the workflow now preserves this script version.
   const protectedText=trimmed.replace(/Summoners\s+War|Invocadores\s+War/gi,'\uE000');
   let translated=map[protectedText];
   if(typeof translated!=='string'){
