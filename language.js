@@ -2009,13 +2009,21 @@ function boot(){
       const target=node.nodeType===1?node:node.parentElement;
       if(target){apply(target);shouldStabilize=true;}
      }
+    } else if(record.type==='characterData'){
+     // Dynamic widgets often update an existing text node instead of inserting a new one.
+     // Re-apply the active language to that node's parent so late-rendered Portuguese
+     // labels and messages are translated too.
+     const target=record.target?.parentElement;
+     if(target && !target.closest?.('script,style,noscript,textarea,code,pre,[contenteditable="true"],[data-no-translate]')){
+      apply(target);
+     }
     } else if(record.type==='attributes'){
      if(record.target?.closest?.('header.top'))shouldStabilize=true;
     }
    }
    if(shouldStabilize)stabilizeHeader();
   });
-  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
+  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
  }
  document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
  window.addEventListener('resize',stabilizeHeader,{passive:true});
