@@ -447,7 +447,7 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')document.q
 @media(max-width:900px){.yuna-skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:600px){.yuna-skill-tree{padding:15px}.yuna-skill-head{align-items:flex-start}.yuna-skill-head h2{font-size:19px}.yuna-skill-grid{grid-template-columns:1fr}.yuna-skill-status{min-width:100px}}
 </style>
 <section class="yuna-skill-tree" id="yuna-skill-tree-home">
-<div class="yuna-skill-head"><div><div class="eyebrow">🎓 YunaRunes • Progressão</div><h2>🌳 Árvore de Habilidades</h2><p>Aprenda Summoners War em etapas e desbloqueie o próximo conhecimento.</p></div><div class="yuna-skill-status"><b id="yst-count">0/10</b><span>habilidades concluídas</span></div></div>
+<div class="yuna-skill-head"><div><div class="eyebrow">🎓 YunaRunes • Progressão</div><h2 data-pt="🌳 Árvore de habilidades" data-en="🌳 Skill tree">🌳 Árvore de habilidades</h2><p>Aprenda Summoners War em etapas e desbloqueie o próximo conhecimento.</p></div><div class="yuna-skill-status"><b id="yst-count">0/10</b><span>habilidades concluídas</span></div></div>
 <div class="yuna-skill-progress"><i id="yst-bar"></i></div><div class="yuna-skill-grid" id="yst-grid"></div><div class="yuna-skill-lesson" id="yst-lesson"><h3 id="yst-title"></h3><p id="yst-text"></p><button id="yst-complete">Concluir habilidade + XP</button></div>
 </section>
 <script>
@@ -476,7 +476,7 @@ render()})();
 @media(max-width:900px){.yrs-form{grid-template-columns:repeat(2,minmax(0,1fr))}.yrs-result{grid-template-columns:1fr}}@media(max-width:600px){.yuna-rune-sim{padding:15px}.yrs-head h2{font-size:19px}.yrs-form{grid-template-columns:1fr}.yrs-btn{min-height:44px}.yrs-result{grid-template-columns:1fr}}
 </style>
 <section class="yuna-rune-sim" id="yuna-rune-simulator">
-<div class="yrs-head"><div><div class="eyebrow">💎 YunaRunes • Ferramenta</div><h2>🧪 Simulador de Runas</h2><p>Gere uma runa, melhore até +15 e veja como os rolls das substats evoluem.</p></div><div class="yrs-score" id="yrs-score">—</div></div>
+<div class="yrs-head"><div><div class="eyebrow">💎 YunaRunes • Ferramenta</div><h2 data-pt="🧪 Simulador de runas" data-en="🧪 Rune simulator">🧪 Simulador de runas</h2><p>Gere uma runa, melhore até +15 e veja como os rolls das substats evoluem.</p></div><div class="yrs-score" id="yrs-score">—</div></div>
 <div class="yrs-form">
 <div class="yrs-field"><label>Tipo</label><select id="yrs-set"><option>Violent</option><option>Swift</option><option>Will</option><option>Rage</option><option>Despair</option><option>Fatal</option><option>Focus</option><option>Blade</option><option>Energy</option><option>Guard</option><option>Revenge</option><option>Nemesis</option><option>Shield</option><option>Vampire</option><option>Destroy</option><option>Fighter</option><option>Determination</option><option>Enhance</option><option>Accuracy</option><option>Tolerance</option><option>Seal</option></select></div>
 <div class="yrs-field"><label>Slot</label><select id="yrs-slot"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select></div>
@@ -950,18 +950,18 @@ $('ycs-start').addEventListener('click',start);$('ycs-turn-btn').addEventListene
 </div>
 </section>
 
-<section class="section acx" id="xp-academy"><h2>⭐ XP, níveis e progresso</h2><p data-pt="Aprende, pratica e ganha XP. O progresso fica guardado neste navegador." data-en="Learn, practice and earn XP. Progress is saved in this browser."></p><div class="master-card"><div id="academyLevelText" style="font-size:20px;font-weight:900"></div><div style="margin:10px 0"><div class="xp-bar"><i id="academyXpFill"></i></div></div><div id="academyXpText" style="color:#9aa9b6;font-size:12px"></div><div class="acx-btns"><button class="acx-btn good" onclick="yunaAcademyEarn(10)">+10 XP</button><button class="acx-btn" onclick="yunaAcademyResetXP()">Resetar XP</button></div></div></section>
-<section class="section acx" id="daily-challenge"><h2>🔥 Desafio do Dia</h2><p data-pt="Um desafio diário para treinar o raciocínio." data-en="A daily challenge to train your reasoning."></p><div class="master-card"><h3 id="dailyQuestion"></h3><div class="acx-btns" id="dailyOptions"></div><div class="challenge-result" id="dailyResult"></div></div></section>
-<section class="section acx" id="rune-lab"><h2>🔬 Laboratório de Runas</h2><p data-pt="Compara duas builds e aprende a decidir entre velocidade, dano e sobrevivência." data-en="Compare two builds and learn how to choose between speed, damage and survival."></p><div class="tiny-grid"><div class="master-card"><h3>Build A</h3><input class="master-input" id="runeA" placeholder="SPD / ATK / CR / CD / HP"></div><div class="master-card"><h3>Build B</h3><input class="master-input" id="runeB" placeholder="SPD / ATK / CR / CD / HP"></div></div><div class="acx-btns"><button class="acx-btn good" onclick="runRuneComparison()">🔬 Comparar</button></div><div class="rune-lab-result" id="runeLabResult"></div></section>
-<section class="section acx" id="wrong-rune"><h2>🧩 Encontra a runa errada</h2><p data-pt="Escolhe a opção que menos faz sentido para um DPS de dano consistente." data-en="Choose the option that makes the least sense for a consistent DPS."></p><div class="acx-btns"><button class="acx-btn" onclick="wrongRune(1)">ATK% / CR / CD / SPD</button><button class="acx-btn" onclick="wrongRune(2)">HP% / DEF% / RES / flat HP</button><button class="acx-btn" onclick="wrongRune(3)">ATK% / CR / CD / ATK</button></div><div class="challenge-result" id="wrongRuneResult"></div></section>
+<section class="section acx" id="xp-academy"><h2 data-pt="⭐ XP, níveis e progresso" data-en="⭐ XP, levels, and progress">⭐ XP, níveis e progresso</h2><p data-pt="Aprende, pratica e ganha XP. O progresso fica guardado neste navegador." data-en="Learn, practice and earn XP. Progress is saved in this browser."></p><div class="master-card"><div id="academyLevelText" style="font-size:20px;font-weight:900"></div><div style="margin:10px 0"><div class="xp-bar"><i id="academyXpFill"></i></div></div><div id="academyXpText" style="color:#9aa9b6;font-size:12px"></div><div class="acx-btns"><button class="acx-btn good" onclick="yunaAcademyEarn(10)">+10 XP</button><button class="acx-btn" onclick="yunaAcademyResetXP()">Resetar XP</button></div></div></section>
+<section class="section acx" id="daily-challenge"><h2 data-pt="🔥 Desafio do dia" data-en="🔥 Daily challenge">🔥 Desafio do dia</h2><p data-pt="Um desafio diário para treinar o raciocínio." data-en="A daily challenge to train your reasoning."></p><div class="master-card"><h3 id="dailyQuestion"></h3><div class="acx-btns" id="dailyOptions"></div><div class="challenge-result" id="dailyResult"></div></div></section>
+<section class="section acx" id="rune-lab"><h2 data-pt="🔬 Laboratório de runas" data-en="🔬 Rune Lab">🔬 Laboratório de runas</h2><p data-pt="Compara duas builds e aprende a decidir entre velocidade, dano e sobrevivência." data-en="Compare two builds and learn how to choose between speed, damage and survival."></p><div class="tiny-grid"><div class="master-card"><h3>Build A</h3><input class="master-input" id="runeA" placeholder="SPD / ATK / CR / CD / HP"></div><div class="master-card"><h3>Build B</h3><input class="master-input" id="runeB" placeholder="SPD / ATK / CR / CD / HP"></div></div><div class="acx-btns"><button class="acx-btn good" onclick="runRuneComparison()">🔬 Comparar</button></div><div class="rune-lab-result" id="runeLabResult"></div></section>
+<section class="section acx" id="wrong-rune"><h2 data-pt="🧩 Encontra a runa errada" data-en="🧩 Find the wrong rune">🧩 Encontra a runa errada</h2><p data-pt="Escolhe a opção que menos faz sentido para um DPS de dano consistente." data-en="Choose the option that makes the least sense for a consistent DPS."></p><div class="acx-btns"><button class="acx-btn" onclick="wrongRune(1)">ATK% / CR / CD / SPD</button><button class="acx-btn" onclick="wrongRune(2)">HP% / DEF% / RES / flat HP</button><button class="acx-btn" onclick="wrongRune(3)">ATK% / CR / CD / ATK</button></div><div class="challenge-result" id="wrongRuneResult"></div></section>
 <section class="section acx" id="battle-challenge"><h2 data-pt="⚔️ Quem ganha esta batalha?" data-en="⚔️ Who wins this battle?">⚔️ Who wins this battle?</h2><p data-pt="Controlo rápido contra DPS lento e sem proteção. Pensa antes de escolher." data-en="Fast control versus a slow unprotected DPS. Think before choosing."></p><div class="acx-btns"><button class="acx-btn" data-pt="💫 Controlo rápido" data-en="💫 Fast control" onclick="battleChoice('control')">💫 Fast control</button><button class="acx-btn" data-pt="💥 DPS lento" data-en="💥 Slow DPS" onclick="battleChoice('dps')">💥 Slow DPS</button></div><div class="battle-result" id="battleResult"></div></section>
 <section class="section acx" id="team-from-scratch"><h2 data-pt="🧠 Monta uma equipa do zero" data-en="🧠 Build a Team from Scratch">🧠 Build a Team from Scratch</h2><p data-pt="Escolhe uma condição de vitória e monta a ordem de funções." data-en="Choose a win condition and build the role order."></p><div class="tiny-grid"><select class="master-select" id="scratchGoal"><option value="control">Controlo</option><option value="damage">Dano rápido</option><option value="survive">Sobrevivência</option></select><select class="master-select" id="scratchFirst"><option>Booster</option><option>Setup</option><option>Debuffer</option><option>DPS</option><option>Healer</option></select></div><div class="acx-btns"><button class="acx-btn good" onclick="buildFromScratch()">🧙 Analisar equipa</button></div><div class="challenge-result" id="scratchResult"></div></section>
-<section class="section acx" id="ranking-academy"><h2>🏆 Ranking pessoal</h2><p data-pt="O teu ranking local sobe com XP e desafios concluídos." data-en="Your local rank rises with XP and completed challenges."></p><div class="master-card"><div id="academyRankText"></div><div class="acx-btns"><button class="acx-btn good" onclick="yunaAcademyEarn(25)">🎯 Concluir missão +25 XP</button></div></div></section>
+<section class="section acx" id="ranking-academy"><h2 data-pt="🏆 Ranking pessoal" data-en="🏆 Personal leaderboard">🏆 Ranking pessoal</h2><p data-pt="O teu ranking local sobe com XP e desafios concluídos." data-en="Your local rank rises with XP and completed challenges."></p><div class="master-card"><div id="academyRankText"></div><div class="acx-btns"><button class="acx-btn good" onclick="yunaAcademyEarn(25)">🎯 Concluir missão +25 XP</button></div></div></section>
 <section class="section acx" id="medals-academy"><h2 data-pt="🎖️ Medalhas especiais" data-en="🎖️ Special Medals">🎖️ Medalhas especiais</h2><div class="medals" id="medalsGrid"></div></section>
-<section class="section acx" id="initial-test"><h2>📊 Teste inicial</h2><p data-pt="Escolhe o tema que melhor descreve o que já sabes." data-en="Choose the topic that best describes what you already know."></p><div class="acx-btns"><button class="acx-btn" onclick="initialTest(1)">⚡ Sei o que é SPD</button><button class="acx-btn" onclick="initialTest(2)">💎 Sei escolher runas</button><button class="acx-btn" onclick="initialTest(3)">🧙 Sei montar equipas</button></div><div class="challenge-result" id="initialTestResult"></div></section>
-<section class="section acx" id="detective-academy"><h2>🕵️ Build Detective</h2><p data-pt="Descobre o gargalo de uma build a partir do sintoma." data-en="Find the bottleneck from the symptom."></p><div class="acx-btns"><button class="acx-btn" onclick="detective('slow')">Nunca jogo primeiro</button><button class="acx-btn" onclick="detective('debuff')">Debuffs falham</button><button class="acx-btn" onclick="detective('damage')">Dano baixo</button></div><div class="challenge-result" id="detectiveResult"></div></section>
+<section class="section acx" id="initial-test"><h2 data-pt="📊 Teste inicial" data-en="📊 Initial test">📊 Teste inicial</h2><p data-pt="Escolhe o tema que melhor descreve o que já sabes." data-en="Choose the topic that best describes what you already know."></p><div class="acx-btns"><button class="acx-btn" onclick="initialTest(1)">⚡ Sei o que é SPD</button><button class="acx-btn" onclick="initialTest(2)">💎 Sei escolher runas</button><button class="acx-btn" onclick="initialTest(3)">🧙 Sei montar equipas</button></div><div class="challenge-result" id="initialTestResult"></div></section>
+<section class="section acx" id="detective-academy"><h2 data-pt="🕵️ Detetive de builds" data-en="🕵️ Build Detective">🕵️ Detetive de builds</h2><p data-pt="Descobre o gargalo de uma build a partir do sintoma." data-en="Find the bottleneck from the symptom."></p><div class="acx-btns"><button class="acx-btn" onclick="detective('slow')">Nunca jogo primeiro</button><button class="acx-btn" onclick="detective('debuff')">Debuffs falham</button><button class="acx-btn" onclick="detective('damage')">Dano baixo</button></div><div class="challenge-result" id="detectiveResult"></div></section>
 <section class="section acx" id="micro-lessons"><h2 data-pt="📖 Aulas de 60 segundos" data-en="📖 60-Second Lessons">📖 Aulas de 60 segundos</h2><div class="master-grid"><div class="master-card"><h3>⚡ SPD</h3><p data-pt="SPD influencia a ordem dos turnos. Mais velocidade não resolve tudo se a sequência estiver errada." data-en="SPD influences turn order. More speed does not solve everything if the sequence is wrong."></p></div><div class="master-card"><h3>💫 STUN</h3><p data-pt="Stun impede o monstro de agir enquanto o efeito estiver ativo." data-en="Stun prevents the monster from acting while active."></p></div><div class="master-card"><h3>🎯 ACC</h3><p data-pt="Accuracy ajuda a aplicar efeitos, mas skill e resistência do alvo também importam." data-en="Accuracy helps land effects, but skill and target resistance also matter."></p></div></div></section>
-<section class="section acx" id="master-mode"><h2>🔥 Master Mode</h2><p data-pt="Quando dominares o básico, tenta responder sem dicas." data-en="Once you master the basics, answer without hints."></p><div class="master-card"><h3>Desafio</h3><p data-pt="O booster joga depois do debuffer. O que verificas primeiro?" data-en="The booster moves after the debuffer. What do you check first?"></p><div class="acx-btns"><button class="acx-btn" onclick="masterAnswer(false)">Trocar todas as runas</button><button class="acx-btn" onclick="masterAnswer(true)">Speed Tune / SPD / ATB</button></div><div class="challenge-result" id="masterResult"></div></div></section>
+<section class="section acx" id="master-mode"><h2 data-pt="🔥 Modo Mestre" data-en="🔥 Master Mode">🔥 Modo Mestre</h2><p data-pt="Quando dominares o básico, tenta responder sem dicas." data-en="Once you master the basics, answer without hints."></p><div class="master-card"><h3>Desafio</h3><p data-pt="O booster joga depois do debuffer. O que verificas primeiro?" data-en="The booster moves after the debuffer. What do you check first?"></p><div class="acx-btns"><button class="acx-btn" onclick="masterAnswer(false)">Trocar todas as runas</button><button class="acx-btn" onclick="masterAnswer(true)">Speed Tune / SPD / ATB</button></div><div class="challenge-result" id="masterResult"></div></div></section>
 <section class="section acx" id="ask-academy"><h2 data-pt="🦊 Pergunta à Yuna Academy" data-en="🦊 Ask Yuna Academy">🦊 Pergunta à Yuna Academy</h2><p data-pt="Pesquisa dentro das aulas. Tenta stun, proc, runa, speed, healer ou RTA." data-en="Search the lessons. Try stun, proc, rune, speed, healer or RTA."></p><div class="search"><input id="academyAsk" placeholder="Ex.: speed"><button class="acx-btn good" onclick="askAcademy()">🔎 Perguntar</button></div><div class="ask-result" id="askResult"></div></section><section class="section acx" id="achievements">
 <h2 data-pt="🏅 Conquistas da Yuna Academy" data-en="🏅 Yuna Academy achievements"></h2>
 <p data-pt="Desbloqueia conquistas enquanto aprendes. Estas ficam guardadas neste navegador." data-en="Unlock achievements as you learn. They are saved in this browser."></p>
@@ -1106,7 +1106,7 @@ el('medalsGrid').innerHTML=['🌱 Primeiro passo','💎 Mestre das runas','🧪 
 </section>
 
 <section class="section" id="academy-dictionary">
-<h2>📖 Dicionário Yuna Academy</h2>
+<h2 data-pt="📖 Dicionário da Yuna Academy" data-en="📖 Yuna Academy Dictionary">📖 Dicionário da Yuna Academy</h2>
 <p>Pesquise um termo e aprenda o significado, o uso e o erro mais comum.</p>
 <input id="uDictSearch" class="dictionary-search" placeholder="Pesquisar ACC, SPD, STUN, PROC...">
 <div class="ultimate-grid" id="uDictGrid"></div>
@@ -1126,7 +1126,7 @@ el('medalsGrid').innerHTML=['🌱 Primeiro passo','💎 Mestre das runas','🧪 
 </section>
 
 <section class="section" id="academy-cert">
-<h2>🏆 Certificação Yuna Academy</h2>
+<h2 data-pt="🏆 Certificação da Yuna Academy" data-en="🏆 Yuna Academy Certification">🏆 Certificação da Yuna Academy</h2>
 <p>Complete a trilha, desafios e provas para desbloquear títulos.</p>
 <div class="badge-row" id="uBadges"></div>
 </section>
@@ -1225,7 +1225,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="rune-school">
-<h2>💎 4. Rune School — runas desde o zero</h2>
+<h2 data-pt="💎 4. Escola de Runas — runas desde o zero" data-en="💎 4. Rune School — runes from scratch">💎 4. Escola de Runas — runas desde o zero</h2>
 <div class="bs-grid">
 <div class="bs-card"><h3>🔢 Slots 1–6</h3><p>Aprenda primeiro a reconhecer slot, main stat e substats. Não escolha uma runa apenas pela cor.</p></div>
 <div class="bs-card"><h3>🎨 Raridade</h3><p>Normal, Magic, Rare, Hero e Legend têm quantidades diferentes de substats e potencial de rolls.</p></div>
@@ -1238,7 +1238,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="terminology-school">
-<h2>🎲 5. Dicionário de combate — palavras que você vai ouvir</h2>
+<h2 data-pt="🎲 5. Dicionário de combate — palavras que vais ouvir" data-en="🎲 5. Combat dictionary — terms you will hear">🎲 5. Dicionário de combate — palavras que vais ouvir</h2>
 <div class="bs-terms">
 <div class="bs-term"><b>PROC</b><span>Ativação adicional de uma mecânica. Não é sinônimo de qualquer efeito.</span></div>
 <div class="bs-term"><b>Violent Proc</b><span>Ativação extra associada ao conjunto/mecânica Violent.</span></div>
@@ -1306,7 +1306,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="mistakes-school">
-<h2>🚨 10. Os erros que mais atrasam novos jogadores</h2>
+<h2 data-pt="🚨 10. Os erros que mais atrasam novos jogadores" data-en="🚨 10. The mistakes that slow down new players">🚨 10. Os erros que mais atrasam novos jogadores</h2>
 <div class="bs-grid">
 <div class="bs-card"><h3>😈 Devilmon sem pensar</h3><p>Use o recurso raro com planejamento. Nem todo monstro merece skill-up imediato.</p></div>
 <div class="bs-card"><h3>💎 Vender runas sem olhar</h3><p>Confira slot, main stat e substats antes de decidir.</p></div>
@@ -1320,7 +1320,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="spd-lab-school">
-<h2>⚡ 11. Laboratório de SPD — veja a ordem dos turnos</h2>
+<h2 data-pt="⚡ 11. Laboratório de SPD — vê a ordem dos turnos" data-en="⚡ 11. SPD Lab — see the turn order">⚡ 11. Laboratório de SPD — vê a ordem dos turnos</h2>
 <p>Digite a SPD de quatro monstros. O laboratório ordena do mais rápido para o mais lento e mostra por que Speed Tune importa.</p>
 <div class="bs-grid">
 <div class="bs-card"><input class="bs-input" id="bsSpd1" type="number" value="300" placeholder="Monstro 1 SPD"><input class="bs-input" id="bsSpd2" type="number" value="280" placeholder="Monstro 2 SPD"><input class="bs-input" id="bsSpd3" type="number" value="250" placeholder="Monstro 3 SPD"><input class="bs-input" id="bsSpd4" type="number" value="210" placeholder="Monstro 4 SPD"><button class="u-btn" onclick="bsSpeedLab()">Ver ordem</button></div>
@@ -1329,7 +1329,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="damage-school">
-<h2>💥 12. Laboratório de dano — pense antes de culpar a build</h2>
+<h2 data-pt="💥 12. Laboratório de dano — pensa antes de culpar a build" data-en="💥 12. Damage Lab — think before blaming the build">💥 12. Laboratório de dano — pensa antes de culpar a build</h2>
 <p>Este é um modelo didático, não uma reprodução completa de todas as fórmulas do jogo. O objetivo é ensinar quais fatores procurar.</p>
 <div class="bs-grid">
 <div class="bs-card"><input class="bs-input" id="bsAtk" type="number" value="2000" placeholder="ATK"><input class="bs-input" id="bsCd" type="number" value="150" placeholder="CD %"><input class="bs-input" id="bsMult" type="number" value="2" step="0.1" placeholder="Multiplicador"><button class="u-btn" onclick="bsDamageLab()">Calcular modelo</button></div>
@@ -1338,7 +1338,7 @@ function renderBadges(){const en=document.documentElement.lang==='en'||localStor
 </section>
 
 <section class="section" id="mission-school">
-<h2>🧩 13. Mission Team Challenge</h2>
+<h2 data-pt="🧩 13. Desafio de equipa por missões" data-en="🧩 13. Mission Team Challenge">🧩 13. Desafio de equipa por missões</h2>
 <p>Monte a lógica de uma equipe para uma missão. Não existe uma única resposta universal; o objetivo é reconhecer o que está faltando.</p>
 <select id="bsMission" class="bs-select"><option value="boss">Boss difícil: precisa sobreviver e aplicar debuffs</option><option value="speed">Fase rápida: quero terminar antes do inimigo</option><option value="control">Inimigos perigosos: preciso limitar ações</option><option value="cleanse">Inimigos aplicam muitos debuffs</option></select>
 <button class="u-btn" onclick="bsMissionCheck()">O que não pode faltar?</button><div id="bsMissionResult" class="bs-result"></div>
