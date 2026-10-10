@@ -1900,6 +1900,7 @@ function apply(root=document.body){
    translated=wordFallback(translated,en());
   }
   translated=translated.replace(/\uE000/g,'Summoners War');
+    translated=translated.replace(/Battle\s+Yesulator/gi,'Battle Simulator');
   if(typeof translated==='string'&&translated!==trimmed){
    const left=raw.match(/^\s*/)?.[0]||'';
    const right=raw.match(/\s*$/)?.[0]||'';
