@@ -1995,16 +1995,6 @@ function getTranslationTools(){
 function apply(root=document.body){
  if(!root)return;
  document.documentElement.lang=en()?'en':'pt-BR';
- const map=en()?PAIRS:REV;
- const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
- const translationPattern=keys.length?new RegExp(keys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g'):null;
- const translatePhrases=value=>translationPattern?value.replace(translationPattern,key=>map[key]):value;')).join('|'),'g'):null;
- const translatePhrases=value=>translationPattern?value.replace(translationPattern,key=>map[key]):value;
- return translationCache[language]={map,translatePhrases};
-}
-function apply(root=document.body){
- if(!root)return;
- document.documentElement.lang=en()?'en':'pt-BR';
  const {map,translatePhrases}=getTranslationTools();
  // Translate explicitly marked elements first.
  if(root.querySelectorAll){
