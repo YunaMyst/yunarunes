@@ -2152,24 +2152,21 @@ function boot(){
  if(!window.__yunaLanguageObserver){
   window.__yunaLanguageObserver=new MutationObserver(records=>{
    let shouldStabilize=false;
+   const addedElements=new Set();
    for(const record of records){
     if(record.type==='childList'){
-     for(const node of record.addedNodes)if(node.nodeType===1||node.nodeType===3){
-      const target=node.nodeType===1?node:node.parentElement;
-      if(target){apply(target);shouldStabilize=true;}
-     }
-    } else if(record.type==='characterData'){
-     // Dynamic widgets often update an existing text node instead of inserting a new one.
-     // Re-apply the active language to that node's parent so late-rendered Portuguese
-     // labels and messages are translated too.
-     const target=record.target?.parentElement;
-     if(target && !target.closest?.('script,style,noscript,textarea,code,pre,[contenteditable="true"],[data-no-translate]')){
-      apply(target);
+     // Only translate newly inserted ELEMENTS. Text nodes are frequently replaced by
+     // apply() itself; rescanning their entire parent here caused a recursive,
+     // quadratic translation loop on the large Academy page and left it unresponsive.
+     for(const node of record.addedNodes){
+      if(node.nodeType===1 && !node.matches('script,style,noscript') &&
+         !node.closest('script,style,noscript,[data-no-translate]')) addedElements.add(node);
      }
     } else if(record.type==='attributes'){
      if(record.target?.closest?.('header.top'))shouldStabilize=true;
     }
    }
+   addedElements.forEach(node=>apply(node));
    if(shouldStabilize)stabilizeHeader();
   });
   window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
