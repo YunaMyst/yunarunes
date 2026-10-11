@@ -1986,6 +1986,8 @@ function apply(root=document.body){
  document.documentElement.lang=en()?'en':'pt-BR';
  const map=en()?PAIRS:REV;
  const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
+ const translationPattern=keys.length?new RegExp(keys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,'\\const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);')).join('|'),'g'):null;
+ const translatePhrases=value=>translationPattern?value.replace(translationPattern,key=>map[key]):value;
  // Translate explicitly marked elements first.
  if(root.querySelectorAll){
   root.querySelectorAll('[data-pt][data-en]').forEach(el=>{
@@ -2014,7 +2016,7 @@ function apply(root=document.body){
     let value=map[protectedValue];
     if(typeof value!=='string'){
      value=protectedValue;
-     for(const key of keys)if(value.includes(key))value=value.split(key).join(map[key]);
+     value=translatePhrases(value);
      value=wordFallback(value,en());
     }
     value=value.replace(/\uE000/g,'Summoners War');
@@ -2043,7 +2045,7 @@ function apply(root=document.body){
   let translated=map[protectedText];
   if(typeof translated!=='string'){
    translated=protectedText;
-   for(const key of keys)if(translated.includes(key))translated=translated.split(key).join(map[key]);
+   translated=translatePhrases(translated);
    translated=wordFallback(translated,en());
   }
   translated=translated.replace(/\uE000/g,'Summoners War');
