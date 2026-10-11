@@ -1981,13 +1981,26 @@ function updateHeader(){
  if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){const label=en()?NAV[i][2]:NAV[i][1];if(a.textContent!==label)a.textContent=label;a.href=NAV[i][0]}});
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
 }
-function apply(root=document.body){
+const translationCache={};
+function getTranslationTools(){
+ const language=en()?'en':'pt';
+ if(translationCache[language])return translationCache[language];
+ const map=language==='en'?PAIRS:REV;
+ const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
+ const translationPattern=keys.length?new RegExp(keys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,'\\function apply(root=document.body){
  if(!root)return;
  document.documentElement.lang=en()?'en':'pt-BR';
  const map=en()?PAIRS:REV;
  const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
  const translationPattern=keys.length?new RegExp(keys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g'):null;
+ const translatePhrases=value=>translationPattern?value.replace(translationPattern,key=>map[key]):value;')).join('|'),'g'):null;
  const translatePhrases=value=>translationPattern?value.replace(translationPattern,key=>map[key]):value;
+ return translationCache[language]={map,translatePhrases};
+}
+function apply(root=document.body){
+ if(!root)return;
+ document.documentElement.lang=en()?'en':'pt-BR';
+ const {map,translatePhrases}=getTranslationTools();
  // Translate explicitly marked elements first.
  if(root.querySelectorAll){
   root.querySelectorAll('[data-pt][data-en]').forEach(el=>{
