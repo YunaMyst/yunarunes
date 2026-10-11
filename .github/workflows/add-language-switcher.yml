@@ -28,7 +28,10 @@ jobs:
               s = s.replace('<script src="header-fix.js"></script>', '')
               s = re.sub(r'<script src="language-dynamic\.js(?:\?v=[^"\']+)?"></script>', '', s)
               s = re.sub(r'<script src="language\.js(?:\?v=[^"\']+)?"></script>', '', s)
-              s = s.replace('</body>', '<script src="language.js?v=20261011-academy-loading-fix-v3"></script></body>')
+              # Academy has a very large interactive page; keep it isolated from
+              # the site-wide translation engine so its UI stays responsive.
+              if p.name != 'academy.html':
+                  s = s.replace('</body>', '<script src="language.js?v=20261011-academy-loading-fix-v3"></script></body>')
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
