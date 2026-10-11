@@ -2130,7 +2130,7 @@ function enforceHeaderControlsLayout(){
  let style=document.getElementById(id);
  if(!style){style=document.createElement('style');style.id=id;document.head.appendChild(style);}
  const css=`
- html body header.top{display:block!important;width:100%!important;overflow:visible!important;position:relative!important;z-index:20!important}
+ html body header.top{display:block!important;width:100%!important;overflow:visible!important;position:relative!important;z-index:2147483000!important;pointer-events:auto!important}html body header.top .header-controls,html body header.top .header-controls .yuna-controls,html body header.top .header-controls button[data-lang]{position:relative!important;z-index:2147483001!important;pointer-events:auto!important;touch-action:manipulation!important}
  html body header.top>.nav{display:grid!important;grid-template-columns:minmax(125px,165px) minmax(0,1fr) max-content!important;grid-template-areas:"brand links controls"!important;align-items:center!important;gap:8px 10px!important;width:100%!important;min-height:62px!important;height:auto!important;padding:8px 14px!important;box-sizing:border-box!important}
  html body header.top .header-brand{grid-area:brand!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important}
  html body header.top .header-brand a.brand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;white-space:nowrap!important;color:#fff!important;text-decoration:none!important;font-size:18px!important;font-weight:900!important;line-height:1.2!important}
@@ -2189,6 +2189,7 @@ function boot(){
  document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
  window.addEventListener('resize',stabilizeHeader,{passive:true});
 }
+window.yunaSetLanguage=setLanguage;
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 
 /* yuna-official-game-name-guard: lightweight, avoid scanning the entire DOM */
