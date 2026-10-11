@@ -2090,19 +2090,14 @@ function apply(root=document.body){
 
 function setLanguage(lang){
  const next=lang==='en'?'en':'pt';
+ if(getLang()===next){
+  document.documentElement.lang=next==='en'?'en':'pt-BR';
+  return;
+ }
  save(next);
- document.documentElement.lang=next==='en'?'en':'pt-BR';
- document.querySelectorAll('[data-lang]').forEach(b=>{
-  b.classList.toggle('active',b.dataset.lang===next);
-  b.setAttribute('aria-pressed',String(b.dataset.lang===next));
- });
- // Apply the selected language immediately without reloading the whole site.
- // This keeps mobile navigation responsive and avoids getting stuck on loading screens.
- apply(document.body);
- window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:{language:next}}));
- updateHeader();
- enforceDonateAppearance();
- bind();
+ // Reload once so every page component reads the same saved language on startup.
+ // Avoid running a second full-page translation pass inside the click handler.
+ window.location.reload();
 }
 function bind(){
  document.querySelectorAll('[data-lang]').forEach(b=>{
