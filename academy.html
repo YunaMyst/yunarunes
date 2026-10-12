@@ -1146,21 +1146,22 @@ window.uLab=()=>{const en=document.documentElement.lang==='en';const a=Math.max(
 window.uLoss=()=>{const t=document.getElementById('uLoss').value;uDiag(t);};
 window.uMaster=ok=>{document.getElementById('uMasterResult').textContent=ok?'👑 Correto! Primeiro corrija SPD/Speed Tune para que a equipe faça o que foi planejado. +20 XP':'❌ Não troque tudo de uma vez. Encontre primeiro o gargalo da equipe.';if(ok){earn(20);award('master')}};
 const dict=[
-['SPD','Speed: influencia a ordem e frequência dos turnos.','Erro comum: achar que o maior SPD sozinho garante vitória.'],
-['ACC','Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.','Erro comum: pensar que 100% ACC significa 100% de aplicação.'],
-['RES','Resistance: participa das verificações de resistência contra efeitos.','Erro comum: ignorar o alvo e olhar apenas sua própria ACC.'],
-['STUN','Controle que impede o monstro de agir durante o efeito.','Erro comum: confundir STUN com STRIP.'],
-['PROC','Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.','Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.'],
-['STRIP','Remoção de buffs.','Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.'],
-['CLEANSE','Remoção de debuffs de um aliado.','Erro comum: confundir cleanse com imunidade.'],
-['CC','Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.','Erro comum: considerar apenas STUN como CC.'],
-['DPS','Função focada em causar dano.','Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.'],
-['SPEED TUNING','Ajuste de velocidades para preservar uma sequência planejada.','Erro comum: montar velocidades isoladamente sem testar a equipe inteira.'],
-['BUFF','Efeito positivo aplicado a um aliado.','Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.'],
-['DEBUFF','Efeito negativo aplicado a um inimigo.','Erro comum: esquecer ACC, RES ou chance da skill.']
+['SPD','Speed: influencia a ordem e frequência dos turnos.','Erro comum: achar que o maior SPD sozinho garante vitória.','Speed affects turn order and how frequently monsters take turns.','Common mistake: assuming the highest SPD alone guarantees victory.'],
+['ACC','Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.','Erro comum: pensar que 100% ACC significa 100% de aplicação.','Accuracy helps land effects that depend on Accuracy.','Common mistake: assuming 100% ACC means a 100% chance to land an effect.'],
+['RES','Resistance: participa das verificações de resistência contra efeitos.','Erro comum: ignorar o alvo e olhar apenas sua própria ACC.','Resistance is used in resistance checks against effects.','Common mistake: ignoring the target and looking only at your own ACC.'],
+['STUN','Controle que impede o monstro de agir durante o efeito.','Erro comum: confundir STUN com STRIP.','Control that prevents a monster from taking action while the effect lasts.','Common mistake: confusing STUN with STRIP.'],
+['PROC','Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.','Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.','Slang for an extra activation or effect triggered by a game mechanic.','Common mistake: using PROC as if it meant any kind of effect.'],
+['STRIP','Remoção de buffs.','Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.','Removal of buffs.','Common mistake: choosing a stripper without considering Speed, skills, and consistency.'],
+['CLEANSE','Remoção de debuffs de um aliado.','Erro comum: confundir cleanse com imunidade.','Removal of debuffs from an ally.','Common mistake: confusing cleanse with immunity.'],
+['CC','Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.','Erro comum: considerar apenas STUN como CC.','Crowd Control: a group of effects that limit or control enemy actions.','Common mistake: thinking STUN is the only form of CC.'],
+['DPS','Função focada em causar dano.','Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.','A role focused on dealing damage.','Common mistake: maximizing damage while ignoring survivability or turn order.'],
+['SPEED TUNING','Ajuste de velocidades para preservar uma sequência planejada.','Erro comum: montar velocidades isoladamente sem testar a equipe inteira.','Adjusting monster Speeds to preserve a planned turn order.','Common mistake: tuning Speeds individually without testing the whole team.'],
+['BUFF','Efeito positivo aplicado a um aliado.','Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.','A beneficial effect applied to an ally.','Common mistake: assuming every buff is equally useful in every game mode.'],
+['DEBUFF','Efeito negativo aplicado a um inimigo.','Erro comum: esquecer ACC, RES ou chance da skill.','A harmful effect applied to an enemy.','Common mistake: forgetting ACC, RES, or the skill activation chance.']
 ];
 const grid=document.getElementById('uDictGrid'),search=document.getElementById('uDictSearch');
-function renderDict(){const q=(search.value||'').toLowerCase();grid.innerHTML=dict.filter(x=>(x[0]+' '+x[1]+' '+x[2]).toLowerCase().includes(q)).map(x=>'<div class="ultimate-card"><h3>'+x[0]+'</h3><p>'+x[1]+'</p><p>⚠️ '+x[2]+'</p></div>').join('')||'<div class="ultimate-card">Nenhum termo encontrado.</div>'}search.addEventListener('input',renderDict);renderDict();
+function renderDict(){const en=document.documentElement.lang==='en'||localStorage.getItem('yunarunes-language')==='en';const q=(search.value||'').toLowerCase();grid.innerHTML=dict.filter(x=>(x[0]+' '+x[en?3:1]+' '+x[en?4:2]).toLowerCase().includes(q)).map(x=>'<div class="ultimate-card"><h3>'+x[0]+'</h3><p>'+x[en?3:1]+'</p><p>⚠️ '+x[en?4:2]+'</p></div>').join('')||'<div class="ultimate-card">'+(en?'No terms found.':'Nenhum termo encontrado.')+'</div>'}
+search.addEventListener('input',renderDict);window.addEventListener('yunarunes-language-applied',renderDict);renderDict();
 const path=[['fund','🌱 Fundamentos: elementos, funções e 6★','🌱 Fundamentals: elements, roles, and 6★'],['combat','⚔️ Combate: turnos, ATB, buffs e debuffs','⚔️ Combat: turns, ATB, buffs, and debuffs'],['runes','💎 Runas: slots, stats principais e substats','💎 Runes: slots, main stats, and substats'],['stats','📊 Stats: SPD, CR, CD, ACC, RES, HP, DEF, ATK','📊 Stats: SPD, CR, CD, ACC, RES, HP, DEF, ATK'],['speed','⚡ Speed Tune e ordem de turnos','⚡ Speed Tune and turn order'],['pve','🏰 PvE: farming e progressão','🏰 PvE: farming and progression'],['pvp','🏆 PvP: Arena, Siege e RTA','🏆 PvP: Arena, Siege, and RTA'],['diagnose','🕵️ Diagnosticar derrotas','🕵️ Diagnose defeats'],['teams','🧙 Montar equipas','🧙 Build teams'],['lab','🧪 Laboratórios','🧪 Labs'],['practice','🎮 Desafios práticos','🎮 Practical challenges'],['master','👑 Modo Mestre','👑 Master Mode']];
 let state=JSON.parse(localStorage.getItem(pathKey)||'{}'),wrap=document.getElementById('uPath');
 function renderPath(){const en=document.documentElement.lang==='en'||localStorage.getItem('yunarunes-language')==='en';wrap.innerHTML=path.map((x,i)=>'<label class="checkrow"><input type="checkbox" '+(state[x[0]]?'checked':'')+' data-u-path="'+x[0]+'"><span><b>'+x[en?2:1]+'</b><small style="display:block;margin-top:6px">'+(en?'Step ':'Etapa ')+(i+1)+' '+(en?'of ':'de ')+path.length+'</small></span></label>').join('');wrap.querySelectorAll('input').forEach(b=>b.onchange=()=>{state[b.dataset.uPath]=b.checked;localStorage.setItem(pathKey,JSON.stringify(state));renderPath();if(b.checked)earn(10)});const n=path.filter(x=>state[x[0]]).length;document.getElementById('uPathFill').style.width=(n/path.length*100)+'%';document.getElementById('uPathText').textContent=n+'/'+path.length+(en?' steps completed':' etapas concluídas');if(n===path.length)award('graduate')};renderPath();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')renderPath()});
@@ -2524,5 +2525,5 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012k"></script>
+<script src="language-academy-fix.js?v=20261012l"></script>
 </body></html>
