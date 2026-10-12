@@ -1,6 +1,32 @@
 (()=>{'use strict';
 const pairs={
 '🔬 Comparar':'🔬 Compare',
+'Speed: influencia a ordem e frequência dos turnos.':'Speed affects turn order and how frequently monsters take turns.'
+'⚠️ Erro comum: achar que o maior SPD sozinho garante vitória.':'⚠️ Common mistake: assuming the highest SPD alone guarantees victory.'
+'Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.':'Accuracy helps land effects that depend on Accuracy.'
+'⚠️ Erro comum: pensar que 100% ACC significa 100% de aplicação.':'⚠️ Common mistake: assuming 100% ACC means a 100% chance to land an effect.'
+'Resistance: participa das verificações de resistência contra efeitos.':'Resistance is used in resistance checks against effects.'
+'⚠️ Erro comum: ignorar o alvo e olhar apenas sua própria ACC.':'⚠️ Common mistake: ignoring the target and looking only at your own ACC.'
+'Controle que impede o monstro de agir durante o efeito.':'Control that prevents a monster from taking action while the effect lasts.'
+'⚠️ Erro comum: confundir STUN com STRIP.':'⚠️ Common mistake: confusing STUN with STRIP.'
+'Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.':'Slang for an extra activation or effect triggered by a game mechanic.'
+'⚠️ Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.':'⚠️ Common mistake: using PROC as if it meant any kind of effect.'
+'Remoção de buffs.':'Removal of buffs.'
+'⚠️ Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.':'⚠️ Common mistake: choosing a stripper without considering Speed, skills, and consistency.'
+'Remoção de debuffs de um aliado.':'Removal of debuffs from an ally.'
+'⚠️ Erro comum: confundir cleanse com imunidade.':'⚠️ Common mistake: confusing cleanse with immunity.'
+'Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.':'Crowd Control: a group of effects that limit or control enemy actions.'
+'⚠️ Erro comum: considerar apenas STUN como CC.':'⚠️ Common mistake: thinking STUN is the only form of CC.'
+'Função focada em causar dano.':'A role focused on dealing damage.'
+'⚠️ Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.':'⚠️ Common mistake: maximizing damage while ignoring survivability or turn order.'
+'Ajuste de velocidades para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.'
+'Ajuste de Speeds para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.'
+'⚠️ Erro comum: montar velocidades isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.'
+'⚠️ Erro comum: montar Speeds isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.'
+'Efeito positivo aplicado a um aliado.':'A beneficial effect applied to an ally.'
+'⚠️ Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.':'⚠️ Common mistake: assuming every buff is equally useful in every game mode.'
+'Efeito negativo aplicado a um inimigo.':'A harmful effect applied to an enemy.'
+'⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.'
 '⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.'
 'Efeito negativo aplicado a um inimigo.':'A negative effect applied to an enemy.',
 '⚠️ Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.':'⚠️ Common mistake: assuming every buff has the same value in every game mode.',
