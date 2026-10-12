@@ -1863,20 +1863,42 @@ render();window.addEventListener('yunarunes-language-applied',render);window.add
 })();
 </script>
 
+<script id="yamp-roadmap-language-fix">
+(function(){
+function applyYampLanguage(){
+var en=document.documentElement.lang==='en';
+try{en=en||localStorage.getItem('yunarunes-language')==='en'}catch(e){}
+document.querySelectorAll('#yuna-academy-master-pack [data-pt][data-en]').forEach(function(el){
+var value=el.getAttribute(en?'data-en':'data-pt');
+if(value!==null){
+if(el.tagName==='INPUT')return;
+el.textContent=value;
+}
+});
+var score=document.getElementById('yamp-road-score');
+if(score){var count=document.querySelectorAll('#yuna-academy-master-pack [data-yamp-road]:checked').length;score.textContent=count+'/4';}
+}
+document.addEventListener('DOMContentLoaded',applyYampLanguage);
+window.addEventListener('yunarunes-language-applied',applyYampLanguage);
+window.addEventListener('storage',function(e){if(e.key==='yunarunes-language')applyYampLanguage()});
+document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyYampLanguage,30)},true);
+applyYampLanguage();
+})();
+</script>
 <!-- YUNA ACADEMY MASTER PACK V1 -->
 <style>
 .yamp{margin:28px 0}.yamp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.yamp-card{background:linear-gradient(145deg,#111b27,#0c131b);border:1px solid #2c3c4d;border-radius:16px;padding:18px}.yamp-card h3{margin:0 0 7px;font-size:20px}.yamp-card p{color:var(--muted);line-height:1.55}.yamp-btn{border:1px solid #40576c;background:#172333;color:#fff;border-radius:10px;padding:10px 12px;font-weight:800;cursor:pointer}.yamp-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.yamp-list{display:grid;gap:8px}.yamp-item{display:flex;gap:9px;padding:10px;background:#0a1118;border:1px solid #263544;border-radius:11px;line-height:1.4}.yamp-item input{accent-color:#8b5cf6;margin-top:3px}.yamp-result{margin-top:12px;padding:12px;background:#0a1118;border:1px solid #2d4052;border-radius:11px;line-height:1.5}.yamp-road{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.yamp-step{padding:12px;border-radius:12px;background:#0a1118;border:1px solid #293746;text-align:center}.yamp-step b{display:block;margin:5px 0}.yamp-meter{height:9px;border-radius:99px;background:#080d12;overflow:hidden;border:1px solid #293746}.yamp-meter span{display:block;height:100%;width:0;background:linear-gradient(90deg,#35a9e1,#8b5cf6);transition:width .25s}.yamp-pvp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.yamp-mini{padding:12px;border:1px solid #293746;border-radius:12px;background:#0a1118}.yamp-tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#1b2a3a;border:1px solid #34485b;font-size:11px;font-weight:800;margin-bottom:7px}@media(max-width:800px){.yamp-grid,.yamp-options{grid-template-columns:1fr}.yamp-road{grid-template-columns:repeat(2,minmax(0,1fr))}.yamp-pvp{grid-template-columns:1fr}}
 </style>
 <section class="yamp" id="yuna-academy-master-pack">
-<div class="eyebrow">🏫 Yuna Academy • Formação completa</div>
-<h2 style="margin:5px 0">Do primeiro dia até o jogo competitivo</h2>
-<p style="color:var(--muted);max-width:920px">Progressão, recursos, decisões de runas, combate, equipes, Speed Tune, artefatos, aprimoramentos e PvP.</p>
+<div class="eyebrow" data-pt="🏫 Yuna Academy • Formação completa" data-en="🏫 Yuna Academy • Complete Training">🏫 Yuna Academy • Formação completa</div>
+<h2 style="margin:5px 0" data-pt="Do primeiro dia até o jogo competitivo" data-en="From your first day to competitive play">Do primeiro dia até o jogo competitivo</h2>
+<p style="color:var(--muted);max-width:920px" data-pt="Progressão, recursos, decisões de runas, combate, equipes, Speed Tune, artefatos, aprimoramentos e PvP." data-en="Progression, resources, rune decisions, combat, teams, Speed Tune, artifacts, upgrades, and PvP.">Progressão, recursos, decisões de runas, combate, equipes, Speed Tune, artefatos, aprimoramentos e PvP.</p>
 <div class="yamp-grid">
-<div class="yamp-card" id="yamp-roadmap"><span class="yamp-tag">🗺️ ROADMAP DA CONTA</span><h3>O que fazer e em que ordem?</h3>
-<div class="yamp-road"><div class="yamp-step">🌱<b>Começo</b><small>Conta e equipe</small></div><div class="yamp-step">💎<b>Runas</b><small>Base de qualidade</small></div><div class="yamp-step">🏰<b>PvE</b><small>Farm consistente</small></div><div class="yamp-step">🧪<b>Otimização</b><small>Artefatos e upgrades</small></div><div class="yamp-step">🏆<b>PvP</b><small>Decisão e draft</small></div></div>
-<p><b>Regra:</b> primeiro consistência, depois velocidade, depois otimização e finalmente competição.</p>
-<div class="yamp-list"><label class="yamp-item"><input type="checkbox" data-yamp-road> Tenho um objetivo principal para a conta.</label><label class="yamp-item"><input type="checkbox" data-yamp-road> Tenho uma equipe funcional de farm.</label><label class="yamp-item"><input type="checkbox" data-yamp-road> Consigo farmar conteúdo com consistência.</label><label class="yamp-item"><input type="checkbox" data-yamp-road> Sei por que estou avançando para o próximo conteúdo.</label></div><div class="yamp-result">Roadmap: <b id="yamp-road-score">0/4</b></div></div>
-<div class="yamp-card" id="yamp-resources"><span class="yamp-tag">💰 RECURSOS</span><h3>Onde gastar meus recursos?</h3><p>Aprenda a priorizar em vez de gastar tudo quando recebe.</p><div class="yamp-options"><button class="yamp-btn" data-yamp-res="mana">💰 Mana</button><button class="yamp-btn" data-pt="💎 Cristais" data-en="💎 Crystals" data-yamp-res="crystals">💎 Cristais</button><button class="yamp-btn" data-yamp-res="devilmon">👿 Devilmon</button><button class="yamp-btn" data-yamp-res="energy">⚡ Energia</button></div><div class="yamp-result" id="yamp-res-result">Escolha um recurso.</div></div>
+<div class="yamp-card" id="yamp-roadmap"><span class="yamp-tag" data-pt="🗺️ ROADMAP DA CONTA" data-en="🗺️ ACCOUNT ROADMAP">🗺️ ROADMAP DA CONTA</span><h3 data-pt="O que fazer e em que ordem?" data-en="What should I do, and in what order?">O que fazer e em que ordem?</h3>
+<div class="yamp-road"><div class="yamp-step">🌱<b data-pt="Início" data-en="Beginner">Início</b><small data-pt="Conta e equipa" data-en="Account and team">Conta e equipa</small></div><div class="yamp-step">💎<b data-pt="Runas" data-en="Runes">Runas</b><small data-pt="Base de qualidade" data-en="Quality foundation">Base de qualidade</small></div><div class="yamp-step">🏰<b>PvE</b><small data-pt="Farm consistente" data-en="Consistent farming">Farm consistente</small></div><div class="yamp-step">🧪<b data-pt="Otimização" data-en="Optimization">Otimização</b><small data-pt="Artefatos e melhorias" data-en="Artifacts and upgrades">Artefatos e melhorias</small></div><div class="yamp-step">🏆<b>PvP</b><small data-pt="Decisão e draft" data-en="Decision-making and draft">Decisão e draft</small></div></div>
+<p><b data-pt="Regra:" data-en="Rule:">Regra:</b> <span data-pt="primeiro consistência, depois velocidade, depois otimização e finalmente competição." data-en="consistency first, then speed, then optimization, and finally competition.">primeiro consistência, depois velocidade, depois otimização e finalmente competição.</span></p>
+<div class="yamp-list"><label class="yamp-item"><input type="checkbox" data-yamp-road><span data-pt="Tenho um objetivo principal para a minha conta." data-en="I have a main goal for my account.">Tenho um objetivo principal para a minha conta.</span></label><label class="yamp-item"><input type="checkbox" data-yamp-road><span data-pt="Tenho uma equipa funcional de farm." data-en="I have a functional farming team.">Tenho uma equipa funcional de farm.</span></label><label class="yamp-item"><input type="checkbox" data-yamp-road><span data-pt="Consigo farmar conteúdo de forma consistente." data-en="I can farm content consistently.">Consigo farmar conteúdo de forma consistente.</span></label><label class="yamp-item"><input type="checkbox" data-yamp-road><span data-pt="Sei por que estou a avançar para o próximo conteúdo." data-en="I know why I am moving on to the next content.">Sei por que estou a avançar para o próximo conteúdo.</span></label></div><div class="yamp-result"><span data-pt="Progresso do roadmap:" data-en="Roadmap progress:">Progresso do roadmap:</span> <b id="yamp-road-score">0/4</b></div></div>
+<div class="yamp-card" id="yamp-resources"><span class="yamp-tag">💰 RECURSOS</span><h3 data-pt="Onde gastar os meus recursos?" data-en="Where should I spend my resources?">Onde gastar os meus recursos?</h3><p data-pt="Aprenda a definir prioridades em vez de gastar tudo assim que recebe." data-en="Learn to prioritize instead of spending everything as soon as you get it.">Aprenda a definir prioridades em vez de gastar tudo assim que recebe.</p><div class="yamp-options"><button class="yamp-btn" data-yamp-res="mana">💰 Mana</button><button class="yamp-btn" data-pt="💎 Cristais" data-en="💎 Crystals" data-yamp-res="crystals">💎 Cristais</button><button class="yamp-btn" data-yamp-res="devilmon">👿 Devilmon</button><button class="yamp-btn" data-yamp-res="energy">⚡ Energia</button></div><div class="yamp-result" id="yamp-res-result" data-pt="Escolha um recurso." data-en="Choose a resource.">Escolha um recurso.</div></div>
 </div>
 <div class="yamp-card" id="yamp-rune-decision" style="margin-top:14px"><span class="yamp-tag">💎 DECISOR DE RUNAS</span><h3>Vendo, guardo ou upo?</h3><p>Treine uma decisão que todo jogador precisa aprender.</p><div class="yamp-options"><button class="yamp-btn" data-yamp-rune="keep">6★ Hero • SPD + ATK% + CR + CD</button><button class="yamp-btn" data-yamp-rune="sell">5★ Normal • substats desconectados</button><button class="yamp-btn" data-yamp-rune="test">6★ Legend • stats interessantes sem rolls</button><button class="yamp-btn" data-yamp-rune="context">Runa boa, mas sem monstro que a use</button></div><div class="yamp-result" id="yamp-rune-result">💡 A função, slot, grau e substats mudam a decisão.</div></div>
 <div class="yamp-grid" style="margin-top:14px">
@@ -2550,7 +2572,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012v"></script>
+<script src="language-academy-fix.js?v=20261012w"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
