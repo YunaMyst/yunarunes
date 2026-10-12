@@ -1,33 +1,33 @@
 (()=>{'use strict';
 const pairs={
 '🔬 Comparar':'🔬 Compare',
-'Speed: influencia a ordem e frequência dos turnos.':'Speed affects turn order and how frequently monsters take turns.'
-'⚠️ Erro comum: achar que o maior SPD sozinho garante vitória.':'⚠️ Common mistake: assuming the highest SPD alone guarantees victory.'
-'Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.':'Accuracy helps land effects that depend on Accuracy.'
-'⚠️ Erro comum: pensar que 100% ACC significa 100% de aplicação.':'⚠️ Common mistake: assuming 100% ACC means a 100% chance to land an effect.'
-'Resistance: participa das verificações de resistência contra efeitos.':'Resistance is used in resistance checks against effects.'
-'⚠️ Erro comum: ignorar o alvo e olhar apenas sua própria ACC.':'⚠️ Common mistake: ignoring the target and looking only at your own ACC.'
-'Controle que impede o monstro de agir durante o efeito.':'Control that prevents a monster from taking action while the effect lasts.'
-'⚠️ Erro comum: confundir STUN com STRIP.':'⚠️ Common mistake: confusing STUN with STRIP.'
-'Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.':'Slang for an extra activation or effect triggered by a game mechanic.'
-'⚠️ Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.':'⚠️ Common mistake: using PROC as if it meant any kind of effect.'
-'Remoção de buffs.':'Removal of buffs.'
-'⚠️ Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.':'⚠️ Common mistake: choosing a stripper without considering Speed, skills, and consistency.'
-'Remoção de debuffs de um aliado.':'Removal of debuffs from an ally.'
-'⚠️ Erro comum: confundir cleanse com imunidade.':'⚠️ Common mistake: confusing cleanse with immunity.'
-'Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.':'Crowd Control: a group of effects that limit or control enemy actions.'
-'⚠️ Erro comum: considerar apenas STUN como CC.':'⚠️ Common mistake: thinking STUN is the only form of CC.'
-'Função focada em causar dano.':'A role focused on dealing damage.'
-'⚠️ Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.':'⚠️ Common mistake: maximizing damage while ignoring survivability or turn order.'
-'Ajuste de velocidades para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.'
-'Ajuste de Speeds para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.'
-'⚠️ Erro comum: montar velocidades isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.'
-'⚠️ Erro comum: montar Speeds isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.'
-'Efeito positivo aplicado a um aliado.':'A beneficial effect applied to an ally.'
-'⚠️ Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.':'⚠️ Common mistake: assuming every buff is equally useful in every game mode.'
-'Efeito negativo aplicado a um inimigo.':'A harmful effect applied to an enemy.'
-'⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.'
-'⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.'
+'Speed: influencia a ordem e frequência dos turnos.':'Speed affects turn order and how frequently monsters take turns.',
+'⚠️ Erro comum: achar que o maior SPD sozinho garante vitória.':'⚠️ Common mistake: assuming the highest SPD alone guarantees victory.',
+'Accuracy: ajuda a aplicar efeitos que dependem de Accuracy.':'Accuracy helps land effects that depend on Accuracy.',
+'⚠️ Erro comum: pensar que 100% ACC significa 100% de aplicação.':'⚠️ Common mistake: assuming 100% ACC means a 100% chance to land an effect.',
+'Resistance: participa das verificações de resistência contra efeitos.':'Resistance is used in resistance checks against effects.',
+'⚠️ Erro comum: ignorar o alvo e olhar apenas sua própria ACC.':'⚠️ Common mistake: ignoring the target and looking only at your own ACC.',
+'Controle que impede o monstro de agir durante o efeito.':'Control that prevents a monster from taking action while the effect lasts.',
+'⚠️ Erro comum: confundir STUN com STRIP.':'⚠️ Common mistake: confusing STUN with STRIP.',
+'Gíria para uma ativação adicional/efeito que ocorre por uma mecânica do jogo.':'Slang for an extra activation or effect triggered by a game mechanic.',
+'⚠️ Erro comum: usar PROC como se fosse sinônimo de qualquer efeito.':'⚠️ Common mistake: using PROC as if it meant any kind of effect.',
+'Remoção de buffs.':'Removal of buffs.',
+'⚠️ Erro comum: escolher um stripper sem considerar velocidade, skill e consistência.':'⚠️ Common mistake: choosing a stripper without considering Speed, skills, and consistency.',
+'Remoção de debuffs de um aliado.':'Removal of debuffs from an ally.',
+'⚠️ Erro comum: confundir cleanse com imunidade.':'⚠️ Common mistake: confusing cleanse with immunity.',
+'Crowd Control: conjunto de efeitos que limitam ações ou controle do inimigo.':'Crowd Control: a group of effects that limit or control enemy actions.',
+'⚠️ Erro comum: considerar apenas STUN como CC.':'⚠️ Common mistake: thinking STUN is the only form of CC.',
+'Função focada em causar dano.':'A role focused on dealing damage.',
+'⚠️ Erro comum: maximizar dano e esquecer sobrevivência ou ordem de turnos.':'⚠️ Common mistake: maximizing damage while ignoring survivability or turn order.',
+'Ajuste de velocidades para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.',
+'Ajuste de Speeds para preservar uma sequência planejada.':'Adjusting monster Speeds to preserve a planned turn order.',
+'⚠️ Erro comum: montar velocidades isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.',
+'⚠️ Erro comum: montar Speeds isoladamente sem testar a equipe inteira.':'⚠️ Common mistake: tuning Speeds individually without testing the whole team.',
+'Efeito positivo aplicado a um aliado.':'A beneficial effect applied to an ally.',
+'⚠️ Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.':'⚠️ Common mistake: assuming every buff is equally useful in every game mode.',
+'Efeito negativo aplicado a um inimigo.':'A harmful effect applied to an enemy.',
+'⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.',
+'⚠️ Erro comum: esquecer ACC, RES ou chance da skill.':'⚠️ Common mistake: forgetting ACC, RES, or the skill activation chance.',
 'Efeito negativo aplicado a um inimigo.':'A negative effect applied to an enemy.',
 '⚠️ Erro comum: assumir que todo buff tem o mesmo valor em qualquer conteúdo.':'⚠️ Common mistake: assuming every buff has the same value in every game mode.',
 'Efeito positivo aplicado a um aliado.':'A positive effect applied to an ally.',
@@ -82,7 +82,7 @@ const pairs={
 'Concluída':'Completed','✓ Concluída':'✓ Completed','Aprender':'Learn',
 'Simulador de Runas':'Rune Simulator','Tipo':'Type','Slot':'Slot','Raridade':'Rarity','Estrelas':'Stars',
 'Fundamentos':'Fundamentals','Diagnóstico':'Diagnosis','Montar Equipas':'Build Teams','Montar equipes':'Build Teams',
-'Combate':'Combat','Equipes':'Teams','Equipas':'Teams','Aprender Runas':'Learn Runes','Aprender Combate':'Learn Combat','Aprender a pensar':'Learn to think','Dicionário':'Dictionary','Laboratórios':'Labs','Testar meus conhecimentos':'Test my knowledge','Concluído':'Completed','Em progresso':'In progress','Bloqueado':'Locked','Próximo':'Next','Anterior':'Previous','Começar':'Start','Continuar':'Continue','Nome do jogador':'Player name','Pontuação':'Score','Certificado':'Certificate','Nível alcançado':'Level achieved','Velocidade':'Speed','Ataque':'Attack','Defesa':'Defense','Vida':'HP','Taxa Crítica':'Critical Rate','Dano Crítico':'Critical Damage','Precisão':'Accuracy','Resistência':'Resistance','Início':'Home','📚 Glossário':'📚 Glossary','🧪 Mecânicas':'🧪 Mechanics','⚡ Laboratório SPD':'⚡ SPD Lab','Equipas & Progressão':'Teams & Progression','🧙 Funções':'🧙 Roles','🏰 Conteúdo':'🏰 Content','📈 Progressão':'📈 Progression','Prática':'Practice','🧪 Laboratório':'🧪 Lab','📚 Micro-lições':'📚 Micro-lessons','🏆 Desafio Diário':'🏆 Daily Challenge','Avançado':'Advanced','💬 Pergunta à Academy':'💬 Ask the Academy','🎓 Graduação':'🎓 Graduation','Usa os simuladores e a árvore de habilidades enquanto avanças nas aulas.':'Use the simulators and skill tree as you progress through the lessons.','A Academia agora funciona como uma jornada: primeiro aprende o básico, depois toma decisões, diagnostica erros e só então enfrenta a graduação.':'The Academy is now a learning journey: first learn the basics, then make decisions, diagnose mistakes, and only then take the graduation exam.','Uma ordem simples para quem acabou de começar. Não tenta ensinar tudo de uma vez.':'A simple path for beginners. It does not try to teach everything at once.','Funções e skills':'Roles and skills','Entendi que o objetivo não é ter todos os monstros, e sim construir uma conta funcional.':'I understand the goal is not to own every monster, but to build a functional account.','Sei diferenciar função de monstro: dano, suporte, controle, proteção e utilidade.':'I can distinguish monster roles: damage, support, control, protection, and utility.','Consigo montar um primeiro time com funções que se complementam.':'I can build a first team with complementary roles.','🧠 PENSAMENTO ESTRATÉGICO':'🧠 STRATEGIC THINKING','Antes de copiar uma build, faça estas quatro perguntas:':'Before copying a build, ask these four questions:','Qual é a função?':'What is the role?','Qual é a condição de vitória?':'What is the win condition?','Escolha stats pela função, não pelo número bonito.':'Choose stats based on the role, not on impressive-looking numbers.','Não troque todas as runas antes de descobrir o problema.':'Do not replace all runes before identifying the problem.'
+'Combate':'Combat','Equipes':'Teams','Equipas':'Teams','Aprender Runas':'Learn Runes','Aprender Combate':'Learn Combat','Aprender a pensar':'Learn to think','Dicionário':'Dictionary','Laboratórios':'Labs','Testar meus conhecimentos':'Test my knowledge','Concluído':'Completed','Em progresso':'In progress','Bloqueado':'Locked','Próximo':'Next','Anterior':'Previous','Começar':'Start','Continuar':'Continue','Nome do jogador':'Player name','Pontuação':'Score','Certificado':'Certificate','Nível alcançado':'Level achieved','Velocidade':'Speed','Ataque':'Attack','Defesa':'Defense','Vida':'HP','Taxa Crítica':'Critical Rate','Dano Crítico':'Critical Damage','Precisão':'Accuracy','Resistência':'Resistance','Início':'Home','📚 Glossário':'📚 Glossary','🧪 Mecânicas':'🧪 Mechanics','⚡ Laboratório SPD':'⚡ SPD Lab','Equipas & Progressão':'Teams & Progression','🧙 Funções':'🧙 Roles','🏰 Conteúdo':'🏰 Content','📈 Progressão':'📈 Progression','Prática':'Practice','🧪 Laboratório':'🧪 Lab','📚 Micro-lições':'📚 Micro-lessons','🏆 Desafio Diário':'🏆 Daily Challenge','Avançado':'Advanced','💬 Pergunta à Academy':'💬 Ask the Academy','🎓 Graduação':'🎓 Graduation','Usa os simuladores e a árvore de habilidades enquanto avanças nas aulas.':'Use the simulators and skill tree as you progress through the lessons.','A Academia agora funciona como uma jornada: primeiro aprende o básico, depois toma decisões, diagnostica erros e só então enfrenta a graduação.':'The Academy is now a learning journey: first learn the basics, then make decisions, diagnose mistakes, and only then take the graduation exam.','Uma ordem simples para quem acabou de começar. Não tenta ensinar tudo de uma vez.':'A simple path for beginners. It does not try to teach everything at once.','Funções e skills':'Roles and skills','Entendi que o objetivo não é ter todos os monstros, e sim construir uma conta funcional.':'I understand the goal is not to own every monster, but to build a functional account.','Sei diferenciar função de monstro: dano, suporte, controle, proteção e utilidade.':'I can distinguish monster roles: damage, support, control, protection, and utility.','Consigo montar um primeiro time com funções que se complementam.':'I can build a first team with complementary roles.','🧠 PENSAMENTO ESTRATÉGICO':'🧠 STRATEGIC THINKING','Antes de copiar uma build, faça estas quatro perguntas:':'Before copying a build, ask these four questions:','Qual é a função?':'What is the role?','Qual é a condição de vitória?':'What is the win condition?','Escolha stats pela função, não pelo número bonito.':'Choose stats based on the role, not on impressive-looking numbers.','Não troque todas as runas antes de descobrir o problema.':'Do not replace all runes before identifying the problem.',
 };
 function translate(root=document.body){
  const lang=(localStorage.getItem('yunarunes-language')==='en')?'en':'pt';
