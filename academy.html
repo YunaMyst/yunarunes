@@ -2433,55 +2433,55 @@ render();
 window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
-<script id="yuna-academy-language-fix-v1">
+<script id="yuna-academy-language-fix-v2">
 (function(){
-  'use strict';
-  var KEY='yunarunes-language';
-  function getLang(){
-    try {
-      var q=new URLSearchParams(window.location.search).get('lang');
-      if(q==='en'||q==='pt'){localStorage.setItem(KEY,q);return q;}
-      return localStorage.getItem(KEY)==='en'?'en':'pt';
-    } catch(e){return 'pt';}
+'use strict';
+var KEY='yunarunes-language';
+function getLang(){
+ try{
+  var q=new URLSearchParams(location.search).get('lang');
+  if(q==='en'||q==='pt'){localStorage.setItem(KEY,q);return q;}
+  return localStorage.getItem(KEY)==='en'?'en':'pt';
+ }catch(e){return 'pt';}
+}
+function applyLang(lang){
+ lang=lang==='en'?'en':'pt';
+ try{localStorage.setItem(KEY,lang)}catch(e){}
+ document.documentElement.lang=lang==='en'?'en':'pt-BR';
+ document.querySelectorAll('[data-pt][data-en]').forEach(function(el){
+  var value=el.getAttribute(lang==='en'?'data-en':'data-pt');
+  if(value===null)return;
+  if(el.matches('input,textarea')){el.placeholder=value;return;}
+  /* Update all visible text without deleting nested controls or event handlers. */
+  var nodes=[];
+  var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+  while(walker.nextNode())nodes.push(walker.currentNode);
+  var current=nodes.map(function(n){return n.nodeValue}).join('').trim();
+  if(!el.children.length){el.textContent=value;return;}
+  if(nodes.length===1){nodes[0].nodeValue=value;return;}
+  if(current && nodes.length){
+   nodes[0].nodeValue=value;
+   for(var i=1;i<nodes.length;i++)nodes[i].nodeValue='';
   }
-  function applyLang(lang){
-    lang=lang==='en'?'en':'pt';
-    try{localStorage.setItem(KEY,lang);}catch(e){}
-    document.documentElement.lang=lang==='en'?'en':'pt-BR';
-    document.querySelectorAll('[data-pt][data-en]').forEach(function(el){
-      var value=el.getAttribute(lang==='en'?'data-en':'data-pt');
-      if(value!==null){
-        if(el.matches('input,textarea')) el.placeholder=value;
-        else if(el.children.length===0) el.textContent=value;
-        else {
-          var textNode=Array.prototype.find.call(el.childNodes,function(n){return n.nodeType===3&&n.nodeValue.trim();});
-          if(textNode) textNode.nodeValue=value;
-          else if(!el.querySelector('[data-keep-content]')) el.textContent=value;
-        }
-      }
-    });
-    document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(function(el){
-      el.placeholder=el.getAttribute(lang==='en'?'data-en-placeholder':'data-pt-placeholder');
-    });
-    document.querySelectorAll('[data-lang]').forEach(function(el){
-      el.setAttribute('aria-pressed',String(el.getAttribute('data-lang')===lang));
-    });
-  }
-  document.addEventListener('click',function(e){
-    var target=e.target.closest('[data-lang]');
-    if(!target)return;
-    e.preventDefault();
-    e.stopPropagation();
-    applyLang(target.getAttribute('data-lang'));
-    try{
-      var url=new URL(window.location.href);
-      url.searchParams.set('lang',target.getAttribute('data-lang'));
-      history.replaceState(null,'',url.pathname+url.search+url.hash);
-    }catch(err){}
-  },true);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){applyLang(getLang());});
-  else applyLang(getLang());
-  window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValue==='en'?'en':'pt');});
+ });
+ document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(function(el){
+  el.placeholder=el.getAttribute(lang==='en'?'data-en-placeholder':'data-pt-placeholder');
+ });
+ document.querySelectorAll('[data-lang]').forEach(function(el){
+  el.setAttribute('aria-pressed',String(el.getAttribute('data-lang')===lang));
+ });
+ document.querySelectorAll('title').forEach(function(el){el.textContent='YunaRunes — Yuna Academy';});
+}
+document.addEventListener('click',function(e){
+ var target=e.target.closest('[data-lang]');
+ if(!target)return;
+ e.preventDefault();e.stopPropagation();
+ var lang=target.getAttribute('data-lang')==='en'?'en':'pt';
+ applyLang(lang);
+ try{var url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url.pathname+url.search+url.hash)}catch(err){}
+},true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){applyLang(getLang())});else applyLang(getLang());
+window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValue==='en'?'en':'pt')});
 })();
 </script>
 </body></html>
