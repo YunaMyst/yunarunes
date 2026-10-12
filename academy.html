@@ -2525,5 +2525,22 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012n"></script>
+<script src="language-academy-fix.js?v=20261012o"></script>
+<script id="yuna-resources-language-hardfix">
+(function(){
+ function applyResourcesLanguage(){
+  var en=false;
+  try{en=new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem('yunarunes-language')==='en'}catch(e){}
+  document.querySelectorAll('a[href="#resources"][data-pt][data-en],#resources [data-pt][data-en],.bs-card [data-pt][data-en]').forEach(function(el){
+   var value=el.getAttribute(en?'data-en':'data-pt');
+   if(value!==null)el.textContent=value;
+  });
+ }
+ document.addEventListener('DOMContentLoaded',applyResourcesLanguage);
+ document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyResourcesLanguage,0)},true);
+ window.addEventListener('yunarunes-language-applied',applyResourcesLanguage);
+ window.addEventListener('storage',function(e){if(e.key==='yunarunes-language')applyResourcesLanguage()});
+ applyResourcesLanguage();
+})();
+</script>
 </body></html>
