@@ -1777,11 +1777,16 @@ document.getElementById('nlFarmResult').textContent=m[v];
 let finalScore=Number(localStorage.getItem('yuna-academy-final-score-v1')||0);
 window.nlFinal=i=>{
 const r=document.getElementById('nlFinalResult');
-if(i===1){finalScore=1;localStorage.setItem('yuna-academy-final-score-v1','1');r.textContent='🏆 Correto! Você atacou o gargalo: a equipe não consegue executar a rotação. SPD, ATB, Speed Tune e sobrevivência são pontos de investigação.'}
-else r.textContent='❌ Ainda não. O problema descrito acontece antes do dano do DPS: descubra por que a equipe não consegue jogar.';
-document.getElementById('nlFinalScore').textContent=finalScore?'🏅 Desafio final concluído!':'';
+const en=document.documentElement.lang==='en'||(function(){try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}})();
+if(i===1){
+ finalScore=1;localStorage.setItem('yuna-academy-final-score-v1','1');
+ r.textContent=en?'🏆 Correct! You identified the bottleneck: the team cannot execute its rotation. SPD, ATB, Speed Tune, and survivability are the areas to investigate.':'🏆 Correto! Você identificou o gargalo: a equipe não consegue executar a rotação. SPD, ATB, Speed Tune e sobrevivência são os pontos a investigar.';
+}else{
+ r.textContent=en?'❌ Not yet. The problem happens before the DPS can deal damage: find out why your team cannot take its turns.':'❌ Ainda não. O problema acontece antes de o DPS causar dano: descubra por que a sua equipe não consegue jogar.';
+}
+document.getElementById('nlFinalScore').textContent=finalScore?(en?'🏅 Final challenge completed!':'🏅 Desafio final concluído!'):'';
 };
-document.getElementById('nlFinalScore').textContent=finalScore?'🏅 Desafio final concluído!':'';
+(function(){const en=document.documentElement.lang==='en'||(function(){try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}})();document.getElementById('nlFinalScore').textContent=finalScore?(en?'🏅 Final challenge completed!':'🏅 Desafio final concluído!'):''})();
 })();
 </script>
 
@@ -2543,7 +2548,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012t"></script>
+<script src="language-academy-fix.js?v=20261012u"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
