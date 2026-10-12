@@ -1821,43 +1821,45 @@ document.getElementById('nlFinalScore').textContent=finalScore?(en?'🏅 Final c
 (()=>{
 const key='yuna-academy-skill-tree-v1';
 const nodes=[
-{id:'base',icon:'🌱',name:'Fundamentos',desc:'Interface, elementos e objetivo da batalha.',xp:20},
-{id:'combat',icon:'⚔️',name:'Combate',desc:'Turnos, alvo, efeitos e lógica de batalha.',xp:25},
-{id:'stats',icon:'📊',name:'Stats',desc:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',xp:30},
-{id:'runes',icon:'💎',name:'Runas',desc:'Slots, main stats, substats e sets.',xp:35},
-{id:'skills',icon:'📖',name:'Skills',desc:'Leia alvo, efeito, chance, scaling e cooldown.',xp:40},
-{id:'teams',icon:'🧙',name:'Equipes',desc:'Funções, condição de vitória e Speed Tune.',xp:45},
-{id:'diagnosis',icon:'🕵️',name:'Diagnóstico',desc:'Encontre o gargalo antes de trocar a build.',xp:50},
-{id:'pve',icon:'🏰',name:'PvE',desc:'Planeje farm e progressão pelo gargalo da conta.',xp:55},
-{id:'pvp',icon:'🏆',name:'PvP',desc:'Adapte a equipe ao adversário e ao objetivo.',xp:60},
-{id:'master',icon:'👑',name:'Mestre',desc:'Resolva problemas sem depender de builds copiadas.',xp:80}
+{id:'base',icon:'🌱',pt:'Fundamentos',en:'Fundamentals',dpt:'Interface, elementos e objetivo da batalha.',den:'Interface, elements, and the objective of battle.',xp:20},
+{id:'combat',icon:'⚔️',pt:'Combate',en:'Combat',dpt:'Turnos, alvo, efeitos e lógica de batalha.',den:'Turns, targets, effects, and battle logic.',xp:25},
+{id:'stats',icon:'📊',pt:'Stats',en:'Stats',dpt:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',den:'HP, ATK, DEF, SPD, CR, CD, ACC, and RES.',xp:30},
+{id:'runes',icon:'💎',pt:'Runas',en:'Runes',dpt:'Slots, atributos principais, substats e sets.',den:'Slots, main stats, substats, and sets.',xp:35},
+{id:'skills',icon:'📖',pt:'Skills',en:'Skills',dpt:'Leia alvo, efeito, chance, scaling e cooldown.',den:'Read the target, effect, chance, scaling, and cooldown.',xp:40},
+{id:'teams',icon:'🧙',pt:'Equipes',en:'Teams',dpt:'Funções, condição de vitória e Speed Tune.',den:'Roles, win condition, and Speed Tune.',xp:45},
+{id:'diagnosis',icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',dpt:'Encontre o gargalo antes de trocar a build.',den:'Find the bottleneck before changing the build.',xp:50},
+{id:'pve',icon:'🏰',pt:'PvE',en:'PvE',dpt:'Planeje farm e progressão pelo gargalo da conta.',den:'Plan farming and progression around your account’s bottleneck.',xp:55},
+{id:'pvp',icon:'🏆',pt:'PvP',en:'PvP',dpt:'Adapte a equipe ao adversário e ao objetivo.',den:'Adapt your team to the opponent and your objective.',xp:60},
+{id:'master',icon:'👑',pt:'Mestre',en:'Master',dpt:'Resolva problemas sem depender de builds copiadas.',den:'Solve problems without relying on copied builds.',xp:80}
 ];
+const isEn=()=>document.documentElement.lang==='en'||(()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(e){return false}})();
+const label=x=>isEn()?x.en:x.pt,desc=x=>isEn()?x.den:x.dpt;
 let state={done:[]};
 try{state=JSON.parse(localStorage.getItem(key)||'{"done":[]}');if(!Array.isArray(state.done))state.done=[]}catch(e){}
 const done=id=>state.done.includes(id);
 const unlocked=i=>i===0||done(nodes[i-1].id);
 const total=nodes.reduce((a,n)=>a+n.xp,0);
 function render(){
-const n=document.getElementById('skillTreeNodes');
-n.innerHTML=nodes.map((x,i)=>'<div class="skill-node '+(done(x.id)?'done ':!unlocked(i)?'locked ':'current')+'"><div class="skill-icon">'+x.icon+'</div><b>'+x.name+'</b><span>'+x.desc+'</span><span style="margin-top:7px">+'+x.xp+' XP</span></div>').join('');
+const n=document.getElementById('skillTreeNodes');if(!n)return;
+n.innerHTML=nodes.map((x,i)=>'<div class="skill-node '+(done(x.id)?'done ':!unlocked(i)?'locked ':'current')+'"><div class="skill-icon">'+x.icon+'</div><b>'+label(x)+'</b><span>'+desc(x)+'</span><span style="margin-top:7px">+'+x.xp+' XP</span></div>').join('');
 const xp=nodes.filter(x=>done(x.id)).reduce((a,n)=>a+n.xp,0),count=state.done.length;
 document.getElementById('skillTreeXP').textContent=xp+' XP';
-document.getElementById('skillTreeStatus').textContent='Nível '+(Math.min(nodes.length,count+1))+' • '+count+'/'+nodes.length+' habilidades';
+document.getElementById('skillTreeStatus').textContent=(isEn()?'Level ':'Nível ')+(Math.min(nodes.length,count+1))+' • '+count+'/'+nodes.length+(isEn()?' skills':' habilidades');
 document.getElementById('skillTreeBar').style.width=(xp/total*100)+'%';
 const lessons=document.getElementById('skillTreeLessons');
-lessons.innerHTML=nodes.map((x,i)=>'<div class="skill-lesson"><h3>'+x.icon+' '+x.name+'</h3><p>'+x.desc+'</p><button class="skill-btn '+(unlocked(i)&&!done(x.id)?'primary':'')+'" '+(!unlocked(i)?'disabled':'')+' onclick="skillTreeLearn('+i+')">'+(done(x.id)?'✓ Concluído':unlocked(i)?'Aprender':'🔒 Bloqueado')+'</button></div>').join('');
+lessons.innerHTML=nodes.map((x,i)=>'<div class="skill-lesson"><h3>'+x.icon+' '+label(x)+'</h3><p>'+desc(x)+'</p><button class="skill-btn '+(unlocked(i)&&!done(x.id)?'primary':'')+'" '+(!unlocked(i)?'disabled':'')+' onclick="skillTreeLearn('+i+')">'+(done(x.id)?'✓ '+(isEn()?'Completed':'Concluído'):unlocked(i)?(isEn()?'Learn':'Aprender'):'🔒 '+(isEn()?'Locked':'Bloqueado'))+'</button></div>').join('');
 }
 window.skillTreeLearn=i=>{
 if(!unlocked(i)||done(nodes[i].id))return;
 const x=nodes[i];state.done.push(x.id);localStorage.setItem(key,JSON.stringify(state));
-document.getElementById('skillTreeResult').textContent='🎉 '+x.name+' desbloqueado! Agora você ganhou +'+x.xp+' XP. O próximo nó está liberado.';
+document.getElementById('skillTreeResult').textContent=isEn()?'🎉 '+label(x)+' unlocked! You earned +'+x.xp+' XP. The next node is now available.':'🎉 '+label(x)+' desbloqueado! Você ganhou +'+x.xp+' XP. O próximo nó está liberado.';
 render();
 };
 document.getElementById('skillTreeReset').addEventListener('click',()=>{
-if(!confirm('Resetar toda a Árvore de Habilidades?'))return;
-state={done:[]};localStorage.setItem(key,JSON.stringify(state));document.getElementById('skillTreeResult').textContent='🌱 Árvore resetada. Comece novamente pelos fundamentos.';render();
+if(!confirm(isEn()?'Reset the entire Skill Tree?':'Resetar toda a Árvore de Habilidades?'))return;
+state={done:[]};localStorage.setItem(key,JSON.stringify(state));document.getElementById('skillTreeResult').textContent=isEn()?'🌱 Skill Tree reset. Start again with Fundamentals.':'🌱 Árvore resetada. Comece novamente pelos fundamentos.';render();
 });
-render();
+render();window.addEventListener('yunarunes-language-applied',render);window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
 
@@ -2548,7 +2550,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012u"></script>
+<script src="language-academy-fix.js?v=20261012v"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
