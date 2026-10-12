@@ -1740,10 +1740,10 @@ render();
 <h2 data-pt="25. Desafio final — explique a sua decisão" data-en="25. Final Challenge — explain your decision"></h2>
 <p data-pt="O objetivo não é acertar por sorte. Escolha a melhor resposta e entenda por quê." data-en="The goal is not to guess. Choose the best answer and understand why."></p>
 <div class="nl-card">
-<p><b>Caso:</b> sua equipe tem dano suficiente, mas o inimigo sempre joga primeiro, coloca controle e sua equipe perde antes de conseguir executar a rotação.</p>
-<button class="nl-btn" type="button" onclick="nlFinal(0)">Aumentar apenas o CD do DPS.</button>
-<button class="nl-btn" type="button" onclick="nlFinal(1)">Investigar SPD, ATB, Speed Tune e sobrevivência.</button>
-<button class="nl-btn" type="button" onclick="nlFinal(2)">Trocar todas as cinco builds imediatamente.</button>
+<p><b data-pt="Caso:" data-en="Scenario:">Caso:</b> <span data-pt="sua equipe tem dano suficiente, mas o inimigo sempre joga primeiro, coloca controle e sua equipe perde antes de conseguir executar a rotação." data-en="Your team has enough damage, but the enemy always moves first, applies crowd control, and defeats your team before it can execute its rotation.">sua equipe tem dano suficiente, mas o inimigo sempre joga primeiro, coloca controle e sua equipe perde antes de conseguir executar a rotação.</span></p>
+<button class="nl-btn" type="button" onclick="nlFinal(0)" data-pt="Aumentar apenas o CD do DPS." data-en="Only increase the DPS's Crit Damage.">Aumentar apenas o CD do DPS.</button>
+<button class="nl-btn" type="button" onclick="nlFinal(1)" data-pt="Investigar SPD, ATB, Speed Tune e sobrevivência." data-en="Investigate SPD, ATB, Speed Tune, and survivability.">Investigar SPD, ATB, Speed Tune e sobrevivência.</button>
+<button class="nl-btn" type="button" onclick="nlFinal(2)" data-pt="Trocar todas as cinco builds imediatamente." data-en="Immediately change all five builds.">Trocar todas as cinco builds imediatamente.</button>
 <div class="nl-result" id="nlFinalResult"></div><div class="nl-score" id="nlFinalScore"></div>
 </div></section>
 
@@ -2543,7 +2543,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012s"></script>
+<script src="language-academy-fix.js?v=20261012t"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
