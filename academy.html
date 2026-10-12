@@ -1705,10 +1705,10 @@ render();
 <button class="nl-btn" type="button" onclick="nlRuneDecision()">🧠 Decidir</button><div class="nl-result" id="nlRuneResult"></div>
 </div>
 <div class="nl-card">
-<h3>⚔️ Ordem de batalha</h3>
-<p>Monte a lógica da equipe antes de pensar no dano final.</p>
-<div class="nl-boss"><div class="nl-chip"><b>1. Preparar</b><span>ATB/boost, setup ou proteção.</span></div><div class="nl-chip"><b>2. Preparar o alvo</b><span>Strip, debuff ou redução.</span></div><div class="nl-chip"><b>3. Finalizar</b><span>Controle, dano ou condição de vitória.</span></div></div>
-<button class="nl-btn" type="button" onclick="nlOrder()">⚡ Verificar lógica</button><div class="nl-result" id="nlOrderResult"></div>
+<h3 data-pt="⚔️ Ordem de batalha" data-en="⚔️ Battle Order">⚔️ Ordem de batalha</h3>
+<p data-pt="Constrói a lógica da equipa antes de pensar no dano final." data-en="Build the team’s logic before thinking about final damage.">Constrói a lógica da equipa antes de pensar no dano final.</p>
+<div class="nl-boss"><div class="nl-chip"><b data-pt="1. Preparar" data-en="1. Set Up">1. Preparar</b><span data-pt="Aumento de ATB, preparação ou proteção." data-en="ATB boost, setup, or protection.">Aumento de ATB, preparação ou proteção.</span></div><div class="nl-chip"><b data-pt="2. Preparar o alvo" data-en="2. Prepare the Target">2. Preparar o alvo</b><span data-pt="Remover buffs, aplicar debuffs ou reduzir atributos." data-en="Strip, debuff, or reduction.">Remover buffs, aplicar debuffs ou reduzir atributos.</span></div><div class="nl-chip"><b data-pt="3. Finalizar" data-en="3. Finish">3. Finalizar</b><span data-pt="Controlo, dano ou condição de vitória." data-en="Control, damage, or win condition.">Controlo, dano ou condição de vitória.</span></div></div>
+<button class="nl-btn" type="button" onclick="nlOrder()" data-pt="⚡ Verificar lógica" data-en="⚡ Check the logic">⚡ Verificar lógica</button><div class="nl-result" id="nlOrderResult"></div>
 </div>
 <div class="nl-card">
 <h3>🏰 Boss School</h3><p>Antes de entrar num conteúdo difícil, marque o que você sabe.</p>
@@ -2543,7 +2543,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012q"></script>
+<script src="language-academy-fix.js?v=20261012r"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
