@@ -1807,7 +1807,26 @@ function ensureLanguageControls(){
   document.head.appendChild(style);
  }
 }
+function convertLanguageButtonsToLinks(){
+ document.querySelectorAll('[data-lang]').forEach(old=>{
+  const lang=old.dataset.lang==='en'?'en':'pt';
+  const link=document.createElement('a');
+  link.href=location.pathname+'?lang='+lang;
+  link.dataset.lang=lang;
+  link.className=old.className||'';
+  link.textContent=old.textContent;
+  link.setAttribute('aria-label',old.getAttribute('aria-label')||(lang==='en'?'English':'Português'));
+  link.setAttribute('role','button');
+  link.style.setProperty('cursor','pointer','important');
+  link.style.setProperty('pointer-events','auto','important');
+  link.style.setProperty('position','relative','important');
+  link.style.setProperty('z-index','2147483647','important');
+  link.addEventListener('click',()=>{save(lang);});
+  old.replaceWith(link);
+ });
+}
 function updateHeader(){
+ convertLanguageButtonsToLinks();
  // Apply the YunaRunes home-link appearance on every page, including pages without header.top.
  document.querySelectorAll('a').forEach(a=>{
   const label=(a.textContent||'').replace(/\s+/g,' ').trim();
@@ -1832,6 +1851,7 @@ function updateHeader(){
  });
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
+ convertLanguageButtonsToLinks();
  // Visual-only fix: prevent legacy YunaRunes home links from appearing as purple underlined text.
  if(!document.getElementById('yunarunes-brand-visual-fix')){
   const brandFix=document.createElement('style');
@@ -2097,6 +2117,7 @@ function setLanguage(lang){
  window.location.reload();
 }
 function bind(){
+ convertLanguageButtonsToLinks();
  document.querySelectorAll('[data-lang]').forEach(b=>{
   if(b.dataset.bound==='1')return;
   b.dataset.bound='1';
@@ -2128,7 +2149,7 @@ function enforceHeaderControlsLayout(){
  html body header.top .header-menu .nav-links a{box-sizing:border-box!important;white-space:nowrap!important}
  html body header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;width:auto!important;min-width:0!important;visibility:visible!important;opacity:1!important}
  html body header.top .header-controls .yuna-controls{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;width:auto!important;min-width:0!important;overflow:visible!important}
- html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>button[data-lang]{display:inline-flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:auto!important;min-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 11px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;cursor:pointer!important;transform:none!important;filter:none!important}
+ html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>[data-lang]{display:inline-flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:auto!important;min-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 11px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;cursor:pointer!important;transform:none!important;filter:none!important}
  html body header.top .header-controls .yuna-controls>button[data-lang="pt"]{order:1!important}
  html body header.top .header-controls .yuna-controls>button[data-lang="en"]{order:2!important}
  html body header.top .header-controls .yuna-controls>a.donate-link{order:0!important;min-width:92px!important;padding-inline:13px!important;background:#7c3aed!important;border:1px solid #a78bfa!important;color:#fff!important;box-shadow:0 2px 10px rgba(124,58,237,.22)!important}
@@ -2177,6 +2198,7 @@ function boot(){
  window.addEventListener('resize',stabilizeHeader,{passive:true});
 }
 window.yunaSetLanguage=setLanguage;
+window.yunaConvertLanguageButtonsToLinks=convertLanguageButtonsToLinks;
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 
 /* yuna-official-game-name-guard: lightweight, avoid scanning the entire DOM */
