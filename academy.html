@@ -1534,6 +1534,19 @@ let qi=0,score=0;function quizEnglish(){return document.documentElement.lang==='
 (()=> {
 const key='yuna-academy-campaign-v1';
 const levels=[
+{id:1,icon:'🍼',pt:'Comecei hoje',en:'I started today',descPt:'Fundamentos, interface, energia, mana e primeiros objetivos.',descEn:'Fundamentals, interface, energy, mana, and first goals.',target:'first-days',rewardPt:'Novato Yuna',rewardEn:'Yuna Beginner'},
+{id:2,icon:'🧬',pt:'Monstros e habilidades',en:'Monsters and Skills',descPt:'Funções, habilidades, scaling, cooldowns e como ler um monstro.',descEn:'Roles, skills, scaling, cooldowns, and how to read a monster.',target:'monster-school',rewardPt:'Aluno de Monstros',rewardEn:'Monster Student'},
+{id:3,icon:'📊',pt:'Atributos',en:'Stats',descPt:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',descEn:'HP, ATK, DEF, SPD, CR, CD, ACC, and RES.',target:'stat-school',rewardPt:'Aluno de Atributos',rewardEn:'Stats Student'},
+{id:4,icon:'💎',pt:'Runas',en:'Runes',descPt:'Slots, atributos principais e secundários, conjuntos, rolls e decisões.',descEn:'Slots, main stats, substats, sets, rolls, and decisions.',target:'rune-school',rewardPt:'Estudante de Runas',rewardEn:'Rune Student'},
+{id:5,icon:'⚔️',pt:'Combate',en:'Combat',descPt:'Turnos, vantagem elemental, buffs, debuffs, controlo e procs.',descEn:'Turns, elemental advantage, buffs, debuffs, crowd control, and procs.',target:'battle-school',rewardPt:'Aluno de Combate',rewardEn:'Combat Student'},
+{id:6,icon:'🧙',pt:'Equipas',en:'Teams',descPt:'Funções, condição de vitória, ordem e Speed Tune.',descEn:'Roles, win condition, turn order, and Speed Tune.',target:'team-thinking-school',rewardPt:'Montador de Equipas',rewardEn:'Team Builder'},
+{id:7,icon:'🏰',pt:'PvE e progressão',en:'PvE and Progression',descPt:'Conteúdos, farming, evolução da conta e prioridades.',descEn:'Content, farming, account progression, and priorities.',target:'content-school',rewardPt:'Especialista PvE',rewardEn:'PvE Specialist'},
+{id:8,icon:'🏆',pt:'PvP',en:'PvP',descPt:'Arena, Guild/Siege, RTA e adaptação ao adversário.',descEn:'Arena, Guild/Siege, RTA, and adapting to your opponent.',target:'progress',rewardPt:'Aprendiz de PvP',rewardEn:'PvP Apprentice'},
+{id:9,icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',descPt:'Descobrir por que perdeu, testar hipóteses e corrigir.',descEn:'Find out why you lost, test hypotheses, and make corrections.',target:'detective-school',rewardPt:'Detetive Yuna',rewardEn:'Yuna Detective'},
+{id:10,icon:'👑',pt:'Modo Mestre',en:'Master Mode',descPt:'Prova final sem depender de copiar builds.',descEn:'Final exam without relying on copied builds.',target:'academy-master',rewardPt:'Mestre Yuna',rewardEn:'Yuna Master'}
+];
+const key='yuna-academy-campaign-v1';
+const levels=[
 {id:1,icon:'🍼',pt:'Comecei hoje',en:'I started today',desc:'Fundamentos, interface, energia, mana e primeiros objetivos.',target:'first-days',reward:'Novato Yuna'},
 {id:2,icon:'🧬',pt:'Monstros e Skills',en:'Monsters and Skills',desc:'Funções, skills, scaling, cooldowns e como ler um monstro.',target:'monster-school',reward:'Aluno de Monstros'},
 {id:3,icon:'📊',pt:'Stats',en:'Stats',desc:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',target:'stat-school',reward:'Aluno de Stats'},
@@ -1545,7 +1558,7 @@ const levels=[
 {id:9,icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',desc:'Descobrir por que perdeu, testar hipóteses e corrigir.',target:'detective-school',reward:'Detetive Yuna'},
 {id:10,icon:'👑',pt:'Modo Mestre',en:'Master Mode',desc:'Prova final sem depender de copiar builds.',target:'academy-master',reward:'Mestre Yuna'}
 ];
-const badges=['Novato Yuna','Aluno de Monstros','Aluno de Stats','Estudante de Runas','Aluno de Combate','Montador de Equipes','Especialista PvE','Aprendiz PvP','Detetive Yuna','Mestre Yuna'];
+const badgesPt=levels.map(l=>l.rewardPt),badgesEn=levels.map(l=>l.rewardEn);
 let state={done:[]};
 try{state=JSON.parse(localStorage.getItem(key)||'{"done":[]}');if(!Array.isArray(state.done))state.done=[]}catch(e){}
 const isDone=id=>state.done.includes(id), unlocked=id=>id===1||isDone(id-1);
@@ -1553,17 +1566,22 @@ function lang(){try{return localStorage.getItem('yunarunes-language')==='en'?'en
 function label(l){return lang()==='en'?l.en:l.pt}
 function render(){
 const grid=document.getElementById('campaignGrid'); if(!grid)return;
+const en=lang()==='en';
 grid.innerHTML=levels.map(l=>{
-const d=isDone(l.id),u=unlocked(l.id);
-return '<div class="campaign-level '+(d?'done ':'')+(!u?'locked':'')+'"><div class="num">Nível '+l.id+(d?' • ✓ Concluído':'')+'</div><h3>'+l.icon+' '+label(l)+'</h3><p>'+l.desc+'</p><small>🎁 '+l.reward+'</small><div class="campaign-btns">'+
-'<a class="campaign-btn '+(u?'primary':'')+'" '+(u?'href="#'+l.target+'"':'aria-disabled="true"')+'>'+ (u?'📖 Abrir aula':'🔒 Bloqueado') +'</a>'+
-(!d&&u?'<button class="campaign-btn primary" type="button" onclick="academyCampaignComplete('+l.id+')">✓ Concluir nível</button>':'')+
-(d?'<button class="campaign-btn" type="button" onclick="academyCampaignUndo('+l.id+')">↩ Reabrir</button>':'')+
+const d=isDone(l.id),u=unlocked(l.id),name=label(l),desc=en?l.descEn:l.descPt,reward=en?l.rewardEn:l.rewardPt;
+const levelText=en?'Level ':'Nível ',doneText=en?' • ✓ Completed':' • ✓ Concluído';
+const openText=en?'📖 Open lesson':'📖 Abrir aula',lockedText=en?'🔒 Locked':'🔒 Bloqueado';
+const completeText=en?'✓ Complete level':'✓ Concluir nível',reopenText=en?'↩ Reopen':'↩ Reabrir';
+return '<div class="campaign-level '+(d?'done ':'')+(!u?'locked':'')+'"><div class="num">'+levelText+l.id+(d?doneText:'')+'</div><h3>'+l.icon+' '+name+'</h3><p>'+desc+'</p><small>🎁 '+reward+'</small><div class="campaign-btns">'+
+'<a class="campaign-btn '+(u?'primary':'')+'" '+(u?'href="#'+l.target+'"':'aria-disabled="true"')+'>'+ (u?openText:lockedText) +'</a>'+
+(!d&&u?'<button class="campaign-btn primary" type="button" onclick="academyCampaignComplete('+l.id+')">'+completeText+'</button>':'')+
+(d?'<button class="campaign-btn" type="button" onclick="academyCampaignUndo('+l.id+')">'+reopenText+'</button>':'')+
 '</div></div>'
 }).join('');
 const n=state.done.length;document.getElementById('campaignBar').style.width=(n/levels.length*100)+'%';
 document.getElementById('campaignStatus').textContent=n+'/'+levels.length+' • '+Math.round(n/levels.length*100)+'%';
-document.getElementById('campaignBadges').innerHTML=badges.map((b,i)=>'<span class="campaign-badge '+(i<n?'':'locked')+'">'+(i<n?'🏅 ':'🔒 ')+b+'</span>').join('');
+const badges=en?badgesEn:badgesPt;
+document.getElementById('campaignBadges').innerHTML=badges.map((b,i)=>'<span class="campaign-badge '+(isDone(i+1)?'':'locked')+'">'+(isDone(i+1)?'🏅 ':'🔒 ')+b+'</span>').join('');
 }
 window.academyCampaignComplete=id=>{
 if(!unlocked(id))return;
@@ -1582,7 +1600,7 @@ if(!confirm(lang()==='en'?'Reset all Yuna Academy progress?':'Resetar todo o pro
 state={done:[]};localStorage.setItem(key,JSON.stringify(state));render();
 });
 render();
-window.addEventListener('yunarunes-language-change',render);
+window.addEventListener('yunarunes-language-change',render);window.addEventListener('yunarunes-language-applied',render);
 window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')render()});
 })();
 </script>
@@ -2525,7 +2543,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012p"></script>
+<script src="language-academy-fix.js?v=20261012q"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
