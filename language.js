@@ -1817,13 +1817,16 @@ function convertLanguageButtonsToLinks(){
   link.textContent=old.textContent;
   link.setAttribute('aria-label',old.getAttribute('aria-label')||(lang==='en'?'English':'Português'));
   link.setAttribute('role','button');
-  link.style.setProperty('cursor','pointer','important');
-  link.style.setProperty('pointer-events','auto','important');
-  link.style.setProperty('position','relative','important');
-  link.style.setProperty('z-index','2147483647','important');
-  link.addEventListener('click',()=>{save(lang);});
+  link.tabIndex=0;
+  link.style.cssText += ';display:inline-flex!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;text-decoration:none!important;';
   old.replaceWith(link);
  });
+ const styleId='yunarunes-language-click-fix-v11';
+ if(!document.getElementById(styleId)){
+  const style=document.createElement('style');style.id=styleId;
+  style.textContent='html body header.top,html body header.top>.nav,html body header.top .header-controls,html body header.top .header-controls .yuna-controls{pointer-events:auto!important;position:relative!important}html body header.top .header-controls{z-index:2147483645!important}html body header.top [data-lang]{pointer-events:auto!important;position:relative!important;z-index:2147483647!important;touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(53,169,225,.35)!important}html body header.top [data-lang]::before,html body header.top [data-lang]::after{pointer-events:none!important}';
+  document.head.appendChild(style);
+ }
 }
 function updateHeader(){
  convertLanguageButtonsToLinks();
