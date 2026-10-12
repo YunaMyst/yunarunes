@@ -1,6 +1,17 @@
 (()=>{'use strict';
 const pairs={
 '🔬 Comparar':'🔬 Compare',
+'Build strategy':'Build strategy',
+'Colocar HP em todos':'Put HP on everyone',
+'Ajustar SPD/ATB':'Adjust SPD/ATB',
+'Debuff falha':'Debuff fails',
+'SPD +18, CR +12, ATK% +8':'SPD +18, CR +12, ATK% +8',
+'HP% +20':'HP% +20',
+'❤️ Colocar HP em todos':'❤️ Put HP on everyone',
+'⚡ Ajustar SPD/ATB':'⚡ Adjust SPD/ATB',
+'🎯 Debuff falha':'🎯 Debuff fails',
+'🐌 Nunca joga':'🐌 Never gets the first turn',
+'🕵️ Descubra o erro':'🕵️ Find the Mistake',
 '🌱 Primeiro passo':'🌱 First Steps',
 '💎 Master das runas':'💎 Rune Master',
 '🧪 Cientista':'🧪 Scientist',
