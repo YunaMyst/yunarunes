@@ -1,6 +1,11 @@
 (()=>{'use strict';
 const pairs={
 '🔬 Comparar':'🔬 Compare',
+'🌱 Primeiro passo':'🌱 First Steps',
+'💎 Master das runas':'💎 Rune Master',
+'🧪 Cientista':'🧪 Scientist',
+'⚔️ Strategist':'⚔️ Strategist',
+'💯 Perfeito':'💯 Perfect',
 'A) +500 ATK, mas perco muita Speed':'A) +500 ATK, but I lose a lot of Speed',
 'B) Menos ATK, mas mantenho o Speed Tune':'B) Less ATK, but I keep the Speed Tune',
 'C) Troco o set inteiro sem testar':'C) I replace the entire set without testing',
