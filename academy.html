@@ -1436,14 +1436,14 @@ window.bsGrad=n=>{document.getElementById('bsGradResult').textContent=n===2?'�
 <section class="section" id="account-checklist-school">
 <h2 data-pt="📋 21. Lista de verificação da conta — descubra o que falta" data-en="📋 21. Account checklist — find out what is missing">📋 21. Lista de verificação da conta — descubra o que falta</h2>
 <div class="check-grid" id="accountChecklist">
-<div class="check-card"><label><input type="checkbox"> Tenho monstros 6★ para minhas funções principais.</label></div>
-<div class="check-card"><label><input type="checkbox"> Consigo farmar um conteúdo de runas de forma consistente.</label></div>
-<div class="check-card"><label><input type="checkbox"> Sei identificar main stat e substats.</label></div>
-<div class="check-card"><label><input type="checkbox"> Entendo SPD e ordem de turnos.</label></div>
-<div class="check-card"><label><input type="checkbox"> Sei o que ACC e RES fazem.</label></div>
-<div class="check-card"><label><input type="checkbox"> Tenho pelo menos uma equipe PvE funcional.</label></div>
-<div class="check-card"><label><input type="checkbox"> Consigo explicar por que minha equipe perdeu.</label></div>
-<div class="check-card"><label><input type="checkbox"> Já consigo adaptar uma equipe em vez de copiar uma fixa.</label></div>
+<div class="check-card"><label data-pt="Tenho monstros 6★ para minhas funções principais." data-en="I have 6★ monsters for my main roles."><input type="checkbox"> Tenho monstros 6★ para minhas funções principais.</label></div>
+<div class="check-card"><label data-pt="Consigo farmar um conteúdo de runas de forma consistente." data-en="I can farm rune content consistently."><input type="checkbox"> Consigo farmar um conteúdo de runas de forma consistente.</label></div>
+<div class="check-card"><label data-pt="Sei identificar o atributo principal e os atributos secundários de uma runa." data-en="I can identify a rune’s main stat and substats."><input type="checkbox"> Sei identificar o atributo principal e os atributos secundários de uma runa.</label></div>
+<div class="check-card"><label data-pt="Entendo SPD e a ordem dos turnos." data-en="I understand SPD and turn order."><input type="checkbox"> Entendo SPD e a ordem dos turnos.</label></div>
+<div class="check-card"><label data-pt="Sei o que ACC e RES fazem." data-en="I know what ACC and RES do."><input type="checkbox"> Sei o que ACC e RES fazem.</label></div>
+<div class="check-card"><label data-pt="Tenho pelo menos uma equipa PvE funcional." data-en="I have at least one functional PvE team."><input type="checkbox"> Tenho pelo menos uma equipa PvE funcional.</label></div>
+<div class="check-card"><label data-pt="Consigo explicar por que a minha equipa perdeu." data-en="I can explain why my team lost."><input type="checkbox"> Consigo explicar por que a minha equipa perdeu.</label></div>
+<div class="check-card"><label data-pt="Já consigo adaptar uma equipa em vez de copiar uma composição fixa." data-en="I can adapt a team instead of copying a fixed one."><input type="checkbox"> Já consigo adaptar uma equipa em vez de copiar uma composição fixa.</label></div>
 </div>
 <p id="accountChecklistText" data-pt="0/8 concluídos" data-en="0/8 completed">0/8 concluídos</p>
 <div class="deep-progress"><i id="accountChecklistBar"></i></div>
@@ -2525,7 +2525,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012o"></script>
+<script src="language-academy-fix.js?v=20261012p"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
