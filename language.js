@@ -2090,13 +2090,10 @@ function apply(root=document.body){
 
 function setLanguage(lang){
  const next=lang==='en'?'en':'pt';
- if(getLang()===next){
-  document.documentElement.lang=next==='en'?'en':'pt-BR';
-  return;
- }
+ // Save the selected language even when it matches the current value.
+ // Reload so every page component reads the same language on startup.
  save(next);
- // Reload once so every page component reads the same saved language on startup.
- // Avoid running a second full-page translation pass inside the click handler.
+ document.documentElement.lang=next==='en'?'en':'pt-BR';
  window.location.reload();
 }
 function bind(){
