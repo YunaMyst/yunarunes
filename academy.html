@@ -1712,12 +1712,12 @@ render();
 </div>
 <div class="nl-card">
 <h3>🏰 Boss School</h3><p>Antes de entrar num conteúdo difícil, marque o que você sabe.</p>
-<label class="nl-check"><input type="checkbox" class="bossCheck"> Sei como o chefe ameaça minha equipe.</label>
-<label class="nl-check"><input type="checkbox" class="bossCheck"> Tenho uma forma de sobreviver ao padrão principal.</label>
-<label class="nl-check"><input type="checkbox" class="bossCheck"> Tenho dano suficiente para encerrar a luta.</label>
-<label class="nl-check"><input type="checkbox" class="bossCheck"> Minha ordem de turnos faz sentido.</label>
-<label class="nl-check"><input type="checkbox" class="bossCheck"> Sei qual parte da equipe está falhando.</label>
-<button class="nl-btn" type="button" onclick="nlBoss()">🏰 Avaliar preparação</button><div class="nl-result" id="nlBossResult"></div>
+<label class="nl-check" data-pt="Sei como o chefe ameaça minha equipe." data-en="I know how the boss threatens my team."><input type="checkbox" class="bossCheck"> Sei como o chefe ameaça minha equipe.</label>
+<label class="nl-check" data-pt="Tenho uma forma de sobreviver ao padrão principal." data-en="I have a way to survive the main attack pattern."><input type="checkbox" class="bossCheck"> Tenho uma forma de sobreviver ao padrão principal.</label>
+<label class="nl-check" data-pt="Tenho dano suficiente para encerrar a luta." data-en="I have enough damage to finish the fight."><input type="checkbox" class="bossCheck"> Tenho dano suficiente para encerrar a luta.</label>
+<label class="nl-check" data-pt="Minha ordem de turnos faz sentido." data-en="My turn order makes sense."><input type="checkbox" class="bossCheck"> Minha ordem de turnos faz sentido.</label>
+<label class="nl-check" data-pt="Sei qual parte da equipe está falhando." data-en="I know which part of the team is failing."><input type="checkbox" class="bossCheck"> Sei qual parte da equipe está falhando.</label>
+<button class="nl-btn" type="button" onclick="nlBoss()" data-pt="🏰 Avaliar preparação" data-en="🏰 Check readiness">🏰 Avaliar preparação</button><div class="nl-result" id="nlBossResult"></div>
 </div>
 <div class="nl-card">
 <h3>🧩 Team Doctor</h3><p>Uma equipe não precisa ter cinco monstros fortes. Ela precisa cobrir o que a missão exige.</p>
@@ -2543,7 +2543,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261012r"></script>
+<script src="language-academy-fix.js?v=20261012s"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
