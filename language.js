@@ -1808,7 +1808,7 @@ function ensureLanguageControls(){
  }
 }
 function convertLanguageButtonsToLinks(){
- document.querySelectorAll('[data-lang]').forEach(old=>{
+ document.querySelectorAll('button[data-lang]').forEach(old=>{
   const lang=old.dataset.lang==='en'?'en':'pt';
   const link=document.createElement('a');
   link.href=location.pathname+'?lang='+lang;
@@ -2138,7 +2138,7 @@ function enforceHeaderControlsLayout(){
  let style=document.getElementById(id);
  if(!style){style=document.createElement('style');style.id=id;document.head.appendChild(style);}
  const css=`
- html body header.top{display:block!important;width:100%!important;overflow:visible!important;position:relative!important;z-index:2147483000!important;pointer-events:auto!important}html body header.top .header-controls,html body header.top .header-controls .yuna-controls,html body header.top .header-controls button[data-lang]{position:relative!important;z-index:2147483001!important;pointer-events:auto!important;touch-action:manipulation!important}
+ html body header.top{display:block!important;width:100%!important;overflow:visible!important;position:relative!important;z-index:2147483000!important;pointer-events:auto!important}html body header.top .header-controls,html body header.top .header-controls .yuna-controls,html body header.top .header-controls [data-lang]{position:relative!important;z-index:2147483001!important;pointer-events:auto!important;touch-action:manipulation!important}
  html body header.top>.nav{display:grid!important;grid-template-columns:minmax(125px,165px) minmax(0,1fr) max-content!important;grid-template-areas:"brand links controls"!important;align-items:center!important;gap:8px 10px!important;width:100%!important;min-height:62px!important;height:auto!important;padding:8px 14px!important;box-sizing:border-box!important}
  html body header.top .header-brand{grid-area:brand!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;min-width:0!important}
  html body header.top .header-brand a.brand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;white-space:nowrap!important;color:#fff!important;text-decoration:none!important;font-size:18px!important;font-weight:900!important;line-height:1.2!important}
@@ -2150,7 +2150,7 @@ function enforceHeaderControlsLayout(){
  html body header.top .header-controls{grid-area:controls!important;display:flex!important;justify-content:flex-end!important;align-items:center!important;width:auto!important;min-width:0!important;visibility:visible!important;opacity:1!important}
  html body header.top .header-controls .yuna-controls{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:7px!important;width:auto!important;min-width:0!important;overflow:visible!important}
  html body header.top .header-controls .yuna-controls>a.donate-link,html body header.top .header-controls .yuna-controls>[data-lang]{display:inline-flex!important;position:static!important;flex:0 0 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:auto!important;min-width:max-content!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 11px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;cursor:pointer!important;transform:none!important;filter:none!important}
- html body header.top .header-controls .yuna-controls>button[data-lang="pt"]{order:1!important}
+ html body header.top .header-controls .yuna-controls>[data-lang="pt"]{order:1!important}
  html body header.top .header-controls .yuna-controls>button[data-lang="en"]{order:2!important}
  html body header.top .header-controls .yuna-controls>a.donate-link{order:0!important;min-width:92px!important;padding-inline:13px!important;background:#7c3aed!important;border:1px solid #a78bfa!important;color:#fff!important;box-shadow:0 2px 10px rgba(124,58,237,.22)!important}
  html body header.top .header-controls .yuna-controls>button[data-lang].active{background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important}
