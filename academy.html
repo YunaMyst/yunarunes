@@ -2452,12 +2452,19 @@ var dict={
 
 function translateLoose(lang){
 var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];
-while(walker.nextNode())nodes.push(walker.currentNode);
+while(walker.nextNode()){
+ var node=walker.currentNode, parent=node.parentElement;
+ if(!parent||parent.closest('script,style,textarea,input,code,noscript,[data-no-translate]'))continue;
+ nodes.push(node);
+}
+var pairs=Object.keys(dict).map(function(k){return [k,dict[k]]}).sort(function(a,b){return Math.max(b[0].length,b[1].length)-Math.max(a[0].length,a[1].length)});
 nodes.forEach(function(node){
-var raw=node.nodeValue,trim=raw.trim();if(!trim)return;
-var translated=dict[trim];if(!translated)return;
-if(lang==='en'){node.nodeValue=raw.replace(trim,translated)}
-else {var back=Object.keys(dict).find(function(k){return dict[k]===trim});if(back)node.nodeValue=raw.replace(trim,back)}
+ var raw=node.nodeValue;if(!raw||!raw.trim())return;var out=raw;
+ pairs.forEach(function(pair){
+  var from=lang==='en'?pair[0]:pair[1],to=lang==='en'?pair[1]:pair[0];
+  if(from && out.indexOf(from)!==-1)out=out.split(from).join(to);
+ });
+ if(out!==raw)node.nodeValue=out;
 });
 }
 window.addEventListener('yunarunes-language-applied',function(e){translateLoose(e.detail==='en'?'en':'pt')});
