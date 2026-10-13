@@ -2256,13 +2256,13 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 </div>
 
 <div class="ynp-path" id="ynp-path">
-<button data-step="0">🐣<br>Começar<small>0 → 7 dias</small></button>
-<button data-step="1">⚔️<br>Batalha<small>ler o combate</small></button>
-<button data-step="2">🧿<br>Runas<small>equipar melhor</small></button>
-<button data-step="3">🧩<br>Equipa<small>funções</small></button>
-<button data-step="4">🧠<br>Estratégia<small>pensar</small></button>
-<button data-step="5">🏰<br>Progressão<small>o que fazer</small></button>
-<button data-step="6">👑<br>Mestre<small>otimizar</small></button>
+<button data-step="0">🐣<br><span data-pt="Começar" data-en="Start">Começar</span><small data-pt="0 → 7 dias" data-en="0 → 7 days">0 → 7 dias</small></button>
+<button data-step="1">⚔️<br><span data-pt="Batalha" data-en="Battle">Batalha</span><small data-pt="ler o combate" data-en="read the battle">ler o combate</small></button>
+<button data-step="2">🧿<br><span data-pt="Runas" data-en="Runes">Runas</span><small data-pt="equipar melhor" data-en="equip better">equipar melhor</small></button>
+<button data-step="3">🧩<br><span data-pt="Equipa" data-en="Team">Equipa</span><small data-pt="funções" data-en="roles">funções</small></button>
+<button data-step="4">🧠<br><span data-pt="Estratégia" data-en="Strategy">Estratégia</span><small data-pt="pensar" data-en="think">pensar</small></button>
+<button data-step="5">🏰<br><span data-pt="Progressão" data-en="Progression">Progressão</span><small data-pt="o que fazer" data-en="what to do">o que fazer</small></button>
+<button data-step="6">👑<br><span data-pt="Mestre" data-en="Master">Mestre</span><small data-pt="otimizar" data-en="optimize">otimizar</small></button>
 </div>
 
 <div class="ynp-panel" id="ynp-panel"></div>
@@ -2595,7 +2595,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyUpgradesLanguage,0)},true);
 })();
 </script>
-<script src="language-academy-fix.js?v=20261013c"></script>
+<script src="language-academy-fix.js?v=20261013d"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
