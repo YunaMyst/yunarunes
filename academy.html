@@ -2283,10 +2283,10 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 <h3 data-pt="🧠 Aprende a pensar durante a batalha" data-en="🧠 Learn to think during battle"></h3>
 <p data-pt="O jogo mostra HP, velocidade, skills, atributos e efeitos. Antes de clicar, pergunta: quem joga primeiro? Quem precisa de buff? Quem tem de ser controlado? Qual alvo é mais perigoso?" data-en="The game shows HP, speed, skills, attributes and effects. Before clicking, ask: who moves first? Who needs a buff? Who must be controlled? Which target is most dangerous?"></p>
 <div class="ynp-options" id="ynp-battle-options">
-<button data-battle="turn">⚡ Quem deve jogar primeiro?</button>
-<button data-battle="target">🎯 Qual alvo devo escolher?</button>
-<button data-battle="effects">🔴🔵 O que significam os efeitos?</button>
-<button data-battle="loss">❌ Por que perdi?</button>
+<button data-battle="turn" data-pt="⚡ Quem deve jogar primeiro?" data-en="⚡ Who should move first?">⚡ Quem deve jogar primeiro?</button>
+<button data-battle="target" data-pt="🎯 Qual alvo devo escolher?" data-en="🎯 Which target should I choose?">🎯 Qual alvo devo escolher?</button>
+<button data-battle="effects" data-pt="🔴🔵 O que significam os efeitos?" data-en="🔴🔵 What do the effects mean?">🔴🔵 O que significam os efeitos?</button>
+<button data-battle="loss" data-pt="❌ Por que perdi?" data-en="❌ Why did I lose?">❌ Por que perdi?</button>
 </div>
 <div class="ynp-result" id="ynp-battle-result"></div>
 </div>
@@ -2595,7 +2595,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyUpgradesLanguage,0)},true);
 })();
 </script>
-<script src="language-academy-fix.js?v=20261013e"></script>
+<script src="language-academy-fix.js?v=20261013f"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
