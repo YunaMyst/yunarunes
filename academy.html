@@ -2271,10 +2271,10 @@ window.addEventListener('storage',e=>{if(e.key==='yunarunes-language')setTimeout
 <h3 data-pt="🚦 O que faço agora?" data-en="🚦 What should I do now?"></h3>
 <p data-pt="Escolhe o teu estado atual e a Academy mostra uma rota simples. Não precisas fazer tudo ao mesmo tempo." data-en="Choose your current situation and the Academy will show a simple route. You do not need to do everything at once."></p>
 <div class="ynp-options" id="ynp-now-options">
-<button data-now="new">🐣 Sou novo</button>
-<button data-now="team">⚔️ Já tenho equipa</button>
-<button data-now="stuck">🧱 Estou preso</button>
-<button data-now="pvp">🏆 Quero PvP</button>
+<button data-now="new" data-pt="🐣 Sou novo" data-en="🐣 I’m new">🐣 Sou novo</button>
+<button data-now="team" data-pt="⚔️ Já tenho equipa" data-en="⚔️ I already have a team">⚔️ Já tenho equipa</button>
+<button data-now="stuck" data-pt="🧱 Estou preso" data-en="🧱 I’m stuck">🧱 Estou preso</button>
+<button data-now="pvp" data-pt="🏆 Quero PvP" data-en="🏆 I want PvP">🏆 Quero PvP</button>
 </div>
 <div class="ynp-result" id="ynp-now-result"></div>
 </div>
@@ -2595,7 +2595,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyUpgradesLanguage,0)},true);
 })();
 </script>
-<script src="language-academy-fix.js?v=20261013d"></script>
+<script src="language-academy-fix.js?v=20261013e"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
