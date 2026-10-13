@@ -2577,7 +2577,24 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
 })();
 </script>
 
-<script src="language-academy-fix.js?v=20261013a"></script>
+<script id="yamp-upgrades-language-hardfix">
+(function(){
+ function applyUpgradesLanguage(){
+  var en=false;
+  try{en=new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem('yunarunes-language')==='en'}catch(e){}
+  var root=document.getElementById('yamp-upgrades');if(!root)return;
+  root.querySelectorAll('[data-pt][data-en]').forEach(function(el){
+   var value=el.getAttribute(en?'data-en':'data-pt');if(value===null)return;
+   if(el.tagName==='SPAN'||el.tagName==='H3'||el.classList.contains('yamp-tag'))el.textContent=value;
+  });
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyUpgradesLanguage);else applyUpgradesLanguage();
+ window.addEventListener('yunarunes-language-applied',applyUpgradesLanguage);
+ window.addEventListener('storage',function(e){if(e.key==='yunarunes-language')applyUpgradesLanguage()});
+ document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyUpgradesLanguage,0)},true);
+})();
+</script>
+<script src="language-academy-fix.js?v=20261013b"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
