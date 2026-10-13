@@ -2162,6 +2162,32 @@ function enforceHeaderControlsLayout(){
  `;
  if(style.textContent!==css)style.textContent=css;
 }
+function enforceLanguageButtonAppearance(root=document){
+ const id='yunarunes-language-buttons-unified-v1';
+ let style=document.getElementById(id);
+ if(!style){style=document.createElement('style');style.id=id;document.head.appendChild(style);}
+ style.textContent=`
+ html body [data-lang="pt"],html body [data-lang="en"]{
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  box-sizing:border-box!important;min-width:88px!important;height:40px!important;min-height:40px!important;
+  margin:0!important;padding:0 12px!important;border:1px solid #34475a!important;border-radius:8px!important;
+  background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;
+  text-decoration:none!important;white-space:nowrap!important;opacity:1!important;visibility:visible!important;
+  cursor:pointer!important;box-shadow:none!important;transform:none!important;
+ }
+ html body [data-lang="pt"].active,html body [data-lang="en"].active,
+ html body [data-lang="pt"][aria-pressed="true"],html body [data-lang="en"][aria-pressed="true"]{
+  background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important;
+ }
+ html body [data-lang="pt"]:hover,html body [data-lang="en"]:hover{border-color:#35a9e1!important}
+ @media(max-width:600px){
+  html body header.top .yuna-controls [data-lang="pt"],html body header.top .yuna-controls [data-lang="en"],
+  html body header.top .header-controls [data-lang="pt"],html body header.top .header-controls [data-lang="en"]{
+   min-width:0!important;max-width:160px!important;flex:1 1 0!important;height:40px!important;min-height:40px!important;padding:0 8px!important;
+  }
+ }
+ `;
+}
 function enforceDonateAppearance(root=document){
  const links=root.querySelectorAll?root.querySelectorAll('header.top a.donate-link, .header-controls a.donate-link, a.donate-link'):[];
  links.forEach(a=>{
@@ -2171,6 +2197,7 @@ function enforceDonateAppearance(root=document){
 }
 function stabilizeHeader(){
  enforceHeaderControlsLayout();
+ enforceLanguageButtonAppearance();
  enforceDonateAppearance();
 }
 function boot(){
