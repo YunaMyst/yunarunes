@@ -1545,19 +1545,6 @@ const levels=[
 {id:9,icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',descPt:'Descobrir por que perdeu, testar hipóteses e corrigir.',descEn:'Find out why you lost, test hypotheses, and make corrections.',target:'detective-school',rewardPt:'Detetive Yuna',rewardEn:'Yuna Detective'},
 {id:10,icon:'👑',pt:'Modo Mestre',en:'Master Mode',descPt:'Prova final sem depender de copiar builds.',descEn:'Final exam without relying on copied builds.',target:'academy-master',rewardPt:'Mestre Yuna',rewardEn:'Yuna Master'}
 ];
-const key='yuna-academy-campaign-v1';
-const levels=[
-{id:1,icon:'🍼',pt:'Comecei hoje',en:'I started today',desc:'Fundamentos, interface, energia, mana e primeiros objetivos.',target:'first-days',reward:'Novato Yuna'},
-{id:2,icon:'🧬',pt:'Monstros e Skills',en:'Monsters and Skills',desc:'Funções, skills, scaling, cooldowns e como ler um monstro.',target:'monster-school',reward:'Aluno de Monstros'},
-{id:3,icon:'📊',pt:'Stats',en:'Stats',desc:'HP, ATK, DEF, SPD, CR, CD, ACC e RES.',target:'stat-school',reward:'Aluno de Stats'},
-{id:4,icon:'💎',pt:'Runas',en:'Runes',desc:'Slots, main stats, substats, sets, rolls e decisões.',target:'rune-school',reward:'Estudante de Runas'},
-{id:5,icon:'⚔️',pt:'Combate',en:'Combat',desc:'Turnos, vantagem elemental, buffs, debuffs, CC e PROC.',target:'battle-school',reward:'Aluno de Combate'},
-{id:6,icon:'🧙',pt:'Equipes',en:'Teams',desc:'Funções, condição de vitória, ordem e Speed Tune.',target:'team-thinking-school',reward:'Montador de Equipes'},
-{id:7,icon:'🏰',pt:'PvE e Progressão',en:'PvE and Progression',desc:'Conteúdos, farm, evolução da conta e prioridades.',target:'content-school',reward:'Especialista PvE'},
-{id:8,icon:'🏆',pt:'PvP',en:'PvP',desc:'Arena, Guild/Siege, RTA e adaptação ao adversário.',target:'progress',reward:'Aprendiz PvP'},
-{id:9,icon:'🕵️',pt:'Diagnóstico',en:'Diagnosis',desc:'Descobrir por que perdeu, testar hipóteses e corrigir.',target:'detective-school',reward:'Detetive Yuna'},
-{id:10,icon:'👑',pt:'Modo Mestre',en:'Master Mode',desc:'Prova final sem depender de copiar builds.',target:'academy-master',reward:'Mestre Yuna'}
-];
 const badgesPt=levels.map(l=>l.rewardPt),badgesEn=levels.map(l=>l.rewardEn);
 let state={done:[]};
 try{state=JSON.parse(localStorage.getItem(key)||'{"done":[]}');if(!Array.isArray(state.done))state.done=[]}catch(e){}
