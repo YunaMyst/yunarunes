@@ -480,7 +480,7 @@ Object.assign(PAIRS, {
  'Feito para PC e telefone':'Made for PC and phone'
 });
 Object.assign(PAIRS, {
- 'YunaRunes — Account Analyzer Yuna Runes 📊 Account Analyzer Analisa a tua conta a partir de monstros e inventário.':'YunaRunes — Account Analyzer Yuna Runes 📊 Account Analyzer Analyze your account using monsters and inventory.',
+ 'YunaRunes — Account Analyzer YunaRunes 📊 Account Analyzer Analisa a tua conta a partir de monstros e inventário.':'YunaRunes — Account Analyzer YunaRunes 📊 Account Analyzer Analyze your account using monsters and inventory.',
  '🧪 Otimização':'🧪 Optimization',
  'a habilidade verifica suas condições → 4.':'the skill checks its conditions → 4.',
  'buffs/debuffs e dano são aplicados conforme a skill → 5.':'buffs/debuffs and damage are applied according to the skill → 5.',
