@@ -259,8 +259,9 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
 /* Mobile-only header layout: keep menu, brand, controls and links in separate rows. */
 @media(max-width:600px){
  html body header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;align-items:center!important;gap:8px!important;width:100%!important;height:auto!important;min-height:0!important;padding:8px 10px 10px!important}
- html body header.top .header-menu{grid-area:menu!important;grid-column:auto!important;grid-row:1!important;min-width:42px!important}
- html body header.top .header-brand{grid-area:brand!important;grid-column:auto!important;grid-row:1!important;display:flex!important;justify-content:center!important;min-width:0!important}
+ html body header.top .header-menu{display:contents!important}
+ html body header.top .header-menu .menu-btn{grid-area:menu!important;grid-column:1!important;grid-row:1!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;width:40px!important;height:38px!important;padding:0!important}
+ html body header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:center!important;min-width:0!important}
  html body header.top .header-brand a.brand{justify-content:center!important;white-space:nowrap!important}
  html body header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important}
  html body header.top .header-controls .yuna-controls{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:100%!important;min-width:0!important;max-width:100%!important}
