@@ -2027,11 +2027,16 @@ function updateHeader(){
   label.textContent='YunaRunes';
   label.style.cssText='color:#fff!important;font-weight:900!important;font-size:18px!important;line-height:1.2!important;text-decoration:none!important';
  }
- // Ensure every page has the same APK and Donate controls, even when its older header omitted them.
+ // APK appears only in a mobile browser, never on desktop or inside the Android app.
  const controls=h.querySelector('.header-controls .yuna-controls')||h.querySelector('.yuna-controls');
  if(controls){
-  // Não criar botão APK no site nem no cabeçalho partilhado.
-  h.querySelectorAll('.apk-link,.mobile-download,[data-download="apk"]').forEach(el=>el.remove());
+  h.querySelectorAll('.mobile-download,[data-download="apk"]').forEach(el=>el.remove());
+  const mobileBrowser=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)&&!/YunaRunesApp/i.test(navigator.userAgent);
+  let apk=controls.querySelector('.apk-link');
+  if(mobileBrowser){
+   if(!apk){apk=document.createElement('a');apk.className='apk-link';apk.textContent='📲 APK';controls.insertBefore(apk,controls.querySelector('.donate-link')||null);}
+   apk.href='/downloads/yunarunes.apk';apk.setAttribute('download','yunarunes.apk');apk.setAttribute('aria-label','Download YunaRunes APK');apk.style.setProperty('text-decoration','none','important');
+  }else if(apk){apk.remove();}
   if(!controls.querySelector('.donate-link')){
    const donate=document.createElement('a');donate.className='donate-link';donate.href='https://www.paypal.com/myaccount/summary';donate.target='_blank';donate.rel='noopener noreferrer';donate.textContent='💜 Donate';controls.appendChild(donate);
   }
