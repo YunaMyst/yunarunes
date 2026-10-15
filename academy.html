@@ -181,6 +181,18 @@ header.top .header-brand a.brand{display:inline-flex!important;align-items:cente
 header.top .header-brand a.brand span{color:#fff!important}
 header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none!important;opacity:.92}
 </style>
+
+<style id="yuna-academy-nav-cleanup-v2">
+/* Clear, grouped navigation; keep every original anchor and destination. */
+.academy-global-nav{top:72px!important;left:16px!important;width:min(370px,calc(100vw - 32px))!important;max-height:calc(100dvh - 88px)!important;padding:14px!important;overscroll-behavior:contain;scrollbar-gutter:stable}
+.academy-global-nav h3{font-size:16px!important;padding:4px 6px 10px!important;border-bottom:1px solid #293746;margin-bottom:8px!important}
+.academy-global-nav .nav-group{display:block!important;grid-column:1/-1;margin:12px 0 4px!important;padding:7px 9px!important;border-left:3px solid #8b5cf6;border-radius:0 6px 6px 0;background:#171324;color:#c8b6ff!important;font-size:10px!important;letter-spacing:1px!important}
+.academy-global-nav a{display:block!important;min-width:0;padding:9px 10px!important;margin:0!important;border:1px solid transparent;border-radius:8px;font-size:12px!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere;transition:background .15s,border-color .15s}
+.academy-global-nav a:hover,.academy-global-nav a:focus-visible,.academy-global-nav a.active{background:#182638!important;border-color:#35475a!important;color:#62c5f2!important;outline:none}
+@media(min-width:901px){.academy-global-nav{display:none;grid-template-columns:1fr 1fr;gap:3px 6px}.academy-global-nav.open{display:grid}.academy-global-nav h3{grid-column:1/-1}.academy-global-nav .nav-group{grid-column:1/-1}}
+@media(max-width:900px){.academy-global-nav{top:58px!important;left:10px!important;width:calc(100vw - 20px)!important;max-height:calc(100dvh - 68px)!important;padding:10px!important}.academy-global-nav a{font-size:12px!important;background:#101923;border:1px solid #293746}.academy-global-nav .nav-group{margin-top:9px!important}}
+@media(max-width:480px){.academy-global-nav{padding:8px!important}.academy-global-nav a{font-size:11px!important;padding:9px 8px!important}}
+</style>
 </head>
 <body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a href="artifact-optimizer.html">💠 Artifacts</a><a href="decks.html">🃏 Decks</a><a href="account-analyzer.html">📊 Análise de Conta</a><a href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer" data-pt="💜 Donate" data-en="💜 Donate">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
@@ -203,40 +215,40 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
 <a href="#buff-debuff-school" data-pt="🔵 Buffs / Debuffs" data-en="🔵 Buffs / Debuffs">🔵 Buffs / Debuffs</a>
 <a href="#mechanics" data-pt="🧪 Mecânicas" data-en="🧪 Mechanics">🧪 Mecânicas</a>
 <a href="#status-guide" data-pt="🎯 Guia Visual" data-en="🎯 Visual Guide">🎯 Guia Visual</a>
-<a href="#why-lost">❌ Por que perdi?</a>
-<div class="nav-group">Runas</div>
-<a href="#runes">🧿 Runas</a>
-<a href="#rune-school">🧿 Escola de Runas</a>
-<a href="#rune-decision-school">💎 Decisor de Runas</a>
-<a href="#rune-lab">🧪 Rune Lab</a>
-<a href="#spd-lab-school">⚡ Laboratório SPD</a>
-<a href="#speed-tune-school">📊 Speed Tune</a>
-<div class="nav-group">Equipas & Progressão</div>
-<a href="#roles">🧙 Funções</a>
-<a href="#team-thinking-school">🧩 Pensar Equipas</a>
-<a href="#build-planner-school">🛠️ Build Planner</a>
-<a href="#content-school">🏰 Conteúdo</a>
-<a href="#pve-pvp-academy">🏆 PvE / PvP</a>
-<a href="#dungeons">🏰 Masmorras</a>
-<a href="#pvp">⚔️ PvP</a>
-<a href="#progress">📈 Progressão</a>
-<div class="nav-group">Prática</div>
-<a href="#yuna-new-player-journey">🦊 Jornada do Novo Jogador</a>
-<a href="#academy-quiz">🧠 Testar Conhecimentos</a>
-<a href="#laboratory">🧪 Laboratório</a>
-<a href="#simulators">🎮 Simuladores</a>
-<a href="#detective-school">🕵️ Detective</a>
-<a href="#micro-lessons">📚 Micro-lições</a>
-<a href="#daily-challenge">🏆 Desafio Diário</a>
-<a href="#team-challenge">🧩 Desafio de Equipa</a>
-<div class="nav-group">Avançado</div>
+<a href="#why-lost" data-pt="❌ Por que perdi?" data-en="❌ Why Did I Lose?">❌ Por que perdi?</a>
+<div class="nav-group" data-pt="Runas" data-en="Runes">Runas</div>
+<a href="#runes" data-pt="🧿 Runas" data-en="🧿 Runes">🧿 Runas</a>
+<a href="#rune-school" data-pt="🧿 Escola de Runas" data-en="🧿 Rune School">🧿 Escola de Runas</a>
+<a href="#rune-decision-school" data-pt="💎 Decisor de Runas" data-en="💎 Rune Decision Tool">💎 Decisor de Runas</a>
+<a href="#rune-lab" data-pt="🧪 Laboratório de Runas" data-en="🧪 Rune Lab">🧪 Laboratório de Runas</a>
+<a href="#spd-lab-school" data-pt="⚡ Laboratório SPD" data-en="⚡ SPD Lab">⚡ Laboratório SPD</a>
+<a href="#speed-tune-school" data-pt="📊 Ajuste de Velocidade" data-en="📊 Speed Tune">📊 Ajuste de Velocidade</a>
+<div class="nav-group" data-pt="Equipas & Progressão" data-en="Teams & Progression">Equipas & Progressão</div>
+<a href="#roles" data-pt="🧙 Funções" data-en="🧙 Roles">🧙 Funções</a>
+<a href="#team-thinking-school" data-pt="🧩 Pensar Equipas" data-en="🧩 Team Thinking">🧩 Pensar Equipas</a>
+<a href="#build-planner-school" data-pt="🛠️ Planeador de Builds" data-en="🛠️ Build Planner">🛠️ Planeador de Builds</a>
+<a href="#content-school" data-pt="🏰 Conteúdos" data-en="🏰 Content">🏰 Conteúdos</a>
+<a href="#pve-pvp-academy" data-pt="🏆 PvE / PvP" data-en="🏆 PvE / PvP">🏆 PvE / PvP</a>
+<a href="#dungeons" data-pt="🏰 Masmorras" data-en="🏰 Dungeons">🏰 Masmorras</a>
+<a href="#pvp" data-pt="⚔️ PvP" data-en="⚔️ PvP">⚔️ PvP</a>
+<a href="#progress" data-pt="📈 Progressão" data-en="📈 Progression">📈 Progressão</a>
+<div class="nav-group" data-pt="Prática" data-en="Practice">Prática</div>
+<a href="#yuna-new-player-journey" data-pt="🦊 Jornada do Novo Jogador" data-en="🦊 New Player Journey">🦊 Jornada do Novo Jogador</a>
+<a href="#academy-quiz" data-pt="🧠 Testar Conhecimentos" data-en="🧠 Knowledge Quiz">🧠 Testar Conhecimentos</a>
+<a href="#laboratory" data-pt="🧪 Laboratório" data-en="🧪 Lab">🧪 Laboratório</a>
+<a href="#simulators" data-pt="🎮 Simuladores" data-en="🎮 Simulators">🎮 Simuladores</a>
+<a href="#detective-school" data-pt="🕵️ Detetive" data-en="🕵️ Detective">🕵️ Detetive</a>
+<a href="#micro-lessons" data-pt="📚 Microlições" data-en="📚 Micro-lessons">📚 Microlições</a>
+<a href="#daily-challenge" data-pt="🏆 Desafio Diário" data-en="🏆 Daily Challenge">🏆 Desafio Diário</a>
+<a href="#team-challenge" data-pt="🧩 Desafio de Equipa" data-en="🧩 Team Challenge">🧩 Desafio de Equipa</a>
+<div class="nav-group" data-pt="Avançado" data-en="Advanced">Avançado</div>
 <a href="#resources" data-pt="💰 Recursos" data-en="💰 Resources">💰 Recursos</a>
-<a href="#artifacts">🧪 Artefactos</a>
-<a href="#master-mode">👑 Modo Mestre</a>
-<a href="#ask-academy">💬 Pergunta à Academy</a>
-<a href="#achievements">🏅 Conquistas</a>
-<a href="#graduation-school">🎓 Graduação</a>
-<a href="#academy-final-training">🏁 Treino Final</a>
+<a href="#artifacts" data-pt="🧪 Artefactos" data-en="🧪 Artifacts">🧪 Artefactos</a>
+<a href="#master-mode" data-pt="👑 Modo Mestre" data-en="👑 Master Mode">👑 Modo Mestre</a>
+<a href="#ask-academy" data-pt="💬 Pergunta à Academy" data-en="💬 Ask the Academy">💬 Pergunta à Academy</a>
+<a href="#achievements" data-pt="🏅 Conquistas" data-en="🏅 Achievements">🏅 Conquistas</a>
+<a href="#graduation-school" data-pt="🎓 Graduação" data-en="🎓 Graduation">🎓 Graduação</a>
+<a href="#academy-final-training" data-pt="🏁 Treino Final" data-en="🏁 Final Training">🏁 Treino Final</a>
 </nav>
 <section class="hero">
 <div class="eyebrow">🦊 YunaRunes • Yuna Academy</div>
