@@ -1790,6 +1790,8 @@ Object.assign(REV,{
 
 Object.assign(PAIRS,{"Quem ganha esta battle?":"Who wins this battle?","Monta uma team do zero":"Build a team from scratch","Prioridade":"Priority","Espera":"Waiting","💎 Cristais":"💎 Crystals"});
 Object.assign(REV,{"Quem ganha esta battle?":"Quem ganha esta batalha?","Monta uma team do zero":"Monte uma equipe do zero"});
+Object.assign(PAIRS,{"Importar decks JSON":"Import JSON decks","Exportar JSON":"Export JSON","Apagar todos":"Delete all","Nome do deck":"Deck name","Conteúdo":"Content","Notas":"Notes","Guardar deck":"Save deck","Os meus decks":"My decks","Deck guardado.":"Deck saved.","Todos os decks apagados.":"All decks deleted.","Ainda não tens decks guardados.":"No decks saved yet.","Copiar":"Copy","Apagar":"Delete","Ex.: Siege — Galleon/Lushen":"E.g. Siege — Galleon/Lushen","Speed tune, alvo, condição...":"Speed tune, target, conditions..."});
+Object.assign(REV,{"Import JSON decks":"Importar decks JSON","Export JSON":"Exportar JSON","Delete all":"Apagar todos","Deck name":"Nome do deck","Content":"Conteúdo","Notes":"Notas","Save deck":"Guardar deck","My decks":"Os meus decks","Deck saved.":"Deck guardado.","All decks deleted.":"Todos os decks apagados.","No decks saved yet.":"Ainda não tens decks guardados.","Copy":"Copiar","Delete":"Apagar","E.g. Siege — Galleon/Lushen":"Ex.: Siege — Galleon/Lushen","Speed tune, target, conditions...":"Speed tune, alvo, condição..."});
 
 function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
