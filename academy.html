@@ -2620,4 +2620,77 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
  applyResourcesLanguage();
 })();
 </script>
+
+<script id="yuna-academy-menu-english-completeness-fix">
+(function(){
+'use strict';
+var labels={
+'#academy-menu':['🎓 Menu da Academy','🎓 Academy Menu'],
+'#start':['🌱 Comece Aqui','🌱 Start Here'],
+'#first-days':['📅 Primeiros Dias','📅 First Days'],
+'#account-roadmap':['🗺️ Roteiro da Conta','🗺️ Account Roadmap'],
+'#elements':['🔥 Elementos','🔥 Elements'],
+'#monster-school':['👹 Escola de Monstros','👹 Monster School'],
+'#skill-school':['📖 Escola de Habilidades','📖 Skill School'],
+'#stat-school':['📊 Escola de Atributos','📊 Stat School'],
+'#terminology-school':['🔤 Terminologia','🔤 Terminology'],
+'#glossary':['📚 Glossário','📚 Glossary'],
+'#combat':['⚔️ Combate','⚔️ Combat'],
+'#battle-school':['⚔️ Escola de Batalha','⚔️ Battle School'],
+'#buff-debuff-school':['🔵 Buffs / Debuffs','🔵 Buffs / Debuffs'],
+'#mechanics':['🧪 Mecânicas','🧪 Mechanics'],
+'#status-guide':['🎯 Guia Visual','🎯 Visual Guide'],
+'#why-lost':['❌ Por que perdi?','❌ Why Did I Lose?'],
+'#runes':['🧿 Runas','🧿 Runes'],
+'#rune-school':['🧿 Escola de Runas','🧿 Rune School'],
+'#rune-decision-school':['💎 Decisor de Runas','💎 Rune Decision Tool'],
+'#rune-lab':['🧪 Laboratório de Runas','🧪 Rune Lab'],
+'#spd-lab-school':['⚡ Laboratório SPD','⚡ SPD Lab'],
+'#speed-tune-school':['📊 Ajuste de Velocidade','📊 Speed Tuning'],
+'#roles':['🧙 Funções','🧙 Roles'],
+'#team-thinking-school':['🧩 Pensar em Equipes','🧩 Team Building Strategies'],
+'#build-planner-school':['🛠️ Planeador de Builds','🛠️ Build Planner'],
+'#content-school':['🏰 Conteúdos','🏰 Content'],
+'#pve-pvp-academy':['🏆 PvE / PvP','🏆 PvE / PvP'],
+'#dungeons':['🏰 Masmorras','🏰 Dungeons'],
+'#pvp':['⚔️ PvP','⚔️ PvP'],
+'#progress':['📈 Progressão','📈 Progression'],
+'#yuna-new-player-journey':['🦊 Jornada do Novo Jogador','🦊 New Player Journey'],
+'#academy-quiz':['🧠 Teste de Conhecimentos','🧠 Knowledge Test'],
+'#laboratory':['🧪 Laboratório','🧪 Lab'],
+'#simulators':['🎮 Simuladores','🎮 Simulators'],
+'#detective-school':['🕵️ Detetive','🕵️ Detective'],
+'#micro-lessons':['📚 Micro-lições','📚 Micro-lessons'],
+'#daily-challenge':['🏆 Desafio Diário','🏆 Daily Challenge'],
+'#team-challenge':['🧩 Desafio de Equipa','🧩 Team Challenge'],
+'#resources':['💰 Recursos','💰 Resources'],
+'#artifacts':['🧪 Artefactos','🧪 Artifacts'],
+'#master-mode':['👑 Modo Master','👑 Master Mode'],
+'#ask-academy':['💬 Pergunta à Academy','💬 Ask the Academy'],
+'#achievements':['🏅 Conquistas','🏅 Achievements'],
+'#graduation-school':['🎓 Graduação','🎓 Graduation'],
+'#academy-final-training':['🏁 Treino Final','🏁 Final Training']
+};
+function currentLang(){
+ try{return new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem('yunarunes-language')==='en'?'en':'pt'}catch(e){return 'pt'}
+}
+function apply(){
+ var lang=currentLang();
+ document.querySelectorAll('.academy-global-nav a[href^="#"]').forEach(function(a){
+  var pair=labels[a.getAttribute('href')];
+  if(pair)a.textContent=pair[lang==='en'?1:0];
+ });
+}
+function boot(){
+ apply();
+ document.addEventListener('yunarunes-language-applied',apply);
+ window.addEventListener('storage',function(e){if(e.key==='yunarunes-language')apply()});
+ document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(apply,0)},true);
+ var nav=document.querySelector('.academy-global-nav');
+ if(nav)new MutationObserver(apply).observe(nav,{childList:true,subtree:true});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
 </body></html>
