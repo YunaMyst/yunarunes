@@ -2234,7 +2234,20 @@ function boot(){
      if(record.target?.closest?.('header.top'))shouldStabilize=true;
     }
    }
-   addedElements.forEach(node=>apply(node));
+   // Translate only the outermost newly inserted elements. Dynamic pages often
+   // insert a whole grid at once; translating every descendant separately rescans
+   // the same subtree many times and can make the entire site appear stuck loading.
+   const pending=new Set(addedElements);
+   const roots=[];
+   for(const node of pending){
+    let parent=node.parentElement, nested=false;
+    while(parent){
+     if(pending.has(parent)){nested=true;break;}
+     parent=parent.parentElement;
+    }
+    if(!nested)roots.push(node);
+   }
+   roots.forEach(node=>apply(node));
    if(shouldStabilize)stabilizeHeader();
   });
   window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
