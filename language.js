@@ -2292,6 +2292,7 @@ function consolidatePrimaryMenuControls(){
   html body header.top .yuna-primary-menu .donate-link{background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;border-color:#a78bfa!important;color:#fff!important}
   html body header.top .yuna-primary-menu .menu-language.active,html body header.top .yuna-primary-menu .menu-language[aria-pressed="true"]{background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important}
   html body header.top .yuna-primary-menu .menu-feedback{background:linear-gradient(180deg,#f4ce73,#c38a2c)!important;border-color:#be66ff!important;color:#251400!important}
+  html body .apk-link,html body .mobile-download,html body [data-download="apk"]{display:none!important}
   html body header.top .yuna-primary-menu .apk-link{display:none!important}
   @media(max-width:600px){html body header.top .yuna-primary-menu .menu-utility{width:100%!important;min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere!important}html body header.top .yuna-primary-menu .apk-link{display:inline-flex!important}}
   body.yunarunes-app header.top .yuna-primary-menu .apk-link{display:none!important}
