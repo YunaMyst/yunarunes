@@ -2266,8 +2266,7 @@ function enforceMobileHeaderControls(){
    html body header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important;order:3!important;background:#172330!important;color:#fff!important;border:1px solid #34475a!important;border-radius:8px!important}
    html body header.top .header-controls .yuna-controls .donate-link{order:4!important}
   }
-  body.yunarunes-app header.top .header-controls .yuna-controls .apk-link,
-  @media(max-width:600px){body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:none!important}}
+  body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:none!important}
  `;
 }
 function boot(){
