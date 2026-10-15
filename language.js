@@ -1854,6 +1854,34 @@ function updateHeader(){
    s.style.setProperty('font-weight','900','important');
   });
  });
+ // Make legacy top-left YunaRunes links visually identical to the main navigation brand.
+ document.querySelectorAll('header.top > a.logo.yunarunes-home, header.top > a.logo').forEach(a=>{
+  if(a.closest('.header-brand')||a.classList.contains('brand'))return;
+  a.classList.add('yunarunes-home');
+  a.href='/index.html';
+  a.setAttribute('aria-label','YunaRunes — Home');
+  a.replaceChildren();
+  const icon=document.createElement('img');
+  icon.className='yunarunes-brand-icon';
+  icon.src='/android/app/src/main/res/drawable/yunarunes_icon_image.webp';
+  icon.alt='';
+  icon.width=34;icon.height=34;icon.decoding='async';
+  icon.style.cssText='width:34px;height:34px;object-fit:contain;display:block;flex:0 0 34px;border-radius:8px';
+  const label=document.createElement('span');
+  label.textContent='YunaRunes';
+  label.style.cssText='color:#fff!important;font-family:Arial,sans-serif!important;font-size:18px!important;font-weight:900!important;line-height:1.2!important;text-decoration:none!important';
+  a.append(icon,label);
+  a.style.cssText+=';display:inline-flex!important;align-items:center!important;gap:8px!important;color:#fff!important;font-family:Arial,sans-serif!important;font-size:18px!important;font-weight:900!important;letter-spacing:0!important;line-height:1.2!important;text-decoration:none!important;white-space:nowrap!important';
+  a.style.setProperty('display','inline-flex','important');
+  a.style.setProperty('align-items','center','important');
+  a.style.setProperty('gap','8px','important');
+  a.style.setProperty('color','#fff','important');
+  a.style.setProperty('font-size','18px','important');
+  a.style.setProperty('font-weight','900','important');
+  a.style.setProperty('letter-spacing','0','important');
+  a.style.setProperty('text-decoration','none','important');
+  a.style.setProperty('white-space','nowrap','important');
+ });
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
  convertLanguageButtonsToLinks();
