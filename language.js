@@ -2027,16 +2027,11 @@ function updateHeader(){
   label.textContent='YunaRunes';
   label.style.cssText='color:#fff!important;font-weight:900!important;font-size:18px!important;line-height:1.2!important;text-decoration:none!important';
  }
- // APK appears only in a mobile browser, never on desktop or inside the Android app.
+ // Ensure every page has the same APK and Donate controls, even when its older header omitted them.
  const controls=h.querySelector('.header-controls .yuna-controls')||h.querySelector('.yuna-controls');
  if(controls){
-  h.querySelectorAll('.mobile-download,[data-download="apk"]').forEach(el=>el.remove());
-  const mobileBrowser=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)&&!/YunaRunesApp/i.test(navigator.userAgent);
-  let apk=controls.querySelector('.apk-link');
-  if(mobileBrowser){
-   if(!apk){apk=document.createElement('a');apk.className='apk-link';apk.textContent='📲 APK';controls.insertBefore(apk,controls.querySelector('.donate-link')||null);}
-   apk.href='/downloads/yunarunes.apk';apk.setAttribute('download','yunarunes.apk');apk.setAttribute('aria-label','Download YunaRunes APK');apk.style.setProperty('text-decoration','none','important');
-  }else if(apk){apk.remove();}
+  // Não criar botão APK no site nem no cabeçalho partilhado.
+  h.querySelectorAll('.apk-link,.mobile-download,[data-download="apk"]').forEach(el=>el.remove());
   if(!controls.querySelector('.donate-link')){
    const donate=document.createElement('a');donate.className='donate-link';donate.href='https://www.paypal.com/myaccount/summary';donate.target='_blank';donate.rel='noopener noreferrer';donate.textContent='💜 Donate';controls.appendChild(donate);
   }
@@ -2251,29 +2246,10 @@ function enforceDonateAppearance(root=document){
   Object.entries(rules).forEach(([k,v])=>{if(a.style.getPropertyValue(k)!==v||a.style.getPropertyPriority(k)!=='important')a.style.setProperty(k,v,'important');});
  });
 }
-function enforceMobileHeaderControls(){
- const id='yunarunes-mobile-header-controls-final';
- let style=document.getElementById(id);
- if(!style){style=document.createElement('style');style.id=id;document.head.appendChild(style);}
- style.textContent=`
-  header.top .header-controls .yuna-controls .apk-link{display:none!important}
-  @media(max-width:600px){
-   html body header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;width:100%!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
-   html body header.top .header-controls .yuna-controls{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow:visible!important}
-   html body header.top .header-controls .yuna-controls>*{display:inline-flex!important;flex:0 1 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-width:0!important;max-width:none!important;height:38px!important;min-height:38px!important;margin:0!important;padding:0 7px!important;font-family:Arial,sans-serif!important;font-size:11px!important;font-weight:800!important;line-height:1!important;white-space:nowrap!important}
-   html body header.top .header-controls .yuna-controls button[data-lang="pt"]{order:1!important}
-   html body header.top .header-controls .yuna-controls button[data-lang="en"]{order:2!important}
-   html body header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important;order:3!important;background:#172330!important;color:#fff!important;border:1px solid #34475a!important;border-radius:8px!important}
-   html body header.top .header-controls .yuna-controls .donate-link{order:4!important}
-  }
-  body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:none!important}
- `;
-}
 function stabilizeHeader(){
  enforceHeaderControlsLayout();
  enforceLanguageButtonAppearance();
  enforceDonateAppearance();
- enforceMobileHeaderControls();
 }
 function boot(){
  updateHeader();bind();apply();stabilizeHeader();
