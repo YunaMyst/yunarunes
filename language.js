@@ -2263,25 +2263,25 @@ function consolidatePrimaryMenuControls(){
   const items=Array.from(document.querySelectorAll('[data-lang="'+lang+'"]'));
   let keep=items.find(el=>el.closest('.yuna-primary-menu'))||items.find(el=>el.closest('.header-controls .yuna-controls'))||items[0];
   if(!keep){keep=document.createElement('a');keep.dataset.lang=lang;keep.href=location.pathname+'?lang='+lang;keep.textContent=lang==='pt'?'🇵🇹 PT':'🇬🇧 EN';keep.setAttribute('aria-label',lang==='pt'?'Português':'English');keep.setAttribute('role','button')}
-  menu.appendChild(keep);keep.classList.add('menu-utility','menu-language');
+  if(keep.parentElement!==menu)menu.appendChild(keep);keep.classList.add('menu-utility','menu-language');
   items.forEach(el=>{if(el!==keep)el.remove()});
  });
  const donateItems=Array.from(document.querySelectorAll('a.donate-link,[data-donate-link]'));
  let donate=donateItems.find(el=>el.closest('.yuna-primary-menu'))||donateItems.find(el=>el.closest('.header-controls'))||donateItems[0];
  if(!donate){donate=document.createElement('a');donate.href='https://www.paypal.com/myaccount/summary';donate.target='_blank';donate.rel='noopener noreferrer';donate.textContent='💜 Donate'}
- donate.classList.add('donate-link','menu-utility');menu.appendChild(donate);
+ donate.classList.add('donate-link','menu-utility');if(donate.parentElement!==menu)menu.appendChild(donate);
  donateItems.forEach(el=>{if(el!==donate)el.remove()});
  const apkItems=Array.from(document.querySelectorAll('.apk-link,.mobile-download,[data-download="apk"],[data-menu-apk]'));
  let apk=apkItems.find(el=>el.closest('.yuna-primary-menu'))||apkItems[0]||null;
  if(mobile&&!inApp){
   if(!apk){apk=document.createElement('a');apk.href='/downloads/yunarunes.apk';apk.textContent='📲 APK';apk.setAttribute('download','');apk.setAttribute('aria-label','Download YunaRunes APK')}
-  apk.classList.add('apk-link','menu-utility');menu.appendChild(apk);
+  apk.classList.add('apk-link','menu-utility');if(apk.parentElement!==menu)menu.appendChild(apk);
  }else if(apk){apk.remove();apk=null}
  apkItems.forEach(el=>{if(el!==apk)el.remove()});
  const feedbackItems=Array.from(document.querySelectorAll('#yr-feedback-open,[data-feedback-open],.yr-feedback-open'));
  let feedback=feedbackItems.find(el=>el.closest('.yuna-primary-menu'))||feedbackItems[0]||null;
  if(!feedback){feedback=document.createElement('a');feedback.href='/index.html#yr-feedback-open';feedback.textContent='💬 Feedback';feedback.setAttribute('aria-label','Send feedback')}
- feedback.classList.add('menu-utility','menu-feedback');menu.appendChild(feedback);
+ feedback.classList.add('menu-utility','menu-feedback');if(feedback.parentElement!==menu)menu.appendChild(feedback);
  feedbackItems.forEach(el=>{if(el!==feedback)el.remove()});
  header.querySelectorAll('.header-controls,.yuna-controls').forEach(el=>{if(!el.querySelector('a:not(.menu-utility),button:not(.menu-utility),[data-lang]'))el.style.setProperty('display','none','important')});
  let style=document.getElementById('yuna-primary-menu-utilities');
