@@ -2251,8 +2251,54 @@ function stabilizeHeader(){
  enforceLanguageButtonAppearance();
  enforceDonateAppearance();
 }
+function consolidatePrimaryMenuControls(){
+ const header=document.querySelector('header.top');
+ if(!header)return;
+ const menu=header.querySelector('.header-menu .nav-links')||header.querySelector('.nav-links');
+ if(!menu)return;
+ menu.classList.add('yuna-primary-menu');
+ const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)&&!/YunaRunesApp/i.test(navigator.userAgent);
+ const inApp=document.body.classList.contains('yunarunes-app')||/YunaRunesApp/i.test(navigator.userAgent);
+ ['pt','en'].forEach(lang=>{
+  const items=Array.from(document.querySelectorAll('[data-lang="'+lang+'"]'));
+  let keep=items.find(el=>el.closest('.yuna-primary-menu'))||items.find(el=>el.closest('.header-controls .yuna-controls'))||items[0];
+  if(!keep){keep=document.createElement('a');keep.dataset.lang=lang;keep.href=location.pathname+'?lang='+lang;keep.textContent=lang==='pt'?'🇵🇹 PT':'🇬🇧 EN';keep.setAttribute('aria-label',lang==='pt'?'Português':'English');keep.setAttribute('role','button')}
+  menu.appendChild(keep);keep.classList.add('menu-utility','menu-language');
+  items.forEach(el=>{if(el!==keep)el.remove()});
+ });
+ const donateItems=Array.from(document.querySelectorAll('a.donate-link,[data-donate-link]'));
+ let donate=donateItems.find(el=>el.closest('.yuna-primary-menu'))||donateItems.find(el=>el.closest('.header-controls'))||donateItems[0];
+ if(!donate){donate=document.createElement('a');donate.href='https://www.paypal.com/myaccount/summary';donate.target='_blank';donate.rel='noopener noreferrer';donate.textContent='💜 Donate'}
+ donate.classList.add('donate-link','menu-utility');menu.appendChild(donate);
+ donateItems.forEach(el=>{if(el!==donate)el.remove()});
+ const apkItems=Array.from(document.querySelectorAll('.apk-link,.mobile-download,[data-download="apk"],[data-menu-apk]'));
+ let apk=apkItems.find(el=>el.closest('.yuna-primary-menu'))||apkItems[0]||null;
+ if(mobile&&!inApp){
+  if(!apk){apk=document.createElement('a');apk.href='/downloads/yunarunes.apk';apk.textContent='📲 APK';apk.setAttribute('download','');apk.setAttribute('aria-label','Download YunaRunes APK')}
+  apk.classList.add('apk-link','menu-utility');menu.appendChild(apk);
+ }else if(apk){apk.remove();apk=null}
+ apkItems.forEach(el=>{if(el!==apk)el.remove()});
+ const feedbackItems=Array.from(document.querySelectorAll('#yr-feedback-open,[data-feedback-open],.yr-feedback-open'));
+ let feedback=feedbackItems.find(el=>el.closest('.yuna-primary-menu'))||feedbackItems[0]||null;
+ if(!feedback){feedback=document.createElement('a');feedback.href='/index.html#yr-feedback-open';feedback.textContent='💬 Feedback';feedback.setAttribute('aria-label','Send feedback')}
+ feedback.classList.add('menu-utility','menu-feedback');menu.appendChild(feedback);
+ feedbackItems.forEach(el=>{if(el!==feedback)el.remove()});
+ header.querySelectorAll('.header-controls,.yuna-controls').forEach(el=>{if(!el.querySelector('a:not(.menu-utility),button:not(.menu-utility),[data-lang]'))el.style.setProperty('display','none','important')});
+ let style=document.getElementById('yuna-primary-menu-utilities');
+ if(!style){style=document.createElement('style');style.id='yuna-primary-menu-utilities';document.head.appendChild(style)}
+ style.textContent=\`
+  html body header.top .header-controls,html body header.top .yuna-controls{display:none!important}
+  html body header.top .yuna-primary-menu .menu-utility{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-height:36px!important;height:36px!important;margin:0!important;padding:0 10px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;cursor:pointer!important}
+  html body header.top .yuna-primary-menu .donate-link{background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;border-color:#a78bfa!important;color:#fff!important}
+  html body header.top .yuna-primary-menu .menu-language.active,html body header.top .yuna-primary-menu .menu-language[aria-pressed="true"]{background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important}
+  html body header.top .yuna-primary-menu .menu-feedback{background:linear-gradient(180deg,#f4ce73,#c38a2c)!important;border-color:#be66ff!important;color:#251400!important}
+  html body header.top .yuna-primary-menu .apk-link{display:none!important}
+  @media(max-width:600px){html body header.top .yuna-primary-menu .menu-utility{width:100%!important;min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere!important}html body header.top .yuna-primary-menu .apk-link{display:inline-flex!important}}
+  body.yunarunes-app header.top .yuna-primary-menu .apk-link{display:none!important}
+ \`;
+}
 function boot(){
- updateHeader();bind();apply();stabilizeHeader();
+ updateHeader();consolidatePrimaryMenuControls();bind();apply();stabilizeHeader();
  if(!window.__yunaLanguageObserver){
   window.__yunaLanguageObserver=new MutationObserver(records=>{
    let shouldStabilize=false;
@@ -2284,6 +2330,7 @@ function boot(){
     if(!nested)roots.push(node);
    }
    roots.forEach(node=>apply(node));
+   if(addedElements.size)consolidatePrimaryMenuControls();
    if(shouldStabilize)stabilizeHeader();
   });
   window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
