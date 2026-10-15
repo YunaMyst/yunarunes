@@ -219,6 +219,42 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
   }
 }
 </style>
+
+<style id="yuna-academy-x-left-of-fox-final">
+/* The open-menu X must sit immediately left of the fox/title, not above the title or at the far right. */
+.academy-nav-toggle[aria-expanded="true"]{
+  position:fixed!important;
+  left:16px!important;
+  right:auto!important;
+  top:62px!important;
+  z-index:100002!important;
+}
+.academy-global-nav.open h3{
+  display:flex!important;
+  align-items:center!important;
+  min-height:44px!important;
+  padding-left:54px!important;
+  padding-right:6px!important;
+  margin-top:2px!important;
+}
+@media(max-width:900px){
+  .academy-nav-toggle[aria-expanded="true"]{
+    left:16px!important;
+    right:auto!important;
+    top:62px!important;
+  }
+  .academy-global-nav.open{
+    left:10px!important;
+    right:10px!important;
+    top:52px!important;
+    width:auto!important;
+    padding-top:10px!important;
+  }
+  .academy-global-nav.open h3{
+    padding-left:54px!important;
+  }
+}
+</style>
 </head>
 <body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a href="artifact-optimizer.html">💠 Artifacts</a><a href="decks.html">🃏 Decks</a><a href="account-analyzer.html">📊 Análise de Conta</a><a href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer" data-pt="💜 Donate" data-en="💜 Donate">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
