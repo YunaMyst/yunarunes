@@ -195,27 +195,37 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
 </style>
 
 <style id="yuna-academy-mobile-menu-close-position-fix">
-/* Keep the X on the same row as the Academy menu title, never over the text. */
+/* Put the real close button in the menu header's right-hand corner on every screen size. */
 .academy-nav-toggle[aria-expanded="true"]{
   position:fixed!important;
+  left:auto!important;
+  right:24px!important;
+  top:82px!important;
   z-index:100001!important;
+  width:40px!important;
+  height:40px!important;
+  margin:0!important;
+  transform:none!important;
+}
+.academy-global-nav.open{
+  padding-top:10px!important;
+}
+.academy-global-nav.open h3{
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  min-height:44px!important;
+  padding:4px 58px 10px 6px!important;
+  margin:2px 6px 8px!important;
+  position:relative!important;
 }
 @media(max-width:900px){
   .academy-nav-toggle[aria-expanded="true"]{
-    left:auto!important;
-    right:22px!important;
-    top:72px!important;
-  }
-  .academy-global-nav.open{
-    padding-top:10px!important;
+    top:64px!important;
+    right:20px!important;
   }
   .academy-global-nav.open h3{
-    box-sizing:border-box!important;
-    display:flex!important;
-    align-items:center!important;
-    min-height:44px!important;
-    padding:4px 58px 10px 6px!important;
-    margin:2px 6px 8px!important;
+    padding-right:58px!important;
   }
 }
 </style>
