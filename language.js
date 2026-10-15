@@ -2269,6 +2269,12 @@ function enforceMobileHeaderControls(){
   body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:none!important}
  `;
 }
+function stabilizeHeader(){
+ enforceHeaderControlsLayout();
+ enforceLanguageButtonAppearance();
+ enforceDonateAppearance();
+ enforceMobileHeaderControls();
+}
 function boot(){
  updateHeader();bind();apply();stabilizeHeader();
  if(!window.__yunaLanguageObserver){
