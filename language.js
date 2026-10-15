@@ -2001,7 +2001,22 @@ function updateHeader(){
   }
  }
  const nav=h.querySelector('.header-menu .nav-links')||h.querySelector('.nav-links');
- if(nav)nav.querySelectorAll('a').forEach((a,i)=>{if(NAV[i]){const label=en()?NAV[i][2]:NAV[i][1];if(a.textContent!==label)a.textContent=label;a.href=NAV[i][0]}});
+ if(nav){
+  const currentFile=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  nav.querySelectorAll('a').forEach(a=>{
+   const href=(a.getAttribute('href')||'').split('?')[0].split('#')[0].split('/').pop().toLowerCase();
+   const item=NAV.find(entry=>entry[0].toLowerCase()===href);
+   if(currentFile==='database.html' && ['index.html','database.html','team-builder.html'].includes(href)){
+    a.remove();
+    return;
+   }
+   if(item){
+    const label=en()?item[2]:item[1];
+    if(a.textContent!==label)a.textContent=label;
+    a.href=item[0];
+   }
+  });
+ }
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
 }
 const translationCache={};
