@@ -255,6 +255,27 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
   }
 }
 </style>
+<style id="yuna-academy-mobile-header-final">
+/* Mobile-only header layout: keep menu, brand, controls and links in separate rows. */
+@media(max-width:600px){
+ html body header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;align-items:center!important;gap:8px!important;width:100%!important;height:auto!important;min-height:0!important;padding:8px 10px 10px!important}
+ html body header.top .header-menu{grid-area:menu!important;grid-column:auto!important;grid-row:1!important;min-width:42px!important}
+ html body header.top .header-brand{grid-area:brand!important;grid-column:auto!important;grid-row:1!important;display:flex!important;justify-content:center!important;min-width:0!important}
+ html body header.top .header-brand a.brand{justify-content:center!important;white-space:nowrap!important}
+ html body header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important}
+ html body header.top .header-controls .yuna-controls{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:5px!important;width:100%!important;min-width:0!important;max-width:100%!important}
+ html body header.top .header-controls .yuna-controls>*{display:inline-flex!important;flex:0 1 auto!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-width:0!important;max-width:none!important;height:38px!important;min-height:38px!important;margin:0!important;padding:0 7px!important;font-size:11px!important;font-weight:800!important;line-height:1!important;white-space:nowrap!important}
+ html body header.top .header-controls .yuna-controls button[data-lang="pt"]{order:1!important}
+ html body header.top .header-controls .yuna-controls button[data-lang="en"]{order:2!important}
+ html body header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important;order:3!important;background:#172330!important;color:#fff!important;border:1px solid #34475a!important;border-radius:8px!important}
+ html body header.top .header-controls .yuna-controls .donate-link{order:4!important}
+ html body header.top .header-menu .nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;display:none!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;padding:0!important}
+ html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
+}
+header.top .header-controls .yuna-controls .apk-link{display:none!important}
+@media(max-width:600px){html body header.top .header-controls .yuna-controls .apk-link{display:inline-flex!important}}
+body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:none!important}
+</style>
 </head>
 <body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Abrir menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a href="artifact-optimizer.html">💠 Artifacts</a><a href="decks.html">🃏 Decks</a><a href="account-analyzer.html">📊 Análise de Conta</a><a href="guild-tools.html">⚔️ Guild/Siege</a></div></div><div class="header-controls"><div class="yuna-controls"><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer" data-pt="💜 Donate" data-en="💜 Donate">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><div class="academy-page-spacer" aria-hidden="true"></div><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
@@ -2757,4 +2778,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
+<script id="yuna-academy-mobile-apk-control">
+(function(){
+ 'use strict';
+ var ua=navigator.userAgent||'';
+ var isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(ua);
+ var isApp=/YunaRunesApp/i.test(ua);
+ var controls=document.querySelector('header.top .header-controls .yuna-controls');
+ if(!controls)return;
+ controls.querySelectorAll('.mobile-download,[data-download="apk"]').forEach(function(el){el.remove()});
+ var apk=controls.querySelector('.apk-link');
+ if(isMobile&&!isApp){
+  if(!apk){apk=document.createElement('a');apk.className='apk-link';apk.textContent='📲 APK';controls.insertBefore(apk,controls.querySelector('.donate-link')||null)}
+  apk.href='/downloads/yunarunes.apk';
+  apk.setAttribute('download','yunarunes.apk');
+  apk.setAttribute('aria-label','Download YunaRunes APK');
+ }else if(apk){apk.remove()}
+})();
+</script>
 </body></html>
