@@ -2779,22 +2779,35 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
-<script id="yuna-academy-mobile-apk-control">
+<script id="yuna-academy-protect-summoners-war">
 (function(){
  'use strict';
- var ua=navigator.userAgent||'';
- var isMobile=/Android|iPhone|iPad|iPod|Mobile/i.test(ua);
- var isApp=/YunaRunesApp/i.test(ua);
- var controls=document.querySelector('header.top .header-controls .yuna-controls');
- if(!controls)return;
- controls.querySelectorAll('.mobile-download,[data-download="apk"]').forEach(function(el){el.remove()});
- var apk=controls.querySelector('.apk-link');
- if(isMobile&&!isApp){
-  if(!apk){apk=document.createElement('a');apk.className='apk-link';apk.textContent='📲 APK';controls.insertBefore(apk,controls.querySelector('.donate-link')||null)}
-  apk.href='/downloads/yunarunes.apk';
-  apk.setAttribute('download','yunarunes.apk');
-  apk.setAttribute('aria-label','Download YunaRunes APK');
- }else if(apk){apk.remove()}
+ function protect(root){
+  if(!root)return;
+  var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];
+  while(walker.nextNode()){
+   var node=walker.currentNode,parent=node.parentElement;
+   if(!parent||parent.closest('script,style,textarea,input,code,noscript,[translate="no"],.notranslate,[data-no-translate]'))continue;
+   if(/Summoners War|Invocadores War/i.test(node.nodeValue||''))nodes.push(node);
+  }
+  nodes.forEach(function(node){
+   var raw=node.nodeValue||'';
+   raw=raw.replace(/Invocadores War/gi,'Summoners War');
+   if(!/Summoners War/i.test(raw)){node.nodeValue=raw;return}
+   var fragment=document.createDocumentFragment(),last=0,match,re=/Summoners War/gi;
+   while((match=re.exec(raw))){
+    if(match.index>last)fragment.appendChild(document.createTextNode(raw.slice(last,match.index)));
+    var span=document.createElement('span');span.className='notranslate';span.setAttribute('translate','no');span.textContent='Summoners War';fragment.appendChild(span);last=match.index+match[0].length;
+   }
+   if(last<raw.length)fragment.appendChild(document.createTextNode(raw.slice(last)));
+   node.parentNode.replaceChild(fragment,node);
+  });
+ }
+ function run(){protect(document.body)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+ window.addEventListener('yunarunes-language-applied',run);
+ if(document.body)new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1)protect(node);else if(node.nodeType===3&&/Summoners War|Invocadores War/i.test(node.nodeValue||''))protect(node.parentElement)})})}).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+</body></html>
 </body></html>
