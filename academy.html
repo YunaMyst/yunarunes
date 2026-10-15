@@ -2581,13 +2581,15 @@ while(walker.nextNode()){
  if(!parent||parent.closest('script,style,textarea,input,code,noscript,[data-no-translate]'))continue;
  nodes.push(node);
 }
-var pairs=Object.keys(dict).map(function(k){return [k,dict[k]]}).sort(function(a,b){return Math.max(b[0].length,b[1].length)-Math.max(a[0].length,a[1].length)});
+var pairs=Object.keys(dict).map(function(k){return [lang==='en'?k:dict[k],lang==='en'?dict[k]:k]}).filter(function(p){return !!p[0]}).sort(function(a,b){return b[0].length-a[0].length});
+function esc(s){return s.split('').map(function(ch){return '\\^$.*+?()[]{}|'.indexOf(ch)>=0?'\\'+ch:ch}).join('')}
+var lookup=Object.create(null),sources=[];
+pairs.forEach(function(pair){if(!Object.prototype.hasOwnProperty.call(lookup,pair[0])){lookup[pair[0]]=pair[1];sources.push(pair[0])}});
+if(!sources.length)return;
+var matcher=new RegExp(sources.map(esc).join('|'),'g');
 nodes.forEach(function(node){
- var raw=node.nodeValue;if(!raw||!raw.trim())return;var out=raw;
- pairs.forEach(function(pair){
-  var from=lang==='en'?pair[0]:pair[1],to=lang==='en'?pair[1]:pair[0];
-  if(from && out.indexOf(from)!==-1)out=out.split(from).join(to);
- });
+ var raw=node.nodeValue;if(!raw||!raw.trim())return;
+ var out=raw.replace(matcher,function(match){return lookup[match]===undefined?match:lookup[match]});
  if(out!==raw)node.nodeValue=out;
 });
 }
