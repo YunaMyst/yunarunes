@@ -1882,6 +1882,12 @@ function updateHeader(){
   a.style.setProperty('text-decoration','none','important');
   a.style.setProperty('white-space','nowrap','important');
  });
+ if(!document.getElementById('yunarunes-legacy-brand-match')){
+  const brandStyle=document.createElement('style');
+  brandStyle.id='yunarunes-legacy-brand-match';
+  brandStyle.textContent='header.top>a.logo.yunarunes-home img.yunarunes-brand-icon{width:34px!important;height:34px!important;flex:0 0 34px!important;object-fit:contain!important;display:block!important}header.top>a.logo.yunarunes-home span{font-family:Arial,sans-serif!important;font-size:18px!important;font-weight:900!important;line-height:1.2!important;color:#fff!important;text-decoration:none!important}@media(max-width:600px){header.top>a.logo.yunarunes-home img.yunarunes-brand-icon{width:32px!important;height:32px!important;flex-basis:32px!important}header.top>a.logo.yunarunes-home span{font-size:17px!important}}';
+  document.head.appendChild(brandStyle);
+ }
  const h=document.querySelector('header.top'); if(!h)return;
  ensureLanguageControls();
  convertLanguageButtonsToLinks();
