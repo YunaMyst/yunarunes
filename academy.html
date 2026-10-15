@@ -195,38 +195,32 @@ header.top .header-brand a.brand:hover{color:#fff!important;text-decoration:none
 </style>
 
 <style id="yuna-academy-mobile-menu-close-position-fix">
-/* Keep the close button immediately beside the Yuna Academy title, not at the screen edge. */
-.academy-nav-toggle[aria-expanded="true"]{
-  position:fixed!important;
-  left:205px!important;
-  right:auto!important;
-  top:82px!important;
-  z-index:100001!important;
-  width:40px!important;
-  height:40px!important;
-  margin:0!important;
-  transform:none!important;
-}
-.academy-global-nav.open{
-  padding-top:10px!important;
-}
+/* The close button is moved into the heading while the menu is open, so its position follows the title on every screen size. */
 .academy-global-nav.open h3{
   box-sizing:border-box!important;
   display:flex!important;
   align-items:center!important;
+  justify-content:flex-start!important;
+  flex-wrap:nowrap!important;
+  gap:8px!important;
   min-height:44px!important;
   padding:4px 6px 10px!important;
   margin:2px 6px 8px!important;
-  position:relative!important;
 }
-@media(max-width:900px){
-  .academy-nav-toggle[aria-expanded="true"]{
-    left:180px!important;
-    top:64px!important;
-  }
-  .academy-global-nav.open h3{
-    padding-right:6px!important;
-  }
+.academy-nav-toggle[aria-expanded="true"]{
+  position:static!important;
+  inset:auto!important;
+  display:inline-flex!important;
+  flex:0 0 36px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:36px!important;
+  min-width:36px!important;
+  height:36px!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+  z-index:100001!important;
 }
 </style>
 </head>
@@ -1039,7 +1033,7 @@ $('ycs-start').addEventListener('click',start);$('ycs-turn-btn').addEventListene
 </section></main>
 <script>
 function academyQuiz(ok){const e=document.getElementById("quizResult");e.textContent=ok?"✅ "+(document.documentElement.lang==="en"?"Correct! Stun prevents the monster from acting.":"Correto! Stun impede o monstro de agir."):"❌ "+(document.documentElement.lang==="en"?"Not quite. Stun prevents the monster from acting.":"Ainda não. Stun impede o monstro de agir.");}
-(()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};(()=>{const nav=document.getElementById('academy-global-nav'),toggle=document.getElementById('academy-nav-toggle');if(!nav||!toggle)return;const closeNav=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰'};const openNav=()=>{nav.classList.add('open');toggle.setAttribute('aria-expanded','true');toggle.textContent='✕'};toggle.addEventListener('click',()=>nav.classList.contains('open')?closeNav():openNav());nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));a.classList.add('active');setTimeout(closeNav,80)}));document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&e.target!==toggle)closeNav()});window.addEventListener('hashchange',()=>{const h=location.hash;nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===h));});})();document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){apply();}});})();
+(()=>{const en=()=>{try{return localStorage.getItem('yunarunes-language')==='en'}catch(_){return false}};const apply=()=>{const e=en();document.documentElement.lang=e?'en':'pt-BR';document.querySelectorAll('[data-pt][data-en]').forEach(x=>x.innerHTML=e?x.dataset.en:x.dataset.pt);document.querySelectorAll('[data-pt-placeholder][data-en-placeholder]').forEach(x=>x.placeholder=e?x.dataset.enPlaceholder:x.dataset.ptPlaceholder);document.querySelectorAll('#side button').forEach(x=>x.classList.toggle('active',x.dataset.target===location.hash.slice(1)||(!location.hash&&x.dataset.target==='start')))};(()=>{const nav=document.getElementById('academy-global-nav'),toggle=document.getElementById('academy-nav-toggle'),heading=nav&&nav.querySelector('h3');if(!nav||!toggle||!heading)return;const closeNav=()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';if(toggle.parentElement!==document.querySelector('main.wrap')){nav.parentNode.insertBefore(toggle,nav)}};const openNav=()=>{nav.classList.add('open');toggle.setAttribute('aria-expanded','true');toggle.textContent='✕';heading.appendChild(toggle)};toggle.addEventListener('click',()=>nav.classList.contains('open')?closeNav():openNav());nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.querySelectorAll('a').forEach(x=>x.classList.remove('active'));a.classList.add('active');setTimeout(closeNav,80)}));document.addEventListener('click',e=>{if(nav.classList.contains('open')&&!nav.contains(e.target)&&e.target!==toggle)closeNav()});window.addEventListener('hashchange',()=>{const h=location.hash;nav.querySelectorAll('a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')===h));});})();document.getElementById('searchBtn').onclick=()=>{const q=document.getElementById('academySearch').value.trim().toLowerCase();if(!q)return;let found=null;document.querySelectorAll('.term,.gloss,.card').forEach(x=>{if(!found&&x.textContent.toLowerCase().includes(q))found=x});if(found){found.scrollIntoView({behavior:'smooth',block:'center'});found.style.outline='2px solid #35a9e1';setTimeout(()=>found.style.outline='',1400)}};apply();window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){apply();}});})();
 </script>
 <script>
 function academyScenario(type){
