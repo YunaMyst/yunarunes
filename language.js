@@ -2495,3 +2495,23 @@ function installOfficialGameNameGuard(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installOfficialGameNameGuard);else installOfficialGameNameGuard();
 })();
+
+/* YunaRunes Android WebView header spacing fix */
+(function(){
+ if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent)) return;
+ function adjustAndroidHeader(){
+  var top=document.querySelector('header.top');
+  if(!top) return;
+  var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
+  var controls=top.querySelector('.header-controls');
+  if(menu) menu.style.setProperty('transform','translateY(30px)','important');
+  if(controls) controls.style.setProperty('transform','translateY(30px)','important');
+ }
+ adjustAndroidHeader();
+ var attempts=0;
+ var timer=setInterval(function(){
+  adjustAndroidHeader();
+  attempts++;
+  if(attempts>=30) clearInterval(timer);
+ },200);
+})();
