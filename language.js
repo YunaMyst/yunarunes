@@ -2290,7 +2290,7 @@ function consolidatePrimaryMenuControls(){
  ['pt','en'].forEach(lang=>{
   const items=Array.from(document.querySelectorAll('[data-lang="'+lang+'"]'));
   let keep=items.find(el=>el.closest('.yuna-primary-menu'))||items.find(el=>el.closest('.header-controls .yuna-controls'))||items[0];
-  if(!keep){keep=document.createElement('a');keep.dataset.lang=lang;keep.href=location.pathname+'?lang='+lang;keep.textContent=lang==='pt'?'🇵🇹 PT':'🇬🇧 EN';keep.setAttribute('aria-label',lang==='pt'?'Português':'English');keep.setAttribute('role','button')}
+  if(!keep){keep=document.createElement('a');keep.dataset.lang=lang;keep.href='#';keep.setAttribute('onclick',"if(window.yunaSetLanguage){window.yunaSetLanguage('"+lang+"')}return false;");keep.textContent=lang==='pt'?'🇧🇷 PT/BR':'🇬🇧 ENG';keep.setAttribute('aria-label',lang==='pt'?'Português':'English');keep.setAttribute('role','button')}
   if(keep.parentElement!==menu)menu.appendChild(keep);keep.classList.add('menu-utility','menu-language');
   items.forEach(el=>{if(el!==keep)el.remove()});
  });
