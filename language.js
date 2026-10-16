@@ -2164,11 +2164,18 @@ function apply(root=document.body){
 
 function setLanguage(lang){
  const next=lang==='en'?'en':'pt';
+ // Change language in-place: never reload or navigate away when a language button is clicked.
  save(next);
  document.documentElement.lang=next==='en'?'en':'pt-BR';
- // Keep the selection in the URL too, so it survives blocked storage and page navigation.
- try{const u=new URL(window.location.href);u.searchParams.set('lang',next);window.location.replace(u.href);}
- catch(_){window.location.reload();}
+ try{
+  const u=new URL(window.location.href);
+  if(u.searchParams.get('lang')!==next){
+   u.searchParams.set('lang',next);
+   window.history.replaceState(null,'',u.pathname+u.search+u.hash);
+  }
+ }catch(_){}
+ apply();
+ window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
 }
 function bind(){
  convertLanguageButtonsToLinks();
