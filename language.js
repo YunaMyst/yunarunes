@@ -1811,23 +1811,11 @@ function ensureLanguageControls(){
  }
 }
 function convertLanguageButtonsToLinks(){
- document.querySelectorAll('button[data-lang]').forEach(old=>{
-  const lang=old.dataset.lang==='en'?'en':'pt';
-  const link=document.createElement('a');
-  link.href=location.pathname+'?lang='+lang;
-  link.dataset.lang=lang;
-  link.className=old.className||'';
-  link.textContent=old.textContent;
-  link.setAttribute('aria-label',old.getAttribute('aria-label')||(lang==='en'?'English':'Português'));
-  link.setAttribute('role','button');
-  link.tabIndex=0;
-  link.style.cssText += ';display:inline-flex!important;align-items:center!important;justify-content:center!important;position:relative!important;z-index:2147483647!important;pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;text-decoration:none!important;';
-  old.replaceWith(link);
- });
- const styleId='yunarunes-language-click-fix-v11';
+ // Keep language controls as buttons: switching language is an in-page action, not navigation.
+ const styleId='yunarunes-language-click-fix-v12';
  if(!document.getElementById(styleId)){
   const style=document.createElement('style');style.id=styleId;
-  style.textContent='html body header.top,html body header.top>.nav,html body header.top .header-controls,html body header.top .header-controls .yuna-controls{pointer-events:auto!important;position:relative!important}html body header.top .header-controls{z-index:2147483645!important}html body header.top [data-lang]{pointer-events:auto!important;position:relative!important;z-index:2147483647!important;touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(53,169,225,.35)!important}html body header.top [data-lang]::before,html body header.top [data-lang]::after{pointer-events:none!important}';
+  style.textContent='html body [data-lang]{pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(53,169,225,.35)!important}html body [data-lang]::before,html body [data-lang]::after{pointer-events:none!important}';
   document.head.appendChild(style);
  }
 }
@@ -2165,19 +2153,19 @@ function apply(root=document.body){
 
 function setLanguage(lang){
  const next=lang==='en'?'en':'pt';
- // Apply the selection immediately and keep it authoritative even if this page was opened with ?lang=...
+ // Language selection must never navigate or reload the current page.
  activeLanguageOverride=next;
  save(next);
  document.documentElement.lang=next==='en'?'en':'pt-BR';
- try{
-  const u=new URL(window.location.href);
-  if(u.searchParams.get('lang')!==next){
-   u.searchParams.set('lang',next);
-   window.history.replaceState(null,'',u.pathname+u.search+u.hash);
-  }
- }catch(_){}
+ document.querySelectorAll('[data-lang]').forEach(el=>{
+  const active=(el.getAttribute('data-lang')||el.getAttribute('data-language'))===next;
+  el.classList.toggle('active',active);
+  el.setAttribute('aria-pressed',active?'true':'false');
+ });
  apply();
  window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
+ window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:next}));
+ window.dispatchEvent(new CustomEvent('yunarunes-lang',{detail:next}));
 }
 function bind(){
  convertLanguageButtonsToLinks();
