@@ -2779,15 +2779,33 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
-<script id="yuna-academy-protect-summoners-war">
+<script id="yuna-academy-protect-summoners-war-v2">
 (function(){
  'use strict';
- var running=false;
- function protect(){
-  if(running||!document.body)return;
-  running=true;
+ var phrase=/invocador(?:es)?\\s*war/gi;
+ var busy=false;
+ function fixString(value){return typeof value==='string'?value.replace(phrase,'Summoners War'):value;}
+ function fix(){
+  if(busy||!document.documentElement)return;
+  busy=true;
   try{
-   /* Keep the game name exact in the Academy hero, in both languages. */
+   /* Fix source attributes too, so the language switch cannot recreate the mistranslation. */
+   document.querySelectorAll('*').forEach(function(el){
+    Array.from(el.attributes||[]).forEach(function(a){
+     if(/^(data-pt|data-en|title|aria-label|placeholder|alt)$/i.test(a.name)){
+      var fixed=fixString(a.value);
+      if(fixed!==a.value)el.setAttribute(a.name,fixed);
+     }
+    });
+   });
+   var walker=document.createTreeWalker(document.body||document.documentElement,NodeFilter.SHOW_TEXT);
+   var nodes=[];
+   while(walker.nextNode()){
+    var n=walker.currentNode;
+    if(n.parentElement&&n.parentElement.closest('script,style,textarea,input,code,noscript'))continue;
+    if(phrase.test(n.nodeValue||'')){phrase.lastIndex=0;nodes.push(n);}else{phrase.lastIndex=0;}
+   }
+   nodes.forEach(function(n){var v=fixString(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v;});
    document.querySelectorAll('.academy-title-pt').forEach(function(el){
     var wanted='Aprenda a Jogar <span class="notranslate" translate="no">Summoners War</span> do <span>zero</span>';
     if(el.innerHTML!==wanted)el.innerHTML=wanted;
@@ -2796,22 +2814,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     var wanted='Learn <span class="notranslate" translate="no">Summoners War</span> from <span>zero</span>';
     if(el.innerHTML!==wanted)el.innerHTML=wanted;
    });
-   /* Fix the exact mistranslated phrase wherever it appears in visible Academy text. */
-   var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];
-   while(walker.nextNode()){
-    var node=walker.currentNode;
-    if(node.parentElement&&node.parentElement.closest('script,style,textarea,input,code,noscript'))continue;
-    if(/Invocador(?:es)?\s+War/i.test(node.nodeValue||''))nodes.push(node);
-   }
-   nodes.forEach(function(node){node.nodeValue=node.nodeValue.replace(/Invocador(?:es)?\s+War/gi,'Summoners War')});
-  }finally{running=false}
+  }finally{busy=false;}
  }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',protect);else protect();
- window.addEventListener('yunarunes-language-applied',protect);
- if(document.body&&window.MutationObserver){
-  var observer=new MutationObserver(function(){protect()});
-  observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+ function boot(){
+  fix();
+  window.addEventListener('yunarunes-language-applied',fix);
+  if(window.MutationObserver){
+   var observer=new MutationObserver(function(){fix();});
+   observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['data-pt','data-en','title','aria-label','placeholder','alt']});
+  }
  }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
 </body></html>
