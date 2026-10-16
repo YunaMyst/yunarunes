@@ -2383,8 +2383,27 @@ function consolidatePrimaryMenuControls(){
   body.yunarunes-app header.top .yuna-primary-menu .apk-link{display:none!important}
  `;
 }
+function ensureYunaRunesBrand(){
+  const header=document.querySelector('header');
+  if(!header)return;
+  const candidates=Array.from(header.querySelectorAll('a[href]'));
+  const brand=candidates.find(a=>/index\.html(?:[?#].*)?$/i.test(a.getAttribute('href')||'')&&(/yunarunes/i.test(a.textContent||'')||/yunarunes/i.test(a.getAttribute('aria-label')||'')));
+  if(!brand)return;
+  const iconUrl='https://raw.githubusercontent.com/YunaMyst/yunarunes/main/android/app/src/main/res/drawable/yunarunes_icon_image.webp';
+  brand.href='/index.html';
+  brand.setAttribute('aria-label','YunaRunes');
+  brand.classList.add('yunarunes-home');
+  for(const [k,v] of Object.entries({display:'inline-flex',alignItems:'center',justifyContent:'center',gap:'8px',boxSizing:'border-box',color:'#fff',textDecoration:'none',fontWeight:'900',whiteSpace:'nowrap',flex:'0 0 auto',minHeight:'40px',padding:'5px 9px',border:'1px solid #30363d',borderRadius:'9px',background:'#111c27',fontSize:'18px'}))brand.style.setProperty(k.replace(/[A-Z]/g,m=>'-'+m.toLowerCase()),v,'important');
+  const img=document.createElement('img');img.src=iconUrl;img.alt='';img.width=26;img.height=26;
+  img.style.cssText='display:block!important;width:26px!important;height:26px!important;object-fit:contain!important;flex:0 0 26px!important';
+  const label=document.createElement('span');label.textContent='YunaRunes';label.style.cssText='display:inline!important;color:#fff!important;line-height:1!important';
+  brand.replaceChildren(img,label);
+  let style=document.getElementById('yuna-global-brand-style');
+  if(!style){style=document.createElement('style');style.id='yuna-global-brand-style';document.head.appendChild(style)}
+  style.textContent='header a.yunarunes-home{cursor:pointer!important}header a.yunarunes-home img{pointer-events:none!important}@media(max-width:600px){header a.yunarunes-home{min-height:36px!important;padding:4px 7px!important;gap:6px!important;font-size:16px!important}header a.yunarunes-home img{width:23px!important;height:23px!important;flex-basis:23px!important}}';
+}
 function boot(){
- updateHeader();consolidatePrimaryMenuControls();bind();stabilizeHeader();
+ updateHeader();ensureYunaRunesBrand();consolidatePrimaryMenuControls();bind();stabilizeHeader();
   // Let the browser paint the page before scanning the entire document for translations.
   const runInitialTranslation=()=>{try{apply()}catch(error){console.error('YunaRunes language initialization:',error)}};
   if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(runInitialTranslation,{timeout:1200});else window.setTimeout(runInitialTranslation,60);
