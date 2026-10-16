@@ -2384,7 +2384,10 @@ function consolidatePrimaryMenuControls(){
  `;
 }
 function boot(){
- updateHeader();consolidatePrimaryMenuControls();bind();apply();stabilizeHeader();
+ updateHeader();consolidatePrimaryMenuControls();bind();stabilizeHeader();
+  // Let the browser paint the page before scanning the entire document for translations.
+  const runInitialTranslation=()=>{try{apply()}catch(error){console.error('YunaRunes language initialization:',error)}};
+  if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(runInitialTranslation,{timeout:1200});else window.setTimeout(runInitialTranslation,60);
  if(!window.__yunaLanguageObserver){
   window.__yunaLanguageObserver=new MutationObserver(records=>{
    let shouldStabilize=false;
