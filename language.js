@@ -2392,7 +2392,7 @@ function ensureYunaRunesBrand(){
    document.body.insertBefore(header,document.body.firstChild);
   }
   const candidates=Array.from(header.querySelectorAll('a[href]'));
-  let brand=candidates.find(a=>/index\\.html(?:[?#].*)?$/i.test(a.getAttribute('href')||'')&&(/yunarunes/i.test(a.textContent||'')||/yunarunes/i.test(a.getAttribute('aria-label')||'')));
+  let brand=candidates.find(a=>/index\.html(?:[?#].*)?$/i.test(a.getAttribute('href')||'')&&(/yunarunes/i.test(a.textContent||'')||/yunarunes/i.test(a.getAttribute('aria-label')||'')));
   if(!brand){
    brand=document.createElement('a');brand.href='/index.html';brand.textContent='YunaRunes';brand.setAttribute('aria-label','YunaRunes');
    header.insertBefore(brand,header.firstChild);
