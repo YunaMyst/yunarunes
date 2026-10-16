@@ -1815,7 +1815,7 @@ function convertLanguageButtonsToLinks(){
  const styleId='yunarunes-language-click-fix-v12';
  if(!document.getElementById(styleId)){
   const style=document.createElement('style');style.id=styleId;
-  style.textContent='html body [data-lang]{pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;-webkit-tap-highlight-color:rgba(53,169,225,.35)!important}html body [data-lang]::before,html body [data-lang]::after{pointer-events:none!important}';
+  style.textContent='html body [data-lang],html body [data-language]{pointer-events:auto!important;touch-action:manipulation!important;cursor:pointer!important;position:relative!important;z-index:2147483647!important;-webkit-tap-highlight-color:rgba(53,169,225,.35)!important}html body [data-lang]::before,html body [data-lang]::after,html body [data-language]::before,html body [data-language]::after{pointer-events:none!important}';
   document.head.appendChild(style);
  }
 }
@@ -2169,16 +2169,25 @@ function setLanguage(lang){
 }
 function bind(){
  convertLanguageButtonsToLinks();
- document.querySelectorAll('[data-lang]').forEach(b=>{
-  if(b.dataset.bound==='1')return;
-  b.dataset.bound='1';
-  b.addEventListener('click',e=>{
-   e.preventDefault();
-   e.stopImmediatePropagation();
-   setLanguage(b.dataset.lang);
-  },true);
+ document.querySelectorAll('[data-lang],[data-language]').forEach(b=>{
+  const lang=b.getAttribute('data-lang')||b.getAttribute('data-language');
+  if(lang!=='en'&&lang!=='pt'&&lang!=='br')return;
+  b.setAttribute('role','button');
+  b.setAttribute('tabindex','0');
+  b.style.setProperty('pointer-events','auto','important');
+  b.style.setProperty('position','relative','important');
+  b.style.setProperty('z-index','2147483647','important');
+  b.onclick=e=>{e.preventDefault();setLanguage(lang==='en'?'en':'pt');return false;};
  });
 }
+// Run before page-level capture handlers, including legacy scripts that cancel clicks.
+window.addEventListener('click',e=>{
+ const el=e.target&&e.target.closest?e.target.closest('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn'):null;
+ if(!el)return;
+ const raw=el.getAttribute('data-lang')||el.getAttribute('data-language')||'';
+ const lang=raw==='en'||/en|english/i.test((el.id||'')+' '+(el.className||''))?'en':'pt';
+ e.preventDefault();e.stopImmediatePropagation();setLanguage(lang);
+},true);
 document.addEventListener('click',e=>{enforceDonateAppearance();},true);
 // Universal language control handler: works with buttons, links, and legacy page-specific controls.
 function resolveLanguageControl(el){
