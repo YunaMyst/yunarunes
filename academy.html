@@ -2780,30 +2780,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </script>
 
 <script id="yuna-academy-protect-summoners-war">
-(function(){
- 'use strict';
- function fix(){
-  if(!document.body)return;
-  /* Only fix existing text nodes. No observer or repeated page-wide updates. */
-  var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  var nodes=[];
-  while(walker.nextNode()){
-   var n=walker.currentNode;
-   if(n.parentElement&&n.parentElement.closest('script,style,textarea,input,code,noscript'))continue;
-   if(/invocador(?:es)?\s*war/i.test(n.nodeValue||''))nodes.push(n);
-  }
-  nodes.forEach(function(n){n.nodeValue=n.nodeValue.replace(/invocador(?:es)?\s*war/gi,'Summoners War');});
-  document.querySelectorAll('.academy-title-pt').forEach(function(el){
-   var wanted='Aprenda a Jogar <span class="notranslate" translate="no">Summoners War</span> do <span>zero</span>';
-   if(el.innerHTML!==wanted)el.innerHTML=wanted;
-  });
-  document.querySelectorAll('.academy-title-en').forEach(function(el){
-   var wanted='Learn <span class="notranslate" translate="no">Summoners War</span> from <span>zero</span>';
-   if(el.innerHTML!==wanted)el.innerHTML=wanted;
-  });
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix,{once:true});else fix();
- window.addEventListener('yunarunes-language-applied',fix);
-})();
+/* Intentionally disabled: the original Academy markup already uses the official game name. */
 </script>
 </body></html>
