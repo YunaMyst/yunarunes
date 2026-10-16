@@ -44,7 +44,7 @@ jobs:
           if home.exists():
               s = home.read_text(encoding='utf-8')
               marker = '<!-- YUNARUNES-ADVANCED-TOOLS -->'
-              if marker not in s:
+              if marker not in s and '⚡ Advanced Tools' not in s:
                   block = '''<section class="card" style="margin-top:18px"><h2>⚡ Advanced Tools</h2><p class="muted">Ferramentas avançadas para artefactos, decks, análise de conta e Guild/Siege.</p><section class="tools"><a class="tool-card" href="tools.html"><b>🧰 Ferramentas</b><br><span>Artifact Optimizer · Decks · Account Analyzer · Guild / Siege</span></a><a class="tool-card" href="artifact-optimizer.html"><b>💠 Artifact Optimizer</b><br><span>Ordenar artefactos e encontrar a melhor combinação.</span></a><a class="tool-card" href="decks.html"><b>🃏 Decks</b><br><span>Guardar e organizar equipas por conteúdo.</span></a><a class="tool-card" href="account-analyzer.html"><b>📊 Account Analyzer</b><br><span>Analisar a evolução e a qualidade da conta.</span></a><a class="tool-card" href="guild-tools.html"><b>⚔️ Guild / Siege</b><br><span>Planeamento de defs, ataques e matchups.</span></a></section></section>'''
                   s = s.replace('</main>', marker + block + '</main>', 1)
                   home.write_text(s, encoding='utf-8')
