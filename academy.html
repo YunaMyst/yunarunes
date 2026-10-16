@@ -2688,7 +2688,7 @@ window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValu
  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(applyUpgradesLanguage,0)},true);
 })();
 </script>
-<script src="language-academy-fix.js?v=20261016-academy-language-stability-v3"></script>
+<script src="language-academy-fix.js?v=20261016-academy-language-stability-v4"></script>
 <script id="yuna-resources-language-hardfix">
 (function(){
  function applyResourcesLanguage(){
@@ -2773,7 +2773,7 @@ function boot(){
  window.addEventListener('storage',function(e){if(e.key==='yunarunes-language')apply()});
  document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(apply,0)},true);
  var nav=document.querySelector('.academy-global-nav');
- if(nav)new MutationObserver(apply).observe(nav,{childList:true,subtree:true});
+ /* Sem MutationObserver neste menu: apply() altera textContent dos links e voltava a disparar o próprio observer indefinidamente. A atualização já é feita pelo evento de idioma e pelo clique nos botões. */
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
