@@ -2183,9 +2183,40 @@ function bind(){
  });
 }
 document.addEventListener('click',e=>{enforceDonateAppearance();},true);
+// Universal language control handler: works with buttons, links, and legacy page-specific controls.
+function resolveLanguageControl(el){
+ if(!el)return null;
+ let lang=el.getAttribute('data-lang')||el.getAttribute('data-language');
+ if(!lang&&/^lang(?:uage)?(?:pt|br|en)$/i.test(el.id||''))lang=/en$/i.test(el.id)?'en':'pt';
+ if(!lang&&/\b(?:pt|br)\b/i.test((el.id||'')+' '+(el.className||'')))lang='pt';
+ if(!lang&&/\ben\b|english/i.test((el.id||'')+' '+(el.className||'')))lang='en';
+ if(!lang&&el.getAttribute('href')){
+  try{const u=new URL(el.getAttribute('href'),location.href);const q=(u.searchParams.get('lang')||'').toLowerCase();if(q==='en'||q==='pt'||q==='br')lang=q==='en'?'en':'pt'}catch(_){}
+ }
+ if(!lang&&el.matches?.('[onclick*="setLanguage"],[onclick*="changeLanguage"]')){
+  const code=(el.getAttribute('onclick')||'').match(/(?:setLanguage|changeLanguage)\s*\(\s*['"]?(en|pt|br)/i);
+  if(code)lang=code[1].toLowerCase()==='en'?'en':'pt';
+ }
+ return lang==='en'?'en':(lang==='pt'||lang==='br'?'pt':null);
+}
 document.addEventListener('click',e=>{
- const b=e.target.closest?.('[data-lang]');
- if(b){e.preventDefault();e.stopPropagation();setLanguage(b.dataset.lang)}
+ const el=e.target?.closest?.('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn,[onclick*="setLanguage"],[onclick*="changeLanguage"],a[href*="lang=pt"],a[href*="lang=en"]');
+ if(!el)return;
+ const lang=resolveLanguageControl(el);
+ if(!lang)return;
+ e.preventDefault();
+ e.stopImmediatePropagation();
+ setLanguage(lang);
+},true);
+document.addEventListener('keydown',e=>{
+ if(e.key!=='Enter'&&e.key!==' ')return;
+ const el=e.target?.closest?.('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn');
+ if(!el)return;
+ const lang=resolveLanguageControl(el);
+ if(!lang)return;
+ e.preventDefault();
+ e.stopImmediatePropagation();
+ setLanguage(lang);
 },true);
 function enforceHeaderControlsLayout(){
  const id='yunarunes-header-controls-stable-v3';
