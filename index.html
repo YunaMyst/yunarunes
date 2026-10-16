@@ -222,4 +222,4 @@ async function load(){const w=words();list.hidden=false;list.innerHTML='<div cla
 view.addEventListener('click',async()=>{showing=!showing;view.textContent=showing?(en()?'HIDE FEEDBACK':'OCULTAR FEEDBACKS'):words().view;list.hidden=!showing;if(showing)await load()});
 form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),message=$('yr-feedback-message').value.trim(),name=$('yr-feedback-name').value.trim()||w.player;if(!rating||!message){status.textContent=w.required;return}submit.disabled=true;submit.textContent=w.sending;status.textContent='';try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,rating,message:'[YunaRunes] '+message})});if(!r.ok)throw Error('HTTP '+r.status);form.reset();setRating(0);status.textContent=w.sent;if(showing)await load()}catch(e){status.textContent=w.sendError}finally{submit.disabled=false;submit.textContent=words().send}});
 })();
-</script><script src="language.js?v=20261016-language-inplace-v23"></script></body></html>
+</script><script src="language.js?v=20261016-language-inplace-v24"></script></body></html>
