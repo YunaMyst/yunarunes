@@ -93,7 +93,7 @@ function translate(root=document.body){
  const raw=n.nodeValue.trim();if(!raw)continue;
  // Preserve the official game title while translating the rest of the sentence.
  const GAME='Summoners War';
- let source=raw.replace(/Invocadores\s*War/gi,GAME);
+ let source=raw.replace(/Invocador(?:es)?\s*War/gi,GAME);
  const hasGame=/Summoners\s+War/i.test(source);
  if(hasGame)source=source.replace(/Summoners\s+War/gi,'__YUNA_OFFICIAL_GAME_NAME__');
  let out=map[source];if(!out){out=source;for(const [a,b] of Object.entries(map).sort((x,y)=>y[0].length-x[0].length))if(a.length>2&&out.includes(a))out=out.split(a).join(b)}
@@ -103,7 +103,7 @@ function translate(root=document.body){
 }
 function protectName(root=document){
  const scope=root&&root.querySelectorAll?root:document;
- const fixNode=n=>{if(n&&n.nodeType===3&&/invocadores\\s*war/i.test(n.nodeValue||''))n.nodeValue=n.nodeValue.replace(/invocadores\\s*war/gi,'Summoners War')};
+ const fixNode=n=>{if(n&&n.nodeType===3&&/invocador(?:es)?\s*war/i.test(n.nodeValue||''))n.nodeValue=n.nodeValue.replace(/invocador(?:es)?\s*war/gi,'Summoners War')};
  const walker=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT);
  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);nodes.forEach(fixNode);
  if(scope.nodeType===1)for(const n of [...scope.childNodes])fixNode(n);
@@ -114,7 +114,7 @@ function boot(){
   if(r.type==='characterData')protectName(r.target.parentElement||document);
   if(r.type==='childList')r.addedNodes.forEach(n=>{if(n.nodeType===1){translate(n);protectName(n)}else if(n.nodeType===3&&n.parentElement){translate(n.parentElement);protectName(n.parentElement)}});
  }));
- observer.observe(document.body,{childList:true,subtree:true,characterData:true});
+ observer.observe(document.body,{childList:true,subtree:true,characterData:false});
  window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){translate();protectName()}});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
@@ -215,7 +215,7 @@ function apply(){
 document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(apply,0)},true);
 window.addEventListener('yunarunes-language-applied',function(){setTimeout(apply,0)});
 document.addEventListener('DOMContentLoaded',apply);
-new MutationObserver(function(ms){if(ms.some(function(m){return m.type==='characterData'||m.addedNodes.length}))setTimeout(apply,0)}).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+new MutationObserver(function(ms){if(ms.some(function(m){return m.type==='characterData'||m.addedNodes.length}))setTimeout(apply,0)}).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
 setTimeout(apply,0);setTimeout(apply,300);setTimeout(apply,1000);
 })();
 
@@ -247,7 +247,7 @@ function schedule(){if(scheduled)return;scheduled=true;setTimeout(function(){sch
 window.addEventListener('yunarunes-language-applied',schedule);
 document.addEventListener('click',schedule,true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
-new MutationObserver(schedule).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+new MutationObserver(schedule).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
 })();
 
 
