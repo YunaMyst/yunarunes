@@ -258,19 +258,24 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
   if (!/YunaRunesApp\/1\.2/i.test(navigator.userAgent)) return;
   function lowerAppButtons(){
     var top=document.querySelector('header.top');
-    if(!top) return;
+    var nav=top && top.querySelector(':scope > .nav');
+    if(!top || !nav) return;
+    /* Reserve real space above the controls instead of relying on a visual transform. */
+    nav.style.setProperty('min-height','88px','important');
+    nav.style.setProperty('padding-top','30px','important');
+    nav.style.setProperty('padding-bottom','8px','important');
     var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
     var controls=top.querySelector('.header-controls');
     [menu,controls].forEach(function(el){
       if(!el) return;
-      if(el.style.getPropertyValue('transform')!=='translateY(48px)' || el.style.getPropertyPriority('transform')!=='important'){
-        el.style.setProperty('transform','translateY(48px)','important');
+      if(el.style.getPropertyValue('transform')!=='none' || el.style.getPropertyPriority('transform')!=='important'){
+        el.style.setProperty('transform','none','important');
       }
     });
   }
   lowerAppButtons();
   var observer=new MutationObserver(lowerAppButtons);
-  observer.observe(document.documentElement,{childList:true,subtree:true});
+  observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['style']});
   document.addEventListener('DOMContentLoaded',lowerAppButtons);
   window.addEventListener('pageshow',lowerAppButtons);
   setTimeout(lowerAppButtons,100);
