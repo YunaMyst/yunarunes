@@ -112,7 +112,7 @@ function boot(){
  translate();protectName();
  const observer=new MutationObserver(records=>records.forEach(r=>{
   if(r.type==='characterData')protectName(r.target.parentElement||document);
-  if(r.type==='childList')r.addedNodes.forEach(n=>{if(n.nodeType===1){translate(n);protectName(n)}else if(n.nodeType===3&&n.parentElement){translate(n.parentElement);protectName(n.parentElement)}});
+  if(r.type==='childList')r.addedNodes.forEach(n=>{if(n.nodeType===1&&!n.matches('script,style,noscript')&&!n.closest('script,style,noscript,[data-no-translate]')){translate(n);protectName(n)}});
  }));
  observer.observe(document.body,{childList:true,subtree:true,characterData:false});
  window.addEventListener('storage',e=>{if(e.key==='yunarunes-language'){translate();protectName()}});
@@ -215,7 +215,7 @@ function apply(){
 document.addEventListener('click',function(e){if(e.target.closest('[data-lang]'))setTimeout(apply,0)},true);
 window.addEventListener('yunarunes-language-applied',function(){setTimeout(apply,0)});
 document.addEventListener('DOMContentLoaded',apply);
-new MutationObserver(function(ms){if(ms.some(function(m){return m.type==='characterData'||m.addedNodes.length}))setTimeout(apply,0)}).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
+new MutationObserver(function(ms){if(ms.some(function(m){return m.type==='characterData'||Array.prototype.some.call(m.addedNodes,function(n){return n.nodeType===1&&!n.matches('script,style,noscript')&&!n.closest('script,style,noscript,[data-no-translate]')})}))setTimeout(apply,0)}).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
 setTimeout(apply,0);setTimeout(apply,300);setTimeout(apply,1000);
 })();
 
@@ -247,7 +247,7 @@ function schedule(){if(scheduled)return;scheduled=true;setTimeout(function(){sch
 window.addEventListener('yunarunes-language-applied',schedule);
 document.addEventListener('click',schedule,true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',schedule);else schedule();
-new MutationObserver(schedule).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
+new MutationObserver(function(ms){if(ms.some(function(m){return Array.prototype.some.call(m.addedNodes,function(n){return n.nodeType===1&&!n.matches('script,style,noscript')&&!n.closest('script,style,noscript,[data-no-translate]')})}))schedule()}).observe(document.documentElement,{subtree:true,childList:true,characterData:false});
 })();
 
 
