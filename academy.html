@@ -285,8 +285,29 @@ body.yunarunes-app header.top .header-controls .yuna-controls .apk-link{display:
 .academy-site-controls button:hover,.academy-site-donate:hover{border-color:#35a9e1}
 @media(max-width:520px){.academy-site-header{min-height:56px;padding:8px 10px;gap:8px}.academy-site-brand{font-size:15px}.academy-site-controls{gap:5px}.academy-site-controls button,.academy-site-donate{font-size:10px;padding:8px 6px}}
 </style>
+
+<style id="yuna-academy-header-click-fix-v1">
+/* Keep Academy's main navigation above the floating section menu so every control remains clickable. */
+html body header.academy-site-header{
+  position:sticky!important;top:0!important;z-index:2147483000!important;
+  display:flex!important;visibility:visible!important;opacity:1!important;
+  pointer-events:auto!important;isolation:isolate!important;
+}
+html body header.academy-site-header .academy-site-brand,
+html body header.academy-site-header .academy-site-controls,
+html body header.academy-site-header .academy-site-controls a,
+html body header.academy-site-header .academy-site-controls button{
+  position:relative!important;z-index:2147483001!important;
+  visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+html body header.academy-site-header .academy-site-brand{cursor:pointer!important}
+html body header.academy-site-header .academy-site-controls button{cursor:pointer!important}
+html body .academy-global-nav{z-index:2147482000!important}
+html body .academy-nav-toggle{z-index:2147482500!important;pointer-events:auto!important;touch-action:manipulation!important}
+</style>
 </head>
-<body><header class="academy-site-header" aria-label="YunaRunes"><a class="academy-site-brand" href="index.html">YunaRunes</a><div class="academy-site-controls"><a class="academy-site-donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></header><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
+<body><header class="academy-site-header" aria-label="YunaRunes"><a class="academy-site-brand" href="/index.html" aria-label="Voltar ao menu principal do YunaRunes">YunaRunes</a><div class="academy-site-controls"><a class="academy-site-donate" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></header><main class="wrap"><button class="academy-nav-toggle" id="academy-nav-toggle" type="button" aria-expanded="false" aria-controls="academy-global-nav" aria-label="Abrir navegação da Yuna Academy" title="Abrir navegação da Yuna Academy">☰</button>
 <nav class="academy-global-nav" id="academy-global-nav" aria-label="Navegação da Yuna Academy">
 <h3>🦊 Yuna Academy</h3>
 <div class="nav-group" data-pt="Início" data-en="Home">Início</div>
