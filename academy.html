@@ -2788,11 +2788,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   while(walker.nextNode()){
    var node=walker.currentNode,parent=node.parentElement;
    if(!parent||parent.closest('script,style,textarea,input,code,noscript,[translate="no"],.notranslate,[data-no-translate]'))continue;
-   if(/Summoners War|Invocadores War/i.test(node.nodeValue||''))nodes.push(node);
+   if(/Summoners War|Invocador(?:es)? War/i.test(node.nodeValue||''))nodes.push(node);
   }
   nodes.forEach(function(node){
-   var raw=node.nodeValue||'';
-   raw=raw.replace(/Invocadores War/gi,'Summoners War');
+   var raw=(node.nodeValue||'').replace(/Invocador(?:es)? War/gi,'Summoners War');
    if(!/Summoners War/i.test(raw)){node.nodeValue=raw;return}
    var fragment=document.createDocumentFragment(),last=0,match,re=/Summoners War/gi;
    while((match=re.exec(raw))){
@@ -2806,7 +2805,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  function run(){protect(document.body)}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
  window.addEventListener('yunarunes-language-applied',run);
- if(document.body)new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1)protect(node);else if(node.nodeType===3&&/Summoners War|Invocadores War/i.test(node.nodeValue||''))protect(node.parentElement)})})}).observe(document.body,{childList:true,subtree:true});
+ if(document.body)new MutationObserver(function(records){records.forEach(function(record){record.addedNodes.forEach(function(node){if(node.nodeType===1)protect(node);else if(node.nodeType===3&&/Summoners War|Invocador(?:es)? War/i.test(node.nodeValue||''))protect(node.parentElement)})})}).observe(document.body,{childList:true,subtree:true,characterData:true});
 })();
 </script>
 </body></html>
