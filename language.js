@@ -1793,7 +1793,7 @@ Object.assign(REV,{"Quem ganha esta battle?":"Quem ganha esta batalha?","Monta u
 Object.assign(PAIRS,{"Importar decks JSON":"Import JSON decks","Exportar JSON":"Export JSON","Apagar todos":"Delete all","Nome do deck":"Deck name","Conteúdo":"Content","Notas":"Notes","Guardar deck":"Save deck","Os meus decks":"My decks","Deck guardado.":"Deck saved.","Todos os decks apagados.":"All decks deleted.","Ainda não tens decks guardados.":"No decks saved yet.","Copiar":"Copy","Apagar":"Delete","Ex.: Siege — Galleon/Lushen":"E.g. Siege — Galleon/Lushen","Speed tune, alvo, condição...":"Speed tune, target, conditions..."});
 Object.assign(REV,{"Import JSON decks":"Importar decks JSON","Export JSON":"Exportar JSON","Delete all":"Apagar todos","Deck name":"Nome do deck","Content":"Conteúdo","Notes":"Notas","Save deck":"Guardar deck","My decks":"Os meus decks","Deck saved.":"Deck guardado.","All decks deleted.":"Todos os decks apagados.","No decks saved yet.":"Ainda não tens decks guardados.","Copy":"Copiar","Delete":"Apagar","E.g. Siege — Galleon/Lushen":"Ex.: Siege — Galleon/Lushen","Speed tune, target, conditions...":"Speed tune, alvo, condição..."});
 
-function getLang(){try{if(localStorage.getItem(K)==='en')return'en'}catch(_){} try{if(document.cookie.split(';').some(x=>x.trim()==='yunarunes-language=en'))return'en'}catch(_){} return'pt'}
+function getLang(){try{const q=new URLSearchParams(window.location.search).get('lang');if(q==='en')return'en';if(q==='pt'||q==='br')return'pt'}catch(_){} try{if(localStorage.getItem(K)==='en')return'en';if(localStorage.getItem(K)==='pt')return'pt'}catch(_){} try{const m=document.cookie.split(';').map(x=>x.trim());if(m.includes('yunarunes-language=en'))return'en';if(m.includes('yunarunes-language=pt'))return'pt'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
 function tr(s){if(!s)return s;const map=en()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(map,s)?map[s]:s}
 function save(lang){try{localStorage.setItem(K,lang);document.cookie='yunarunes-language='+lang+'; path=/; max-age=31536000; SameSite=Lax'}catch(_){} }
@@ -2164,11 +2164,11 @@ function apply(root=document.body){
 
 function setLanguage(lang){
  const next=lang==='en'?'en':'pt';
- // Save the selected language even when it matches the current value.
- // Reload so every page component reads the same language on startup.
  save(next);
  document.documentElement.lang=next==='en'?'en':'pt-BR';
- window.location.reload();
+ // Keep the selection in the URL too, so it survives blocked storage and page navigation.
+ try{const u=new URL(window.location.href);u.searchParams.set('lang',next);window.location.replace(u.href);}
+ catch(_){window.location.reload();}
 }
 function bind(){
  convertLanguageButtonsToLinks();
