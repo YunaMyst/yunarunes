@@ -33,7 +33,7 @@ jobs:
                   p.write_text(s, encoding='utf-8')
                   continue
               # Other site pages use the shared language engine.
-              script = '<script src="language.js?v=20261016-brand-v32"></script>'
+              script = '<script src="language.js?v=20261016-brand-v33"></script>'
               if 'language.js' not in s:
                   s = s.replace('</body>', script + '</body>')
               else:
