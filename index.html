@@ -36,6 +36,10 @@ header.top .header-controls .yuna-controls .apk-link{display:none!important}
  header.top .header-menu .nav-links{grid-area:links!important;display:none!important;width:100%!important}
  header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
 }
+
+/* APP: afastar o cabeçalho da barra de estado do Android */
+body.yunarunes-app header.top>.nav{padding-top:18px!important}
+@media(max-width:600px){body.yunarunes-app header.top>.nav{padding-top:18px!important}}
 </style>
 <style id="yunarunes-brand-visibility-fix">
 html body header.top .nav .header-brand a.brand,
