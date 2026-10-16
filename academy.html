@@ -2803,6 +2803,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',protect);else protect();
  window.addEventListener('yunarunes-language-applied',protect);
+  if(document.body&&window.MutationObserver){var observer=new MutationObserver(function(){protect()});observer.observe(document.body,{childList:true,subtree:true,characterData:true});}
 })();
 </script>
 </body></html>
