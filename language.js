@@ -2496,22 +2496,28 @@ function installOfficialGameNameGuard(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installOfficialGameNameGuard);else installOfficialGameNameGuard();
 })();
 
-/* YunaRunes Android WebView header spacing fix */
+/* YunaRunes Android WebView header spacing fix — shared across every page */
 (function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent)) return;
+ if(!/YunaRunesApp/i.test(navigator.userAgent)) return;
  function adjustAndroidHeader(){
   var top=document.querySelector('header.top');
-  if(!top) return;
+  var nav=top && top.querySelector(':scope > .nav');
+  if(!top || !nav) return;
+  /* Reserve real vertical space and override the old native transforms. */
+  nav.style.setProperty('height','auto','important');
+  nav.style.setProperty('min-height','92px','important');
+  nav.style.setProperty('padding','30px 8px 8px','important');
+  nav.style.setProperty('box-sizing','border-box','important');
   var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
   var controls=top.querySelector('.header-controls');
-  if(menu) menu.style.setProperty('transform','translateY(30px)','important');
-  if(controls) controls.style.setProperty('transform','translateY(30px)','important');
+  if(menu) menu.style.setProperty('transform','none','important');
+  if(controls) controls.style.setProperty('transform','none','important');
  }
- adjustAndroidHeader();
- var attempts=0;
- var timer=setInterval(function(){
+ function run(){
   adjustAndroidHeader();
-  attempts++;
-  if(attempts>=30) clearInterval(timer);
- },200);
+  [100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(adjustAndroidHeader,ms);});
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+ else run();
+ window.addEventListener('pageshow',run);
 })();
