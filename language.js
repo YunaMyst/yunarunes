@@ -1,7 +1,7 @@
 (()=>{
 'use strict';
 const K='yunarunes-language';
-const NAV=[['index.html','🏠 Início','🏠 Home'],['database.html','👹 Database','👹 Database'],['team-builder.html','⚔️ Team Builder','⚔️ Team Builder'],['runes.html','🧿 Runas','🧿 Runes'],['optimizer.html','⚙️ Optimizer','⚙️ Optimizer'],['artifact-optimizer.html','💠 Artifacts','💠 Artifacts'],['decks.html','🃏 Decks','🃏 Decks'],['account-analyzer.html','📊 Análise de Conta','📊 Account Analyzer'],['guild-tools.html','⚔️ Guild','⚔️ Guild']];
+const NAV=[['index.html','🏠 Início','🏠 Home'],['database.html','👹 Banco de dados','👹 Database'],['team-builder.html','⚔️ Equipe Builder','⚔️ Team Builder'],['runes.html','🧿 Runas','🧿 Runes'],['optimizer.html','⚙️ Otimizar','⚙️ Optimizer'],['artifact-optimizer.html','💠 Artefatos','💠 Artifacts'],['decks.html','🃏 Decks','🃏 Decks'],['account-analyzer.html','📊 Análise da conta','📊 Account Analyzer'],['guild-tools.html','⚔️ Guilda','⚔️ Guild']];
 const PAIRS={
 'IMUNIDADE':'IMMUNITY','Imunidade':'Immunity','imunidade':'immunity','Início':'Home','Runas':'Runes','Análise de Conta':'Account Analyzer','Pesquisar':'Search','Carregando a base de monstros...':'Loading monster database...','O seu hub de':'Your hub for','mobs, runas':'monsters, runes','e equipes.':'and teams.','ACESSO RÁPIDO':'QUICK ACCESS','Escolhe a categoria de monstros':'Choose a monster category','Monstros de 2 estrelas':'2-star monsters','Monstros de 3 estrelas':'3-star monsters','Monstros de 4 estrelas':'4-star monsters','Monstros de 5 estrelas':'5-star monsters','Ver monstros →':'View monsters →','Abrir →':'Open →','⭐ Nat 5 em destaque':'⭐ Featured Nat 5','Abrir Nat 5 →':'Open Nat 5 →','🔥 YunaRunes — Atividades':'🔥 YunaRunes — Activities','Conteúdo para voltar todos os dias.':'Content to come back to every day.','Rune do Dia':'Rune of the Day','Uma runa em destaque para analisar, comparar e melhorar.':'A featured rune to analyze, compare, and improve.','Abrir Runas →':'Open Runes →','Monstro da Semana':'Monster of the Week','Descobre um monstro, parceiros e ideias de build.':'Discover a monster, teammates, and build ideas.','Explorar Database →':'Explore Database →','Desafio YunaRunes':'YunaRunes Challenge','Um objetivo semanal para testar as tuas builds.':'A weekly goal to test your builds.','Criar uma build →':'Create a build →','📊 Histórico local':'📊 Local history','💎 Score de runa':'💎 Rune score','Projeto independente da comunidade Summoners War':'Independent Summoners War community project','Não afiliado à Com2uS.':'Not affiliated with Com2uS.','NOVOS PLAYERS':'NEW PLAYERS','Yuna Academy — Aprender Summoners War':'Yuna Academy — Learn Summoners War','Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.':'Learn the basics: elements, PROC, STUN, runes, stats, monster roles, and much more.','Começar a aprender →':'Start learning →','A carregar os monstros...':'Loading monsters...','Nenhum monstro encontrado.':'No monster found.','Função':'Role','Elemento':'Element','Família':'Family','Despertar':'Awakening','Stats base':'Base stats','Skills':'Skills','Runas recomendadas':'Recommended runes','Guardar build':'Save build','Limpar':'Clear','Voltar à Base de Monstros':'Back to Monster Database','Pesquisa um monstro para começar.':'Search for a monster to get started.','Erro ao carregar a base de monstros.':'Error loading the monster database.','Instalar / Baixar APK':'Install / Download APK',
 'Pesquisar monstros, filtra por elemento e estrelas e abre a ficha individual para ver mais informações.':'Search monsters, filter by element and stars, and open an individual profile for more information.',
@@ -2130,6 +2130,47 @@ function apply(root=document.body){
    const right=raw.match(/\s*$/)?.[0]||'';
    node.nodeValue=left+translated+right;
   }
+ }
+ // Normalize Portuguese text to Brazilian Portuguese after the regular PT/EN translation.
+ // This runs on each page and on dynamically inserted content, so shared navigation and tools stay consistent.
+ if(!en()){
+  const brRules=[
+   [/\\bDatabase\\b/g,'Banco de dados'],
+   [/\\bEquipa(s)?\\b/g,(_,p)=>p?'Equipes':'Equipe'],
+   [/\\bequipa(s)?\\b/g,(_,p)=>p?'equipes':'equipe'],
+   [/\\btelemóvel(is)?\\b/gi,(_,p)=>p?'celulares':'celular'],
+   [/\\bficheiro(s)?\\b/gi,(_,p)=>p?'arquivos':'arquivo'],
+   [/\\becrã(s)?\\b/gi,(_,p)=>p?'telas':'tela'],
+   [/\\butilizador(es)?\\b/gi,(_,p)=>p?'usuários':'usuário'],
+   [/\\bdefinições\\b/gi,'configurações'],
+   [/\\bA carregar\\b/gi,'Carregando'],
+   [/\\ba carregar\\b/g,'carregando'],
+   [/\\bEscolhe\\b/g,'Escolha'],
+   [/\\bescolhe\\b/g,'escolha'],
+   [/\\bDescobre\\b/g,'Descubra'],
+   [/\\bdescobre\\b/g,'descubra'],
+   [/\\bAprende\\b/g,'Aprenda'],
+   [/\\baprende\\b/g,'aprenda'],
+   [/\\bConclua\\b/g,'Conclua'],
+   [/\\bteu\\b/gi,'seu'],
+   [/\\btua\\b/gi,'sua'],
+   [/\\bteus\\b/gi,'seus'],
+   [/\\btuas\\b/gi,'suas'],
+   [/\\bGuardar build\\b/g,'Salvar build'],
+   [/\\bGuardar equipa\\b/g,'Salvar equipe'],
+   [/\\bGuardar deck\\b/g,'Salvar deck'],
+   [/\\bGuardar alterações\\b/g,'Salvar alterações'],
+   [/\\bGuarda as tuas\\b/g,'Salve suas'],
+   [/\\bOtimizarr\\b/g,'Otimizar']
+  ];
+  const walkerBR=(root.ownerDocument||document).createTreeWalker(root,NodeFilter.SHOW_TEXT,{
+   acceptNode(node){const p=node.parentElement;if(!p||p.closest('script,style,noscript,textarea,code,pre,[contenteditable="true"],[data-no-translate]'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}
+  });
+  const brNodes=[];while(walkerBR.nextNode())brNodes.push(walkerBR.currentNode);
+  for(const n of brNodes){let v=n.nodeValue;for(const [re,to] of brRules)v=v.replace(re,to);if(v!==n.nodeValue)n.nodeValue=v;}
+  if(root.querySelectorAll)root.querySelectorAll('input,textarea,button,select,[title],[aria-label]').forEach(el=>{
+   for(const attr of ['placeholder','title','aria-label']){let v=el.getAttribute(attr);if(!v)continue;for(const [re,to] of brRules)v=v.replace(re,to);if(v!==el.getAttribute(attr))el.setAttribute(attr,v);}
+  });
  }
  // Final safety pass: the official game name must never be localized, regardless of language or page.
  protectOfficialGameName(root);
