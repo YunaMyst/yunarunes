@@ -2044,6 +2044,10 @@ function updateHeader(){
  }
  h.querySelectorAll('[data-lang]').forEach(b=>{b.classList.toggle('active',b.dataset.lang===(en()?'en':'pt'));b.setAttribute('aria-pressed',String(b.dataset.lang===(en()?'en':'pt')))})
 }
+// Complete the reverse dictionary after every Portuguese/English pair has been registered.
+for (const [ptValue, enValue] of Object.entries(PAIRS)) {
+ if (typeof enValue === 'string' && enValue !== ptValue && !Object.prototype.hasOwnProperty.call(REV, enValue)) REV[enValue] = ptValue;
+}
 const translationCache={};
 function getTranslationTools(){
  const language=en()?'en':'pt';
@@ -2291,7 +2295,7 @@ function stabilizeHeader(){
 function consolidatePrimaryMenuControls(){
  const header=document.querySelector('header.top');
  if(!header)return;
- const menu=header.querySelector('.header-menu .nav-links')||header.querySelector('.nav-links');
+ const menu=header.querySelector('.header-controls .yuna-controls')||header.querySelector('.header-controls')||header.querySelector('.header-menu .nav-links')||header.querySelector('.nav-links');
  if(!menu)return;
  menu.classList.add('yuna-primary-menu');
  const mobile=/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)&&!/YunaRunesApp/i.test(navigator.userAgent);
@@ -2320,18 +2324,18 @@ function consolidatePrimaryMenuControls(){
  if(!feedback){feedback=document.createElement('a');feedback.href='/index.html#yr-feedback-open';feedback.textContent='💬 Feedback';feedback.setAttribute('aria-label','Send feedback')}
  feedback.classList.add('menu-utility','menu-feedback');if(feedback.parentElement!==menu)menu.appendChild(feedback);
  feedbackItems.forEach(el=>{if(el!==feedback)el.remove()});
- header.querySelectorAll('.header-controls,.yuna-controls').forEach(el=>{if(!el.querySelector('a:not(.menu-utility),button:not(.menu-utility),[data-lang]'))el.style.setProperty('display','none','important')});
+ header.querySelectorAll('.header-controls,.yuna-controls').forEach(el=>{el.style.setProperty('display','flex','important');el.style.setProperty('visibility','visible','important');el.style.setProperty('pointer-events','auto','important')});
  let style=document.getElementById('yuna-primary-menu-utilities');
  if(!style){style=document.createElement('style');style.id='yuna-primary-menu-utilities';document.head.appendChild(style)}
  style.textContent=`
-  html body header.top .header-controls,html body header.top .yuna-controls{display:none!important}
+  html body header.top .header-controls,html body header.top .yuna-controls{display:flex!important;visibility:visible!important;pointer-events:auto!important}
   html body header.top .yuna-primary-menu .menu-utility{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-height:36px!important;height:36px!important;margin:0!important;padding:0 10px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;cursor:pointer!important}
   html body header.top .yuna-primary-menu .donate-link{background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;border-color:#a78bfa!important;color:#fff!important}
   html body header.top .yuna-primary-menu .menu-language.active,html body header.top .yuna-primary-menu .menu-language[aria-pressed="true"]{background:#35a9e1!important;border-color:#35a9e1!important;color:#061018!important}
   html body header.top .yuna-primary-menu .menu-feedback{background:linear-gradient(180deg,#f4ce73,#c38a2c)!important;border-color:#be66ff!important;color:#251400!important}
   html body .apk-link,html body .mobile-download,html body [data-download="apk"]{display:none!important}
   html body header.top .yuna-primary-menu .apk-link{display:none!important}
-  @media(max-width:600px){html body header.top .yuna-primary-menu .menu-utility{width:100%!important;min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere!important}html body header.top .yuna-primary-menu .apk-link{display:inline-flex!important}}
+  @media(max-width:600px){html body header.top .header-controls .yuna-controls{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;gap:6px!important}html body header.top .yuna-primary-menu .menu-utility{width:auto!important;min-width:0!important;max-width:none!important;white-space:nowrap!important;overflow-wrap:normal!important}html body header.top .yuna-primary-menu .apk-link{display:inline-flex!important}}
   body.yunarunes-app header.top .yuna-primary-menu .apk-link{display:none!important}
  `;
 }
