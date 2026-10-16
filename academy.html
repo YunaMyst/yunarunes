@@ -2782,8 +2782,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <script id="yuna-academy-protect-summoners-war">
 (function(){
  'use strict';
- var wrong=/Invocador(?:es)?\\s+War/gi;
- var title=/Summoners\\s+War/gi;
+ var wrong=/Invocador(?:es)?\s+War/gi;
+ var title=/Summoners\s+War/gi;
  function normalizeText(node){
   if(!node||node.nodeType!==3)return;
   var value=node.nodeValue||'';
@@ -2807,7 +2807,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    var raw=node.nodeValue||'';
    if(!title.test(raw)){title.lastIndex=0;return;}
    title.lastIndex=0;
-   var fragment=document.createDocumentFragment(),last=0,match,re=/Summoners\\s+War/gi;
+   var fragment=document.createDocumentFragment(),last=0,match,re=/Summoners\s+War/gi;
    while((match=re.exec(raw))){
     if(match.index>last)fragment.appendChild(document.createTextNode(raw.slice(last,match.index)));
     var span=document.createElement('span');
@@ -2831,7 +2831,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     if(target&&wrong.test(target.nodeValue||'')){wrong.lastIndex=0;normalizeText(target);return}
     wrong.lastIndex=0;
     if(target&&target.parentElement&&target.parentElement.closest('span[translate="no"],span.notranslate'))normalizeText(target);
-    else if(target&&/Summoners\\s+War/i.test(target.nodeValue||'')){protect(target.parentElement)}
+    else if(target&&/Summoners\s+War/i.test(target.nodeValue||'')){protect(target.parentElement)}
     return;
    }
    record.addedNodes.forEach(function(node){if(node.nodeType===1||node.nodeType===3)protect(node)});
