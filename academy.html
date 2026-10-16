@@ -2782,61 +2782,27 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <script id="yuna-academy-protect-summoners-war">
 (function(){
  'use strict';
- var wrong=/Invocador(?:es)?\s+War/gi;
- var title=/Summoners\s+War/gi;
- function normalizeText(node){
-  if(!node||node.nodeType!==3)return;
-  var value=node.nodeValue||'';
-  if(wrong.test(value)){wrong.lastIndex=0;node.nodeValue=value.replace(wrong,'Summoners War');}
-  wrong.lastIndex=0;
- }
- function protect(root){
-  if(!root)return;
-  if(root.nodeType===3){normalizeText(root);return;}
-  if(root.nodeType!==1&&root.nodeType!==9&&root.nodeType!==11)return;
-  var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[];
+ function protect(){
+  var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];
   while(walker.nextNode()){
    var node=walker.currentNode,parent=node.parentElement;
-   if(!parent||parent.closest('script,style,textarea,input,code,noscript,[data-no-translate]'))continue;
-   nodes.push(node);
+   if(!parent||parent.closest('script,style,textarea,input,code,noscript,[data-no-translate],span[translate="no"],span.notranslate'))continue;
+   if(/Summoners\s+War|Invocador(?:es)?\s+War/i.test(node.nodeValue||''))nodes.push(node);
   }
   nodes.forEach(function(node){
-   normalizeText(node);
-   var parent=node.parentElement;
-   if(!parent||parent.closest('span[translate="no"],span.notranslate'))return;
-   var raw=node.nodeValue||'';
-   if(!title.test(raw)){title.lastIndex=0;return;}
-   title.lastIndex=0;
+   var raw=(node.nodeValue||'').replace(/Invocador(?:es)?\s+War/gi,'Summoners War');
+   if(!/Summoners\s+War/i.test(raw)){node.nodeValue=raw;return}
    var fragment=document.createDocumentFragment(),last=0,match,re=/Summoners\s+War/gi;
    while((match=re.exec(raw))){
     if(match.index>last)fragment.appendChild(document.createTextNode(raw.slice(last,match.index)));
-    var span=document.createElement('span');
-    span.className='notranslate';
-    span.setAttribute('translate','no');
-    span.textContent='Summoners War';
-    fragment.appendChild(span);
-    last=match.index+match[0].length;
+    var span=document.createElement('span');span.className='notranslate';span.setAttribute('translate','no');span.textContent='Summoners War';fragment.appendChild(span);last=match.index+match[0].length;
    }
    if(last<raw.length)fragment.appendChild(document.createTextNode(raw.slice(last)));
    if(node.parentNode)node.parentNode.replaceChild(fragment,node);
   });
  }
- function run(){protect(document.body)}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
- window.addEventListener('yunarunes-language-applied',run);
- if(document.body)new MutationObserver(function(records){
-  records.forEach(function(record){
-   if(record.type==='characterData'){
-    var target=record.target;
-    if(target&&wrong.test(target.nodeValue||'')){wrong.lastIndex=0;normalizeText(target);return}
-    wrong.lastIndex=0;
-    if(target&&target.parentElement&&target.parentElement.closest('span[translate="no"],span.notranslate'))normalizeText(target);
-    else if(target&&/Summoners\s+War/i.test(target.nodeValue||'')){protect(target.parentElement)}
-    return;
-   }
-   record.addedNodes.forEach(function(node){if(node.nodeType===1||node.nodeType===3)protect(node)});
-  });
- }).observe(document.body,{childList:true,subtree:true,characterData:true});
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',protect);else protect();
+ window.addEventListener('yunarunes-language-applied',protect);
 })();
 </script>
 </body></html>
