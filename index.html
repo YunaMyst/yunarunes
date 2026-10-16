@@ -261,13 +261,21 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
     if(!top) return;
     var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
     var controls=top.querySelector('.header-controls');
-    if(menu) menu.style.setProperty('transform','translateY(24px)','important');
-    if(controls) controls.style.setProperty('transform','translateY(24px)','important');
+    [menu,controls].forEach(function(el){
+      if(!el) return;
+      if(el.style.getPropertyValue('transform')!=='translateY(28px)' || el.style.getPropertyPriority('transform')!=='important'){
+        el.style.setProperty('transform','translateY(28px)','important');
+      }
+    });
   }
   lowerAppButtons();
-  setTimeout(lowerAppButtons,250);
-  setTimeout(lowerAppButtons,800);
-  setTimeout(lowerAppButtons,1600);
+  var observer=new MutationObserver(lowerAppButtons);
+  observer.observe(document.documentElement,{childList:true,subtree:true});
+  document.addEventListener('DOMContentLoaded',lowerAppButtons);
+  window.addEventListener('pageshow',lowerAppButtons);
+  setTimeout(lowerAppButtons,100);
+  setTimeout(lowerAppButtons,500);
+  setTimeout(lowerAppButtons,1500);
 })();
 </script>
 <script src="language.js?v=20261016-brand-v33"></script></body></html>
