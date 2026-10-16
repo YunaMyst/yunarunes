@@ -2384,15 +2384,21 @@ function consolidatePrimaryMenuControls(){
  `;
 }
 function ensureYunaRunesBrand(){
-  const header=document.querySelector('header');
-  if(!header)return;
+  if(!document.body)return;
+  let header=document.querySelector('header');
+  if(!header){
+   header=document.createElement('header');header.className='top';
+   header.style.cssText='display:flex!important;align-items:center!important;justify-content:flex-start!important;box-sizing:border-box!important;width:100%!important;min-height:54px!important;padding:8px 14px!important;background:rgba(7,11,17,.98)!important;border-bottom:1px solid #202b38!important;position:relative!important;z-index:99999!important';
+   document.body.insertBefore(header,document.body.firstChild);
+  }
   const candidates=Array.from(header.querySelectorAll('a[href]'));
-  const brand=candidates.find(a=>/index\.html(?:[?#].*)?$/i.test(a.getAttribute('href')||'')&&(/yunarunes/i.test(a.textContent||'')||/yunarunes/i.test(a.getAttribute('aria-label')||'')));
-  if(!brand)return;
+  let brand=candidates.find(a=>/index\\.html(?:[?#].*)?$/i.test(a.getAttribute('href')||'')&&(/yunarunes/i.test(a.textContent||'')||/yunarunes/i.test(a.getAttribute('aria-label')||'')));
+  if(!brand){
+   brand=document.createElement('a');brand.href='/index.html';brand.textContent='YunaRunes';brand.setAttribute('aria-label','YunaRunes');
+   header.insertBefore(brand,header.firstChild);
+  }
   const iconUrl='https://raw.githubusercontent.com/YunaMyst/yunarunes/main/android/app/src/main/res/drawable/yunarunes_icon_image.webp';
-  brand.href='/index.html';
-  brand.setAttribute('aria-label','YunaRunes');
-  brand.classList.add('yunarunes-home');
+  brand.href='/index.html';brand.setAttribute('aria-label','YunaRunes');brand.classList.add('yunarunes-home');
   for(const [k,v] of Object.entries({display:'inline-flex',alignItems:'center',justifyContent:'center',gap:'8px',boxSizing:'border-box',color:'#fff',textDecoration:'none',fontWeight:'900',whiteSpace:'nowrap',flex:'0 0 auto',minHeight:'40px',padding:'5px 9px',border:'1px solid #30363d',borderRadius:'9px',background:'#111c27',fontSize:'18px'}))brand.style.setProperty(k.replace(/[A-Z]/g,m=>'-'+m.toLowerCase()),v,'important');
   const img=document.createElement('img');img.src=iconUrl;img.alt='';img.width=26;img.height=26;
   img.style.cssText='display:block!important;width:26px!important;height:26px!important;object-fit:contain!important;flex:0 0 26px!important';
