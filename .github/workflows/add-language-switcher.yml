@@ -28,7 +28,11 @@ jobs:
               s = s.replace('<script src="header-fix.js"></script>', '')
               s = re.sub(r'<script src="language-dynamic\.js(?:\?v=[^"\']+)?"></script>', '', s)
               s = re.sub(r'<script src="language\.js(?:\?v=[^"\']+)?"></script>', '', s)
-              # All site pages, including Academy and Team Builder, must use the same language engine.
+              # Team Builder has a self-contained language switcher; the global engine conflicts with its startup.
+              if p.name == 'team-builder.html':
+                  p.write_text(s, encoding='utf-8')
+                  continue
+              # Other site pages use the shared language engine.
               script = '<script src="language.js?v=20261016-language-inplace-v26"></script>'
               if 'language.js' not in s:
                   s = s.replace('</body>', script + '</body>')
