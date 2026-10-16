@@ -2331,7 +2331,9 @@ function boot(){
     if(!nested)roots.push(node);
    }
    roots.forEach(node=>apply(node));
-   if(addedElements.size)consolidatePrimaryMenuControls();
+   // Header controls are normalized during boot and on click/resize.
+   // Do not mutate the watched subtree from this observer callback: it can
+   // retrigger childList records repeatedly on pages with dynamic content.
    if(shouldStabilize)stabilizeHeader();
   });
   window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});
