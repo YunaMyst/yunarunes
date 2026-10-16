@@ -2334,7 +2334,7 @@ function boot(){
    if(addedElements.size)consolidatePrimaryMenuControls();
    if(shouldStabilize)stabilizeHeader();
   });
-  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class','style','hidden','aria-pressed']});
+  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});
  }
  document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
  window.addEventListener('resize',stabilizeHeader,{passive:true});
