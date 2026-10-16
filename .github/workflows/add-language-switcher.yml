@@ -28,10 +28,12 @@ jobs:
               s = s.replace('<script src="header-fix.js"></script>', '')
               s = re.sub(r'<script src="language-dynamic\.js(?:\?v=[^"\']+)?"></script>', '', s)
               s = re.sub(r'<script src="language\.js(?:\?v=[^"\']+)?"></script>', '', s)
-              # Academy has a very large interactive page; keep it isolated from
-              # the site-wide translation engine so its UI stays responsive.
-              if p.name not in ('academy.html', 'team-builder.html'):
-                  s = s.replace('</body>', '<script src="language.js?v=20261016-observer-loop-fix-v15"></script></body>')
+              # All site pages, including Academy and Team Builder, must use the same language engine.
+              script = '<script src="language.js?v=20261016-language-query-fix-v18"></script>'
+              if 'language.js' not in s:
+                  s = s.replace('</body>', script + '</body>')
+              else:
+                  s = re.sub(r'<script src="language\\.js(?:\\?v=[^"\\']+)?"></script>', script, s)
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
