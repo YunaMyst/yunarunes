@@ -2323,7 +2323,7 @@ function consolidatePrimaryMenuControls(){
  header.querySelectorAll('.header-controls,.yuna-controls').forEach(el=>{if(!el.querySelector('a:not(.menu-utility),button:not(.menu-utility),[data-lang]'))el.style.setProperty('display','none','important')});
  let style=document.getElementById('yuna-primary-menu-utilities');
  if(!style){style=document.createElement('style');style.id='yuna-primary-menu-utilities';document.head.appendChild(style)}
- style.textContent=\`
+ style.textContent=`
   html body header.top .header-controls,html body header.top .yuna-controls{display:none!important}
   html body header.top .yuna-primary-menu .menu-utility{display:inline-flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;min-height:36px!important;height:36px!important;margin:0!important;padding:0 10px!important;border:1px solid #34475a!important;border-radius:8px!important;background:#111c27!important;color:#f2f6fa!important;font:800 12px/1 Arial,sans-serif!important;text-decoration:none!important;white-space:nowrap!important;cursor:pointer!important}
   html body header.top .yuna-primary-menu .donate-link{background:linear-gradient(135deg,#6d28d9,#4c1d95)!important;border-color:#a78bfa!important;color:#fff!important}
@@ -2333,7 +2333,7 @@ function consolidatePrimaryMenuControls(){
   html body header.top .yuna-primary-menu .apk-link{display:none!important}
   @media(max-width:600px){html body header.top .yuna-primary-menu .menu-utility{width:100%!important;min-width:0!important;max-width:none!important;white-space:normal!important;overflow-wrap:anywhere!important}html body header.top .yuna-primary-menu .apk-link{display:inline-flex!important}}
   body.yunarunes-app header.top .yuna-primary-menu .apk-link{display:none!important}
- \`;
+ `;
 }
 function boot(){
  updateHeader();consolidatePrimaryMenuControls();bind();apply();stabilizeHeader();
