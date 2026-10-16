@@ -2052,7 +2052,7 @@ const translationCache={};
 function getTranslationTools(){
  const language=en()?'en':'pt';
  if(translationCache[language])return translationCache[language];
- const map=language==='en'?PAIRS:REV;
+ const map=language==='en'?PAIRS:Object.assign(Object.fromEntries(Object.entries(PAIRS).filter(([pt,enValue])=>typeof enValue==='string'&&pt!==enValue).map(([pt,enValue])=>[enValue,pt])),REV);
  const keys=Object.keys(map).filter(key=>key.length>=3&&key!==map[key]).sort((x,y)=>y.length-x.length);
  const escapedKeys=keys.map(key=>key.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
  const translationPattern=escapedKeys.length?new RegExp(escapedKeys.join('|'),'g'):null;
@@ -2188,8 +2188,11 @@ function bind(){
 window.addEventListener('click',e=>{
  const el=e.target&&e.target.closest?e.target.closest('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn'):null;
  if(!el)return;
- const raw=el.getAttribute('data-lang')||el.getAttribute('data-language')||'';
- const lang=raw==='en'||/en|english/i.test((el.id||'')+' '+(el.className||''))?'en':'pt';
+ const raw=(el.getAttribute('data-lang')||el.getAttribute('data-language')||'').toLowerCase();
+ // Trust the explicit language value first. Do not inspect class names like
+ // "menu-language": the word "language" contains "en" and misclassified PT as EN.
+ const hint=(el.id||'')+' '+(typeof el.className==='string'?el.className:'');
+ const lang=raw==='pt'||raw==='br'?'pt':raw==='en'?'en':(/(?:^|[\s_-])(?:en|english)(?:$|[\s_-])/i.test(hint)?'en':'pt');
  e.preventDefault();e.stopImmediatePropagation();setLanguage(lang);
 },true);
 document.addEventListener('click',e=>{enforceDonateAppearance();},true);
