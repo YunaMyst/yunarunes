@@ -147743,7 +147743,7 @@
           "ATK"
         ],
         "effects": [
-          "Unrecoverable",
+          "Unrevivable",
           "Absorb ATB"
         ],
         "upgrades": [
@@ -150334,5 +150334,728 @@
       "subStats": []
     },
     "source": "https://swarfarm.com/bestiary/36015-dark-ubel"
+  },
+  "Maris|Water|5|A1": {
+    "name": "Maris",
+    "element": "Water",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36700,
+    "com2usId": 36711,
+    "archetype": "Support",
+    "stats": {
+      "HP": 11205,
+      "ATK": 703,
+      "DEF": 692,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 11205,
+      "ATK": 703,
+      "DEF": 692,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5394,
+        "name": "Star Crash",
+        "description": "Attacks the enemy to decrease its Attack Power for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5399,
+        "name": "Splash",
+        "description": "Attacks the enemy to stun for 1 turn with an 80% chance. Afterwards, attacks a random enemy to decrease its Attack Speed for 2 turns with a 50% chance. If the random attack hits the same target as the first attack, additionally absorbs its Attack Bar by 50%.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "5.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Additional Attack",
+          "Decrease ATK SPD",
+          "Absorb ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5404,
+        "name": "Deep Inhale",
+        "description": "Attacks all enemies to steal all beneficial effects and disturb HP recovery for 2 turns. Afterwards, grants 1 of the stolen beneficial effects at random to each other ally for 2 turns.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "4.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Steal Buff",
+          "Unrecoverable",
+          "Transfer Buff"
+        ],
+        "upgrades": [
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Resistance 41% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36701-water-cosmic-worm"
+  },
+  "Volcaris|Fire|5|A1": {
+    "name": "Volcaris",
+    "element": "Fire",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36700,
+    "com2usId": 36712,
+    "archetype": "HP",
+    "stats": {
+      "HP": 12840,
+      "ATK": 626,
+      "DEF": 659,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 12840,
+      "ATK": 626,
+      "DEF": 659,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5395,
+        "name": "Star Crash",
+        "description": "Attacks the enemy to decrease its Attack Power for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5400,
+        "name": "Big Sigh",
+        "description": "Attacks all enemies 2 times. Each hit decreases their Attack Bar by 15% with an 80% chance and decreases their Defense for 2 turns with a 30% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATB",
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5405,
+        "name": "Squash",
+        "description": "Attacks all enemies to stun for 1 turn and absorb their Attack Bar. The damage is proportionate to your MAX HP. The fewer enemies there are, the greater the damage dealt and the amount of Attack Bar absorbed. In addition, increases your MAX HP by 20%, up to 100%, each time this skill is used.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "{MAX HP}*(0.17*{Alive Enemies} + 0.23)/{Alive Enemies}",
+        "scalesWith": [
+          "Alive Enemies",
+          "MAX HP"
+        ],
+        "effects": [
+          "Stun",
+          "Absorb ATB",
+          "Accumulate MAX HP"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Defense 33% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_2.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36702-fire-cosmic-worm"
+  },
+  "Auraris|Wind|5|A1": {
+    "name": "Auraris",
+    "element": "Wind",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36700,
+    "com2usId": 36713,
+    "archetype": "Support",
+    "stats": {
+      "HP": 11370,
+      "ATK": 714,
+      "DEF": 670,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 11370,
+      "ATK": 714,
+      "DEF": 670,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5396,
+        "name": "Star Crash",
+        "description": "Attacks the enemy to decrease its Attack Power for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5401,
+        "name": "Big Sigh",
+        "description": "Attacks all enemies 2 times. Each hit decreases their Attack Bar by 15% with an 80% chance and decreases their Defense for 2 turns with a 30% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATB",
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5406,
+        "name": "Wormhole Dive",
+        "description": "Attacks all enemies to increase the duration of harmful effects on them by 1 turn, increase their chance of landing a Glancing Hit for 2 turns, and grant Silence for 1 to 2 turns. The damage is proportionate to your MAX HP.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "0.33*{MAX HP}",
+        "scalesWith": [
+          "MAX HP"
+        ],
+        "effects": [
+          "Increase Debuff Duration",
+          "Increase Glancing Hit Chance",
+          "Silence"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "HP 33% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_3.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36703-wind-cosmic-worm"
+  },
+  "Luminaris|Light|5|A1": {
+    "name": "Luminaris",
+    "element": "Light",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36700,
+    "com2usId": 36714,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9720,
+      "ATK": 878,
+      "DEF": 615,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 9720,
+      "ATK": 878,
+      "DEF": 615,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5397,
+        "name": "Star Crash",
+        "description": "Attacks the enemy to decrease its Attack Power for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5402,
+        "name": "Big Sigh",
+        "description": "Attacks all enemies 2 times. Each hit decreases their Attack Bar by 15% with an 80% chance and decreases their Defense for 2 turns with a 30% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATB",
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5407,
+        "name": "Cosmic Breath",
+        "description": "Attacks all enemies to deal damage that ignores all effects that resist death. Resets the cooldown of [Cosmic Breath] if an enemy is defeated by this attack. If the enemy's Defense is lower than your Attack Power, increases the damage by up to 100% in proportion to the difference.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "5.0*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Ignores Resist Death",
+          "Reduce Cooltime",
+          "Increase Damage"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Attack Power 33% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_4.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36704-light-cosmic-worm"
+  },
+  "Noctaris|Dark|5|A1": {
+    "name": "Noctaris",
+    "element": "Dark",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36700,
+    "com2usId": 36715,
+    "archetype": "HP",
+    "stats": {
+      "HP": 12675,
+      "ATK": 604,
+      "DEF": 692,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 12675,
+      "ATK": 604,
+      "DEF": 692,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5398,
+        "name": "Star Crash",
+        "description": "Attacks the enemy to decrease its Attack Power for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5403,
+        "name": "Splash",
+        "description": "Attacks the enemy to stun for 1 turn with an 80% chance. Afterwards, attacks a random enemy to decrease its Attack Speed for 2 turns with a 50% chance. If the random attack hits the same target as the first attack, additionally absorbs its Attack Bar by 50%.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "5.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Additional Attack",
+          "Decrease ATK SPD",
+          "Absorb ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5408,
+        "name": "Splash Splash",
+        "description": "Attacks the enemy to stun for 1 turn and leave a Branding effect for 2 turns. Afterwards, attacks random enemies 2 to 3 times, each hit stunning them for 1 turn with a 50% chance and blocking them from removing harmful effects for 1 turn with a 50% chance. Decreases the cooldown of this skill by 1 turn whenever you attack a stunned enemy. The damage increases according to your MAX HP.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.0*{ATK} + 0.33*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Stun",
+          "Brand",
+          "Additional Attack",
+          "Stun",
+          "Harmful Effect Removal Blocked",
+          "Reduce Cooltime"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Critical Rate 24% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_5.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36705-dark-cosmic-worm"
   }
 }

@@ -5,7 +5,7 @@
     "language": "pt-PT",
     "generatedBy": "YunaRunes",
     "filter": "playable unique monsters; base/awakened/2A counted as one",
-    "playableMonsters": 1053,
+    "playableMonsters": 1058,
     "awakeningVariantsCollapsed": true
   },
   "monsters": [
@@ -740,6 +740,18 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0097_1_4.png",
       "detailsKey": "Audrey|Light|5|A1"
+    },
+    {
+      "id": 3112,
+      "name": "Auraris",
+      "element": "Wind",
+      "family": "36700",
+      "role": "Support",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_3.png",
+      "detailsKey": "Auraris|Wind|5|A1"
     },
     {
       "id": 2185,
@@ -6958,6 +6970,18 @@
       "detailsKey": "Lumina|Water|4|A1"
     },
     {
+      "id": 3113,
+      "name": "Luminaris",
+      "element": "Light",
+      "family": "36700",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_4.png",
+      "detailsKey": "Luminaris|Light|5|A1"
+    },
+    {
       "id": 619,
       "name": "Lumirecia",
       "element": "Water",
@@ -7352,6 +7376,18 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0033_3_1.png",
       "detailsKey": "Marble|Light|3|A1"
+    },
+    {
+      "id": 3110,
+      "name": "Maris",
+      "element": "Water",
+      "family": "36700",
+      "role": "Support",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_1.png",
+      "detailsKey": "Maris|Water|5|A1"
     },
     {
       "id": 1188,
@@ -8384,6 +8420,18 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0153_1_3.png",
       "detailsKey": "Nobella|Wind|4|A1"
+    },
+    {
+      "id": 3114,
+      "name": "Noctaris",
+      "element": "Dark",
+      "family": "36700",
+      "role": "HP",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_5.png",
+      "detailsKey": "Noctaris|Dark|5|A1"
     },
     {
       "id": 1877,
@@ -11864,6 +11912,18 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0043_4_2.png",
       "detailsKey": "Vivachel|Dark|5|A1"
+    },
+    {
+      "id": 3111,
+      "name": "Volcaris",
+      "element": "Fire",
+      "family": "36700",
+      "role": "HP",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0228_1_2.png",
+      "detailsKey": "Volcaris|Fire|5|A1"
     },
     {
       "id": 2630,
