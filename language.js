@@ -2535,7 +2535,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    set(button,'display','inline-flex');set(button,'position','relative');set(button,'transform','none');set(button,'flex','1 1 0');set(button,'min-width','0');set(button,'max-width','160px');
    set(button,'height','40px');set(button,'min-height','40px');set(button,'margin','0');set(button,'padding','0 4px');set(button,'font-size','11px');set(button,'white-space','nowrap');set(button,'align-items','center');set(button,'justify-content','center');
   });
-  if(links){set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');set(links,'position','static');set(links,'width','100%');set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr)');}
+  if(links){set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');set(links,'position','static');set(links,'width','100%');set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');}
  }
  function run(){adjustAndroidHeader();[100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(adjustAndroidHeader,ms);});}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
