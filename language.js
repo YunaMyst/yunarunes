@@ -2498,7 +2498,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 /* YunaRunes Android WebView header fix — remote update, no APK reinstall required */
 (function(){
- if(!/YunaRunesApp/i.test(navigator.userAgent)) return;
+ if(!/Android/i.test(navigator.userAgent)) return;
  function set(el,key,value){if(el)el.style.setProperty(key,value,'important')}
  function adjustAndroidHeader(){
   var top=document.querySelector('header.top');
