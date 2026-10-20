@@ -2496,28 +2496,49 @@ function installOfficialGameNameGuard(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installOfficialGameNameGuard);else installOfficialGameNameGuard();
 })();
 
-/* YunaRunes Android WebView header spacing fix — shared across every page */
+/* YunaRunes Android WebView header fix — remote update, no APK reinstall required */
 (function(){
  if(!/YunaRunesApp/i.test(navigator.userAgent)) return;
+ function set(el,key,value){if(el)el.style.setProperty(key,value,'important')}
  function adjustAndroidHeader(){
   var top=document.querySelector('header.top');
   var nav=top && top.querySelector(':scope > .nav');
   if(!top || !nav) return;
-  /* Reserve real vertical space and override the old native transforms. */
-  nav.style.setProperty('height','auto','important');
-  nav.style.setProperty('min-height','92px','important');
-  nav.style.setProperty('padding','30px 8px 8px','important');
-  nav.style.setProperty('box-sizing','border-box','important');
-  var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
-  var controls=top.querySelector('.header-controls');
-  if(menu) menu.style.setProperty('transform','none','important');
-  if(controls) controls.style.setProperty('transform','none','important');
+  var menu=top.querySelector(':scope > .nav > .header-menu');
+  var brand=top.querySelector(':scope > .nav > .header-brand');
+  var btn=menu && menu.querySelector('.menu-btn');
+  var links=menu && menu.querySelector('.nav-links');
+  var toggle=menu && menu.querySelector('.nav-toggle');
+  var controls=top.querySelector(':scope > .nav > .header-controls');
+  var row=controls && controls.querySelector('.yuna-controls');
+  /* Put the title/menu on row one and all four utility buttons on row two. */
+  set(top,'width','100%');set(top,'overflow','visible');set(top,'position','relative');
+  set(nav,'display','grid');
+  set(nav,'grid-template-columns','42px minmax(0,1fr) 42px');
+  set(nav,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
+  set(nav,'align-items','center');set(nav,'column-gap','8px');set(nav,'row-gap','10px');
+  set(nav,'width','100%');set(nav,'height','auto');set(nav,'min-height','0');
+  set(nav,'padding','22px 10px 12px');set(nav,'margin','0');set(nav,'box-sizing','border-box');
+  set(menu,'display','block');set(menu,'grid-area','menu');set(menu,'grid-column','1');set(menu,'grid-row','1');
+  set(menu,'position','static');set(menu,'min-width','42px');set(menu,'margin','0');set(menu,'padding','0');
+  set(brand,'display','flex');set(brand,'grid-area','brand');set(brand,'grid-column','2');set(brand,'grid-row','1');
+  set(brand,'justify-content','center');set(brand,'align-items','center');set(brand,'min-width','0');set(brand,'overflow','visible');set(brand,'margin','0');set(brand,'padding','0');
+  var brandLink=brand && brand.querySelector('.brand');
+  set(brandLink,'display','flex');set(brandLink,'justify-content','center');set(brandLink,'white-space','nowrap');set(brandLink,'margin','0');
+  set(btn,'display','flex');set(btn,'position','static');set(btn,'transform','none');set(btn,'width','38px');set(btn,'height','38px');set(btn,'min-height','38px');set(btn,'margin','0');set(btn,'padding','5px');set(btn,'align-items','center');set(btn,'justify-content','center');
+  set(controls,'display','flex');set(controls,'grid-area','controls');set(controls,'grid-column','1 / -1');set(controls,'grid-row','2');
+  set(controls,'position','static');set(controls,'width','100%');set(controls,'min-width','0');set(controls,'max-width','100%');set(controls,'height','auto');
+  set(controls,'justify-content','center');set(controls,'align-items','center');set(controls,'margin','0');set(controls,'padding','0');set(controls,'transform','none');set(controls,'overflow','visible');
+  set(row,'display','flex');set(row,'position','static');set(row,'width','100%');set(row,'min-width','0');set(row,'max-width','100%');
+  set(row,'justify-content','center');set(row,'align-items','center');set(row,'flex-wrap','nowrap');set(row,'gap','5px');set(row,'margin','0');set(row,'padding','0');
+  if(row)row.querySelectorAll('.donate-link,button[data-lang],#yr-feedback-open').forEach(function(button){
+   set(button,'display','inline-flex');set(button,'position','relative');set(button,'transform','none');set(button,'flex','1 1 0');set(button,'min-width','0');set(button,'max-width','160px');
+   set(button,'height','40px');set(button,'min-height','40px');set(button,'margin','0');set(button,'padding','0 4px');set(button,'font-size','11px');set(button,'white-space','nowrap');set(button,'align-items','center');set(button,'justify-content','center');
+  });
+  if(links){set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');set(links,'position','static');set(links,'width','100%');set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr)');}
  }
- function run(){
-  adjustAndroidHeader();
-  [100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(adjustAndroidHeader,ms);});
- }
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
- else run();
+ function run(){adjustAndroidHeader();[100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(adjustAndroidHeader,ms);});}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
  window.addEventListener('pageshow',run);
+ if(document.documentElement)new MutationObserver(function(){adjustAndroidHeader();}).observe(document.documentElement,{childList:true,subtree:true});
 })();
