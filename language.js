@@ -2515,9 +2515,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   set(nav,'position','relative');set(nav,'display','grid');
   set(nav,'grid-template-columns','42px minmax(0,1fr) 42px');
   set(nav,'grid-template-areas','"menu brand spacer" "controls controls controls"');
-  set(nav,'align-items','center');set(nav,'column-gap','8px');set(nav,'row-gap','10px');
+  set(nav,'align-items','center');set(nav,'column-gap','8px');set(nav,'row-gap','16px');
   set(nav,'width','100%');set(nav,'height','auto');set(nav,'min-height','0');
-  set(nav,'padding','22px 10px 12px');set(nav,'margin','0');set(nav,'box-sizing','border-box');
+  set(nav,'padding','18px 10px 14px');set(nav,'margin','0');set(nav,'box-sizing','border-box');
   set(menu,'display','block');set(menu,'grid-area','menu');set(menu,'grid-column','1');set(menu,'grid-row','1');
   set(menu,'position','static');set(menu,'min-width','42px');set(menu,'margin','0');set(menu,'padding','0');
   set(brand,'display','flex');set(brand,'grid-area','brand');set(brand,'grid-column','2');set(brand,'grid-row','1');
@@ -2527,7 +2527,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   set(btn,'display','flex');set(btn,'position','static');set(btn,'transform','none');set(btn,'width','38px');set(btn,'height','38px');set(btn,'min-height','38px');set(btn,'margin','0');set(btn,'padding','5px');set(btn,'align-items','center');set(btn,'justify-content','center');
   set(controls,'display','flex');set(controls,'grid-area','controls');set(controls,'grid-column','1 / -1');set(controls,'grid-row','2');
   set(controls,'position','static');set(controls,'width','100%');set(controls,'min-width','0');set(controls,'max-width','100%');set(controls,'height','auto');
-  set(controls,'justify-content','center');set(controls,'align-items','center');set(controls,'margin','0');set(controls,'padding','0');set(controls,'transform','none');set(controls,'overflow','visible');
+  set(controls,'justify-content','center');set(controls,'align-items','center');set(controls,'margin','12px 0 0');set(controls,'padding','0');set(controls,'transform','none');set(controls,'overflow','visible');
   set(row,'display','flex');set(row,'position','static');set(row,'width','100%');set(row,'min-width','0');set(row,'max-width','100%');
   set(row,'justify-content','center');set(row,'align-items','center');set(row,'flex-wrap','nowrap');set(row,'gap','5px');set(row,'margin','0');set(row,'padding','0');
   if(row)row.querySelectorAll('.donate-link,button[data-lang],#yr-feedback-open').forEach(function(button){
