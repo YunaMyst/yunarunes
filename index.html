@@ -410,6 +410,11 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
   h.querySelectorAll('.yuna-controls .donate-link,.yuna-controls button[data-lang],.yuna-controls #yr-feedback-open').forEach(function(b){set(b,'flex','1 1 0');set(b,'min-width','0');set(b,'max-width','160px');set(b,'height','40px');set(b,'padding','0 4px');set(b,'font-size','11px')});
   if(links){set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr))')}
  }
- document.addEventListener('DOMContentLoaded',fix);window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
+ document.addEventListener('DOMContentLoaded',function(){
+  fix();
+  var toggle=document.querySelector('header.top .header-menu .nav-toggle');
+  if(toggle)toggle.addEventListener('change',function(){requestAnimationFrame(fix)});
+ });
+ window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
 })();
-</script><script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+</script><script src="language.js?v=20261020-app-header-grid-v8"></script></body></html>
