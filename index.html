@@ -340,4 +340,47 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
   [0,100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(lowerAppButtons,ms);});
 })();
 </script>
-<script src="language.js?v=20261016-brand-v33"></script></body></html>
+<script src="language.js?v=20261016-brand-v33"></script><style id="yunarunes-app-header-force-fix">
+@media(max-width:800px){
+ body.yunarunes-app header.top{padding-top:0!important}
+ body.yunarunes-app header.top>.nav{
+  display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;
+  grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;
+  gap:12px 8px!important;padding:34px 10px 14px!important;
+  min-height:0!important;height:auto!important;align-items:center!important;
+ }
+ body.yunarunes-app header.top .header-menu{display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important}
+ body.yunarunes-app header.top .header-menu .menu-btn{display:flex!important;position:static!important;transform:none!important;width:38px!important;height:38px!important;align-items:center!important;justify-content:center!important}
+ body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:center!important;min-width:0!important}
+ body.yunarunes-app header.top .header-brand .brand{margin:0!important;font-size:18px!important;max-width:100%!important}
+ body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;width:100%!important;justify-content:center!important;margin:0!important;transform:none!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls{display:flex!important;width:100%!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
+ body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
+ body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;padding:0 4px!important;font-size:11px!important;white-space:nowrap!important}
+ body.yunarunes-app header.top .header-menu .nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;display:none!important;width:100%!important}
+ body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
+<script id="yunarunes-app-header-force-fix-js">
+(function(){
+ if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
+ document.body.classList.add('yunarunes-app');
+ function fix(){
+  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
+  if(!h||!n)return;
+  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
+  set(h,'padding-top','0px');
+  set(n,'display','grid');set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
+  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
+  set(n,'gap','12px 8px');set(n,'padding','34px 10px 14px');set(n,'height','auto');set(n,'min-height','0');
+  var menu=h.querySelector('.header-menu'),brand=h.querySelector('.header-brand'),btn=h.querySelector('.header-menu .menu-btn'),controls=h.querySelector('.header-controls'),links=h.querySelector('.header-menu .nav-links'),toggle=h.querySelector('.header-menu .nav-toggle');
+  [[menu,'grid-area','menu'],[menu,'grid-column','1'],[menu,'grid-row','1'],[brand,'grid-area','brand'],[brand,'grid-column','2'],[brand,'grid-row','1'],[controls,'grid-area','controls'],[controls,'grid-column','1 / -1'],[controls,'grid-row','2'],[controls,'margin','0'],[controls,'transform','none'],[links,'grid-area','links'],[links,'grid-column','1 / -1'],[links,'grid-row','3']].forEach(x=>set(x[0],x[1],x[2]));
+  set(menu,'display','block');set(brand,'display','flex');set(brand,'justify-content','center');set(btn,'position','static');set(btn,'transform','none');set(btn,'width','38px');set(btn,'height','38px');set(controls,'display','flex');set(controls,'width','100%');set(controls,'justify-content','center');
+  var row=h.querySelector('.yuna-controls');set(row,'display','flex');set(row,'width','100%');set(row,'gap','6px');set(row,'justify-content','center');set(row,'flex-wrap','nowrap');
+  h.querySelectorAll('.yuna-controls .donate-link,.yuna-controls button[data-lang],.yuna-controls #yr-feedback-open').forEach(function(b){set(b,'flex','1 1 0');set(b,'min-width','0');set(b,'max-width','160px');set(b,'height','40px');set(b,'padding','0 4px');set(b,'font-size','11px')});
+  if(links){set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr))')}
+ }
+ document.addEventListener('DOMContentLoaded',fix);window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
+})();
+</script></body></html>
