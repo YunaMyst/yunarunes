@@ -700,4 +700,52 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  apply();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-app-menu-closed-state-fix-v3">
+@media(max-width:800px){
+ body.yunarunes-app header.top>.nav{grid-auto-flow:row!important;grid-template-rows:38px 40px auto!important}
+ body.yunarunes-app header.top .header-menu .nav-links{
+  position:static!important;float:none!important;clear:both!important;
+  inset:auto!important;transform:none!important;align-self:stretch!important;
+  overflow:hidden!important;box-sizing:border-box!important;
+ }
+ body.yunarunes-app header.top .header-menu .nav-toggle:not(:checked)~.nav-links{
+  display:none!important;height:0!important;min-height:0!important;max-height:0!important;
+  padding:0!important;margin:0!important;border:0!important;gap:0!important;
+ }
+ body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{
+  display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;
+  padding:10px 0 2px!important;margin:0!important;gap:8px!important;
+ }
+ body.yunarunes-app header.top .header-controls,
+ body.yunarunes-app header.top .header-controls .yuna-controls{
+  position:relative!important;inset:auto!important;float:none!important;transform:none!important;
+  align-self:center!important;box-sizing:border-box!important;
+ }
+}
+</style>
+<script id="yunarunes-app-menu-closed-state-fix-v3-js">
+(function(){
+ if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
+ function apply(){
+  var h=document.querySelector('body.yunarunes-app header.top');
+  if(!h)return;
+  var n=h.querySelector(':scope > .nav'),t=h.querySelector('.header-menu .nav-toggle'),l=h.querySelector('.header-menu .nav-links');
+  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
+  set(n,'grid-auto-flow','row');set(n,'grid-template-rows',t&&t.checked?'38px 40px auto':'38px 40px 0px');
+  set(l,'position','static');set(l,'float','none');set(l,'clear','both');set(l,'transform','none');set(l,'overflow','hidden');set(l,'box-sizing','border-box');
+  if(t&&t.checked){
+   set(l,'display','grid');set(l,'height','auto');set(l,'max-height','none');set(l,'min-height','0');set(l,'padding','10px 0 2px');set(l,'margin','0');set(l,'gap','8px');
+  }else{
+   set(l,'display','none');set(l,'height','0');set(l,'max-height','0');set(l,'min-height','0');set(l,'padding','0');set(l,'margin','0');set(l,'border','0');set(l,'gap','0');
+  }
+  var c=h.querySelector('.header-controls'),row=h.querySelector('.yuna-controls');
+  set(c,'position','relative');set(c,'inset','auto');set(c,'float','none');set(c,'transform','none');
+  set(row,'position','relative');set(row,'inset','auto');set(row,'float','none');set(row,'transform','none');
+ }
+ document.addEventListener('change',function(e){if(e.target&&e.target.matches('.header-menu .nav-toggle')){apply();requestAnimationFrame(apply)}},true);
+ document.addEventListener('click',function(e){if(e.target&&e.target.closest('.header-menu .menu-btn')){setTimeout(apply,0);setTimeout(apply,80)}},true);
+ document.addEventListener('DOMContentLoaded',apply);window.addEventListener('load',apply);window.addEventListener('pageshow',apply);apply();
+})();
+</script>
+</body></html>
