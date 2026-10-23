@@ -427,8 +427,8 @@ body.yunarunes-app header.top .yuna-controls a {
   set(brand&&brand.querySelector('.brand'),{display:'inline-flex',position:'static',justifyContent:'center',alignItems:'center',width:'auto',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',fontSize:'18px',lineHeight:'1.2',whiteSpace:'nowrap',transform:'none',boxSizing:'border-box'});
   set(menu&&menu.querySelector('.menu-btn'),{display:'inline-flex',position:'static',width:'40px',minWidth:'40px',height:'40px',minHeight:'40px',margin:'0',padding:'0',transform:'none',boxSizing:'border-box',alignItems:'center',justifyContent:'center'});
   set(controls,{display:'flex',position:'relative',zIndex:'2147483001',pointerEvents:'auto',gridArea:'controls',gridColumn:'1 / -1',gridRow:'2',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
-  set(controls&&controls.querySelector('.yuna-controls'),{display:'flex',position:'static',flexFlow:'row nowrap',alignItems:'stretch',justifyContent:'stretch',gap:'5px',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
-  if(controls)Array.prototype.forEach.call(controls.querySelectorAll('.yuna-controls>*'),function(el){set(el,{display:'inline-flex',position:'relative',zIndex:'11',pointerEvents:'auto',flex:'1 1 0',alignItems:'center',justifyContent:'center',width:'0',minWidth:'0',maxWidth:'none',height:'42px',minHeight:'42px',margin:'0',padding:'0 2px',fontSize:'10px',lineHeight:'1',whiteSpace:'nowrap',transform:'none',boxSizing:'border-box',overflow:'hidden'});});
+  set(controls&&controls.querySelector('.yuna-controls'),{display:'grid',position:'static',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gridTemplateRows:'repeat(2,minmax(42px,auto))',alignItems:'stretch',justifyContent:'stretch',gap:'6px',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
+  if(controls)Array.prototype.forEach.call(controls.querySelectorAll('.yuna-controls>*'),function(el){set(el,{display:'inline-flex',position:'relative',zIndex:'11',pointerEvents:'auto',flex:'none',alignItems:'center',justifyContent:'center',width:'100%',minWidth:'0',maxWidth:'none',height:'42px',minHeight:'42px',margin:'0',padding:'0 5px',fontSize:'11px',lineHeight:'1.1',whiteSpace:'normal',transform:'none',boxSizing:'border-box',overflow:'visible',textAlign:'center'});});
   var toggle=nav.querySelector('.nav-toggle');
   set(links,{display:toggle&&toggle.checked?'grid':'none',position:'relative',zIndex:'2147483002',pointerEvents:'auto',gridArea:'links',gridColumn:'1 / -1',gridRow:'3',width:'100%',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',transform:'none',boxSizing:'border-box',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gap:'7px'});
   function syncMenu(){
@@ -566,6 +566,40 @@ body.yunarunes-app header.top .nav-toggle:checked~.nav-links { display:grid!impo
   display:flex!important;position:static!important;width:100%!important;min-width:0!important;min-height:46px!important;
   height:auto!important;margin:0!important;padding:8px 5px!important;transform:none!important;box-sizing:border-box!important;
   white-space:normal!important;overflow-wrap:anywhere!important;text-align:center!important;
+ }
+}
+</style>
+<style id="yunarunes-header-final-no-overlap">
+@media(max-width:800px){
+ body.yunarunes-app header.top>.nav,html.yr-mobile-device body header.top>.nav{
+  display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls"!important;
+  grid-template-rows:auto auto!important;align-items:center!important;gap:8px!important;width:100%!important;max-width:100%!important;
+  height:auto!important;min-height:0!important;margin:0!important;padding:10px!important;box-sizing:border-box!important;overflow:visible!important
+ }
+ body.yunarunes-app header.top>.nav>.header-menu,html.yr-mobile-device body header.top>.nav>.header-menu{grid-area:menu!important;grid-column:1!important;grid-row:1!important;position:static!important;width:40px!important;min-width:40px!important;margin:0!important}
+ body.yunarunes-app header.top>.nav>.header-brand,html.yr-mobile-device body header.top>.nav>.header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:center!important;align-items:center!important;width:100%!important;min-width:0!important;margin:0!important}
+ body.yunarunes-app header.top>.nav>.header-controls,html.yr-mobile-device body header.top>.nav>.header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:block!important;position:static!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls,html.yr-mobile-device body header.top .header-controls .yuna-controls{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:repeat(2,minmax(42px,auto))!important;
+  gap:6px!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important;box-sizing:border-box!important
+ }
+ body.yunarunes-app header.top .header-controls .yuna-controls>*,html.yr-mobile-device body header.top .header-controls .yuna-controls>*{
+  display:flex!important;position:static!important;flex:none!important;width:100%!important;min-width:0!important;max-width:none!important;
+  height:42px!important;min-height:42px!important;margin:0!important;padding:0 5px!important;box-sizing:border-box!important;
+  align-items:center!important;justify-content:center!important;font:800 11px/1.1 Arial,sans-serif!important;
+  white-space:normal!important;overflow:visible!important;text-align:center!important;transform:none!important
+ }
+ body.yunarunes-app header.top>.nav>.nav-links,html.yr-mobile-device body header.top>.nav>.nav-links{
+  display:none!important;position:absolute!important;top:calc(100% + 6px)!important;left:10px!important;right:10px!important;
+  grid-area:auto!important;grid-column:auto!important;grid-row:auto!important;width:auto!important;max-width:none!important;
+  max-height:calc(100dvh - 220px)!important;overflow-y:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:7px!important;margin:0!important;padding:10px!important;box-sizing:border-box!important;z-index:2147483000!important;
+  background:#101923!important;border:1px solid #293746!important;border-radius:14px!important
+ }
+ body.yunarunes-app header.top .nav-toggle:checked~.nav-links,html.yr-mobile-device body header.top .nav-toggle:checked~.nav-links{display:grid!important}
+ body.yunarunes-app header.top>.nav>.nav-links a,html.yr-mobile-device body header.top>.nav>.nav-links a{
+  display:flex!important;position:static!important;width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;
+  margin:0!important;padding:8px 5px!important;box-sizing:border-box!important;white-space:normal!important;overflow-wrap:anywhere!important;text-align:center!important
  }
 }
 </style>
