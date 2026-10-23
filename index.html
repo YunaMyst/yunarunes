@@ -321,7 +321,9 @@ html.yunarunes-real-app body header.top>.nav>.nav-links {display:none!important}
   var isAndroid=/Android/i.test(ua);
   /* Android System WebView costuma incluir "; wv)" e Version/4.0 no user-agent. */
   var isWebView=/;\s*wv\)/i.test(ua)||/\bwv\b/i.test(ua)||/YunaRunesApp/i.test(ua)||(/Version\/\d/i.test(ua)&&isAndroid);
-  var isApp=isAndroid&&isWebView;
+  var body=document.body;
+  var hasAppMarker=!!(body&&(body.classList.contains('yunarunes-app')||body.classList.contains('yunarunes-app-device')))||document.documentElement.classList.contains('yunarunes-app-device');
+  var isApp=isAndroid&&(isWebView||hasAppMarker);
   document.documentElement.classList.toggle('yunarunes-real-app',isApp);
   var nav=document.querySelector('header.top>.nav');
   var holder=nav&&nav.querySelector('.header-menu');
