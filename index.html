@@ -505,4 +505,40 @@ html body.yunarunes-app header.top>.nav>.nav-toggle:checked~.nav-links{display:g
  window.addEventListener('pageshow',apply);
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-menu-app-only-v2">
+/* Regra final: menu só no Android WebView do APK, nunca no PC ou navegador móvel. */
+html:not(.yunarunes-real-app) body header.top>.nav>.header-menu,
+html:not(.yunarunes-real-app) body header.top>.nav>.nav-toggle,
+html:not(.yunarunes-real-app) body header.top>.nav>.nav-links{
+ display:none!important;visibility:hidden!important;pointer-events:none!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu{
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu>#yr-menu-toggle{
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important
+}
+html.yunarunes-real-app body header.top>.nav>.nav-toggle{display:none!important}
+html.yunarunes-real-app body header.top>.nav>.nav-toggle:checked~.nav-links{display:grid!important}
+</style>
+<script id="yunarunes-menu-app-only-v2-js">
+(function(){
+ function apply(){
+  var ua=navigator.userAgent||'';
+  var app=/Android/i.test(ua)&&(/;\s*wv\)/i.test(ua)||/\bwv\b/i.test(ua)||/YunaRunesApp/i.test(ua));
+  document.documentElement.classList.toggle('yunarunes-real-app',app);
+  var holder=document.querySelector('header.top>.nav>.header-menu');
+  var toggle=document.querySelector('header.top>.nav>.nav-toggle');
+  var links=document.querySelector('header.top>.nav>.nav-links');
+  if(holder)holder.style.setProperty('display',app?'block':'none','important');
+  if(holder)holder.style.setProperty('visibility',app?'visible':'hidden','important');
+  if(toggle)toggle.style.setProperty('display','none','important');
+  if(links&&!app)links.style.setProperty('display','none','important');
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);
+ else apply();
+ window.addEventListener('pageshow',apply);
+})();
+</script>
+</body></html>
