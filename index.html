@@ -431,7 +431,29 @@ body.yunarunes-app header.top .yuna-controls a {
   if(controls)Array.prototype.forEach.call(controls.querySelectorAll('.yuna-controls>*'),function(el){set(el,{display:'inline-flex',position:'relative',zIndex:'11',pointerEvents:'auto',flex:'1 1 0',alignItems:'center',justifyContent:'center',width:'0',minWidth:'0',maxWidth:'none',height:'42px',minHeight:'42px',margin:'0',padding:'0 2px',fontSize:'10px',lineHeight:'1',whiteSpace:'nowrap',transform:'none',boxSizing:'border-box',overflow:'hidden'});});
   var toggle=nav.querySelector('.nav-toggle');
   set(links,{display:toggle&&toggle.checked?'grid':'none',position:'relative',zIndex:'2147483002',pointerEvents:'auto',gridArea:'links',gridColumn:'1 / -1',gridRow:'3',width:'100%',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',transform:'none',boxSizing:'border-box',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gap:'7px'});
-  if(toggle&&!toggle.dataset.yunaClickFix){toggle.dataset.yunaClickFix='1';toggle.addEventListener('change',function(){if(links)links.style.setProperty('display',toggle.checked?'grid':'none','important');});}
+  function syncMenu(){
+   if(!links||!toggle)return;
+   if(toggle.checked){
+    links.style.setProperty('display','grid','important');
+    links.style.setProperty('visibility','visible','important');
+    links.style.setProperty('pointer-events','auto','important');
+    nav.classList.add('yuna-menu-open');
+   }else{
+    links.style.setProperty('display','none','important');
+    links.style.setProperty('visibility','hidden','important');
+    links.style.setProperty('pointer-events','none','important');
+    links.style.setProperty('max-height','0','important');
+    links.style.setProperty('overflow','hidden','important');
+    nav.classList.remove('yuna-menu-open');
+   }
+  }
+  if(toggle&&!toggle.dataset.yunaClickFix){
+   toggle.dataset.yunaClickFix='1';
+   toggle.addEventListener('change',syncMenu);
+   if(links)Array.prototype.forEach.call(links.querySelectorAll('a'),function(a){a.addEventListener('click',function(){toggle.checked=false;syncMenu();});});
+   document.addEventListener('click',function(ev){if(!toggle.checked)return;if(!nav.contains(ev.target)){toggle.checked=false;syncMenu();}});
+  }
+  syncMenu();
   if(menu){var label=menu.querySelector('.menu-btn');if(label){set(label,{position:'relative',zIndex:'2147483003',pointerEvents:'auto',cursor:'pointer'});}}
   if(controls)controls.style.setProperty('pointer-events','auto','important');
   if(links)Array.prototype.forEach.call(links.querySelectorAll('a'),function(el){set(el,{display:'flex',position:'static',alignItems:'center',justifyContent:'center',width:'100%',minWidth:'0',minHeight:'44px',height:'auto',margin:'0',padding:'8px 5px',whiteSpace:'normal',overflowWrap:'anywhere',transform:'none',boxSizing:'border-box'});});
