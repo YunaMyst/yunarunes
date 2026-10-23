@@ -409,4 +409,29 @@ body.yunarunes-app header.top .yuna-controls a {
   }
 }
 </style>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<style id="yunarunes-app-header-overlap-fix-v2">
+/* App: cada faixa do cabeçalho ocupa a sua própria linha; os quatro controlos não se sobrepõem. */
+body.yunarunes-app header.top { position:relative!important; width:100%!important; overflow:visible!important; }
+body.yunarunes-app header.top>.nav {
+ display:grid!important;
+ grid-template-columns:42px minmax(0,1fr)!important;
+ grid-template-areas:"menu brand" "controls controls" "links links"!important;
+ grid-template-rows:auto auto auto!important;
+ align-items:center!important;
+ justify-content:stretch!important;
+ gap:10px 8px!important;
+ width:100%!important; max-width:none!important; height:auto!important; min-height:0!important;
+ margin:0!important; padding:10px 10px 12px!important; box-sizing:border-box!important;
+}
+body.yunarunes-app header.top>.nav>.header-menu { display:block!important; grid-area:menu!important; grid-column:1!important; grid-row:1!important; position:static!important; min-width:0!important; margin:0!important; padding:0!important; }
+body.yunarunes-app header.top>.nav>.header-brand { display:flex!important; grid-area:brand!important; grid-column:2!important; grid-row:1!important; justify-content:center!important; align-items:center!important; position:static!important; min-width:0!important; width:100%!important; margin:0!important; padding:0!important; }
+body.yunarunes-app header.top .header-brand a.brand { display:inline-flex!important; align-items:center!important; justify-content:center!important; position:static!important; max-width:100%!important; margin:0!important; padding:0!important; white-space:nowrap!important; font-size:18px!important; line-height:1.2!important; }
+body.yunarunes-app header.top .header-menu .menu-btn { display:inline-flex!important; align-items:center!important; justify-content:center!important; position:static!important; width:40px!important; min-width:40px!important; height:40px!important; min-height:40px!important; margin:0!important; padding:0!important; transform:none!important; box-sizing:border-box!important; }
+body.yunarunes-app header.top>.nav>.header-controls { display:flex!important; grid-area:controls!important; grid-column:1/-1!important; grid-row:2!important; position:static!important; width:100%!important; min-width:0!important; max-width:100%!important; height:auto!important; margin:0!important; padding:0!important; transform:none!important; box-sizing:border-box!important; }
+body.yunarunes-app header.top .header-controls .yuna-controls { display:flex!important; flex-flow:row nowrap!important; align-items:stretch!important; justify-content:stretch!important; gap:5px!important; width:100%!important; min-width:0!important; max-width:100%!important; height:auto!important; margin:0!important; padding:0!important; overflow:visible!important; box-sizing:border-box!important; }
+body.yunarunes-app header.top .header-controls .yuna-controls>* { display:inline-flex!important; flex:1 1 0!important; align-items:center!important; justify-content:center!important; min-width:0!important; max-width:none!important; width:0!important; height:42px!important; min-height:42px!important; margin:0!important; padding:0 3px!important; position:static!important; transform:none!important; box-sizing:border-box!important; font:800 10px/1 Arial,sans-serif!important; white-space:nowrap!important; overflow:hidden!important; text-overflow:clip!important; }
+body.yunarunes-app header.top>.nav>.nav-links { display:none!important; grid-area:links!important; grid-column:1/-1!important; grid-row:3!important; position:static!important; width:100%!important; min-width:0!important; max-width:100%!important; margin:0!important; padding:0!important; transform:none!important; box-sizing:border-box!important; grid-template-columns:repeat(2,minmax(0,1fr))!important; gap:7px!important; }
+body.yunarunes-app header.top>.nav>.nav-links a { display:flex!important; align-items:center!important; justify-content:center!important; min-width:0!important; min-height:44px!important; height:auto!important; margin:0!important; padding:8px 5px!important; box-sizing:border-box!important; white-space:normal!important; overflow-wrap:anywhere!important; }
+body.yunarunes-app header.top .nav-toggle:checked~.nav-links { display:grid!important; }
+</style>
+<script src="language.js?v=20261023-overlap-fix-v2"></script></body></html>
