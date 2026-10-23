@@ -389,33 +389,6 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
 }
 </style>
 
-<script id="yunarunes-app-header-dom-repair-v10">
-(function(){
- if(!/YunaRunesApp/i.test(navigator.userAgent||''))return;
- function repair(){
-  var nav=document.querySelector('header.top>.nav');
-  if(!nav)return;
-  var wrap=nav.querySelector(':scope > .header-menu');
-  if(!wrap)return;
-  var toggle=wrap.querySelector('.nav-toggle')||nav.querySelector('.nav-toggle');
-  var links=wrap.querySelector('.nav-links')||nav.querySelector('.nav-links');
-  var label=wrap.querySelector('.menu-btn')||nav.querySelector('.menu-btn');
-  if(label&&label.parentElement!==wrap)wrap.appendChild(label);
-  if(toggle&&toggle.parentElement!==nav)nav.insertBefore(toggle,wrap.nextSibling);
-  if(links&&links.parentElement!==nav){
-   if(toggle&&toggle.parentElement===nav)nav.insertBefore(links,toggle.nextSibling);
-   else nav.insertBefore(links,wrap.nextSibling);
-  }
-  if(toggle&&links&&toggle.nextElementSibling!==links)nav.insertBefore(links,toggle.nextSibling);
-  if(toggle){toggle.style.setProperty('display','none','important');}
- }
- var queued=false;
- function schedule(){if(queued)return;queued=true;setTimeout(function(){queued=false;repair();},0);}
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repair,{once:true});else repair();
- new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
- [50,150,350,700,1200,2000,3500].forEach(function(t){setTimeout(repair,t);});
-})();
-</script>
 <script id="yunarunes-app-header-menu-final-v9-js">
 (function(){
  var ua=navigator.userAgent||'';
@@ -446,37 +419,4 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  body.yunarunes-app header.top>.nav>.nav-links a{position:static!important;transform:none!important;width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;box-sizing:border-box!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important}
 }
 </style>
-<script id="yunarunes-app-header-web-override-v12-js">
-(function(){
- if(!/YunaRunesApp/i.test(navigator.userAgent||''))return;
- function set(el,props){if(!el)return;Object.keys(props).forEach(function(k){el.style.setProperty(k,props[k],'important')})}
- function fix(){
-  var nav=document.querySelector('header.top>.nav');if(!nav)return;
-  var menu=nav.querySelector('.menu-btn'),wrap=nav.querySelector('.header-menu'),toggle=nav.querySelector('.nav-toggle'),links=nav.querySelector('.nav-links'),brand=nav.querySelector('.header-brand'),controls=nav.querySelector('.header-controls'),langs=nav.querySelector('.yuna-controls');
-  if(menu&&!wrap){wrap=document.createElement('div');wrap.className='header-menu';nav.insertBefore(wrap,nav.firstChild);wrap.appendChild(menu)}
-  if(menu&&wrap&&menu.parentElement!==wrap)wrap.appendChild(menu);
-  if(toggle&&toggle.parentElement!==nav)nav.insertBefore(toggle,wrap?wrap.nextSibling:nav.firstChild);
-  if(links&&links.parentElement!==nav)nav.appendChild(links);
-  if(toggle&&links&&toggle.nextElementSibling!==links)nav.insertBefore(links,toggle.nextSibling);
-  document.body.classList.add('yunarunes-app');
-  set(nav,{'display':'grid','grid-template-columns':'42px minmax(0,1fr)','grid-template-areas':'"menu brand" "controls controls" "links links"','grid-template-rows':'auto auto auto','align-items':'center','justify-content':'stretch','gap':'8px','width':'100%','max-width':'none','height':'auto','min-height':'0','margin':'0','padding':'8px 10px 10px','box-sizing':'border-box','overflow':'visible'});
-  set(wrap,{'display':'block','grid-area':'menu','grid-column':'1','grid-row':'1','position':'static','transform':'none','width':'auto','min-width':'0','margin':'0','padding':'0'});
-  set(menu,{'display':'inline-flex','position':'static','transform':'none','width':'42px','height':'42px','min-height':'42px','align-items':'center','justify-content':'center','box-sizing':'border-box','margin':'0','padding':'0'});
-  set(brand,{'display':'flex','grid-area':'brand','grid-column':'2','grid-row':'1','position':'static','transform':'none','justify-content':'center','width':'auto','min-width':'0','max-width':'100%','margin':'0','padding':'0','visibility':'visible'});
-  set(controls,{'display':'flex','grid-area':'controls','grid-column':'1 / -1','grid-row':'2','position':'static','transform':'none','width':'100%','max-width':'100%','min-width':'0','height':'auto','margin':'0','padding':'0','justify-content':'stretch'});
-  set(langs,{'display':'flex','width':'100%','max-width':'100%','min-width':'0','height':'auto','margin':'0','padding':'0','gap':'5px','justify-content':'center','align-items':'center','flex-wrap':'nowrap'});
-  set(toggle,{'display':'none'});
-  set(links,{'display':toggle&&toggle.checked?'grid':'none','grid-area':'links','grid-column':'1 / -1','grid-row':'3','position':'static','transform':'none','width':'100%','max-width':'none','min-width':'0','height':'auto','max-height':'none','min-height':'0','margin':'0','padding':toggle&&toggle.checked?'8px 0 2px':'0','overflow':'visible','grid-template-columns':'repeat(2,minmax(0,1fr))','grid-auto-rows':'minmax(46px,auto)','gap':'8px','box-sizing':'border-box'});
-  if(links)Array.prototype.forEach.call(links.querySelectorAll('a'),function(a){set(a,{'display':'flex','position':'static','transform':'none','width':'100%','min-width':'0','min-height':'46px','height':'auto','margin':'0','padding':'9px 7px','box-sizing':'border-box','white-space':'normal','overflow-wrap':'anywhere','align-items':'center','justify-content':'center','text-align':'center'})});
- }
- var started=false;
- function start(){
-  if(started)return;started=true;
-  fix();
-  [120,400,900,1800].forEach(function(ms){setTimeout(fix,ms)});
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
- window.addEventListener('pageshow',function(){fix();[200,700].forEach(function(ms){setTimeout(fix,ms)})});
-})();
-</script>
 <script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
