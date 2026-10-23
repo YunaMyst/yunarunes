@@ -840,4 +840,39 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  document.addEventListener('DOMContentLoaded',fix);window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-app-menu-state-fix-v5">
+@media(max-width:800px){
+ body.yunarunes-app header.top>.nav>.nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
+ body.yunarunes-app:not(.yunarunes-menu-open) header.top>.nav>.nav-links{display:none!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+ body.yunarunes-app.yunarunes-menu-open header.top>.nav>.nav-links{display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;margin:0!important;padding:10px 0 2px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;overflow:visible!important}
+}
+</style>
+<script id="yunarunes-app-menu-state-fix-v5-js">
+(function(){
+ if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
+ function sync(){
+  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
+  if(!h||!n)return;
+  var wrap=n.querySelector('.header-menu'),toggle=n.querySelector('.nav-toggle'),links=n.querySelector('.nav-links');
+  if(!wrap||!toggle||!links)return;
+  document.body.classList.add('yunarunes-app');
+  if(links.parentElement!==n)n.appendChild(links);
+  document.body.classList.toggle('yunarunes-menu-open',!!toggle.checked);
+  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
+  set(links,'display',toggle.checked?'grid':'none');
+  set(links,'height',toggle.checked?'auto':'0');
+  set(links,'max-height',toggle.checked?'none':'0');
+  set(links,'min-height','0');
+  set(links,'padding',toggle.checked?'10px 0 2px':'0');
+  set(links,'margin','0');
+  set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');
+  set(links,'gap',toggle.checked?'8px':'0');
+  set(n,'grid-template-rows',toggle.checked?'auto auto auto':'auto auto 0px');
+ }
+ document.addEventListener('change',function(e){if(e.target&&e.target.matches('.nav-toggle')){sync();setTimeout(sync,30)}},true);
+ document.addEventListener('click',function(e){if(e.target&&e.target.closest('.menu-btn')){setTimeout(sync,0);setTimeout(sync,40)}},true);
+ document.addEventListener('DOMContentLoaded',sync);window.addEventListener('load',sync);window.addEventListener('pageshow',sync);sync();
+})();
+</script>
+</body></html>
