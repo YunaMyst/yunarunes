@@ -541,4 +541,30 @@ html.yunarunes-real-app body header.top>.nav>.nav-toggle:checked~.nav-links{disp
  window.addEventListener('pageshow',apply);
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-menu-app-only-final-v3">
+/* Estado padrão: oculto em PC e navegador móvel. Só aparece com a marca do WebView do APK. */
+html body header.top>.nav>.header-menu,
+html body header.top>.nav>.header-menu>#yr-menu-toggle{
+ display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu{
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu>#yr-menu-toggle{
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important
+}
+</style>
+<script id="yunarunes-menu-app-only-final-v3-js">
+(function(){
+ function apply(){
+  var ua=navigator.userAgent||'';
+  var isWebView=/Android/i.test(ua)&&(/;\s*wv\)/i.test(ua)||/\bwv\b/i.test(ua)||/YunaRunesApp/i.test(ua));
+  document.documentElement.classList.toggle('yunarunes-real-app',isWebView);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);
+ else apply();
+ window.addEventListener('pageshow',apply);
+})();
+</script>
+</body></html>
