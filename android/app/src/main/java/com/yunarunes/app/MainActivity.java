@@ -142,7 +142,7 @@ public class MainActivity extends Activity {
         + "\n"
         + "  apply();\n"
         + "  clean();\n"
-        + "  new MutationObserver(function(){apply();}).observe(document.documentElement,{childList:true,subtree:true});\n"
+        + "  // Apply header layout once after page load; avoid repeated DOM restyling that can make controls flicker.\n"
         + "})();";
 
     @Override public void onCreate(Bundle savedInstanceState) {
