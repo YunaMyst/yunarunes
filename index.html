@@ -461,4 +461,40 @@ html.yunarunes-real-app body header.top>.nav>.nav-links{display:none!important;p
 html.yunarunes-real-app body header.top>.nav>.nav-links.yr-menu-open{display:grid!important}
 html.yunarunes-real-app body header.top>.nav>.nav-links a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important}
 </style>
+
+<style id="yunarunes-app-match-mobile-header-v3">
+/* Igualar o cabeçalho do APK ao do site no telemóvel: título centrado e controlos legíveis abaixo. */
+html.yunarunes-real-app body header.top>.nav{
+ position:relative!important;display:flex!important;flex-direction:column!important;align-items:center!important;
+ justify-content:flex-start!important;gap:8px!important;padding:10px!important;width:100%!important;
+ height:auto!important;min-height:0!important;overflow:visible!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-brand{
+ order:0!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:34px!important;margin:0!important;padding:0 48px!important;
+}
+html.yunarunes-real-app body header.top>.nav .header-brand .brand{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ margin:0!important;padding:0!important;font-size:18px!important;line-height:1.2!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu{
+ position:absolute!important;left:10px!important;top:8px!important;right:auto!important;
+ width:40px!important;height:40px!important;z-index:2147483647!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-controls{
+ order:1!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-width:0!important;margin:0!important;padding:0!important;
+}
+html.yunarunes-real-app body header.top .header-controls .yuna-controls{
+ display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:stretch!important;
+ width:100%!important;min-width:0!important;gap:6px!important;margin:0!important;padding:0!important;
+}
+html.yunarunes-real-app body header.top .header-controls .yuna-controls>*{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:1 1 0!important;width:0!important;min-width:0!important;max-width:none!important;
+ height:40px!important;min-height:40px!important;margin:0!important;padding:0 4px!important;
+ font:800 11px/1 Arial,sans-serif!important;white-space:nowrap!important;overflow:hidden!important;
+}
+html.yunarunes-real-app body header.top>.nav>.nav-links{top:calc(100% + 5px)!important}
+</style>
 <script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
