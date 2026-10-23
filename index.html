@@ -396,4 +396,73 @@ html.yunarunes-app-device body header.top>.nav>.header-menu{display:block!import
  else setup();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-menu-button-persistent-fix-v3">
+/* Corrige o botão de menu no telemóvel e no WebView do APK, independentemente do estado do menu. */
+html body header.top>.nav>.header-menu{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ position:absolute!important;left:10px!important;top:10px!important;
+ width:44px!important;height:44px!important;min-width:44px!important;
+ z-index:2147483647!important;pointer-events:auto!important;
+}
+html body header.top>.nav>.header-menu>#yr-menu-toggle{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ pointer-events:auto!important;position:relative!important;inset:auto!important;
+ width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+ padding:0!important;margin:0!important;align-items:center!important;justify-content:center!important;
+ background:#172330!important;color:#fff!important;border:1px solid #8b5cf6!important;
+ border-radius:9px!important;font:900 22px/1 Arial,sans-serif!important;
+ box-shadow:0 2px 8px #0008!important;cursor:pointer!important;
+}
+html body header.top>.nav>.nav-links{z-index:2147483000!important}
+html body.yunarunes-app header.top>.nav>.header-menu,
+html.yunarunes-app-device body header.top>.nav>.header-menu{display:block!important;visibility:visible!important;opacity:1!important}
+</style>
+<script id="yunarunes-menu-button-persistent-fix-v3">
+(function(){
+ function repair(){
+  var nav=document.querySelector('header.top>.nav');
+  var holder=nav&&nav.querySelector('.header-menu');
+  var button=document.getElementById('yr-menu-toggle');
+  var toggle=nav&&nav.querySelector('.nav-toggle');
+  var links=document.getElementById('yr-nav-links');
+  if(!nav||!holder||!button||!toggle||!links)return;
+  [holder,button].forEach(function(el){
+   el.style.setProperty('display',el===holder?'block':'flex','important');
+   el.style.setProperty('visibility','visible','important');
+   el.style.setProperty('opacity','1','important');
+   el.style.setProperty('pointer-events','auto','important');
+  });
+  holder.style.setProperty('position','absolute','important');
+  holder.style.setProperty('left','10px','important');
+  holder.style.setProperty('top','10px','important');
+  holder.style.setProperty('z-index','2147483647','important');
+  if(!button.dataset.menuBound){
+   button.dataset.menuBound='1';
+   button.addEventListener('click',function(){
+    toggle.checked=!toggle.checked;
+    toggle.dispatchEvent(new Event('change',{bubbles:true}));
+    button.setAttribute('aria-expanded',String(toggle.checked));
+    button.setAttribute('aria-label',toggle.checked?'Fechar menu':'Abrir menu');
+    links.style.setProperty('display',toggle.checked?'grid':'none','important');
+   });
+   links.addEventListener('click',function(e){
+    if(e.target.closest('a')){
+     toggle.checked=false;links.style.setProperty('display','none','important');
+     button.setAttribute('aria-expanded','false');
+    }
+   });
+   document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){toggle.checked=false;links.style.setProperty('display','none','important');button.setAttribute('aria-expanded','false');}
+   });
+  }
+  button.setAttribute('aria-expanded',String(toggle.checked));
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',repair);
+ else repair();
+ window.addEventListener('pageshow',repair);
+ window.addEventListener('resize',repair);
+ setTimeout(repair,250);setTimeout(repair,1000);
+})();
+</script>
+</body></html>
