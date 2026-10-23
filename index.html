@@ -497,4 +497,73 @@ html.yunarunes-real-app body header.top .header-controls .yuna-controls>*{
 }
 html.yunarunes-real-app body header.top>.nav>.nav-links{top:calc(100% + 5px)!important}
 </style>
+
+<style id="yunarunes-app-header-match-mobile-v4">
+/* Replica no APK o mesmo layout responsivo do cabeçalho no site móvel. */
+html.yunarunes-real-app body header.top{
+ position:relative!important;width:100%!important;height:auto!important;min-height:0!important;
+ overflow:visible!important;z-index:2147483000!important;
+}
+html.yunarunes-real-app body header.top>.nav{
+ display:grid!important;position:relative!important;
+ grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"brand" "controls"!important;
+ grid-template-rows:auto auto!important;align-items:center!important;justify-content:stretch!important;
+ gap:12px!important;width:100%!important;max-width:none!important;height:auto!important;
+ min-height:0!important;margin:0!important;padding:14px 10px 12px!important;overflow:visible!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-brand{
+ grid-area:brand!important;grid-column:1!important;grid-row:1!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ position:relative!important;width:100%!important;min-width:0!important;min-height:40px!important;
+ margin:0!important;padding:0 44px!important;transform:none!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-brand .brand{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ position:static!important;width:auto!important;max-width:100%!important;margin:0!important;padding:0!important;
+ font:900 18px/1.2 Arial,sans-serif!important;white-space:nowrap!important;transform:none!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu{
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ position:absolute!important;left:10px!important;right:auto!important;top:12px!important;
+ width:40px!important;height:40px!important;margin:0!important;padding:0!important;z-index:2147483647!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu>#yr-menu-toggle{
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ align-items:center!important;justify-content:center!important;position:static!important;
+ width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+ margin:0!important;padding:0!important;background:#172330!important;color:#fff!important;
+ border:1px solid #293746!important;border-radius:8px!important;font:900 20px/1 Arial,sans-serif!important;
+}
+html.yunarunes-real-app body header.top>.nav>.header-controls{
+ grid-area:controls!important;grid-column:1!important;grid-row:2!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ position:static!important;width:100%!important;min-width:0!important;height:auto!important;
+ margin:0!important;padding:0!important;transform:none!important;
+}
+html.yunarunes-real-app body header.top .header-controls .yuna-controls{
+ display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:stretch!important;
+ position:static!important;width:100%!important;min-width:0!important;gap:5px!important;
+ margin:0!important;padding:0!important;transform:none!important;
+}
+html.yunarunes-real-app body header.top .header-controls .yuna-controls>*{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:1 1 0!important;width:0!important;min-width:0!important;max-width:none!important;
+ height:40px!important;min-height:40px!important;margin:0!important;padding:0 3px!important;
+ font:800 10px/1 Arial,sans-serif!important;white-space:nowrap!important;overflow:hidden!important;
+ position:static!important;transform:none!important;
+}
+html.yunarunes-real-app body header.top>.nav>.nav-links{
+ display:none!important;position:absolute!important;top:calc(100% + 6px)!important;
+ left:10px!important;right:10px!important;width:auto!important;max-width:none!important;
+ max-height:calc(100dvh - 180px)!important;overflow-y:auto!important;grid-area:auto!important;
+ grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:10px!important;
+ margin:0!important;z-index:2147483646!important;border:1px solid #293746!important;
+ border-radius:14px!important;background:#101923!important;box-shadow:0 8px 28px #0008!important;
+}
+html.yunarunes-real-app body header.top>.nav>.nav-links.yr-menu-open{display:grid!important}
+html.yunarunes-real-app body header.top>.nav>.nav-links a{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ min-height:44px!important;padding:10px 7px!important;text-align:center!important;
+}
+</style>
 <script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
