@@ -411,7 +411,7 @@ html:not(.yunarunes-real-app) body header.top>.nav>.header-menu>#yr-menu-toggle{
  function setup(){
   var root=document.documentElement, ua=navigator.userAgent||'';
   var android=/Android/i.test(ua);
-  var webview=/;\\s*wv\\)/i.test(ua)||/\\bwv\\b/i.test(ua)||/YunaRunesApp/i.test(ua)||(/Version\\/\\d/i.test(ua)&&android);
+  var webview=/;\s*wv\)/i.test(ua)||/\bwv\b/i.test(ua)||/YunaRunesApp/i.test(ua)||(/Version\/\d/i.test(ua)&&android);
   var app=android&&webview;
   root.classList.toggle('yunarunes-real-app',app);
   var nav=document.querySelector('header.top>.nav');
