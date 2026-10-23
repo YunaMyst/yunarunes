@@ -194,7 +194,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
 (function(){
   function markApp(){
     var ua=navigator.userAgent||'';
-    if(/Android/i.test(ua)&&(/;\\s*wv\\)/i.test(ua)||/Version\\/\\d+\\.\\d+.*Chrome/i.test(ua))){
+    if(/Android/i.test(ua)&&(ua.indexOf('wv')!==-1||ua.indexOf('Version/')!==-1)){
       document.body.classList.add('yunarunes-app');
     }
   }
