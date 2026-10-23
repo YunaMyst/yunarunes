@@ -465,4 +465,44 @@ html.yunarunes-app-device body header.top>.nav>.header-menu{display:block!import
  setTimeout(repair,250);setTimeout(repair,1000);
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-menu-app-only-v1">
+/* No site normal, desktop ou mobile browser: sem botão de menu. O botão existe apenas no APK/WebView Android. */
+html:not(.yunarunes-app-device) body:not(.yunarunes-app) header.top>.nav>.header-menu,
+html:not(.yunarunes-app-device) body:not(.yunarunes-app) header.top>.nav>.nav-toggle,
+html:not(.yunarunes-app-device) body:not(.yunarunes-app) header.top>.nav>.nav-links{display:none!important}
+html.yunarunes-app-device body header.top>.nav>.header-menu,
+html body.yunarunes-app header.top>.nav>.header-menu{display:block!important;visibility:visible!important;opacity:1!important}
+html.yunarunes-app-device body header.top>.nav>.header-menu>#yr-menu-toggle,
+html body.yunarunes-app header.top>.nav>.header-menu>#yr-menu-toggle{display:flex!important;visibility:visible!important;opacity:1!important}
+html.yunarunes-app-device body header.top>.nav>.nav-links,
+html body.yunarunes-app header.top>.nav>.nav-links{display:none!important}
+html.yunarunes-app-device body header.top>.nav>.nav-toggle:checked~.nav-links,
+html body.yunarunes-app header.top>.nav>.nav-toggle:checked~.nav-links{display:grid!important}
+</style>
+<script id="yunarunes-menu-app-only-js-v1">
+(function(){
+ function apply(){
+  var ua=navigator.userAgent||'';
+  var isAndroid=/Android/i.test(ua);
+  if(isAndroid){
+   document.documentElement.classList.add('yunarunes-app-device');
+   if(document.body)document.body.classList.add('yunarunes-app');
+  }else{
+   document.documentElement.classList.remove('yunarunes-app-device');
+   if(document.body)document.body.classList.remove('yunarunes-app');
+  }
+  var app=document.documentElement.classList.contains('yunarunes-app-device')||(document.body&&document.body.classList.contains('yunarunes-app'));
+  var holder=document.querySelector('header.top>.nav>.header-menu');
+  var toggle=document.querySelector('header.top>.nav>.nav-toggle');
+  var links=document.querySelector('header.top>.nav>.nav-links');
+  if(holder)holder.style.setProperty('display',app?'block':'none','important');
+  if(toggle)toggle.style.setProperty('display',app?'none':'none','important');
+  if(links&&!app)links.style.setProperty('display','none','important');
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);
+ else apply();
+ window.addEventListener('pageshow',apply);
+})();
+</script>
+</body></html>
