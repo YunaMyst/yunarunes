@@ -875,4 +875,51 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  document.addEventListener('DOMContentLoaded',sync);window.addEventListener('load',sync);window.addEventListener('pageshow',sync);sync();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261020-app-header-grid-v7"></script>
+<style id="yunarunes-app-menu-unified-v6">
+@media(max-width:800px){
+ body.yunarunes-app header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;grid-template-rows:auto auto auto!important;align-content:start!important;align-items:center!important;gap:10px 8px!important;height:auto!important;min-height:0!important;padding:30px 10px 12px!important;box-sizing:border-box!important}
+ body.yunarunes-app header.top .header-menu{display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important;position:static!important;float:none!important;transform:none!important}
+ body.yunarunes-app header.top .header-menu .menu-btn{display:flex!important;position:static!important;transform:none!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;margin:0!important}
+ body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;position:static!important;transform:none!important;justify-content:center!important;min-width:0!important}
+ body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;position:static!important;transform:none!important;width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls{display:flex!important;position:static!important;transform:none!important;width:100%!important;min-width:0!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
+ body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
+ body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;padding:0 4px!important;font-size:11px!important;white-space:nowrap!important}
+ body.yunarunes-app header.top>.nav>.nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;position:static!important;float:none!important;transform:none!important;width:100%!important;min-width:0!important;box-sizing:border-box!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;margin:0!important}
+ body.yunarunes-app:not(.yunarunes-menu-open) header.top>.nav>.nav-links{display:none!important;height:0!important;max-height:0!important;min-height:0!important;padding:0!important;overflow:hidden!important}
+ body.yunarunes-app.yunarunes-menu-open header.top>.nav>.nav-links{display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;padding:10px 0 2px!important;overflow:visible!important}
+ body.yunarunes-app header.top>.nav>.nav-links a{display:flex!important;position:static!important;transform:none!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;box-sizing:border-box!important;margin:0!important;padding:9px 7px!important;white-space:normal!important;overflow-wrap:anywhere!important}
+ body.yunarunes-app header.top>.nav>.nav-links .nav-divider{display:none!important}
+}
+</style>
+<script id="yunarunes-app-menu-unified-v6-js">
+(function(){
+ if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
+ function sync(){
+  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
+  if(!n)return;
+  document.body.classList.add('yunarunes-app');
+  var wrap=n.querySelector('.header-menu'),toggle=n.querySelector('.nav-toggle'),links=n.querySelector('.nav-links');
+  if(!wrap||!toggle||!links)return;
+  if(links.parentElement!==n)n.appendChild(links);
+  var open=!!toggle.checked;
+  document.body.classList.toggle('yunarunes-menu-open',open);
+  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
+  set(n,'display','grid');set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
+  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
+  set(n,'grid-template-rows',open?'auto auto auto':'auto auto 0px');
+  set(n,'height','auto');set(n,'min-height','0');set(n,'align-content','start');set(n,'padding','30px 10px 12px');set(n,'gap','10px 8px');
+  set(wrap,'display','block');set(wrap,'grid-area','menu');set(wrap,'grid-column','1');set(wrap,'grid-row','1');set(wrap,'position','static');set(wrap,'transform','none');
+  set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');set(links,'position','static');set(links,'transform','none');
+  set(links,'display',open?'grid':'none');set(links,'height',open?'auto':'0');set(links,'max-height',open?'none':'0');set(links,'min-height','0');set(links,'padding',open?'10px 0 2px':'0');set(links,'margin','0');set(links,'gap',open?'8px':'0');set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');
+ }
+ function queue(){[0,30,100,250].forEach(function(ms){setTimeout(sync,ms)});}
+ document.addEventListener('click',function(e){if(e.target&&e.target.closest('.menu-btn'))queue()},true);
+ document.addEventListener('change',function(e){if(e.target&&e.target.matches('.nav-toggle'))queue()},true);
+ document.addEventListener('DOMContentLoaded',queue);window.addEventListener('load',queue);window.addEventListener('pageshow',queue);
+ sync();
+})();
+</script>
+</body></html>
