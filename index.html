@@ -323,37 +323,6 @@ view.addEventListener('click',async()=>{showing=!showing;view.textContent=showin
 form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),message=$('yr-feedback-message').value.trim(),name=$('yr-feedback-name').value.trim()||w.player;if(!rating||!message){status.textContent=w.required;return}submit.disabled=true;submit.textContent=w.sending;status.textContent='';try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,rating,message:'[YunaRunes] '+message})});if(!r.ok)throw Error('HTTP '+r.status);form.reset();setRating(0);status.textContent=w.sent;if(showing)await load()}catch(e){status.textContent=w.sendError}finally{submit.disabled=false;submit.textContent=words().send}});
 })();
 </script>
-<script id="yunarunes-apk-live-spacing">
-(function(){
-  if (!/YunaRunesApp\/1\.2/i.test(navigator.userAgent)) return;
-  function lowerAppButtons(){
-    var top=document.querySelector('header.top');
-    var nav=top && top.querySelector(':scope > .nav');
-    if(!top || !nav) return;
-    function set(el, prop, value){
-      if(el && el.style.getPropertyValue(prop)!==value){
-        el.style.setProperty(prop,value,'important');
-      } else if(el && el.style.getPropertyPriority(prop)!=='important'){
-        el.style.setProperty(prop,value,'important');
-      }
-    }
-    /* The Android WebView injects its own styles after page load.
-       Re-apply spacing briefly after that injection, without an observer loop. */
-    set(nav,'height','auto');
-    set(nav,'min-height','92px');
-    set(nav,'padding','30px 8px 8px');
-    set(nav,'align-items','center');
-    var menu=top.querySelector('.header-menu .menu-btn, .menu-btn');
-    var controls=top.querySelector('.header-controls');
-    set(menu,'transform','none');
-    set(controls,'transform','none');
-  }
-  document.addEventListener('DOMContentLoaded',lowerAppButtons);
-  window.addEventListener('load',lowerAppButtons);
-  window.addEventListener('pageshow',lowerAppButtons);
-  [0,100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(lowerAppButtons,ms);});
-})();
-</script>
 
 
 
@@ -374,7 +343,8 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
 
 
 
-<style id="yunarunes-app-header-menu-final-v7">
+
+<style id="yunarunes-app-header-menu-final-v9">
 @media(max-width:800px){
  body.yunarunes-app header.top>.nav{
   display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;
@@ -418,7 +388,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  body.yunarunes-app header.top>.nav>.nav-links .nav-divider{display:none!important}
 }
 </style>
-<script id="yunarunes-app-header-menu-final-v7-js">
+<script id="yunarunes-app-header-menu-final-v9-js">
 (function(){
  var ua=navigator.userAgent||'';
  if(!/YunaRunesApp\/1\.2/i.test(ua))return;
@@ -437,4 +407,4 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
  window.addEventListener('pageshow',init);
 })();
-</script><script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+</script><script src="language.js?v=20261023-app-header-menu-v9"></script></body></html>
