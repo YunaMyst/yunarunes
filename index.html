@@ -409,6 +409,35 @@ body.yunarunes-app header.top .yuna-controls a {
   }
 }
 </style>
+<script id="yunarunes-webview-header-repair-v3">
+(function(){
+ function repair(){
+  var ua=navigator.userAgent||'';
+  var isAndroidWebView=/Android/i.test(ua)&&(/;\s*wv\)/i.test(ua)||/Version\/\d+\.\d+.*Chrome/i.test(ua));
+  if(!isAndroidWebView)return;
+  var body=document.body, top=document.querySelector('header.top'), nav=top&&top.querySelector(':scope > .nav');
+  if(!body||!nav)return;
+  body.classList.add('yunarunes-app');
+  var brand=nav.querySelector(':scope > .header-brand'), menu=nav.querySelector(':scope > .header-menu'), controls=nav.querySelector(':scope > .header-controls'), links=nav.querySelector(':scope > .nav-links');
+  function set(el, props){if(!el)return;Object.keys(props).forEach(function(k){el.style.setProperty(k,props[k],'important');});}
+  set(top,{position:'relative',width:'100%',height:'auto',overflow:'visible',transform:'none',margin:'0',padding:'0',boxSizing:'border-box'});
+  set(nav,{display:'grid',gridTemplateColumns:'42px minmax(0,1fr)',gridTemplateRows:'auto auto auto',gridTemplateAreas:'"menu brand" "controls controls" "links links"',alignItems:'center',gap:'10px 8px',width:'100%',maxWidth:'100%',height:'auto',minHeight:'0',margin:'0',padding:'12px 10px 14px',boxSizing:'border-box',overflow:'visible'});
+  set(menu,{display:'block',position:'static',gridArea:'menu',gridColumn:'1',gridRow:'1',width:'42px',minWidth:'42px',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
+  set(brand,{display:'flex',position:'static',gridArea:'brand',gridColumn:'2',gridRow:'1',justifyContent:'center',alignItems:'center',width:'100%',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',transform:'none',overflow:'visible',boxSizing:'border-box'});
+  set(brand&&brand.querySelector('.brand'),{display:'inline-flex',position:'static',justifyContent:'center',alignItems:'center',width:'auto',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',fontSize:'18px',lineHeight:'1.2',whiteSpace:'nowrap',transform:'none',boxSizing:'border-box'});
+  set(menu&&menu.querySelector('.menu-btn'),{display:'inline-flex',position:'static',width:'40px',minWidth:'40px',height:'40px',minHeight:'40px',margin:'0',padding:'0',transform:'none',boxSizing:'border-box',alignItems:'center',justifyContent:'center'});
+  set(controls,{display:'flex',position:'static',gridArea:'controls',gridColumn:'1 / -1',gridRow:'2',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
+  set(controls&&controls.querySelector('.yuna-controls'),{display:'flex',position:'static',flexFlow:'row nowrap',alignItems:'stretch',justifyContent:'stretch',gap:'5px',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',margin:'0',padding:'0',transform:'none',boxSizing:'border-box'});
+  if(controls)Array.prototype.forEach.call(controls.querySelectorAll('.yuna-controls>*'),function(el){set(el,{display:'inline-flex',position:'static',flex:'1 1 0',alignItems:'center',justifyContent:'center',width:'0',minWidth:'0',maxWidth:'none',height:'42px',minHeight:'42px',margin:'0',padding:'0 2px',fontSize:'10px',lineHeight:'1',whiteSpace:'nowrap',transform:'none',boxSizing:'border-box',overflow:'hidden'});});
+  var toggle=nav.querySelector('.nav-toggle');
+  set(links,{display:toggle&&toggle.checked?'grid':'none',position:'static',gridArea:'links',gridColumn:'1 / -1',gridRow:'3',width:'100%',minWidth:'0',maxWidth:'100%',margin:'0',padding:'0',transform:'none',boxSizing:'border-box',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gap:'7px'});
+  if(links)Array.prototype.forEach.call(links.querySelectorAll('a'),function(el){set(el,{display:'flex',position:'static',alignItems:'center',justifyContent:'center',width:'100%',minWidth:'0',minHeight:'44px',height:'auto',margin:'0',padding:'8px 5px',whiteSpace:'normal',overflowWrap:'anywhere',transform:'none',boxSizing:'border-box'});});
+ }
+ function start(){repair();var root=document.documentElement;if(root&&!root.dataset.yunaHeaderRepair){root.dataset.yunaHeaderRepair='1';new MutationObserver(function(){repair();}).observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:['style','class']});}}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+ window.addEventListener('pageshow',repair);
+})();
+</script>
 <style id="yunarunes-app-header-overlap-fix-v2">
 /* App: cada faixa do cabeçalho ocupa a sua própria linha; os quatro controlos não se sobrepõem. */
 body.yunarunes-app header.top { position:relative!important; width:100%!important; overflow:visible!important; }
