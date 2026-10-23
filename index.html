@@ -297,19 +297,58 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
 
 
 <style id="yunarunes-menu-app-only-clean">
+/* O cabeçalho normal permanece no PC e no navegador móvel. O botão ☰ só aparece no APK. */
 html body header.top>.nav>.header-menu,
-html body header.top>.nav>.header-menu>#yr-menu-toggle {display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}
-html.yunarunes-real-app body header.top>.nav>.header-menu {display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
-html.yunarunes-real-app body header.top>.nav>.header-menu>#yr-menu-toggle {display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important}
+html body header.top>.nav>.header-menu>#yr-menu-toggle {
+ display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu {
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ position:absolute!important;left:10px!important;top:12px!important;z-index:2147483647!important;
+ width:44px!important;height:44px!important
+}
+html.yunarunes-real-app body header.top>.nav>.header-menu>#yr-menu-toggle {
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ align-items:center!important;justify-content:center!important;width:44px!important;height:44px!important;
+ min-width:44px!important;margin:0!important;padding:0!important;background:#172330!important;
+ color:#fff!important;border:1px solid #8b5cf6!important;border-radius:9px!important;
+ font:900 22px/1 Arial,sans-serif!important;cursor:pointer!important
+}
 html.yunarunes-real-app body header.top>.nav>.nav-toggle {display:none!important}
+html.yunarunes-real-app body header.top>.nav>.nav-links {display:none!important}
 html.yunarunes-real-app body header.top>.nav>.nav-toggle:checked~.nav-links {display:grid!important}
 </style>
 <script id="yunarunes-menu-app-only-clean-js">
 (function(){
  function apply(){
   var ua=navigator.userAgent||'';
-  var isApp=/Android/i.test(ua)&&(/;\\s*wv\\)/i.test(ua)||/\\bwv\\b/i.test(ua)||/YunaRunesApp/i.test(ua));
+  /* Android WebView normalmente contém "wv"; suportar também user-agent personalizado do APK. */
+  var isApp=/Android/i.test(ua)&&(/wv/i.test(ua)||/YunaRunesApp/i.test(ua));
   document.documentElement.classList.toggle('yunarunes-real-app',isApp);
+  var nav=document.querySelector('header.top>.nav');
+  var holder=nav&&nav.querySelector('.header-menu');
+  var button=nav&&nav.querySelector('#yr-menu-toggle');
+  var toggle=nav&&nav.querySelector('.nav-toggle');
+  var links=nav&&nav.querySelector('.nav-links');
+  if(!isApp||!button||!toggle||!links)return;
+  if(!button.dataset.menuBound){
+   button.dataset.menuBound='1';
+   button.addEventListener('click',function(){
+    toggle.checked=!toggle.checked;
+    button.setAttribute('aria-expanded',String(toggle.checked));
+    button.setAttribute('aria-label',toggle.checked?'Fechar menu':'Abrir menu');
+    links.style.setProperty('display',toggle.checked?'grid':'none','important');
+   });
+   links.addEventListener('click',function(e){
+    if(e.target.closest('a')){
+     toggle.checked=false;links.style.setProperty('display','none','important');
+     button.setAttribute('aria-expanded','false');
+    }
+   });
+   document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){toggle.checked=false;links.style.setProperty('display','none','important');button.setAttribute('aria-expanded','false');}
+   });
+  }
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);
  else apply();
