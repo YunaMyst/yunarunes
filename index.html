@@ -344,26 +344,6 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
 
 
 
-<script id="yunarunes-app-header-menu-final-v9-js">
-(function(){
- var ua=navigator.userAgent||'';
- if(!/YunaRunesApp/i.test(ua))return;
- function init(){
-  var n=document.querySelector('header.top>.nav');
-  if(!n)return;
-  document.body.classList.add('yunarunes-app');
-  var toggle=n.querySelector(':scope > .nav-toggle');
-  var label=n.querySelector('.header-menu .menu-btn');
-  if(!toggle||!label)return;
-  function sync(){document.body.classList.toggle('yunarunes-menu-open',!!toggle.checked);label.setAttribute('aria-expanded',toggle.checked?'true':'false');}
-  toggle.addEventListener('change',sync);
-  label.addEventListener('click',function(){setTimeout(sync,0);setTimeout(sync,50)});
-  sync();
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
- window.addEventListener('pageshow',init);
-})();
-</script>
 <style id="yunarunes-app-header-web-override-v12">
 @media(max-width:800px){
  body.yunarunes-app header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;grid-template-areas:"menu brand" "controls controls" "links links"!important;grid-template-rows:auto auto auto!important;align-items:center!important;gap:8px!important;width:100%!important;height:auto!important;min-height:0!important;padding:8px 10px 10px!important;box-sizing:border-box!important;overflow:visible!important}
@@ -374,4 +354,59 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
  body.yunarunes-app header.top>.nav>.nav-links a{position:static!important;transform:none!important;width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;box-sizing:border-box!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important}
 }
 </style>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+
+<style id="yunarunes-app-header-stability-hotfix">
+/* Keep app header controls visually stable; layout is owned by the existing app header rules. */
+body.yunarunes-app header.top,
+body.yunarunes-app header.top .nav,
+body.yunarunes-app header.top .header-brand,
+body.yunarunes-app header.top .header-menu,
+body.yunarunes-app header.top .menu-btn,
+body.yunarunes-app header.top .header-controls,
+body.yunarunes-app header.top .yuna-controls,
+body.yunarunes-app header.top .yuna-controls button,
+body.yunarunes-app header.top .yuna-controls a,
+body.yunarunes-app header.top .nav-links,
+body.yunarunes-app header.top .nav-links a {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+  backface-visibility: hidden !important;
+}
+body.yunarunes-app header.top .header-brand,
+body.yunarunes-app header.top .header-menu,
+body.yunarunes-app header.top .menu-btn,
+body.yunarunes-app header.top .header-controls,
+body.yunarunes-app header.top .yuna-controls,
+body.yunarunes-app header.top .yuna-controls button,
+body.yunarunes-app header.top .yuna-controls a {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+@media (max-width: 800px) {
+  body.yunarunes-app header.top>.nav {
+    grid-template-columns: 42px minmax(0, 1fr) !important;
+    grid-template-areas: "menu brand" "controls controls" "links links" !important;
+    grid-template-rows: auto auto auto !important;
+    align-items: center !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 8px 10px 10px !important;
+    gap: 8px !important;
+  }
+  body.yunarunes-app header.top .header-controls,
+  body.yunarunes-app header.top .yuna-controls {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    transform: none !important;
+    position: static !important;
+  }
+  body.yunarunes-app header.top .yuna-controls {
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    gap: 5px !important;
+  }
+}
+</style>
+<script src="language.js?v=20261023-header-stability-v1"></script></body></html>
