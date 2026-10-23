@@ -266,96 +266,7 @@ body.yunarunes-app header.top{padding-top:env(safe-area-inset-top, 0px)!importan
  html body header.top .header-menu .nav-links{display:none!important;position:absolute!important;top:100%!important;left:8px!important;right:8px!important;grid-area:auto!important;grid-column:auto!important;grid-row:auto!important;z-index:2147483000!important}
  html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
 }
-</style><style id="yunarunes-app-header-centered">
-@media(max-width:600px){
- html body header.top{display:block!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important}
- html body header.top>.nav{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;position:relative!important;width:100%!important;height:auto!important;min-height:0!important;gap:0!important;margin:0!important;padding:16px 10px 14px!important;box-sizing:border-box!important}
- html body header.top .header-brand{display:flex!important;order:1!important;position:relative!important;inset:auto!important;align-self:stretch!important;justify-content:center!important;align-items:center!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important;transform:none!important;z-index:1!important}
- html body header.top .header-brand a.brand{display:flex!important;position:static!important;inset:auto!important;transform:none!important;justify-content:center!important;align-items:center!important;width:100%!important;margin:0!important;padding:0!important;font-size:20px!important;line-height:1.3!important;text-align:center!important;white-space:nowrap!important}
- html body header.top .header-menu{display:contents!important}
- html body header.top .header-menu .menu-btn{display:flex!important;position:absolute!important;top:10px!important;left:10px!important;right:auto!important;bottom:auto!important;transform:none!important;width:38px!important;height:38px!important;align-items:center!important;justify-content:center!important;margin:0!important;z-index:5!important}
- html body header.top .header-menu .nav-toggle{position:absolute!important;left:-9999px!important}
- html body header.top .header-controls{display:flex!important;order:2!important;position:relative!important;inset:auto!important;transform:none!important;align-self:stretch!important;width:100%!important;max-width:100%!important;min-width:0!important;height:auto!important;justify-content:center!important;align-items:center!important;margin:18px 0 0!important;padding:0!important;z-index:2!important;box-sizing:border-box!important}
- html body header.top .header-controls .yuna-controls{display:flex!important;position:static!important;inset:auto!important;transform:none!important;flex-flow:row nowrap!important;justify-content:center!important;align-items:center!important;gap:6px!important;width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;padding:0!important}
- html body header.top .header-controls .yuna-controls>*{display:inline-flex!important;position:relative!important;inset:auto!important;transform:none!important;flex:1 1 0!important;width:auto!important;min-width:0!important;max-width:160px!important;height:40px!important;min-height:40px!important;margin:0!important;padding:0 3px!important;box-sizing:border-box!important;font-size:11px!important;white-space:nowrap!important;align-items:center!important;justify-content:center!important}
- html body header.top .header-menu .nav-links{display:none!important;position:absolute!important;top:calc(100% - 1px)!important;left:8px!important;right:8px!important;width:auto!important;max-height:65vh!important;overflow-y:auto!important;box-sizing:border-box!important;z-index:2147483000!important}
- html body header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
-}
-</style><style id="yunarunes-app-menu-overlap-fix">
-/* Corrige a barra superior no WebView Android sem alterar o cabeçalho do PC. */
-@media (max-width: 800px) {
-  html body.yunarunes-app { overflow-x: hidden !important; }
-  html body.yunarunes-app header.top { width: 100% !important; max-width: 100% !important; overflow: visible !important; }
-  html body.yunarunes-app header.top > .nav {
-    display: grid !important;
-    grid-template-columns: 42px minmax(0, 1fr) !important;
-    grid-template-areas: "menu brand" "controls controls" "links links" !important;
-    width: 100% !important; max-width: 100% !important;
-    height: auto !important; min-height: 0 !important;
-    padding: 28px 10px 10px !important;
-    gap: 8px !important; align-items: center !important;
-    overflow: visible !important;
-  }
-  html body.yunarunes-app header.top .header-menu {
-    display: block !important; grid-area: menu !important;
-    grid-column: 1 !important; grid-row: 1 !important; min-width: 0 !important;
-  }
-  html body.yunarunes-app header.top .header-menu .menu-btn {
-    display: flex !important; position: static !important; transform: none !important;
-    width: 38px !important; height: 38px !important; padding: 4px !important;
-    align-items: center !important; justify-content: center !important;
-  }
-  html body.yunarunes-app header.top .header-brand {
-    display: flex !important; grid-area: brand !important;
-    grid-column: 2 !important; grid-row: 1 !important;
-    justify-content: flex-start !important; min-width: 0 !important; overflow: hidden !important;
-  }
-  html body.yunarunes-app header.top .header-brand .brand {
-    margin: 0 !important; max-width: 100% !important;
-    font-size: 18px !important; white-space: nowrap !important;
-  }
-  html body.yunarunes-app header.top .header-controls {
-    display: flex !important; grid-area: controls !important;
-    grid-column: 1 / -1 !important; grid-row: 2 !important;
-    width: 100% !important; min-width: 0 !important; max-width: 100% !important;
-    margin: 0 !important; transform: none !important; justify-content: stretch !important;
-    overflow: visible !important;
-  }
-  html body.yunarunes-app header.top .header-controls .yuna-controls {
-    display: flex !important; flex-flow: row wrap !important;
-    justify-content: center !important; align-items: center !important;
-    gap: 6px !important; width: 100% !important; min-width: 0 !important; max-width: 100% !important;
-    overflow: visible !important;
-  }
-  html body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
-  html body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
-  html body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open {
-    display: inline-flex !important; flex: 1 1 105px !important;
-    width: auto !important; min-width: 0 !important; max-width: none !important;
-    height: 40px !important; min-height: 40px !important;
-    margin: 0 !important; padding: 0 6px !important;
-    font-size: 11px !important; line-height: 1.1 !important;
-    white-space: nowrap !important; box-sizing: border-box !important;
-    justify-content: center !important; position: relative !important;
-    left: auto !important; right: auto !important; transform: none !important;
-  }
-  html body.yunarunes-app header.top .header-menu .nav-links {
-    grid-area: links !important; grid-column: 1 / -1 !important; grid-row: 3 !important;
-    width: 100% !important; min-width: 0 !important; margin: 0 !important;
-    padding: 8px 0 2px !important; box-sizing: border-box !important;
-  }
-  html body.yunarunes-app header.top .header-menu .nav-toggle:not(:checked) ~ .nav-links {
-    display: none !important;
-  }
-  html body.yunarunes-app header.top .header-menu .nav-toggle:checked ~ .nav-links {
-    display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 6px !important;
-  }
-  html body.yunarunes-app header.top .header-menu .nav-links a {
-    min-width: 0 !important; overflow-wrap: anywhere !important;
-  }
-}
-</style></head><body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Open menu" data-pt-aria-label="Abrir menu" data-en-aria-label="Open menu">☰</label><input class="nav-toggle" id="navToggle" type="checkbox"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html?v=20261016-team-builder-fix-v12">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a class="nav-advanced" href="artifact-optimizer.html">💠 Artifacts</a><a class="nav-advanced" href="decks.html">🃏 Decks</a><a class="nav-advanced" href="account-analyzer.html">📊 Análise de Conta</a><a class="nav-advanced" href="guild-tools.html">⚔️ Guild</a></div></div><div class="header-controls"><div class="yuna-controls"><button id="yr-feedback-open" type="button" data-pt="💜 Feedback" data-en="💜 Feedback">💜 Feedback</button><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><main class="wrap"><section class="hero"><div><div class="eyebrow" data-pt="🦊 YunaRunes • Summoners War" data-en="🦊 YunaRunes • Summoners War">🦊 YunaRunes • Summoners War</div><h1 data-pt="O seu hub de mobs, runas e equipes." data-en="Your hub for monsters, runes, and teams.">O seu hub de <span>mobs, runas</span> e equipes.</h1><p data-pt="Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel." data-en="Search for a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. Everything in one place, ready for desktop and mobile.">Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel.</p><div class="search"><input id="homeSearch" list="homeNames" placeholder="🔎 Search for a monster..." data-pt-placeholder="🔎 Pesquisar um monstro..." data-en-placeholder="🔎 Search for a monster..."><datalist id="homeNames"></datalist><button class="btn" id="searchBtn" data-pt="Pesquisar" data-en="Search">Pesquisar</button></div><div id="status" class="status" data-pt="A carregar a base de monstros..." data-en="Loading monster database...">A carregar a base de monstros...</div></div><div class="fox"><img src="android/app/src/main/res/drawable/yunarunes_icon_image.webp" alt="YunaRunes fox"></div></section><a href="academy.html" class="academy-home-card" aria-label="Yuna Academy — Aprender Summoners War"><div class="academy-home-icon">🎓</div><div class="academy-home-content"><span class="academy-home-kicker">NOVOS PLAYERS</span><h2>Yuna Academy — Aprender Summoners War</h2><p>Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.</p><span class="academy-home-cta">Começar a aprender →</span></div><div class="academy-home-fox">🦊</div></a><div class="category-label"><span data-pt="ACESSO RÁPIDO" data-en="QUICK ACCESS">ACESSO RÁPIDO</span><small data-pt="Escolhe a categoria de monstros" data-en="Choose a monster category">Escolhe a categoria de monstros</small></div><section class="quick"><a class="star-card s2" href="database.html?stars=2"><strong>◆</strong><b data-pt="Nat 2" data-en="2-star">Nat 2</b><span data-pt="Monstros de 2 estrelas" data-en="2-star monsters">Monstros de 2 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s3" href="database.html?stars=3"><strong>◆</strong><b data-pt="Nat 3" data-en="3-star">Nat 3</b><span data-pt="Monstros de 3 estrelas" data-en="3-star monsters">Monstros de 3 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s4" href="database.html?stars=4"><strong>◆</strong><b data-pt="Nat 4" data-en="4-star">Nat 4</b><span data-pt="Monstros de 4 estrelas" data-en="4-star monsters">Monstros de 4 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s5" href="nat5.html"><strong>⭐</strong><b data-pt="Nat 5" data-en="5-star">Nat 5</b><span data-pt="Monstros de 5 estrelas" data-en="5-star monsters">Monstros de 5 estrelas</span><em data-pt="Abrir →" data-en="Open →">Abrir →</em></a></section><div class="section-title"><h2 data-pt="⭐ Nat 5 em destaque" data-en="⭐ Featured Nat 5">⭐ Nat 5 em destaque</h2><a href="nat5.html" data-pt="Abrir Nat 5 →" data-en="Open Nat 5 →">Abrir Nat 5 →</a></div><section id="featured" class="featured"></section><section id="yuna-retention" style="margin:22px 0 0">
+</style></head><body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Open menu" data-pt-aria-label="Abrir menu" data-en-aria-label="Open menu">☰</label></div><input class="nav-toggle" id="navToggle" type="checkbox" aria-label="Toggle navigation"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html?v=20261016-team-builder-fix-v12">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a class="nav-advanced" href="artifact-optimizer.html">💠 Artifacts</a><a class="nav-advanced" href="decks.html">🃏 Decks</a><a class="nav-advanced" href="account-analyzer.html">📊 Análise de Conta</a><a class="nav-advanced" href="guild-tools.html">⚔️ Guild</a></div><div class="header-controls"><div class="yuna-controls"><button id="yr-feedback-open" type="button" data-pt="💜 Feedback" data-en="💜 Feedback">💜 Feedback</button><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><main class="wrap"><section class="hero"><div><div class="eyebrow" data-pt="🦊 YunaRunes • Summoners War" data-en="🦊 YunaRunes • Summoners War">🦊 YunaRunes • Summoners War</div><h1 data-pt="O seu hub de mobs, runas e equipes." data-en="Your hub for monsters, runes, and teams.">O seu hub de <span>mobs, runas</span> e equipes.</h1><p data-pt="Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel." data-en="Search for a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. Everything in one place, ready for desktop and mobile.">Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel.</p><div class="search"><input id="homeSearch" list="homeNames" placeholder="🔎 Search for a monster..." data-pt-placeholder="🔎 Pesquisar um monstro..." data-en-placeholder="🔎 Search for a monster..."><datalist id="homeNames"></datalist><button class="btn" id="searchBtn" data-pt="Pesquisar" data-en="Search">Pesquisar</button></div><div id="status" class="status" data-pt="A carregar a base de monstros..." data-en="Loading monster database...">A carregar a base de monstros...</div></div><div class="fox"><img src="android/app/src/main/res/drawable/yunarunes_icon_image.webp" alt="YunaRunes fox"></div></section><a href="academy.html" class="academy-home-card" aria-label="Yuna Academy — Aprender Summoners War"><div class="academy-home-icon">🎓</div><div class="academy-home-content"><span class="academy-home-kicker">NOVOS PLAYERS</span><h2>Yuna Academy — Aprender Summoners War</h2><p>Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.</p><span class="academy-home-cta">Começar a aprender →</span></div><div class="academy-home-fox">🦊</div></a><div class="category-label"><span data-pt="ACESSO RÁPIDO" data-en="QUICK ACCESS">ACESSO RÁPIDO</span><small data-pt="Escolhe a categoria de monstros" data-en="Choose a monster category">Escolhe a categoria de monstros</small></div><section class="quick"><a class="star-card s2" href="database.html?stars=2"><strong>◆</strong><b data-pt="Nat 2" data-en="2-star">Nat 2</b><span data-pt="Monstros de 2 estrelas" data-en="2-star monsters">Monstros de 2 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s3" href="database.html?stars=3"><strong>◆</strong><b data-pt="Nat 3" data-en="3-star">Nat 3</b><span data-pt="Monstros de 3 estrelas" data-en="3-star monsters">Monstros de 3 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s4" href="database.html?stars=4"><strong>◆</strong><b data-pt="Nat 4" data-en="4-star">Nat 4</b><span data-pt="Monstros de 4 estrelas" data-en="4-star monsters">Monstros de 4 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s5" href="nat5.html"><strong>⭐</strong><b data-pt="Nat 5" data-en="5-star">Nat 5</b><span data-pt="Monstros de 5 estrelas" data-en="5-star monsters">Monstros de 5 estrelas</span><em data-pt="Abrir →" data-en="Open →">Abrir →</em></a></section><div class="section-title"><h2 data-pt="⭐ Nat 5 em destaque" data-en="⭐ Featured Nat 5">⭐ Nat 5 em destaque</h2><a href="nat5.html" data-pt="Abrir Nat 5 →" data-en="Open Nat 5 →">Abrir Nat 5 →</a></div><section id="featured" class="featured"></section><section id="yuna-retention" style="margin:22px 0 0">
 <div style="display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:9px"><div><h2 style="margin:0" data-pt="🔥 YunaRunes — Atividades" data-en="🔥 YunaRunes — Activities">🔥 YunaRunes — Atividades</h2><span style="color:#8fa0af;font-size:12px" data-pt="Conteúdo para voltar todos os dias." data-en="Content to come back to every day.">Conteúdo para voltar todos os dias.</span></div></div>
 <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
 <a href="#yuna-daily-result" id="yuna-daily-card" style="background:#111923;border:1px solid #2b3a4b;border-radius:12px;padding:15px;color:#fff;text-decoration:none"><div style="font-size:24px">💎</div><b style="display:block;margin-top:7px" data-pt="Rune do Dia" data-en="Rune of the Day">Rune do Dia</b><span style="display:block;color:#8fa0af;font-size:12px;margin-top:5px" data-pt="Uma runa em destaque para analisar, comparar e melhorar." data-en="A featured rune to analyze, compare, and improve.">Uma runa em destaque para analisar, comparar e melhorar.</span><strong id="yuna-daily-rune" style="display:block;color:#35a9e1;font-size:11px;margin-top:10px" data-pt="Abrir Runas →" data-en="Open Runes →">Abrir Runas →</strong></a>
@@ -443,483 +354,87 @@ form.addEventListener('submit',async e=>{e.preventDefault();const w=words(),mess
   [0,100,300,700,1200,2000,3000].forEach(function(ms){setTimeout(lowerAppButtons,ms);});
 })();
 </script>
-<style id="yunarunes-app-header-force-fix">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="yunarunes-app-header-menu-final-v7">
 @media(max-width:800px){
- body.yunarunes-app header.top{padding-top:0!important}
  body.yunarunes-app header.top>.nav{
   display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;
   grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;
-  gap:12px 8px!important;padding:34px 10px 14px!important;
-  min-height:0!important;height:auto!important;align-items:center!important;
+  grid-template-rows:auto auto auto!important;align-items:center!important;align-content:start!important;
+  gap:10px 8px!important;width:100%!important;height:auto!important;min-height:0!important;
+  padding:22px 10px 12px!important;box-sizing:border-box!important;
  }
- body.yunarunes-app header.top .header-menu{display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important}
- body.yunarunes-app header.top .header-menu .menu-btn{display:flex!important;position:static!important;transform:none!important;width:38px!important;height:38px!important;align-items:center!important;justify-content:center!important}
- body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;justify-content:center!important;min-width:0!important}
- body.yunarunes-app header.top .header-brand .brand{margin:0!important;font-size:18px!important;max-width:100%!important}
- body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;width:100%!important;justify-content:center!important;margin:0!important;transform:none!important}
- body.yunarunes-app header.top .header-controls .yuna-controls{display:flex!important;width:100%!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important}
+ body.yunarunes-app header.top .header-menu{display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important;position:static!important;min-width:0!important;margin:0!important}
+ body.yunarunes-app header.top .header-menu .menu-btn{
+  display:flex!important;position:static!important;inset:auto!important;transform:none!important;
+  align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;
+  margin:0!important;padding:0!important;box-sizing:border-box!important;
+ }
+ body.yunarunes-app header.top>.nav>.nav-toggle{display:none!important}
+ body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;position:static!important;transform:none!important;justify-content:center!important;min-width:0!important;margin:0!important}
+ body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;position:static!important;float:none!important;transform:none!important;width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important}
+ body.yunarunes-app header.top .header-controls .yuna-controls{display:flex!important;position:static!important;float:none!important;transform:none!important;width:100%!important;min-width:0!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important}
  body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
  body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
  body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;padding:0 4px!important;font-size:11px!important;white-space:nowrap!important}
- body.yunarunes-app header.top .header-menu .nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;display:none!important;width:100%!important}
- body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-</style>
-<script id="yunarunes-app-header-force-fix-js">
-(function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- document.body.classList.add('yunarunes-app');
- function fix(){
-  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
-  if(!h||!n)return;
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(h,'padding-top','0px');
-  set(n,'display','grid');set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
-  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
-  set(n,'gap','12px 8px');set(n,'padding','34px 10px 14px');set(n,'height','auto');set(n,'min-height','0');
-  var menu=h.querySelector('.header-menu'),brand=h.querySelector('.header-brand'),btn=h.querySelector('.header-menu .menu-btn'),controls=h.querySelector('.header-controls'),links=h.querySelector('.header-menu .nav-links'),toggle=h.querySelector('.header-menu .nav-toggle');
-  [[menu,'grid-area','menu'],[menu,'grid-column','1'],[menu,'grid-row','1'],[brand,'grid-area','brand'],[brand,'grid-column','2'],[brand,'grid-row','1'],[controls,'grid-area','controls'],[controls,'grid-column','1 / -1'],[controls,'grid-row','2'],[controls,'margin','0'],[controls,'transform','none'],[links,'grid-area','links'],[links,'grid-column','1 / -1'],[links,'grid-row','3']].forEach(x=>set(x[0],x[1],x[2]));
-  set(menu,'display','block');set(brand,'display','flex');set(brand,'justify-content','center');set(btn,'position','static');set(btn,'transform','none');set(btn,'width','38px');set(btn,'height','38px');set(controls,'display','flex');set(controls,'width','100%');set(controls,'justify-content','center');
-  var row=h.querySelector('.yuna-controls');set(row,'display','flex');set(row,'width','100%');set(row,'gap','6px');set(row,'justify-content','center');set(row,'flex-wrap','nowrap');
-  h.querySelectorAll('.yuna-controls .donate-link,.yuna-controls button[data-lang],.yuna-controls #yr-feedback-open').forEach(function(b){set(b,'flex','1 1 0');set(b,'min-width','0');set(b,'max-width','160px');set(b,'height','40px');set(b,'padding','0 4px');set(b,'font-size','11px')});
-  if(links){set(links,'display',toggle&&toggle.checked?'grid':'none');if(toggle&&toggle.checked)set(links,'grid-template-columns','repeat(2,minmax(0,1fr))')}
- }
- document.addEventListener('DOMContentLoaded',function(){
-  fix();
-  var toggle=document.querySelector('header.top .header-menu .nav-toggle');
-  if(toggle)toggle.addEventListener('change',function(){requestAnimationFrame(fix)});
- });
- window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
-})();
-</script>
-<style id="yunarunes-menu-layout-stable">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav{
-  display:grid!important;
-  grid-template-columns:42px minmax(0,1fr) 42px!important;
-  grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;
-  align-items:center!important;
-  height:auto!important;min-height:0!important;
-  padding:34px 10px 14px!important;
-  row-gap:12px!important;column-gap:8px!important;
- }
- body.yunarunes-app header.top .header-menu{grid-area:menu!important;grid-column:1!important;grid-row:1!important}
- body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;justify-content:center!important}
- body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;transform:none!important;margin:0!important}
- body.yunarunes-app header.top .header-menu .nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;width:100%!important}
- body.yunarunes-app header.top .header-menu .nav-toggle:not(:checked)~.nav-links{display:none!important}
- body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
-}
-</style>
-<script id="yunarunes-menu-stable-reapply">
-(function(){
- if(!/YunaRunesApp\\/1\\.2/i.test(navigator.userAgent))return;
- function apply(){
-  var h=document.querySelector('body.yunarunes-app header.top');
-  if(!h)return;
-  var n=h.querySelector(':scope > .nav'),t=h.querySelector('.header-menu .nav-toggle'),l=h.querySelector('.header-menu .nav-links');
-  if(!n||!t||!l)return;
-  n.style.setProperty('display','grid','important');
-  n.style.setProperty('grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"','important');
-  n.style.setProperty('grid-template-columns','42px minmax(0,1fr) 42px','important');
-  n.style.setProperty('height','auto','important');
-  n.style.setProperty('padding','34px 10px 14px','important');
-  l.style.setProperty('display',t.checked?'grid':'none','important');
-  if(t.checked)l.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');
- }
- document.addEventListener('change',function(e){if(e.target&&e.target.matches('.header-menu .nav-toggle')){apply();setTimeout(apply,80)}},true);
- document.addEventListener('click',function(e){if(e.target&&e.target.closest('.header-menu .menu-btn')){setTimeout(apply,0);setTimeout(apply,80)}},true);
- window.addEventListener('pageshow',apply);document.addEventListener('DOMContentLoaded',apply);apply();
-})();
-</script>
-<style id="yunarunes-app-menu-buttons-clean-v1">
-/* Corrige apenas os botões do menu aberto no app/WebView. */
-@media(max-width:800px){
- body.yunarunes-app header.top .header-menu .nav-links{
-  box-sizing:border-box!important;
-  width:100%!important;
-  min-width:0!important;
-  margin:0!important;
-  padding:10px 0 2px!important;
-  gap:8px!important;
-  align-items:stretch!important;
-  justify-items:stretch!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  grid-auto-rows:minmax(46px,auto)!important;
-  overflow:visible!important;
- }
- body.yunarunes-app header.top .header-menu .nav-links a{
-  box-sizing:border-box!important;
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:100%!important;
-  min-width:0!important;
-  min-height:46px!important;
-  height:auto!important;
-  margin:0!important;
-  padding:9px 7px!important;
-  border:1px solid #293746!important;
-  border-radius:9px!important;
-  background:#101923!important;
-  color:#dce6ee!important;
-  font-size:12px!important;
-  font-weight:800!important;
-  line-height:1.25!important;
-  text-align:center!important;
-  white-space:normal!important;
-  overflow-wrap:anywhere!important;
-  word-break:normal!important;
-  text-overflow:clip!important;
-  transform:none!important;
-  box-shadow:none!important;
- }
- body.yunarunes-app header.top .header-menu .nav-links a:active,
- body.yunarunes-app header.top .header-menu .nav-links a:focus-visible{
-  background:#172330!important;
-  border-color:#35a9e1!important;
-  outline:2px solid #35a9e1!important;
-  outline-offset:1px!important;
- }
- body.yunarunes-app header.top .header-menu .nav-links .nav-divider{display:none!important}
- body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{
-  display:grid!important;
- }
-}
-</style>
-
-<style id="yunarunes-app-menu-structural-fix-v2">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav{
-  display:grid!important;
-  grid-template-columns:42px minmax(0,1fr) 42px!important;
-  grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;
-  align-items:center!important;
-  gap:10px 8px!important;
-  width:100%!important;
-  height:auto!important;
-  min-height:0!important;
-  padding:30px 10px 12px!important;
- }
- /* Make the wrapper transparent to the grid so menu and links occupy separate rows. */
- body.yunarunes-app header.top .header-menu{display:contents!important}
- body.yunarunes-app header.top .header-menu .menu-btn{
-  grid-area:menu!important;
-  grid-column:1!important;
-  grid-row:1!important;
-  display:flex!important;
-  position:static!important;
-  align-items:center!important;
-  justify-content:center!important;
-  width:38px!important;
-  height:38px!important;
-  margin:0!important;
-  transform:none!important;
-  z-index:100004!important;
- }
- body.yunarunes-app header.top .header-menu .nav-toggle{display:none!important}
- body.yunarunes-app header.top .header-brand{
-  grid-area:brand!important;grid-column:2!important;grid-row:1!important;
-  display:flex!important;justify-content:center!important;min-width:0!important;
- }
- body.yunarunes-app header.top .header-controls{
-  grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;
-  display:flex!important;width:100%!important;justify-content:center!important;
-  margin:0!important;transform:none!important;min-width:0!important;
- }
- body.yunarunes-app header.top .header-controls .yuna-controls{
-  display:flex!important;width:100%!important;gap:6px!important;
-  justify-content:center!important;flex-wrap:nowrap!important;min-width:0!important;
- }
- body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
- body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
- body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{
-  flex:1 1 0!important;min-width:0!important;max-width:160px!important;
-  height:40px!important;padding:0 4px!important;font-size:11px!important;white-space:nowrap!important;
- }
- body.yunarunes-app header.top .header-menu .nav-links{
-  grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;
-  box-sizing:border-box!important;display:none!important;width:100%!important;min-width:0!important;
-  margin:0!important;padding:10px 0 2px!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;
-  align-items:stretch!important;justify-items:stretch!important;overflow:visible!important;
- }
- body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{display:grid!important}
- body.yunarunes-app header.top .header-menu .nav-links a{
-  box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;
-  width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;
-  margin:0!important;padding:9px 7px!important;border:1px solid #293746!important;border-radius:9px!important;
-  background:#101923!important;color:#dce6ee!important;font-size:12px!important;font-weight:800!important;
-  line-height:1.25!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important;
-  text-overflow:clip!important;transform:none!important;box-shadow:none!important;
- }
- body.yunarunes-app header.top .header-menu .nav-links .nav-divider{display:none!important}
-}
-</style>
-<script id="yunarunes-app-menu-structural-fix-v2-js">
-(function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- function apply(){
-  var h=document.querySelector('body.yunarunes-app header.top');
-  if(!h)return;
-  var n=h.querySelector(':scope > .nav');
-  var wrap=h.querySelector('.header-menu');
-  var btn=h.querySelector('.header-menu .menu-btn');
-  var toggle=h.querySelector('.header-menu .nav-toggle');
-  var links=h.querySelector('.header-menu .nav-links');
-  var brand=h.querySelector('.header-brand');
-  var controls=h.querySelector('.header-controls');
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(n,'display','grid');
-  set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
-  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
-  set(n,'grid-template-rows','auto auto auto');
-  set(n,'height','auto');set(n,'min-height','0');set(n,'padding','30px 10px 12px');set(n,'gap','10px 8px');
-  set(wrap,'display','contents');
-  set(btn,'grid-area','menu');set(btn,'grid-column','1');set(btn,'grid-row','1');
-  set(btn,'position','static');set(btn,'transform','none');set(btn,'width','38px');set(btn,'height','38px');
-  set(toggle,'display','none');
-  set(brand,'grid-area','brand');set(brand,'grid-column','2');set(brand,'grid-row','1');
-  set(brand,'display','flex');set(brand,'justify-content','center');
-  set(controls,'grid-area','controls');set(controls,'grid-column','1 / -1');set(controls,'grid-row','2');
-  set(controls,'display','flex');set(controls,'width','100%');set(controls,'justify-content','center');set(controls,'transform','none');
-  set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');
-  set(links,'display',toggle&&toggle.checked?'grid':'none');set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');
-  set(links,'width','100%');set(links,'min-width','0');set(links,'gap','8px');
- }
- document.addEventListener('change',function(e){
-  if(e.target&&e.target.matches('.header-menu .nav-toggle')){apply();setTimeout(apply,0);setTimeout(apply,100)}
- },true);
- document.addEventListener('click',function(e){
-  if(e.target&&e.target.closest('.header-menu .menu-btn')){setTimeout(apply,0);setTimeout(apply,80)}
- },true);
- document.addEventListener('DOMContentLoaded',apply);
- window.addEventListener('load',apply);
- window.addEventListener('pageshow',apply);
- apply();
-})();
-</script>
-
-<style id="yunarunes-app-menu-closed-state-fix-v3">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav{grid-auto-flow:row!important;grid-template-rows:38px 40px auto!important}
- body.yunarunes-app header.top .header-menu .nav-links{
-  position:static!important;float:none!important;clear:both!important;
-  inset:auto!important;transform:none!important;align-self:stretch!important;
-  overflow:hidden!important;box-sizing:border-box!important;
- }
- body.yunarunes-app header.top .header-menu .nav-toggle:not(:checked)~.nav-links{
-  display:none!important;height:0!important;min-height:0!important;max-height:0!important;
-  padding:0!important;margin:0!important;border:0!important;gap:0!important;
- }
- body.yunarunes-app header.top .header-menu .nav-toggle:checked~.nav-links{
-  display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;
-  padding:10px 0 2px!important;margin:0!important;gap:8px!important;
- }
- body.yunarunes-app header.top .header-controls,
- body.yunarunes-app header.top .header-controls .yuna-controls{
-  position:relative!important;inset:auto!important;float:none!important;transform:none!important;
-  align-self:center!important;box-sizing:border-box!important;
- }
-}
-</style>
-<script id="yunarunes-app-menu-closed-state-fix-v3-js">
-(function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- function apply(){
-  var h=document.querySelector('body.yunarunes-app header.top');
-  if(!h)return;
-  var n=h.querySelector(':scope > .nav'),t=h.querySelector('.header-menu .nav-toggle'),l=h.querySelector('.header-menu .nav-links');
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(n,'grid-auto-flow','row');set(n,'grid-template-rows',t&&t.checked?'38px 40px auto':'38px 40px 0px');
-  set(l,'position','static');set(l,'float','none');set(l,'clear','both');set(l,'transform','none');set(l,'overflow','hidden');set(l,'box-sizing','border-box');
-  if(t&&t.checked){
-   set(l,'display','grid');set(l,'height','auto');set(l,'max-height','none');set(l,'min-height','0');set(l,'padding','10px 0 2px');set(l,'margin','0');set(l,'gap','8px');
-  }else{
-   set(l,'display','none');set(l,'height','0');set(l,'max-height','0');set(l,'min-height','0');set(l,'padding','0');set(l,'margin','0');set(l,'border','0');set(l,'gap','0');
-  }
-  var c=h.querySelector('.header-controls'),row=h.querySelector('.yuna-controls');
-  set(c,'position','relative');set(c,'inset','auto');set(c,'float','none');set(c,'transform','none');
-  set(row,'position','relative');set(row,'inset','auto');set(row,'float','none');set(row,'transform','none');
- }
- document.addEventListener('change',function(e){if(e.target&&e.target.matches('.header-menu .nav-toggle')){apply();requestAnimationFrame(apply)}},true);
- document.addEventListener('click',function(e){if(e.target&&e.target.closest('.header-menu .menu-btn')){setTimeout(apply,0);setTimeout(apply,80)}},true);
- document.addEventListener('DOMContentLoaded',apply);window.addEventListener('load',apply);window.addEventListener('pageshow',apply);apply();
-})();
-</script>
-
-<style id="yunarunes-app-header-menu-reparent-v4">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav{
-  display:grid!important;
-  grid-template-columns:42px minmax(0,1fr) 42px!important;
-  grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;
-  grid-template-rows:auto auto auto!important;
-  align-items:center!important;
-  align-content:start!important;
-  gap:10px 8px!important;
-  width:100%!important;height:auto!important;min-height:0!important;
-  padding:30px 10px 12px!important;box-sizing:border-box!important;
- }
- body.yunarunes-app header.top .header-menu{
-  display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important;
-  position:static!important;float:none!important;transform:none!important;min-width:0!important;
- }
- body.yunarunes-app header.top .header-menu .menu-btn{
-  display:flex!important;position:static!important;transform:none!important;
-  width:38px!important;height:38px!important;align-items:center!important;justify-content:center!important;
-  margin:0!important;box-sizing:border-box!important;
- }
- body.yunarunes-app header.top .header-menu .nav-toggle{display:none!important}
- body.yunarunes-app header.top .header-brand{
-  grid-area:brand!important;grid-column:2!important;grid-row:1!important;
-  display:flex!important;position:static!important;transform:none!important;
-  justify-content:center!important;min-width:0!important;margin:0!important;
- }
- body.yunarunes-app header.top .header-controls{
-  grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;
-  display:flex!important;position:static!important;float:none!important;transform:none!important;
-  width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important;
- }
- body.yunarunes-app header.top .header-controls .yuna-controls{
-  display:flex!important;position:static!important;transform:none!important;float:none!important;
-  width:100%!important;min-width:0!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important;
- }
- body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
- body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
- body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{
-  flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;
-  padding:0 4px!important;font-size:11px!important;white-space:nowrap!important;
- }
  body.yunarunes-app header.top>.nav>.nav-links{
   grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;
-  position:static!important;inset:auto!important;float:none!important;transform:none!important;
-  box-sizing:border-box!important;width:100%!important;min-width:0!important;
-  margin:0!important;padding:10px 0 2px!important;
-  grid-template-columns:repeat(2,minmax(0,1fr))!important;
-  grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;
-  align-items:stretch!important;justify-items:stretch!important;overflow:visible!important;
+  display:none!important;position:static!important;float:none!important;transform:none!important;
+  width:100%!important;min-width:0!important;height:0!important;max-height:0!important;min-height:0!important;
+  box-sizing:border-box!important;margin:0!important;padding:0!important;overflow:hidden!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;
+ }
+ body.yunarunes-app header.top>.nav>.nav-toggle:checked~.nav-links{
+  display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;
+  margin:0!important;padding:10px 0 2px!important;overflow:visible!important;
  }
  body.yunarunes-app header.top>.nav>.nav-links a{
-  display:flex!important;position:static!important;transform:none!important;float:none!important;
-  box-sizing:border-box!important;align-items:center!important;justify-content:center!important;
-  width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;
-  margin:0!important;padding:9px 7px!important;border:1px solid #293746!important;border-radius:9px!important;
+  display:flex!important;position:static!important;float:none!important;transform:none!important;
+  align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;
+  min-height:46px!important;height:auto!important;box-sizing:border-box!important;margin:0!important;
+  padding:9px 7px!important;border:1px solid #293746!important;border-radius:9px!important;
   background:#101923!important;color:#dce6ee!important;font-size:12px!important;font-weight:800!important;
   line-height:1.25!important;text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important;
  }
  body.yunarunes-app header.top>.nav>.nav-links .nav-divider{display:none!important}
 }
 </style>
-<script id="yunarunes-app-header-menu-reparent-v4-js">
+<script id="yunarunes-app-header-menu-final-v7-js">
 (function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- function fix(){
-  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
-  if(!h||!n)return;
-  document.body.classList.add('yunarunes-app');
-  var wrap=n.querySelector('.header-menu'),toggle=wrap&&wrap.querySelector('.nav-toggle');
-  var links=wrap&&wrap.querySelector('.nav-links');
-  if(!wrap||!toggle||!links)return;
-  if(links.parentElement!==n)n.appendChild(links);
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(n,'display','grid');set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
-  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
-  set(n,'grid-template-rows','auto auto auto');set(n,'align-content','start');set(n,'height','auto');set(n,'min-height','0');set(n,'padding','30px 10px 12px');set(n,'gap','10px 8px');
-  set(wrap,'display','block');set(wrap,'grid-area','menu');set(wrap,'grid-column','1');set(wrap,'grid-row','1');set(wrap,'position','static');set(wrap,'transform','none');
-  set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');
-  set(links,'display',toggle.checked?'grid':'none');set(links,'position','static');set(links,'transform','none');set(links,'width','100%');set(links,'min-width','0');set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');set(links,'gap','8px');
-  var b=wrap.querySelector('.menu-btn'),brand=n.querySelector('.header-brand'),controls=n.querySelector('.header-controls');
-  set(b,'position','static');set(b,'transform','none');set(b,'width','38px');set(b,'height','38px');
-  set(brand,'grid-area','brand');set(brand,'grid-column','2');set(brand,'grid-row','1');set(brand,'display','flex');set(brand,'justify-content','center');
-  set(controls,'grid-area','controls');set(controls,'grid-column','1 / -1');set(controls,'grid-row','2');set(controls,'display','flex');set(controls,'position','static');set(controls,'transform','none');set(controls,'width','100%');set(controls,'margin','0');
- }
- document.addEventListener('change',function(e){if(e.target&&e.target.matches('.header-menu .nav-toggle')){fix();setTimeout(fix,50)}},true);
- document.addEventListener('click',function(e){if(e.target&&e.target.closest('.header-menu .menu-btn')){setTimeout(fix,0);setTimeout(fix,50)}},true);
- document.addEventListener('DOMContentLoaded',fix);window.addEventListener('load',fix);window.addEventListener('pageshow',fix);fix();
-})();
-</script>
-
-<style id="yunarunes-app-menu-state-fix-v5">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav>.nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
- body.yunarunes-app:not(.yunarunes-menu-open) header.top>.nav>.nav-links{display:none!important;height:0!important;max-height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
- body.yunarunes-app.yunarunes-menu-open header.top>.nav>.nav-links{display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;margin:0!important;padding:10px 0 2px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;overflow:visible!important}
-}
-</style>
-<script id="yunarunes-app-menu-state-fix-v5-js">
-(function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- function sync(){
-  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
-  if(!h||!n)return;
-  var wrap=n.querySelector('.header-menu'),toggle=n.querySelector('.nav-toggle'),links=n.querySelector('.nav-links');
-  if(!wrap||!toggle||!links)return;
-  document.body.classList.add('yunarunes-app');
-  if(links.parentElement!==n)n.appendChild(links);
-  document.body.classList.toggle('yunarunes-menu-open',!!toggle.checked);
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(links,'display',toggle.checked?'grid':'none');
-  set(links,'height',toggle.checked?'auto':'0');
-  set(links,'max-height',toggle.checked?'none':'0');
-  set(links,'min-height','0');
-  set(links,'padding',toggle.checked?'10px 0 2px':'0');
-  set(links,'margin','0');
-  set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');
-  set(links,'gap',toggle.checked?'8px':'0');
-  set(n,'grid-template-rows',toggle.checked?'auto auto auto':'auto auto 0px');
- }
- document.addEventListener('change',function(e){if(e.target&&e.target.matches('.nav-toggle')){sync();setTimeout(sync,30)}},true);
- document.addEventListener('click',function(e){if(e.target&&e.target.closest('.menu-btn')){setTimeout(sync,0);setTimeout(sync,40)}},true);
- document.addEventListener('DOMContentLoaded',sync);window.addEventListener('load',sync);window.addEventListener('pageshow',sync);sync();
-})();
-</script>
-
-<style id="yunarunes-app-menu-unified-v6">
-@media(max-width:800px){
- body.yunarunes-app header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr) 42px!important;grid-template-areas:"menu brand spacer" "controls controls controls" "links links links"!important;grid-template-rows:auto auto auto!important;align-content:start!important;align-items:center!important;gap:10px 8px!important;height:auto!important;min-height:0!important;padding:30px 10px 12px!important;box-sizing:border-box!important}
- body.yunarunes-app header.top .header-menu{display:block!important;grid-area:menu!important;grid-column:1!important;grid-row:1!important;position:static!important;float:none!important;transform:none!important}
- body.yunarunes-app header.top .header-menu .menu-btn{display:flex!important;position:static!important;transform:none!important;align-items:center!important;justify-content:center!important;width:38px!important;height:38px!important;margin:0!important}
- body.yunarunes-app header.top .header-brand{grid-area:brand!important;grid-column:2!important;grid-row:1!important;display:flex!important;position:static!important;transform:none!important;justify-content:center!important;min-width:0!important}
- body.yunarunes-app header.top .header-controls{grid-area:controls!important;grid-column:1/-1!important;grid-row:2!important;display:flex!important;position:static!important;transform:none!important;width:100%!important;min-width:0!important;margin:0!important;justify-content:center!important}
- body.yunarunes-app header.top .header-controls .yuna-controls{display:flex!important;position:static!important;transform:none!important;width:100%!important;min-width:0!important;gap:6px!important;justify-content:center!important;flex-wrap:nowrap!important}
- body.yunarunes-app header.top .header-controls .yuna-controls .donate-link,
- body.yunarunes-app header.top .header-controls .yuna-controls button[data-lang],
- body.yunarunes-app header.top .header-controls .yuna-controls #yr-feedback-open{flex:1 1 0!important;min-width:0!important;max-width:160px!important;height:40px!important;padding:0 4px!important;font-size:11px!important;white-space:nowrap!important}
- body.yunarunes-app header.top>.nav>.nav-links{grid-area:links!important;grid-column:1/-1!important;grid-row:3!important;position:static!important;float:none!important;transform:none!important;width:100%!important;min-width:0!important;box-sizing:border-box!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:minmax(46px,auto)!important;gap:8px!important;margin:0!important}
- body.yunarunes-app:not(.yunarunes-menu-open) header.top>.nav>.nav-links{display:none!important;height:0!important;max-height:0!important;min-height:0!important;padding:0!important;overflow:hidden!important}
- body.yunarunes-app.yunarunes-menu-open header.top>.nav>.nav-links{display:grid!important;height:auto!important;max-height:none!important;min-height:0!important;padding:10px 0 2px!important;overflow:visible!important}
- body.yunarunes-app header.top>.nav>.nav-links a{display:flex!important;position:static!important;transform:none!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:46px!important;height:auto!important;box-sizing:border-box!important;margin:0!important;padding:9px 7px!important;white-space:normal!important;overflow-wrap:anywhere!important}
- body.yunarunes-app header.top>.nav>.nav-links .nav-divider{display:none!important}
-}
-</style>
-<script id="yunarunes-app-menu-unified-v6-js">
-(function(){
- if(!/YunaRunesApp\/1\.2/i.test(navigator.userAgent))return;
- function sync(){
-  var h=document.querySelector('header.top'),n=h&&h.querySelector(':scope > .nav');
+ var ua=navigator.userAgent||'';
+ if(!/YunaRunesApp\/1\.2/i.test(ua))return;
+ function init(){
+  var n=document.querySelector('header.top>.nav');
   if(!n)return;
   document.body.classList.add('yunarunes-app');
-  var wrap=n.querySelector('.header-menu'),toggle=n.querySelector('.nav-toggle'),links=n.querySelector('.nav-links');
-  if(!wrap||!toggle||!links)return;
-  if(links.parentElement!==n)n.appendChild(links);
-  var open=!!toggle.checked;
-  document.body.classList.toggle('yunarunes-menu-open',open);
-  function set(el,k,v){if(el)el.style.setProperty(k,v,'important')}
-  set(n,'display','grid');set(n,'grid-template-columns','42px minmax(0,1fr) 42px');
-  set(n,'grid-template-areas','"menu brand spacer" "controls controls controls" "links links links"');
-  set(n,'grid-template-rows',open?'auto auto auto':'auto auto 0px');
-  set(n,'height','auto');set(n,'min-height','0');set(n,'align-content','start');set(n,'padding','30px 10px 12px');set(n,'gap','10px 8px');
-  set(wrap,'display','block');set(wrap,'grid-area','menu');set(wrap,'grid-column','1');set(wrap,'grid-row','1');set(wrap,'position','static');set(wrap,'transform','none');
-  set(links,'grid-area','links');set(links,'grid-column','1 / -1');set(links,'grid-row','3');set(links,'position','static');set(links,'transform','none');
-  set(links,'display',open?'grid':'none');set(links,'height',open?'auto':'0');set(links,'max-height',open?'none':'0');set(links,'min-height','0');set(links,'padding',open?'10px 0 2px':'0');set(links,'margin','0');set(links,'gap',open?'8px':'0');set(links,'grid-template-columns','repeat(2,minmax(0,1fr))');
+  var toggle=n.querySelector(':scope > .nav-toggle');
+  var label=n.querySelector('.header-menu .menu-btn');
+  if(!toggle||!label)return;
+  function sync(){document.body.classList.toggle('yunarunes-menu-open',!!toggle.checked);label.setAttribute('aria-expanded',toggle.checked?'true':'false');}
+  toggle.addEventListener('change',sync);
+  label.addEventListener('click',function(){setTimeout(sync,0);setTimeout(sync,50)});
+  sync();
  }
- function queue(){[0,30,100,250].forEach(function(ms){setTimeout(sync,ms)});}
- document.addEventListener('click',function(e){if(e.target&&e.target.closest('.menu-btn'))queue()},true);
- document.addEventListener('change',function(e){if(e.target&&e.target.matches('.nav-toggle'))queue()},true);
- document.addEventListener('DOMContentLoaded',queue);window.addEventListener('load',queue);window.addEventListener('pageshow',queue);
- sync();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+ window.addEventListener('pageshow',init);
 })();
-</script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+</script><script src="language.js?v=20261023-app-header-menu-final-v7"></script></body></html>
