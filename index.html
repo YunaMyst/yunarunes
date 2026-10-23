@@ -113,6 +113,70 @@ html body header.top .header-controls .donate-link{color:#f0dcff!important;text-
  html body header.top .nav-links a{min-height:44px!important}
 }
 </style>
+
+<style id="yunarunes-app-header-forced-layout-v1">
+/* Força o layout compacto dentro do APK mesmo quando o WebView reporta largura de desktop. */
+html body.yunarunes-app header.top{position:relative!important;z-index:1000!important;overflow:visible!important;width:100%!important}
+html body.yunarunes-app header.top>.nav{
+ display:grid!important;grid-template-columns:minmax(0,1fr)!important;
+ grid-template-areas:"brand" "controls"!important;grid-template-rows:auto auto!important;
+ align-items:center!important;gap:10px!important;width:100%!important;max-width:none!important;
+ min-height:0!important;height:auto!important;margin:0!important;padding:12px 10px!important;position:relative!important;
+}
+html body.yunarunes-app header.top>.nav>.header-brand{
+ grid-area:brand!important;display:flex!important;justify-content:center!important;align-items:center!important;
+ width:100%!important;min-width:0!important;min-height:40px!important;margin:0!important;padding:0 48px!important;
+}
+html body.yunarunes-app header.top .header-brand a.brand{
+ display:inline-flex!important;justify-content:center!important;align-items:center!important;
+ margin:0!important;padding:0!important;font-size:20px!important;line-height:1.2!important;
+ white-space:nowrap!important;position:static!important;
+}
+html body.yunarunes-app header.top>.nav>.header-menu{
+ display:block!important;position:absolute!important;left:10px!important;top:12px!important;
+ width:40px!important;height:40px!important;margin:0!important;padding:0!important;z-index:1015!important;
+}
+html body.yunarunes-app header.top .header-menu .menu-btn{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:40px!important;height:40px!important;margin:0!important;padding:0!important;
+ position:static!important;border:1px solid #293746!important;border-radius:8px!important;
+ background:#172330!important;color:#fff!important;font-size:20px!important;line-height:1!important;cursor:pointer!important;
+}
+html body.yunarunes-app header.top>.nav>.header-controls{
+ grid-area:controls!important;display:flex!important;justify-content:center!important;align-items:center!important;
+ width:100%!important;min-width:0!important;margin:0!important;padding:0!important;
+}
+html body.yunarunes-app header.top .header-controls .yuna-controls{
+ display:flex!important;flex-flow:row nowrap!important;justify-content:stretch!important;align-items:center!important;
+ width:100%!important;min-width:0!important;gap:6px!important;margin:0!important;padding:0!important;
+}
+html body.yunarunes-app header.top .header-controls .yuna-controls>*{
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:1 1 0!important;width:0!important;min-width:0!important;max-width:none!important;
+ height:40px!important;min-height:40px!important;margin:0!important;padding:0 3px!important;
+ font:800 11px/1 Arial,sans-serif!important;white-space:nowrap!important;overflow:hidden!important;
+}
+html body.yunarunes-app header.top>.nav>.nav-toggle{display:none!important}
+html body.yunarunes-app header.top>.nav>.nav-links{
+ display:none!important;position:absolute!important;top:calc(100% + 5px)!important;
+ left:10px!important;right:10px!important;width:auto!important;max-width:none!important;
+ max-height:calc(100dvh - 170px)!important;overflow-y:auto!important;
+ grid-area:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:7px!important;padding:10px!important;margin:0!important;z-index:1020!important;
+ border:1px solid #293746!important;border-radius:14px!important;background:#101923!important;
+ box-shadow:0 8px 28px #0008!important;
+}
+html body.yunarunes-app header.top>.nav>.nav-toggle:checked~.nav-links{display:grid!important}
+html body.yunarunes-app header.top .nav-links a{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ min-height:44px!important;padding:9px 6px!important;font-size:12px!important;
+ text-align:center!important;white-space:normal!important;overflow-wrap:anywhere!important;
+}
+@media(max-width:360px){
+ html body.yunarunes-app header.top .header-controls .yuna-controls{gap:3px!important}
+ html body.yunarunes-app header.top .header-controls .yuna-controls>*{font-size:9px!important}
+}
+</style>
 </head><body><header class="top"><nav class="nav"><div class="header-brand"><a class="brand" href="index.html" aria-label="YunaRunes" style="display:flex!important;align-items:center!important;color:#ffffff!important;text-decoration:none!important;font-weight:900!important;font-size:18px!important;line-height:1!important;white-space:nowrap!important;border:0!important;background:transparent!important"><span style="color:#ffffff!important;text-decoration:none!important">YunaRunes</span></a></div><div class="header-menu"><label class="menu-btn" for="navToggle" aria-label="Open menu" data-pt-aria-label="Abrir menu" data-en-aria-label="Open menu">☰</label></div><input class="nav-toggle" id="navToggle" type="checkbox" aria-label="Toggle navigation"><div class="nav-links"><a href="index.html">🏠 Início</a><a href="database.html">👹 Database</a><a href="team-builder.html?v=20261016-team-builder-fix-v12">⚔️ Team Builder</a><a href="runes.html">🧿 Runas</a><a href="optimizer.html">⚙️ Optimizer</a><span class="nav-divider"></span><a class="nav-advanced" href="artifact-optimizer.html">💠 Artifacts</a><a class="nav-advanced" href="decks.html">🃏 Decks</a><a class="nav-advanced" href="account-analyzer.html">📊 Análise de Conta</a><a class="nav-advanced" href="guild-tools.html">⚔️ Guild</a></div><div class="header-controls"><div class="yuna-controls"><button id="yr-feedback-open" type="button" data-pt="💜 Feedback" data-en="💜 Feedback">💜 Feedback</button><a class="donate-link" href="https://www.paypal.com/myaccount/summary" target="_blank" rel="noopener noreferrer">💜 Donate</a><button type="button" data-lang="pt">🇧🇷 PT/BR</button><button type="button" data-lang="en">🇬🇧 ENG</button></div></div></nav></header><main class="wrap"><section class="hero"><div><div class="eyebrow" data-pt="🦊 YunaRunes • Summoners War" data-en="🦊 YunaRunes • Summoners War">🦊 YunaRunes • Summoners War</div><h1 data-pt="O seu hub de mobs, runas e equipes." data-en="Your hub for monsters, runes, and teams.">O seu hub de <span>mobs, runas</span> e equipes.</h1><p data-pt="Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel." data-en="Search for a monster, build a team, create builds, optimize your inventory, and save your favorite monsters. Everything in one place, ready for desktop and mobile.">Pesquisa um monstro, monta uma equipa, cria builds, otimiza o teu inventário e guarda os teus monstros favoritos. Tudo num só lugar, preparado para PC e telemóvel.</p><div class="search"><input id="homeSearch" list="homeNames" placeholder="🔎 Search for a monster..." data-pt-placeholder="🔎 Pesquisar um monstro..." data-en-placeholder="🔎 Search for a monster..."><datalist id="homeNames"></datalist><button class="btn" id="searchBtn" data-pt="Pesquisar" data-en="Search">Pesquisar</button></div><div id="status" class="status" data-pt="A carregar a base de monstros..." data-en="Loading monster database...">A carregar a base de monstros...</div></div><div class="fox"><img src="android/app/src/main/res/drawable/yunarunes_icon_image.webp" alt="YunaRunes fox"></div></section><a href="academy.html" class="academy-home-card" aria-label="Yuna Academy — Aprender Summoners War"><div class="academy-home-icon">🎓</div><div class="academy-home-content"><span class="academy-home-kicker">NOVOS PLAYERS</span><h2>Yuna Academy — Aprender Summoners War</h2><p>Aprende desde o básico: elementos, PROC, STUN, runas, stats, funções dos monstros e muito mais.</p><span class="academy-home-cta">Começar a aprender →</span></div><div class="academy-home-fox">🦊</div></a><div class="category-label"><span data-pt="ACESSO RÁPIDO" data-en="QUICK ACCESS">ACESSO RÁPIDO</span><small data-pt="Escolhe a categoria de monstros" data-en="Choose a monster category">Escolhe a categoria de monstros</small></div><section class="quick"><a class="star-card s2" href="database.html?stars=2"><strong>◆</strong><b data-pt="Nat 2" data-en="2-star">Nat 2</b><span data-pt="Monstros de 2 estrelas" data-en="2-star monsters">Monstros de 2 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s3" href="database.html?stars=3"><strong>◆</strong><b data-pt="Nat 3" data-en="3-star">Nat 3</b><span data-pt="Monstros de 3 estrelas" data-en="3-star monsters">Monstros de 3 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s4" href="database.html?stars=4"><strong>◆</strong><b data-pt="Nat 4" data-en="4-star">Nat 4</b><span data-pt="Monstros de 4 estrelas" data-en="4-star monsters">Monstros de 4 estrelas</span><em data-pt="Ver monstros →" data-en="View monsters →">Ver monstros →</em></a><a class="star-card s5" href="nat5.html"><strong>⭐</strong><b data-pt="Nat 5" data-en="5-star">Nat 5</b><span data-pt="Monstros de 5 estrelas" data-en="5-star monsters">Monstros de 5 estrelas</span><em data-pt="Abrir →" data-en="Open →">Abrir →</em></a></section><div class="section-title"><h2 data-pt="⭐ Nat 5 em destaque" data-en="⭐ Featured Nat 5">⭐ Nat 5 em destaque</h2><a href="nat5.html" data-pt="Abrir Nat 5 →" data-en="Open Nat 5 →">Abrir Nat 5 →</a></div><section id="featured" class="featured"></section><section id="yuna-retention" style="margin:22px 0 0">
 <div style="display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:9px"><div><h2 style="margin:0" data-pt="🔥 YunaRunes — Atividades" data-en="🔥 YunaRunes — Activities">🔥 YunaRunes — Atividades</h2><span style="color:#8fa0af;font-size:12px" data-pt="Conteúdo para voltar todos os dias." data-en="Content to come back to every day.">Conteúdo para voltar todos os dias.</span></div></div>
 <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
