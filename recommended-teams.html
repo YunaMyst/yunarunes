@@ -37,19 +37,36 @@ main{max-width:1200px;margin:auto;padding:24px 16px 50px}.hero{padding:25px;bord
 <header><nav class="nav"><a class="brand" href="index.html">🦊 YunaRunes</a></nav></header>
 <main>
 <script>
-/* Corrige grafias antigas se forem mantidas por conteúdo local ou cache da página. */
-document.addEventListener('DOMContentLoaded', () => {
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  const nodes = [];
-  while (walker.nextNode()) nodes.push(walker.currentNode);
-  for (const node of nodes) {
-    if (/Elementoais/i.test(node.nodeValue)) {
-      node.nodeValue = node.nodeValue.replace(/Elementoais/gi, match => match[0] === 'E' ? 'Elementais' : 'elementais');
+/* Normaliza textos antigos mesmo quando scripts da página os inserem depois do carregamento. */
+(() => {
+  const bad = 'Elemento' + 'ais';
+  const fixText = (value) => value.replace(new RegExp(bad, 'gi'), match => match[0] === 'E' ? 'Elementais' : 'elementais');
+  const scan = (root) => {
+    if (root.nodeType === Node.TEXT_NODE) {
+      if (root.nodeValue && root.nodeValue.toLowerCase().includes(bad.toLowerCase())) root.nodeValue = fixText(root.nodeValue);
+      return;
     }
-  }
-});
+    if (root.nodeType !== Node.ELEMENT_NODE && root !== document) return;
+    if (root.attributes) {
+      for (const attr of [...root.attributes]) {
+        if (attr.value.toLowerCase().includes(bad.toLowerCase())) root.setAttribute(attr.name, fixText(attr.value));
+      }
+    }
+    if (root.childNodes) for (const child of [...root.childNodes]) scan(child);
+  };
+  const run = () => scan(document.body);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run, {once:true});
+  else run();
+  new MutationObserver(mutations => {
+    for (const mutation of mutations) {
+      if (mutation.type === 'characterData') scan(mutation.target);
+      for (const node of mutation.addedNodes || []) scan(node);
+      if (mutation.type === 'attributes') scan(mutation.target);
+    }
+  }).observe(document.documentElement, {subtree:true,childList:true,characterData:true,attributes:true});
+})();
 </script>
-<section class="hero"><div class="eyebrow" data-pt="GUIA DE COMPOSIÇÕES" data-en="TEAM COMPOSITION GUIDE">GUIA DE COMPOSIÇÕES</div><h1 data-pt="⚔️ Team Recomendados" data-en="⚔️ Recommended Teams">⚔️ Team Recomendados</h1><p data-pt="Descobre composições para as Bestas Elementais, Cairos, Raid 5 e Raides Elementais." data-en="Find team composition ideas for Elemental Beasts, Cairos, Raid 5, and Elemental Raids.">Encontra ideias de composição para Bestas Elementais, Cairos, Raid 5 e Raides Elementais.</p></section>
+<section class="hero"><div class="eyebrow" data-pt="GUIA DE COMPOSIÇÕES" data-en="TEAM COMPOSITION GUIDE">GUIA DE COMPOSIÇÕES</div><h1 data-pt="⚔️ Team Recomendados" data-en="⚔️ Recommended Teams">⚔️ Team Recomendados</h1><p data-pt="Descobre composições para as Bestas Elementais, Cairos, Raid 5 e Raides Elementais." data-en="Find team composition ideas for Elemental Beasts, Cairos, Raid 5, and Elemental Raids.">Descobre composições para as Bestas Elementais, Cairos, Raid 5 e Raides Elementais.</p></section>
 <div class="notice" data-pt="Nota: as composições são modelos por função e ponto de partida. O resultado depende dos monstros, runas, artefactos e mecânicas atuais do jogo; confirma os requisitos antes de investir recursos." data-en="Note: these are role-based composition templates and starting points. Results depend on your monsters, runes, artifacts, and current game mechanics; verify requirements before investing resources.">Nota: as composições são modelos por função e ponto de partida. O resultado depende dos monstros, runas, artefactos e mecânicas atuais do jogo; confirma os requisitos antes de investir recursos.</div>
 <div class="filters" role="group" aria-label="Filtrar conteúdo">
 <button class="active" data-filter="all" data-pt="Todos" data-en="All">Todos</button><button data-filter="beasts" data-pt="🐲 Bestas Elementais" data-en="🐲 Elemental Beasts">🐲 Bestas Elementais</button><button data-filter="cairos" data-pt="🏰 Cairos" data-en="🏰 Cairos">🏰 Cairos</button><button data-filter="r5" data-pt="🔥 Raid 5" data-en="🔥 Raid 5">🔥 Raid 5</button><button data-filter="elemental" data-pt="🌈 Raides Elementais" data-en="🌈 Elemental Raids">🌈 Raides Elementais</button><button id="showSaved" data-pt="⭐ Os meus times guardados" data-en="⭐ My saved teams">⭐ Os meus times guardados</button></div>
@@ -118,4 +135,4 @@ async function init(){const catalog=await catalogPromise;document.querySelectorA
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261028-elementais-fix-v2"></script></body></html>
