@@ -2447,7 +2447,11 @@ function boot(){
     }
     if(!nested)roots.push(node);
    }
-   roots.forEach(node=>apply(node));
+   roots.forEach(node=>{
+    // Never let a single huge dynamically-rendered list block the whole website.
+    // Small UI fragments still receive automatic translation; large grids remain interactive.
+    try{if(node.querySelectorAll && node.querySelectorAll('*').length>350)return;apply(node)}catch(error){console.warn('YunaRunes: skipped translation for a large dynamic section',error)}
+   });
    // Header controls are normalized during boot and on click/resize.
    // Do not mutate the watched subtree from this observer callback: it can
    // retrigger childList records repeatedly on pages with dynamic content.
