@@ -727,4 +727,23 @@ html.yunarunes-real-app body header.top>.nav>.nav-links a{display:flex!important
   window.addEventListener('load',function(){setTimeout(schedule,500);setTimeout(schedule,1500);});
 })();
 </script>
-<script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
+<script src="language.js?v=20261029-site-load-fix-4"></script>
+<script>
+/* Correção localizada do texto do cartão Team Recomendados. */
+(function(){
+  function corrigirElementais(){
+    document.querySelectorAll('h2,p,a,span').forEach(function(el){
+      if(el.children.length===0 && el.textContent){
+        el.textContent=el.textContent.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'});
+      }
+      ['data-pt','data-en','aria-label','title'].forEach(function(attr){
+        var v=el.getAttribute(attr);
+        if(v && /Elementoais/i.test(v)) el.setAttribute(attr,v.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'}));
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',corrigirElementais,{once:true});
+  else corrigirElementais();
+  window.addEventListener('load',function(){setTimeout(corrigirElementais,500);},{once:true});
+})();
+</script></body></html>
