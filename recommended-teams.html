@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1015">
@@ -34,7 +34,7 @@ main{max-width:1200px;margin:auto;padding:24px 16px 50px}.hero{padding:25px;bord
 </style>
 </head>
 <body>
-<header><nav class="nav"><a class="brand" href="index.html">🦊 YunaRunes</a></nav></header>
+<header><nav class="nav"><a class="brand" href="index.html">🦊 YunaRunes</a><div class="lang" aria-label="Idioma"><button type="button" data-lang="pt" aria-label="Português do Brasil">🇧🇷 PT/BR</button><button type="button" data-lang="en" aria-label="English">🇬🇧 ENG</button></div></nav></header>
 <main>
 <script>
 /* Normaliza textos antigos mesmo quando scripts da página os inserem depois do carregamento. */
@@ -135,4 +135,4 @@ async function init(){const catalog=await catalogPromise;document.querySelectorA
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
-<script src="language.js?v=20261020-app-header-grid-v7"></script></body></html>
+<script src="language.js?v=20261029-language-buttons-v1"></script></body></html>
