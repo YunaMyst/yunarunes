@@ -2507,7 +2507,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* Corrige globalmente a grafia de "Elementais" em textos estáticos e inseridos dinamicamente. */
 (function(){
   function fixElementais(root){
-    if(root.nodeType===Node.TEXT_NODE){root.nodeValue=root.nodeValue.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'});return;}
+    if(root.nodeType===Node.TEXT_NODE){var original=root.nodeValue||'';var corrected=original.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'});if(corrected!==original)root.nodeValue=corrected;return;}
     if(root.nodeType!==Node.ELEMENT_NODE && root!==document)return;
     if(root.attributes){Array.from(root.attributes).forEach(function(a){if(/Elementoais/i.test(a.value))root.setAttribute(a.name,a.value.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'}));});}
     if(root.childNodes)Array.from(root.childNodes).forEach(fixElementais);
