@@ -2501,18 +2501,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  function run(){adjustAndroidHeader();[100,400,900,1800].forEach(function(ms){setTimeout(adjustAndroidHeader,ms)})}
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
  window.addEventListener('pageshow',run);
- if(document.documentElement)new MutationObserver(function(){adjustAndroidHeader()}).observe(document.documentElement,{childList:true,subtree:true});
+  // Avoid observing every DOM insertion; repeated full-header scans can stall Android pages.
 })();;
 
-/* Corrige globalmente a grafia de "Elementais" em textos estáticos e inseridos dinamicamente. */
-(function(){
-  function fixElementais(root){
-    if(root.nodeType===Node.TEXT_NODE){var original=root.nodeValue||'';var corrected=original.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'});if(corrected!==original)root.nodeValue=corrected;return;}
-    if(root.nodeType!==Node.ELEMENT_NODE && root!==document)return;
-    if(root.attributes){Array.from(root.attributes).forEach(function(a){if(/Elementoais/i.test(a.value))root.setAttribute(a.name,a.value.replace(/Elementoais/gi,function(m){return m[0]==='E'?'Elementais':'elementais'}));});}
-    if(root.childNodes)Array.from(root.childNodes).forEach(fixElementais);
-  }
-  function runElementaisFix(){fixElementais(document.body||document.documentElement);}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',runElementaisFix);else runElementaisFix();
-  new MutationObserver(function(records){records.forEach(function(r){r.addedNodes.forEach(fixElementais);if(r.type==='characterData')fixElementais(r.target);});}).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
-})();
+/* The misspelling is corrected in source HTML; avoid scanning the whole DOM at runtime. */
