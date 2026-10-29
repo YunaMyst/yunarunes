@@ -2417,48 +2417,10 @@ function boot(){
   // Let the browser paint the page before scanning the entire document for translations.
   const runInitialTranslation=()=>{try{apply()}catch(error){console.error('YunaRunes language initialization:',error)}};
   if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(runInitialTranslation,{timeout:1200});else window.setTimeout(runInitialTranslation,60);
- if(!window.__yunaLanguageObserver){
-  window.__yunaLanguageObserver=new MutationObserver(records=>{
-   let shouldStabilize=false;
-   const addedElements=new Set();
-   for(const record of records){
-    if(record.type==='childList'){
-     // Only translate newly inserted ELEMENTS. Text nodes are frequently replaced by
-     // apply() itself; rescanning their entire parent here caused a recursive,
-     // quadratic translation loop on the large Academy page and left it unresponsive.
-     for(const node of record.addedNodes){
-      if(node.nodeType===1 && !node.matches('script,style,noscript') &&
-         !node.closest('script,style,noscript,[data-no-translate]')) addedElements.add(node);
-     }
-    } else if(record.type==='attributes'){
-     if(record.target?.closest?.('header.top'))shouldStabilize=true;
-    }
-   }
-   // Translate only the outermost newly inserted elements. Dynamic pages often
-   // insert a whole grid at once; translating every descendant separately rescans
-   // the same subtree many times and can make the entire site appear stuck loading.
-   const pending=new Set(addedElements);
-   const roots=[];
-   for(const node of pending){
-    let parent=node.parentElement, nested=false;
-    while(parent){
-     if(pending.has(parent)){nested=true;break;}
-     parent=parent.parentElement;
-    }
-    if(!nested)roots.push(node);
-   }
-   roots.forEach(node=>{
-    // Never let a single huge dynamically-rendered list block the whole website.
-    // Small UI fragments still receive automatic translation; large grids remain interactive.
-    try{if(node.querySelectorAll && node.querySelectorAll('*').length>350)return;apply(node)}catch(error){console.warn('YunaRunes: skipped translation for a large dynamic section',error)}
-   });
-   // Header controls are normalized during boot and on click/resize.
-   // Do not mutate the watched subtree from this observer callback: it can
-   // retrigger childList records repeatedly on pages with dynamic content.
-   if(shouldStabilize)stabilizeHeader();
-  });
-  window.__yunaLanguageObserver.observe(document.body,{childList:true,subtree:true});
- }
+ // Performance safeguard: do not continuously rescan and translate every dynamically inserted
+ // subtree. Some tools render thousands of nodes at once; the observer made pages unresponsive.
+ // Initial translation still runs once at boot, and choosing a language still translates the page.
+ window.__yunaLanguageObserver=null;
  document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
  window.addEventListener('resize',stabilizeHeader,{passive:true});
 }
