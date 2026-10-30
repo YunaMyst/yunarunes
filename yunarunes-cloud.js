@@ -15,7 +15,7 @@ function readLocal(key) {
   catch { return []; }
 }
 function writeLocal(key, value) {
-  try { Storage.prototype.setItem.call(localStorage, STORAGE[key], JSON.stringify(value)); } catch {}
+  try { originalSetItem.call(localStorage, STORAGE[key], JSON.stringify(value)); } catch {}
 }
 function merge(local, remote, key) {
   const result = [], seen = new Set();
@@ -72,6 +72,8 @@ Storage.prototype.setItem = function(key, value) {
   }
 };
 async function saveTeam(monsters) {
+  const user = await currentUser();
+  if (!user) throw new Error("Inicia sessão na tua conta YunaRunes para guardar equipas.");
   const teams = readLocal("teams");
   const team = { id: crypto.randomUUID(), monsters, saved_at: new Date().toISOString() };
   teams.unshift(team);
