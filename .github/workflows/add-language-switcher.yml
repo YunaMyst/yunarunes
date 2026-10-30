@@ -1,6 +1,8 @@
 name: Add language switcher
 on:
   push:
+    branches:
+      - main
     paths:
       - '.github/workflows/add-language-switcher.yml'
       - 'language.js'
@@ -17,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Keep one language system and add advanced tools access
         run: |
           python - <<'PY'
@@ -26,8 +30,8 @@ jobs:
           for p in Path('.').glob('*.html'):
               s = p.read_text(encoding='utf-8')
               s = s.replace('<script src="header-fix.js"></script>', '')
-              s = re.sub(r'<script src="language-dynamic\.js(?:\?v=[^"\']+)?"></script>', '', s)
-              s = re.sub(r'<script src="language\.js(?:\?v=[^"\']+)?"></script>', '', s)
+              s = re.sub(r'<script src="language-dynamic\\.js(?:\\?v=[^"\\']+)?"></script>', '', s)
+              s = re.sub(r'<script src="language\\.js(?:\\?v=[^"\\']+)?"></script>', '', s)
               # Team Builder has a self-contained language switcher; the global engine conflicts with its startup.
               if p.name == 'team-builder.html':
                   p.write_text(s, encoding='utf-8')
@@ -37,7 +41,7 @@ jobs:
               if 'language.js' not in s:
                   s = s.replace('</body>', script + '</body>')
               else:
-                  s = re.sub(r'<script src="language\.js[^"]*"></script>', script, s)
+                  s = re.sub(r'<script src="language\\.js[^"]*"></script>', script, s)
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
@@ -55,6 +59,4 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add '*.html'
           git diff --cached --quiet || git commit -m 'add advanced tools to site'
-          # Integrate commits made while this workflow was running before pushing.
-          git pull --rebase origin main
-          git push
+          git push origin HEAD:main
