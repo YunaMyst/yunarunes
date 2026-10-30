@@ -1,6 +1,8 @@
 name: Add language switcher
 on:
   push:
+    branches:
+      - main
     paths:
       - '.github/workflows/add-language-switcher.yml'
       - 'language.js'
@@ -57,4 +59,4 @@ jobs:
           git diff --cached --quiet || git commit -m 'add advanced tools to site'
           # Integrate commits made while this workflow was running before pushing.
           git pull --rebase origin main
-          git push
+          git push origin HEAD:main
