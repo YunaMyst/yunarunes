@@ -29,7 +29,7 @@ main{max-width:1200px;margin:auto;padding:24px 16px 50px}.hero{padding:25px;bord
 .monster-build .mname{font-weight:800;font-size:11px;line-height:1.25;overflow-wrap:anywhere}
 .monster-build .runes{color:#8bdcff;font-size:10px;margin-top:3px;line-height:1.3}
 .monster-build .stats{color:#a8b6c4;font-size:10px;line-height:1.3}
-.monster-build .content-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}.monster-build .content-tag{display:inline-block;background:#172b35;border:1px solid #315568;color:#aee7f8;border-radius:10px;padding:2px 6px;font-size:9px;line-height:1.35;font-weight:700}
+
 .build-note{font-size:11px;color:var(--muted);margin:8px 0 0}
 @media(max-width:560px){.monster-builds{grid-template-columns:1fr}.monster-build img{width:44px;height:44px;flex-basis:44px}}
 </style>
@@ -135,26 +135,13 @@ function english(){let lang='';try{lang=localStorage.getItem('yunarunes-language
 function normalized(s){return String(s||'').toLowerCase().replace(/\s*\(2a\)/g,'').replace(/[^a-z0-9]/g,'')}
 function findMonster(name,catalog){if(/high-damage|damage dealer|defense breaker|attack buffer|support|frontline|twins/i.test(name))return null;const n=normalized(name);return catalog.find(m=>normalized(m.name)===n)||catalog.find(m=>normalized(m.name).includes(n)||n.includes(normalized(m.name)))}
 const KNOWN_MONSTER_IMAGES={veromos:'https://swarfarm.com/static/herders/images/monsters/unit_icon_0032_4_2.png'};
-function contentLabel(key,en){
-const labels={'cairos-giants':en?'Cairos · Giant':'Cairos · Gigante','cairos-dragons':en?'Cairos · Dragon':'Cairos · Dragão','cairos-necro':en?'Cairos · Necropolis':'Cairos · Necropolis','cairos-spiritual':en?'Cairos · Spiritual Realm':'Cairos · Reino Espiritual','cairos-steel':en?'Cairos · Steel Fortress':'Cairos · Fortaleza de Aço','cairos-punisher':en?'Cairos · Punisher’s Crypt':'Cairos · Cripta do Justiceiro','cairos-magic':en?'Cairos · Hall of Magic':'Cairos · Salão da Magia','cairos-fire':en?'Cairos · Hall of Fire':'Cairos · Salão do Fogo','cairos-water':en?'Cairos · Hall of Water':'Cairos · Salão da Água','cairos-wind':en?'Cairos · Hall of Wind':'Cairos · Salão do Vento','cairos-light':en?'Cairos · Hall of Light':'Cairos · Salão da Luz','cairos-dark':en?'Cairos · Hall of Dark':'Cairos · Salão das Trevas','r5':'Raid 5','raid-fire':en?'Elemental Raid · Fire':'Raid Elemental · Fogo','raid-water':en?'Elemental Raid · Water':'Raid Elemental · Água','raid-wind':en?'Elemental Raid · Wind':'Raid Elemental · Vento','raid-light':en?'Elemental Raid · Light':'Raid Elemental · Luz','raid-dark':en?'Elemental Raid · Dark':'Raid Elemental · Trevas'};
-return labels[key]||key;
-}
-function buildMonsterContentIndex(en){
-const index={};
-Object.entries(TEAM_BUILDS).filter(([content])=>content!=='monster-endgame-reference').forEach(([content,tiers])=>Object.values(tiers).forEach(rows=>(rows||[]).forEach(row=>{
-const name=row[0];if(!index[name])index[name]=[];
-const label=contentLabel(content,en);if(!index[name].includes(label))index[name].push(label);
-})));
-return index;
-}
 function draw(card,tier,catalog){
 const holder=card.querySelector('.monster-builds');if(!holder)return;
 const id=card.dataset.team;let key=id.startsWith('raid-')?id:id.startsWith('r5-')?'r5':id;
 const data=TEAM_BUILDS[key];if(!data)return;
-const contentIndex=buildMonsterContentIndex(english());
 const rows=data[tier]||[];
 if(!rows.length){holder.innerHTML='<p class="tier-empty">'+(english()?'No teams or rune recommendations registered for this stage yet.':'Ainda não existem equipas ou recomendações de runas registadas para esta fase.')+'</p>';return}
-holder.innerHTML=rows.map((m,i)=>{const found=findMonster(m[0],catalog);const imageUrl=(found&&found.image)||KNOWN_MONSTER_IMAGES[normalized(m[0])];const img=imageUrl?'<img loading="lazy" src="'+imageUrl+'" alt="'+m[0]+'" onerror="this.style.opacity=.15">':'<img alt="" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2748%27 height=%2748%27 viewBox=%270 0 48 48%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%276%27 fill=%27%23111923%27/%3E%3Ctext x=%2724%27 y=%2730%27 text-anchor=%27middle%27 font-size=%2722%27 fill=%27%238bdcff%27%3E✦%3C/text%3E%3C/svg%3E">';return '<div class="monster-build" role="button" tabindex="0" aria-label="'+m[0]+' — '+(english()?'view rune recommendations':'ver runas recomendadas')+'" data-monster-name="'+m[0].replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-monster-image="'+(imageUrl||'')+'" data-rune-tier="'+tier+'">'+img+'<div><div class="mname">'+m[0]+'</div><div class="runes">🪄 '+(english()?'Runes: ':'Runas: ')+m[1]+'</div><div class="stats">'+(english()?'Slots 2/4/6: ':'Atributos 2/4/6: ')+m[2]+'</div><div class="content-tags"><span class="content-tag">'+(english()?'Useful in: ':'Útil em: ')+'</span>'+((contentIndex[m[0]]||[]).map(label=>'<span class="content-tag">'+label+'</span>').join('')||'<span class="content-tag">'+(english()?'No listed team yet':'Sem equipa registada')+'</span>')+'</div></div></div>'}).join('');
+holder.innerHTML=rows.map((m,i)=>{const found=findMonster(m[0],catalog);const imageUrl=(found&&found.image)||KNOWN_MONSTER_IMAGES[normalized(m[0])];const img=imageUrl?'<img loading="lazy" src="'+imageUrl+'" alt="'+m[0]+'" onerror="this.style.opacity=.15">':'<img alt="" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2748%27 height=%2748%27 viewBox=%270 0 48 48%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%276%27 fill=%27%23111923%27/%3E%3Ctext x=%2724%27 y=%2730%27 text-anchor=%27middle%27 font-size=%2722%27 fill=%27%238bdcff%27%3E✦%3C/text%3E%3C/svg%3E">';return '<div class="monster-build" role="button" tabindex="0" aria-label="'+m[0]+' — '+(english()?'view rune recommendations':'ver runas recomendadas')+'" data-monster-name="'+m[0].replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'" data-monster-image="'+(imageUrl||'')+'" data-rune-tier="'+tier+'">'+img+'<div><div class="mname">'+m[0]+'</div><div class="runes">🪄 '+(english()?'Runes: ':'Runas: ')+m[1]+'</div><div class="stats">'+(english()?'Slots 2/4/6: ':'Atributos 2/4/6: ')+m[2]+'</div></div></div>'}).join('');
 }
 // End-game reference builds for monsters that only appeared in beginner/mid-game teams.
 // These are role-based PvE starting points; tune speed, bulk, accuracy and damage to the team.
