@@ -3,7 +3,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = "https://uxwbbaeupemihonwyszu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_6A3yVOK07l0h6bmdjZ0U3A_CjzobvMX";
 const TABLE = "yunarunes_player_data";
-const STORAGE = { favorites: "yunarunes-favorites", teams: "yunarunes-saved-teams" };
+const STORAGE = { favorites: "yunarunes-favorites", teams: "yunarunes-saved-teams", decks: "yunarunes-decks" };
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
 });
@@ -89,7 +89,7 @@ async function removeTeam(id) {
 window.YunaRunesCloud = {
   client: supabase, syncAll, currentUser, saveTeam, removeTeam,
   getFavorites: () => readLocal("favorites"),
-  getTeams: () => readLocal("teams")
+  getTeams: () => readLocal("teams"), getDecks: () => readLocal("decks")
 };
 window.YunaRunesCloudReady = (async () => {
   const { data: { session } } = await supabase.auth.getSession();
