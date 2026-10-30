@@ -58,6 +58,7 @@ $('logoutBtn').addEventListener('click',async()=>{const {error}=await cloud.clie
 $('teamsList').addEventListener('click',async e=>{const b=e.target.closest('[data-remove-team]');if(!b)return;try{await cloud.removeTeam(b.dataset.removeTeam);renderSaved();status('Equipa removida.')}catch(err){status(err.message,true)}});
 window.addEventListener('yunarunes-cloud-sync',renderSaved);
 await window.YunaRunesCloudReady;
+cloud=window.YunaRunesCloud;
 const {data:{session}}=await cloud.client.auth.getSession();
 if(session){await cloud.syncAll();showProfile(session.user)}
 if(new URLSearchParams(location.search).has('confirmed'))status('Email confirmado. Já podes entrar na tua conta.');
