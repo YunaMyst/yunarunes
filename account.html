@@ -31,6 +31,7 @@ button.secondary,.button.secondary{background:#202b36;color:#fff;border:1px soli
 </form>
 <button class="switch" id="modeBtn" type="button">Ainda não tens conta? Criar conta</button>
 </div>
+<div id="resetBox" class="profile"><h2>Definir nova palavra-passe</h2><form id="resetForm"><label for="newPassword">Nova palavra-passe</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><div class="actions"><button type="submit">Guardar nova palavra-passe</button></div></form></div>
 <div id="profileBox" class="profile">
 <h2 id="welcome"></h2><p class="muted">A tua sessão está ativa. Os favoritos e as equipas guardadas são sincronizados automaticamente.</p>
 <div class="actions"><button class="secondary" id="syncBtn" type="button">Sincronizar agora</button><button class="secondary" id="logoutBtn" type="button">Terminar sessão</button></div>
@@ -60,7 +61,10 @@ window.addEventListener('yunarunes-cloud-sync',renderSaved);
 await window.YunaRunesCloudReady;
 cloud=window.YunaRunesCloud;
 const {data:{session}}=await cloud.client.auth.getSession();
-if(session){await cloud.syncAll();showProfile(session.user)}
+const recovery = new URLSearchParams(location.search).get('type') === 'recovery' || location.hash.includes('type=recovery');
+if(recovery){$('authBox').style.display='none';$('resetBox').style.display='block';}
+else if(session){await cloud.syncAll();showProfile(session.user)}
 if(new URLSearchParams(location.search).has('confirmed'))status('Email confirmado. Já podes entrar na tua conta.');
+$('resetForm').addEventListener('submit',async e=>{e.preventDefault();try{const {error}=await cloud.client.auth.updateUser({password:$('newPassword').value});if(error)throw error;$('resetBox').style.display='none';showProfile(await cloud.currentUser());status('Palavra-passe atualizada com sucesso.')}catch(err){status(err.message,true)}});
 </script>
 </body></html>
