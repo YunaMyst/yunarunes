@@ -21,6 +21,7 @@ const PLAYER_STATE_KEYS = [
   "yunarunes_monster",
   "yunarunes_set",
   "yunarunes-history",
+  "yunarunes-account-diary-v1",
   ...Array.from({ length: 6 }, (_, i) => "yunarunes_slot_" + (i + 1))
 ];
 const PLAYER_STATE_KEY_SET = new Set(PLAYER_STATE_KEYS);
