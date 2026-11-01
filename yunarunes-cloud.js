@@ -150,6 +150,9 @@ async function syncAll() {
     }
 
     window.dispatchEvent(new CustomEvent("yunarunes-cloud-sync"));
+    // A página pode ter desenhado a interface antes de terminar a recuperação remota.
+    // Recarrega apenas quando os dados locais foram efetivamente alterados.
+    if (localChanged) setTimeout(() => window.location.reload(), 0);
   } finally {
     syncing = false;
   }
