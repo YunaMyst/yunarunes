@@ -827,4 +827,35 @@ html.yr-live-app body .yr-app-promo-actions button{background:#202b36;border-col
   window.addEventListener('resize',run);
 })();
 </script>
+
+<style id="yr-remove-apk-mobile-header">
+@media(max-width:600px){
+  header.top a[href*=".apk" i],
+  header.top a[href*="downloads/" i],
+  header.top [data-download-apk],
+  header.top .apk-link,
+  header.top .app-download-link{display:none!important}
+}
+</style>
+<script id="yr-remove-apk-and-app-promo">
+(function(){
+  function clean(){
+    document.querySelectorAll('.yr-app-promo').forEach(function(el){el.remove();});
+    var header=document.querySelector('header.top');
+    if(header && window.matchMedia('(max-width: 600px)').matches){
+      header.querySelectorAll('a,button,[role="button"]').forEach(function(el){
+        var label=(el.innerText||el.textContent||'').trim();
+        var href=el.getAttribute('href')||'';
+        if(/\.apk(?:$|[?#])/i.test(href)||/\b(?:baixar|download)\s*(?:o\s*)?apk\b|\bapk\b/i.test(label)){
+          el.remove();
+        }
+      });
+    }
+  }
+  clean();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean);
+  new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener('resize',clean);
+})();
+</script>
 <script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
