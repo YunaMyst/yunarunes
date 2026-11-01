@@ -44,9 +44,13 @@ function readLocal(key) {
 
 function writeLocal(key, value) {
   try {
-    originalSetItem.call(localStorage, STORAGE[key], JSON.stringify(Array.isArray(value) ? value : []));
+    const serialized = JSON.stringify(Array.isArray(value) ? value : []);
+    if (localStorage.getItem(STORAGE[key]) === serialized) return false;
+    originalSetItem.call(localStorage, STORAGE[key], serialized);
+    return true;
   } catch (error) {
     console.warn("YunaRunes: não foi possível atualizar o armazenamento local.", error);
+    return false;
   }
 }
 
@@ -65,11 +69,22 @@ function restorePlayerState(payload) {
       .filter(item => item && PLAYER_STATE_KEY_SET.has(item.key) && typeof item.value === "string")
       .map(item => [item.key, item.value])
   );
+  let changed = false;
 
   for (const key of PLAYER_STATE_KEYS) {
-    if (values.has(key)) originalSetItem.call(localStorage, key, values.get(key));
-    else originalRemoveItem.call(localStorage, key);
+    const current = localStorage.getItem(key);
+    if (values.has(key)) {
+      const next = values.get(key);
+      if (current !== next) {
+        originalSetItem.call(localStorage, key, next);
+        changed = true;
+      }
+    } else if (current !== null) {
+      originalRemoveItem.call(localStorage, key);
+      changed = true;
+    }
   }
+  return changed;
 }
 
 async function currentUser() {
@@ -108,6 +123,7 @@ async function syncAll() {
   if (!user) return;
 
   syncing = true;
+  let localChanged = false;
   try {
     const { data, error } = await supabase
       .from(TABLE)
@@ -120,7 +136,7 @@ async function syncAll() {
     for (const key of Object.keys(STORAGE)) {
       const row = data?.find(item => item.data_key === key);
       if (row) {
-        writeLocal(key, row.payload);
+        localChanged = writeLocal(key, row.payload) || localChanged;
       } else {
         await upsertRow(user, key, readLocal(key));
       }
@@ -128,7 +144,7 @@ async function syncAll() {
 
     const stateRow = data?.find(item => item.data_key === "player_state");
     if (stateRow) {
-      restorePlayerState(stateRow.payload);
+      localChanged = restorePlayerState(stateRow.payload) || localChanged;
     } else {
       await upsertRow(user, "player_state", readPlayerState());
     }
