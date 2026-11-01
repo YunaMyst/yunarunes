@@ -750,4 +750,81 @@ html.yunarunes-real-app body header.top>.nav>.nav-links a{display:flex!important
   else corrigirElementais();
   window.addEventListener('load',function(){setTimeout(corrigirElementais,500);},{once:true});
 })();
-</script><script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
+</script>
+<style id="yr-live-app-header-patch">
+html.yr-live-app body header.top{position:relative!important;z-index:2147483000!important;overflow:visible!important}
+html.yr-live-app body header.top>.nav{display:grid!important;grid-template-columns:42px minmax(0,1fr) auto!important;grid-template-areas:"menu brand controls" "links links links"!important;grid-template-rows:44px auto!important;align-items:center!important;gap:8px!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;padding:8px 10px!important;margin:0!important;overflow:visible!important;box-sizing:border-box!important}
+html.yr-live-app body header.top>.nav>.header-menu{grid-area:menu!important;display:flex!important;position:static!important;width:42px!important;height:42px!important;min-width:42px!important;margin:0!important;padding:0!important;align-items:center!important;justify-content:flex-start!important;z-index:2147483647!important}
+html.yr-live-app body header.top>.nav>.header-menu .menu-btn{display:flex!important;position:static!important;width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;margin:0!important;padding:0!important;align-items:center!important;justify-content:center!important;font-size:20px!important}
+html.yr-live-app body header.top>.nav>.header-brand{grid-area:brand!important;display:flex!important;position:static!important;justify-content:center!important;align-items:center!important;width:100%!important;min-width:0!important;min-height:40px!important;margin:0!important;padding:0!important}
+html.yr-live-app body header.top>.nav>.header-brand .brand{display:flex!important;justify-content:center!important;align-items:center!important;width:auto!important;max-width:100%!important;margin:0!important;padding:0!important;font-size:18px!important;line-height:1.2!important}
+html.yr-live-app body header.top>.nav>.header-controls{grid-area:controls!important;display:flex!important;position:static!important;width:auto!important;min-width:0!important;margin:0!important;padding:0!important;justify-content:flex-end!important}
+html.yr-live-app body header.top .header-controls .yuna-controls{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;width:auto!important;min-width:0!important;margin:0!important;padding:0!important}
+html.yr-live-app body header.top .header-controls .yuna-controls>*{display:inline-flex!important;flex:0 1 auto!important;width:auto!important;min-width:0!important;max-width:none!important;height:36px!important;min-height:36px!important;margin:0!important;padding:0 6px!important;font:800 10px/1 Arial,sans-serif!important;white-space:nowrap!important;overflow:hidden!important}
+html.yr-live-app body header.top .header-controls #yr-feedback-open{display:none!important}
+html.yr-live-app body header.top>.nav>.nav-toggle{display:none!important}
+html.yr-live-app body header.top>.nav>.nav-links{grid-area:links!important;display:none!important;position:absolute!important;top:calc(100% + 5px)!important;left:10px!important;right:10px!important;width:auto!important;max-width:none!important;max-height:calc(100dvh - 150px)!important;overflow-y:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important;padding:10px!important;margin:0!important;z-index:2147483646!important;border:1px solid #293746!important;border-radius:13px!important;background:#101923!important;box-shadow:0 8px 28px #0008!important;box-sizing:border-box!important}
+html.yr-live-app body header.top>.nav>.nav-links.yr-menu-open{display:grid!important}
+html.yr-live-app body header.top>.nav>.nav-links a{display:flex!important;align-items:center!important;justify-content:center!important;min-height:42px!important;padding:9px 6px!important;text-align:center!important}
+html.yr-live-app body .yr-app-promo{display:block!important;margin:14px 0 16px;padding:17px;border:1px solid #7657b8;border-radius:14px;background:linear-gradient(135deg,#1b1930,#101923);box-shadow:0 8px 25px #0005}
+html.yr-live-app body .yr-app-promo h2{margin:0 0 7px;color:#fff;font-size:18px}
+html.yr-live-app body .yr-app-promo p{margin:0 0 12px;color:#b7c4d1;font-size:12px;line-height:1.5}
+html.yr-live-app body .yr-app-promo-actions{display:flex;gap:8px;flex-wrap:wrap}
+html.yr-live-app body .yr-app-promo-actions button,html.yr-live-app body .yr-app-promo-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 12px;border:1px solid #35a9e1;border-radius:8px;background:#35a9e1;color:#061018;font-size:11px;font-weight:900;text-decoration:none;cursor:pointer}
+html.yr-live-app body .yr-app-promo-actions button{background:#202b36;border-color:#40536a;color:#fff}
+@media(max-width:370px){html.yr-live-app body header.top>.nav{grid-template-columns:38px minmax(0,1fr) auto!important;gap:5px!important;padding-inline:7px!important}html.yr-live-app body header.top .header-controls .yuna-controls{gap:2px!important}html.yr-live-app body header.top .header-controls .yuna-controls>*{padding-inline:4px!important;font-size:9px!important}html.yr-live-app body header.top>.nav>.header-brand .brand{font-size:16px!important}}
+</style>
+<script id="yr-live-app-header-promo">
+(function(){
+  var isApp=/YunaRunesApp/i.test(navigator.userAgent||'');
+  if(!isApp)return;
+  document.documentElement.classList.add('yr-live-app','yunarunes-app','yunarunes-real-app');
+  if(document.body)document.body.classList.add('yunarunes-app');
+  function applyHeader(){
+    var nav=document.querySelector('header.top>.nav');
+    if(!nav)return;
+    var menu=nav.querySelector(':scope>.header-menu .menu-btn');
+    var links=nav.querySelector(':scope>.nav-links');
+    var controls=nav.querySelector(':scope>.header-controls .yuna-controls');
+    if(menu&&links&&!menu.dataset.yrLiveBound){
+      menu.dataset.yrLiveBound='1';
+      menu.addEventListener('click',function(ev){
+        ev.preventDefault();ev.stopPropagation();
+        var open=!links.classList.contains('yr-menu-open');
+        links.classList.toggle('yr-menu-open',open);
+        menu.setAttribute('aria-expanded',open?'true':'false');
+        menu.setAttribute('aria-label',open?'Fechar menu':'Abrir menu');
+      },true);
+      links.addEventListener('click',function(ev){
+        if(ev.target.closest('a')){links.classList.remove('yr-menu-open');menu.setAttribute('aria-expanded','false');}
+      });
+      document.addEventListener('click',function(ev){
+        if(!nav.contains(ev.target)){links.classList.remove('yr-menu-open');menu.setAttribute('aria-expanded','false');}
+      });
+    }
+    if(controls){var feedback=controls.querySelector('#yr-feedback-open');if(feedback)feedback.style.setProperty('display','none','important');}
+  }
+  function addPromo(){
+    if(!document.body||document.querySelector('.yr-app-promo'))return;
+    var hero=document.querySelector('main.wrap .hero');
+    if(!hero)return;
+    var card=document.createElement('section');
+    card.className='yr-app-promo';
+    card.innerHTML='<h2>🦊 Conhece e partilha o YunaRunes</h2><p>O universo de Summoners War num só lugar: Database de monstros, Team Builder, runas, ferramentas e Yuna Academy. Explora o site e partilha com a tua guilda!</p><div class="yr-app-promo-actions"><a href="https://yunarunes.com/" target="_self">Abrir site</a><button type="button" id="yr-app-share">Partilhar site</button></div>';
+    hero.insertAdjacentElement('afterend',card);
+    var share=card.querySelector('#yr-app-share');
+    share.addEventListener('click',function(){
+      var data={title:'YunaRunes',text:'Explora o YunaRunes — ferramentas e conteúdos de Summoners War!',url:'https://yunarunes.com/'};
+      if(navigator.share){navigator.share(data).catch(function(){});}
+      else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(data.url).then(function(){share.textContent='Link copiado!';}).catch(function(){window.prompt('Copia o link do YunaRunes:',data.url);});}
+      else{window.prompt('Copia o link do YunaRunes:',data.url);}
+    });
+  }
+  function run(){applyHeader();addPromo();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});else run();
+  [250,900,1800,3200,5000].forEach(function(ms){setTimeout(run,ms);});
+  window.addEventListener('load',run);
+  window.addEventListener('resize',run);
+})();
+</script>
+<script src="language.js?v=20261101-live-app-header-promo-1"></script></body></html>
