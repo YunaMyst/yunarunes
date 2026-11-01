@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1015"><title>Conta do jogador — YunaRunes</title>
+<style>
+:root{color-scheme:dark;--bg:#080c11;--panel:#121923;--text:#f2f6fa;--muted:#95a4b2;--accent:#35a9e1;--purple:#8b5cf6;--border:#293746}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#24113d 0,#0b1016 38%,var(--bg) 75%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+header{padding:15px 20px;background:#080c11eF;border-bottom:1px solid var(--border)}header a{color:#fff;text-decoration:none;font-weight:900;font-size:18px}
+main{width:min(720px,calc(100% - 28px));margin:35px auto}.panel{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:24px;margin-bottom:16px;box-shadow:0 12px 35px #0005}
+h1{margin:0 0 8px;font-size:27px}h2{margin:0 0 12px;font-size:19px}.muted{color:var(--muted);line-height:1.55}
+label{display:block;margin:14px 0 6px;font-size:13px;font-weight:800}input{width:100%;padding:13px;border-radius:9px;border:1px solid #3b4b5a;background:#090f15;color:#fff;font-size:15px}
+button,.button{border:0;border-radius:9px;padding:12px 16px;background:var(--accent);color:#061018;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+button.secondary,.button.secondary{background:#202b36;color:#fff;border:1px solid var(--border)}button:disabled{opacity:.55;cursor:wait}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.switch{background:none;color:#8bdcff;border:0;padding:8px 0;margin-top:10px}
+.status{min-height:22px;margin-top:12px;font-size:13px;color:#b9d8e8}.status.error{color:#ff9b9b}.profile{display:none}.team{padding:12px;border:1px solid var(--border);border-radius:10px;margin-top:9px}.team b{display:block;margin-bottom:5px}.tag{display:inline-block;background:#202b36;padding:5px 8px;border-radius:7px;font-size:12px;margin:3px 3px 0 0}
+@media(max-width:600px){main{margin:18px auto}.panel{padding:18px}h1{font-size:23px}}
+</style>
+</head>
+<body>
+<header><a href="index.html">🦊 YunaRunes</a></header>
+<main>
+<section class="panel">
+<h1>👤 Conta do jogador</h1>
+<p class="muted">Cria a tua conta para guardar os teus favoritos e as tuas equipas. Os teus dados ficam associados à tua conta e podem ser recuperados noutro dispositivo.</p>
+<div id="authBox">
+<form id="authForm">
+<label for="email">Email</label><input id="email" type="email" autocomplete="email" required maxlength="254">
+<label for="password">Palavra-passe</label><input id="password" type="password" autocomplete="current-password" minlength="8" required>
+<div class="actions"><button id="submitBtn" type="submit">Entrar</button><button class="secondary" id="forgotBtn" type="button">Recuperar palavra-passe</button></div>
+</form>
+<button class="switch" id="modeBtn" type="button">Ainda não tens conta? Criar conta</button>
+</div>
+<div id="resetBox" class="profile"><h2>Definir nova palavra-passe</h2><form id="resetForm"><label for="newPassword">Nova palavra-passe</label><input id="newPassword" type="password" minlength="8" autocomplete="new-password" required><div class="actions"><button type="submit">Guardar nova palavra-passe</button></div></form></div>
+<div id="profileBox" class="profile">
+<h2 id="welcome"></h2><p class="muted">A tua sessão está ativa. Os favoritos e as equipas guardadas são sincronizados automaticamente.</p>
+<div class="actions"><button class="secondary" id="syncBtn" type="button">Sincronizar agora</button><button class="secondary" id="logoutBtn" type="button">Terminar sessão</button></div>
+</div>
+<p id="status" class="status" role="status" aria-live="polite"></p>
+</section>
+<section id="savedBox" class="panel profile">
+<h2>❤️ Os teus favoritos</h2><p id="favCount" class="muted">A carregar…</p>
+<h2 style="margin-top:22px">⚔️ As tuas equipas guardadas</h2><div id="teamsList"></div><h2 style="margin-top:22px">🃏 Decks do Gestor de Equipas</h2><div id="decksList"></div>
+</section>
+<a class="button secondary" href="index.html">← Voltar ao YunaRunes</a>
+</main>
+<script type="module" src="yunarunes-cloud.js"></script>
+<script type="module">
+const $=id=>document.getElementById(id);
+let creating=false,cloud;
+function status(message,error=false){$('status').textContent=message;$('status').classList.toggle('error',error)}
+function showProfile(user){$('authBox').style.display=user?'none':'block';$('profileBox').style.display=user?'block':'none';$('savedBox').style.display=user?'block':'none';if(user){$('welcome').textContent='Olá, '+user.email;renderSaved()}}
+function renderSaved(){const c=window.YunaRunesCloud;if(!c)return;const favs=c.getFavorites(),teams=c.getTeams(),decks=c.getDecks();$('favCount').textContent=favs.length+' monstros guardados';$('teamsList').innerHTML=teams.length?teams.map(t=>'<div class="team"><b>'+t.monsters.length+' monstros · '+new Date(t.saved_at).toLocaleDateString()+'</b>'+t.monsters.map(m=>'<span class="tag">'+String(m.name).replace(/[&<>"]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]))+'</span>').join('')+'<button class="secondary" data-remove-team="'+t.id+'" type="button" style="margin-top:10px">Remover</button></div>').join(''):'<p class="muted">Ainda não guardaste nenhuma equipa no Team Builder.</p>';$('decksList').innerHTML=decks.length?decks.map(d=>'<div class="team"><b>'+String(d.name||'Deck').replace(/[&<>"]/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x]))+' · '+String(d.content||'')+'</b><p class="muted">'+(d.mobs||[]).map(x=>String(x).replace(/[&<>"]/g,y=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[y]))).join(', ')+'</p></div>').join(''):'<p class="muted">Ainda não tens decks guardados.</p>'}
+$('modeBtn').addEventListener('click',()=>{creating=!creating;$('submitBtn').textContent=creating?'Criar conta':'Entrar';$('password').autocomplete=creating?'new-password':'current-password';$('modeBtn').textContent=creating?'Já tens conta? Entrar':'Ainda não tens conta? Criar conta';status('')});
+$('authForm').addEventListener('submit',async e=>{e.preventDefault();$('submitBtn').disabled=true;status('A processar…');try{await window.YunaRunesCloudReady;cloud=window.YunaRunesCloud;const email=$('email').value.trim(),password=$('password').value;if(creating){const {data,error}=await cloud.client.auth.signUp({email,password,options:{emailRedirectTo:location.origin+'/account.html'}});if(error)throw error;if(data.session){await cloud.syncAll();showProfile(data.user);status('Conta criada com sucesso.')}else{status('Enviámos um email de confirmação. Abre a mensagem para ativares a tua conta.')}}else{const {data,error}=await cloud.client.auth.signInWithPassword({email,password});if(error)throw error;await cloud.syncAll();showProfile(data.user);status('Sessão iniciada com sucesso.')}}catch(err){status(err.message||'Não foi possível concluir. Tenta novamente.',true)}finally{$('submitBtn').disabled=false}});
+$('forgotBtn').addEventListener('click',async()=>{try{await window.YunaRunesCloudReady;const email=$('email').value.trim();if(!email)throw new Error('Escreve primeiro o teu email.');const {error}=await window.YunaRunesCloud.client.auth.resetPasswordForEmail(email,{redirectTo:location.origin+'/account.html'});if(error)throw error;status('Se existir uma conta para esse email, receberás as instruções de recuperação.')}catch(err){status(err.message,true)}});
+$('syncBtn').addEventListener('click',async()=>{try{await cloud.syncAll();renderSaved();status('Dados sincronizados.')}catch(err){status(err.message,true)}});
+$('logoutBtn').addEventListener('click',async()=>{const {error}=await cloud.client.auth.signOut();if(error){status(error.message,true);return}showProfile(null);status('Sessão terminada.')});
+$('teamsList').addEventListener('click',async e=>{const b=e.target.closest('[data-remove-team]');if(!b)return;try{await cloud.removeTeam(b.dataset.removeTeam);renderSaved();status('Equipa removida.')}catch(err){status(err.message,true)}});
+window.addEventListener('yunarunes-cloud-sync',renderSaved);
+await window.YunaRunesCloudReady;
+cloud=window.YunaRunesCloud;
+const {data:{session}}=await cloud.client.auth.getSession();
+const recovery = new URLSearchParams(location.search).get('type') === 'recovery' || location.hash.includes('type=recovery');
+if(recovery){$('authBox').style.display='none';$('resetBox').style.display='block';}
+else if(session){await cloud.syncAll();showProfile(session.user)}
+if(new URLSearchParams(location.search).has('confirmed'))status('Email confirmado. Já podes entrar na tua conta.');
+$('resetForm').addEventListener('submit',async e=>{e.preventDefault();try{const {error}=await cloud.client.auth.updateUser({password:$('newPassword').value});if(error)throw error;$('resetBox').style.display='none';showProfile(await cloud.currentUser());status('Palavra-passe atualizada com sucesso.')}catch(err){status(err.message,true)}});
+</script>
+</body></html>
