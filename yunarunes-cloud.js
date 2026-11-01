@@ -3,6 +3,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = "https://uxwbbaeupemihonwyszu.supabase.co";
 const SUPABASE_KEY = "sb_publishable_6A3yVOK07l0h6bmdjZ0U3A_CjzobvMX";
 const TABLE = "yunarunes_player_data";
+const OWNER_KEY = "yunarunes-cloud-owner-v1";
 const STORAGE = {
   favorites: "yunarunes-favorites",
   teams: "yunarunes-saved-teams",
@@ -29,6 +30,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 });
 
 let syncing = false;
+let syncPromise = null;
 const timers = new Map();
 const originalSetItem = Storage.prototype.setItem;
 const originalRemoveItem = Storage.prototype.removeItem;
@@ -70,21 +72,33 @@ function restorePlayerState(payload) {
       .map(item => [item.key, item.value])
   );
   let changed = false;
-
-  for (const key of PLAYER_STATE_KEYS) {
-    const current = localStorage.getItem(key);
-    if (values.has(key)) {
-      const next = values.get(key);
-      if (current !== next) {
-        originalSetItem.call(localStorage, key, next);
-        changed = true;
-      }
-    } else if (current !== null) {
-      originalRemoveItem.call(localStorage, key);
+  // Nunca apagar uma preferência local só porque ela ainda não existe na nuvem.
+  for (const [key, next] of values) {
+    if (localStorage.getItem(key) !== next) {
+      originalSetItem.call(localStorage, key, next);
       changed = true;
     }
   }
   return changed;
+}
+
+function mergeArray(cloudValue, localValue) {
+  const merged = [];
+  const seen = new Set();
+  for (const item of [...(Array.isArray(cloudValue) ? cloudValue : []), ...(Array.isArray(localValue) ? localValue : [])]) {
+    let signature;
+    try { signature = JSON.stringify(item); } catch { signature = String(item); }
+    if (!seen.has(signature)) { seen.add(signature); merged.push(item); }
+  }
+  return merged;
+}
+
+function mergePlayerState(cloudValue, localValue) {
+  const values = new Map();
+  for (const item of [...(Array.isArray(localValue) ? localValue : []), ...(Array.isArray(cloudValue) ? cloudValue : [])]) {
+    if (item && PLAYER_STATE_KEY_SET.has(item.key) && typeof item.value === "string") values.set(item.key, item.value);
+  }
+  return [...values].map(([key, value]) => ({ key, value }));
 }
 
 async function currentUser() {
@@ -118,44 +132,67 @@ async function savePlayerState() {
 }
 
 async function syncAll() {
-  if (syncing) return;
-  const user = await currentUser();
-  if (!user) return;
+  if (syncPromise) return syncPromise;
+  syncPromise = (async () => {
+    syncing = true;
+    let localChanged = false;
+    try {
+      const user = await currentUser();
+      if (!user) return;
+      const previousOwner = localStorage.getItem(OWNER_KEY);
+      const differentAccount = Boolean(previousOwner && previousOwner !== user.id);
 
-  syncing = true;
-  let localChanged = false;
-  try {
-    const { data, error } = await supabase
-      .from(TABLE)
-      .select("data_key,payload")
-      .eq("user_id", user.id);
-    if (error) throw error;
+      const { data, error } = await supabase
+        .from(TABLE)
+        .select("data_key,payload")
+        .eq("user_id", user.id);
+      if (error) throw error;
 
-    // A nuvem é a fonte principal quando já existe um registo.
-    // Os dados locais são migrados apenas na primeira sincronização daquela chave.
-    for (const key of Object.keys(STORAGE)) {
-      const row = data?.find(item => item.data_key === key);
-      if (row) {
-        localChanged = writeLocal(key, row.payload) || localChanged;
-      } else {
-        await upsertRow(user, key, readLocal(key));
+      // Evita misturar dados locais de duas contas diferentes no mesmo navegador.
+      if (differentAccount) {
+        for (const key of Object.values(STORAGE)) {
+          if (localStorage.getItem(key) !== null) {
+            originalRemoveItem.call(localStorage, key);
+            localChanged = true;
+          }
+        }
+        for (const key of PLAYER_STATE_KEYS) {
+          if (localStorage.getItem(key) !== null) {
+            originalRemoveItem.call(localStorage, key);
+            localChanged = true;
+          }
+        }
       }
-    }
 
-    const stateRow = data?.find(item => item.data_key === "player_state");
-    if (stateRow) {
-      localChanged = restorePlayerState(stateRow.payload) || localChanged;
-    } else {
-      await upsertRow(user, "player_state", readPlayerState());
-    }
+      for (const key of Object.keys(STORAGE)) {
+        const row = data?.find(item => item.data_key === key);
+        const local = differentAccount ? [] : readLocal(key);
+        if (row) {
+          const merged = differentAccount ? (Array.isArray(row.payload) ? row.payload : []) : mergeArray(row.payload, local);
+          if (JSON.stringify(merged) !== JSON.stringify(row.payload)) await upsertRow(user, key, merged);
+          localChanged = writeLocal(key, merged) || localChanged;
+        } else {
+          await upsertRow(user, key, local);
+          localChanged = writeLocal(key, local) || localChanged;
+        }
+      }
 
-    window.dispatchEvent(new CustomEvent("yunarunes-cloud-sync"));
-    // A página pode ter desenhado a interface antes de terminar a recuperação remota.
-    // Recarrega apenas quando os dados locais foram efetivamente alterados.
-    if (localChanged) setTimeout(() => window.location.reload(), 0);
-  } finally {
-    syncing = false;
-  }
+      const stateRow = data?.find(item => item.data_key === "player_state");
+      const localState = differentAccount ? [] : readPlayerState();
+      const mergedState = stateRow ? mergePlayerState(stateRow.payload, localState) : localState;
+      if (!stateRow || JSON.stringify(mergedState) !== JSON.stringify(stateRow.payload)) {
+        await upsertRow(user, "player_state", mergedState);
+      }
+      localChanged = restorePlayerState(mergedState) || localChanged;
+
+      originalSetItem.call(localStorage, OWNER_KEY, user.id);
+      window.dispatchEvent(new CustomEvent("yunarunes-cloud-sync", { detail: { userId: user.id, online: true } }));
+      if (localChanged) setTimeout(() => window.location.reload(), 0);
+    } finally {
+      syncing = false;
+    }
+  })().finally(() => { syncPromise = null; });
+  return syncPromise;
 }
 
 function scheduleSave(kind) {
@@ -205,6 +242,12 @@ window.addEventListener("storage", event => {
   if (kind) scheduleSave(kind);
 });
 
+window.addEventListener("online", () => {
+  syncAll().catch(error => console.warn("YunaRunes: sincronização ao voltar a estar online falhou.", error?.message || error));
+  for (const key of Object.keys(STORAGE)) scheduleSave(key);
+  scheduleSave("player_state");
+});
+
 async function saveTeam(monsters) {
   const user = await currentUser();
   if (!user) throw new Error("Inicia sessão na tua conta YunaRunes para guardar equipas.");
@@ -240,13 +283,24 @@ window.YunaRunesCloud = {
 };
 
 window.YunaRunesCloudReady = (async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (session) await syncAll();
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) await syncAll();
+  } catch (error) {
+    // Se a nuvem estiver indisponível, o armazenamento local continua utilizável.
+    console.warn("YunaRunes: nuvem indisponível; dados locais mantidos.", error?.message || error);
+    window.dispatchEvent(new CustomEvent("yunarunes-cloud-error", {
+      detail: { key: "startup", message: error?.message || "Nuvem indisponível" }
+    }));
+  }
 
   supabase.auth.onAuthStateChange((event, sessionNow) => {
     if (sessionNow && (event === "SIGNED_IN" || event === "TOKEN_REFRESHED" || event === "USER_UPDATED")) {
       setTimeout(() => syncAll().catch(error => {
         console.warn("YunaRunes: sincronização após autenticação falhou.", error?.message || error);
+        window.dispatchEvent(new CustomEvent("yunarunes-cloud-error", {
+          detail: { key: "auth", message: error?.message || "Falha de sincronização" }
+        }));
       }), 0);
     }
   });
