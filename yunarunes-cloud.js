@@ -249,6 +249,19 @@ window.addEventListener("online", () => {
 });
 
 async function saveTeam(monsters) {
+  let user = null;
+  let authAvailable = false;
+  try {
+    user = await currentUser();
+    authAvailable = true;
+  } catch (error) {
+    console.warn("YunaRunes: autenticação indisponível durante a gravação.", error?.message || error);
+  }
+  // Se este navegador já pertenceu a outra conta, não guardar dados anónimos
+  // que poderiam ser confundidos com os dados dessa conta.
+  if (!user && localStorage.getItem(OWNER_KEY)) {
+    throw new Error("Inicia sessão na conta que utilizavas anteriormente antes de guardar uma nova equipe neste navegador.");
+  }
   const teams = readLocal("teams");
   const team = {
     id: crypto.randomUUID(),
@@ -258,16 +271,15 @@ async function saveTeam(monsters) {
   teams.unshift(team);
   writeLocal("teams", teams.slice(0, 100));
   let cloudSaved = false;
-  try {
-    const user = await currentUser();
-    if (user) {
+  if (user) {
+    try {
       await saveKey("teams", readLocal("teams"));
       cloudSaved = true;
+    } catch (error) {
+      console.warn("YunaRunes: equipe guardada localmente; sincronização pendente.", error?.message || error);
     }
-  } catch (error) {
-    console.warn("YunaRunes: equipe guardada localmente; nuvem indisponível.", error?.message || error);
   }
-  return { ...team, cloudSaved };
+  return { ...team, cloudSaved, localOnly: !cloudSaved };
 }
 
 async function removeTeam(id) {
