@@ -10,8 +10,8 @@ android {
         applicationId 'com.yunarunes.mobile.v3'
         minSdk 19
         targetSdk 35
-        versionCode 19
-        versionName '1.8.2'
+        versionCode 20
+        versionName '1.8.3'
     }
 
     signingConfigs {
