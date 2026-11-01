@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1015"><title>Diário da conta — YunaRunes</title>
+<style>
+:root{color-scheme:dark;--bg:#080c11;--panel:#121923;--text:#f2f6fa;--muted:#95a4b2;--accent:#35a9e1;--border:#293746}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#24113d 0,#0b1016 38%,var(--bg) 75%);color:var(--text);font-family:Arial,sans-serif;min-height:100vh}
+header{padding:15px max(16px,calc((100% - 900px)/2));background:#080c11ef;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header a{color:#fff;text-decoration:none;font-weight:900}header .back{font-size:13px;color:#8bdcff}
+main{width:min(820px,calc(100% - 28px));margin:28px auto}.panel{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:24px;margin-bottom:16px;box-shadow:0 12px 35px #0005}
+h1{margin:0 0 8px;font-size:27px}.muted{color:var(--muted);line-height:1.55}
+label{display:block;margin:14px 0 6px;font-size:13px;font-weight:800}
+input,select,textarea{width:100%;padding:13px;border-radius:9px;border:1px solid #3b4b5a;background:#090f15;color:#fff;font:15px Arial,sans-serif}textarea{resize:vertical;min-height:105px}
+button{border:0;border-radius:9px;padding:12px 16px;background:var(--accent);color:#061018;font-weight:900;cursor:pointer}button.secondary{background:#202b36;color:#fff;border:1px solid var(--border)}button:disabled{opacity:.55;cursor:wait}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.status{min-height:22px;margin-top:12px;font-size:13px;color:#b9d8e8}.status.error{color:#ff9b9b}
+.entry{padding:14px;border:1px solid var(--border);border-radius:10px;margin-top:10px;background:#0d141c}.entry-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.entry h3{font-size:15px;margin:0 0 6px}.entry p{white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0;line-height:1.5;color:#c5d0d9}.meta{font-size:12px;color:var(--muted)}
+#diaryContent{display:none}@media(max-width:600px){main{margin:18px auto}.panel{padding:18px}h1{font-size:23px}}
+</style></head>
+<body>
+<header><a href="index.html">🦊 YunaRunes</a><a class="back" href="account.html">👤 Conta do jogador</a></header>
+<main><section class="panel">
+<h1>📔 Diário da conta</h1>
+<p class="muted">Acompanha a evolução da tua conta, regista objetivos, monstros obtidos, melhorias de runas e conquistas. Os teus registos são privados e sincronizados com a tua conta.</p>
+<div id="loginNotice" class="muted" style="display:none">Para aceder ao teu diário, inicia sessão na tua conta do jogador. <a href="account.html" style="color:#8bdcff">Iniciar sessão</a></div>
+<div id="diaryContent">
+<form id="diaryForm">
+<label for="diaryDate">Data</label><input id="diaryDate" type="date" required>
+<label for="diaryCategory">Categoria</label><select id="diaryCategory"><option>Progresso</option><option>Monstros</option><option>Runas</option><option>Equipas</option><option>Objetivos</option><option>Conquistas</option><option>Outros</option></select>
+<label for="diaryTitle">Título</label><input id="diaryTitle" type="text" maxlength="100" placeholder="Ex.: Primeiro clear no novo andar" required>
+<label for="diaryNotes">Notas e progresso</label><textarea id="diaryNotes" maxlength="2000" rows="4" placeholder="O que aconteceu? O que melhoraste? Quais são os próximos objetivos?" required></textarea>
+<div class="actions"><button id="saveBtn" type="submit">Guardar registo</button></div>
+</form><div id="entryList" aria-live="polite"></div>
+</div><p id="status" class="status" role="status" aria-live="polite"></p>
+</section></main>
+<script type="module" src="yunarunes-cloud.js?v=20261101-player-cloud-v1"></script>
+<script type="module">
+const $=id=>document.getElementById(id), KEY='yunarunes-account-diary-v1';let cloud;
+function say(t,e=false){$('status').textContent=t;$('status').classList.toggle('error',e)}
+function read(){try{const x=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(x)?x:[]}catch{return []}}
+function render(){
+ const box=$('entryList');box.replaceChildren();const rows=read();
+ if(!rows.length){const p=document.createElement('p');p.className='muted';p.textContent='Ainda não tens registos. Adiciona o primeiro para começares a acompanhar a evolução da tua conta.';box.append(p);return}
+ rows.forEach(row=>{const card=document.createElement('article');card.className='entry';const head=document.createElement('div');head.className='entry-head';const detail=document.createElement('div');const title=document.createElement('h3');title.textContent=row.title||'Registo';const meta=document.createElement('div');meta.className='meta';meta.textContent=(row.date||'')+' · '+(row.category||'Outros');detail.append(title,meta);head.append(detail);const del=document.createElement('button');del.type='button';del.className='secondary';del.textContent='Eliminar';del.dataset.remove=row.id;head.append(del);const notes=document.createElement('p');notes.textContent=row.notes||'';card.append(head,notes);box.append(card)})
+}
+function today(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')}
+$('diaryDate').value=today();
+$('diaryForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('saveBtn');b.disabled=true;try{const row={id:Date.now().toString(36)+Math.random().toString(36).slice(2),date:$('diaryDate').value,category:$('diaryCategory').value,title:$('diaryTitle').value.trim(),notes:$('diaryNotes').value.trim(),created_at:new Date().toISOString()};if(!row.title||!row.notes)throw new Error('Preenche o título e as notas.');const all=read();all.unshift(row);localStorage.setItem(KEY,JSON.stringify(all.slice(0,100)));await cloud.savePlayerState();$('diaryForm').reset();$('diaryDate').value=today();render();say('Registo guardado e sincronizado na tua conta.')}catch(err){say(err.message||'Não foi possível guardar.',true)}finally{b.disabled=false}});
+$('entryList').addEventListener('click',async e=>{const b=e.target.closest('[data-remove]');if(!b)return;try{localStorage.setItem(KEY,JSON.stringify(read().filter(x=>x.id!==b.dataset.remove)));await cloud.savePlayerState();render();say('Registo eliminado e sincronizado.')}catch(err){say(err.message||'Não foi possível eliminar.',true)}});
+await window.YunaRunesCloudReady;cloud=window.YunaRunesCloud;const {data:{session}}=await cloud.client.auth.getSession();
+if(!session){$('loginNotice').style.display='block'}else{await cloud.syncAll();$('diaryContent').style.display='block';render()}
+window.addEventListener('yunarunes-cloud-sync',render);
+</script>
+<script src="language.js?v=20261029-site-load-fix-4"></script>
+</body></html>
