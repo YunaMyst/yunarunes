@@ -111,7 +111,7 @@ jobs:
           mkdir -p downloads
           cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes.apk
           cp android/app/build/outputs/apk/release/app-release.apk downloads/yunarunes-1.8.3.apk
-          git add downloads/yunarunes.apk downloads/yunarunes-1.8.2.apk
+          git add downloads/yunarunes.apk downloads/yunarunes-1.8.3.apk
           if git diff --cached --quiet; then
             echo "APK unchanged"
           else
