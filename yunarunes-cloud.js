@@ -250,10 +250,8 @@ window.addEventListener("online", () => {
 
 async function saveTeam(monsters) {
   let user = null;
-  let authAvailable = false;
   try {
     user = await currentUser();
-    authAvailable = true;
   } catch (error) {
     console.warn("YunaRunes: autenticação indisponível durante a gravação.", error?.message || error);
   }
