@@ -249,8 +249,6 @@ window.addEventListener("online", () => {
 });
 
 async function saveTeam(monsters) {
-  const user = await currentUser();
-  if (!user) throw new Error("Inicia sessão na tua conta YunaRunes para guardar equipas.");
   const teams = readLocal("teams");
   const team = {
     id: crypto.randomUUID(),
@@ -259,8 +257,17 @@ async function saveTeam(monsters) {
   };
   teams.unshift(team);
   writeLocal("teams", teams.slice(0, 100));
-  await saveKey("teams", readLocal("teams"));
-  return team;
+  let cloudSaved = false;
+  try {
+    const user = await currentUser();
+    if (user) {
+      await saveKey("teams", readLocal("teams"));
+      cloudSaved = true;
+    }
+  } catch (error) {
+    console.warn("YunaRunes: equipe guardada localmente; nuvem indisponível.", error?.message || error);
+  }
+  return { ...team, cloudSaved };
 }
 
 async function removeTeam(id) {
