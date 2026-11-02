@@ -1,7 +1,7 @@
-/* YunaRunes International — full-page UI translation layer.
- * Preserves game names, code, JSON, scripts and explicitly protected content.
- * Uses the existing PT/EN dictionary first, then Google Translate for all remaining
- * visible text and dynamic content. The selected locale persists across pages.
+/* YunaRunes International — site-wide multilingual translation layer.
+ * Keeps the selected locale consistent on every page and translates visible,
+ * dynamically-created text and UI attributes. Preserves game names and code.
+ * Uses the page's detected source language for fallback translation.
  */
 (()=>{'use strict';
 const KEY='yunarunes-locale';
@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v2';
+const cacheKey='yunarunes-i18n-cache-v3';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -67,7 +67,7 @@ async function endpoint(texts){
    // Secondary provider if Google fails OR returns the source unchanged.
    try{
     const pair=new URL('https://api.mymemory.translated.net/get');
-    pair.searchParams.set('q',text);pair.searchParams.set('langpair','pt|'+locale);
+    pair.searchParams.set('q',text);pair.searchParams.set('langpair','autodetect|'+locale);
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
     let response;
     try{response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal})}finally{clearTimeout(timeout)}
