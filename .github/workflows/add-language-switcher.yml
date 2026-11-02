@@ -38,9 +38,10 @@ jobs:
               s = re.sub(r'<script src="international\.js[^"]*"></script>', '', s)
               s = re.sub(r'<script src="language\.js[^"]*"></script>', '', s)
               if p.name == 'team-builder.html':
-                  s = s.replace('</body>', intl + '\n</body>')
+                  s = s.replace('</body>', script + '\n' + intl + '\n</body>')
               else:
-                  s = s.replace('</body>', intl + '\n' + script + '\n</body>')
+                  # Start the header/language controls before the full-site translator.
+                  s = s.replace('</body>', script + '\n' + intl + '\n</body>')
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
