@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v22';
+const cacheKey='yunarunes-i18n-cache-v23';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -142,6 +142,32 @@ async function translateOne(text){
    }
   }
  }
+ // Backup provider: MyMemory, with automatic source-language detection.
+ // This runs when Google is unavailable, throttled, or returns unchanged text.
+ try{
+  const pair=new URL('https://api.mymemory.translated.net/get');
+  pair.searchParams.set('q',sourceText);
+  pair.searchParams.set('langpair','autodetect|'+locale);
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),10000);
+  let response;
+  try{
+   response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});
+  }finally{clearTimeout(timer)}
+  if(response&&response.ok){
+   const data=await response.json();
+   const raw=data&&data.responseData&&data.responseData.translatedText;
+   if(raw){
+    const decoder=document.createElement('textarea');
+    decoder.innerHTML=raw;
+    let value=decoder.value||'';
+    if(clean(value)!==clean(sourceText)){
+     protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+     return value;
+    }
+   }
+  }
+ }catch(_){}
  return null;
 }
 async function endpoint(texts){
