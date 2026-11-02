@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v4';
+const cacheKey='yunarunes-i18n-cache-v5';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -46,43 +46,65 @@ function queue(){
  const run=()=>{scheduled=false;translatePending()};
  if('requestIdleCallback'in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,80);
 }
+function splitForProvider(text){
+ const parts=[];let rest=String(text||'');
+ while(rest.length>360){
+  let cut=rest.lastIndexOf(' ',360);if(cut<180)cut=360;
+  parts.push(rest.slice(0,cut));rest=rest.slice(cut).replace(/^\\s+/,'');
+ }
+ if(rest)parts.push(rest);
+ return parts;
+}
+function googleSegments(data){
+ if(!Array.isArray(data)||!Array.isArray(data[0]))return '';
+ return data[0].map(part=>Array.isArray(part)?(part[0]||''):'').join('');
+}
+async function getJson(url,timeoutMs=10000){
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);
+ try{const response=await fetch(url,{credentials:'omit',cache:'no-store',signal:controller.signal});if(!response.ok)return null;return await response.json()}
+ catch(_){return null}finally{clearTimeout(timer)}
+}
+async function translateOne(text){
+ const u=new URL('https://translate.googleapis.com/translate_a/single');
+ u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+ let data=await getJson(u.toString(),10000);
+ let value=googleSegments(data);
+ if(value&&clean(value)!==clean(text))return value;
+ // Alternate Google web endpoint: useful when the legacy gtx endpoint is throttled.
+ const alt=new URL('https://clients5.google.com/translate_a/t');
+ alt.searchParams.set('client','dict-chrome-ex');alt.searchParams.set('sl','auto');alt.searchParams.set('tl',locale);alt.searchParams.set('q',text);
+ data=await getJson(alt.toString(),10000);
+ value=googleSegments(data);
+ if(value&&clean(value)!==clean(text))return value;
+ // Keyless fallback. Keep each request below MyMemory's small per-query limit.
+ const pair=new URL('https://api.mymemory.translated.net/get');
+ pair.searchParams.set('q',text);pair.searchParams.set('langpair','autodetect|'+locale);
+ data=await getJson(pair.toString(),10000);
+ value=data&&data.responseData&&data.responseData.translatedText;
+ if(value){
+  const decoder=document.createElement('textarea');decoder.innerHTML=value;
+  const decoded=decoder.value||'';
+  if(clean(decoded)!==clean(text))return decoded;
+ }
+ return null;
+}
 async function endpoint(texts){
- // Google Translate's unofficial endpoint is reliable with one q parameter per request.
- // Sending several q parameters in one request can return a single nested result and
- // silently leave most page strings untranslated.
  const out=[];
  for(let i=0;i<texts.length;i+=6){
   const group=texts.slice(i,i+6);
   const values=await Promise.all(group.map(async text=>{
-   const u=new URL('https://translate.googleapis.com/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
-   try{
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
-    const response=await fetch(u.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});clearTimeout(timeout);
-    if(!response.ok)return null;
-    const data=await response.json();
-    const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
-    const value=segments.map(part=>part&&part[0]||'').join('');
-    if(value&&clean(value)!==clean(text))return value;
-   }catch(_){}
-   // Secondary provider if Google fails OR returns the source unchanged.
-   try{
-    const pair=new URL('https://api.mymemory.translated.net/get');
-    pair.searchParams.set('q',text);pair.searchParams.set('langpair','autodetect|'+locale);
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
-    let response;
-    try{response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal})}finally{clearTimeout(timeout)}
-    if(!response.ok)return null;
-    const data=await response.json();
-    const value=data&&data.responseData&&data.responseData.translatedText;
+   const pieces=splitForProvider(text);
+   if(pieces.length===1)return translateOne(text);
+   const translated=[];
+   for(const piece of pieces){
+    const value=await translateOne(piece);
     if(!value)return null;
-    const decoder=document.createElement('textarea');decoder.innerHTML=value;
-    const decoded=decoder.value||'';
-    return clean(decoded)!==clean(text)?decoded:null;
-   }catch(_){return null}
+    translated.push(value);
+   }
+   return translated.join(' ');
   }));
   out.push(...values);
-  if(i+6<texts.length)await new Promise(resolve=>setTimeout(resolve,120));
+  if(i+6<texts.length)await new Promise(resolve=>setTimeout(resolve,180));
  }
  return out;
 }
@@ -197,13 +219,13 @@ function makePicker(){
  return true;
 }
 function boot(){
- try{const saved=localStorage.getItem(KEY),legacy=localStorage.getItem('yunarunes-language');locale=(saved&&saved!=='pt')?saved:(legacy||saved||'pt')}catch(_){locale='pt'}
+ try{const saved=localStorage.getItem(KEY),legacy=localStorage.getItem('yunarunes-language');locale=(saved&&LANGS.some(x=>x[0]===saved))?saved:(legacy||'pt')}catch(_){locale='pt'}
  if(!LANGS.some(x=>x[0]===locale))locale='pt';
  // Normalize to Portuguese first so every locale starts from the same source language.
  if(typeof window.yunaSetLanguage==='function'){
   // Keep the legacy PT/EN selector and this full-site selector in sync.
   // Never force Portuguese over an English choice saved by language.js.
-  window.yunaSetLanguage(locale);
+  window.yunaSetLanguage(locale,true);
  }
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
