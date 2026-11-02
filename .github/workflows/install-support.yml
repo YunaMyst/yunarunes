@@ -1,0 +1,44 @@
+name: Install YunaRunes support button
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'support.js'
+      - '.github/workflows/install-support.yml'
+permissions:
+  contents: write
+concurrency:
+  group: yunarunes-header-patch
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Install support script on every site page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          marker = '<script src="support.js?v=20261102-support-v1"></script>'
+          changed = []
+          for path in Path('.').glob('*.html'):
+              source = path.read_text(encoding='utf-8')
+              updated = re.sub(r'\\s*<script src="support\\.js[^"]*"></script>\\s*', '\\n', source)
+              if '</body>' in updated.lower():
+                  pos = updated.lower().rfind('</body>')
+                  updated = updated[:pos] + marker + '\\n' + updated[pos:]
+              if updated != source:
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(path.name)
+          print('Support script installed in:', ', '.join(changed))
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git diff --cached --quiet || git commit -m 'install support button across YunaRunes'
+          git push origin HEAD:main
