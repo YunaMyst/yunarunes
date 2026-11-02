@@ -156,7 +156,7 @@ function queueAttributeTranslations(){
     const values=await endpoint(batch.map(job=>job.source));
     batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
    }
-   if(locale!==runLocale){jobs.forEach(job=>pendingAttributes.set(runLocale+'|'+job.attr+'|'+job.source,job));return;}
+   if(locale!==runLocale)return;
    const results=new Map(translatedValues.map(item=>[item.job,item.value]));
    // Apply all completed attribute translations together, avoiding one-by-one repaint flicker.
    jobs.forEach(job=>{
