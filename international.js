@@ -63,6 +63,20 @@ async function endpoint(texts){
     const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
     const value=segments.map(part=>part&&part[0]||'').join('');
     return value||text;
+   }catch(_){}
+   // Secondary provider if Google Translate is unavailable or throttled.
+   try{
+    const pair=new URL('https://api.mymemory.translated.net/get');
+    pair.searchParams.set('q',text);pair.searchParams.set('langpair','pt|'+locale);
+    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),10000);
+    let response;
+    try{response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal})}finally{clearTimeout(timeout)}
+    if(!response.ok)return null;
+    const data=await response.json();
+    const value=data&&data.responseData&&data.responseData.translatedText;
+    if(!value)return null;
+    const decoder=document.createElement('textarea');decoder.innerHTML=value;
+    return decoder.value||null;
    }catch(_){return null}
   }));
   out.push(...values);
