@@ -21,16 +21,19 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          marker = '<script src="international.js?v=20261102"></script>'
+          marker = '<script src="international.js?v=20261103"></script>'
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
-              if marker in source or 'src="international.js' in source:
+              import re
+              updated = re.sub(r'<script src="international\\.js(?:\\?v=[^"]*)?"></script>', marker, source)
+              if updated != source:
+                  source = updated
+              elif marker not in source and '</body>' in source.lower():
+                  pos = source.lower().rfind('</body>')
+                  source = source[:pos] + marker + '\\n' + source[pos:]
+              else:
                   continue
-              if '</body>' not in source.lower():
-                  continue
-              pos = source.lower().rfind('</body>')
-              source = source[:pos] + marker + '\n' + source[pos:]
               path.write_text(source, encoding='utf-8')
               changed.append(path.name)
           print('International selector installed in:', ', '.join(changed))
