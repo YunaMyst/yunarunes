@@ -37,11 +37,9 @@ jobs:
               # Remove duplicates and rebuild the shared scripts in the required order.
               s = re.sub(r'<script src="international\.js[^"]*"></script>', '', s)
               s = re.sub(r'<script src="language\.js[^"]*"></script>', '', s)
-              if p.name == 'team-builder.html':
-                  s = s.replace('</body>', script + '\n' + intl + '\n</body>')
-              else:
-                  # Start the header/language controls before the full-site translator.
-                  s = s.replace('</body>', script + '\n' + intl + '\n</body>')
+              # The full-site translator must initialize before the legacy language controls,
+              # so its language-change listener is ready when the selector emits its event.
+              s = s.replace('</body>', intl + '\n' + script + '\n</body>')
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
