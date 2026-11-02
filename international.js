@@ -28,6 +28,48 @@ function protectedNode(n){
  return false;
 }
 function clean(s){return (s||'').replace(/\s+/g,' ').trim()}
+const authoredOriginals=new WeakMap();
+function applyAuthoredTranslations(root=document){
+ if(!root)return;
+ const selector='[data-'+locale+'],[data-'+locale+'-placeholder],[data-'+locale+'-title],[data-'+locale+'-aria-label]';
+ const elements=[];
+ if(root.nodeType===1&&root.matches?.(selector))elements.push(root);
+ if(root.querySelectorAll)elements.push(...root.querySelectorAll(selector));
+ elements.forEach(el=>{
+  if(protectedNode(el))return;
+  const originals=authoredOriginals.get(el)||{};
+  // Translate common UI attributes from page-authored locale values.
+  ['placeholder','title','aria-label'].forEach(attr=>{
+   const value=el.getAttribute('data-'+locale+'-'+attr);
+   if(value!==null){
+    if(originals[attr]===undefined)originals[attr]=el.getAttribute(attr)||'';
+    if(el.getAttribute(attr)!==value)el.setAttribute(attr,value);
+   }else if(locale==='pt'&&originals[attr]!==undefined){
+    el.setAttribute(attr,originals[attr]);
+   }
+  });
+  const value=el.getAttribute('data-'+locale);
+  if(value===null)return;
+  const textNodes=Array.from(el.childNodes).filter(n=>n.nodeType===3&&clean(n.nodeValue));
+  const hasElement=Array.from(el.childNodes).some(n=>n.nodeType===1);
+  if(hasElement)return; // Never destroy nested controls, icons, or markup.
+  if(!originals.text)originals.text=textNodes.map(n=>n.nodeValue).join('');
+  authoredOriginals.set(el,originals);
+  if(textNodes.length===1){
+   const node=textNodes[0];
+   if(!originalText.has(node))originalText.set(node,node.nodeValue);
+   if(node.nodeValue!==value){lastWritten.set(node,value);node.nodeValue=value}
+  }else if(!textNodes.length){
+   el.textContent=value;
+  }else{
+   const node=textNodes[0];
+   if(!originalText.has(node))originalText.set(node,node.nodeValue);
+   lastWritten.set(node,value);node.nodeValue=value;
+   textNodes.slice(1).forEach(n=>n.nodeValue='');
+  }
+ });
+}
+
 function addText(n){
  if(!n||n.nodeType!==3||protectedNode(n)||!clean(n.nodeValue))return;
  if(lastWritten.has(n)){
@@ -336,7 +378,7 @@ function boot(){
  }
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
-   if(r.type==='childList')r.addedNodes.forEach(n=>{addTree(n);translateAttributes(n)});
+   if(r.type==='childList')r.addedNodes.forEach(n=>{applyAuthoredTranslations(n);addTree(n);translateAttributes(n)});
    else if(r.type==='characterData'&&r.target.nodeValue!==lastWritten.get(r.target))addText(r.target); else if(r.type==='attributes'){const el=r.target;translateAttributes(el)}
   });
   if(locale!=='pt')queue();
@@ -367,6 +409,7 @@ function boot(){
   try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
   document.documentElement.lang=next==='pt'?'pt-BR':next;
   const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
+  applyAuthoredTranslations(document.head);applyAuthoredTranslations(document.body);
   if(next!=='pt'){
    // Requeue existing translated nodes using their preserved source text.
    [document.head,document.body].forEach(root=>{
