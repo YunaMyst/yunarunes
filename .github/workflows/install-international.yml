@@ -21,21 +21,19 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          marker = '<script src="international.js?v=20261104"></script>'
+          marker = '<script src="international.js?v=20261105"></script>'
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
               import re
-              updated = re.sub(r'<script src="international\.js[^"]*"></script>', marker, source)
+              # Remove old/duplicate tags, then add exactly one current script reference.
+              updated = re.sub(r'\\s*<script src="international\\.js[^"]*"></script>\\s*', '\\n', source)
+              if '</body>' in updated.lower():
+                  pos = updated.lower().rfind('</body>')
+                  updated = updated[:pos] + marker + '\\n' + updated[pos:]
               if updated != source:
-                  source = updated
-              elif marker not in source and '</body>' in source.lower():
-                  pos = source.lower().rfind('</body>')
-                  source = source[:pos] + marker + '\n' + source[pos:]
-              else:
-                  continue
-              path.write_text(source, encoding='utf-8')
-              changed.append(path.name)
+                  path.write_text(updated, encoding='utf-8')
+                  changed.append(path.name)
           print('International selector installed in:', ', '.join(changed))
           PY
       - name: Commit and push
