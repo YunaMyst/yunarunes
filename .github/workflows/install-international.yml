@@ -21,16 +21,16 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          marker = '<script src="international.js?v=20261105"></script>'
+          marker = '<script src="international.js?v=20261106"></script>'
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
               import re
               # Remove old/duplicate tags, then add exactly one current script reference.
-              updated = re.sub(r'\\s*<script src="international\\.js[^"]*"></script>\\s*', '\\n', source)
+              updated = re.sub(r'\s*<script src="international\.js[^"]*"></script>\s*', '\n', source)
               if '</body>' in updated.lower():
                   pos = updated.lower().rfind('</body>')
-                  updated = updated[:pos] + marker + '\\n' + updated[pos:]
+                  updated = updated[:pos] + marker + '\n' + updated[pos:]
               if updated != source:
                   path.write_text(updated, encoding='utf-8')
                   changed.append(path.name)
