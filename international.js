@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v8';
+const cacheKey='yunarunes-i18n-cache-v9';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -217,7 +217,10 @@ function translateAttributes(root){
    }
    const key=locale+'|@'+attr+'|'+source;
    if(cache[key]){
-    el.setAttribute(attr,cache[key]);
+    // Do not write an attribute when it already has this translation.
+    // Rewriting an identical value still fires MutationObserver and used to
+    // create a permanent translation/observer loop that blocked the page.
+    if(current!==cache[key])el.setAttribute(attr,cache[key]);
     originals[attr]={source,translated:cache[key],pending:false};
     return;
    }
