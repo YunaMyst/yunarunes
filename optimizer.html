@@ -39,5 +39,8 @@ function setInventoryText(){const imported=localStorage.getItem('yunarunes-inven
 $('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data)||!data.length)throw Error('formato');localStorage.setItem('yunarunes-inventory',JSON.stringify(data));runes=data;setInventoryText();$('results').textContent=tr('Inventário importado. Agora podes otimizar.','Inventory imported. You can optimize now.')}catch(err){$('inventory').textContent=tr('JSON inválido. Usa um ficheiro de inventário de runas em formato de lista.','Invalid JSON. Use a rune inventory file in list format.')}});
 function clearImported(){localStorage.removeItem('yunarunes-inventory');runes=demoRunes;setInventoryText();$('results').textContent=tr('Inventário de demonstração restaurado.','Demo inventory restored.')}
 const p=new URLSearchParams(location.search).get('monster');if(p)$('monster').value=p;load();
-</script><script src="yunarunes-upgrades.js?v=20261001-v2"></script><script type="module" src="yunarunes-cloud.js?v=20261101-player-cloud-v1"></script><script src="international.js?v=20261104"></script>
-<script src="international.js?v=20261104"></script>\n<script src="language.js?v=20261029-site-load-fix-4"></script><script src="international.js?v=20261105"></script>\n</body></html>
+</script><script src="yunarunes-upgrades.js?v=20261001-v2"></script><script type="module" src="yunarunes-cloud.js?v=20261101-player-cloud-v1"></script>
+
+\n<script src="language.js?v=20261029-site-load-fix-4"></script>
+\n<script src="international.js?v=20261106"></script>
+</body></html>
