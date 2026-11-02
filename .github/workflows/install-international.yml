@@ -26,7 +26,7 @@ jobs:
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
               import re
-              updated = re.sub(r'<script src="international\\.js(?:\\?v=[^"]*)?"></script>', marker, source)
+              updated = re.sub(r'<script src="international\.js(?:\\?v=[^"]*)?"></script>', marker, source)
               if updated != source:
                   source = updated
               elif marker not in source and '</body>' in source.lower():
