@@ -2618,14 +2618,17 @@ var KEY='yunarunes-language';
 function getLang(){
  try{
   var q=new URLSearchParams(location.search).get('lang');
-  if(q==='en'||q==='pt'){localStorage.setItem(KEY,q);return q;}
-  return localStorage.getItem(KEY)==='en'?'en':'pt';
+  var saved=localStorage.getItem('yunarunes-locale')||localStorage.getItem(KEY)||'pt';
+  var lang=q||saved;
+  if(!['pt','en','ko','fr','de','es','ja'].includes(lang))lang='pt';
+  if(q)localStorage.setItem('yunarunes-locale',lang);
+  return lang;
  }catch(e){return 'pt';}
 }
 function applyLang(lang){
- lang=lang==='en'?'en':'pt';
- try{localStorage.setItem(KEY,lang)}catch(e){}
- document.documentElement.lang=lang==='en'?'en':'pt-BR';
+ if(!['pt','en','ko','fr','de','es','ja'].includes(lang))lang='pt';
+ try{localStorage.setItem('yunarunes-locale',lang);if(lang==='pt'||lang==='en')localStorage.setItem(KEY,lang)}catch(e){}
+ document.documentElement.lang=lang==='pt'?'pt-BR':lang;
  document.querySelectorAll('[data-pt][data-en]').forEach(function(el){
   var value=el.getAttribute(lang==='en'?'data-en':'data-pt');
   if(value===null)return;
@@ -2660,7 +2663,7 @@ document.addEventListener('click',function(e){
  try{var url=new URL(location.href);url.searchParams.set('lang',lang);history.replaceState(null,'',url.pathname+url.search+url.hash)}catch(err){}
 },true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){applyLang(getLang())});else applyLang(getLang());
-window.addEventListener('storage',function(e){if(e.key===KEY)applyLang(e.newValue==='en'?'en':'pt')});
+window.addEventListener('storage',function(e){if(e.key==='yunarunes-locale'||e.key===KEY)applyLang(e.key==='yunarunes-locale'?e.newValue:(e.newValue==='en'?'en':'pt'))});
 })();
 </script>
 
@@ -2751,13 +2754,17 @@ var labels={
 '#academy-final-training':['🏁 Treino Final','🏁 Final Training']
 };
 function currentLang(){
- try{return new URLSearchParams(location.search).get('lang')==='en'||localStorage.getItem('yunarunes-language')==='en'?'en':'pt'}catch(e){return 'pt'}
+ try{
+  var q=new URLSearchParams(location.search).get('lang');
+  var lang=q||localStorage.getItem('yunarunes-locale')||localStorage.getItem('yunarunes-language')||'pt';
+  return ['pt','en','ko','fr','de','es','ja'].includes(lang)?lang:'pt';
+ }catch(e){return 'pt'}
 }
 function apply(){
  var lang=currentLang();
  document.querySelectorAll('.academy-global-nav a[href^="#"]').forEach(function(a){
   var pair=labels[a.getAttribute('href')];
-  if(pair)a.textContent=pair[lang==='en'?1:0];
+  if(pair){var koLabels={'#academy-menu':'🎓 카테고리별 학습','#basics':'📘 기초','#combat-school':'⚔️ 전투 학교','#buff-debuff-school':'🔵 버프 / 디버프','#mechanics':'🧪 전투 메커니즘','#status-guide':'🎯 상태 효과 가이드','#why-lost':'❌ 패배 원인 분석','#runes':'🧿 룬','#rune-school':'🧿 룬 학습','#rune-decision-school':'💎 룬 선택 도구','#rune-lab':'🧪 룬 연구소','#spd-lab-school':'⚡ 속도 연구소','#speed-tune-school':'📊 속도 조정','#roles':'🧙 몬스터 역할','#team-thinking-school':'🧩 팀 구성 전략','#build-planner-school':'🛠️ 빌드 플래너','#content-school':'🏰 콘텐츠','#pve-pvp-academy':'🏆 PvE / PvP','#dungeons':'🏰 던전','#pvp':'⚔️ PvP','#progress':'📈 성장 단계','#yuna-new-player-journey':'🦊 초보자 여정','#academy-quiz':'🧠 지식 테스트','#laboratory':'🧪 연구실','#simulators':'🎮 시뮬레이터','#detective-school':'🕵️ 탐정','#micro-lessons':'📚 짧은 강의','#daily-challenge':'🏆 일일 도전','#team-challenge':'🧩 팀 도전','#resources':'💰 자원','#artifacts':'🧪 아티팩트','#master-mode':'👑 마스터 모드','#ask-academy':'💬 아카데미에 질문하기','#achievements':'🏅 업적','#graduation-school':'🎓 졸업','#academy-final-training':'🏁 최종 훈련'};a.textContent=lang==='ko'?(koLabels[a.getAttribute('href')]||pair[0]):pair[lang==='en'?1:0];}
  });
 }
 function boot(){
