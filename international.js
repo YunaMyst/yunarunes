@@ -12,7 +12,7 @@ const LANGS=[
 const cacheKey='yunarunes-i18n-cache-v7';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
-const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
+const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
 const attributeRetries=new WeakMap();
@@ -100,6 +100,7 @@ async function endpoint(texts){
 async function translatePending(){
  if(busy||!pending.size)return;
  busy=true;
+ const runLocale=locale;
  const nodes=Array.from(pending);pending.clear();
  const work=[];
  for(const n of nodes){
@@ -125,9 +126,12 @@ async function translatePending(){
    }
   });
  }
+ // Ignore responses from a language that was replaced while requests were in flight.
+ if(locale!==runLocale){busy=false;nodes.forEach(n=>pending.add(n));queue();return;}
  // Commit all translations in one browser task so users see one stable language.
  for(const x of work){
   if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.original)continue;
+  if(!originalText.has(x.node))originalText.set(x.node,x.original);
   lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
  }
  saveCache();busy=false;
@@ -143,6 +147,7 @@ function queueAttributeTranslations(){
   if(attributeBusy||!pendingAttributes.size)return;
   attributeBusy=true;
   const jobs=Array.from(pendingAttributes.values());pendingAttributes.clear();
+  const runLocale=locale;
   const missing=jobs.filter(job=>!cache[job.key]);
   try{
    const translatedValues=[];
@@ -151,6 +156,7 @@ function queueAttributeTranslations(){
     const values=await endpoint(batch.map(job=>job.source));
     batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
    }
+   if(locale!==runLocale){jobs.forEach(job=>pendingAttributes.set(runLocale+'|'+job.attr+'|'+job.source,job));return;}
    const results=new Map(translatedValues.map(item=>[item.job,item.value]));
    // Apply all completed attribute translations together, avoiding one-by-one repaint flicker.
    jobs.forEach(job=>{
@@ -244,7 +250,7 @@ function makePicker(){
   const select=document.createElement('select');select.id='yuna-international-select';select.value=locale;select.setAttribute('aria-label','Choose language');select.setAttribute('title','Choose the language for the entire YunaRunes site');
   select.style.cssText='width:132px;max-width:min(132px,42vw);min-width:0;padding:7px 8px;border:1px solid #34475a;border-radius:8px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
   LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
-  select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value);if(select.value==='en'||select.value==='pt')localStorage.setItem('yunarunes-language',select.value)}catch(_){};location.reload()});
+  select.addEventListener('change',()=>{if(typeof window.yunaSetLanguage==='function')window.yunaSetLanguage(select.value);else{locale=select.value;switchLocale(locale)}});
   wrap.append(label,select);
   controls.appendChild(wrap);
  }
@@ -279,10 +285,32 @@ function boot(){
  });
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content']});
  observer.observe(document.head,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['content','title','aria-label','alt']});
- window.addEventListener('yunarunes-language-applied',event=>{
-  const next=String(event&&event.detail||'').toLowerCase();
+ function switchLocale(next){
   if(!LANGS.some(item=>item[0]===next))return;
   locale=next;
+  pending.clear();pendingAttributes.clear();
+  // Restore every translated text node to its original HTML language first.
+  [document.head,document.body].forEach(root=>{
+   if(!root)return;
+   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+   let node;
+   while((node=walker.nextNode())){
+    const original=originalText.get(node),written=lastWritten.get(node);
+    if(original!==undefined&&node.nodeValue===written){
+     node.nodeValue=original;lastWritten.delete(node);
+    }
+   }
+  });
+  // Restore translated attributes before queuing the new language.
+  const selector='[placeholder],[title],[aria-label],[aria-description],[aria-placeholder],[alt],[data-placeholder],[data-tooltip],[data-label],[data-original-title],[value],meta[content]';
+  document.querySelectorAll(selector).forEach(el=>{
+   const originals=attributeOriginals.get(el);if(!originals)return;
+   Object.keys(originals).forEach(attr=>{
+    const item=originals[attr];
+    if(item&&item.translated&&el.getAttribute(attr)===item.translated)el.setAttribute(attr,item.source);
+    if(item)item.pending=false;
+   });
+  });
   try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
   document.documentElement.lang=next==='pt'?'pt-BR':next;
   const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
@@ -290,6 +318,10 @@ function boot(){
    addTree(document.head);addTree(document.body);
    translateAttributes(document.head);translateAttributes(document.body);queue();
   }
+ }
+ window.addEventListener('yunarunes-language-applied',event=>{
+  const next=String(event&&event.detail||'').toLowerCase();
+  switchLocale(next);
  });
  const headerObserver=new MutationObserver(()=>makePicker());
  headerObserver.observe(document.body,{subtree:true,childList:true});
