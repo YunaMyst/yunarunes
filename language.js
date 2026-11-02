@@ -1445,7 +1445,7 @@ Object.assign(PAIRS,{
 'Importar JSON':'Import JSON','Exportar JSON':'Export JSON','Descarregar JSON':'Download JSON','Copiar':'Copy',
 'Em breve':'Coming soon','Funcionalidade em desenvolvimento':'Feature in development','Volta em breve':'Check back soon',
 'Aprende':'Learn','Aprenda':'Learn','Aprender':'Learn','Começa aqui':'Start here','Comece aqui':'Start here',
-'Guia':'Guide','Dicas':'Tips','Ajuda':'Help','Academia':'Academy','Glossário':'Glossary','Combate':'Combat','Progressão':'Progression',
+'Guia':'Guide','Dicas':'Tips','Ajuda':'Help','Academia':'Yuna Academy','Glossário':'Glossary','Combate':'Combat','Progressão':'Progression',
 'Montar equipes':'Build teams','Montar equipes':'Build teams','Aprender runas':'Learn runes','Aprender combate':'Learn combat',
 'Testar conhecimentos':'Test knowledge','Testar meus conhecimentos':'Test my knowledge',
 'Última atualização':'Last updated','Atualizar':'Refresh','Atualizado':'Updated','Atualização':'Update',
