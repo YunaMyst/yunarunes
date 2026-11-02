@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v16';
+const cacheKey='yunarunes-i18n-cache-v17';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -31,45 +31,41 @@ function clean(s){return (s||'').replace(/\s+/g,' ').trim()}
 const authoredOriginals=new WeakMap();
 function applyAuthoredTranslations(root=document){
  if(!root)return;
- const selector='[data-'+locale+'],[data-'+locale+'-placeholder],[data-'+locale+'-title],[data-'+locale+'-aria-label]';
+ const selector='[data-pt],[data-'+locale+'],[data-pt-placeholder],[data-'+locale+'-placeholder],[data-pt-title],[data-'+locale+'-title],[data-pt-aria-label],[data-'+locale+'-aria-label]';
  const elements=[];
  if(root.nodeType===1&&root.matches?.(selector))elements.push(root);
  if(root.querySelectorAll)elements.push(...root.querySelectorAll(selector));
  elements.forEach(el=>{
   if(protectedNode(el))return;
   const originals=authoredOriginals.get(el)||{};
-  // Translate common UI attributes from page-authored locale values.
   ['placeholder','title','aria-label'].forEach(attr=>{
-   const value=el.getAttribute('data-'+locale+'-'+attr);
-   if(value!==null){
-    if(originals[attr]===undefined)originals[attr]=el.getAttribute(attr)||'';
-    if(el.getAttribute(attr)!==value)el.setAttribute(attr,value);
-   }else if(locale==='pt'&&originals[attr]!==undefined){
-    el.setAttribute(attr,originals[attr]);
-   }
+   const source=el.getAttribute('data-pt-'+attr);
+   const target=el.getAttribute('data-'+locale+'-'+attr);
+   if(source!==null&&originals[attr]===undefined)originals[attr]=source;
+   const value=target!==null?target:(source!==null?source:null);
+   if(value!==null&&el.getAttribute(attr)!==value)el.setAttribute(attr,value);
   });
-  const value=el.getAttribute('data-'+locale);
-  if(value===null)return;
-  const textNodes=Array.from(el.childNodes).filter(n=>n.nodeType===3&&clean(n.nodeValue));
+  const source=el.getAttribute('data-pt');
+  const target=el.getAttribute('data-'+locale);
+  if(source===null&&target===null){authoredOriginals.set(el,originals);return}
   const hasElement=Array.from(el.childNodes).some(n=>n.nodeType===1);
-  if(hasElement)return; // Never destroy nested controls, icons, or markup.
-  if(!originals.text)originals.text=textNodes.map(n=>n.nodeValue).join('');
-  authoredOriginals.set(el,originals);
-  if(textNodes.length===1){
-   const node=textNodes[0];
-   if(!originalText.has(node))originalText.set(node,node.nodeValue);
-   if(node.nodeValue!==value){lastWritten.set(node,value);node.nodeValue=value}
-  }else if(!textNodes.length){
-   el.textContent=value;
+  if(hasElement){authoredOriginals.set(el,originals);return}
+  const display=target!==null?target:(source!==null?source:null);
+  if(display===null)return;
+  let node=Array.from(el.childNodes).find(n=>n.nodeType===3);
+  if(!node){node=document.createTextNode('');el.appendChild(node)}
+  const base=source!==null?source:(originalText.get(node)??node.nodeValue);
+  if(!originalText.has(node))originalText.set(node,base);
+  if(locale==='pt'||target!==null){
+   if(node.nodeValue!==display){lastWritten.set(node,display);node.nodeValue=display}
+   else if(lastWritten.has(node))lastWritten.set(node,display);
   }else{
-   const node=textNodes[0];
-   if(!originalText.has(node))originalText.set(node,node.nodeValue);
-   lastWritten.set(node,value);node.nodeValue=value;
-   textNodes.slice(1).forEach(n=>n.nodeValue='');
+   if(node.nodeValue!==base){node.nodeValue=base}
+   lastWritten.delete(node);
   }
+  authoredOriginals.set(el,originals);
  });
 }
-
 function addText(n){
  if(!n||n.nodeType!==3||protectedNode(n)||!clean(n.nodeValue))return;
  if(lastWritten.has(n)){
