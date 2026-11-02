@@ -2200,19 +2200,22 @@ function apply(root=document.body){
  }
 }
 
-function setLanguage(lang){
+function setLanguage(lang, fromBoot=false){
  const allowed=['pt','en','ko','fr','de','es','ja'];
- const next=allowed.includes(String(lang).toLowerCase())?String(lang).toLowerCase():'pt';
+ const raw=String(lang||'').toLowerCase();
+ const next=raw==='br'?'pt':(allowed.includes(raw)?raw:'pt');
  try{localStorage.setItem('yunarunes-locale',next)}catch(_){}
- // Language selection must never navigate or reload the current page.
  activeLanguageOverride=next;
  save(next);
  document.documentElement.lang=next==='pt'?'pt-BR':next;
- document.querySelectorAll('[data-lang]').forEach(el=>{
-  const active=(el.getAttribute('data-lang')||el.getAttribute('data-language'))===next;
+ document.querySelectorAll('[data-lang],[data-language]').forEach(el=>{
+  const active=(el.getAttribute('data-lang')||el.getAttribute('data-language')||'').toLowerCase()===next;
   el.classList.toggle('active',active);
   el.setAttribute('aria-pressed',active?'true':'false');
  });
+ // User selections reload from the original source HTML so changing from one
+ // translated language to another never translates an already-translated string.
+ if(!fromBoot){location.reload();return;}
  if(next==='pt'||next==='en')apply();
  window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:next}));
@@ -2221,63 +2224,48 @@ function setLanguage(lang){
 function bind(){
  convertLanguageButtonsToLinks();
  document.querySelectorAll('[data-lang],[data-language]').forEach(b=>{
-  const lang=b.getAttribute('data-lang')||b.getAttribute('data-language');
-  if(!['en','pt','br','ko','fr','de','es','ja'].includes(String(lang||'').toLowerCase()))return;
-  b.setAttribute('role','button');
-  b.setAttribute('tabindex','0');
+  const lang=(b.getAttribute('data-lang')||b.getAttribute('data-language')||'').toLowerCase();
+  if(!['en','pt','br','ko','fr','de','es','ja'].includes(lang))return;
+  b.setAttribute('role','button');b.setAttribute('tabindex','0');
   b.style.setProperty('pointer-events','auto','important');
   b.style.setProperty('position','relative','important');
   b.style.setProperty('z-index','2147483647','important');
   b.onclick=e=>{e.preventDefault();setLanguage(lang);return false;};
  });
 }
-// Run before page-level capture handlers, including legacy scripts that cancel clicks.
-window.addEventListener('click',e=>{
- const el=e.target&&e.target.closest?e.target.closest('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn'):null;
- if(!el)return;
- const raw=(el.getAttribute('data-lang')||el.getAttribute('data-language')||'').toLowerCase();
- // Trust the explicit language value first. Do not inspect class names like
- // "menu-language": the word "language" contains "en" and misclassified PT as EN.
- const hint=(el.id||'')+' '+(typeof el.className==='string'?el.className:'');
- const lang=raw==='pt'||raw==='br'?'pt':raw==='en'?'en':(/(?:^|[\s_-])(?:en|english)(?:$|[\s_-])/i.test(hint)?'en':'pt');
- e.preventDefault();e.stopImmediatePropagation();setLanguage(lang);
-},true);
-document.addEventListener('click',e=>{enforceDonateAppearance();},true);
-// Universal language control handler: works with buttons, links, and legacy page-specific controls.
 function resolveLanguageControl(el){
  if(!el)return null;
- let lang=el.getAttribute('data-lang')||el.getAttribute('data-language');
- if(!lang&&/^lang(?:uage)?(?:pt|br|en)$/i.test(el.id||''))lang=/en$/i.test(el.id)?'en':'pt';
- if(!lang&&/\b(?:pt|br)\b/i.test((el.id||'')+' '+(el.className||'')))lang='pt';
- if(!lang&&/\ben\b|english/i.test((el.id||'')+' '+(el.className||'')))lang='en';
- if(!lang&&el.getAttribute('href')){
-  try{const u=new URL(el.getAttribute('href'),location.href);const q=(u.searchParams.get('lang')||'').toLowerCase();if(q==='en'||q==='pt'||q==='br')lang=q==='en'?'en':'pt'}catch(_){}
+ let lang=(el.getAttribute('data-lang')||el.getAttribute('data-language')||'').toLowerCase();
+ const allowed=['pt','br','en','ko','fr','de','es','ja'];
+ if(allowed.includes(lang))return lang==='br'?'pt':lang;
+ const hint=((el.id||'')+' '+(typeof el.className==='string'?el.className:'')).toLowerCase();
+ const idMatch=(el.id||'').match(/(?:language|lang)[-_]?(pt|br|en|ko|fr|de|es|ja)$/i);
+ if(idMatch)return idMatch[1].toLowerCase()==='br'?'pt':idMatch[1].toLowerCase();
+ if(/(?:^|[\\s_-])(?:pt|br|portuguese)(?:$|[\\s_-])/.test(hint))return 'pt';
+ if(/(?:^|[\\s_-])(?:en|english)(?:$|[\\s_-])/.test(hint))return 'en';
+ if(el.getAttribute('href')){
+  try{const q=(new URL(el.getAttribute('href'),location.href)).searchParams.get('lang');if(allowed.includes((q||'').toLowerCase()))return q.toLowerCase()==='br'?'pt':q.toLowerCase()}catch(_){}
  }
- if(!lang&&el.matches?.('[onclick*="setLanguage"],[onclick*="changeLanguage"]')){
-  const code=(el.getAttribute('onclick')||'').match(/(?:setLanguage|changeLanguage)\s*\(\s*['"]?(en|pt|br)/i);
-  if(code)lang=code[1].toLowerCase()==='en'?'en':'pt';
+ if(el.matches?.('[onclick*="setLanguage"],[onclick*="changeLanguage"]')){
+  const m=(el.getAttribute('onclick')||'').match(/(?:setLanguage|changeLanguage)\\s*\\(\\s*['"]?(pt|br|en|ko|fr|de|es|ja)/i);
+  if(m)return m[1].toLowerCase()==='br'?'pt':m[1].toLowerCase();
  }
- return lang==='en'?'en':(lang==='pt'||lang==='br'?'pt':null);
+ return null;
 }
-document.addEventListener('click',e=>{
- const el=e.target?.closest?.('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn,[onclick*="setLanguage"],[onclick*="changeLanguage"],a[href*="lang=pt"],a[href*="lang=en"]');
+window.addEventListener('click',e=>{
+ const el=e.target&&e.target.closest?e.target.closest('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn,[onclick*="setLanguage"],[onclick*="changeLanguage"],a[href*="lang="]'):null;
  if(!el)return;
- const lang=resolveLanguageControl(el);
- if(!lang)return;
- e.preventDefault();
- e.stopImmediatePropagation();
- setLanguage(lang);
+ const lang=resolveLanguageControl(el);if(!lang)return;
+ e.preventDefault();e.stopImmediatePropagation();setLanguage(lang);
 },true);
 document.addEventListener('keydown',e=>{
  if(e.key!=='Enter'&&e.key!==' ')return;
  const el=e.target?.closest?.('[data-lang],[data-language],.language-link,.menu-language,.lang-btn,#langPT,#langEN,#ptBtn,#enBtn');
  if(!el)return;
- const lang=resolveLanguageControl(el);
- if(!lang)return;
- e.preventDefault();
- e.stopImmediatePropagation();
- setLanguage(lang);
+ const lang=resolveLanguageControl(el);if(!lang)return;
+ e.preventDefault();e.stopImmediatePropagation();setLanguage(lang);
 },true);
+document.addEventListener('click',()=>{enforceDonateAppearance();},true);
 function enforceHeaderControlsLayout(){
  const id='yunarunes-header-controls-stable-v3';
  let style=document.getElementById(id);
