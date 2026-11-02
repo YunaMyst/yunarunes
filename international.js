@@ -68,52 +68,32 @@ function googleSegments(data){
   return Array.isArray(part)&&typeof part[0]==='string'?part[0]:'';
  }).join('');
 }
-async function getJson(url,timeoutMs=10000){
+async function getJson(url,timeoutMs=4500){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);
- try{const response=await fetch(url,{credentials:'omit',cache:'no-store',signal:controller.signal});if(!response.ok)return null;return await response.json()}
+ try{const response=await fetch(url,{credentials:'omit',cache:'force-cache',signal:controller.signal});if(!response.ok)return null;return await response.json()}
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
  const u=new URL('https://translate.googleapis.com/translate_a/single');
- u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
- let data=await getJson(u.toString(),10000);
- let value=googleSegments(data);
- if(value&&clean(value)!==clean(text))return value;
- // Alternate Google web endpoint: useful when the legacy gtx endpoint is throttled.
- const alt=new URL('https://clients5.google.com/translate_a/t');
- alt.searchParams.set('client','dict-chrome-ex');alt.searchParams.set('sl','pt');alt.searchParams.set('tl',locale);alt.searchParams.set('q',text);
- data=await getJson(alt.toString(),10000);
- value=googleSegments(data);
- if(value&&clean(value)!==clean(text))return value;
- // Keyless fallback. Keep each request below MyMemory's small per-query limit.
- const pair=new URL('https://api.mymemory.translated.net/get');
- pair.searchParams.set('q',text);pair.searchParams.set('langpair','pt|'+locale);
- data=await getJson(pair.toString(),10000);
- value=data&&data.responseData&&data.responseData.translatedText;
- if(value){
-  const decoder=document.createElement('textarea');decoder.innerHTML=value;
-  const decoded=decoder.value||'';
-  if(clean(decoded)!==clean(text))return decoded;
- }
- return null;
+ u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+ const data=await getJson(u.toString(),4500);
+ const value=googleSegments(data);
+ return value&&clean(value)!==clean(text)?value:null;
 }
 async function endpoint(texts){
- const out=[];
- for(let i=0;i<texts.length;i+=6){
-  const group=texts.slice(i,i+6);
+ // Bound concurrency: translate in parallel rather than serial batches. A slow
+ // external provider must never keep the entire page waiting for minutes.
+ const out=new Array(texts.length);
+ const concurrency=12;
+ for(let i=0;i<texts.length;i+=concurrency){
+  const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
    const pieces=splitForProvider(text);
    if(pieces.length===1)return translateOne(text);
-   const translated=[];
-   for(const piece of pieces){
-    const value=await translateOne(piece);
-    if(!value)return null;
-    translated.push(value);
-   }
-   return translated.join(' ');
+   const translated=await Promise.all(pieces.map(piece=>translateOne(piece)));
+   return translated.every(Boolean)?translated.join(' '):null;
   }));
-  out.push(...values);
-  if(i+6<texts.length)await new Promise(resolve=>setTimeout(resolve,180));
+  values.forEach((value,j)=>{out[i+j]=value});
  }
  return out;
 }
