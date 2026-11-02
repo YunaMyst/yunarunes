@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v5';
+const cacheKey='yunarunes-i18n-cache-v6';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -56,11 +56,17 @@ function splitForProvider(text){
  return parts;
 }
 function googleSegments(data){
- if(!Array.isArray(data)||!Array.isArray(data[0]))return '';
- // The gtx endpoint returns an array of segment arrays; clients5 may return
- // a compact [translatedText, detectedLanguage] pair instead.
- if(typeof data[0][0]==='string')return data[0][0]||'';
- return data[0].map(part=>Array.isArray(part)?(part[0]||''):'').join('');
+ // Google endpoints return either [[["translated","source",...],...],...]
+ // or a compact ["translated text","detected language"] response.
+ if(!Array.isArray(data))return '';
+ const first=data[0];
+ if(typeof first==='string')return first;
+ if(!Array.isArray(first))return '';
+ if(typeof first[0]==='string')return first[0]||'';
+ return first.map(part=>{
+  if(typeof part==='string')return part;
+  return Array.isArray(part)&&typeof part[0]==='string'?part[0]:'';
+ }).join('');
 }
 async function getJson(url,timeoutMs=10000){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);
@@ -69,19 +75,19 @@ async function getJson(url,timeoutMs=10000){
 }
 async function translateOne(text){
  const u=new URL('https://translate.googleapis.com/translate_a/single');
- u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+ u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
  let data=await getJson(u.toString(),10000);
  let value=googleSegments(data);
  if(value&&clean(value)!==clean(text))return value;
  // Alternate Google web endpoint: useful when the legacy gtx endpoint is throttled.
  const alt=new URL('https://clients5.google.com/translate_a/t');
- alt.searchParams.set('client','dict-chrome-ex');alt.searchParams.set('sl','auto');alt.searchParams.set('tl',locale);alt.searchParams.set('q',text);
+ alt.searchParams.set('client','dict-chrome-ex');alt.searchParams.set('sl','pt');alt.searchParams.set('tl',locale);alt.searchParams.set('q',text);
  data=await getJson(alt.toString(),10000);
  value=googleSegments(data);
  if(value&&clean(value)!==clean(text))return value;
  // Keyless fallback. Keep each request below MyMemory's small per-query limit.
  const pair=new URL('https://api.mymemory.translated.net/get');
- pair.searchParams.set('q',text);pair.searchParams.set('langpair','autodetect|'+locale);
+ pair.searchParams.set('q',text);pair.searchParams.set('langpair','pt|'+locale);
  data=await getJson(pair.toString(),10000);
  value=data&&data.responseData&&data.responseData.translatedText;
  if(value){
