@@ -21,7 +21,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          marker = '<script src="international.js?v=20261102-i18n-v13"></script>'
+          marker = '<script src="international.js?v=20261102-i18n-v14"></script>'
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
