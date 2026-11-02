@@ -188,7 +188,7 @@ async function syncAll() {
 
       originalSetItem.call(localStorage, OWNER_KEY, user.id);
       window.dispatchEvent(new CustomEvent("yunarunes-cloud-sync", { detail: { userId: user.id, online: true } }));
-      if (localChanged) setTimeout(() => window.location.reload(), 0);
+      // Restoring cloud data must never reload the whole page: repeated startup\n      // syncs could otherwise create a visible reload/flicker loop.\n      if (localChanged) {\n        window.dispatchEvent(new CustomEvent("yunarunes-cloud-restored", { detail: { userId: user.id } }));\n      }
     } finally {
       syncing = false;
     }
