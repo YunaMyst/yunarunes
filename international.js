@@ -41,8 +41,7 @@ function addTree(root){
  let n;while((n=walker.nextNode()))addText(n);
 }
 function queue(){
- // Portuguese is the source language: never send it back through machine translation.
- if(locale==='pt'||scheduled||busy)return;
+ if(scheduled||busy)return;
  scheduled=true;
  const run=()=>{scheduled=false;translatePending()};
  if('requestIdleCallback'in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,80);
@@ -99,7 +98,7 @@ async function endpoint(texts){
  return out;
 }
 async function translatePending(){
- if(locale==='pt'||busy||!pending.size)return;
+ if(busy||!pending.size)return;
  busy=true;
  const runLocale=locale;
  const nodes=Array.from(pending);pending.clear();
@@ -141,11 +140,11 @@ async function translatePending(){
 const pendingAttributes=new Map();
 let attributeBusy=false,attributeScheduled=false;
 function queueAttributeTranslations(){
- if(locale==='pt'||attributeScheduled||attributeBusy||!pendingAttributes.size)return;
+ if(attributeScheduled||attributeBusy||!pendingAttributes.size)return;
  attributeScheduled=true;
  const run=async()=>{
   attributeScheduled=false;
-  if(locale==='pt'||attributeBusy||!pendingAttributes.size)return;
+  if(attributeBusy||!pendingAttributes.size)return;
   attributeBusy=true;
   const jobs=Array.from(pendingAttributes.values());pendingAttributes.clear();
   const runLocale=locale;
@@ -285,8 +284,8 @@ function boot(){
  }
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
-   if(r.type==='childList')r.addedNodes.forEach(n=>{if(locale!=='pt'){addTree(n);translateAttributes(n)}});
-   else if(r.type==='characterData'&&r.target.nodeValue!==lastWritten.get(r.target))addText(r.target); else if(r.type==='attributes'&&locale!=='pt'){const el=r.target;translateAttributes(el)}
+   if(r.type==='childList')r.addedNodes.forEach(n=>{addTree(n);translateAttributes(n)});
+   else if(r.type==='characterData'&&r.target.nodeValue!==lastWritten.get(r.target))addText(r.target); else if(r.type==='attributes'){const el=r.target;translateAttributes(el)}
   });
   if(locale!=='pt')queue();
  });
