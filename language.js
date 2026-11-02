@@ -2213,9 +2213,8 @@ function setLanguage(lang, fromBoot=false){
   el.classList.toggle('active',active);
   el.setAttribute('aria-pressed',active?'true':'false');
  });
- // User selections reload from the original source HTML so changing from one
- // translated language to another never translates an already-translated string.
- if(!fromBoot){location.reload();return;}
+ // Switch in place. The international layer restores original source text
+ // before applying the next locale, so a full page reload is unnecessary.
  if(next==='pt'||next==='en')apply();
  window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:next}));
