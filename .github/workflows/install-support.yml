@@ -26,10 +26,10 @@ jobs:
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
-              updated = re.sub(r'\\s*<script src="support\\.js[^"]*"></script>\\s*', '\\n', source)
+              updated = re.sub(r'\s*<script src="support\.js[^"]*"></script>\s*', '\n', source)
               if '</body>' in updated.lower():
                   pos = updated.lower().rfind('</body>')
-                  updated = updated[:pos] + marker + '\\n' + updated[pos:]
+                  updated = updated[:pos] + marker + '\n' + updated[pos:]
               if updated != source:
                   path.write_text(updated, encoding='utf-8')
                   changed.append(path.name)
