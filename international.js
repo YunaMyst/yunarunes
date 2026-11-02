@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v15';
+const cacheKey='yunarunes-i18n-cache-v16';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -128,8 +128,11 @@ async function translatePending(){
   const displayed=n.nodeValue;
   const original=originalText.has(n)?originalText.get(n):displayed;
   const key=runLocale+'|'+original;
-  const explicitKo=runLocale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
-  if(explicitKo){work.push({node:n,original,displayed,value:explicitKo,key:null});continue}
+  // Prefer authored translations on the text's own element. The old code
+  // only checked data-ko, ignoring thousands of existing data-pt/data-en values.
+  const parent=n.parentElement;
+  const explicit=parent&&parent.childNodes.length===1?parent.getAttribute('data-'+runLocale):null;
+  if(explicit&&clean(explicit)){work.push({node:n,original,displayed,value:explicit,key:null});continue}
   if(cache[key]){work.push({node:n,original,displayed,value:cache[key],key:null});continue}
   work.push({node:n,original,displayed,key,value:null});
  }
