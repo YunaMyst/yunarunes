@@ -2431,9 +2431,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 /* yuna-official-game-name-guard: lightweight, avoid scanning the entire DOM */
 function protectOfficialGameName(root=document){
  try{
-  document.documentElement.setAttribute('translate','no');
-  document.documentElement.classList.add('notranslate');
-  if(document.body){document.body.setAttribute('translate','no');document.body.classList.add('notranslate');}
+  // Never disable translation for the whole document. Protect only the exact
+  // game-name text node below so the international layer can translate all UI.
   if(!root||!root.childNodes)return;
   for(const node of Array.from(root.childNodes)){
    if(node.nodeType===3&&/invocadores\s+war/i.test(node.nodeValue||'')){
