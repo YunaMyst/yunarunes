@@ -93,6 +93,8 @@ async function translatePending(){
  for(const n of nodes){
   if(!n.isConnected||protectedNode(n))continue;
   const original=n.nodeValue, key=locale+'|'+original;
+  const explicitKo=locale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
+  if(explicitKo){lastWritten.set(n,explicitKo);n.nodeValue=explicitKo;n.__yunaIntlDone=true;translated.add(n);continue}
   if(cache[key]){lastWritten.set(n,cache[key]);n.nodeValue=cache[key];n.__yunaIntlDone=true;translated.add(n);continue}
   work.push({node:n,original,key});
  }
