@@ -119,7 +119,7 @@ async function getJson(url,timeoutMs=12000){
 async function translateOne(text){
  // Preserve official product names while translating the surrounding sentence.
  const protectedNames=[];
- const sourceText=String(text||'').replace(/Summoners\\s+War|YunaRunes/gi,match=>{
+ const sourceText=String(text||'').replace(/Summoners\s+War|YunaRunes/gi,match=>{
   const token='YUNARUNESKEEP'+protectedNames.length+'TOKEN';
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
