@@ -12,7 +12,7 @@ const LANGS=[
 const cacheKey='yunarunes-i18n-cache-v1';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
-const translated=new WeakSet(), lastWritten=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
+const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
 try{cache=JSON.parse(localStorage.getItem(cacheKey)||'{}')}catch(_){}
@@ -55,12 +55,14 @@ async function endpoint(texts){
   const values=await Promise.all(group.map(async text=>{
    const u=new URL('https://translate.googleapis.com/translate_a/single');
    u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
-   const response=await fetch(u.toString(),{credentials:'omit'});
-   if(!response.ok)throw Error('translation unavailable: '+response.status);
-   const data=await response.json();
-   const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
-   const value=segments.map(part=>part&&part[0]||'').join('');
-   return value||text;
+   try{
+    const response=await fetch(u.toString(),{credentials:'omit'});
+    if(!response.ok)return null;
+    const data=await response.json();
+    const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
+    const value=segments.map(part=>part&&part[0]||'').join('');
+    return value&&value!==text?value:null;
+   }catch(_){return null}
   }));
   out.push(...values);
   if(i+3<texts.length)await new Promise(resolve=>setTimeout(resolve,100));
@@ -81,13 +83,19 @@ async function translatePending(){
  // Small batches avoid URL-size limits and keep the page responsive.
  for(let i=0;i<work.length;i+=8){
   const batch=work.slice(i,i+8);
-  try{
-   const values=await endpoint(batch.map(x=>x.original));
-   batch.forEach((x,j)=>{if(!x.node.isConnected||x.node.nodeValue!==x.original)return;const v=values[j];if(v){cache[x.key]=v;lastWritten.set(x.node,v);x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}});
-  }catch(err){console.warn('YunaRunes translation batch failed:',err)}
+  const values=await endpoint(batch.map(x=>x.original));
+  batch.forEach((x,j)=>{
+   if(!x.node.isConnected||x.node.nodeValue!==x.original)return;
+   const v=values[j];
+   if(v){cache[x.key]=v;retryCount.delete(x.node);lastWritten.set(x.node,v);x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}
+   else{
+    const tries=retryCount.get(x.node)||0;
+    if(tries<4){retryCount.set(x.node,tries+1);pending.add(x.node)}
+   }
+  });
  }
  saveCache();busy=false;
- if(pending.size)queue();
+ if(pending.size){const delay=Math.min(8000,700*Math.pow(2,Math.min(4,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
 }
 function translateAttributes(root){
  const nodes=[];
@@ -125,7 +133,7 @@ function translateAttributes(root){
      originals[attr]={source,translated:translatedValue,pending:false};
     }
     saveCache();
-   }).catch(()=>{if(originals[attr]&&originals[attr].source===source)delete originals[attr]});
+   }).catch(()=>{if(originals[attr]&&originals[attr].source===source)delete originals[attr];setTimeout(()=>{if(el.isConnected&&locale!=='pt')translateAttributes(el)},1800)});
   });
  });
 }
