@@ -204,6 +204,11 @@ function boot(){
  window.addEventListener('yunarunes-language-applied',event=>{
   const next=event&&event.detail;
   if(next!=='en'&&next!=='pt')return;
+  // The legacy selector only knows PT/EN. Its PT fallback must not overwrite
+  // a language selected in the international picker (KR, FR, DE, ES or JA).
+  let selected='';
+  try{selected=localStorage.getItem(KEY)||''}catch(_){}
+  if(selected&&selected!=='pt'&&selected!=='en')return;
   locale=next;
   try{localStorage.setItem(KEY,next)}catch(_){}
   document.documentElement.lang=next==='en'?'en':'pt-BR';
