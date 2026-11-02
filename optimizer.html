@@ -40,12 +40,6 @@ $('file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)re
 function clearImported(){localStorage.removeItem('yunarunes-inventory');runes=demoRunes;setInventoryText();$('results').textContent=tr('Inventário de demonstração restaurado.','Demo inventory restored.')}
 const p=new URLSearchParams(location.search).get('monster');if(p)$('monster').value=p;load();
 </script><script src="yunarunes-upgrades.js?v=20261001-v2"></script><script type="module" src="yunarunes-cloud.js?v=20261101-player-cloud-v1"></script>
-
-
-
-
-
-
-<script src="international.js?v=20261102-i18n-v11"></script>
 <script src="language.js?v=20261102-i18n-v10"></script><script src="support.js?v=20261102-support-v1"></script>
+<script src="international.js?v=20261102-i18n-v11"></script>
 </body></html>

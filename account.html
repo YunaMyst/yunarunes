@@ -130,12 +130,6 @@ else if(session){await cloud.syncAll();showProfile(session.user)}
 if(new URLSearchParams(location.search).has('confirmed'))status('Email confirmado. Já podes entrar na tua conta.');
 $('resetForm').addEventListener('submit',async e=>{e.preventDefault();try{const {error}=await cloud.client.auth.updateUser({password:$('newPassword').value});if(error)throw error;$('resetBox').style.display='none';showProfile(await cloud.currentUser());status('Palavra-passe atualizada com sucesso.')}catch(err){status(err.message,true)}});
 </script>
-
-
-
-
-
-
-<script src="international.js?v=20261102-i18n-v11"></script>
 <script src="language.js?v=20261102-i18n-v10"></script><script src="support.js?v=20261102-support-v1"></script>
+<script src="international.js?v=20261102-i18n-v11"></script>
 </body></html>
