@@ -68,23 +68,33 @@ function googleSegments(data){
   return Array.isArray(part)&&typeof part[0]==='string'?part[0]:'';
  }).join('');
 }
-async function getJson(url,timeoutMs=4500){
+async function getJson(url,timeoutMs=12000){
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);
  try{const response=await fetch(url,{credentials:'omit',cache:'force-cache',signal:controller.signal});if(!response.ok)return null;return await response.json()}
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
- const u=new URL('https://translate.googleapis.com/translate_a/single');
- u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
- const data=await getJson(u.toString(),4500);
- const value=googleSegments(data);
- return value&&clean(value)!==clean(text)?value:null;
+ // The site contains Portuguese plus English labels and dynamically loaded
+ // content. Auto-detect the source first so mixed-language sections are covered.
+ const request=async source=>{
+  const u=new URL('https://translate.googleapis.com/translate_a/single');
+  u.searchParams.set('client','gtx');u.searchParams.set('sl',source);u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+  const data=await getJson(u.toString(),12000);
+  if(!data)return {failed:true,value:null};
+  const value=googleSegments(data);
+  return {failed:false,value:value&&clean(value)!==clean(text)?value:null};
+ };
+ const automatic=await request('auto');
+ if(automatic.value)return automatic.value;
+ // If auto-detection returned no usable response, retry explicitly as Portuguese.
+ if(automatic.failed){const fallback=await request('pt');return fallback.value||null;}
+ return null;
 }
 async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=12;
+ const concurrency=4;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -122,7 +132,7 @@ async function translatePending(){
    if(v){x.value=v;cache[x.key]=v;retryCount.delete(x.node)}
    else{
     const tries=retryCount.get(x.node)||0;
-    if(tries<4){retryCount.set(x.node,tries+1);pending.add(x.node)}
+    if(tries<7){retryCount.set(x.node,tries+1);pending.add(x.node)}
    }
   });
  }
@@ -135,7 +145,7 @@ async function translatePending(){
   lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
  }
  saveCache();busy=false;
- if(pending.size){const delay=Math.min(8000,700*Math.pow(2,Math.min(4,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
+ if(pending.size){const delay=Math.min(30000,1200*Math.pow(2,Math.min(5,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
 }
 const pendingAttributes=new Map();
 let attributeBusy=false,attributeScheduled=false;
@@ -173,9 +183,9 @@ function queueAttributeTranslations(){
      const retries=attributeRetries.get(job.el)||{};
      const count=retries[job.attr]||0;
      originals[job.attr]={source:job.source,translated:null,pending:false};
-     if(count<4){
+     if(count<7){
       retries[job.attr]=count+1;attributeRetries.set(job.el,retries);
-      setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},Math.min(10000,1200*Math.pow(2,count)));
+      setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},Math.min(30000,1500*Math.pow(2,count)));
      }
     }
     attributeOriginals.set(job.el,originals);
