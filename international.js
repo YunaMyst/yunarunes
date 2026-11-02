@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v1';
+const cacheKey='yunarunes-i18n-cache-v2';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -54,7 +54,7 @@ async function endpoint(texts){
   const group=texts.slice(i,i+3);
   const values=await Promise.all(group.map(async text=>{
    const u=new URL('https://translate.googleapis.com/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+   u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
    try{
     const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
     const response=await fetch(u.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});clearTimeout(timeout);
@@ -62,9 +62,9 @@ async function endpoint(texts){
     const data=await response.json();
     const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
     const value=segments.map(part=>part&&part[0]||'').join('');
-    return value||text;
+    if(value&&clean(value)!==clean(text))return value;
    }catch(_){}
-   // Secondary provider if Google Translate is unavailable or throttled.
+   // Secondary provider if Google fails OR returns the source unchanged.
    try{
     const pair=new URL('https://api.mymemory.translated.net/get');
     pair.searchParams.set('q',text);pair.searchParams.set('langpair','pt|'+locale);
@@ -76,7 +76,8 @@ async function endpoint(texts){
     const value=data&&data.responseData&&data.responseData.translatedText;
     if(!value)return null;
     const decoder=document.createElement('textarea');decoder.innerHTML=value;
-    return decoder.value||null;
+    const decoded=decoder.value||'';
+    return clean(decoded)!==clean(text)?decoded:null;
    }catch(_){return null}
   }));
   out.push(...values);
