@@ -45,11 +45,27 @@ function queue(){
  const run=()=>{scheduled=false;translatePending()};
  if('requestIdleCallback'in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,80);
 }
-function endpoint(texts){
- const u=new URL('https://translate.googleapis.com/translate_a/single');
- u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');
- texts.forEach(t=>u.searchParams.append('q',t));
- return fetch(u.toString(),{credentials:'omit'}).then(r=>{if(!r.ok)throw Error('translation unavailable');return r.json()}).then(data=>texts.map((_,i)=>(data[i]||[]).map(part=>part&&part[0]||'').join('')||texts[i]));
+async function endpoint(texts){
+ // Google Translate's unofficial endpoint is reliable with one q parameter per request.
+ // Sending several q parameters in one request can return a single nested result and
+ // silently leave most page strings untranslated.
+ const out=[];
+ for(let i=0;i<texts.length;i+=3){
+  const group=texts.slice(i,i+3);
+  const values=await Promise.all(group.map(async text=>{
+   const u=new URL('https://translate.googleapis.com/translate_a/single');
+   u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+   const response=await fetch(u.toString(),{credentials:'omit'});
+   if(!response.ok)throw Error('translation unavailable: '+response.status);
+   const data=await response.json();
+   const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
+   const value=segments.map(part=>part&&part[0]||'').join('');
+   return value||text;
+  }));
+  out.push(...values);
+  if(i+3<texts.length)await new Promise(resolve=>setTimeout(resolve,100));
+ }
+ return out;
 }
 async function translatePending(){
  if(busy||locale==='pt'||!pending.size)return;
