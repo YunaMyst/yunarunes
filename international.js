@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v23';
+const cacheKey='yunarunes-i18n-cache-v24';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -129,20 +129,20 @@ async function translateOne(text){
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
  });
- const sources=['auto','pt','en'].filter(source=>source!==locale||source==='auto');
+ // Use automatic source detection first. The previous six-request fallback
+ // chain could leave the page looking untranslated for minutes when Google
+ // was throttled; try each Google host once, then move promptly to MyMemory.
  const hosts=['translate.googleapis.com','translate.google.com'];
  for(const host of hosts){
-  for(const source of sources){
-   const u=new URL('https://'+host+'/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
-   u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-   const data=await getJson(u.toString(),12000);
-   if(!data)continue;
-   let value=googleSegments(data);
-   if(value&&clean(value)!==clean(sourceText)){
-    protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
-    return value;
-   }
+  const u=new URL('https://'+host+'/translate_a/single');
+  u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');
+  u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
+  const data=await getJson(u.toString(),6000);
+  if(!data)continue;
+  let value=googleSegments(data);
+  if(value&&clean(value)!==clean(sourceText)){
+   protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+   return value;
   }
  }
  // Backup provider: MyMemory, with automatic source-language detection.
