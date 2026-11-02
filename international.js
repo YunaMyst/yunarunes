@@ -70,6 +70,9 @@ function applyAuthoredTranslations(root=document){
 }
 function addText(n){
  if(!n||n.nodeType!==3||protectedNode(n)||!clean(n.nodeValue))return;
+ // Preserve the true source text as soon as a text node enters the translator.
+ // This lets every language switch restart from the same original wording.
+ if(!originalText.has(n))originalText.set(n,n.nodeValue);
  if(lastWritten.has(n)){
   if(n.nodeValue===lastWritten.get(n))return;
   // The application reused a translated text node for new dynamic content.
@@ -423,7 +426,13 @@ function makePicker(){
   const select=document.createElement('select');select.id='yuna-international-select';select.value=locale;select.setAttribute('aria-label','Choose language');select.setAttribute('title','Choose the language for the entire YunaRunes site');
   select.style.cssText='width:132px;max-width:min(132px,42vw);min-width:0;padding:7px 8px;border:1px solid #34475a;border-radius:8px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
   LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
-  select.addEventListener('change',()=>{if(typeof window.yunaSetLanguage==='function')window.yunaSetLanguage(select.value);else{locale=select.value;switchLocale(locale)}});
+  select.addEventListener('change',()=>{
+   const next=select.value;
+   // Keep the legacy header controls in sync, then guarantee that the
+   // site-wide translation layer receives the selected locale as well.
+   if(typeof window.yunaSetLanguage==='function')window.yunaSetLanguage(next);
+   if(locale!==next)switchLocale(next);
+  });
   wrap.append(label,select);
   controls.appendChild(wrap);
  }
