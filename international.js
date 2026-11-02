@@ -20,8 +20,9 @@ function protectedNode(n){
  if(!n)return true;
  const el=n.nodeType===1?n:n.parentElement;
  if(!el)return false;
- if(protectedTags.has(el.tagName)||el.closest('script,style,noscript,textarea,code,pre,kbd,samp,[data-no-translate],[translate="no"],.notranslate,[contenteditable="true"],input,select,option'))return true;
+ if(protectedTags.has(el.tagName)||el.closest('script,style,noscript,textarea,code,pre,kbd,samp,[data-no-translate],[translate="no"],.notranslate,[contenteditable="true"],input'))return true;
  if(el.closest('.monster-name,[data-monster-name],.summoner-name,[data-preserve-name]'))return true;
+ if(el.tagName==='OPTION'&&el.parentElement&&/monster|summoner|mob/i.test((el.parentElement.id||'')+' '+(el.parentElement.className||'')))return true;
  return false;
 }
 function clean(s){return (s||'').replace(/\s+/g,' ').trim()}
@@ -65,7 +66,7 @@ async function translatePending(){
   const batch=work.slice(i,i+8);
   try{
    const values=await endpoint(batch.map(x=>x.original));
-   batch.forEach((x,j)=>{if(!x.node.isConnected)return;const v=values[j];if(v){cache[x.key]=v;x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}});
+   batch.forEach((x,j)=>{if(!x.node.isConnected||x.node.nodeValue!==x.original)return;const v=values[j];if(v){cache[x.key]=v;x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}});
   }catch(err){console.warn('YunaRunes translation batch failed:',err)}
  }
  saveCache();busy=false;
@@ -74,10 +75,11 @@ async function translatePending(){
 function translateAttributes(root){
  const nodes=[];
  if(root.nodeType===1)nodes.push(root);
- if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label]'));
+ if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[value]'));
  nodes.forEach(el=>{
   if(protectedNode(el))return;
-  ['placeholder','title','aria-label'].forEach(attr=>{
+  ['placeholder','title','aria-label','value'].forEach(attr=>{
+   if(attr==='value'&&!(el.tagName==='BUTTON'||(el.tagName==='INPUT'&&/^(button|submit|reset)$/i.test(el.type))))return;
    const val=el.getAttribute(attr);if(!val||!clean(val))return;
    const key=locale+'|@'+attr+'|'+val;
    if(cache[key]){el.setAttribute(attr,cache[key]);return}
@@ -97,7 +99,7 @@ function makePicker(){
  if(!controls||!donate)return false;
  let wrap=controls.querySelector('#yuna-international-picker');
  if(!wrap){
-  wrap=document.createElement('div');wrap.id='yuna-international-picker';
+  wrap=document.createElement('div');wrap.id='yuna-international-picker';wrap.setAttribute('data-no-translate','true');
   wrap.style.cssText='display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;margin-left:7px;';
   const label=document.createElement('label');label.htmlFor='yuna-international-select';label.textContent='🌐';label.style.cssText='font-size:17px;line-height:1;';
   const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
@@ -121,7 +123,7 @@ function boot(){
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
  if(locale!=='pt'){
-  addTree(document.body);translateAttributes(document.body);queue();
+  addTree(document.head);addTree(document.body);translateAttributes(document.head);translateAttributes(document.body);queue();
  }
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
