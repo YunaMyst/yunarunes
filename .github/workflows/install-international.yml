@@ -1,0 +1,44 @@
+name: Install YunaRunes international selector
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'international.js'
+      - '.github/workflows/install-international.yml'
+permissions:
+  contents: write
+concurrency:
+  group: yunarunes-international-install
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add the international selector to every site page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          marker = '<script src="international.js?v=20261102"></script>'
+          changed = []
+          for path in Path('.').glob('*.html'):
+              source = path.read_text(encoding='utf-8')
+              if marker in source or 'src="international.js' in source:
+                  continue
+              if '</body>' not in source.lower():
+                  continue
+              pos = source.lower().rfind('</body>')
+              source = source[:pos] + marker + '\n' + source[pos:]
+              path.write_text(source, encoding='utf-8')
+              changed.append(path.name)
+          print('International selector installed in:', ', '.join(changed))
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add '*.html'
+          git diff --cached --quiet || git commit -m 'install international language selector across site'
+          git push origin HEAD:main
