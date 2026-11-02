@@ -2201,17 +2201,19 @@ function apply(root=document.body){
 }
 
 function setLanguage(lang){
- const next=lang==='en'?'en':'pt';
+ const allowed=['pt','en','ko','fr','de','es','ja'];
+ const next=allowed.includes(String(lang).toLowerCase())?String(lang).toLowerCase():'pt';
+ try{localStorage.setItem('yunarunes-locale',next)}catch(_){}
  // Language selection must never navigate or reload the current page.
  activeLanguageOverride=next;
  save(next);
- document.documentElement.lang=next==='en'?'en':'pt-BR';
+ document.documentElement.lang=next==='pt'?'pt-BR':next;
  document.querySelectorAll('[data-lang]').forEach(el=>{
   const active=(el.getAttribute('data-lang')||el.getAttribute('data-language'))===next;
   el.classList.toggle('active',active);
   el.setAttribute('aria-pressed',active?'true':'false');
  });
- apply();
+ if(next==='pt'||next==='en')apply();
  window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-lang',{detail:next}));
@@ -2220,13 +2222,13 @@ function bind(){
  convertLanguageButtonsToLinks();
  document.querySelectorAll('[data-lang],[data-language]').forEach(b=>{
   const lang=b.getAttribute('data-lang')||b.getAttribute('data-language');
-  if(lang!=='en'&&lang!=='pt'&&lang!=='br')return;
+  if(!['en','pt','br','ko','fr','de','es','ja'].includes(String(lang||'').toLowerCase()))return;
   b.setAttribute('role','button');
   b.setAttribute('tabindex','0');
   b.style.setProperty('pointer-events','auto','important');
   b.style.setProperty('position','relative','important');
   b.style.setProperty('z-index','2147483647','important');
-  b.onclick=e=>{e.preventDefault();setLanguage(lang==='en'?'en':'pt');return false;};
+  b.onclick=e=>{e.preventDefault();setLanguage(lang);return false;};
  });
 }
 // Run before page-level capture handlers, including legacy scripts that cancel clicks.
