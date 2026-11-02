@@ -33,21 +33,14 @@ jobs:
               s = re.sub(r'<script src="language-dynamic[^"]*"></script>', '', s)
               # Keep the global seven-language translator fresh on every page, including Team Builder.
               intl = '<script src="international.js?v=20261102-i18n-v33"></script>'
-              if 'international.js' in s:
-                  s = re.sub(r'<script src="international.js[^"]*"></script>', intl, s)
-              else:
-                  s = s.replace('</body>', intl + '</body>')
-              s = re.sub(r'<script src="language.js[^"]*"></script>', '', s)
-              # Team Builder has a self-contained language switcher; the global engine conflicts with its startup.
-              if p.name == 'team-builder.html':
-                  p.write_text(s, encoding='utf-8')
-                  continue
-              # Other site pages use the shared language engine.
               script = '<script src="language.js?v=20261102-i18n-v14"></script>'
-              if 'language.js' not in s:
-                  s = s.replace('</body>', script + '</body>')
+              # Remove duplicates and rebuild the shared scripts in the required order.
+              s = re.sub(r'<script src="international\\.js[^"]*"></script>', '', s)
+              s = re.sub(r'<script src="language\\.js[^"]*"></script>', '', s)
+              if p.name == 'team-builder.html':
+                  s = s.replace('</body>', intl + '\\n</body>')
               else:
-                  s = re.sub(r'<script src="language.js[^"]*"></script>', script, s)
+                  s = s.replace('</body>', intl + '\\n' + script + '\\n</body>')
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
