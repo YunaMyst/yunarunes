@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v21';
+const cacheKey='yunarunes-i18n-cache-v22';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -327,6 +327,51 @@ function translateAttributes(root){
  });
  queueAttributeTranslations();
 }
+function switchLocale(next){
+  if(!LANGS.some(item=>item[0]===next))return;
+  locale=next;
+  pending.clear();pendingAttributes.clear();
+  // Keep the currently displayed language in place while the next language
+  // is prepared. This avoids flashing back to Portuguese on every switch.
+  if(next==='pt'){
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    let node;
+    while((node=walker.nextNode())){
+     const original=originalText.get(node),written=lastWritten.get(node);
+     if(original!==undefined&&written!==undefined&&node.nodeValue===written){
+      node.nodeValue=original;lastWritten.delete(node);
+     }
+    }
+   });
+  }
+  pending.clear();
+  pendingAttributes.clear();
+  try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
+  document.documentElement.lang=next==='pt'?'pt-BR':next;
+  const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
+  applyAuthoredTranslations(document.head);applyAuthoredTranslations(document.body);
+  if(next!=='pt'){
+   // Requeue existing translated nodes using their preserved source text.
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    let node;
+    while((node=walker.nextNode())){
+     if(originalText.has(node))pending.add(node);
+     else addText(node);
+    }
+   });
+   translateAttributes(document.head);translateAttributes(document.body);queue();
+  }else{
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    addTree(root);
+    translateAttributes(root);
+   });
+  }
+ }
 function makePicker(){
  const header=document.querySelector('header.academy-site-header, header.top, header');
  if(!header)return false;
@@ -387,51 +432,6 @@ function boot(){
  });
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content']});
  observer.observe(document.head,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['content','title','aria-label','alt']});
- function switchLocale(next){
-  if(!LANGS.some(item=>item[0]===next))return;
-  locale=next;
-  pending.clear();pendingAttributes.clear();
-  // Keep the currently displayed language in place while the next language
-  // is prepared. This avoids flashing back to Portuguese on every switch.
-  if(next==='pt'){
-   [document.head,document.body].forEach(root=>{
-    if(!root)return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    let node;
-    while((node=walker.nextNode())){
-     const original=originalText.get(node),written=lastWritten.get(node);
-     if(original!==undefined&&written!==undefined&&node.nodeValue===written){
-      node.nodeValue=original;lastWritten.delete(node);
-     }
-    }
-   });
-  }
-  pending.clear();
-  pendingAttributes.clear();
-  try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
-  document.documentElement.lang=next==='pt'?'pt-BR':next;
-  const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
-  applyAuthoredTranslations(document.head);applyAuthoredTranslations(document.body);
-  if(next!=='pt'){
-   // Requeue existing translated nodes using their preserved source text.
-   [document.head,document.body].forEach(root=>{
-    if(!root)return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    let node;
-    while((node=walker.nextNode())){
-     if(originalText.has(node))pending.add(node);
-     else addText(node);
-    }
-   });
-   translateAttributes(document.head);translateAttributes(document.body);queue();
-  }else{
-   [document.head,document.body].forEach(root=>{
-    if(!root)return;
-    addTree(root);
-    translateAttributes(root);
-   });
-  }
- }
  window.addEventListener('yunarunes-language-applied',event=>{
   const next=String(event&&event.detail||'').toLowerCase();
   switchLocale(next);
