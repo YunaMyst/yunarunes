@@ -2215,7 +2215,6 @@ function setLanguage(lang, fromBoot=false){
  });
  // Switch in place. The international layer restores original source text
  // before applying the next locale, so a full page reload is unnecessary.
- if(next==='pt'||next==='en')apply();
  window.dispatchEvent(new CustomEvent('yunarunes-language-applied',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-language-change',{detail:next}));
  window.dispatchEvent(new CustomEvent('yunarunes-lang',{detail:next}));
