@@ -88,23 +88,26 @@ function translateAttributes(root){
  });
 }
 function makePicker(){
- // Remove the previous row of individual language buttons from the header.
- document.querySelectorAll('.yuna-language-controls').forEach(el=>el.remove());
  const nav=document.querySelector('header.top .nav, header .nav, .nav');
  if(!nav)return false;
- if(nav.querySelector('#yuna-international-picker'))return true;
- const wrap=document.createElement('div');wrap.id='yuna-international-picker';
- wrap.style.cssText='display:flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto;position:relative;z-index:8;';
- const label=document.createElement('label');label.htmlFor='yuna-international-select';label.textContent='🌐';label.style.cssText='font-size:18px;';
- const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
- select.style.cssText='width:132px;max-width:132px;min-width:0;padding:8px 9px;border:1px solid #34475a;border-radius:9px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
- LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
- select.value=locale;
- select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value)}catch(_){};location.reload()});
- wrap.append(label,select);nav.appendChild(wrap);
- if(matchMedia('(max-width:1024px), (pointer:coarse)').matches){
-  wrap.style.position='absolute';wrap.style.right='10px';wrap.style.top='7px';wrap.style.marginLeft='0';
+ // Remove the old PT/BR and ENG buttons wherever the legacy header placed them.
+ nav.querySelectorAll('[data-lang="pt"],[data-lang="en"],.yuna-language-controls').forEach(el=>el.remove());
+ const controls=nav.querySelector('.yuna-controls')||nav.querySelector('.header-controls');
+ const donate=controls&&controls.querySelector('.donate-link');
+ if(!controls||!donate)return false;
+ let wrap=controls.querySelector('#yuna-international-picker');
+ if(!wrap){
+  wrap=document.createElement('div');wrap.id='yuna-international-picker';
+  wrap.style.cssText='display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;margin-left:7px;';
+  const label=document.createElement('label');label.htmlFor='yuna-international-select';label.textContent='🌐';label.style.cssText='font-size:17px;line-height:1;';
+  const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
+  select.style.cssText='width:132px;max-width:132px;min-width:0;padding:7px 8px;border:1px solid #34475a;border-radius:8px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
+  LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
+  select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value)}catch(_){};location.reload()});
+  wrap.append(label,select);
  }
+ wrap.querySelector('select').value=locale;
+ if(donate.nextElementSibling!==wrap)donate.insertAdjacentElement('afterend',wrap);
  return true;
 }
 function boot(){
