@@ -139556,7 +139556,7 @@
           "ATK"
         ],
         "effects": [
-          "Beneficial Effects Blocked",
+          "Harmful Effect Removal Blocked",
           "Decrease DEF",
           "Decrease ATK SPD",
           "Brand",
@@ -147572,7 +147572,7 @@
         "description": "Grants Immunity on all allies for 1 turn and creates a Shield for 3 turns. The Shield amount is proportionate to your Attack Power.",
         "slot": 2,
         "cooltime": 4,
-        "hits": 1,
+        "hits": 0,
         "passive": false,
         "aoe": false,
         "multiplier": "2.8*{ATK}",
@@ -147713,7 +147713,7 @@
         "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
         "slot": 2,
         "cooltime": null,
-        "hits": 1,
+        "hits": 0,
         "passive": true,
         "aoe": false,
         "multiplier": "",
@@ -147852,7 +147852,7 @@
         "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
         "slot": 2,
         "cooltime": null,
-        "hits": 1,
+        "hits": 0,
         "passive": true,
         "aoe": false,
         "multiplier": "",
@@ -148128,7 +148128,7 @@
         "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
         "slot": 2,
         "cooltime": null,
-        "hits": 1,
+        "hits": 0,
         "passive": true,
         "aoe": false,
         "multiplier": "",
@@ -149298,7 +149298,7 @@
         "description": "Increases your Attack Bar by 20% whenever you are attacked by the enemy. In addition, increases the damage you deal to enemies as the total HP condition of all allies worsens, and by 100% per defeated ally. The increase in damage is limited to 200%. [Automatic Effect]",
         "slot": 3,
         "cooltime": null,
-        "hits": 1,
+        "hits": 0,
         "passive": true,
         "aoe": false,
         "multiplier": "",
@@ -151057,5 +151057,2984 @@
       "subStats": []
     },
     "source": "https://swarfarm.com/bestiary/36705-dark-cosmic-worm"
+  },
+  "Kiel|Water|5|A1": {
+    "name": "Kiel",
+    "element": "Water",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36200,
+    "com2usId": 36211,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9555,
+      "ATK": 790,
+      "DEF": 714,
+      "SPD": 100,
+      "CRI Rate": 30,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 9555,
+      "ATK": 790,
+      "DEF": 714,
+      "SPD": 100
+    },
+    "skills": [
+      {
+        "id": 5409,
+        "name": "Skyward Blade",
+        "description": "Attacks the enemy to increase its chance of landing a Glancing Hit for 2 turns with a 50% chance. The damage is proportionate to the enemy's MAX HP.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "2.9*{ATK} + 0.06*{Target MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "Target MAX HP"
+        ],
+        "effects": [
+          "Increase Glancing Hit Chance"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5410,
+        "name": "Skyward Charge",
+        "description": "Increases the Defense of all allies for 2 turns, and then attacks the enemy to decrease its Attack Power for 2 turns with an 80% chance. The damage is proportionate to the enemy's MAX HP.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.5*{ATK} + 0.1*{Target MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "Target MAX HP"
+        ],
+        "effects": [
+          "Increase DEF",
+          "Decrease ATK"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5411,
+        "name": "Skyborne Knight (Passive)",
+        "description": "Decreases the damage that other allies receive by 20% and increases the damage you deal to the boss by 100%. This does not accumulate with other damage reduction effects. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Decrease DEF",
+          "Increase Damage"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "Defense 44% Dungeon",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0233_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36211-water-kiel"
+  },
+  "Freu|Water|5|A1": {
+    "name": "Freu",
+    "element": "Water",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36300,
+    "com2usId": 36311,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9555,
+      "ATK": 889,
+      "DEF": 615,
+      "SPD": 105,
+      "CRI Rate": 30,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 9555,
+      "ATK": 889,
+      "DEF": 615,
+      "SPD": 105
+    },
+    "skills": [
+      {
+        "id": 5412,
+        "name": "Mana Beam",
+        "description": "Attacks the enemy to decrease its Defense for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5417,
+        "name": "Pulse Shield",
+        "description": "Grants Immunity on all allies for 1 turn and creates a Shield for 3 turns. The Shield amount is proportionate to your Attack Power.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 0,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "2.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Immunity",
+          "Shield"
+        ],
+        "upgrades": [
+          {
+            "effect": "Shield +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5422,
+        "name": "Feixe de Mana・Barreira de Varredura",
+        "description": "Attacks the enemy to deal damage that ignores its Defense. Grants Endure on yourself for 1 turn if the enemy is defeated by this attack.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Ignore DEF",
+          "Endure"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Attack Power 44% Arena",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36311-water-freu"
+  },
+  "Freu|Fire|5|A1": {
+    "name": "Freu",
+    "element": "Fire",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36300,
+    "com2usId": 36312,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 10215,
+      "ATK": 856,
+      "DEF": 604,
+      "SPD": 105,
+      "CRI Rate": 30,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 10215,
+      "ATK": 856,
+      "DEF": 604,
+      "SPD": 105
+    },
+    "skills": [
+      {
+        "id": 5413,
+        "name": "Mana Beam",
+        "description": "Attacks the enemy to decrease its Defense for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5418,
+        "name": "Mana Detection (Passive)",
+        "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
+        "slot": 2,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Heal",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Recovery +{0}%",
+            "amount": 20
+          }
+        ]
+      },
+      {
+        "id": 5423,
+        "name": "Arcane Discharge",
+        "description": "Attacks all enemies 2 to 3 times. Each hit grants Unrevivable for 1 turn and absorbs their Attack Bar by 15%.",
+        "slot": 3,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "2.2*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Unrevivable",
+          "Absorb ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "HP 44% Arena",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_2.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36312-fire-freu"
+  },
+  "Freu|Wind|5|A1": {
+    "name": "Freu",
+    "element": "Wind",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36300,
+    "com2usId": 36313,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 10380,
+      "ATK": 823,
+      "DEF": 626,
+      "SPD": 105,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 10380,
+      "ATK": 823,
+      "DEF": 626,
+      "SPD": 105
+    },
+    "skills": [
+      {
+        "id": 5414,
+        "name": "Mana Beam",
+        "description": "Attacks the enemy to decrease its Defense for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5419,
+        "name": "Mana Detection (Passive)",
+        "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
+        "slot": 2,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Heal",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Recovery +{0}%",
+            "amount": 20
+          }
+        ]
+      },
+      {
+        "id": 5424,
+        "name": "Arcane Thunderbolt",
+        "description": "Attacks all enemies 3 times. Each hit removes 1 beneficial effect and grants Suppression for 1 turn.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 3,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.6*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Suppression"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Resistance 55% Arena",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_3.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36313-wind-freu"
+  },
+  "Freu|Light|5|A1": {
+    "name": "Freu",
+    "element": "Light",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36300,
+    "com2usId": 36314,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9885,
+      "ATK": 878,
+      "DEF": 604,
+      "SPD": 105,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 40,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 9885,
+      "ATK": 878,
+      "DEF": 604,
+      "SPD": 105
+    },
+    "skills": [
+      {
+        "id": 5415,
+        "name": "Mana Beam",
+        "description": "Attacks the enemy to decrease its Defense for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5420,
+        "name": "Pulse Shield",
+        "description": "Grants Immunity on all allies for 1 turn and creates a Shield for 3 turns. The Shield amount is proportionate to your Attack Power.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 0,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "2.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Immunity",
+          "Shield"
+        ],
+        "upgrades": [
+          {
+            "effect": "Shield +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5425,
+        "name": "Arcane Counter (Passive)",
+        "description": "When you are attacked during the enemy's turn, offsets the damage with a 40% chance. If the offset succeeds, attacks all enemies to stun for 1 turn. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "3.6*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Offset Damage",
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Accuracy 55% Arena",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 9,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_4.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36314-light-freu"
+  },
+  "Freu|Dark|5|A1": {
+    "name": "Freu",
+    "element": "Dark",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36300,
+    "com2usId": 36315,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 10545,
+      "ATK": 812,
+      "DEF": 626,
+      "SPD": 105,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 10545,
+      "ATK": 812,
+      "DEF": 626,
+      "SPD": 105
+    },
+    "skills": [
+      {
+        "id": 5416,
+        "name": "Mana Beam",
+        "description": "Attacks the enemy to decrease its Defense for 2 turns with a 50% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5421,
+        "name": "Mana Detection (Passive)",
+        "description": "After you attack, recovers your HP by 10% per enemy granted with a harmful effect among the targets you attacked. In addition, when an enemy granted with a harmful effect gains a turn, increases your Attack Bar by 25%. [Automatic Effect]",
+        "slot": 2,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Heal",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Recovery +{0}%",
+            "amount": 20
+          }
+        ]
+      },
+      {
+        "id": 5426,
+        "name": "Unstable Destruction Pulse",
+        "description": "Attacks all enemies to grant Silence for 1 turn and Seal for 1 turn, and resets their Attack Bar.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "5.2*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Silence",
+          "Seal",
+          "Decrease ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Critical Rate 33% Arena",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_5.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36315-dark-freu"
+  },
+  "Luen|Water|5|A1": {
+    "name": "Luen",
+    "element": "Water",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36400,
+    "com2usId": 36411,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9720,
+      "ATK": 878,
+      "DEF": 615,
+      "SPD": 103,
+      "CRI Rate": 30,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 9720,
+      "ATK": 878,
+      "DEF": 615,
+      "SPD": 103
+    },
+    "skills": [
+      {
+        "id": 5427,
+        "name": "Mana Particle Cannon",
+        "description": "Attacks the enemy to remove 1 beneficial effect with a 50% chance. Increases your Attack Bar by 30% if all your skills are on cooldown.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5432,
+        "name": "Canhão de Partículas de Mana・Barragem",
+        "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 3,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5437,
+        "name": "Canhão de Partículas de Mana・Snipe",
+        "description": "Attacks all enemies to grant Irresistible for 2 turns. After attacking, you leave the battle until your next turn.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "4.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Irresistible",
+          "Leave Battle"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Attack Power 38% Guild",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36411-water-luen"
+  },
+  "Luen|Fire|4|A1": {
+    "name": "Luen",
+    "element": "Fire",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36400,
+    "com2usId": 36412,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9555,
+      "ATK": 769,
+      "DEF": 571,
+      "SPD": 103,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 7020,
+      "ATK": 565,
+      "DEF": 420,
+      "SPD": 103
+    },
+    "skills": [
+      {
+        "id": 5428,
+        "name": "Mana Particle Cannon",
+        "description": "Attacks the enemy to remove 1 beneficial effect with a 50% chance. Increases your Attack Bar by 30% if all your skills are on cooldown.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5433,
+        "name": "Canhão de Partículas de Mana・Bombardeio",
+        "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK",
+          "Beneficial Effects Blocked",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5438,
+        "name": "Residual Mana (Passive)",
+        "description": "Decreases the enemy's Attack Speed for 1 turn when you attack. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Decrease ATK SPD"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "Accuracy 48% Guild",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_2.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36412-fire-luen"
+  },
+  "Luen|Wind|5|A1": {
+    "name": "Luen",
+    "element": "Wind",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36400,
+    "com2usId": 36413,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 10710,
+      "ATK": 790,
+      "DEF": 637,
+      "SPD": 103,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 40,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 10710,
+      "ATK": 790,
+      "DEF": 637,
+      "SPD": 103
+    },
+    "skills": [
+      {
+        "id": 5429,
+        "name": "Mana Particle Cannon",
+        "description": "Attacks the enemy to remove 1 beneficial effect with a 50% chance. Increases your Attack Bar by 30% if all your skills are on cooldown.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5434,
+        "name": "Canhão de Partículas de Mana・Barragem",
+        "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 3,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5439,
+        "name": "Safety Barrier (Passive)",
+        "description": "When an ally (including yourself) takes fatal damage from an attack, offsets the damage, and then grants Invincible on the ally target for 1 turn. Afterwards, increases your Attack Bar by 50%. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": 6,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Offset Damage",
+          "Invincible",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "HP 38% Guild",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_3.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36413-wind-luen"
+  },
+  "Luen|Light|5|A1": {
+    "name": "Luen",
+    "element": "Light",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36400,
+    "com2usId": 36414,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 10875,
+      "ATK": 834,
+      "DEF": 582,
+      "SPD": 103,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 10875,
+      "ATK": 834,
+      "DEF": 582,
+      "SPD": 103
+    },
+    "skills": [
+      {
+        "id": 5430,
+        "name": "Mana Particle Cannon",
+        "description": "Attacks the enemy to remove 1 beneficial effect with a 50% chance. Increases your Attack Bar by 30% if all your skills are on cooldown.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5435,
+        "name": "Canhão de Partículas de Mana・Bombardeio",
+        "description": "Attacks all enemies 2 times. Each hit decreases their Attack Power for 2 turns with a 50% chance and blocks them from receiving beneficial effects for 2 turns with a 50% chance. In addition, increases your Attack Bar by 15% for each harmful effect granted on the enemies after the attack.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease ATK",
+          "Beneficial Effects Blocked",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5440,
+        "name": "Safety Protocol (Passive)",
+        "description": "Grants Reflect Harmful Effect on all allies for 1 turn at the start of your turn. In addition, increases your Attack Bar by 5% whenever an ally (including yourself) is attacked and decreases the damage other allies receive by 10%. This does not accumulate with other damage reduction effects. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Reflect Harmful Effect",
+          "Decrease Damage",
+          "Increase ATB"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "Resistance 48% Guild",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_4.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36414-light-luen"
+  },
+  "Luen|Dark|4|A1": {
+    "name": "Luen",
+    "element": "Dark",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36400,
+    "com2usId": 36415,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9885,
+      "ATK": 758,
+      "DEF": 560,
+      "SPD": 103,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 7260,
+      "ATK": 557,
+      "DEF": 412,
+      "SPD": 103
+    },
+    "skills": [
+      {
+        "id": 5431,
+        "name": "Mana Particle Cannon",
+        "description": "Attacks the enemy to remove 1 beneficial effect with a 50% chance. Increases your Attack Bar by 30% if all your skills are on cooldown.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5436,
+        "name": "Canhão de Partículas de Mana・Barragem",
+        "description": "Attacks the enemy 3 times to decrease its Defense for 2 turns with a 30% chance each. Increases your Attack Bar by 35% whenever this attack lands as a Critical Hit.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 3,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Increase ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5441,
+        "name": "Canhão de Partículas de Mana・Fogo Pesado",
+        "description": "Attacks all enemies to increase their chance of landing a Glancing Hit for 2 turns and decrease their Attack Bar by 30%.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "4.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Increase Glancing Hit Chance",
+          "Decrease ATB"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Defense 38% Guild",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_5.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36415-dark-luen"
+  },
+  "Schporte|Water|4|A1": {
+    "name": "Schporte",
+    "element": "Water",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36500,
+    "com2usId": 36511,
+    "archetype": "HP",
+    "stats": {
+      "HP": 11535,
+      "ATK": 604,
+      "DEF": 604,
+      "SPD": 99,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 8475,
+      "ATK": 444,
+      "DEF": 444,
+      "SPD": 99
+    },
+    "skills": [
+      {
+        "id": 5442,
+        "name": "Dash Smash",
+        "description": "Attacks the enemy to deal damage that increases according to your MAX HP. Afterwards, if there is an ally with HP below 70%, goes under the Threat state while enemies attack with a single-target skill 1 time.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "1.7*{ATK} + 0.17*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Threat"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5447,
+        "name": "Jump Smash",
+        "description": "Attacks all enemies to stun for 1 turn with a 50% chance, dealing damage that increases according to your MAX HP. Recovers your HP by 5% per stunned enemy after the attack.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.2*{ATK} + 0.21*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Stun",
+          "Heal"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5452,
+        "name": "Unyielding Axe (Passive)",
+        "description": "Decreases the damage taken from enemies by up to 50% as your HP condition worsens. Grants Endure on yourself for 1 turn when your HP falls below 50% from above 50%. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 1,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Decrease Damage",
+          "Endure"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "Critical Rate 21% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36511-water-schporte"
+  },
+  "Schporte|Fire|5|A1": {
+    "name": "Schporte",
+    "element": "Fire",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36500,
+    "com2usId": 36512,
+    "archetype": "HP",
+    "stats": {
+      "HP": 13170,
+      "ATK": 604,
+      "DEF": 659,
+      "SPD": 99,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 40,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 13170,
+      "ATK": 604,
+      "DEF": 659,
+      "SPD": 99
+    },
+    "skills": [
+      {
+        "id": 5443,
+        "name": "Dash Smash",
+        "description": "Attacks the enemy to deal damage that increases according to your MAX HP. Afterwards, if there is an ally with HP below 70%, goes under the Threat state while enemies attack with a single-target skill 1 time.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "1.7*{ATK} + 0.17*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Threat"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5448,
+        "name": "Tornado Swing",
+        "description": "Attacks all enemies to remove 1 beneficial effect with a 50% chance and provoke for 1 turn with an 80% chance. The damage increases according to your MAX HP.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.5*{ATK} + 0.19*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Provoke"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5453,
+        "name": "Ignition Swing",
+        "description": "Attacks the enemy to deal damage proportionate to your MAX HP and additional damage equal to your HP lost. Enemies defeated by this attack cannot be revived during battle.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "0.22*{MAX HP}",
+        "scalesWith": [
+          "MAX HP"
+        ],
+        "effects": [
+          "Increase Damage",
+          "Anti-Revive"
+        ],
+        "upgrades": [
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Defense 28% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_2.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36512-fire-schporte"
+  },
+  "Schporte|Wind|5|A1": {
+    "name": "Schporte",
+    "element": "Wind",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36500,
+    "com2usId": 36513,
+    "archetype": "HP",
+    "stats": {
+      "HP": 12180,
+      "ATK": 714,
+      "DEF": 615,
+      "SPD": 99,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 40,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 12180,
+      "ATK": 714,
+      "DEF": 615,
+      "SPD": 99
+    },
+    "skills": [
+      {
+        "id": 5444,
+        "name": "Dash Smash",
+        "description": "Attacks the enemy to deal damage that increases according to your MAX HP. Afterwards, if there is an ally with HP below 70%, goes under the Threat state while enemies attack with a single-target skill 1 time.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "1.7*{ATK} + 0.17*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Threat"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5449,
+        "name": "Tornado Swing",
+        "description": "Attacks all enemies to remove 1 beneficial effect with a 50% chance and provoke for 1 turn with an 80% chance. The damage increases according to your MAX HP.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.5*{ATK} + 0.19*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Provoke"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5454,
+        "name": "Unwavering Axe (Passive)",
+        "description": "Increases your Attack Bar by 20% whenever you are attacked by the enemy. In addition, increases the damage you deal to enemies as the total HP condition of all allies worsens, and by 100% per defeated ally. The increase in damage is limited to 200%. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Increase ATB",
+          "Increase Damage"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "HP 28% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 9,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_3.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36513-wind-schporte"
+  },
+  "Schporte|Light|4|A1": {
+    "name": "Schporte",
+    "element": "Light",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36500,
+    "com2usId": 36514,
+    "archetype": "HP",
+    "stats": {
+      "HP": 11040,
+      "ATK": 703,
+      "DEF": 538,
+      "SPD": 99,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 8115,
+      "ATK": 517,
+      "DEF": 396,
+      "SPD": 99
+    },
+    "skills": [
+      {
+        "id": 5445,
+        "name": "Dash Smash",
+        "description": "Attacks the enemy to deal damage that increases according to your MAX HP. Afterwards, if there is an ally with HP below 70%, goes under the Threat state while enemies attack with a single-target skill 1 time.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "1.7*{ATK} + 0.17*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Threat"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5450,
+        "name": "Tornado Swing",
+        "description": "Attacks all enemies to remove 1 beneficial effect with a 50% chance and provoke for 1 turn with an 80% chance. The damage increases according to your MAX HP.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.5*{ATK} + 0.19*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Remove Buff",
+          "Provoke"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5455,
+        "name": "Overcharge Axe",
+        "description": "Attacks all enemies 3 times to decrease their Defense for 2 turns with a 30% chance each. Destroys the enemy's MAX HP by 20% of the damage dealt.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 3,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.5*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Destroy HP"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 20
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "Accuracy 35% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_4.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36514-light-schporte"
+  },
+  "Schporte|Dark|5|A1": {
+    "name": "Schporte",
+    "element": "Dark",
+    "naturalStars": 5,
+    "baseStars": 6,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36500,
+    "com2usId": 36515,
+    "archetype": "HP",
+    "stats": {
+      "HP": 12345,
+      "ATK": 593,
+      "DEF": 725,
+      "SPD": 99,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 40,
+      "Accuracy": 0
+    },
+    "baseStats": {
+      "HP": 12345,
+      "ATK": 593,
+      "DEF": 725,
+      "SPD": 99
+    },
+    "skills": [
+      {
+        "id": 5446,
+        "name": "Dash Smash",
+        "description": "Attacks the enemy to deal damage that increases according to your MAX HP. Afterwards, if there is an ally with HP below 70%, goes under the Threat state while enemies attack with a single-target skill 1 time.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "1.7*{ATK} + 0.17*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Threat"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5451,
+        "name": "Jump Smash",
+        "description": "Attacks all enemies to stun for 1 turn with a 50% chance, dealing damage that increases according to your MAX HP. Recovers your HP by 5% per stunned enemy after the attack.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.2*{ATK} + 0.21*{MAX HP}",
+        "scalesWith": [
+          "ATK",
+          "MAX HP"
+        ],
+        "effects": [
+          "Stun",
+          "Heal"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5456,
+        "name": "Overpower (Passive)",
+        "description": "Increases your Attack Bar by 20% when using [Dash Smash], and deals additional damage equal to 15% of your MAX HP when using [Jump Smash]. In addition, removes 1 harmful effect granted on yourself when you gain a turn with less than 50% HP. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Increase ATB",
+          "Increase Damage",
+          "Cleanse"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "Attack Speed 21% General",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 10,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_5.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36515-dark-schporte"
+  },
+  "Wieb|Water|4|A1": {
+    "name": "Wieb",
+    "element": "Water",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36600,
+    "com2usId": 36611,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9555,
+      "ATK": 758,
+      "DEF": 582,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 7020,
+      "ATK": 557,
+      "DEF": 428,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5457,
+        "name": "Dimension Slash",
+        "description": "Attacks the enemy to stun for 1 turn with a 30% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5462,
+        "name": "Barra Dimensional・Flurry",
+        "description": "Attacks all enemies 2 times. The first hit decreases their Defense for 2 turns with a 50% chance, and the second hit disturbs HP recovery for 2 turns with a 50% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Unrecoverable"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5467,
+        "name": "Giant Killer (Passive)",
+        "description": "Deals damage that ignores all beneficial effects that reduce damage taken when you attack. In addition, if the enemy's MAX HP is higher than yours, increases your Critical Rate to 100%. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Ignore Damage Reduction",
+          "Increase Attack Critical Chance"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_1.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36611-water-wieb"
+  },
+  "Wieb|Fire|4|A1": {
+    "name": "Wieb",
+    "element": "Fire",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36600,
+    "com2usId": 36612,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9720,
+      "ATK": 714,
+      "DEF": 615,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 7140,
+      "ATK": 525,
+      "DEF": 452,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5458,
+        "name": "Dimension Slash",
+        "description": "Attacks the enemy to stun for 1 turn with a 30% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5463,
+        "name": "Corte Dimensional・Emboscada",
+        "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "5.6*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Brand"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5468,
+        "name": "Corte Dimensional・Havoc",
+        "description": "Attacks the enemy 3 times to inflict 1 Continuous Damage for 2 turns each. If the target is not a boss, deals fixed damage equal to 5% of its MAX HP for each Continuous Damage granted on the target.",
+        "slot": 3,
+        "cooltime": 5,
+        "hits": 3,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "2.1*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Continuous DMG",
+          "Increase Damage"
+        ],
+        "upgrades": [
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_2.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36612-fire-wieb"
+  },
+  "Wieb|Wind|4|A1": {
+    "name": "Wieb",
+    "element": "Wind",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36600,
+    "com2usId": 36613,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9060,
+      "ATK": 780,
+      "DEF": 593,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 6660,
+      "ATK": 573,
+      "DEF": 436,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5459,
+        "name": "Dimension Slash",
+        "description": "Attacks the enemy to stun for 1 turn with a 30% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5464,
+        "name": "Corte Dimensional・Emboscada",
+        "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "5.6*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Brand"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5469,
+        "name": "Dimension Shatter (Passive)",
+        "description": "When attacking on your turn, attacks the target 2 to 3 more times to decrease its Defense for 2 turns. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "0.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Additional Attack",
+          "Decrease DEF"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_3.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36613-wind-wieb"
+  },
+  "Wieb|Light|4|A1": {
+    "name": "Wieb",
+    "element": "Light",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36600,
+    "com2usId": 36614,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9555,
+      "ATK": 736,
+      "DEF": 604,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 7020,
+      "ATK": 541,
+      "DEF": 444,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5460,
+        "name": "Dimension Slash",
+        "description": "Attacks the enemy to stun for 1 turn with a 30% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5465,
+        "name": "Corte Dimensional・Emboscada",
+        "description": "Attacks the enemy to stun for 1 turn with a 70% chance and leave a Branding effect for 2 turns with a 70% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "5.6*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Brand"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5470,
+        "name": "Dimension Bind",
+        "description": "Attacks the enemy to stun for 1 turn and block the target from removing harmful effects for 1 turn. This effect cannot be resisted.",
+        "slot": 3,
+        "cooltime": 4,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "7.2*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun",
+          "Harmful Effect Removal Blocked",
+          "Ignore Resistance"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      }
+    ],
+    "leaderSkill": "",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 12,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_4.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36614-light-wieb"
+  },
+  "Wieb|Dark|4|A1": {
+    "name": "Wieb",
+    "element": "Dark",
+    "naturalStars": 4,
+    "baseStars": 5,
+    "awakeningLevel": 1,
+    "isSecondAwakening": false,
+    "familyId": 36600,
+    "com2usId": 36615,
+    "archetype": "Attack",
+    "stats": {
+      "HP": 9390,
+      "ATK": 725,
+      "DEF": 626,
+      "SPD": 101,
+      "CRI Rate": 15,
+      "CRI Dmg": 50,
+      "Resistance": 15,
+      "Accuracy": 25
+    },
+    "baseStats": {
+      "HP": 6900,
+      "ATK": 533,
+      "DEF": 460,
+      "SPD": 101
+    },
+    "skills": [
+      {
+        "id": 5461,
+        "name": "Dimension Slash",
+        "description": "Attacks the enemy to stun for 1 turn with a 30% chance.",
+        "slot": 1,
+        "cooltime": null,
+        "hits": 1,
+        "passive": false,
+        "aoe": false,
+        "multiplier": "3.8*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Stun"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          }
+        ]
+      },
+      {
+        "id": 5466,
+        "name": "Barra Dimensional・Flurry",
+        "description": "Attacks all enemies 2 times. The first hit decreases their Defense for 2 turns with a 50% chance, and the second hit disturbs HP recovery for 2 turns with a 50% chance.",
+        "slot": 2,
+        "cooltime": 4,
+        "hits": 2,
+        "passive": false,
+        "aoe": true,
+        "multiplier": "1.7*{ATK}",
+        "scalesWith": [
+          "ATK"
+        ],
+        "effects": [
+          "Decrease DEF",
+          "Unrecoverable"
+        ],
+        "upgrades": [
+          {
+            "effect": "Damage +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 5
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Damage +{0}%",
+            "amount": 10
+          },
+          {
+            "effect": "Effect Rate +{0}%",
+            "amount": 15
+          },
+          {
+            "effect": "Cooltime Turn -{0}",
+            "amount": 1
+          }
+        ]
+      },
+      {
+        "id": 5471,
+        "name": "Dimensional Memory (Passive)",
+        "description": "Grants 1 random harmful effect that was applied in the current battle on the enemy for 1 turn whenever you attack. [Automatic Effect]",
+        "slot": 3,
+        "cooltime": null,
+        "hits": 0,
+        "passive": true,
+        "aoe": false,
+        "multiplier": "",
+        "scalesWith": [],
+        "effects": [
+          "Random Harmful Effect in Battle"
+        ],
+        "upgrades": []
+      }
+    ],
+    "leaderSkill": "",
+    "awakening": "",
+    "awakeningCost": [],
+    "skillUpsToMax": 11,
+    "canAwaken": true,
+    "obtainable": true,
+    "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_5.png",
+    "runes": {
+      "sets": [],
+      "mainStats": {},
+      "subStats": []
+    },
+    "source": "https://swarfarm.com/bestiary/36615-dark-wieb"
   }
 }

@@ -5,7 +5,7 @@
     "language": "pt-PT",
     "generatedBy": "YunaRunes",
     "filter": "playable unique monsters; base/awakened/2A counted as one",
-    "playableMonsters": 1058,
+    "playableMonsters": 1079,
     "awakeningVariantsCollapsed": true
   },
   "monsters": [
@@ -3658,6 +3658,66 @@
       "detailsKey": "Frederic|Light|5|A1"
     },
     {
+      "id": 3126,
+      "name": "Freu",
+      "element": "Dark",
+      "family": "36300",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_5.png",
+      "detailsKey": "Freu|Dark|5|A1"
+    },
+    {
+      "id": 3123,
+      "name": "Freu",
+      "element": "Fire",
+      "family": "36300",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_2.png",
+      "detailsKey": "Freu|Fire|5|A1"
+    },
+    {
+      "id": 3125,
+      "name": "Freu",
+      "element": "Light",
+      "family": "36300",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_4.png",
+      "detailsKey": "Freu|Light|5|A1"
+    },
+    {
+      "id": 3122,
+      "name": "Freu",
+      "element": "Water",
+      "family": "36300",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_1.png",
+      "detailsKey": "Freu|Water|5|A1"
+    },
+    {
+      "id": 3124,
+      "name": "Freu",
+      "element": "Wind",
+      "family": "36300",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0229_1_3.png",
+      "detailsKey": "Freu|Wind|5|A1"
+    },
+    {
       "id": 262,
       "name": "Fria",
       "element": "Fire",
@@ -6118,6 +6178,18 @@
       "detailsKey": "Kiara|Dark|5|A1"
     },
     {
+      "id": 3116,
+      "name": "Kiel",
+      "element": "Water",
+      "family": "36200",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0233_1_1.png",
+      "detailsKey": "Kiel|Water|5|A1"
+    },
+    {
       "id": 1846,
       "name": "Kiki",
       "element": "Dark",
@@ -6920,6 +6992,66 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0043_1_0.png",
       "detailsKey": "Ludo|Fire|4|A1"
+    },
+    {
+      "id": 3136,
+      "name": "Luen",
+      "element": "Dark",
+      "family": "36400",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_5.png",
+      "detailsKey": "Luen|Dark|4|A1"
+    },
+    {
+      "id": 3133,
+      "name": "Luen",
+      "element": "Fire",
+      "family": "36400",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_2.png",
+      "detailsKey": "Luen|Fire|4|A1"
+    },
+    {
+      "id": 3135,
+      "name": "Luen",
+      "element": "Light",
+      "family": "36400",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_4.png",
+      "detailsKey": "Luen|Light|5|A1"
+    },
+    {
+      "id": 3132,
+      "name": "Luen",
+      "element": "Water",
+      "family": "36400",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_1.png",
+      "detailsKey": "Luen|Water|5|A1"
+    },
+    {
+      "id": 3134,
+      "name": "Luen",
+      "element": "Wind",
+      "family": "36400",
+      "role": "Attack",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0231_1_3.png",
+      "detailsKey": "Luen|Wind|5|A1"
     },
     {
       "id": 605,
@@ -9922,6 +10054,66 @@
       "detailsKey": "Scarlett|Fire|4|A1"
     },
     {
+      "id": 3146,
+      "name": "Schporte",
+      "element": "Dark",
+      "family": "36500",
+      "role": "HP",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_5.png",
+      "detailsKey": "Schporte|Dark|5|A1"
+    },
+    {
+      "id": 3143,
+      "name": "Schporte",
+      "element": "Fire",
+      "family": "36500",
+      "role": "HP",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_2.png",
+      "detailsKey": "Schporte|Fire|5|A1"
+    },
+    {
+      "id": 3145,
+      "name": "Schporte",
+      "element": "Light",
+      "family": "36500",
+      "role": "HP",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_4.png",
+      "detailsKey": "Schporte|Light|4|A1"
+    },
+    {
+      "id": 3142,
+      "name": "Schporte",
+      "element": "Water",
+      "family": "36500",
+      "role": "HP",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_1.png",
+      "detailsKey": "Schporte|Water|4|A1"
+    },
+    {
+      "id": 3144,
+      "name": "Schporte",
+      "element": "Wind",
+      "family": "36500",
+      "role": "HP",
+      "stars": 5,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0230_1_3.png",
+      "detailsKey": "Schporte|Wind|5|A1"
+    },
+    {
       "id": 2541,
       "name": "Seal",
       "element": "Wind",
@@ -12128,6 +12320,66 @@
       "isSecondAwakening": false,
       "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0182_1_3.png",
       "detailsKey": "White Tiger Blade Master|Wind|4|A1"
+    },
+    {
+      "id": 3156,
+      "name": "Wieb",
+      "element": "Dark",
+      "family": "36600",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_5.png",
+      "detailsKey": "Wieb|Dark|4|A1"
+    },
+    {
+      "id": 3153,
+      "name": "Wieb",
+      "element": "Fire",
+      "family": "36600",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_2.png",
+      "detailsKey": "Wieb|Fire|4|A1"
+    },
+    {
+      "id": 3155,
+      "name": "Wieb",
+      "element": "Light",
+      "family": "36600",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_4.png",
+      "detailsKey": "Wieb|Light|4|A1"
+    },
+    {
+      "id": 3152,
+      "name": "Wieb",
+      "element": "Water",
+      "family": "36600",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_1.png",
+      "detailsKey": "Wieb|Water|4|A1"
+    },
+    {
+      "id": 3154,
+      "name": "Wieb",
+      "element": "Wind",
+      "family": "36600",
+      "role": "Attack",
+      "stars": 4,
+      "awakeningLevel": 1,
+      "isSecondAwakening": false,
+      "image": "https://swarfarm.com/static/herders/images/monsters/unit_icon_0232_1_3.png",
+      "detailsKey": "Wieb|Wind|4|A1"
     },
     {
       "id": 960,
