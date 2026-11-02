@@ -9,12 +9,13 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v3';
+const cacheKey='yunarunes-i18n-cache-v4';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
+const attributeRetries=new WeakMap();
 try{cache=JSON.parse(localStorage.getItem(cacheKey)||'{}')}catch(_){}
 function saveCache(){try{localStorage.setItem(cacheKey,JSON.stringify(cache))}catch(_){}}
 function protectedNode(n){
@@ -119,13 +120,14 @@ function translateAttributes(root){
  const nodes=[];
  if(root.nodeType===1)nodes.push(root);
  if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[alt],[data-placeholder],[data-tooltip],[value]'));
- const attrs=['placeholder','title','aria-label','alt','data-placeholder','data-tooltip','value'];
+ const attrs=['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content'];
  nodes.forEach(el=>{
   if(protectedNode(el))return;
   let originals=attributeOriginals.get(el);
   if(!originals){originals={};attributeOriginals.set(el,originals)}
   attrs.forEach(attr=>{
    if(attr==='value'&&!(el.tagName==='BUTTON'||(el.tagName==='INPUT'&&/^(button|submit|reset)$/i.test(el.type))))return;
+   if(attr==='content'&&!((el.tagName==='META')&&/^(description|og:title|og:description|twitter:title|twitter:description)$/i.test(el.getAttribute('name')||el.getAttribute('property')||'')))return;
    const current=el.getAttribute(attr);if(!current||!clean(current))return;
    const previous=originals[attr];
    if(previous&&current===previous.translated)return;
@@ -141,7 +143,13 @@ function translateAttributes(root){
    originals[attr]={source,translated:null,pending:true};
    endpoint([source]).then(a=>{
     const translatedValue=a[0];
-    if(!translatedValue)return;
+    if(!translatedValue){
+     const retries=attributeRetries.get(el)||{};const count=retries[attr]||0;
+     if(count<4){retries[attr]=count+1;attributeRetries.set(el,retries);originals[attr]={source,translated:null,pending:false};setTimeout(()=>{if(el.isConnected&&locale!=='pt')translateAttributes(el)},Math.min(10000,1200*Math.pow(2,count)))}
+     else originals[attr]={source,translated:null,pending:false};
+     return;
+    }
+    const retries=attributeRetries.get(el)||{};delete retries[attr];attributeRetries.set(el,retries);
     cache[key]=translatedValue;
     const live=el.getAttribute(attr);
     if(live===source){
@@ -177,7 +185,7 @@ function makePicker(){
   wrap=document.createElement('div');wrap.id='yuna-international-picker';wrap.setAttribute('data-no-translate','true');
   wrap.style.cssText='display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;margin-left:0;max-width:100%;';
   const label=document.createElement('label');label.htmlFor='yuna-international-select';label.textContent='🌐';label.style.cssText='font-size:17px;line-height:1;flex:0 0 auto;';
-  const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
+  const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');select.setAttribute('title','Choose the language for the entire YunaRunes site');
   select.style.cssText='width:132px;max-width:min(132px,42vw);min-width:0;padding:7px 8px;border:1px solid #34475a;border-radius:8px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
   LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
   select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value);if(select.value==='en'||select.value==='pt')localStorage.setItem('yunarunes-language',select.value)}catch(_){};location.reload()});
@@ -210,7 +218,8 @@ function boot(){
   });
   if(locale!=='pt')queue();
  });
- observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','alt','data-placeholder','data-tooltip','value']});
+ observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content']});
+ observer.observe(document.head,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['content','title','aria-label','alt']});
  window.addEventListener('yunarunes-language-applied',event=>{
   const next=event&&event.detail;
   if(next!=='en'&&next!=='pt')return;
