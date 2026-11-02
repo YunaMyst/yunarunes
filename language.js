@@ -2424,9 +2424,9 @@ function protectOfficialGameName(root=document){
     node.nodeValue=node.nodeValue.replace(/invocadores\s+war/gi,'Summoners War');
    }
   }
-  if(root.nodeType===1&&root.childNodes.length===1&&root.firstChild.nodeType===3&&/summoners\s+war/i.test(root.textContent||'')){
-   root.setAttribute('translate','no');root.classList.add('notranslate');
-  }
+  // Do not mark the whole parent as notranslate: that blocks translation
+  // of complete headings/sentences that merely contain the official game name.
+  // international.js protects the exact "Summoners War" phrase instead.
  }catch(_){}
 }
 function installOfficialGameNameGuard(){
