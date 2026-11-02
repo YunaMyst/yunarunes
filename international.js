@@ -88,19 +88,24 @@ function translateAttributes(root){
  });
 }
 function makePicker(){
- const h=document.querySelector('header.top')||document.querySelector('header');
- if(!h)return false;
- if(h.querySelector('#yuna-international-picker'))return true;
- const old=h.querySelector('.yuna-language-controls');if(old)old.style.display='none';
+ // Remove the previous row of individual language buttons from the header.
+ document.querySelectorAll('.yuna-language-controls').forEach(el=>el.remove());
+ const nav=document.querySelector('header.top .nav, header .nav, .nav');
+ if(!nav)return false;
+ if(nav.querySelector('#yuna-international-picker'))return true;
  const wrap=document.createElement('div');wrap.id='yuna-international-picker';
- wrap.style.cssText='display:flex;align-items:center;gap:6px;margin-left:auto;max-width:100%;';
+ wrap.style.cssText='display:flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto;position:relative;z-index:8;';
  const label=document.createElement('label');label.htmlFor='yuna-international-select';label.textContent='🌐';label.style.cssText='font-size:18px;';
  const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
- select.style.cssText='max-width:155px;min-width:105px;padding:8px 10px;border:1px solid #34475a;border-radius:9px;background:#111c27;color:#fff;font-weight:700;';
+ select.style.cssText='width:132px;max-width:132px;min-width:0;padding:8px 9px;border:1px solid #34475a;border-radius:9px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
  LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
  select.value=locale;
  select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value)}catch(_){};location.reload()});
- wrap.append(label,select);h.appendChild(wrap);return true;
+ wrap.append(label,select);nav.appendChild(wrap);
+ if(matchMedia('(max-width:1024px), (pointer:coarse)').matches){
+  wrap.style.position='absolute';wrap.style.right='10px';wrap.style.top='7px';wrap.style.marginLeft='0';
+ }
+ return true;
 }
 function boot(){
  try{locale=localStorage.getItem(KEY)||'pt'}catch(_){locale='pt'}
