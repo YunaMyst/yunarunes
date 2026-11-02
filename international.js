@@ -153,7 +153,7 @@ function makePicker(){
   const select=document.createElement('select');select.id='yuna-international-select';select.setAttribute('aria-label','Choose language');
   select.style.cssText='width:132px;max-width:132px;min-width:0;padding:7px 8px;border:1px solid #34475a;border-radius:8px;background:#111c27;color:#fff;font-weight:700;font-size:12px;';
   LANGS.forEach(([code,name])=>{const o=document.createElement('option');o.value=code;o.textContent=name;select.appendChild(o)});
-  select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value)}catch(_){};location.reload()});
+  select.addEventListener('change',()=>{try{localStorage.setItem(KEY,select.value);if(select.value==='en'||select.value==='pt')localStorage.setItem('yunarunes-language',select.value)}catch(_){};location.reload()});
   wrap.append(label,select);
  }
  wrap.querySelector('select').value=locale;
@@ -161,13 +161,15 @@ function makePicker(){
  return true;
 }
 function boot(){
- try{locale=localStorage.getItem(KEY)||'pt'}catch(_){locale='pt'}
+ try{locale=localStorage.getItem(KEY)||localStorage.getItem('yunarunes-language')||'pt'}catch(_){locale='pt'}
  if(!LANGS.some(x=>x[0]===locale))locale='pt';
  // Normalize to Portuguese first so every locale starts from the same source language.
  if(typeof window.yunaSetLanguage==='function'){
-  window.yunaSetLanguage('pt');
-  if(locale==='en')window.yunaSetLanguage('en');
+  // Keep the legacy PT/EN selector and this full-site selector in sync.
+  // Never force Portuguese over an English choice saved by language.js.
+  window.yunaSetLanguage(locale==='en'?'en':'pt');
  }
+ try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
  if(locale!=='pt'){
@@ -181,6 +183,14 @@ function boot(){
   if(locale!=='pt')queue();
  });
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','alt','data-placeholder','data-tooltip','value']});
+ window.addEventListener('yunarunes-language-applied',event=>{
+  const next=event&&event.detail;
+  if(next!=='en'&&next!=='pt')return;
+  locale=next;
+  try{localStorage.setItem(KEY,next)}catch(_){}
+  document.documentElement.lang=next==='en'?'en':'pt-BR';
+  const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
+ });
  const headerObserver=new MutationObserver(()=>makePicker());
  headerObserver.observe(document.body,{subtree:true,childList:true});
 }
