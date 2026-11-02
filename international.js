@@ -328,7 +328,11 @@ function boot(){
    });
    translateAttributes(document.head);translateAttributes(document.body);queue();
   }else{
-   [document.head,document.body].forEach(root=>{if(root)addTree(root)});
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    addTree(root);
+    translateAttributes(root);
+   });
   }
  }
  window.addEventListener('yunarunes-language-applied',event=>{
