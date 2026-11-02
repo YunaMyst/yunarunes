@@ -61,7 +61,7 @@ async function endpoint(texts){
     const data=await response.json();
     const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
     const value=segments.map(part=>part&&part[0]||'').join('');
-    return value&&value!==text?value:null;
+    return value||text;
    }catch(_){return null}
   }));
   out.push(...values);
