@@ -35,12 +35,12 @@ jobs:
               intl = '<script src="international.js?v=20261102-i18n-v33"></script>'
               script = '<script src="language.js?v=20261102-i18n-v14"></script>'
               # Remove duplicates and rebuild the shared scripts in the required order.
-              s = re.sub(r'<script src="international\\.js[^"]*"></script>', '', s)
-              s = re.sub(r'<script src="language\\.js[^"]*"></script>', '', s)
+              s = re.sub(r'<script src="international\.js[^"]*"></script>', '', s)
+              s = re.sub(r'<script src="language\.js[^"]*"></script>', '', s)
               if p.name == 'team-builder.html':
-                  s = s.replace('</body>', intl + '\\n</body>')
+                  s = s.replace('</body>', intl + '\n</body>')
               else:
-                  s = s.replace('</body>', intl + '\\n' + script + '\\n</body>')
+                  s = s.replace('</body>', intl + '\n' + script + '\n</body>')
               p.write_text(s, encoding='utf-8')
 
           home = Path('index.html')
