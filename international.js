@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v10';
+const cacheKey='yunarunes-i18n-cache-v11';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -30,7 +30,12 @@ function protectedNode(n){
 function clean(s){return (s||'').replace(/\s+/g,' ').trim()}
 function addText(n){
  if(!n||n.nodeType!==3||protectedNode(n)||!clean(n.nodeValue))return;
- if(lastWritten.has(n)&&n.nodeValue===lastWritten.get(n))return;
+ if(lastWritten.has(n)){
+  if(n.nodeValue===lastWritten.get(n))return;
+  // The application reused a translated text node for new dynamic content.
+  // Treat the new live value as its new source instead of translating stale text.
+  originalText.set(n,n.nodeValue);lastWritten.delete(n);retryCount.delete(n);
+ }
  pending.add(n);
 }
 function addTree(root){
@@ -94,7 +99,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=4;
+ const concurrency=6;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -132,7 +137,7 @@ async function translatePending(){
    if(v){x.value=v;cache[x.key]=v;retryCount.delete(x.node)}
    else{
     const tries=retryCount.get(x.node)||0;
-    if(tries<7){retryCount.set(x.node,tries+1);pending.add(x.node)}
+    if(tries<20){retryCount.set(x.node,tries+1);pending.add(x.node)}
    }
   });
  }
@@ -145,7 +150,7 @@ async function translatePending(){
   lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
  }
  saveCache();busy=false;
- if(pending.size){const delay=Math.min(30000,1200*Math.pow(2,Math.min(5,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
+ if(pending.size){const delay=Math.min(60000,1200*Math.pow(2,Math.min(6,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
 }
 const pendingAttributes=new Map();
 let attributeBusy=false,attributeScheduled=false;
@@ -166,7 +171,12 @@ function queueAttributeTranslations(){
     const values=await endpoint(batch.map(job=>job.source));
     batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
    }
-   if(locale!==runLocale)return;
+   if(locale!==runLocale){
+    // A language was selected while requests were running. Requeue these
+    // attributes so the newly selected locale cannot leave stale labels behind.
+    jobs.forEach(job=>{if(job.el.isConnected){const originals=attributeOriginals.get(job.el)||{};if(originals[job.attr])originals[job.attr].pending=false;attributeOriginals.set(job.el,originals);pendingAttributes.set(job.el.getAttribute('id')+'|'+job.attr+'|'+job.source+'|'+Math.random(),job);}});
+    return;
+   }
    const results=new Map(translatedValues.map(item=>[item.job,item.value]));
    // Apply all completed attribute translations together, avoiding one-by-one repaint flicker.
    jobs.forEach(job=>{
@@ -183,9 +193,9 @@ function queueAttributeTranslations(){
      const retries=attributeRetries.get(job.el)||{};
      const count=retries[job.attr]||0;
      originals[job.attr]={source:job.source,translated:null,pending:false};
-     if(count<7){
+     if(count<20){
       retries[job.attr]=count+1;attributeRetries.set(job.el,retries);
-      setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},Math.min(30000,1500*Math.pow(2,count)));
+      setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},Math.min(60000,1500*Math.pow(2,Math.min(6,count))));
      }
     }
     attributeOriginals.set(job.el,originals);
