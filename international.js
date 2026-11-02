@@ -54,9 +54,9 @@ async function endpoint(texts){
   const group=texts.slice(i,i+3);
   const values=await Promise.all(group.map(async text=>{
    const u=new URL('https://translate.googleapis.com/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
+   u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
    try{
-    const response=await fetch(u.toString(),{credentials:'omit'});
+    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);\n    const response=await fetch(u.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});clearTimeout(timeout);
     if(!response.ok)return null;
     const data=await response.json();
     const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
@@ -161,7 +161,7 @@ function makePicker(){
  return true;
 }
 function boot(){
- try{locale=localStorage.getItem(KEY)||localStorage.getItem('yunarunes-language')||'pt'}catch(_){locale='pt'}
+ try{const saved=localStorage.getItem(KEY),legacy=localStorage.getItem('yunarunes-language');locale=(saved&&saved!=='pt')?saved:(legacy||saved||'pt')}catch(_){locale='pt'}
  if(!LANGS.some(x=>x[0]===locale))locale='pt';
  // Normalize to Portuguese first so every locale starts from the same source language.
  if(typeof window.yunaSetLanguage==='function'){
