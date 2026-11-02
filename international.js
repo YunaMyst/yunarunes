@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v19';
+const cacheKey='yunarunes-i18n-cache-v20';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -48,20 +48,22 @@ function applyAuthoredTranslations(root=document){
   const source=el.getAttribute('data-pt');
   const target=el.getAttribute('data-'+locale);
   if(source===null&&target===null){authoredOriginals.set(el,originals);return}
-  const hasElement=Array.from(el.childNodes).some(n=>n.nodeType===1);
-  if(hasElement){authoredOriginals.set(el,originals);return}
-  const display=target!==null?target:(source!==null?source:null);
-  if(display===null)return;
+  if(Array.from(el.childNodes).some(n=>n.nodeType===1)){authoredOriginals.set(el,originals);return}
   let node=Array.from(el.childNodes).find(n=>n.nodeType===3);
   if(!node){node=document.createTextNode('');el.appendChild(node)}
   const base=source!==null?source:(originalText.get(node)??node.nodeValue);
   if(!originalText.has(node))originalText.set(node,base);
-  if(locale==='pt'||target!==null){
-   if(node.nodeValue!==display){lastWritten.set(node,display);node.nodeValue=display}
-   else if(lastWritten.has(node))lastWritten.set(node,display);
+  if(target!==null){
+   if(node.nodeValue!==target){lastWritten.set(node,target);node.nodeValue=target}
+   else if(lastWritten.has(node))lastWritten.set(node,target);
+   pending.delete(node);
   }else{
-   if(node.nodeValue!==base){node.nodeValue=base}
+   // A Portuguese fallback is source text, not a completed translation.
+   // Keep it eligible for automatic translation into ko/fr/de/es/ja.
+   if(node.nodeValue!==base)node.nodeValue=base;
    lastWritten.delete(node);
+   if(locale==='pt')pending.delete(node);
+   else pending.add(node);
   }
   authoredOriginals.set(el,originals);
  });
