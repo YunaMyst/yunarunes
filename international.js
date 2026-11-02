@@ -14,13 +14,14 @@ const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'Germ
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
+const attributeOriginals=new WeakMap();
 try{cache=JSON.parse(localStorage.getItem(cacheKey)||'{}')}catch(_){}
 function saveCache(){try{localStorage.setItem(cacheKey,JSON.stringify(cache))}catch(_){}}
 function protectedNode(n){
  if(!n)return true;
  const el=n.nodeType===1?n:n.parentElement;
  if(!el)return false;
- if(protectedTags.has(el.tagName)||el.closest('script,style,noscript,textarea,code,pre,kbd,samp,[data-no-translate],[translate="no"],.notranslate,[contenteditable="true"],input'))return true;
+ if(protectedTags.has(el.tagName)||el.closest('script,style,noscript,textarea,code,pre,kbd,samp,[data-no-translate],[translate="no"],.notranslate,[contenteditable="true"]'))return true;
  if(el.closest('.monster-name,[data-monster-name],.summoner-name,[data-preserve-name]'))return true;
  if(el.tagName==='OPTION'&&el.parentElement&&/monster|summoner|mob/i.test((el.parentElement.id||'')+' '+(el.parentElement.className||'')))return true;
  return false;
@@ -75,17 +76,40 @@ async function translatePending(){
 function translateAttributes(root){
  const nodes=[];
  if(root.nodeType===1)nodes.push(root);
- if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[value]'));
+ if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[alt],[data-placeholder],[data-tooltip],[value]'));
+ const attrs=['placeholder','title','aria-label','alt','data-placeholder','data-tooltip','value'];
  nodes.forEach(el=>{
   if(protectedNode(el))return;
-  ['placeholder','title','aria-label','value'].forEach(attr=>{
+  let originals=attributeOriginals.get(el);
+  if(!originals){originals={};attributeOriginals.set(el,originals)}
+  attrs.forEach(attr=>{
    if(attr==='value'&&!(el.tagName==='BUTTON'||(el.tagName==='INPUT'&&/^(button|submit|reset)$/i.test(el.type))))return;
-   const val=el.getAttribute(attr);if(!val||!clean(val))return;
-   const key=locale+'|@'+attr+'|'+val;
-   if(cache[key]){el.setAttribute(attr,cache[key]);return}
-   if(el.getAttribute('data-yuna-intl-'+attr))return;
-   el.setAttribute('data-yuna-intl-'+attr,val);
-   endpoint([val]).then(a=>{if(a[0]){cache[key]=a[0];el.setAttribute(attr,a[0]);saveCache()}}).catch(()=>{});
+   const current=el.getAttribute(attr);if(!current||!clean(current))return;
+   const previous=originals[attr];
+   if(previous&&current===previous.translated)return;
+   const source=previous&&current===previous.source?previous.source:current;
+   const key=locale+'|@'+attr+'|'+source;
+   if(locale==='pt')return;
+   if(cache[key]){
+    el.setAttribute(attr,cache[key]);
+    originals[attr]={source,translated:cache[key]};
+    return;
+   }
+   if(previous&&previous.source===source&&previous.pending)return;
+   originals[attr]={source,translated:null,pending:true};
+   endpoint([source]).then(a=>{
+    const translatedValue=a[0];
+    if(!translatedValue)return;
+    cache[key]=translatedValue;
+    const live=el.getAttribute(attr);
+    if(live===source){
+     el.setAttribute(attr,translatedValue);
+     originals[attr]={source,translated:translatedValue,pending:false};
+    }else if(live===translatedValue){
+     originals[attr]={source,translated:translatedValue,pending:false};
+    }
+    saveCache();
+   }).catch(()=>{if(originals[attr]&&originals[attr].source===source)delete originals[attr]});
   });
  });
 }
