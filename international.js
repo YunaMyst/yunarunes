@@ -203,7 +203,7 @@ function boot(){
  if(typeof window.yunaSetLanguage==='function'){
   // Keep the legacy PT/EN selector and this full-site selector in sync.
   // Never force Portuguese over an English choice saved by language.js.
-  window.yunaSetLanguage(locale==='en'?'en':'pt');
+  window.yunaSetLanguage(locale);
  }
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
@@ -221,17 +221,16 @@ function boot(){
  observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content']});
  observer.observe(document.head,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['content','title','aria-label','alt']});
  window.addEventListener('yunarunes-language-applied',event=>{
-  const next=event&&event.detail;
-  if(next!=='en'&&next!=='pt')return;
-  // The legacy selector only knows PT/EN. Its PT fallback must not overwrite
-  // a language selected in the international picker (KR, FR, DE, ES or JA).
-  let selected='';
-  try{selected=localStorage.getItem(KEY)||''}catch(_){}
-  if(selected&&selected!=='pt'&&selected!=='en')return;
+  const next=String(event&&event.detail||'').toLowerCase();
+  if(!LANGS.some(item=>item[0]===next))return;
   locale=next;
-  try{localStorage.setItem(KEY,next)}catch(_){}
-  document.documentElement.lang=next==='en'?'en':'pt-BR';
+  try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
+  document.documentElement.lang=next==='pt'?'pt-BR':next;
   const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
+  if(next!=='pt'){
+   addTree(document.head);addTree(document.body);
+   translateAttributes(document.head);translateAttributes(document.body);queue();
+  }
  });
  const headerObserver=new MutationObserver(()=>makePicker());
  headerObserver.observe(document.body,{subtree:true,childList:true});
