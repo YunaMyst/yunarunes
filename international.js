@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v14';
+const cacheKey='yunarunes-i18n-cache-v15';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -84,7 +84,7 @@ async function translateOne(text){
  const request=async source=>{
   const u=new URL('https://translate.googleapis.com/translate_a/single');
   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
-  const data=await getJson(u.toString(),12000);
+  const data=await getJson(u.toString(),8000);
   if(!data)return {failed:true,value:null};
   const value=googleSegments(data);
   return {failed:false,value:value&&clean(value)!==clean(text)?value:null};
@@ -104,7 +104,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=2;
+ const concurrency=4;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -147,9 +147,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=8){
+  for(let i=0;i<work.length;i+=16){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+8);
+   const batch=work.slice(i,i+16);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
@@ -162,7 +162,7 @@ async function translatePending(){
       retryCount.delete(x.node);
      }else{
       const tries=retryCount.get(x.node)||0;
-      if(tries<8){retryCount.set(x.node,tries+1);pending.add(x.node)}
+      if(tries<5){retryCount.set(x.node,tries+1);pending.add(x.node)}
      }
     });
    }
