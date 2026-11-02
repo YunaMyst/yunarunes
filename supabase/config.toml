@@ -1,0 +1,7 @@
+project_id = "uxwbbaeupemihonwyszu"
+
+[functions.support-requests]
+verify_jwt = false
+
+[functions.support-admin]
+verify_jwt = false
