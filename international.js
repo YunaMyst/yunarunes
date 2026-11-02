@@ -125,37 +125,61 @@ async function translatePending(){
  const work=[];
  for(const n of nodes){
   if(!n.isConnected||protectedNode(n))continue;
-  const displayed=n.nodeValue, original=originalText.has(n)?originalText.get(n):displayed, key=locale+'|'+original;
-  const explicitKo=locale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
+  const displayed=n.nodeValue;
+  const original=originalText.has(n)?originalText.get(n):displayed;
+  const key=runLocale+'|'+original;
+  const explicitKo=runLocale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
   if(explicitKo){work.push({node:n,original,displayed,value:explicitKo,key:null});continue}
   if(cache[key]){work.push({node:n,original,displayed,value:cache[key],key:null});continue}
   work.push({node:n,original,displayed,key,value:null});
  }
- // Fetch every missing translation first. Do not update the visible page batch by
- // batch: that caused the whole page to visibly flicker between languages.
- for(let i=0;i<work.length;i+=8){
-  const batch=work.slice(i,i+8).filter(x=>x.value===null);
-  if(!batch.length)continue;
-  const values=await endpoint(batch.map(x=>x.original));
-  batch.forEach((x,j)=>{
-   const v=values[j];
-   if(v){x.value=v;cache[x.key]=v;retryCount.delete(x.node)}
-   else{
-    const tries=retryCount.get(x.node)||0;
-    if(tries<20){retryCount.set(x.node,tries+1);pending.add(x.node)}
-   }
+ // Translate and render small batches immediately. A large page must not wait
+ // for every request to finish before showing any translated content.
+ const applyBatch=batch=>{
+  if(locale!==runLocale)return;
+  batch.forEach(x=>{
+   if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.displayed)return;
+   if(!originalText.has(x.node))originalText.set(x.node,x.original);
+   lastWritten.set(x.node,x.value);
+   x.node.nodeValue=x.value;
+   x.node.__yunaIntlDone=true;
+   translated.add(x.node);
   });
+ };
+ try{
+  for(let i=0;i<work.length;i+=8){
+   if(locale!==runLocale)break;
+   const batch=work.slice(i,i+8);
+   const missing=batch.filter(x=>x.value===null);
+   if(missing.length){
+    const values=await endpoint(missing.map(x=>x.original));
+    if(locale!==runLocale)break;
+    missing.forEach((x,j)=>{
+     const value=values[j];
+     if(value){
+      x.value=value;
+      if(x.key)cache[x.key]=value;
+      retryCount.delete(x.node);
+     }else{
+      const tries=retryCount.get(x.node)||0;
+      if(tries<8){retryCount.set(x.node,tries+1);pending.add(x.node)}
+     }
+    });
+   }
+   applyBatch(batch);
+   saveCache();
+  }
+ }finally{
+  busy=false;
+  if(locale!==runLocale){
+   nodes.forEach(n=>{if(n.isConnected)pending.add(n)});
+   queue();
+  }else if(pending.size){
+   const retries=Array.from(pending,n=>retryCount.get(n)||0);
+   const delay=Math.min(30000,1000*Math.pow(2,Math.min(5,Math.max(0,...retries))));
+   setTimeout(queue,delay);
+  }
  }
- // Ignore responses from a language that was replaced while requests were in flight.
- if(locale!==runLocale){busy=false;nodes.forEach(n=>pending.add(n));queue();return;}
- // Commit all translations in one browser task so users see one stable language.
- for(const x of work){
-  if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.displayed)continue;
-  if(!originalText.has(x.node))originalText.set(x.node,x.original);
-  lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
- }
- saveCache();busy=false;
- if(pending.size){const delay=Math.min(60000,1200*Math.pow(2,Math.min(6,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
 }
 const pendingAttributes=new Map();
 let attributeBusy=false,attributeScheduled=false;
