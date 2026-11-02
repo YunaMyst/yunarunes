@@ -8,5 +8,6 @@ async function load(){notice.textContent='A carregar pedidos privados…';try{co
 async function init(){for(let i=0;i<50&&!window.YunaRunesCloud;i++)await new Promise(r=>setTimeout(r,100));const c=window.YunaRunesCloud;if(!c){notice.textContent='Não foi possível iniciar a sessão YunaRunes.';return}try{const {data,error}=await c.client.auth.getSession();if(error)throw error;if(!data.session){notice.textContent='Inicia sessão na tua conta YunaRunes e depois abre novamente este painel.';return}token=data.session.access_token;await load()}catch(e){notice.textContent=e.message||'Falha de autenticação.'}}
 document.getElementById('refresh').addEventListener('click',load);init()})();
 </script><script src="support.js?v=20261102-support-v1"></script>
-<script src="language.js?v=20261102-i18n-v13"></script><script src="international.js?v=20261102-i18n-v13"></script>
+<script src="language.js?v=20261102-i18n-v13"></script>
+<script src="international.js?v=20261102-i18n-v14"></script>
 </body></html>
