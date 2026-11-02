@@ -2241,13 +2241,13 @@ function resolveLanguageControl(el){
  const hint=((el.id||'')+' '+(typeof el.className==='string'?el.className:'')).toLowerCase();
  const idMatch=(el.id||'').match(/(?:language|lang)[-_]?(pt|br|en|ko|fr|de|es|ja)$/i);
  if(idMatch)return idMatch[1].toLowerCase()==='br'?'pt':idMatch[1].toLowerCase();
- if(/(?:^|[\\s_-])(?:pt|br|portuguese)(?:$|[\\s_-])/.test(hint))return 'pt';
- if(/(?:^|[\\s_-])(?:en|english)(?:$|[\\s_-])/.test(hint))return 'en';
+ if(/(?:^|[\s_-])(?:pt|br|portuguese)(?:$|[\s_-])/.test(hint))return 'pt';
+ if(/(?:^|[\s_-])(?:en|english)(?:$|[\s_-])/.test(hint))return 'en';
  if(el.getAttribute('href')){
   try{const q=(new URL(el.getAttribute('href'),location.href)).searchParams.get('lang');if(allowed.includes((q||'').toLowerCase()))return q.toLowerCase()==='br'?'pt':q.toLowerCase()}catch(_){}
  }
  if(el.matches?.('[onclick*="setLanguage"],[onclick*="changeLanguage"]')){
-  const m=(el.getAttribute('onclick')||'').match(/(?:setLanguage|changeLanguage)\\s*\\(\\s*['"]?(pt|br|en|ko|fr|de|es|ja)/i);
+  const m=(el.getAttribute('onclick')||'').match(/(?:setLanguage|changeLanguage)\s*\(\\s*['"]?(pt|br|en|ko|fr|de|es|ja)/i);
   if(m)return m[1].toLowerCase()==='br'?'pt':m[1].toLowerCase();
  }
  return null;
