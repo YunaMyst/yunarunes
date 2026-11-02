@@ -2402,12 +2402,9 @@ function ensureYunaRunesBrand(){
 }
 function boot(){
  updateHeader();ensureYunaRunesBrand();consolidatePrimaryMenuControls();bind();stabilizeHeader();
-  // Let the browser paint the page before scanning the entire document for translations.
-  const runInitialTranslation=()=>{try{const saved=localStorage.getItem('yunarunes-locale')||getLang();if(saved==='pt'||saved==='en')apply();}catch(error){console.error('YunaRunes language initialization:',error)}};
-  if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(runInitialTranslation,{timeout:1200});else window.setTimeout(runInitialTranslation,60);
- // Performance safeguard: do not continuously rescan and translate every dynamically inserted
- // subtree. Some tools render thousands of nodes at once; the observer made pages unresponsive.
- // Initial translation still runs once at boot, and choosing a language still translates the page.
+  // Translation is handled exclusively by international.js for all seven locales.
+  // Do not run the legacy PT/EN dictionary here: it races with the site-wide translator
+  // and causes visible text to be replaced twice during startup and language changes.
  window.__yunaLanguageObserver=null;
  document.addEventListener('click',()=>{stabilizeHeader();requestAnimationFrame(stabilizeHeader);},true);
  window.addEventListener('resize',stabilizeHeader,{passive:true});
