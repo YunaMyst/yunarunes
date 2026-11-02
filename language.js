@@ -1794,7 +1794,7 @@ Object.assign(PAIRS,{"Importar decks JSON":"Import JSON decks","Exportar JSON":"
 Object.assign(REV,{"Import JSON decks":"Importar decks JSON","Export JSON":"Exportar JSON","Delete all":"Apagar todos","Deck name":"Nome do deck","Content":"Conteúdo","Notes":"Notas","Save deck":"Salvar deck","My decks":"Os meus decks","Deck saved.":"Deck guardado.","All decks deleted.":"Todos os decks apagados.","No decks saved yet.":"Ainda não tens decks guardados.","Copy":"Copiar","Delete":"Apagar","E.g. Siege — Galleon/Lushen":"Ex.: Siege — Galleon/Lushen","Speed tune, target, conditions...":"Speed tune, alvo, condição..."});
 
 let activeLanguageOverride=null;
-function getLang(){if(activeLanguageOverride==='en'||activeLanguageOverride==='pt')return activeLanguageOverride;try{const q=new URLSearchParams(window.location.search).get('lang');if(q==='en')return'en';if(q==='pt'||q==='br')return'pt'}catch(_){} try{if(localStorage.getItem(K)==='en')return'en';if(localStorage.getItem(K)==='pt')return'pt'}catch(_){} try{const m=document.cookie.split(';').map(x=>x.trim());if(m.includes('yunarunes-language=en'))return'en';if(m.includes('yunarunes-language=pt'))return'pt'}catch(_){} return'pt'}
+function getLang(){if(['en','pt','ko','fr','de','es','ja'].includes(activeLanguageOverride))return activeLanguageOverride;try{const q=new URLSearchParams(window.location.search).get('lang');if(q==='en')return'en';if(q==='pt'||q==='br')return'pt'}catch(_){} try{if(localStorage.getItem(K)==='en')return'en';if(localStorage.getItem(K)==='pt')return'pt'}catch(_){} try{const m=document.cookie.split(';').map(x=>x.trim());if(m.includes('yunarunes-language=en'))return'en';if(m.includes('yunarunes-language=pt'))return'pt'}catch(_){} return'pt'}
 const en=()=>getLang()==='en';
 function tr(s){if(!s)return s;const map=en()?PAIRS:REV;return Object.prototype.hasOwnProperty.call(map,s)?map[s]:s}
 function save(lang){try{localStorage.setItem(K,lang);document.cookie='yunarunes-language='+lang+'; path=/; max-age=31536000; SameSite=Lax'}catch(_){} }
@@ -2417,7 +2417,7 @@ function ensureYunaRunesBrand(){
 function boot(){
  updateHeader();ensureYunaRunesBrand();consolidatePrimaryMenuControls();bind();stabilizeHeader();
   // Let the browser paint the page before scanning the entire document for translations.
-  const runInitialTranslation=()=>{try{apply()}catch(error){console.error('YunaRunes language initialization:',error)}};
+  const runInitialTranslation=()=>{try{const saved=localStorage.getItem('yunarunes-locale')||getLang();if(saved==='pt'||saved==='en')apply();}catch(error){console.error('YunaRunes language initialization:',error)}};
   if(typeof window.requestIdleCallback==='function')window.requestIdleCallback(runInitialTranslation,{timeout:1200});else window.setTimeout(runInitialTranslation,60);
  // Performance safeguard: do not continuously rescan and translate every dynamically inserted
  // subtree. Some tools render thousands of nodes at once; the observer made pages unresponsive.
