@@ -131,4 +131,4 @@ if(new URLSearchParams(location.search).has('confirmed'))status('Email confirmad
 $('resetForm').addEventListener('submit',async e=>{e.preventDefault();try{const {error}=await cloud.client.auth.updateUser({password:$('newPassword').value});if(error)throw error;$('resetBox').style.display='none';showProfile(await cloud.currentUser());status('Palavra-passe atualizada com sucesso.')}catch(err){status(err.message,true)}});
 </script>
 <script src="international.js?v=20261104"></script>
-<script src="international.js?v=20261104"></script>\n<script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
+<script src="international.js?v=20261104"></script>\n<script src="language.js?v=20261029-site-load-fix-4"></script><script src="international.js?v=20261105"></script>\n</body></html>
