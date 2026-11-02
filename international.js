@@ -50,8 +50,8 @@ async function endpoint(texts){
  // Sending several q parameters in one request can return a single nested result and
  // silently leave most page strings untranslated.
  const out=[];
- for(let i=0;i<texts.length;i+=3){
-  const group=texts.slice(i,i+3);
+ for(let i=0;i<texts.length;i+=6){
+  const group=texts.slice(i,i+6);
   const values=await Promise.all(group.map(async text=>{
    const u=new URL('https://translate.googleapis.com/translate_a/single');
    u.searchParams.set('client','gtx');u.searchParams.set('sl','auto');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
@@ -81,7 +81,7 @@ async function endpoint(texts){
    }catch(_){return null}
   }));
   out.push(...values);
-  if(i+3<texts.length)await new Promise(resolve=>setTimeout(resolve,100));
+  if(i+6<texts.length)await new Promise(resolve=>setTimeout(resolve,120));
  }
  return out;
 }
@@ -99,8 +99,8 @@ async function translatePending(){
   work.push({node:n,original,key});
  }
  // Small batches avoid URL-size limits and keep the page responsive.
- for(let i=0;i<work.length;i+=8){
-  const batch=work.slice(i,i+8);
+ for(let i=0;i<work.length;i+=24){
+  const batch=work.slice(i,i+24);
   const values=await endpoint(batch.map(x=>x.original));
   batch.forEach((x,j)=>{
    if(!x.node.isConnected||x.node.nodeValue!==x.original)return;
