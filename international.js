@@ -12,7 +12,7 @@ const LANGS=[
 const cacheKey='yunarunes-i18n-cache-v1';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
-const translated=new WeakSet(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
+const translated=new WeakSet(), lastWritten=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
 try{cache=JSON.parse(localStorage.getItem(cacheKey)||'{}')}catch(_){}
@@ -29,7 +29,7 @@ function protectedNode(n){
 function clean(s){return (s||'').replace(/\s+/g,' ').trim()}
 function addText(n){
  if(!n||n.nodeType!==3||protectedNode(n)||!clean(n.nodeValue))return;
- if(n.__yunaIntlDone)return;
+ if(lastWritten.has(n)&&n.nodeValue===lastWritten.get(n))return;
  pending.add(n);
 }
 function addTree(root){
@@ -75,7 +75,7 @@ async function translatePending(){
  for(const n of nodes){
   if(!n.isConnected||protectedNode(n))continue;
   const original=n.nodeValue, key=locale+'|'+original;
-  if(cache[key]){n.nodeValue=cache[key];n.__yunaIntlDone=true;translated.add(n);continue}
+  if(cache[key]){lastWritten.set(n,cache[key]);n.nodeValue=cache[key];n.__yunaIntlDone=true;translated.add(n);continue}
   work.push({node:n,original,key});
  }
  // Small batches avoid URL-size limits and keep the page responsive.
@@ -83,7 +83,7 @@ async function translatePending(){
   const batch=work.slice(i,i+8);
   try{
    const values=await endpoint(batch.map(x=>x.original));
-   batch.forEach((x,j)=>{if(!x.node.isConnected||x.node.nodeValue!==x.original)return;const v=values[j];if(v){cache[x.key]=v;x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}});
+   batch.forEach((x,j)=>{if(!x.node.isConnected||x.node.nodeValue!==x.original)return;const v=values[j];if(v){cache[x.key]=v;lastWritten.set(x.node,v);x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}});
   }catch(err){console.warn('YunaRunes translation batch failed:',err)}
  }
  saveCache();busy=false;
@@ -168,11 +168,11 @@ function boot(){
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
    if(r.type==='childList')r.addedNodes.forEach(n=>{addTree(n);translateAttributes(n)});
-   else if(r.type==='characterData'&&!r.target.__yunaIntlDone)addText(r.target);
+   else if(r.type==='characterData'&&r.target.nodeValue!==lastWritten.get(r.target))addText(r.target); else if(r.type==='attributes'){const el=r.target;translateAttributes(el)}
   });
   if(locale!=='pt')queue();
  });
- observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+ observer.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','title','aria-label','alt','data-placeholder','data-tooltip','value']});
  const headerObserver=new MutationObserver(()=>makePicker());
  headerObserver.observe(document.body,{subtree:true,childList:true});
 }
