@@ -48,9 +48,9 @@ function queue(){
 }
 function splitForProvider(text){
  const parts=[];let rest=String(text||'');
- while(rest.length>360){
-  let cut=rest.lastIndexOf(' ',360);if(cut<180)cut=360;
-  parts.push(rest.slice(0,cut));rest=rest.slice(cut).replace(/^\\s+/,'');
+ while(rest.length>180){
+  let cut=rest.lastIndexOf(' ',180);if(cut<90)cut=180;
+  parts.push(rest.slice(0,cut));rest=rest.slice(cut).replace(/^\s+/,'');
  }
  if(rest)parts.push(rest);
  return parts;
