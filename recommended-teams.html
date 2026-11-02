@@ -179,5 +179,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 \n
 \n
-<script src="international.js?v=20261102-kr-selection-fix"></script>
-<script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
+<script src="international.js?v=20261102-kr-hero-hard-fix"></script>
+<script src="language.js?v=20261029-site-load-fix-4"></script>
+<script>
+/* Keep the Yuna Team hero in the exact Korean wording when KR is selected.
+   This runs after the legacy PT/EN script so it cannot reset the subtitle. */
+(()=>{try{
+ const locale=localStorage.getItem('yunarunes-locale');
+ if(locale!=='ko')return;
+ const eyebrow=document.querySelector('.hero .eyebrow');
+ const subtitle=document.querySelector('.hero p');
+ if(eyebrow){eyebrow.textContent='모든 플레이어를 위한';}
+ if(subtitle){subtitle.textContent='이계의 짐승, 카이로스 던전, 레이드 5 및 속성 레이드를 위한 팀 구성.';}
+ document.documentElement.lang='ko';
+}catch(_){}})();
+</script></body></html>
