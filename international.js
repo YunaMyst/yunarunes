@@ -118,7 +118,7 @@ async function endpoint(texts){
  return out;
 }
 async function translatePending(){
- if(busy||locale==='pt'||!pending.size)return;
+ if(busy||!pending.size)return;
  busy=true;
  const nodes=Array.from(pending);pending.clear();
  const work=[];
@@ -126,23 +126,29 @@ async function translatePending(){
   if(!n.isConnected||protectedNode(n))continue;
   const original=n.nodeValue, key=locale+'|'+original;
   const explicitKo=locale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
-  if(explicitKo){lastWritten.set(n,explicitKo);n.nodeValue=explicitKo;n.__yunaIntlDone=true;translated.add(n);continue}
-  if(cache[key]){lastWritten.set(n,cache[key]);n.nodeValue=cache[key];n.__yunaIntlDone=true;translated.add(n);continue}
-  work.push({node:n,original,key});
+  if(explicitKo){work.push({node:n,original,value:explicitKo,key:null});continue}
+  if(cache[key]){work.push({node:n,original,value:cache[key],key:null});continue}
+  work.push({node:n,original,key,value:null});
  }
- // Small batches avoid URL-size limits and keep the page responsive.
+ // Fetch every missing translation first. Do not update the visible page batch by
+ // batch: that caused the whole page to visibly flicker between languages.
  for(let i=0;i<work.length;i+=24){
-  const batch=work.slice(i,i+24);
+  const batch=work.slice(i,i+24).filter(x=>x.value===null);
+  if(!batch.length)continue;
   const values=await endpoint(batch.map(x=>x.original));
   batch.forEach((x,j)=>{
-   if(!x.node.isConnected||x.node.nodeValue!==x.original)return;
    const v=values[j];
-   if(v){cache[x.key]=v;retryCount.delete(x.node);lastWritten.set(x.node,v);x.node.nodeValue=v;x.node.__yunaIntlDone=true;translated.add(x.node)}
+   if(v){x.value=v;cache[x.key]=v;retryCount.delete(x.node)}
    else{
     const tries=retryCount.get(x.node)||0;
     if(tries<4){retryCount.set(x.node,tries+1);pending.add(x.node)}
    }
   });
+ }
+ // Commit all translations in one browser task so users see one stable language.
+ for(const x of work){
+  if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.original)continue;
+  lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
  }
  saveCache();busy=false;
  if(pending.size){const delay=Math.min(8000,700*Math.pow(2,Math.min(4,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
