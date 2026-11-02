@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v17';
+const cacheKey='yunarunes-i18n-cache-v18';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -117,24 +117,24 @@ async function getJson(url,timeoutMs=12000){
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
- // The site contains Portuguese plus English labels and dynamically loaded
- // content. Auto-detect the source first so mixed-language sections are covered.
- const request=async source=>{
-  const u=new URL('https://translate.googleapis.com/translate_a/single');
-  u.searchParams.set('client','gtx');u.searchParams.set('sl',source);u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
-  const data=await getJson(u.toString(),8000);
-  if(!data)return {failed:true,value:null};
-  const value=googleSegments(data);
-  return {failed:false,value:value&&clean(value)!==clean(text)?value:null};
- };
- const automatic=await request('auto');
- if(automatic.value)return automatic.value;
- // Short labels and mixed-language pages are often misdetected by auto mode.
- // Retry both source languages used across YunaRunes before leaving text untranslated.
- for(const source of ['pt','en']){
-  if(source===locale)continue;
-  const fallback=await request(source);
-  if(fallback.value)return fallback.value;
+ // Google exposes the same translation service on two CORS-enabled hosts.
+ // Try both so a temporary host/rate-limit failure does not leave a whole
+ // non-English locale untranslated.
+ const sources=['auto','pt','en'].filter(source=>source!==locale||source==='auto');
+ const hosts=['translate.googleapis.com','translate.google.com'];
+ for(const host of hosts){
+  for(const source of sources){
+   const u=new URL('https://'+host+'/translate_a/single');
+   u.searchParams.set('client','gtx');
+   u.searchParams.set('sl',source);
+   u.searchParams.set('tl',locale);
+   u.searchParams.set('dt','t');
+   u.searchParams.set('q',text);
+   const data=await getJson(u.toString(),12000);
+   if(!data)continue;
+   const value=googleSegments(data);
+   if(value&&clean(value)!==clean(text))return value;
+  }
  }
  return null;
 }
