@@ -57,6 +57,9 @@ function splitForProvider(text){
 }
 function googleSegments(data){
  if(!Array.isArray(data)||!Array.isArray(data[0]))return '';
+ // The gtx endpoint returns an array of segment arrays; clients5 may return
+ // a compact [translatedText, detectedLanguage] pair instead.
+ if(typeof data[0][0]==='string')return data[0][0]||'';
  return data[0].map(part=>Array.isArray(part)?(part[0]||''):'').join('');
 }
 async function getJson(url,timeoutMs=10000){
