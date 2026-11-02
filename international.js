@@ -133,6 +133,62 @@ async function translatePending(){
  saveCache();busy=false;
  if(pending.size){const delay=Math.min(8000,700*Math.pow(2,Math.min(4,Math.max(...Array.from(pending,n=>retryCount.get(n)||0)))));setTimeout(queue,delay)}
 }
+const pendingAttributes=new Map();
+let attributeBusy=false,attributeScheduled=false;
+function queueAttributeTranslations(){
+ if(attributeScheduled||attributeBusy||!pendingAttributes.size)return;
+ attributeScheduled=true;
+ const run=async()=>{
+  attributeScheduled=false;
+  if(attributeBusy||!pendingAttributes.size)return;
+  attributeBusy=true;
+  const jobs=Array.from(pendingAttributes.values());pendingAttributes.clear();
+  const missing=jobs.filter(job=>!cache[job.key]);
+  try{
+   const translatedValues=[];
+   for(let i=0;i<missing.length;i+=24){
+    const batch=missing.slice(i,i+24);
+    const values=await endpoint(batch.map(job=>job.source));
+    batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
+   }
+   const results=new Map(translatedValues.map(item=>[item.job,item.value]));
+   // Apply all completed attribute translations together, avoiding one-by-one repaint flicker.
+   jobs.forEach(job=>{
+    if(!job.el.isConnected||locale==='pt')return;
+    const value=cache[job.key]||results.get(job);
+    const live=job.el.getAttribute(job.attr);
+    const originals=attributeOriginals.get(job.el)||{};
+    if(value&&live===job.source){
+     job.el.setAttribute(job.attr,value);
+     originals[job.attr]={source:job.source,translated:value,pending:false};
+     cache[job.key]=value;
+     const retries=attributeRetries.get(job.el)||{};delete retries[job.attr];attributeRetries.set(job.el,retries);
+    }else if(!value){
+     const retries=attributeRetries.get(job.el)||{};
+     const count=retries[job.attr]||0;
+     originals[job.attr]={source:job.source,translated:null,pending:false};
+     if(count<4){
+      retries[job.attr]=count+1;attributeRetries.set(job.el,retries);
+      setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},Math.min(10000,1200*Math.pow(2,count)));
+     }
+    }
+    attributeOriginals.set(job.el,originals);
+   });
+   saveCache();
+  }catch(error){
+   jobs.forEach(job=>{
+    const originals=attributeOriginals.get(job.el)||{};
+    if(originals[job.attr])originals[job.attr].pending=false;
+    attributeOriginals.set(job.el,originals);
+    setTimeout(()=>{if(job.el.isConnected&&locale!=='pt')translateAttributes(job.el)},1800);
+   });
+  }finally{
+   attributeBusy=false;
+   if(pendingAttributes.size)queueAttributeTranslations();
+  }
+ };
+ if(typeof requestIdleCallback==='function')requestIdleCallback(run,{timeout:500});else setTimeout(run,50);
+}
 function translateAttributes(root){
  const nodes=[];
  if(root.nodeType===1)nodes.push(root);
@@ -149,36 +205,19 @@ function translateAttributes(root){
    const previous=originals[attr];
    if(previous&&current===previous.translated)return;
    const source=previous&&current===previous.source?previous.source:current;
-   const key=locale+'|@'+attr+'|'+source;
    if(locale==='pt')return;
+   const key=locale+'|@'+attr+'|'+source;
    if(cache[key]){
     el.setAttribute(attr,cache[key]);
-    originals[attr]={source,translated:cache[key]};
+    originals[attr]={source,translated:cache[key],pending:false};
     return;
    }
    if(previous&&previous.source===source&&previous.pending)return;
    originals[attr]={source,translated:null,pending:true};
-   endpoint([source]).then(a=>{
-    const translatedValue=a[0];
-    if(!translatedValue){
-     const retries=attributeRetries.get(el)||{};const count=retries[attr]||0;
-     if(count<4){retries[attr]=count+1;attributeRetries.set(el,retries);originals[attr]={source,translated:null,pending:false};setTimeout(()=>{if(el.isConnected&&locale!=='pt')translateAttributes(el)},Math.min(10000,1200*Math.pow(2,count)))}
-     else originals[attr]={source,translated:null,pending:false};
-     return;
-    }
-    const retries=attributeRetries.get(el)||{};delete retries[attr];attributeRetries.set(el,retries);
-    cache[key]=translatedValue;
-    const live=el.getAttribute(attr);
-    if(live===source){
-     el.setAttribute(attr,translatedValue);
-     originals[attr]={source,translated:translatedValue,pending:false};
-    }else if(live===translatedValue){
-     originals[attr]={source,translated:translatedValue,pending:false};
-    }
-    saveCache();
-   }).catch(()=>{if(originals[attr]&&originals[attr].source===source)delete originals[attr];setTimeout(()=>{if(el.isConnected&&locale!=='pt')translateAttributes(el)},1800)});
+   pendingAttributes.set(el.getAttribute('id')+'|'+attr+'|'+source+'|'+Math.random(),{el,attr,source,key});
   });
  });
+ queueAttributeTranslations();
 }
 function makePicker(){
  const header=document.querySelector('header.academy-site-header, header.top, header');
