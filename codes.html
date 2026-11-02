@@ -15,6 +15,5 @@ const lang=()=>localStorage.getItem('yunarunes-language')==='en'?'en':'pt';const
 async function load(){const r=await fetch('./codes.json?v='+Date.now(),{cache:'no-store'});const d=await r.json();const now=Date.now();const active=d.codes.filter(x=>!x.expires||new Date(x.expires).getTime()>now);document.getElementById('codes').innerHTML=active.map(x=>`<article class="code"><div class="codehead"><span class="codevalue">${x.code}</span><span class="status">● ACTIVE</span></div><div class="rewards">${x.rewards.map(v=>`<span class="reward">${v}</span>`).join('')}</div><div class="actions"><button class="btn" data-code="${x.code}">📋 ${tr('Copy')}</button><a class="btn secondary" href="${x.ios}" target="_blank" rel="noopener">🍎 ${tr('Redeem iOS')}</a></div><div class="expires">${x.expires?tr('Expires')+': '+new Date(x.expires).toLocaleString(lang()==='en'?'en-GB':'pt-PT',{dateStyle:'medium',timeStyle:'short'}):'● ACTIVE'}</div></article>`).join('');document.querySelectorAll('[data-code]').forEach(b=>b.addEventListener('click',async()=>{await navigator.clipboard.writeText(b.dataset.code);const old=b.innerHTML;b.textContent='✓ '+tr('Copy');setTimeout(()=>b.innerHTML='📋 '+tr('Copy'),1200)}))}load().catch(()=>document.getElementById('codes').innerHTML='<div class="notice">Não foi possível carregar os códigos.</div>');
 </script>
 <script src="support.js?v=20261102-support-v1"></script>
-
-<script src="international.js?v=20261102-i18n-v27"></script>
-<script src="language.js?v=20261102-i18n-v14"></script></body></html>
+<script src="language.js?v=20261102-i18n-v14"></script><script src="international.js?v=20261102-i18n-v28"></script>
+</body></html>
