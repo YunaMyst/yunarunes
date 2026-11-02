@@ -26,6 +26,7 @@ jobs:
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
+              updated = updated.replace('\\n', '\n')
               updated = re.sub(r'\s*<script src="support\.js[^"]*"></script>\s*', '\n', source)
               if '</body>' in updated.lower():
                   pos = updated.lower().rfind('</body>')
