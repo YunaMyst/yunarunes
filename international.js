@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v7';
+const cacheKey='yunarunes-i18n-cache-v8';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -105,11 +105,11 @@ async function translatePending(){
  const work=[];
  for(const n of nodes){
   if(!n.isConnected||protectedNode(n))continue;
-  const original=n.nodeValue, key=locale+'|'+original;
+  const displayed=n.nodeValue, original=originalText.has(n)?originalText.get(n):displayed, key=locale+'|'+original;
   const explicitKo=locale==='ko'&&n.parentElement&&n.parentElement.closest('[data-ko]')?.getAttribute('data-ko');
-  if(explicitKo){work.push({node:n,original,value:explicitKo,key:null});continue}
-  if(cache[key]){work.push({node:n,original,value:cache[key],key:null});continue}
-  work.push({node:n,original,key,value:null});
+  if(explicitKo){work.push({node:n,original,displayed,value:explicitKo,key:null});continue}
+  if(cache[key]){work.push({node:n,original,displayed,value:cache[key],key:null});continue}
+  work.push({node:n,original,displayed,key,value:null});
  }
  // Fetch every missing translation first. Do not update the visible page batch by
  // batch: that caused the whole page to visibly flicker between languages.
@@ -130,7 +130,7 @@ async function translatePending(){
  if(locale!==runLocale){busy=false;nodes.forEach(n=>pending.add(n));queue();return;}
  // Commit all translations in one browser task so users see one stable language.
  for(const x of work){
-  if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.original)continue;
+  if(!x.value||!x.node.isConnected||x.node.nodeValue!==x.displayed)continue;
   if(!originalText.has(x.node))originalText.set(x.node,x.original);
   lastWritten.set(x.node,x.value);x.node.nodeValue=x.value;x.node.__yunaIntlDone=true;translated.add(x.node);
  }
@@ -209,9 +209,12 @@ function translateAttributes(root){
    if(attr==='content'&&!((el.tagName==='META')&&/^(description|og:title|og:description|twitter:title|twitter:description)$/i.test(el.getAttribute('name')||el.getAttribute('property')||'')))return;
    const current=el.getAttribute(attr);if(!current||!clean(current))return;
    const previous=originals[attr];
-   if(previous&&current===previous.translated)return;
-   const source=previous&&current===previous.source?previous.source:current;
-   if(locale==='pt')return;
+   const source=previous&&(current===previous.translated||current===previous.source)?previous.source:current;
+   if(locale==='pt'){
+    if(previous&&previous.translated&&current===previous.translated)el.setAttribute(attr,source);
+    originals[attr]={source,translated:null,pending:false};
+    return;
+   }
    const key=locale+'|@'+attr+'|'+source;
    if(cache[key]){
     el.setAttribute(attr,cache[key]);
@@ -289,34 +292,40 @@ function boot(){
   if(!LANGS.some(item=>item[0]===next))return;
   locale=next;
   pending.clear();pendingAttributes.clear();
-  // Restore every translated text node to its original HTML language first.
-  [document.head,document.body].forEach(root=>{
-   if(!root)return;
-   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-   let node;
-   while((node=walker.nextNode())){
-    const original=originalText.get(node),written=lastWritten.get(node);
-    if(original!==undefined&&node.nodeValue===written){
-     node.nodeValue=original;lastWritten.delete(node);
+  // Keep the currently displayed language in place while the next language
+  // is prepared. This avoids flashing back to Portuguese on every switch.
+  if(next==='pt'){
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    let node;
+    while((node=walker.nextNode())){
+     const original=originalText.get(node),written=lastWritten.get(node);
+     if(original!==undefined&&written!==undefined&&node.nodeValue===written){
+      node.nodeValue=original;lastWritten.delete(node);
+     }
     }
-   }
-  });
-  // Restore translated attributes before queuing the new language.
-  const selector='[placeholder],[title],[aria-label],[aria-description],[aria-placeholder],[alt],[data-placeholder],[data-tooltip],[data-label],[data-original-title],[value],meta[content]';
-  document.querySelectorAll(selector).forEach(el=>{
-   const originals=attributeOriginals.get(el);if(!originals)return;
-   Object.keys(originals).forEach(attr=>{
-    const item=originals[attr];
-    if(item&&item.translated&&el.getAttribute(attr)===item.translated)el.setAttribute(attr,item.source);
-    if(item)item.pending=false;
    });
-  });
+  }
+  pending.clear();
+  pendingAttributes.clear();
   try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
   document.documentElement.lang=next==='pt'?'pt-BR':next;
   const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
   if(next!=='pt'){
-   addTree(document.head);addTree(document.body);
+   // Requeue existing translated nodes using their preserved source text.
+   [document.head,document.body].forEach(root=>{
+    if(!root)return;
+    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+    let node;
+    while((node=walker.nextNode())){
+     if(originalText.has(node))pending.add(node);
+     else addText(node);
+    }
+   });
    translateAttributes(document.head);translateAttributes(document.body);queue();
+  }else{
+   [document.head,document.body].forEach(root=>{if(root)addTree(root)});
   }
  }
  window.addEventListener('yunarunes-language-applied',event=>{
