@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v11';
+const cacheKey='yunarunes-i18n-cache-v12';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -91,8 +91,13 @@ async function translateOne(text){
  };
  const automatic=await request('auto');
  if(automatic.value)return automatic.value;
- // If auto-detection returned no usable response, retry explicitly as Portuguese.
- if(automatic.failed){const fallback=await request('pt');return fallback.value||null;}
+ // Short labels and mixed-language pages are often misdetected by auto mode.
+ // Retry both source languages used across YunaRunes before leaving text untranslated.
+ for(const source of ['pt','en']){
+  if(source===locale)continue;
+  const fallback=await request(source);
+  if(fallback.value)return fallback.value;
+ }
  return null;
 }
 async function endpoint(texts){
@@ -106,7 +111,7 @@ async function endpoint(texts){
    const pieces=splitForProvider(text);
    if(pieces.length===1)return translateOne(text);
    const translated=await Promise.all(pieces.map(piece=>translateOne(piece)));
-   return translated.every(Boolean)?translated.join(' '):null;
+   return translated.map((value,index)=>value||pieces[index]).join(' ');
   }));
   values.forEach((value,j)=>{out[i+j]=value});
  }
