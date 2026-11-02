@@ -18,6 +18,6 @@ main{max-width:1024px;margin:auto;padding:26px 16px 50px}.hero,.card{background:
 (function(){const input=document.getElementById('search'),list=document.getElementById('monsterNames'),button=document.getElementById('synergyBtn');fetch('monster-catalog.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('catalog');return r.json()}).then(d=>{const a=Array.isArray(d)?d:(d.monsters||[]);list.innerHTML=[...new Set(a.filter(m=>m&&m.name).map(m=>m.name))].sort().map(n=>'<option value="'+String(n).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'">').join('')}).catch(()=>{document.getElementById('synergyResults').innerHTML='<div class="card empty error">Não foi possível carregar a Database.</div>'});button.addEventListener('click',()=>window.YunaRunesSynergy&&window.YunaRunesSynergy());input.addEventListener('keydown',e=>{if(e.key==='Enter')button.click()})})();
 </script><script src="synergy.js?v=20261030-1"></script>
 
-\n<script src="language.js?v=20261029-site-load-fix-4"></script>
+\n
 \n<script src="international.js?v=20261106"></script>
-</body></html>
+<script src="language.js?v=20261029-site-load-fix-4"></script></body></html>
