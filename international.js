@@ -56,7 +56,8 @@ async function endpoint(texts){
    const u=new URL('https://translate.googleapis.com/translate_a/single');
    u.searchParams.set('client','gtx');u.searchParams.set('sl','pt');u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',text);
    try{
-    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);\n    const response=await fetch(u.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});clearTimeout(timeout);
+    const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),12000);
+    const response=await fetch(u.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});clearTimeout(timeout);
     if(!response.ok)return null;
     const data=await response.json();
     const segments=Array.isArray(data)&&Array.isArray(data[0])?data[0]:[];
