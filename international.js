@@ -119,7 +119,7 @@ async function translatePending(){
 function translateAttributes(root){
  const nodes=[];
  if(root.nodeType===1)nodes.push(root);
- if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[alt],[data-placeholder],[data-tooltip],[value]'));
+ if(root.querySelectorAll)nodes.push(...root.querySelectorAll('[placeholder],[title],[aria-label],[aria-description],[aria-placeholder],[alt],[data-placeholder],[data-tooltip],[data-label],[data-original-title],[value],meta[name="description"],meta[property="og:title"],meta[property="og:description"],meta[name="twitter:title"],meta[name="twitter:description"]'));
  const attrs=['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content'];
  nodes.forEach(el=>{
   if(protectedNode(el))return;
