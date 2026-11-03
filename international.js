@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v55';
+const cacheKey='yunarunes-i18n-cache-v56';
 // Start with a clean cache: older entries were generated while the source
 // language was incorrectly forced to Portuguese for English/mixed-language UI.
 const previousCacheKeys=[];
@@ -143,10 +143,10 @@ function detectSourceLanguage(text){
  const s=clean(text).toLowerCase();
  if(/[가-힣]/.test(s))return 'ko';
  if(/[ぁ-んァ-ン]/.test(s))return 'ja';
- if(/[áàâãçéêíóôõú]/i.test(s)||/\\b(o|a|os|as|de|do|da|dos|das|que|para|com|uma|um|não|seu|sua|como|mais|monstro|runas|equipa|equipes|início|aprenda)\\b/.test(s))return 'pt';
- if(/[¿¡ñ]/i.test(s)||/\\b(el|los|las|una|uno|con|más|monstruo|runas|inicio|aprende)\\b/.test(s))return 'es';
- if(/[àâçéèêëîïôûùüÿœ]/i.test(s)||/\\b(le|les|des|une|avec|pour|vous|dans|monstre|début)\\b/.test(s))return 'fr';
- if(/[äöüß]/i.test(s)||/\\b(der|die|das|und|nicht|mit|für|ein|eine|monster|runen|anfang)\\b/.test(s))return 'de';
+ if(/[áàâãçéêíóôõú]/i.test(s)||/\b(o|a|os|as|de|do|da|dos|das|que|para|com|uma|um|não|seu|sua|como|mais|monstro|runas|equipa|equipes|início|aprenda)\b/.test(s))return 'pt';
+ if(/[¿¡ñ]/i.test(s)||/\b(el|los|las|una|uno|con|más|monstruo|runas|inicio|aprende)\b/.test(s))return 'es';
+ if(/[àâçéèêëîïôûùüÿœ]/i.test(s)||/\b(le|les|des|une|avec|pour|vous|dans|monstre|début)\b/.test(s))return 'fr';
+ if(/[äöüß]/i.test(s)||/\b(der|die|das|und|nicht|mit|für|ein|eine|monster|runen|anfang)\b/.test(s))return 'de';
  return 'auto';
 }
 async function translateOne(text,targetLocale=locale){
