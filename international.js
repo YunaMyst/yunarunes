@@ -9,10 +9,10 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v51';
-const previousCacheKeys=['yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v52';
+const previousCacheKeys=['yunarunes-i18n-cache-v51','yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
-let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
+let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false, localeController=new AbortController();
 const translated=new WeakSet(), trackedTextNodes=new Set(), trackedAttributeElements=new Set(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
@@ -130,10 +130,12 @@ function googleSegments(data){
   return Array.isArray(part)&&typeof part[0]==='string'?part[0]:'';
  }).join('');
 }
-async function getJson(url,timeoutMs=12000){
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);
+async function getJson(url,timeoutMs=2500){
+ const controller=new AbortController();const cancel=()=>controller.abort();
+ localeController.signal.addEventListener('abort',cancel,{once:true});
+ const timer=setTimeout(()=>controller.abort(),timeoutMs);
  try{const response=await fetch(url,{credentials:'omit',cache:'force-cache',signal:controller.signal});if(!response.ok)return null;return await response.json()}
- catch(_){return null}finally{clearTimeout(timer)}
+ catch(_){return null}finally{clearTimeout(timer);localeController.signal.removeEventListener('abort',cancel)}
 }
 async function translateOne(text,targetLocale=locale){
  // The authored English strings are already available in the page; the other
@@ -149,17 +151,19 @@ async function translateOne(text,targetLocale=locale){
   const u=new URL('https://'+host+'/translate_a/single');
   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
   u.searchParams.set('tl',targetLocale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-  const data=await getJson(u.toString(),3200);
+  const data=await getJson(u.toString(),2500);
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?value:null;
  };
  // Most YunaRunes content is authored in Portuguese. Use that explicit
  // source language first: auto-detection misclassifies short UI labels and
  // leaves German, Spanish and Japanese strings untranslated.
- let value=await request('translate.googleapis.com','pt');
- if(!value)value=await request('translate.googleapis.com','auto');
- if(!value)value=await request('translate.google.com','pt');
- if(!value)value=await request('translate.google.com','auto');
+ let value=(await Promise.all([
+  request('translate.googleapis.com','pt'),request('translate.google.com','pt')
+ ])).find(Boolean)||null;
+ if(!value)value=(await Promise.all([
+  request('translate.googleapis.com','auto'),request('translate.google.com','auto')
+ ])).find(Boolean)||null;
  if(!value)return null;
  protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
  return value;
@@ -178,7 +182,7 @@ async function endpoint(texts,targetLocale=locale){
    out[index]=translated.map((value,j)=>value||pieces[j]).join(' ');
   }
  };
- await Promise.all(Array.from({length:Math.min(48,texts.length)},worker));
+ await Promise.all(Array.from({length:Math.min(64,texts.length)},worker));
  return out;
 }
 async function translatePending(){
@@ -225,9 +229,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=96){
+  for(let i=0;i<work.length;i+=128){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+96);
+   const batch=work.slice(i,i+128);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original),runLocale);
@@ -361,6 +365,10 @@ function translateAttributes(root){
 }
 function switchLocale(next){
   if(!LANGS.some(item=>item[0]===next))return;
+  // Cancel every request from the previous language immediately. This prevents
+  // a slow German/Spanish/Japanese batch from blocking the newly selected locale.
+  try{localeController.abort()}catch(_){}
+  localeController=new AbortController();
   if(next===locale)return;
   // Always clear the previous locale before preparing the next one. Without
   // this reset, a Korean node can remain visible while its French request is
