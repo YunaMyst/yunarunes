@@ -458,8 +458,12 @@ function boot(){
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
+ applyAuthoredTranslations(document.head);
+ applyAuthoredTranslations(document.body);
  if(locale!=='pt'){
-  addTree(document.head);addTree(document.body);translateAttributes(document.head);translateAttributes(document.body);queue();
+  addTree(document.head);addTree(document.body);
+  translateAttributes(document.head);translateAttributes(document.body);
+  queue();queueAttributeTranslations();
  }
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
