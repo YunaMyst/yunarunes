@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v25';
+const cacheKey='yunarunes-i18n-cache-v26';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -180,7 +180,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=4;
+ const concurrency=2;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -226,9 +226,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=16){
+  for(let i=0;i<work.length;i+=8){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+16);
+   const batch=work.slice(i,i+8);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
@@ -241,7 +241,7 @@ async function translatePending(){
       retryCount.delete(x.node);
      }else{
       const tries=retryCount.get(x.node)||0;
-      if(tries<5){retryCount.set(x.node,tries+1);pending.add(x.node)}
+      if(tries<30){retryCount.set(x.node,tries+1);pending.add(x.node)}
      }
     });
    }
@@ -255,7 +255,7 @@ async function translatePending(){
    queue();
   }else if(pending.size){
    const retries=Array.from(pending,n=>retryCount.get(n)||0);
-   const delay=Math.min(30000,1000*Math.pow(2,Math.min(5,Math.max(0,...retries))));
+   const delay=Math.min(15000,700*Math.pow(1.5,Math.min(8,Math.max(0,...retries))));
    setTimeout(queue,delay);
   }
  }
