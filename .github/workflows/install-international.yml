@@ -21,7 +21,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          marker = '<script src="international.js?v=20261103-i18n-v61"></script>'
+          marker = '<script src="international.js?v=20261103-i18n-v62"></script>'
           changed = []
           for path in Path('.').glob('*.html'):
               source = path.read_text(encoding='utf-8')
@@ -31,8 +31,7 @@ jobs:
               language_tag = '<script src="language.js'
               if language_tag in updated:
                   pos = updated.find(language_tag)
-                  end = updated.find('</script>', pos) + len('</script>')
-                  updated = updated[:end] + '\n' + marker + updated[end:]
+                  updated = updated[:pos] + marker + '\n' + updated[pos:]
               elif '</body>' in updated.lower():
                   pos = updated.lower().rfind('</body>')
                   updated = updated[:pos] + marker + '\n' + updated[pos:]
