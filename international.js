@@ -9,8 +9,8 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v48';
-const previousCacheKeys=['yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v49';
+const previousCacheKeys=['yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -148,7 +148,7 @@ async function translateOne(text,targetLocale=locale){
   const u=new URL('https://'+host+'/translate_a/single');
   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
   u.searchParams.set('tl',targetLocale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-  const data=await getJson(u.toString(),4500);
+  const data=await getJson(u.toString(),3200);
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?value:null;
  };
@@ -171,12 +171,12 @@ async function endpoint(texts,targetLocale=locale){
    const index=cursor++;
    const text=texts[index];
    const pieces=splitForProvider(text);
-   if(pieces.length===1){out[index]=await translateOne(text);continue}
+   if(pieces.length===1){out[index]=await translateOne(text,targetLocale);continue}
    const translated=await Promise.all(pieces.map(piece=>translateOne(piece,targetLocale)));
    out[index]=translated.map((value,j)=>value||pieces[j]).join(' ');
   }
  };
- await Promise.all(Array.from({length:Math.min(16,texts.length)},worker));
+ await Promise.all(Array.from({length:Math.min(24,texts.length)},worker));
  return out;
 }
 async function translatePending(){
@@ -223,7 +223,7 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=work.length||1){
+  for(let i=0;i<work.length;i+=32){
    if(locale!==runLocale)break;
    const batch=work.slice(i);
    const missing=batch.filter(x=>x.value===null);
@@ -318,7 +318,7 @@ function queueAttributeTranslations(){
    if(pendingAttributes.size)queueAttributeTranslations();
   }
  };
- if(typeof requestIdleCallback==='function')requestIdleCallback(run,{timeout:500});else setTimeout(run,50);
+ setTimeout(run,0);
 }
 function translateAttributes(root){
  const nodes=[];
