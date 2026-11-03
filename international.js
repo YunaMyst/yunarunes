@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v43';
+const cacheKey='yunarunes-i18n-cache-v44';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -94,8 +94,9 @@ function addTree(root){
 function queue(){
  if(scheduled||busy)return;
  scheduled=true;
+ // Start as soon as the language selector changes; do not wait for an idle slot.
  const run=()=>{scheduled=false;translatePending()};
- if('requestIdleCallback'in window)requestIdleCallback(run,{timeout:1000});else setTimeout(run,80);
+ setTimeout(run,0);
 }
 function splitForProvider(text){
  const parts=[];let rest=String(text||'');
@@ -179,20 +180,20 @@ async function translateOne(text){
  return null;
 }
 async function endpoint(texts){
- // Bound concurrency: translate in parallel rather than serial batches. A slow
- // external provider must never keep the entire page waiting for minutes.
- const out=new Array(texts.length);
- const concurrency=8;
- for(let i=0;i<texts.length;i+=concurrency){
-  const group=texts.slice(i,i+concurrency);
-  const values=await Promise.all(group.map(async text=>{
+ // Worker pool keeps many labels translating simultaneously without serial
+ // waves. Results retain their original positions for safe DOM updates.
+ const out=new Array(texts.length);let cursor=0;
+ const worker=async()=>{
+  while(cursor<texts.length){
+   const index=cursor++;
+   const text=texts[index];
    const pieces=splitForProvider(text);
-   if(pieces.length===1)return translateOne(text);
+   if(pieces.length===1){out[index]=await translateOne(text);continue}
    const translated=await Promise.all(pieces.map(piece=>translateOne(piece)));
-   return translated.map((value,index)=>value||pieces[index]).join(' ');
-  }));
-  values.forEach((value,j)=>{out[i+j]=value});
- }
+   out[index]=translated.map((value,j)=>value||pieces[j]).join(' ');
+  }
+ };
+ await Promise.all(Array.from({length:Math.min(16,texts.length)},worker));
  return out;
 }
 async function translatePending(){
@@ -239,9 +240,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=24){
+  for(let i=0;i<work.length;i+=48){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+24);
+   const batch=work.slice(i,i+48);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
