@@ -9,8 +9,8 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v50';
-const previousCacheKeys=['yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v51';
+const previousCacheKeys=['yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), trackedTextNodes=new Set(), trackedAttributeElements=new Set(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -153,12 +153,13 @@ async function translateOne(text,targetLocale=locale){
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?value:null;
  };
- // Use one primary request first; only contact the fallback host if it
- // fails. The previous double-request-per-label strategy caused rate limits,
- // especially on large pages and for less frequently selected locales.
- let value=await request('translate.googleapis.com','auto');
+ // Most YunaRunes content is authored in Portuguese. Use that explicit
+ // source language first: auto-detection misclassifies short UI labels and
+ // leaves German, Spanish and Japanese strings untranslated.
+ let value=await request('translate.googleapis.com','pt');
+ if(!value)value=await request('translate.googleapis.com','auto');
+ if(!value)value=await request('translate.google.com','pt');
  if(!value)value=await request('translate.google.com','auto');
- if(!value)value=await request('translate.googleapis.com','pt');
  if(!value)return null;
  protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
  return value;
@@ -177,7 +178,7 @@ async function endpoint(texts,targetLocale=locale){
    out[index]=translated.map((value,j)=>value||pieces[j]).join(' ');
   }
  };
- await Promise.all(Array.from({length:Math.min(24,texts.length)},worker));
+ await Promise.all(Array.from({length:Math.min(48,texts.length)},worker));
  return out;
 }
 async function translatePending(){
@@ -224,9 +225,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=32){
+  for(let i=0;i<work.length;i+=96){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+32);
+   const batch=work.slice(i,i+96);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original),runLocale);
