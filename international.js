@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v35';
+const cacheKey='yunarunes-i18n-cache-v36';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -96,8 +96,9 @@ function queue(){
 }
 function splitForProvider(text){
  const parts=[];let rest=String(text||'');
- while(rest.length>180){
-  let cut=rest.lastIndexOf(' ',180);if(cut<90)cut=180;
+ // Keep each URL payload comfortably below public endpoint limits.
+ while(rest.length>1100){
+  let cut=rest.lastIndexOf(' ',1100);if(cut<550)cut=1100;
   parts.push(rest.slice(0,cut));rest=rest.slice(cut).replace(/^\s+/,'');
  }
  if(rest)parts.push(rest);
@@ -176,19 +177,46 @@ async function translateOne(text){
  return null;
 }
 async function endpoint(texts){
- // Bound concurrency: translate in parallel rather than serial batches. A slow
- // external provider must never keep the entire page waiting for minutes.
+ // Batch several short UI strings into one provider request. The old
+ // implementation sent one network request per text node, so large pages
+ // quickly hit public-provider throttling and left buttons/labels in PT.
  const out=new Array(texts.length);
+ const batches=[];let current=[],length=0;
+ texts.forEach((text,index)=>{
+  const value=String(text||'');
+  const extra=value.length+(current.length?32:0);
+  if(current.length&&(current.length>=8||length+extra>1050)){
+   batches.push(current);current=[];length=0;
+  }
+  current.push({index,text:value});length+=value.length+(current.length>1?32:0);
+ });
+ if(current.length)batches.push(current);
  const concurrency=3;
- for(let i=0;i<texts.length;i+=concurrency){
-  const group=texts.slice(i,i+concurrency);
-  const values=await Promise.all(group.map(async text=>{
-   const pieces=splitForProvider(text);
-   if(pieces.length===1)return translateOne(text);
-   const translated=await Promise.all(pieces.map(piece=>translateOne(piece)));
-   return translated.map((value,index)=>value||pieces[index]).join(' ');
+ for(let i=0;i<batches.length;i+=concurrency){
+  const group=batches.slice(i,i+concurrency);
+  await Promise.all(group.map(async batch=>{
+   if(batch.length===1){
+    const item=batch[0],parts=splitForProvider(item.text);
+    if(parts.length===1)out[item.index]=await translateOne(item.text);
+    else{
+     const values=await Promise.all(parts.map(part=>translateOne(part)));
+     out[item.index]=values.map((value,j)=>value||parts[j]).join(' ');
+    }
+    return;
+   }
+   const marker=index=>'ZXQYUNASEG'+String(index).padStart(3,'0')+'QXZ';
+   const joined=batch.map((item,j)=>item.text+marker(j)).join('\n');
+   const translated=await translateOne(joined);
+   const pieces=translated?translated.split(/ZXQYUNASEG\\d{3}QXZ/):[];
+   if(pieces.length===batch.length){
+    batch.forEach((item,j)=>{out[item.index]=pieces[j].replace(/^\\s+|\\s+$/g,'')||null});
+   }else{
+    // If a provider rewrites separators, fall back per string rather than
+    // applying a combined sentence to the wrong control.
+    const values=await Promise.all(batch.map(item=>translateOne(item.text)));
+    batch.forEach((item,j)=>{out[item.index]=values[j]});
+   }
   }));
-  values.forEach((value,j)=>{out[i+j]=value});
  }
  return out;
 }
