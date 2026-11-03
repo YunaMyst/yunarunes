@@ -926,4 +926,40 @@ html.yr-live-app body .yr-app-promo-actions button{background:#202b36;border-col
 
 <script src="international.js?v=20261102-i18n-v36"></script>
 <script src="language.js?v=20261102-i18n-v14"></script>
-</body></html>
+<style id="yr-mobile-header-actions-v2">
+/* Final mobile override: placed after all legacy header styles to prevent cascade conflicts. */
+@media (max-width:1024px), (pointer:coarse) {
+ html body header.top>.nav>.header-controls,
+ html body.yunarunes-app header.top>.nav>.header-controls {
+   grid-area:controls!important; grid-column:1!important; grid-row:2!important;
+   display:block!important; width:100%!important; min-width:0!important;
+   max-width:100%!important; padding:0!important; margin:0!important;
+   overflow:visible!important;
+ }
+ html body header.top>.nav>.header-controls>.yuna-controls,
+ html body.yunarunes-app header.top>.nav>.header-controls>.yuna-controls {
+   display:grid!important; grid-template-columns:repeat(3,minmax(0,1fr))!important;
+   grid-auto-flow:row!important; align-items:stretch!important; justify-content:stretch!important;
+   gap:7px!important; width:100%!important; min-width:0!important; max-width:100%!important;
+   margin:0!important; padding:0!important; box-sizing:border-box!important;
+ }
+ html body header.top>.nav>.header-controls>.yuna-controls>*,
+ html body.yunarunes-app header.top>.nav>.header-controls>.yuna-controls>* {
+   display:flex!important; align-items:center!important; justify-content:center!important;
+   width:100%!important; min-width:0!important; max-width:100%!important;
+   height:auto!important; min-height:42px!important; margin:0!important;
+   padding:7px 4px!important; box-sizing:border-box!important;
+   font-size:clamp(10px,2.8vw,12px)!important; line-height:1.2!important;
+   text-align:center!important; white-space:normal!important;
+   overflow:visible!important; overflow-wrap:anywhere!important;
+ }
+ html body header.top>.nav>.header-controls>.yuna-controls>:nth-child(-n+3),
+ html body.yunarunes-app header.top>.nav>.header-controls>.yuna-controls>:nth-child(-n+3) {
+   grid-row:1!important;
+ }
+ html body header.top>.nav>.header-controls>.yuna-controls>:nth-child(n+4),
+ html body.yunarunes-app header.top>.nav>.header-controls>.yuna-controls>:nth-child(n+4) {
+   min-height:38px!important; font-size:10px!important;
+ }
+}
+</style></body></html>
