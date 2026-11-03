@@ -9,8 +9,10 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v54';
-const previousCacheKeys=['yunarunes-i18n-cache-v53','yunarunes-i18n-cache-v52','yunarunes-i18n-cache-v51','yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v55';
+// Start with a clean cache: older entries were generated while the source
+// language was incorrectly forced to Portuguese for English/mixed-language UI.
+const previousCacheKeys=[];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false, localeController=new AbortController();
 const translated=new WeakSet(), trackedTextNodes=new Set(), trackedAttributeElements=new Set(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -137,6 +139,16 @@ async function getJson(url,timeoutMs=10000){
  try{const response=await fetch(url,{credentials:'omit',cache:'force-cache',signal:controller.signal});if(!response.ok)return null;return await response.json()}
  catch(_){return null}finally{clearTimeout(timer);localeController.signal.removeEventListener('abort',cancel)}
 }
+function detectSourceLanguage(text){
+ const s=clean(text).toLowerCase();
+ if(/[가-힣]/.test(s))return 'ko';
+ if(/[ぁ-んァ-ン]/.test(s))return 'ja';
+ if(/[áàâãçéêíóôõú]/i.test(s)||/\\b(o|a|os|as|de|do|da|dos|das|que|para|com|uma|um|não|seu|sua|como|mais|monstro|runas|equipa|equipes|início|aprenda)\\b/.test(s))return 'pt';
+ if(/[¿¡ñ]/i.test(s)||/\\b(el|los|las|una|uno|con|más|monstruo|runas|inicio|aprende)\\b/.test(s))return 'es';
+ if(/[àâçéèêëîïôûùüÿœ]/i.test(s)||/\\b(le|les|des|une|avec|pour|vous|dans|monstre|début)\\b/.test(s))return 'fr';
+ if(/[äöüß]/i.test(s)||/\\b(der|die|das|und|nicht|mit|für|ein|eine|monster|runen|anfang)\\b/.test(s))return 'de';
+ return 'auto';
+}
 async function translateOne(text,targetLocale=locale){
  // The authored English strings are already available in the page; the other
  // locales use Portuguese as their stable source. Try PT and auto-detection
@@ -155,13 +167,14 @@ async function translateOne(text,targetLocale=locale){
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?value:null;
  };
- // Most YunaRunes content is authored in Portuguese. Use that explicit
- // source language first: auto-detection misclassifies short UI labels and
- // leaves German, Spanish and Japanese strings untranslated.
- let value=await request('translate.googleapis.com','pt');
- if(!value)value=await request('translate.google.com','pt');
- if(!value)value=await request('translate.googleapis.com','auto');
- if(!value)value=await request('translate.google.com','auto');
+ // Detect the actual source per text node. The site mixes Portuguese,
+ // English and translated/authored labels; forcing every phrase to PT caused
+ // English labels to remain wrong in several target languages.
+ const source=detectSourceLanguage(sourceText);
+ let value=await request('translate.googleapis.com',source);
+ if(!value)value=await request('translate.google.com',source);
+ if(!value&&source!=='auto')value=await request('translate.googleapis.com','auto');
+ if(!value&&source!=='auto')value=await request('translate.google.com','auto');
  if(!value)return null;
  protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
  return value;
