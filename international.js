@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v30';
+const cacheKey='yunarunes-i18n-cache-v31';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -129,48 +129,44 @@ async function translateOne(text){
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
  });
- // Try automatic detection first, then explicit Portuguese and English.
- // Most YunaRunes source content is Portuguese; explicit source hints are
- // important for short labels that automatic detection cannot identify.
- const sources=['auto','pt','en'];
+ const restore=value=>{
+  if(!value)return value;
+  protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+  return value;
+ };
+ // One fast Google request is the normal path. Only retry with explicit
+ // source languages when automatic detection fails or returns the source.
  const hosts=['translate.googleapis.com','translate.google.com'];
- for(const host of hosts){
-  for(const source of sources){
-   const u=new URL('https://'+host+'/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
+ const sources=['auto','pt','en'];
+ for(let h=0;h<hosts.length;h++){
+  for(let s=0;s<sources.length;s++){
+   const u=new URL('https://'+hosts[h]+'/translate_a/single');
+   u.searchParams.set('client','gtx');u.searchParams.set('sl',sources[s]);
    u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-   const data=await getJson(u.toString(),8000);
+   const data=await getJson(u.toString(),7000);
    if(!data)continue;
-   let value=googleSegments(data);
-   if(value&&clean(value)!==clean(sourceText)){
-    protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
-    return value;
-   }
+   const value=googleSegments(data);
+   if(value&&clean(value)!==clean(sourceText))return restore(value);
+   // If auto-detection returned the original, try the explicit source hint.
   }
  }
- // Backup provider: MyMemory, with automatic source-language detection.
- // This runs when Google is unavailable, throttled, or returns unchanged text.
+ // MyMemory is a fallback only; keep the original text queued if it fails.
  try{
   const pair=new URL('https://api.mymemory.translated.net/get');
   pair.searchParams.set('q',sourceText);
   pair.searchParams.set('langpair','autodetect|'+locale);
   const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),10000);
+  const timer=setTimeout(()=>controller.abort(),8000);
   let response;
-  try{
-   response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});
-  }finally{clearTimeout(timer)}
+  try{response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal})}
+  finally{clearTimeout(timer)}
   if(response&&response.ok){
    const data=await response.json();
    const raw=data&&data.responseData&&data.responseData.translatedText;
    if(raw){
-    const decoder=document.createElement('textarea');
-    decoder.innerHTML=raw;
-    let value=decoder.value||'';
-    if(clean(value)!==clean(sourceText)){
-     protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
-     return value;
-    }
+    const decoder=document.createElement('textarea');decoder.innerHTML=raw;
+    const value=decoder.value||'';
+    if(clean(value)!==clean(sourceText))return restore(value);
    }
   }
  }catch(_){}
@@ -180,7 +176,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=2;
+ const concurrency=5;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -226,9 +222,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=8){
+  for(let i=0;i<work.length;i+=20){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+8);
+   const batch=work.slice(i,i+20);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
@@ -274,8 +270,8 @@ function queueAttributeTranslations(){
   const missing=jobs.filter(job=>!cache[job.key]);
   try{
    const translatedValues=[];
-   for(let i=0;i<missing.length;i+=8){
-    const batch=missing.slice(i,i+8);
+   for(let i=0;i<missing.length;i+=20){
+    const batch=missing.slice(i,i+20);
     const values=await endpoint(batch.map(job=>job.source));
     batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
    }
