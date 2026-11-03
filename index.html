@@ -970,4 +970,56 @@ html.yr-live-app body .yr-app-promo-actions button{background:#202b36;border-col
 
 <script src="international.js?v=20261102-i18n-v36"></script>
 <script src="language.js?v=20261102-i18n-v14"></script>
+
+<style id="yr-mobile-support-feedback-donate-fix">
+/* Apenas telemóveis: primeira linha com Suporte, Feedback e Donate; idiomas na segunda. */
+@media (max-width: 767px), (pointer:coarse) and (max-width: 1024px) {
+  html body header.top > .nav > .header-controls > .yuna-controls,
+  html body.yunarunes-app header.top > .nav > .header-controls > .yuna-controls {
+    display:grid!important;
+    grid-template-columns:repeat(6,minmax(0,1fr))!important;
+    grid-template-rows:auto auto!important;
+    grid-auto-flow:row!important;
+    gap:7px!important;
+    width:100%!important;
+    max-width:100%!important;
+    align-items:stretch!important;
+  }
+  html body header.top > .nav > .header-controls > .yuna-controls > #yr-feedback-open,
+  html body header.top > .nav > .header-controls > .yuna-controls > #yr-support-open,
+  html body header.top > .nav > .header-controls > .yuna-controls > .donate-link {
+    grid-column:span 2!important;
+    grid-row:1!important;
+    min-width:0!important;
+    width:100%!important;
+    min-height:44px!important;
+    height:auto!important;
+    padding:7px 3px!important;
+    font-size:clamp(10px,2.8vw,12px)!important;
+    line-height:1.15!important;
+    white-space:normal!important;
+    overflow-wrap:anywhere!important;
+    text-align:center!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+  }
+  html body header.top > .nav > .header-controls > .yuna-controls > [data-lang] {
+    grid-column:span 3!important;
+    grid-row:2!important;
+    min-width:0!important;
+    width:100%!important;
+    min-height:40px!important;
+    height:auto!important;
+    padding:7px 4px!important;
+    font-size:11px!important;
+    white-space:nowrap!important;
+    justify-content:center!important;
+    box-sizing:border-box!important;
+  }
+  html body header.top > .nav > .header-controls > .yuna-controls > #yr-support-open {
+    display:inline-flex!important;
+  }
+}
+</style>
+
 </body></html>
