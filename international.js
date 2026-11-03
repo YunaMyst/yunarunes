@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v34';
+const cacheKey='yunarunes-i18n-cache-v35';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -144,12 +144,14 @@ async function translateOne(text){
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?restore(value):null;
  };
- let value=await request('translate.googleapis.com','auto');
+ // Most YunaRunes source content is authored in Portuguese. Explicitly
+ // declaring it avoids inconsistent auto-detection on short UI labels.
+ let value=await request('translate.googleapis.com','pt');
  if(value)return value;
- // Retry with the page's dominant source language, then the alternate host.
- value=await request('translate.googleapis.com','pt');
+ // Auto-detection and the alternate Google host are fallbacks only.
+ value=await request('translate.googleapis.com','auto');
  if(value)return value;
- value=await request('translate.google.com','auto');
+ value=await request('translate.google.com','pt');
  if(value)return value;
  // Last-resort free fallback. Failed translations remain queued for retry.
  try{
@@ -177,7 +179,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=2;
+ const concurrency=3;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
