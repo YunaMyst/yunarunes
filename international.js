@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v39';
+const cacheKey='yunarunes-i18n-cache-v40';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
