@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v32';
+const cacheKey='yunarunes-i18n-cache-v33';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -122,9 +122,9 @@ async function getJson(url,timeoutMs=12000){
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
- // Preserve official product names while translating the surrounding sentence.
+ // Keep official game and project names intact.
  const protectedNames=[];
- const sourceText=String(text||'').replace(/Summoners\s+War|YunaRunes/gi,match=>{
+ const sourceText=String(text||'').replace(/Summoners\\s+War|YunaRunes/gi,match=>{
   const token='YUNARUNESKEEP'+protectedNames.length+'TOKEN';
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
@@ -134,27 +134,28 @@ async function translateOne(text){
   protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
   return value;
  };
- // One fast Google request is the normal path. Only retry with explicit
- // source languages when automatic detection fails or returns the source.
- const hosts=['translate.googleapis.com','translate.google.com'];
- const sources=['auto','pt','en'];
- for(let h=0;h<hosts.length;h++){
-  for(let s=0;s<sources.length;s++){
-   const u=new URL('https://'+hosts[h]+'/translate_a/single');
-   u.searchParams.set('client','gtx');u.searchParams.set('sl',sources[s]);
-   u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-   const data=await getJson(u.toString(),7000);
-   if(!data)continue;
-   const value=googleSegments(data);
-   if(value&&clean(value)!==clean(sourceText))return restore(value);
-   // If auto-detection returned the original, try the explicit source hint.
-  }
- }
- // MyMemory is a fallback only; keep the original text queued if it fails.
+ // Free public endpoints are rate-limited. Make one normal request first,
+ // and only use fallbacks when the primary provider fails or returns source text.
+ const request=async(host,source)=>{
+  const u=new URL('https://'+host+'/translate_a/single');
+  u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
+  u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
+  const data=await getJson(u.toString(),9000);
+  const value=googleSegments(data);
+  return value&&clean(value)!==clean(sourceText)?restore(value):null;
+ };
+ let value=await request('translate.googleapis.com','auto');
+ if(value)return value;
+ // Retry with the page's dominant source language, then the alternate host.
+ value=await request('translate.googleapis.com','pt');
+ if(value)return value;
+ value=await request('translate.google.com','auto');
+ if(value)return value;
+ // Last-resort free fallback. Failed translations remain queued for retry.
  try{
   const pair=new URL('https://api.mymemory.translated.net/get');
   pair.searchParams.set('q',sourceText);
-  pair.searchParams.set('langpair','autodetect|'+locale);
+  pair.searchParams.set('langpair','pt|'+locale);
   const controller=new AbortController();
   const timer=setTimeout(()=>controller.abort(),8000);
   let response;
@@ -165,7 +166,7 @@ async function translateOne(text){
    const raw=data&&data.responseData&&data.responseData.translatedText;
    if(raw){
     const decoder=document.createElement('textarea');decoder.innerHTML=raw;
-    const value=decoder.value||'';
+    value=decoder.value||'';
     if(clean(value)!==clean(sourceText))return restore(value);
    }
   }
