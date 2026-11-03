@@ -9,14 +9,23 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v45';
+const cacheKey='yunarunes-i18n-cache-v46';
+const previousCacheKeys=['yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
 const attributeRetries=new WeakMap();
-try{cache=JSON.parse(localStorage.getItem(cacheKey)||'{}')}catch(_){}
+// Keep translations already cached by this browser across translator updates.
+// Desktop and mobile have separate browser storage; migrating older cache keys
+// prevents a new script release from forcing the desktop to translate again.
+try{
+ cache=JSON.parse(localStorage.getItem(cacheKey)||'{}');
+ previousCacheKeys.forEach(key=>{
+  try{const older=JSON.parse(localStorage.getItem(key)||'{}');Object.keys(older).forEach(k=>{if(!cache[k])cache[k]=older[k]})}catch(_){}
+ });
+}catch(_){cache={}}
 function saveCache(){try{localStorage.setItem(cacheKey,JSON.stringify(cache))}catch(_){}}
 function protectedNode(n){
  if(!n)return true;
