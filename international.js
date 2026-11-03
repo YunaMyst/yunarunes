@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v31';
+const cacheKey='yunarunes-i18n-cache-v32';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -176,7 +176,7 @@ async function endpoint(texts){
  // Bound concurrency: translate in parallel rather than serial batches. A slow
  // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const concurrency=5;
+ const concurrency=2;
  for(let i=0;i<texts.length;i+=concurrency){
   const group=texts.slice(i,i+concurrency);
   const values=await Promise.all(group.map(async text=>{
@@ -222,9 +222,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=20){
+  for(let i=0;i<work.length;i+=8){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+20);
+   const batch=work.slice(i,i+8);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
@@ -270,8 +270,8 @@ function queueAttributeTranslations(){
   const missing=jobs.filter(job=>!cache[job.key]);
   try{
    const translatedValues=[];
-   for(let i=0;i<missing.length;i+=20){
-    const batch=missing.slice(i,i+20);
+   for(let i=0;i<missing.length;i+=8){
+    const batch=missing.slice(i,i+8);
     const values=await endpoint(batch.map(job=>job.source));
     batch.forEach((job,index)=>translatedValues.push({job,value:values[index]}));
    }
