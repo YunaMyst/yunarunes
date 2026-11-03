@@ -9,8 +9,8 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v53';
-const previousCacheKeys=['yunarunes-i18n-cache-v52','yunarunes-i18n-cache-v51','yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v54';
+const previousCacheKeys=['yunarunes-i18n-cache-v53','yunarunes-i18n-cache-v52','yunarunes-i18n-cache-v51','yunarunes-i18n-cache-v50','yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false, localeController=new AbortController();
 const translated=new WeakSet(), trackedTextNodes=new Set(), trackedAttributeElements=new Set(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -461,6 +461,9 @@ function boot(){
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
+ // Apply page-authored locale strings before capturing source text or queuing
+ // automatic translation, so the seven-language dictionaries are never skipped.
+ applyAuthoredTranslations(document.head);applyAuthoredTranslations(document.body);
  addTree(document.head);addTree(document.body);
  translateAttributes(document.head);translateAttributes(document.body);
  if(locale!=='pt')queue();
