@@ -9,8 +9,8 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v46';
-const previousCacheKeys=['yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v47';
+const previousCacheKeys=['yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -357,25 +357,35 @@ function translateAttributes(root){
 }
 function switchLocale(next){
   if(!LANGS.some(item=>item[0]===next))return;
+  if(next===locale)return;
+  // Always clear the previous locale before preparing the next one. Without
+  // this reset, a Korean node can remain visible while its French request is
+  // in flight, producing a mixed Korean/French page.
+  [document.head,document.body].forEach(root=>{
+   if(!root)return;
+   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+   let node;
+   while((node=walker.nextNode())){
+    const original=originalText.get(node),written=lastWritten.get(node);
+    if(original!==undefined&&written!==undefined&&node.nodeValue===written){
+     lastWritten.delete(node);
+     node.nodeValue=original;
+    }
+   }
+   const elements=[...(root.nodeType===1?[root]:[]),...(root.querySelectorAll?root.querySelectorAll('*'):[])];
+   elements.forEach(el=>{
+    const originals=attributeOriginals.get(el);
+    if(!originals)return;
+    Object.keys(originals).forEach(attr=>{
+     const item=originals[attr];
+     if(item&&item.translated&&el.getAttribute(attr)===item.translated)el.setAttribute(attr,item.source);
+     originals[attr]={source:item.source,translated:null,pending:false};
+    });
+    attributeOriginals.set(el,originals);
+   });
+  });
   locale=next;
   pending.clear();pendingAttributes.clear();
-  // Keep the currently displayed language in place while the next language
-  // is prepared. This avoids flashing back to Portuguese on every switch.
-  if(next==='pt'){
-   [document.head,document.body].forEach(root=>{
-    if(!root)return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    let node;
-    while((node=walker.nextNode())){
-     const original=originalText.get(node),written=lastWritten.get(node);
-     if(original!==undefined&&written!==undefined&&node.nodeValue===written){
-      node.nodeValue=original;lastWritten.delete(node);
-     }
-    }
-   });
-  }
-  pending.clear();
-  pendingAttributes.clear();
   try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
   document.documentElement.lang=next==='pt'?'pt-BR':next;
   const picker=document.querySelector('#yuna-international-select');if(picker)picker.value=next;
