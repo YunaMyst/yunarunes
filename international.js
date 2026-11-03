@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v44';
+const cacheKey='yunarunes-i18n-cache-v45';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -126,58 +126,31 @@ async function getJson(url,timeoutMs=12000){
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
- // Preserve official product names while translating the surrounding sentence.
+ // The authored English strings are already available in the page; the other
+ // locales use Portuguese as their stable source. Try PT and auto-detection
+ // simultaneously so a slow detection response cannot delay the translation.
  const protectedNames=[];
  const sourceText=String(text||'').replace(/Summoners\s+War|YunaRunes/gi,match=>{
   const token='YUNARUNESKEEP'+protectedNames.length+'TOKEN';
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
  });
- // One fast automatic-detection request is the primary path. The old
- // implementation tried six provider/source combinations sequentially for
- // every text node, multiplying delay across a large page.
- const request=async(host,source,timeout=5000)=>{
+ const request=async(host,source)=>{
   const u=new URL('https://'+host+'/translate_a/single');
   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
   u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-  const data=await getJson(u.toString(),timeout);
+  const data=await getJson(u.toString(),4500);
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?value:null;
  };
- let fast=await request('translate.googleapis.com','auto',5000);
- if(!fast)fast=await request('translate.googleapis.com','pt',5000);
- if(!fast)fast=await request('translate.google.com','auto',5000);
- if(fast){
-  protectedNames.forEach(item=>{fast=fast.split(item.token).join(item.value)});
-  return fast;
- }
- // Backup provider: MyMemory, with automatic source-language detection.
- // This runs when Google is unavailable, throttled, or returns unchanged text.
- try{
-  const pair=new URL('https://api.mymemory.translated.net/get');
-  pair.searchParams.set('q',sourceText);
-  pair.searchParams.set('langpair','autodetect|'+locale);
-  const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),10000);
-  let response;
-  try{
-   response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});
-  }finally{clearTimeout(timer)}
-  if(response&&response.ok){
-   const data=await response.json();
-   const raw=data&&data.responseData&&data.responseData.translatedText;
-   if(raw){
-    const decoder=document.createElement('textarea');
-    decoder.innerHTML=raw;
-    let value=decoder.value||'';
-    if(clean(value)!==clean(sourceText)){
-     protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
-     return value;
-    }
-   }
-  }
- }catch(_){}
- return null;
+ const attempts=await Promise.all([
+  request('translate.googleapis.com','pt'),
+  request('translate.google.com','auto')
+ ]);
+ let value=attempts.find(Boolean);
+ if(!value)return null;
+ protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+ return value;
 }
 async function endpoint(texts){
  // Worker pool keeps many labels translating simultaneously without serial
@@ -193,7 +166,7 @@ async function endpoint(texts){
    out[index]=translated.map((value,j)=>value||pieces[j]).join(' ');
   }
  };
- await Promise.all(Array.from({length:Math.min(16,texts.length)},worker));
+ await Promise.all(Array.from({length:Math.min(48,texts.length)},worker));
  return out;
 }
 async function translatePending(){
@@ -240,9 +213,9 @@ async function translatePending(){
   });
  };
  try{
-  for(let i=0;i<work.length;i+=48){
+  for(let i=0;i<work.length;i+=work.length||1){
    if(locale!==runLocale)break;
-   const batch=work.slice(i,i+48);
+   const batch=work.slice(i);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original));
