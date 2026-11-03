@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v40';
+const cacheKey='yunarunes-i18n-cache-v41';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -48,13 +48,9 @@ function applyAuthoredTranslations(root=document){
   const source=el.getAttribute('data-pt');
   const target=el.getAttribute('data-'+locale);
   if(source===null&&target===null){authoredOriginals.set(el,originals);return}
-  // Buttons and labels often wrap their caption in a span or an icon element.
-  // Translate the single real caption text node without destroying that markup.
-  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
-  const textNodes=[];let candidate;
-  while((candidate=walker.nextNode()))if(clean(candidate.nodeValue)&&!protectedNode(candidate))textNodes.push(candidate);
-  if(textNodes.length!==1){authoredOriginals.set(el,originals);return}
-  const node=textNodes[0];
+  if(Array.from(el.childNodes).some(n=>n.nodeType===1)){authoredOriginals.set(el,originals);return}
+  let node=Array.from(el.childNodes).find(n=>n.nodeType===3);
+  if(!node){node=document.createTextNode('');el.appendChild(node)}
   const base=source!==null?source:(originalText.get(node)??node.nodeValue);
   if(!originalText.has(node))originalText.set(node,base);
   if(target!==null){
@@ -63,6 +59,7 @@ function applyAuthoredTranslations(root=document){
    pending.delete(node);
   }else{
    // A Portuguese fallback is source text, not a completed translation.
+   // Keep it eligible for automatic translation into ko/fr/de/es/ja.
    if(node.nodeValue!==base)node.nodeValue=base;
    lastWritten.delete(node);
    if(locale==='pt')pending.delete(node);
@@ -99,9 +96,8 @@ function queue(){
 }
 function splitForProvider(text){
  const parts=[];let rest=String(text||'');
- // Keep each URL payload comfortably below public endpoint limits.
- while(rest.length>1500){
-  let cut=rest.lastIndexOf(' ',1500);if(cut<750)cut=1500;
+ while(rest.length>180){
+  let cut=rest.lastIndexOf(' ',180);if(cut<90)cut=180;
   parts.push(rest.slice(0,cut));rest=rest.slice(cut).replace(/^\s+/,'');
  }
  if(rest)parts.push(rest);
@@ -126,100 +122,74 @@ async function getJson(url,timeoutMs=12000){
  catch(_){return null}finally{clearTimeout(timer)}
 }
 async function translateOne(text){
- // Keep official game and project names intact.
+ // Preserve official product names while translating the surrounding sentence.
  const protectedNames=[];
  const sourceText=String(text||'').replace(/Summoners\s+War|YunaRunes/gi,match=>{
   const token='YUNARUNESKEEP'+protectedNames.length+'TOKEN';
   protectedNames.push({token,value:/^summoners/i.test(match)?'Summoners War':'YunaRunes'});
   return token;
  });
- const restore=value=>{
-  if(!value)return value;
-  protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
-  return value;
- };
- // Free public endpoints are rate-limited. Make one normal request first,
- // and only use fallbacks when the primary provider fails or returns source text.
- const request=async(host,source)=>{
-  const u=new URL('https://'+host+'/translate_a/single');
-  u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
-  u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
-  const data=await getJson(u.toString(),9000);
-  const value=googleSegments(data);
-  return value&&clean(value)!==clean(sourceText)?restore(value):null;
- };
- // The site contains both Portuguese and English source labels. Detect the
- // language per text node so English UI labels are not mistranslated as PT.
- let value=await request('translate.googleapis.com','auto');
- if(value)return value;
- // Portuguese is the dominant authored language and remains the fallback.
- value=await request('translate.googleapis.com','pt');
- if(value)return value;
- value=await request('translate.google.com','pt');
- if(value)return value;
- // Last-resort free fallback. Failed translations remain queued for retry.
+ // Try automatic detection first, then explicit Portuguese and English.
+ // Most YunaRunes source content is Portuguese; explicit source hints are
+ // important for short labels that automatic detection cannot identify.
+ const sources=['auto','pt','en'];
+ const hosts=['translate.googleapis.com','translate.google.com'];
+ for(const host of hosts){
+  for(const source of sources){
+   const u=new URL('https://'+host+'/translate_a/single');
+   u.searchParams.set('client','gtx');u.searchParams.set('sl',source);
+   u.searchParams.set('tl',locale);u.searchParams.set('dt','t');u.searchParams.set('q',sourceText);
+   const data=await getJson(u.toString(),8000);
+   if(!data)continue;
+   let value=googleSegments(data);
+   if(value&&clean(value)!==clean(sourceText)){
+    protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+    return value;
+   }
+  }
+ }
+ // Backup provider: MyMemory, with automatic source-language detection.
+ // This runs when Google is unavailable, throttled, or returns unchanged text.
  try{
   const pair=new URL('https://api.mymemory.translated.net/get');
   pair.searchParams.set('q',sourceText);
-  pair.searchParams.set('langpair','pt|'+locale);
+  pair.searchParams.set('langpair','autodetect|'+locale);
   const controller=new AbortController();
-  const timer=setTimeout(()=>controller.abort(),8000);
+  const timer=setTimeout(()=>controller.abort(),10000);
   let response;
-  try{response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal})}
-  finally{clearTimeout(timer)}
+  try{
+   response=await fetch(pair.toString(),{credentials:'omit',cache:'no-store',signal:controller.signal});
+  }finally{clearTimeout(timer)}
   if(response&&response.ok){
    const data=await response.json();
    const raw=data&&data.responseData&&data.responseData.translatedText;
    if(raw){
-    const decoder=document.createElement('textarea');decoder.innerHTML=raw;
-    value=decoder.value||'';
-    if(clean(value)!==clean(sourceText))return restore(value);
+    const decoder=document.createElement('textarea');
+    decoder.innerHTML=raw;
+    let value=decoder.value||'';
+    if(clean(value)!==clean(sourceText)){
+     protectedNames.forEach(item=>{value=value.split(item.token).join(item.value)});
+     return value;
+    }
    }
   }
  }catch(_){}
  return null;
 }
 async function endpoint(texts){
- // Batch several short UI strings into one provider request. The old
- // implementation sent one network request per text node, so large pages
- // quickly hit public-provider throttling and left buttons/labels in PT.
+ // Bound concurrency: translate in parallel rather than serial batches. A slow
+ // external provider must never keep the entire page waiting for minutes.
  const out=new Array(texts.length);
- const batches=[];let current=[],length=0;
- texts.forEach((text,index)=>{
-  const value=String(text||'');
-  const extra=value.length+(current.length?32:0);
-  if(current.length&&(current.length>=8||length+extra>1050)){
-   batches.push(current);current=[];length=0;
-  }
-  current.push({index,text:value});length+=value.length+(current.length>1?32:0);
- });
- if(current.length)batches.push(current);
- const concurrency=3;
- for(let i=0;i<batches.length;i+=concurrency){
-  const group=batches.slice(i,i+concurrency);
-  await Promise.all(group.map(async batch=>{
-   if(batch.length===1){
-    const item=batch[0],parts=splitForProvider(item.text);
-    if(parts.length===1)out[item.index]=await translateOne(item.text);
-    else{
-     const values=await Promise.all(parts.map(part=>translateOne(part)));
-     out[item.index]=values.map((value,j)=>value||parts[j]).join(' ');
-    }
-    return;
-   }
-   const marker=index=>'ZXQYUNASEG'+String(index).padStart(3,'0')+'QXZ';
-   const joined=batch.map((item,j)=>item.text+marker(j)).join('\n');
-   const translated=await translateOne(joined);
-   const pieces=translated?translated.split(/ZXQYUNASEG\d{3}QXZ/):[];
-   if(pieces.length===batch.length){
-    batch.forEach((item,j)=>{out[item.index]=pieces[j].replace(/^\s+|\s+$/g,'')||null});
-   }else{
-    // If a provider rewrites separators, fall back per string rather than
-    // applying a combined sentence to the wrong control.
-    const values=await Promise.all(batch.map(item=>translateOne(item.text)));
-    batch.forEach((item,j)=>{out[item.index]=values[j]});
-   }
+ const concurrency=2;
+ for(let i=0;i<texts.length;i+=concurrency){
+  const group=texts.slice(i,i+concurrency);
+  const values=await Promise.all(group.map(async text=>{
+   const pieces=splitForProvider(text);
+   if(pieces.length===1)return translateOne(text);
+   const translated=await Promise.all(pieces.map(piece=>translateOne(piece)));
+   return translated.map((value,index)=>value||pieces[index]).join(' ');
   }));
+  values.forEach((value,j)=>{out[i+j]=value});
  }
  return out;
 }
@@ -236,19 +206,8 @@ async function translatePending(){
   const key=runLocale+'|'+original;
   // Prefer authored translations on the text's own element. The old code
   // only checked data-ko, ignoring thousands of existing data-pt/data-en values.
-  // Resolve authored translations on the nearest wrapper too (e.g. a
-  // button whose caption lives inside a nested span).
-  let parent=n.parentElement, explicit=null;
-  while(parent&&!explicit){
-   const candidate=parent.getAttribute('data-'+runLocale);
-   if(candidate){
-    const walker=document.createTreeWalker(parent,NodeFilter.SHOW_TEXT);
-    const captions=[];let textNode;
-    while((textNode=walker.nextNode()))if(clean(textNode.nodeValue)&&!protectedNode(textNode))captions.push(textNode);
-    if(captions.length===1&&captions[0]===n)explicit=candidate;
-   }
-   parent=parent.parentElement;
-  }
+  const parent=n.parentElement;
+  const explicit=parent&&parent.childNodes.length===1?parent.getAttribute('data-'+runLocale):null;
   if(explicit&&clean(explicit)){work.push({node:n,original,displayed,value:explicit,key:null});continue}
   if(cache[key]){work.push({node:n,original,displayed,value:cache[key],key:null});continue}
   work.push({node:n,original,displayed,key,value:null});
@@ -499,12 +458,8 @@ function boot(){
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
- applyAuthoredTranslations(document.head);
- applyAuthoredTranslations(document.body);
  if(locale!=='pt'){
-  addTree(document.head);addTree(document.body);
-  translateAttributes(document.head);translateAttributes(document.body);
-  queue();queueAttributeTranslations();
+  addTree(document.head);addTree(document.body);translateAttributes(document.head);translateAttributes(document.body);queue();
  }
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
