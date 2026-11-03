@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v37';
+const cacheKey='yunarunes-i18n-cache-v38';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -145,12 +145,12 @@ async function translateOne(text){
   const value=googleSegments(data);
   return value&&clean(value)!==clean(sourceText)?restore(value):null;
  };
- // Most YunaRunes source content is authored in Portuguese. Explicitly
- // declaring it avoids inconsistent auto-detection on short UI labels.
- let value=await request('translate.googleapis.com','pt');
+ // The site contains both Portuguese and English source labels. Detect the
+ // language per text node so English UI labels are not mistranslated as PT.
+ let value=await request('translate.googleapis.com','auto');
  if(value)return value;
- // Auto-detection and the alternate Google host are fallbacks only.
- value=await request('translate.googleapis.com','auto');
+ // Portuguese is the dominant authored language and remains the fallback.
+ value=await request('translate.googleapis.com','pt');
  if(value)return value;
  value=await request('translate.google.com','pt');
  if(value)return value;
