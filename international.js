@@ -9,11 +9,11 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v49';
-const previousCacheKeys=['yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
+const cacheKey='yunarunes-i18n-cache-v50';
+const previousCacheKeys=['yunarunes-i18n-cache-v49','yunarunes-i18n-cache-v48','yunarunes-i18n-cache-v47','yunarunes-i18n-cache-v46','yunarunes-i18n-cache-v45','yunarunes-i18n-cache-v44','yunarunes-i18n-cache-v43','yunarunes-i18n-cache-v42','yunarunes-i18n-cache-v41','yunarunes-i18n-cache-v40'];
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
-const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
+const translated=new WeakSet(), trackedTextNodes=new Set(), trackedAttributeElements=new Set(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
 let cache={};
 const attributeOriginals=new WeakMap();
 const attributeRetries=new WeakMap();
@@ -85,6 +85,7 @@ function addText(n){
  // Preserve the true source text as soon as a text node enters the translator.
  // This lets every language switch restart from the same original wording.
  if(!originalText.has(n))originalText.set(n,n.nodeValue);
+ trackedTextNodes.add(n);
  if(lastWritten.has(n)){
   if(n.nodeValue===lastWritten.get(n))return;
   // The application reused a translated text node for new dynamic content.
@@ -225,7 +226,7 @@ async function translatePending(){
  try{
   for(let i=0;i<work.length;i+=32){
    if(locale!==runLocale)break;
-   const batch=work.slice(i);
+   const batch=work.slice(i,i+32);
    const missing=batch.filter(x=>x.value===null);
    if(missing.length){
     const values=await endpoint(missing.map(x=>x.original),runLocale);
@@ -327,6 +328,7 @@ function translateAttributes(root){
  const attrs=['placeholder','title','aria-label','aria-description','aria-placeholder','alt','data-placeholder','data-tooltip','data-label','data-original-title','value','content'];
  nodes.forEach(el=>{
   if(protectedNode(el))return;
+  trackedAttributeElements.add(el);
   let originals=attributeOriginals.get(el);
   if(!originals){originals={};attributeOriginals.set(el,originals)}
   attrs.forEach(attr=>{
@@ -362,29 +364,21 @@ function switchLocale(next){
   // Always clear the previous locale before preparing the next one. Without
   // this reset, a Korean node can remain visible while its French request is
   // in flight, producing a mixed Korean/French page.
-  [document.head,document.body].forEach(root=>{
-   if(!root)return;
-   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-   let node;
-   while((node=walker.nextNode())){
-    const original=originalText.get(node),written=lastWritten.get(node);
-    if(original!==undefined&&written!==undefined&&node.nodeValue===written){
-     lastWritten.delete(node);
-     node.nodeValue=original;
-    }
-   }
-   const elements=[...(root.nodeType===1?[root]:[]),...(root.querySelectorAll?root.querySelectorAll('*'):[])];
-   elements.forEach(el=>{
-    const originals=attributeOriginals.get(el);
-    if(!originals)return;
-    Object.keys(originals).forEach(attr=>{
-     const item=originals[attr];
-     if(item&&item.translated&&el.getAttribute(attr)===item.translated)el.setAttribute(attr,item.source);
-     originals[attr]={source:item.source,translated:null,pending:false};
-    });
-    attributeOriginals.set(el,originals);
+  for(const node of trackedTextNodes){
+   if(!node.isConnected){trackedTextNodes.delete(node);continue;}
+   const original=originalText.get(node),written=lastWritten.get(node);
+   if(original!==undefined&&written!==undefined&&node.nodeValue===written){lastWritten.delete(node);node.nodeValue=original;}
+  }
+  for(const el of trackedAttributeElements){
+   if(!el.isConnected){trackedAttributeElements.delete(el);continue;}
+   const originals=attributeOriginals.get(el);if(!originals)continue;
+   Object.keys(originals).forEach(attr=>{
+    const item=originals[attr];
+    if(item&&item.translated&&el.getAttribute(attr)===item.translated)el.setAttribute(attr,item.source);
+    originals[attr]={source:item.source,translated:null,pending:false};
    });
-  });
+   attributeOriginals.set(el,originals);
+  }
   locale=next;
   pending.clear();pendingAttributes.clear();
   try{localStorage.setItem(KEY,next);if(next==='pt'||next==='en')localStorage.setItem('yunarunes-language',next)}catch(_){}
@@ -465,9 +459,9 @@ function boot(){
  try{localStorage.setItem(KEY,locale);if(locale==='en'||locale==='pt')localStorage.setItem('yunarunes-language',locale)}catch(_){}
  document.documentElement.lang=locale==='pt'?'pt-BR':locale;
  makePicker();
- if(locale!=='pt'){
-  addTree(document.head);addTree(document.body);translateAttributes(document.head);translateAttributes(document.body);queue();
- }
+ addTree(document.head);addTree(document.body);
+ translateAttributes(document.head);translateAttributes(document.body);
+ if(locale!=='pt')queue();
  observer=new MutationObserver(records=>{
   records.forEach(r=>{
    if(r.type==='childList')r.addedNodes.forEach(n=>{applyAuthoredTranslations(n);addTree(n);translateAttributes(n)});
