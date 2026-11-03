@@ -9,7 +9,7 @@ const LANGS=[
  ['pt','🇧🇷 Português'],['en','🇬🇧 English'],['ko','🇰🇷 한국어'],
  ['fr','🇫🇷 Français'],['de','🇩🇪 Deutsch'],['es','🇪🇸 Español'],['ja','🇯🇵 日本語']
 ];
-const cacheKey='yunarunes-i18n-cache-v41';
+const cacheKey='yunarunes-i18n-cache-v42';
 const targetNames={pt:'Portuguese',en:'English',ko:'Korean',fr:'French',de:'German',es:'Spanish',ja:'Japanese'};
 let locale='pt', busy=false, observer=null, pending=new Set(), scheduled=false;
 const translated=new WeakSet(), lastWritten=new WeakMap(), originalText=new WeakMap(), retryCount=new WeakMap(), protectedTags=new Set(['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','CODE','PRE','KBD','SAMP']);
@@ -48,9 +48,13 @@ function applyAuthoredTranslations(root=document){
   const source=el.getAttribute('data-pt');
   const target=el.getAttribute('data-'+locale);
   if(source===null&&target===null){authoredOriginals.set(el,originals);return}
-  if(Array.from(el.childNodes).some(n=>n.nodeType===1)){authoredOriginals.set(el,originals);return}
-  let node=Array.from(el.childNodes).find(n=>n.nodeType===3);
-  if(!node){node=document.createTextNode('');el.appendChild(node)}
+  // Buttons and labels often wrap their caption in a span or an icon element.
+  // Translate the single real caption text node without destroying that markup.
+  const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+  const textNodes=[];let candidate;
+  while((candidate=walker.nextNode()))if(clean(candidate.nodeValue)&&!protectedNode(candidate))textNodes.push(candidate);
+  if(textNodes.length!==1){authoredOriginals.set(el,originals);return}
+  const node=textNodes[0];
   const base=source!==null?source:(originalText.get(node)??node.nodeValue);
   if(!originalText.has(node))originalText.set(node,base);
   if(target!==null){
@@ -59,7 +63,6 @@ function applyAuthoredTranslations(root=document){
    pending.delete(node);
   }else{
    // A Portuguese fallback is source text, not a completed translation.
-   // Keep it eligible for automatic translation into ko/fr/de/es/ja.
    if(node.nodeValue!==base)node.nodeValue=base;
    lastWritten.delete(node);
    if(locale==='pt')pending.delete(node);
@@ -206,8 +209,19 @@ async function translatePending(){
   const key=runLocale+'|'+original;
   // Prefer authored translations on the text's own element. The old code
   // only checked data-ko, ignoring thousands of existing data-pt/data-en values.
-  const parent=n.parentElement;
-  const explicit=parent&&parent.childNodes.length===1?parent.getAttribute('data-'+runLocale):null;
+  // Resolve authored translations on the nearest wrapper too (e.g. a
+  // button whose caption lives inside a nested span).
+  let parent=n.parentElement, explicit=null;
+  while(parent&&!explicit){
+   const candidate=parent.getAttribute('data-'+runLocale);
+   if(candidate){
+    const walker=document.createTreeWalker(parent,NodeFilter.SHOW_TEXT);
+    const captions=[];let textNode;
+    while((textNode=walker.nextNode()))if(clean(textNode.nodeValue)&&!protectedNode(textNode))captions.push(textNode);
+    if(captions.length===1&&captions[0]===n)explicit=candidate;
+   }
+   parent=parent.parentElement;
+  }
   if(explicit&&clean(explicit)){work.push({node:n,original,displayed,value:explicit,key:null});continue}
   if(cache[key]){work.push({node:n,original,displayed,value:cache[key],key:null});continue}
   work.push({node:n,original,displayed,key,value:null});
