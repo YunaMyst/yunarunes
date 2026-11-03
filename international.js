@@ -387,15 +387,10 @@ function switchLocale(next){
   applyAuthoredTranslations(document.head);applyAuthoredTranslations(document.body);
   if(next!=='pt'){
    // Requeue existing translated nodes using their preserved source text.
-   [document.head,document.body].forEach(root=>{
-    if(!root)return;
-    const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-    let node;
-    while((node=walker.nextNode())){
-     if(originalText.has(node))pending.add(node);
-     else addText(node);
-    }
-   });
+   for(const node of trackedTextNodes){
+    if(!node.isConnected){trackedTextNodes.delete(node);continue;}
+    pending.add(node);
+   }
    translateAttributes(document.head);translateAttributes(document.body);queue();
   }else{
    [document.head,document.body].forEach(root=>{
