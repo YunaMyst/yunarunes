@@ -33,7 +33,7 @@ jobs:
               s = s.replace('<script src="header-fix.js"></script>', '')
               s = re.sub(r'<script src="language-dynamic[^"]*"></script>', '', s)
               # Keep the global seven-language translator fresh on every page, including Team Builder.
-              intl = '<script src="international.js?v=20261103-i18n-v54"></script>'
+              intl = '<script src="international.js?v=20261103-i18n-v55"></script>'
               script = '<script src="language.js?v=20261102-i18n-v14"></script>'
               # Remove duplicates and rebuild the shared scripts in the required order.
               s = re.sub(r'<script src="international\.js[^"]*"></script>', '', s)
