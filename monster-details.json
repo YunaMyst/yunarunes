@@ -103523,7 +103523,11 @@
         "aoe": false,
         "multiplier": "",
         "scalesWith": [],
-        "effects": [],
+        "effects": [
+          "Additional Turn",
+          "Stun",
+          "Reduce Cooltime"
+        ],
         "upgrades": [
           {
             "effect": "Cooltime Turn -{0}",
